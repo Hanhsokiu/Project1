@@ -6,13 +6,20 @@ on:
     paths:
       - 'frontend/**'
       - 'shared/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/frontend-ci.yml'
   pull_request:
     branches: [main, develop]
     paths:
       - 'frontend/**'
       - 'shared/**'
-
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/frontend-ci.yml'
+  workflow_dispatch:
 jobs:
   build:
     name: Lint & Build Frontend

@@ -6,13 +6,20 @@ on:
     paths:
       - 'backend/**'
       - 'shared/**'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
       - '.github/workflows/backend-ci.yml'
   pull_request:
     branches: [main, develop]
     paths:
       - 'backend/**'
       - 'shared/**'
-
+      - 'package.json'
+      - 'pnpm-lock.yaml'
+      - 'pnpm-workspace.yaml'
+      - '.github/workflows/backend-ci.yml'
+  workflow_dispatch:
 jobs:
   test:
     name: Build & Test Backend
