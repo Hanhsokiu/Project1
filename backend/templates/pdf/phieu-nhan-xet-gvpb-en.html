@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Comment and Grading of Graduation Project of Reviewer</title>
+  <style>
+    body { font-family: "Times New Roman", serif; font-size: 13pt; margin: 40px; line-height: 1.4; }
+    .header { display: flex; justify-content: space-between; text-align: center; font-weight: bold; }
+    .title { text-align: center; margin-top: 20px; text-transform: uppercase; font-size: 14pt; font-weight: bold; }
+    .info-line { margin: 5px 0; }
+    .signature { margin-top: 30px; text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>UNIVERSITY OF TRANSPORT AND COMMUNICATIONS<br><strong>INTERNATIONAL TRAINING FACULTY</strong></div>
+    <div>SOCIALIST REPUBLIC OF VIETNAM<br>Independence - Freedom – Happiness</div>
+  </div>
+  <p style="text-align: right; font-style: italic;">Ha Noi, {{month}} {{year}}</p>
+
+  <div class="title">
+    COMMENT AND GRADING OF GRADUATION PROJECT<br>OF REVIEWER
+  </div>
+
+  <div class="info-line">Topic: <strong>{{topicTitle}}</strong></div>
+  <div class="info-line">Student: <strong>{{studentName}}</strong> &nbsp;&nbsp;&nbsp;&nbsp; ID: <strong>{{studentCode}}</strong> &nbsp;&nbsp;&nbsp;&nbsp; Session: <strong>[{{committeeNumber}}]</strong></div>
+  <div class="info-line">Class: {{className}} &nbsp;&nbsp;&nbsp;&nbsp; Course: {{course}}</div>
+  <div class="info-line">Reviewer: <strong>{{reviewerName}}</strong></div>
+  <div class="info-line">Institution: {{reviewerInstitution}}</div>
+
+  <h3 style="text-align: center; margin: 15px 0 5px 0;">COMMENT</h3>
+
+  <p><strong>A. Project report (5 points)</strong><br>
+  1- Evaluation of layout and presentation of the report (2 points): <em>{{reportFormatScore}} / 2</em><br>{{reportFormatComment}}<br>
+  2- Evaluation of content and quality of the report (3 points): <em>{{reportContentScore}} / 3</em><br>{{reportContentComment}}
+  </p>
+
+  <p><strong>B. Project product (software, lab, ...) (5 points)</strong><br>
+  1- Practical significance of the product (1 point): <em>{{productSignificanceScore}} / 1</em><br>{{productSignificanceComment}}<br>
+  2- Completeness of the product (2 points): <em>{{productCompletenessScore}} / 2</em><br>{{productCompletenessComment}}<br>
+  3- Ability of students to master the product (2 points): <em>{{studentMasteryScore}} / 2</em><br>{{studentMasteryComment}}
+  </p>
+
+  <p><strong>C. Discussion questions (Ask at least 2 questions for students)</strong><br>
+  1. {{question1}}<br>
+  2. {{question2}}
+  </p>
+
+  <p><strong>D. Mark: {{reviewerScore}} / 10</strong></p>
+
+  <div class="signature">
+    <strong>REVIEWER</strong><br>
+    <em>(Sign)</em><br><br><br><br>
+    <strong>{{reviewerName}}</strong>
+  </div>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Sơ Đồ Thực Thể Kết Hợp (ERD) - QLDATN
+
+- Tệp bản vẽ thiết kế: [ERD_He_thong_Quan_ly_Do_an.drawio](./ERD_He_thong_Quan_ly_Do_an.drawio) (mở bằng Draw.io hoặc VS Code Draw.io Integration).
+- Mô hình đồ án: **Đồ án cá nhân (1 Sinh viên / 1 Đề tài)**.
+- Các thực thể chính:
+  1. `USER_ACCOUNT`, `ROLE`, `PERMISSION`, `USER_ROLE`, `ROLE_PERMISSION`
+  2. `STUDENT`, `LECTURER`, `DEPARTMENT`, `RESEARCH_AREA`
+  3. `THESIS_TERM`, `TERM_PHASE`, `TERM_PARAMETER`, `TERM_LECTURER`, `TERM_STUDENT`
+  4. `REGISTRATION`, `REGISTRATION_PREF`, `ASSIGNMENT_PLAN`, `ADVISOR_ASSIGNMENT`
+  5. `TOPIC`, `PROPOSAL`, `PROPOSAL_VERSION`, `REVIEW_GROUP`, `THESIS_DOSSIER`
+  6. `GUIDANCE_PLAN`, `TASK`, `TASK_SUBMISSION`, `GUIDANCE_MEETING`, `PHASE_EVALUATION`
+  7. `DEFENSE_COMMITTEE`, `ROOM`, `DEFENSE_SESSION`, `DEFENSE_MINUTES`
+  8. `SCORE_ENTRY`, `SCORE_DETAIL`, `FINAL_RESULT` (Chuẩn 40/60 UTC)

@@ -1,0 +1,75 @@
+<mxfile host="app.diagrams.net" modified="2026-10-20T22:45:00.000Z" agent="Antigravity" version="21.0.0" type="device">
+  <diagram id="erd_ql_datn" name="ERD Hệ thống Quản lý Đồ án Tốt nghiệp">
+    <mxGraphModel dx="1422" dy="794" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        
+        <!-- USER_ACCOUNT -->
+        <mxCell id="user_account" value="&lt;b&gt;USER_ACCOUNT&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ username: VARCHAR(100) [UQ]&lt;br&gt;+ email: VARCHAR(255) [UQ]&lt;br&gt;+ password_hash: VARCHAR&lt;br&gt;+ status: AccountStatus&lt;br&gt;+ must_change_password: BOOL" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#dae8fc;strokeColor=#6c8ebf;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="80" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- STUDENT -->
+        <mxCell id="student" value="&lt;b&gt;STUDENT&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ user_id: UUID [FK]&lt;br&gt;+ student_code: VARCHAR [UQ]&lt;br&gt;+ full_name: VARCHAR&lt;br&gt;+ gpa: DECIMAL(4,2)&lt;br&gt;+ training_system_id: UUID [FK]" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="60" y="270" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- LECTURER -->
+        <mxCell id="lecturer" value="&lt;b&gt;LECTURER&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ user_id: UUID [FK]&lt;br&gt;+ lecturer_code: VARCHAR [UQ]&lt;br&gt;+ full_name: VARCHAR&lt;br&gt;+ department_id: UUID [FK]&lt;br&gt;+ max_students: INT" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#d5e8d4;strokeColor=#82b366;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="80" width="220" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- THESIS_TERM -->
+        <mxCell id="thesis_term" value="&lt;b&gt;THESIS_TERM&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ code: VARCHAR [UQ]&lt;br&gt;+ name: VARCHAR&lt;br&gt;+ status: TermStatus&lt;br&gt;+ start_date: TIMESTAMP&lt;br&gt;+ end_date: TIMESTAMP" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#fff2cc;strokeColor=#d6b656;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="80" width="210" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- REGISTRATION -->
+        <mxCell id="registration" value="&lt;b&gt;REGISTRATION&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ term_id: UUID [FK]&lt;br&gt;+ student_id: UUID [FK]&lt;br&gt;+ status: RegistrationStatus" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="270" width="220" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- TOPIC & PROPOSAL -->
+        <mxCell id="proposal" value="&lt;b&gt;PROPOSAL (1 SV / 1 Đề tài)&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ topic_id: UUID [FK]&lt;br&gt;+ student_id: UUID [FK, UQ]&lt;br&gt;+ status: ProposalStatus" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#ffe6cc;strokeColor=#d79b00;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="270" width="220" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- DEFENSE_COMMITTEE -->
+        <mxCell id="committee" value="&lt;b&gt;DEFENSE_COMMITTEE&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ term_id: UUID [FK]&lt;br&gt;+ name: VARCHAR" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="80" width="210" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- SCORE_ENTRY -->
+        <mxCell id="score_entry" value="&lt;b&gt;SCORE_ENTRY&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ proposal_id: UUID [FK]&lt;br&gt;+ scorer_id: UUID [FK]&lt;br&gt;+ role: VARCHAR&lt;br&gt;+ total_score: DECIMAL(4,1)" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#f8cecc;strokeColor=#b85450;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="260" width="210" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- FINAL_RESULT -->
+        <mxCell id="final_result" value="&lt;b&gt;FINAL_RESULT (Chuẩn 40/60)&lt;/b&gt;&lt;hr&gt;+ id: UUID [PK]&lt;br&gt;+ proposal_id: UUID [FK, UQ]&lt;br&gt;+ advisor_score: DECIMAL(4,1)&lt;br&gt;+ reviewer_score: DECIMAL(4,1)&lt;br&gt;+ final_score: DECIMAL(4,1)&lt;br&gt;+ is_passed: BOOL" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=#e1d5e7;strokeColor=#9673a6;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="1230" y="250" width="230" height="140" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <mxCell id="edge1" edge="1" parent="1" source="student" target="user_account">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" edge="1" parent="1" source="lecturer" target="user_account">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" edge="1" parent="1" source="registration" target="student">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" edge="1" parent="1" source="proposal" target="student">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge5" edge="1" parent="1" source="score_entry" target="proposal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge6" edge="1" parent="1" source="final_result" target="proposal">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

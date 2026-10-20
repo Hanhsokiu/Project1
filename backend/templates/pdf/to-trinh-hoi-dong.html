@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Tờ trình thành lập Hội đồng chấm ĐATN</title>
+  <style>
+    body { font-family: "Times New Roman", serif; font-size: 13pt; margin: 40px; line-height: 1.4; }
+    .header { display: flex; justify-content: space-between; text-align: center; font-weight: bold; }
+    .title { text-align: center; margin-top: 25px; text-transform: uppercase; font-size: 15pt; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; margin-bottom: 25px; }
+    th, td { border: 1px solid black; padding: 6px; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>TRƯỜNG ĐẠI HỌC GIAO THÔNG VẬN TẢI<br><strong>KHOA CÔNG NGHỆ THÔNG TIN</strong></div>
+    <div>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>Độc lập – Tự do - Hạnh phúc</div>
+  </div>
+  <p style="text-align: right; font-style: italic;">Hà Nội, ngày {{day}} tháng {{month}} năm {{year}}</p>
+
+  <div class="title">TỜ TRÌNH<br><span style="font-size: 12pt; font-weight: normal; font-style: italic;">V/v: Thành lập hội đồng chấm đồ án tốt nghiệp lớp {{className}}</span></div>
+
+  <p><strong>Kính gửi:</strong> - Ban Giám hiệu<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- Phòng Đào tạo Đại học</p>
+
+  <p>Căn cứ vào kế hoạch học tập giảng dạy năm học {{academicYear}} của Trường ĐH GTVT, Khoa CNTT kính đề nghị Nhà trường cho phép thành lập các hội đồng chấm đồ án tốt nghiệp cho sinh viên hệ chính quy.</p>
+  <p>Đề xuất danh sách hội đồng chấm đồ án tốt nghiệp gồm các thành viên sau:</p>
+
+  {{#each committees}}
+  <h4 style="margin-bottom: 5px;">HỘI ĐỒNG {{this.orderIndex}}</h4>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 10%;">STT</th>
+        <th style="width: 40%;">Họ và tên</th>
+        <th style="width: 25%;">Nhiệm vụ</th>
+        <th style="width: 25%;">Ghi chú (Đơn vị)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each this.members}}
+      <tr>
+        <td style="text-align: center;">{{@index + 1}}</td>
+        <td>{{this.fullName}}</td>
+        <td>{{this.role}}</td>
+        <td>{{this.institution}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  {{/each}}
+
+  <div style="margin-top: 40px; text-align: right;">
+    <strong>TRƯỞNG KHOA CÔNG NGHỆ THÔNG TIN</strong><br><br><br><br>
+    <strong>TS. HOÀNG VĂN THÔNG</strong>
+  </div>
+</body>
+</html>

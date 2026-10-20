@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bản nhận xét và chấm điểm ĐATN của người hướng dẫn</title>
+  <style>
+    body { font-family: "Times New Roman", serif; font-size: 13pt; margin: 40px; line-height: 1.5; }
+    .header { display: flex; justify-content: space-between; text-align: center; font-weight: bold; }
+    .title { text-align: center; margin-top: 25px; text-transform: uppercase; font-size: 15pt; }
+    .info-line { margin: 6px 0; }
+    .section-title { font-weight: bold; margin-top: 15px; }
+    .signature { margin-top: 40px; text-align: right; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div>TRƯỜNG ĐẠI HỌC GIAO THÔNG VẬN TẢI<br><strong>KHOA CÔNG NGHỆ THÔNG TIN</strong></div>
+    <div>CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM<br>Độc lập – Tự do - Hạnh phúc</div>
+  </div>
+  <p style="text-align: right; font-style: italic; margin-top: 10px;">Hà Nội, ngày {{day}} tháng {{month}} năm {{year}}</p>
+
+  <div class="title">
+    BẢN NHẬN XÉT VÀ CHẤM ĐIỂM ĐỒ ÁN TỐT NGHIỆP<br>CỦA NGƯỜI HƯỚNG DẪN
+  </div>
+
+  <div class="info-line">- Tên đề tài: <strong>{{topicTitle}}</strong></div>
+  <div class="info-line">- Họ và tên sinh viên: <strong>{{studentName}}</strong> &nbsp;&nbsp;&nbsp;&nbsp; Mã SV: <strong>{{studentCode}}</strong> &nbsp;&nbsp;&nbsp;&nbsp; Hội đồng: <strong>[{{committeeNumber}}]</strong></div>
+  <div class="info-line">- Lớp: {{className}} &nbsp;&nbsp;&nbsp;&nbsp; Khóa: {{course}}</div>
+  <div class="info-line">- Giảng viên hướng dẫn: <strong>{{advisorName}}</strong></div>
+  <div class="info-line">- Cơ quan công tác: {{advisorInstitution}}</div>
+
+  <div class="section-title">A. Nhận xét:</div>
+  <p>- <em>Nhận xét chung về tính ý nghĩa thực tiễn, tính cấp thiết của đồ án:</em><br>{{practicalSignificance}}</p>
+  <p>- <em>Ý thức, thái độ của sinh viên trong quá trình thực hiện đồ án:</em><br>{{attitude}}</p>
+  <p>- <em>Kết quả thực hiện đồ án (cần nhận xét cụ thể những kết quả đạt được, chưa làm được):</em><br>{{resultQuality}}</p>
+
+  <div class="section-title">B. Điểm: <strong>{{advisorScore}}</strong> / 10</div>
+
+  <div class="signature">
+    <strong>GIẢNG VIÊN HƯỚNG DẪN</strong><br>
+    <em>(Ký và ghi rõ họ tên)</em><br><br><br><br>
+    <strong>{{advisorName}}</strong>
+  </div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: doan_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-doan_db}
+      POSTGRES_USER: ${DB_USER:-doan_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-doan_password}
+    ports:
+      - '${DB_PORT:-5432}:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-doan_user} -d ${DB_NAME:-doan_db}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - doan_network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: doan_backend
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://${DB_USER:-doan_user}:${DB_PASSWORD:-doan_password}@postgres:5432/${DB_NAME:-doan_db}
+      - NODE_ENV=${NODE_ENV:-development}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
+      - MAIL_HOST=mailhog
+      - MAIL_PORT=1025
+      - STORAGE_LOCAL_PATH=/app/uploads
+    ports:
+      - '${PORT:-3000}:3000'
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - uploads_data:/app/uploads
+    networks:
+      - doan_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: doan_frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:${PORT:-3000}/api
+    ports:
+      - '5173:5173'
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - doan_network
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: doan_mailhog
+    restart: unless-stopped
+    ports:
+      - '1025:1025'   # SMTP
+      - '8025:8025'   # Web UI
+    networks:
+      - doan_network
+
+  nginx:
+    image: nginx:alpine
+    container_name: doan_nginx
+    restart: unless-stopped
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - '80:80'
+    volumes:
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      - doan_network
+
+volumes:
+  postgres_data:
+  uploads_data:
+
+networks:
+  doan_network:
+    driver: bridge

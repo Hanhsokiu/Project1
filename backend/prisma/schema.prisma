@@ -1,0 +1,919 @@
+// Prisma schema cho Hệ thống Quản lý Đồ án Tốt nghiệp
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum AccountStatus {
+  ACTIVE
+  LOCKED
+  PENDING_ACTIVATION
+}
+
+enum TermStatus {
+  DRAFT
+  OPEN_REGISTRATION
+  CLOSED_REGISTRATION
+  IN_PROGRESS
+  DEFENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum RegistrationStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  CANCELLED
+}
+
+enum AssignmentStatus {
+  DRAFT
+  PUBLISHED
+  FINALIZED
+}
+
+enum ProposalStatus {
+  DRAFT
+  SUBMITTED
+  UNDER_REVIEW
+  REVISION_REQUESTED
+  APPROVED
+  REJECTED
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  SUBMITTED
+  REVIEWED
+  OVERDUE
+}
+
+enum DefenseEligibilityStatus {
+  PENDING
+  ELIGIBLE
+  INELIGIBLE
+  DEFERRED
+}
+
+enum DefermentStatus {
+  PENDING
+  DEPARTMENT_APPROVED
+  FACULTY_APPROVED
+  REJECTED
+}
+
+enum ExportJobStatus {
+  QUEUED
+  PROCESSING
+  DONE
+  FAILED
+}
+
+enum NotificationStatus {
+  UNREAD
+  READ
+}
+
+enum ImportJobStatus {
+  QUEUED
+  PROCESSING
+  DONE
+  FAILED
+}
+
+// ============================================
+// V001: AUTH & SYSTEM MODULE
+// ============================================
+
+model UserAccount {
+  id                 String        @id @default(uuid())
+  username           String        @unique
+  email              String        @unique
+  passwordHash       String        @map("password_hash")
+  status             AccountStatus @default(PENDING_ACTIVATION)
+  failedLoginCount   Int           @default(0) @map("failed_login_count")
+  lastLoginAt        DateTime?     @map("last_login_at")
+  mustChangePassword Boolean       @default(true) @map("must_change_password")
+  createdAt          DateTime      @default(now()) @map("created_at")
+  updatedAt          DateTime      @updatedAt @map("updated_at")
+
+  userRoles     UserRole[]
+  loginSessions LoginSession[]
+  auditLogs     AuditLog[]
+  notifications Notification[]
+  student       Student?
+  lecturer      Lecturer?
+
+  @@map("USER_ACCOUNT")
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  userRoles       UserRole[]
+  rolePermissions RolePermission[]
+
+  @@map("ROLE")
+}
+
+model Permission {
+  id          String   @id @default(uuid())
+  resource    String
+  action      String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  rolePermissions RolePermission[]
+
+  @@unique([resource, action])
+  @@map("PERMISSION")
+}
+
+model UserRole {
+  userId     String   @map("user_id")
+  roleId     String   @map("role_id")
+  assignedAt DateTime @default(now()) @map("assigned_at")
+
+  user UserAccount @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role Role        @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@id([userId, roleId])
+  @@map("USER_ROLE")
+}
+
+model RolePermission {
+  roleId       String @map("role_id")
+  permissionId String @map("permission_id")
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@id([roleId, permissionId])
+  @@map("ROLE_PERMISSION")
+}
+
+model LoginSession {
+  id           String    @id @default(uuid())
+  userId       String    @map("user_id")
+  refreshToken String    @map("refresh_token")
+  ipAddress    String?   @map("ip_address")
+  userAgent    String?   @map("user_agent")
+  expiresAt    DateTime  @map("expires_at")
+  revokedAt    DateTime? @map("revoked_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+
+  user UserAccount @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("LOGIN_SESSION")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?  @map("user_id")
+  action     String
+  resource   String
+  resourceId String?  @map("resource_id")
+  oldValue   Json?    @map("old_value")
+  newValue   Json?    @map("new_value")
+  ipAddress  String?  @map("ip_address")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  user UserAccount? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@map("AUDIT_LOG")
+}
+
+model Notification {
+  id        String             @id @default(uuid())
+  userId    String             @map("user_id")
+  title     String
+  body      String
+  link      String?
+  status    NotificationStatus @default(UNREAD)
+  createdAt DateTime           @default(now()) @map("created_at")
+  readAt    DateTime?          @map("read_at")
+
+  user UserAccount @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("NOTIFICATION")
+}
+
+// ============================================
+// V002: CATALOG MODULE
+// ============================================
+
+model Department {
+  id        String   @id @default(uuid())
+  code      String   @unique
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  lecturers Lecturer[]
+
+  @@map("DEPARTMENT")
+}
+
+model TitleConfig {
+  id           String   @id @default(uuid())
+  name         String   @unique
+  abbreviation String
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  lecturers Lecturer[]
+
+  @@map("TITLE_CONFIG")
+}
+
+model TrainingSystem {
+  id        String   @id @default(uuid())
+  code      String   @unique
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  students Student[]
+
+  @@map("TRAINING_SYSTEM")
+}
+
+model Lecturer {
+  id           String   @id @default(uuid())
+  userId       String   @unique @map("user_id")
+  lecturerCode String   @unique @map("lecturer_code")
+  fullName     String   @map("full_name")
+  departmentId String   @map("department_id")
+  titleId      String?  @map("title_id")
+  phone        String?
+  isActive     Boolean  @default(true) @map("is_active")
+  maxStudents  Int      @default(5) @map("max_students")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  user                UserAccount          @relation(fields: [userId], references: [id])
+  department          Department           @relation(fields: [departmentId], references: [id])
+  title               TitleConfig?         @relation(fields: [titleId], references: [id])
+  researchAreas       LecturerArea[]
+  termLecturers       TermLecturer[]
+  advisorAssignments  AdvisorAssignment[]  @relation("AdvisorAssignment")
+  reviewerAssignments ReviewerAssignment[] @relation("ReviewerAssignment")
+  committeeMembers    CommitteeMember[]
+
+  @@map("LECTURER")
+}
+
+model Student {
+  id               String   @id @default(uuid())
+  userId           String   @unique @map("user_id")
+  studentCode      String   @unique @map("student_code")
+  fullName         String   @map("full_name")
+  trainingSystemId String   @map("training_system_id")
+  gpa              Decimal  @default(0) @db.Decimal(4, 2)
+  phone            String?
+  isActive         Boolean  @default(true) @map("is_active")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  user           UserAccount    @relation(fields: [userId], references: [id])
+  trainingSystem TrainingSystem @relation(fields: [trainingSystemId], references: [id])
+  termStudents   TermStudent[]
+  registrations  Registration[]
+  proposal       Proposal?
+
+  @@map("STUDENT")
+}
+
+model ResearchArea {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  lecturerAreas LecturerArea[]
+  topics        Topic[]
+
+  @@map("RESEARCH_AREA")
+}
+
+model LecturerArea {
+  lecturerId     String @map("lecturer_id")
+  researchAreaId String @map("research_area_id")
+
+  lecturer     Lecturer     @relation(fields: [lecturerId], references: [id], onDelete: Cascade)
+  researchArea ResearchArea @relation(fields: [researchAreaId], references: [id], onDelete: Cascade)
+
+  @@id([lecturerId, researchAreaId])
+  @@map("LECTURER_AREA")
+}
+
+model ImportJob {
+  id          String          @id @default(uuid())
+  type        String          // STUDENT | LECTURER
+  fileName    String          @map("file_name")
+  filePath    String          @map("file_path")
+  status      ImportJobStatus @default(QUEUED)
+  totalRows   Int             @default(0) @map("total_rows")
+  successRows Int             @default(0) @map("success_rows")
+  errorRows   Int             @default(0) @map("error_rows")
+  errorReport Json?           @map("error_report")
+  createdAt   DateTime        @default(now()) @map("created_at")
+  completedAt DateTime?       @map("completed_at")
+
+  @@map("IMPORT_JOB")
+}
+
+// ============================================
+// V003: TERM MODULE
+// ============================================
+
+model ThesisTerm {
+  id           String     @id @default(uuid())
+  code         String     @unique
+  name         String
+  academicYear String     @map("academic_year")
+  semester     Int
+  status       TermStatus @default(DRAFT)
+  startDate    DateTime   @map("start_date")
+  endDate      DateTime   @map("end_date")
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  phases            TermPhase[]
+  parameters        TermParameter[]
+  termLecturers     TermLecturer[]
+  termStudents      TermStudent[]
+  registrations     Registration[]
+  topics            Topic[]
+  defenseCommittees DefenseCommittee[]
+  exportJobs        ExportJob[]
+
+  @@map("THESIS_TERM")
+}
+
+model TermPhase {
+  id        String   @id @default(uuid())
+  termId    String   @map("term_id")
+  phaseName String   @map("phase_name")
+  startDate DateTime @map("start_date")
+  endDate   DateTime @map("end_date")
+  isLocked  Boolean  @default(false) @map("is_locked")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Cascade)
+
+  @@map("TERM_PHASE")
+}
+
+model TermParameter {
+  id          String   @id @default(uuid())
+  termId      String   @map("term_id")
+  key         String
+  value       String
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Cascade)
+
+  @@unique([termId, key])
+  @@map("TERM_PARAMETER")
+}
+
+model TermLecturer {
+  termId     String @map("term_id")
+  lecturerId String @map("lecturer_id")
+  quota      Int    @default(5)
+
+  term     ThesisTerm @relation(fields: [termId], references: [id], onDelete: Cascade)
+  lecturer Lecturer   @relation(fields: [lecturerId], references: [id], onDelete: Cascade)
+
+  @@id([termId, lecturerId])
+  @@map("TERM_LECTURER")
+}
+
+model TermStudent {
+  id             String   @id @default(uuid())
+  termId         String   @map("term_id")
+  studentId      String   @map("student_id")
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  term         ThesisTerm    @relation(fields: [termId], references: [id], onDelete: Cascade)
+  student      Student       @relation(fields: [studentId], references: [id])
+
+  @@unique([termId, studentId])
+  @@map("TERM_STUDENT")
+}
+
+// ============================================
+// V004: REGISTRATION & ASSIGNMENT MODULE
+// ============================================
+
+model Registration {
+  id        String             @id @default(uuid())
+  termId    String             @map("term_id")
+  studentId String             @map("student_id")
+  status    RegistrationStatus @default(PENDING)
+  note      String?
+  createdAt DateTime           @default(now()) @map("created_at")
+  updatedAt DateTime           @updatedAt @map("updated_at")
+
+  term              ThesisTerm          @relation(fields: [termId], references: [id])
+  student           Student             @relation(fields: [studentId], references: [id])
+  preferences       RegistrationPref[]
+  advisorAssignment AdvisorAssignment?
+
+  @@unique([termId, studentId])
+  @@map("REGISTRATION")
+}
+
+model RegistrationPref {
+  id              String @id @default(uuid())
+  registrationId  String @map("registration_id")
+  lecturerId      String @map("lecturer_id")
+  preferenceOrder Int    @map("preference_order")
+
+  registration Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+
+  @@unique([registrationId, preferenceOrder])
+  @@map("REGISTRATION_PREF")
+}
+
+model AssignmentPlan {
+  id          String           @id @default(uuid())
+  termId      String           @map("term_id")
+  status      AssignmentStatus @default(DRAFT)
+  createdAt   DateTime         @default(now()) @map("created_at")
+  publishedAt DateTime?        @map("published_at")
+
+  advisorAssignments AdvisorAssignment[]
+
+  @@map("ASSIGNMENT_PLAN")
+}
+
+model AdvisorAssignment {
+  id               String   @id @default(uuid())
+  assignmentPlanId String   @map("assignment_plan_id")
+  registrationId   String   @unique @map("registration_id")
+  advisorId        String   @map("advisor_id")
+  isManual         Boolean  @default(false) @map("is_manual")
+  note             String?
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  assignmentPlan AssignmentPlan @relation(fields: [assignmentPlanId], references: [id])
+  registration   Registration   @relation(fields: [registrationId], references: [id])
+  advisor        Lecturer       @relation("AdvisorAssignment", fields: [advisorId], references: [id])
+
+  @@map("ADVISOR_ASSIGNMENT")
+}
+
+// ============================================
+// V005: TOPIC & PROPOSAL MODULE
+// ============================================
+
+model Topic {
+  id             String   @id @default(uuid())
+  termId         String   @map("term_id")
+  researchAreaId String?  @map("research_area_id")
+  title          String
+  description    String?
+  isActive       Boolean  @default(true) @map("is_active")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  term         ThesisTerm     @relation(fields: [termId], references: [id])
+  researchArea ResearchArea?  @relation(fields: [researchAreaId], references: [id])
+  proposals    Proposal[]
+  topicHistory TopicHistory[]
+
+  @@map("TOPIC")
+}
+
+model TopicHistory {
+  id        String   @id @default(uuid())
+  topicId   String   @map("topic_id")
+  changedBy String   @map("changed_by")
+  oldValue  Json     @map("old_value")
+  newValue  Json     @map("new_value")
+  createdAt DateTime @default(now()) @map("created_at")
+
+  topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
+
+  @@map("TOPIC_HISTORY")
+}
+
+model Proposal {
+  id        String         @id @default(uuid())
+  topicId   String         @map("topic_id")
+  studentId String         @unique @map("student_id")
+  status    ProposalStatus @default(DRAFT)
+  createdAt DateTime       @default(now()) @map("created_at")
+  updatedAt DateTime       @updatedAt @map("updated_at")
+
+  topic    Topic             @relation(fields: [topicId], references: [id])
+  student  Student           @relation(fields: [studentId], references: [id])
+  versions ProposalVersion[]
+  reviews  ProposalReview[]
+  dossier  ThesisDossier?
+
+  @@map("PROPOSAL")
+}
+
+model ProposalVersion {
+  id         String   @id @default(uuid())
+  proposalId String   @map("proposal_id")
+  version    Int
+  content    Json
+  filePath   String?  @map("file_path")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  proposal Proposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+
+  @@unique([proposalId, version])
+  @@map("PROPOSAL_VERSION")
+}
+
+model ReviewGroup {
+  id        String   @id @default(uuid())
+  termId    String   @map("term_id")
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  members ReviewGroupMember[]
+  reviews ProposalReview[]
+
+  @@map("REVIEW_GROUP")
+}
+
+model ReviewGroupMember {
+  reviewGroupId String @map("review_group_id")
+  lecturerId    String @map("lecturer_id")
+
+  reviewGroup ReviewGroup @relation(fields: [reviewGroupId], references: [id], onDelete: Cascade)
+
+  @@id([reviewGroupId, lecturerId])
+  @@map("REVIEW_GROUP_MEMBER")
+}
+
+model ProposalReview {
+  id            String    @id @default(uuid())
+  proposalId    String    @map("proposal_id")
+  reviewGroupId String    @map("review_group_id")
+  decision      String?   // APPROVED | REVISION_REQUESTED | REJECTED
+  comment       String?
+  reviewedAt    DateTime? @map("reviewed_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+
+  proposal    Proposal    @relation(fields: [proposalId], references: [id])
+  reviewGroup ReviewGroup @relation(fields: [reviewGroupId], references: [id])
+
+  @@map("PROPOSAL_REVIEW")
+}
+
+model ThesisDossier {
+  id          String    @id @default(uuid())
+  proposalId  String    @unique @map("proposal_id")
+  status      String    @default("DRAFT") // DRAFT | SUBMITTED | APPROVED
+  filePath    String?   @map("file_path")
+  submittedAt DateTime? @map("submitted_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  proposal Proposal @relation(fields: [proposalId], references: [id])
+
+  @@map("THESIS_DOSSIER")
+}
+
+// ============================================
+// V006: GUIDANCE MODULE
+// ============================================
+
+model GuidancePlan {
+  id          String   @id @default(uuid())
+  proposalId  String   @unique @map("proposal_id")
+  advisorId   String   @map("advisor_id")
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  tasks            Task[]
+  meetings         GuidanceMeeting[]
+  phaseEvaluations PhaseEvaluation[]
+
+  @@map("GUIDANCE_PLAN")
+}
+
+model Task {
+  id             String     @id @default(uuid())
+  guidancePlanId String     @map("guidance_plan_id")
+  title          String
+  description    String?
+  deadline       DateTime
+  status         TaskStatus @default(TODO)
+  createdAt      DateTime   @default(now()) @map("created_at")
+  updatedAt      DateTime   @updatedAt @map("updated_at")
+
+  guidancePlan GuidancePlan     @relation(fields: [guidancePlanId], references: [id], onDelete: Cascade)
+  submissions  TaskSubmission[]
+
+  @@map("TASK")
+}
+
+model TaskSubmission {
+  id        String   @id @default(uuid())
+  taskId    String   @map("task_id")
+  content   String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  task    Task             @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  files   SubmissionFile[]
+  reviews TaskReview[]
+
+  @@map("TASK_SUBMISSION")
+}
+
+model SubmissionFile {
+  id           String   @id @default(uuid())
+  submissionId String   @map("submission_id")
+  fileName     String   @map("file_name")
+  filePath     String   @map("file_path")
+  fileSize     Int      @map("file_size")
+  mimeType     String   @map("mime_type")
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  submission TaskSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
+
+  @@map("SUBMISSION_FILE")
+}
+
+model TaskReview {
+  id           String   @id @default(uuid())
+  submissionId String   @map("submission_id")
+  reviewerId   String   @map("reviewer_id")
+  comment      String?
+  isPassed     Boolean  @map("is_passed")
+  reviewedAt   DateTime @default(now()) @map("reviewed_at")
+
+  submission TaskSubmission @relation(fields: [submissionId], references: [id])
+
+  @@map("TASK_REVIEW")
+}
+
+model GuidanceMeeting {
+  id             String   @id @default(uuid())
+  guidancePlanId String   @map("guidance_plan_id")
+  meetingDate    DateTime @map("meeting_date")
+  location       String?
+  summary        String?
+  createdAt      DateTime @default(now()) @map("created_at")
+
+  guidancePlan GuidancePlan @relation(fields: [guidancePlanId], references: [id], onDelete: Cascade)
+
+  @@map("GUIDANCE_MEETING")
+}
+
+model PhaseEvaluation {
+  id             String    @id @default(uuid())
+  guidancePlanId String    @map("guidance_plan_id")
+  phaseName      String    @map("phase_name")
+  score          Decimal?  @db.Decimal(4, 1)
+  comment        String?
+  evaluatedAt    DateTime? @map("evaluated_at")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  guidancePlan GuidancePlan @relation(fields: [guidancePlanId], references: [id])
+
+  @@map("PHASE_EVALUATION")
+}
+
+model FinalReport {
+  id          String    @id @default(uuid())
+  proposalId  String    @unique @map("proposal_id")
+  filePath    String?   @map("file_path")
+  submittedAt DateTime? @map("submitted_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@map("FINAL_REPORT")
+}
+
+model DefenseConfirmation {
+  id          String    @id @default(uuid())
+  proposalId  String    @unique @map("proposal_id")
+  advisorId   String    @map("advisor_id")
+  status      String    @default("PENDING") // PENDING | CONFIRMED | REJECTED
+  note        String?
+  confirmedAt DateTime? @map("confirmed_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+
+  @@map("DEFENSE_CONFIRMATION")
+}
+
+// ============================================
+// V007: DEFENSE MODULE
+// ============================================
+
+model DefenseEligibility {
+  id         String                   @id @default(uuid())
+  proposalId String                   @unique @map("proposal_id")
+  status     DefenseEligibilityStatus @default(PENDING)
+  checkedAt  DateTime?                @map("checked_at")
+  note       String?
+  createdAt  DateTime                 @default(now()) @map("created_at")
+
+  @@map("DEFENSE_ELIGIBILITY")
+}
+
+model DefermentRequest {
+  id          String          @id @default(uuid())
+  proposalId  String          @map("proposal_id")
+  reason      String
+  status      DefermentStatus @default(PENDING)
+  requestedAt DateTime        @default(now()) @map("requested_at")
+  updatedAt   DateTime        @updatedAt @map("updated_at")
+
+  @@map("DEFERMENT_REQUEST")
+}
+
+model ReviewerAssignment {
+  id         String   @id @default(uuid())
+  proposalId String   @map("proposal_id")
+  reviewerId String   @map("reviewer_id")
+  assignedAt DateTime @default(now()) @map("assigned_at")
+
+  reviewer Lecturer @relation("ReviewerAssignment", fields: [reviewerId], references: [id])
+
+  @@unique([proposalId, reviewerId])
+  @@map("REVIEWER_ASSIGNMENT")
+}
+
+model Room {
+  id        String   @id @default(uuid())
+  code      String   @unique
+  name      String
+  capacity  Int
+  location  String?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  defenseSessions DefenseSession[]
+
+  @@map("ROOM")
+}
+
+model DefenseCommittee {
+  id        String   @id @default(uuid())
+  termId    String   @map("term_id")
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+
+  term            ThesisTerm         @relation(fields: [termId], references: [id])
+  members         CommitteeMember[]
+  defenseSessions DefenseSession[]
+
+  @@map("DEFENSE_COMMITTEE")
+}
+
+model CommitteeMember {
+  committeeId String @map("committee_id")
+  lecturerId  String @map("lecturer_id")
+  role        String // CHAIR | SECRETARY | MEMBER | REVIEWER
+
+  committee DefenseCommittee @relation(fields: [committeeId], references: [id], onDelete: Cascade)
+  lecturer  Lecturer         @relation(fields: [lecturerId], references: [id])
+
+  @@id([committeeId, lecturerId])
+  @@map("COMMITTEE_MEMBER")
+}
+
+model DefenseSession {
+  id          String   @id @default(uuid())
+  committeeId String   @map("committee_id")
+  roomId      String   @map("room_id")
+  scheduledAt DateTime @map("scheduled_at")
+  durationMin Int      @default(30) @map("duration_min")
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  committee         DefenseCommittee   @relation(fields: [committeeId], references: [id])
+  room              Room               @relation(fields: [roomId], references: [id])
+  committeeStudents CommitteeStudent[]
+  minutes           DefenseMinutes?
+
+  @@map("DEFENSE_SESSION")
+}
+
+model CommitteeStudent {
+  sessionId  String @map("session_id")
+  proposalId String @map("proposal_id")
+  orderIndex Int    @map("order_index")
+
+  session DefenseSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@id([sessionId, proposalId])
+  @@map("COMMITTEE_STUDENT")
+}
+
+model DefenseMinutes {
+  id        String   @id @default(uuid())
+  sessionId String   @unique @map("session_id")
+  content   Json?
+  filePath  String?  @map("file_path")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  session DefenseSession @relation(fields: [sessionId], references: [id])
+
+  @@map("DEFENSE_MINUTES")
+}
+
+// ============================================
+// V008: GRADING MODULE
+// ============================================
+
+model RubricCriteria {
+  id          String   @id @default(uuid())
+  termId      String   @map("term_id")
+  name        String
+  weight      Decimal  @db.Decimal(5, 2)
+  maxScore    Decimal  @default(10) @map("max_score") @db.Decimal(4, 1)
+  description String?
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  scoreDetails ScoreDetail[]
+
+  @@map("RUBRIC_CRITERIA")
+}
+
+model ScoreEntry {
+  id         String   @id @default(uuid())
+  proposalId String   @map("proposal_id")
+  scorerId   String   @map("scorer_id") // Lecturer ID
+  role       String   // ADVISOR | REVIEWER | COMMITTEE_CHAIR | COMMITTEE_MEMBER
+  totalScore Decimal? @map("total_score") @db.Decimal(4, 1)
+  isLocked   Boolean  @default(false) @map("is_locked")
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  scoreDetails ScoreDetail[]
+
+  @@unique([proposalId, scorerId, role])
+  @@map("SCORE_ENTRY")
+}
+
+model ScoreDetail {
+  id               String   @id @default(uuid())
+  scoreEntryId     String   @map("score_entry_id")
+  rubricCriteriaId String   @map("rubric_criteria_id")
+  score            Decimal  @db.Decimal(4, 1)
+  comment          String?
+  createdAt        DateTime @default(now()) @map("created_at")
+
+  scoreEntry     ScoreEntry     @relation(fields: [scoreEntryId], references: [id], onDelete: Cascade)
+  rubricCriteria RubricCriteria @relation(fields: [rubricCriteriaId], references: [id])
+
+  @@unique([scoreEntryId, rubricCriteriaId])
+  @@map("SCORE_DETAIL")
+}
+
+model FinalResult {
+  id            String    @id @default(uuid())
+  proposalId    String    @unique @map("proposal_id")
+  advisorScore  Decimal?  @map("advisor_score") @db.Decimal(4, 1)
+  reviewerScore Decimal?  @map("reviewer_score") @db.Decimal(4, 1)
+  finalScore    Decimal?  @map("final_score") @db.Decimal(4, 1)
+  isPassed      Boolean?  @map("is_passed")
+  isPublished   Boolean   @default(false) @map("is_published")
+  publishedAt   DateTime? @map("published_at")
+  createdAt     DateTime  @default(now()) @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+
+  @@map("FINAL_RESULT")
+}
+
+// ============================================
+// V009: REPORT & EXPORT MODULE
+// ============================================
+
+model ExportJob {
+  id          String          @id @default(uuid())
+  termId      String?         @map("term_id")
+  type        String          // EXCEL_STUDENT | EXCEL_RESULT | PDF_MINUTES | ...
+  status      ExportJobStatus @default(QUEUED)
+  filePath    String?         @map("file_path")
+  requestedBy String          @map("requested_by")
+  createdAt   DateTime        @default(now()) @map("created_at")
+  completedAt DateTime?       @map("completed_at")
+
+  term ThesisTerm? @relation(fields: [termId], references: [id])
+
+  @@map("EXPORT_JOB")
+}

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Đề cương ĐATN Cử nhân</title>
+  <style>
+    body { font-family: "Times New Roman", serif; font-size: 13pt; margin: 40px; line-height: 1.4; }
+    .header { text-align: center; font-weight: bold; }
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; }
+    th, td { border: 1px solid black; padding: 6px; }
+    .signatures { margin-top: 40px; display: flex; justify-content: space-between; text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <p>TRƯỜNG ĐẠI HỌC GIAO THÔNG VẬN TẢI<br>KHOA CÔNG NGHỆ THÔNG TIN</p>
+    <h2>ĐỀ CƯƠNG ĐỒ ÁN TỐT NGHIỆP CỬ NHÂN</h2>
+  </div>
+  <p><strong>Họ và tên sinh viên:</strong> {{studentName}} &nbsp;&nbsp;&nbsp;&nbsp; <strong>Mã SV:</strong> {{studentCode}}</p>
+  <p><strong>Giảng viên hướng dẫn:</strong> {{advisorName}}</p>
+  <p><strong>Tên đề tài:</strong> {{topicTitle}}</p>
+  <h3>1. Nội dung, phạm vi của đề tài</h3>
+  <p>{{description}}</p>
+  <h3>2. Công nghệ, công cụ và ngôn ngữ lập trình</h3>
+  <p>{{technologies}}</p>
+  <h3>3. Kế hoạch thực hiện đề tài</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width: 10%;">STT</th>
+        <th style="width: 50%;">Nội dung công việc</th>
+        <th style="width: 25%;">Thời gian dự kiến</th>
+        <th style="width: 15%;">Ghi chú</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each tasks}}
+      <tr>
+        <td style="text-align: center;">{{@index + 1}}</td>
+        <td>{{this.title}}</td>
+        <td>{{this.deadline}}</td>
+        <td>{{this.status}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <div class="signatures">
+    <div><strong>Trưởng Khoa</strong></div>
+    <div><strong>Trưởng Bộ môn</strong></div>
+    <div><strong>Giảng viên hướng dẫn</strong></div>
+    <div><strong>Sinh viên thực hiện</strong></div>
+  </div>
+</body>
+</html>

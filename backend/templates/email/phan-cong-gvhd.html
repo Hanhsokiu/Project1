@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Thông báo phân công GVHD</title>
+</head>
+<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+  <h2>Kính gửi Thầy/Cô {{lecturerName}},</h2>
+  <p>Khoa Công nghệ Thông tin - Trường Đại học Giao thông vận tải xin thông báo kết quả phân công hướng dẫn đồ án tốt nghiệp đợt <strong>{{termName}}</strong>.</p>
+  <p>Thầy/Cô đã được phân công hướng dẫn các sinh viên sau:</p>
+  <ul>
+    {{#each students}}
+    <li><strong>{{this.studentCode}}</strong> - {{this.fullName}} (Lớp: {{this.className}})</li>
+    {{/each}}
+  </ul>
+  <p>Xin trân trọng cảm ơn Thầy/Cô!</p>
+</body>
+</html>

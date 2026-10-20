@@ -1,0 +1,81 @@
+name: Backend CI
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'backend/**'
+      - 'shared/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'backend/**'
+      - 'shared/**'
+
+jobs:
+  test:
+    name: Build & Test Backend
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: doan_test
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Type check
+        working-directory: backend
+        run: pnpm type-check
+
+      - name: Lint
+        working-directory: backend
+        run: pnpm lint
+
+      - name: Generate Prisma client
+        working-directory: backend
+        run: pnpm prisma generate
+
+      - name: Run migrations
+        working-directory: backend
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/doan_test
+        run: pnpm prisma migrate deploy
+
+      - name: Run tests
+        working-directory: backend
+        env:
+          DATABASE_URL: postgresql://test_user:test_password@localhost:5432/doan_test
+          JWT_SECRET: test-secret
+          JWT_REFRESH_SECRET: test-refresh-secret
+          NODE_ENV: test
+        run: pnpm test:cov
+
+      - name: Upload coverage
+        uses: codecov/codecov-action@v4
+        with:
+          directory: backend/coverage

@@ -1,0 +1,41 @@
+openapi: 3.0.0
+info:
+  title: Hệ Thống Quản Lý Đồ Án Tốt Nghiệp (QLDATN) API
+  version: 1.0.0
+  description: API tài liệu hóa các Use Case từ UC01 đến UC25
+paths:
+  /auth/login:
+    post:
+      summary: UC01 - Đăng nhập hệ thống
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Đăng nhập thành công, trả về access token
+  /students:
+    get:
+      summary: UC04 - Lấy danh sách sinh viên đủ điều kiện
+      responses:
+        '200':
+          description: Danh sách sinh viên
+  /terms:
+    get:
+      summary: UC07 - Lấy danh sách các đợt đồ án
+      responses:
+        '200':
+          description: Danh sách đợt đồ án
+  /registrations/term/{termId}:
+    get:
+      summary: UC09 - Danh sách đăng ký theo đợt
+      responses:
+        '200':
+          description: Danh sách đăng ký
