@@ -5,7 +5,6 @@
 
 export interface PersonWithName {
   fullName: string;
-  [key: string]: any;
 }
 
 export class VietnameseNameUtil {

@@ -4,6 +4,7 @@ import { UserAccountRepository } from '../repository/user-account.repository';
 import * as bcrypt from 'bcryptjs';
 import { BusinessException } from '../../common/exception/business.exception';
 import { ErrorCode } from '../../common/exception/error-code.enum';
+import { PasswordPolicyValidator } from '../validator/password-policy.validator';
 
 @Injectable()
 export class AuthService {
@@ -67,12 +68,12 @@ export class AuthService {
     return { success: true, message: 'Đổi mật khẩu thành công' };
   }
 
-  async refreshToken(refreshToken: string) {
+  async refreshToken(_refreshToken: string) {
     // TODO: Implement refresh token logic
     throw new UnauthorizedException('Not implemented');
   }
 
-  async logout(refreshToken: string) {
+  async logout(_refreshToken: string) {
     // TODO: Revoke session
     return { success: true };
   }

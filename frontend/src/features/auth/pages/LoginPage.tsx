@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { httpClient } from '@shared/api/http-client';
+import { getErrorMessage } from '@shared/api/error-message';
 
 export default function LoginPage() {
   const navigate = useNavigate();
@@ -29,8 +30,8 @@ export default function LoginPage() {
       } else {
         navigate('/');
       }
-    } catch (err: any) {
-      const msg = err.response?.data?.message || err.message || 'Tên đăng nhập hoặc mật khẩu không đúng.';
+    } catch (err: unknown) {
+      const msg = getErrorMessage(err, 'Tên đăng nhập hoặc mật khẩu không đúng.');
       setError(msg);
     } finally {
       setIsLoading(false);
@@ -56,8 +57,8 @@ export default function LoginPage() {
       });
       alert('Đổi mật khẩu thành công! Bạn sẽ được chuyển đến trang chủ.');
       navigate('/');
-    } catch (err: any) {
-      setChangePwdError(err.response?.data?.message || 'Không thể đổi mật khẩu');
+    } catch (err: unknown) {
+      setChangePwdError(getErrorMessage(err, 'Không thể đổi mật khẩu'));
     }
   };
 
