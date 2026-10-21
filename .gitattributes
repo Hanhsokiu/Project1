@@ -1,0 +1,4 @@
+# Keep NEW migration checksums stable between Windows and Linux.
+# The already-existing 0_init is intentionally excluded.
+backend/prisma/migrations/20*/migration.sql text eol=lf
+backend/prisma/review/pr2b/*.sql text eol=lf

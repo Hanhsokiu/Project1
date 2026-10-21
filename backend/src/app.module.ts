@@ -18,10 +18,16 @@ import { ReportModule } from './report/report.module';
 import { NotificationModule } from './notification/notification.module';
 import { JwtAuthGuard } from './common/security/jwt-auth.guard';
 import { PermissionsGuard } from './common/security/permissions.guard';
+import { resolve } from 'path';
+import { validateEnvironment } from './config/environment';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: '.env' }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: resolve(__dirname, '../.env'),
+      validate: validateEnvironment,
+    }),
     EventEmitterModule.forRoot(),
     ScheduleModule.forRoot(),
     ThrottlerModule.forRoot([{ ttl: 60000, limit: 100 }]),

@@ -1,0 +1,224 @@
+{
+  "database": "isolated loopback rehearsal",
+  "postgresMajor": 17,
+  "checks": [
+    {
+      "name": "dedicated empty PostgreSQL17 identity",
+      "result": "PASS"
+    },
+    {
+      "name": "unchanged 0_init replay",
+      "result": "PASS"
+    },
+    {
+      "name": "empty baseline enum bridge",
+      "result": "PASS"
+    },
+    {
+      "name": "synthetic legacy fixture loaded",
+      "result": "PASS"
+    },
+    {
+      "name": "Prisma enum filters match bridged SQL",
+      "result": "PASS"
+    },
+    {
+      "name": "baseline bridge refuses nonempty data without rewriting it",
+      "result": "PASS"
+    },
+    {
+      "name": "injected expand failure rolls back DDL and preserves legacy fixture",
+      "result": "PASS"
+    },
+    {
+      "name": "atomic expand replay over populated legacy fixture",
+      "result": "PASS"
+    },
+    {
+      "name": "application data no longer granted to PUBLIC by fixture defaults",
+      "result": "PASS"
+    },
+    {
+      "name": "legacy Topic.proposals and Student.proposal JSON unchanged",
+      "result": "PASS"
+    },
+    {
+      "name": "legacy false and ownership not guessed or auto-backfilled",
+      "result": "PASS"
+    },
+    {
+      "name": "cross-term Topic ownership rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "proposal cannot point at another proposal version",
+      "result": "PASS"
+    },
+    {
+      "name": "only one active round per proposal",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent opposing decisions produce one final decision",
+      "result": "PASS"
+    },
+    {
+      "name": "final review decision immutable",
+      "result": "PASS"
+    },
+    {
+      "name": "required student must belong to period term",
+      "result": "PASS"
+    },
+    {
+      "name": "missing week visible before obligation, plan or manual task",
+      "result": "PASS"
+    },
+    {
+      "name": "creating task does not submit or complete required week",
+      "result": "PASS"
+    },
+    {
+      "name": "completion without current PASS evidence rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "PASS FAIL REVISION_REQUIRED stored distinctly",
+      "result": "PASS"
+    },
+    {
+      "name": "PASS record does not automatically complete task or student",
+      "result": "PASS"
+    },
+    {
+      "name": "progress review result cannot be rewritten",
+      "result": "PASS"
+    },
+    {
+      "name": "explicit completion requires current PASS review",
+      "result": "PASS"
+    },
+    {
+      "name": "effective review cannot point at another submission",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent compare-and-swap has exactly one winner",
+      "result": "PASS"
+    },
+    {
+      "name": "audit event content is append-only",
+      "result": "PASS"
+    },
+    {
+      "name": "old API payload remains stable after new workflow writes",
+      "result": "PASS"
+    },
+    {
+      "name": "12 diagnostic SELECTs run on populated synthetic fixture, no counted violations",
+      "result": "PASS"
+    }
+  ],
+  "diagnostics": [
+    {
+      "check": "duplicate_proposal_topic",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "orphan_or_unmapped_proposal_owner",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "topics_without_owner_evidence",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "multiple_topics_per_student_term",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "assignment_cross_term_or_roster",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "multiple_finalized_plans",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "review_cross_term",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "review_member_outside_term",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "duplicate_proposal_version",
+      "rows": [
+        {
+          "violations": 0
+        }
+      ]
+    },
+    {
+      "check": "task_review_legacy_distribution",
+      "rows": [
+        {
+          "is_passed": false,
+          "records": 1
+        }
+      ]
+    },
+    {
+      "check": "proposal_status_distribution",
+      "rows": [
+        {
+          "status": "DRAFT",
+          "records": 2
+        }
+      ]
+    },
+    {
+      "check": "dossier_status_distribution",
+      "rows": []
+    }
+  ],
+  "legacyPayloadHash": "bbbcff11290e3ba9ebf4c8e5a0bf676e1aa5ce042bee7ca7e830cd8508598910",
+  "sharedDatabaseDDL": false,
+  "limitations": [
+    "Synthetic fixture is not a legacy production snapshot",
+    "Application authorization and workflow services are not implemented or tested here"
+  ]
+}

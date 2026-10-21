@@ -1,0 +1,54 @@
+-- REVIEW ONLY: apply after unchanged 0_init, on empty application tables only.
+-- Converts legacy status VARCHAR to the existing Prisma enum contract.
+BEGIN;
+DO $guard$ DECLARE t text; occupied boolean; BEGIN
+  FOREACH t IN ARRAY ARRAY['USER_ACCOUNT','ROLE','PERMISSION','USER_ROLE','ROLE_PERMISSION','LOGIN_SESSION','AUDIT_LOG','NOTIFICATION','DEPARTMENT','TITLE_CONFIG','TRAINING_SYSTEM','LECTURER','STUDENT','RESEARCH_AREA','LECTURER_AREA','IMPORT_JOB','THESIS_TERM','TERM_PHASE','TERM_PARAMETER','TERM_LECTURER','TERM_STUDENT','REGISTRATION','REGISTRATION_PREF','ASSIGNMENT_PLAN','ADVISOR_ASSIGNMENT','TOPIC','TOPIC_HISTORY','PROPOSAL','PROPOSAL_VERSION','REVIEW_GROUP','REVIEW_GROUP_MEMBER','PROPOSAL_REVIEW','THESIS_DOSSIER','GUIDANCE_PLAN','TASK','TASK_SUBMISSION','SUBMISSION_FILE','TASK_REVIEW','GUIDANCE_MEETING','PHASE_EVALUATION','FINAL_REPORT','DEFENSE_CONFIRMATION','DEFENSE_ELIGIBILITY','DEFERMENT_REQUEST','REVIEWER_ASSIGNMENT','ROOM','DEFENSE_COMMITTEE','COMMITTEE_MEMBER','DEFENSE_SESSION','COMMITTEE_STUDENT','DEFENSE_MINUTES','RUBRIC_CRITERIA','SCORE_ENTRY','SCORE_DETAIL','FINAL_RESULT','EXPORT_JOB'] LOOP
+    EXECUTE format('SELECT EXISTS(SELECT 1 FROM public.%I LIMIT 1)',t) INTO occupied;
+    IF occupied THEN RAISE EXCEPTION 'Baseline enum bridge requires empty application tables: %',t; END IF;
+  END LOOP;
+END $guard$;
+CREATE TYPE public."AccountStatus" AS ENUM ('ACTIVE', 'LOCKED', 'PENDING_ACTIVATION');
+CREATE TYPE public."TermStatus" AS ENUM ('DRAFT', 'OPEN_REGISTRATION', 'CLOSED_REGISTRATION', 'IN_PROGRESS', 'DEFENDING', 'COMPLETED', 'CANCELLED');
+CREATE TYPE public."RegistrationStatus" AS ENUM ('PENDING', 'APPROVED', 'REJECTED', 'CANCELLED');
+CREATE TYPE public."AssignmentStatus" AS ENUM ('DRAFT', 'PUBLISHED', 'FINALIZED');
+CREATE TYPE public."ProposalStatus" AS ENUM ('DRAFT', 'SUBMITTED', 'UNDER_REVIEW', 'REVISION_REQUESTED', 'APPROVED', 'REJECTED');
+CREATE TYPE public."TaskStatus" AS ENUM ('TODO', 'IN_PROGRESS', 'SUBMITTED', 'REVIEWED', 'OVERDUE');
+CREATE TYPE public."DefenseEligibilityStatus" AS ENUM ('PENDING', 'ELIGIBLE', 'INELIGIBLE', 'DEFERRED');
+CREATE TYPE public."DefermentStatus" AS ENUM ('PENDING', 'DEPARTMENT_APPROVED', 'FACULTY_APPROVED', 'REJECTED');
+CREATE TYPE public."ExportJobStatus" AS ENUM ('QUEUED', 'PROCESSING', 'DONE', 'FAILED');
+CREATE TYPE public."NotificationStatus" AS ENUM ('UNREAD', 'READ');
+CREATE TYPE public."ImportJobStatus" AS ENUM ('QUEUED', 'PROCESSING', 'DONE', 'FAILED');
+ALTER TABLE public."USER_ACCOUNT" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."USER_ACCOUNT" ALTER COLUMN "status" TYPE public."AccountStatus" USING "status"::text::public."AccountStatus";
+ALTER TABLE public."USER_ACCOUNT" ALTER COLUMN "status" SET DEFAULT 'PENDING_ACTIVATION'::public."AccountStatus";
+ALTER TABLE public."NOTIFICATION" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."NOTIFICATION" ALTER COLUMN "status" TYPE public."NotificationStatus" USING "status"::text::public."NotificationStatus";
+ALTER TABLE public."NOTIFICATION" ALTER COLUMN "status" SET DEFAULT 'UNREAD'::public."NotificationStatus";
+ALTER TABLE public."IMPORT_JOB" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."IMPORT_JOB" ALTER COLUMN "status" TYPE public."ImportJobStatus" USING "status"::text::public."ImportJobStatus";
+ALTER TABLE public."IMPORT_JOB" ALTER COLUMN "status" SET DEFAULT 'QUEUED'::public."ImportJobStatus";
+ALTER TABLE public."THESIS_TERM" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."THESIS_TERM" ALTER COLUMN "status" TYPE public."TermStatus" USING "status"::text::public."TermStatus";
+ALTER TABLE public."THESIS_TERM" ALTER COLUMN "status" SET DEFAULT 'DRAFT'::public."TermStatus";
+ALTER TABLE public."REGISTRATION" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."REGISTRATION" ALTER COLUMN "status" TYPE public."RegistrationStatus" USING "status"::text::public."RegistrationStatus";
+ALTER TABLE public."REGISTRATION" ALTER COLUMN "status" SET DEFAULT 'PENDING'::public."RegistrationStatus";
+ALTER TABLE public."ASSIGNMENT_PLAN" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."ASSIGNMENT_PLAN" ALTER COLUMN "status" TYPE public."AssignmentStatus" USING "status"::text::public."AssignmentStatus";
+ALTER TABLE public."ASSIGNMENT_PLAN" ALTER COLUMN "status" SET DEFAULT 'DRAFT'::public."AssignmentStatus";
+ALTER TABLE public."PROPOSAL" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."PROPOSAL" ALTER COLUMN "status" TYPE public."ProposalStatus" USING "status"::text::public."ProposalStatus";
+ALTER TABLE public."PROPOSAL" ALTER COLUMN "status" SET DEFAULT 'DRAFT'::public."ProposalStatus";
+ALTER TABLE public."TASK" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."TASK" ALTER COLUMN "status" TYPE public."TaskStatus" USING "status"::text::public."TaskStatus";
+ALTER TABLE public."TASK" ALTER COLUMN "status" SET DEFAULT 'TODO'::public."TaskStatus";
+ALTER TABLE public."DEFENSE_ELIGIBILITY" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."DEFENSE_ELIGIBILITY" ALTER COLUMN "status" TYPE public."DefenseEligibilityStatus" USING "status"::text::public."DefenseEligibilityStatus";
+ALTER TABLE public."DEFENSE_ELIGIBILITY" ALTER COLUMN "status" SET DEFAULT 'PENDING'::public."DefenseEligibilityStatus";
+ALTER TABLE public."DEFERMENT_REQUEST" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."DEFERMENT_REQUEST" ALTER COLUMN "status" TYPE public."DefermentStatus" USING "status"::text::public."DefermentStatus";
+ALTER TABLE public."DEFERMENT_REQUEST" ALTER COLUMN "status" SET DEFAULT 'PENDING'::public."DefermentStatus";
+ALTER TABLE public."EXPORT_JOB" ALTER COLUMN "status" DROP DEFAULT;
+ALTER TABLE public."EXPORT_JOB" ALTER COLUMN "status" TYPE public."ExportJobStatus" USING "status"::text::public."ExportJobStatus";
+ALTER TABLE public."EXPORT_JOB" ALTER COLUMN "status" SET DEFAULT 'QUEUED'::public."ExportJobStatus";
+COMMIT;

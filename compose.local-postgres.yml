@@ -1,0 +1,9 @@
+# Explicit local-only override. Never points at Supabase.
+services:
+  backend:
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://doan_local:${LOCAL_DB_PASSWORD:?Set LOCAL_DB_PASSWORD in root .env}@postgres:5432/doan_local
+      DIRECT_URL: postgresql://doan_local:${LOCAL_DB_PASSWORD:?Set LOCAL_DB_PASSWORD in root .env}@postgres:5432/doan_local

@@ -1,13 +1,15 @@
-FROM node:20-alpine AS base
-RUN npm install -g pnpm
-
-WORKDIR /app
-COPY package.json pnpm-lock.yaml* ./
-RUN pnpm install
-
+FROM node:20-alpine
+RUN npm install -g pnpm@9
+WORKDIR /workspace
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY backend/package.json backend/package.json
+COPY frontend/package.json frontend/package.json
+COPY shared/package.json shared/package.json
+RUN pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm prisma generate
-RUN pnpm build
-
+# Generation only, no database connection during image build.
+RUN DATABASE_URL=postgresql://offline:offline@127.0.0.1:1/offline DIRECT_URL=postgresql://offline:offline@127.0.0.1:1/offline pnpm --filter @doan/backend prisma generate
+RUN pnpm --filter @doan/backend build
+WORKDIR /workspace/backend
 EXPOSE 3000
 CMD ["node", "dist/main"]

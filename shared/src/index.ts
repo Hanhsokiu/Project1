@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export type { Id, Instant, Revision, CurrentUserResponse, OfficialAdvisorContext, TopicAgreement, SubmittedProposalContext, GuidancePeriodContext } from './contracts/academic-context';
+
 // Roles
 export const ROLES = {
   ADMIN: 'ADMIN',

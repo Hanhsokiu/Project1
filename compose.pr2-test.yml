@@ -1,0 +1,22 @@
+name: btl-pr2-test
+services:
+  postgres-test:
+    image: postgres:16-alpine
+    container_name: btl-pr2-postgres-test
+    environment:
+      POSTGRES_DB: doan_pr2_test
+      POSTGRES_USER: btl_pr2_test
+      POSTGRES_PASSWORD: ${TEST_DB_PASSWORD:?Run db:test:init first}
+    labels:
+      btl.pr2.instance: ${TEST_DB_INSTANCE_TOKEN:?Run db:test:init first}
+    ports:
+      - "127.0.0.1:55432:5432"
+    volumes:
+      - pr2-test-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U btl_pr2_test -d doan_pr2_test"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  pr2-test-data:

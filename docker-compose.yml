@@ -2,19 +2,20 @@ version: '3.9'
 
 services:
   postgres:
+    profiles: [local-db]
     image: postgres:16-alpine
     container_name: doan_postgres
     restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_NAME:-doan_db}
-      POSTGRES_USER: ${DB_USER:-doan_user}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-doan_password}
+      POSTGRES_DB: doan_local
+      POSTGRES_USER: doan_local
+      POSTGRES_PASSWORD: ${LOCAL_DB_PASSWORD:-}
     ports:
-      - '${DB_PORT:-5432}:5432'
+      - '127.0.0.1:${DB_PORT:-5432}:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${DB_USER:-doan_user} -d ${DB_NAME:-doan_db}']
+      test: ['CMD-SHELL', 'pg_isready -U doan_local -d doan_local']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -23,34 +24,33 @@ services:
 
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: backend/Dockerfile
     container_name: doan_backend
+    command: ["pnpm", "dev"]
     restart: unless-stopped
-    depends_on:
-      postgres:
-        condition: service_healthy
+    env_file: ./backend/.env
     environment:
-      - DATABASE_URL=postgresql://${DB_USER:-doan_user}:${DB_PASSWORD:-doan_password}@postgres:5432/${DB_NAME:-doan_db}
       - NODE_ENV=${NODE_ENV:-development}
-      - JWT_SECRET=${JWT_SECRET}
-      - JWT_REFRESH_SECRET=${JWT_REFRESH_SECRET}
       - MAIL_HOST=mailhog
       - MAIL_PORT=1025
       - STORAGE_LOCAL_PATH=/app/uploads
     ports:
       - '${PORT:-3000}:3000'
     volumes:
-      - ./backend:/app
-      - /app/node_modules
+      - .:/workspace
+      - /workspace/node_modules
+      - /workspace/backend/node_modules
+      - /workspace/frontend/node_modules
+      - /workspace/shared/node_modules
       - uploads_data:/app/uploads
     networks:
       - doan_network
 
   frontend:
     build:
-      context: ./frontend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: frontend/Dockerfile
     container_name: doan_frontend
     restart: unless-stopped
     depends_on:
@@ -60,8 +60,11 @@ services:
     ports:
       - '5173:5173'
     volumes:
-      - ./frontend:/app
-      - /app/node_modules
+      - .:/workspace
+      - /workspace/node_modules
+      - /workspace/backend/node_modules
+      - /workspace/frontend/node_modules
+      - /workspace/shared/node_modules
     networks:
       - doan_network
 

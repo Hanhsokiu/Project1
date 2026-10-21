@@ -12,27 +12,68 @@ Hệ thống quản lý đồ án tốt nghiệp dành cho khoa/bộ môn đại
 ## Yêu cầu
 - Node.js >= 20
 - pnpm >= 9
-- Docker Desktop
+- Docker Desktop (chỉ cần khi chạy bằng Docker)
+- Python >= 3.10 chỉ cần khi người tích hợp tái sinh artifact PR2B (`pr2b:prepare`); code/check hằng ngày dùng artifact đã có.
 
-## Cách chạy nhanh
+## Bắt đầu cho nhóm ba người
 
-```bash
-# 1. Copy biến môi trường
-cp .env.example .env
+Xem [hướng dẫn chia việc, contract và môi trường local](docs/implementation/03-team-development-guide.md).
+Phân công: người 1 bước 1–3, người 2 bước 4–8, người 3 bước 9–10; schema/migration dùng chung một cây.
 
-# 2. Khởi động toàn bộ hệ thống
-make up
-
-# 3. Chạy migration và seed
-make migrate
-make seed
-
-# 4. Truy cập
-# Frontend: http://localhost:5173
-# Backend API: http://localhost:3000/api
-# Swagger: http://localhost:3000/api/docs
-# MailHog: http://localhost:8025
+```powershell
+pnpm install --frozen-lockfile
+pnpm setup:dev
+pnpm verify
+# Khi Docker Desktop hoạt động, dùng DB riêng trên máy:
+pnpm db:local:init
+pnpm db:local:up
+pnpm db:local:migrate
+pnpm dev:local
 ```
+
+Setup giữ nguyên env đang có; verify không thực hiện DDL. `dev:local` và migrate local
+chỉ dùng container PostgreSQL17 đã xác minh ở 127.0.0.1:55440, không dùng URL Supabase trong env.
+Schema expand và migration đã có trong repository; chưa deploy lên Supabase chung.
+
+## Cấu hình Supabase và chạy dev
+
+Kiến trúc giữ React → NestJS (JWT/RBAC) → Prisma → Supabase PostgreSQL.
+Không cần Supabase Auth/SDK keys để dùng Prisma.
+
+Copy `backend/.env.example` thành `backend/.env`, điền DATABASE_URL/DIRECT_URL từ
+Dashboard → Connect và sinh JWT secrets riêng. Copy `frontend/.env.example` thành
+`frontend/.env.local`. Các file thật được Git bỏ qua; không đưa credentials vào VITE_*.
+Root `.env` chỉ dùng Docker interpolation, không phải env ứng dụng.
+
+```powershell
+pnpm --filter @doan/backend prisma validate
+pnpm --filter @doan/backend prisma generate
+pnpm dev
+```
+
+Docker mặc định dùng database đã cấu hình trong backend/.env, không chạy Postgres local:
+
+```powershell
+docker compose up -d --build
+```
+
+Database local chỉ bật bằng profile và override riêng; xem
+[hướng dẫn cấu hình và kiểm tra Supabase](docs/implementation/02b-supabase-configuration.md).
+CI vẫn dùng database PostgreSQL test riêng, không database nhóm.
+
+## Kiểm tra trước migration
+
+```powershell
+pnpm --filter @doan/backend db:inspect
+```
+
+Đặt DB_INSPECT_HOST khớp host trong DIRECT_URL. Lệnh chỉ đọc catalog/count/history,
+không thay schema hay dữ liệu. `make migrate` chỉ hướng dẫn kiểm tra và phê duyệt;
+không còn gọi db push. Deploy chỉ qua gate đích được duyệt, xem tài liệu trên.
+Chưa chạy migration/seed lên DB chung khi chưa kiểm history và backup.
+
+Frontend: http://localhost:5173; API: http://localhost:3000/api;
+Swagger ngoài production: http://localhost:3000/api/docs.
 
 ## Lệnh thường dùng
 
@@ -41,8 +82,8 @@ make seed
 | `make up` | Khởi động toàn bộ Docker services |
 | `make down` | Dừng Docker services |
 | `make test` | Chạy toàn bộ test |
-| `make migrate` | Chạy database migration |
-| `make seed` | Chạy seed dữ liệu mẫu |
+| `make migrate` | Hướng dẫn kiểm tra/review; không thực hiện DDL |
+| `make seed` | Chỉ hiển thị hướng dẫn; không có seed tự động |
 | `make logs` | Xem logs |
 | `make studio` | Mở Prisma Studio |
 
@@ -52,11 +93,13 @@ make seed
 do-an-tot-nghiep/
 ├── backend/          # NestJS API server
 ├── frontend/         # React + Vite client
-├── database/         # Migrations & seeds (Prisma)
+├── database/         # SQL lịch sử và seed tham chiếu
 ├── docs/             # Tài liệu dự án
 ├── infra/            # Nginx, CI scripts
 └── docker-compose.yml
 ```
+
+Migration chuẩn ở `backend/prisma/migrations/`, không chạy lại cây SQL lịch sử song song.
 
 ## Đóng góp
 1. Tạo nhánh từ `main`: `git checkout -b feat/UC01-auth`

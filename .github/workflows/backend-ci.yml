@@ -21,9 +21,91 @@ on:
       - '.github/workflows/backend-ci.yml'
   workflow_dispatch:
 jobs:
+  pr2b-review:
+    name: PR2B review SQL on isolated PostgreSQL 17
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci
+      DIRECT_URL: postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci
+      PR2B_TEST_URL: postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci
+      PGHOST: 127.0.0.1
+      PGUSER: test_user
+      PGPASSWORD: test_password
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: btl_pr2b_ci
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install PostgreSQL client
+        run: sudo apt-get update && sudo apt-get install -y postgresql-client
+      - run: pnpm install --frozen-lockfile
+      - name: Prepare, validate and generate review clients
+        working-directory: backend
+        run: |
+          pnpm prisma generate
+          pnpm prisma validate
+          pnpm pr2b:prepare
+          pnpm pr2b:validate
+          pnpm pr2b:generate
+          pnpm type-check
+          pnpm type-check:pr2b
+          pnpm foundation:check
+          pnpm pr2b:target-test
+          pnpm test:local-tools
+      - name: Rehearse review SQL over synthetic legacy data
+        working-directory: backend
+        run: pnpm pr2b:rehearse
+      - name: Rehearse actual Prisma migration history in a separate empty DB
+        working-directory: backend
+        env:
+          PR2B_TEST_URL: postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_chain
+        run: |
+          createdb btl_pr2b_ci_chain
+          pnpm pr2b:replay-chain
+      - name: Rehearse active repository migrations and canonical client
+        working-directory: backend
+        env:
+          PR2B_TEST_URL: postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_active
+        run: |
+          createdb btl_pr2b_ci_active
+          pnpm db:test:active-chain
+          pnpm build
+          pnpm test:smoke:local
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pr2b-review-results
+          path: |
+            backend/prisma/review/pr2b/test-results.json
+            backend/prisma/review/pr2b/chain-results.json
+            backend/prisma/review/pr2b/active-chain-results.json
+            backend/prisma/review/pr2b/smoke-results.json
   test:
     name: Build & Test Backend
     runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: postgresql://test_user:test_password@localhost:5432/doan_test
+      DIRECT_URL: postgresql://test_user:test_password@localhost:5432/doan_test
 
     services:
       postgres:
@@ -59,6 +141,10 @@ jobs:
         working-directory: backend
         run: pnpm prisma generate
 
+      - name: Test dedicated database tooling guards
+        working-directory: backend
+        run: pnpm test:database-tools
+
       - name: Type check
         working-directory: backend
         run: pnpm type-check
@@ -77,8 +163,8 @@ jobs:
         working-directory: backend
         env:
           DATABASE_URL: postgresql://test_user:test_password@localhost:5432/doan_test
-          JWT_SECRET: test-secret
-          JWT_REFRESH_SECRET: test-refresh-secret
+          JWT_SECRET: ci-test-access-secret-not-for-production
+          JWT_REFRESH_SECRET: ci-test-refresh-secret-not-for-production
           NODE_ENV: test
         run: pnpm test:cov
 

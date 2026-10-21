@@ -6,6 +6,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 // ============================================
@@ -115,6 +116,30 @@ model UserAccount {
   lecturer      Lecturer?
 
   @@map("USER_ACCOUNT")
+
+  pr2bAcademicTermGrantUserId AcademicTermGrant[] @relation("AcademicTermGrant_userId")
+  pr2bAssignmentPlanWorkflowFinalizedByUserId AssignmentPlanWorkflow[] @relation("AssignmentPlanWorkflow_finalizedByUserId")
+  pr2bAssignmentChangeActorId AssignmentChange[] @relation("AssignmentChange_actorId")
+  pr2bProposalVersionWorkflowCreatedByUserId ProposalVersionWorkflow[] @relation("ProposalVersionWorkflow_createdByUserId")
+  pr2bProposalVersionWorkflowSubmittedByUserId ProposalVersionWorkflow[] @relation("ProposalVersionWorkflow_submittedByUserId")
+  pr2bReviewMembershipHistoryActorId ReviewMembershipHistory[] @relation("ReviewMembershipHistory_actorId")
+  pr2bProposalReviewWorkflowStartedByUserId ProposalReviewWorkflow[] @relation("ProposalReviewWorkflow_startedByUserId")
+  pr2bProposalReviewDecisionDecidedByUserId ProposalReviewDecision[] @relation("ProposalReviewDecision_decidedByUserId")
+  pr2bReviewCommentAuthorUserId ReviewComment[] @relation("ReviewComment_authorUserId")
+  pr2bDossierFinalizationFinalizedByUserId DossierFinalization[] @relation("DossierFinalization_finalizedByUserId")
+  pr2bDossierReceiptReceivedByUserId DossierReceipt[] @relation("DossierReceipt_receivedByUserId")
+  pr2bDossierHistoryActorId DossierHistory[] @relation("DossierHistory_actorId")
+  pr2bPlanHistoryActorId PlanHistory[] @relation("PlanHistory_actorId")
+  pr2bTaskProgressEventActorId TaskProgressEvent[] @relation("TaskProgressEvent_actorId")
+  pr2bTaskHistoryActorId TaskHistory[] @relation("TaskHistory_actorId")
+  pr2bSubmissionWorkflowSubmittedByUserId SubmissionWorkflow[] @relation("SubmissionWorkflow_submittedByUserId")
+  pr2bProgressReviewReviewerUserId ProgressReview[] @relation("ProgressReview_reviewerUserId")
+  pr2bFileAssetCreatedByUserId FileAsset[] @relation("FileAsset_createdByUserId")
+  pr2bMeetingWorkflowAuthorUserId MeetingWorkflow[] @relation("MeetingWorkflow_authorUserId")
+  pr2bMeetingHistoryActorId MeetingHistory[] @relation("MeetingHistory_actorId")
+  pr2bEvaluationWorkflowEvaluatorUserId EvaluationWorkflow[] @relation("EvaluationWorkflow_evaluatorUserId")
+  pr2bEvaluationHistoryActorId EvaluationHistory[] @relation("EvaluationHistory_actorId")
+  pr2bIdempotencyRecordActorId IdempotencyRecord[] @relation("IdempotencyRecord_actorId")
 }
 
 model Role {
@@ -225,6 +250,10 @@ model Department {
   lecturers Lecturer[]
 
   @@map("DEPARTMENT")
+
+  pr2bGrantDepartmentDepartmentId GrantDepartment[] @relation("GrantDepartment_departmentId")
+  pr2bResearchAreaWorkflowDepartmentId ResearchAreaWorkflow[] @relation("ResearchAreaWorkflow_departmentId")
+  pr2bReviewGroupWorkflowDepartmentId ReviewGroupWorkflow[] @relation("ReviewGroupWorkflow_departmentId")
 }
 
 model TitleConfig {
@@ -272,6 +301,11 @@ model Lecturer {
   committeeMembers    CommitteeMember[]
 
   @@map("LECTURER")
+
+  pr2bAssignmentChangeOldAdvisorId AssignmentChange[] @relation("AssignmentChange_oldAdvisorId")
+  pr2bAssignmentChangeNewAdvisorId AssignmentChange[] @relation("AssignmentChange_newAdvisorId")
+  pr2bTopicWorkflowConfirmedByAdvisorId TopicWorkflow[] @relation("TopicWorkflow_confirmedByAdvisorId")
+  pr2bReviewMembershipHistoryLecturerId ReviewMembershipHistory[] @relation("ReviewMembershipHistory_lecturerId")
 }
 
 model Student {
@@ -305,6 +339,8 @@ model ResearchArea {
   topics        Topic[]
 
   @@map("RESEARCH_AREA")
+
+  pr2bResearchAreaWorkflowResearchAreaId ResearchAreaWorkflow? @relation("ResearchAreaWorkflow_researchAreaId")
 }
 
 model LecturerArea {
@@ -360,6 +396,13 @@ model ThesisTerm {
   exportJobs        ExportJob[]
 
   @@map("THESIS_TERM")
+
+  pr2bAcademicTermGrantTermId AcademicTermGrant[] @relation("AcademicTermGrant_termId")
+  pr2bTermWorkflowTermId TermWorkflow? @relation("TermWorkflow_termId")
+  pr2bTermPhaseWorkflowTermId TermPhaseWorkflow[] @relation("TermPhaseWorkflow_termId")
+  pr2bTopicWorkflowTermId TopicWorkflow[] @relation("TopicWorkflow_termId")
+  pr2bGuidancePeriodTermId GuidancePeriod[] @relation("GuidancePeriod_termId")
+  pr2bPeriodRequiredStudentTermId PeriodRequiredStudent[] @relation("PeriodRequiredStudent_termId")
 }
 
 model TermPhase {
@@ -374,6 +417,8 @@ model TermPhase {
   term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Cascade)
 
   @@map("TERM_PHASE")
+
+  pr2bTermPhaseWorkflowPhaseId TermPhaseWorkflow? @relation("TermPhaseWorkflow_phaseId")
 }
 
 model TermParameter {
@@ -414,6 +459,10 @@ model TermStudent {
 
   @@unique([termId, studentId])
   @@map("TERM_STUDENT")
+
+  pr2bTopicWorkflowTermStudentId TopicWorkflow? @relation("TopicWorkflow_termStudentId")
+  pr2bPeriodRequiredStudentTermStudentId PeriodRequiredStudent[] @relation("PeriodRequiredStudent_termStudentId")
+  pr2bWeeklyReportObligationTermStudentId WeeklyReportObligation[] @relation("WeeklyReportObligation_termStudentId")
 }
 
 // ============================================
@@ -460,6 +509,9 @@ model AssignmentPlan {
   advisorAssignments AdvisorAssignment[]
 
   @@map("ASSIGNMENT_PLAN")
+
+  pr2bTermWorkflowOfficialAssignmentPlanId TermWorkflow? @relation("TermWorkflow_officialAssignmentPlanId")
+  pr2bAssignmentPlanWorkflowPlanId AssignmentPlanWorkflow? @relation("AssignmentPlanWorkflow_planId")
 }
 
 model AdvisorAssignment {
@@ -476,6 +528,9 @@ model AdvisorAssignment {
   advisor        Lecturer       @relation("AdvisorAssignment", fields: [advisorId], references: [id])
 
   @@map("ADVISOR_ASSIGNMENT")
+
+  pr2bAssignmentChangeAssignmentId AssignmentChange[] @relation("AssignmentChange_assignmentId")
+  pr2bGuidancePlanWorkflowAssignmentId GuidancePlanWorkflow[] @relation("GuidancePlanWorkflow_assignmentId")
 }
 
 // ============================================
@@ -498,6 +553,8 @@ model Topic {
   topicHistory TopicHistory[]
 
   @@map("TOPIC")
+
+  pr2bTopicWorkflowTopicId TopicWorkflow? @relation("TopicWorkflow_topicId")
 }
 
 model TopicHistory {
@@ -528,6 +585,11 @@ model Proposal {
   dossier  ThesisDossier?
 
   @@map("PROPOSAL")
+
+  pr2bProposalWorkflowProposalId ProposalWorkflow? @relation("ProposalWorkflow_proposalId")
+  pr2bProposalReviewWorkflowProposalId ProposalReviewWorkflow[] @relation("ProposalReviewWorkflow_proposalId")
+  pr2bDossierFinalizationProposalId DossierFinalization[] @relation("DossierFinalization_proposalId")
+  pr2bGuidancePlanWorkflowProposalId GuidancePlanWorkflow[] @relation("GuidancePlanWorkflow_proposalId")
 }
 
 model ProposalVersion {
@@ -542,6 +604,15 @@ model ProposalVersion {
 
   @@unique([proposalId, version])
   @@map("PROPOSAL_VERSION")
+
+  pr2bProposalWorkflowWorkingVersionId ProposalWorkflow[] @relation("ProposalWorkflow_workingVersionId")
+  pr2bProposalWorkflowSubmittedVersionId ProposalWorkflow[] @relation("ProposalWorkflow_submittedVersionId")
+  pr2bProposalVersionWorkflowVersionId ProposalVersionWorkflow? @relation("ProposalVersionWorkflow_versionId")
+  pr2bProposalVersionWorkflowBasedOnVersionId ProposalVersionWorkflow[] @relation("ProposalVersionWorkflow_basedOnVersionId")
+  pr2bProposalReviewWorkflowVersionId ProposalReviewWorkflow[] @relation("ProposalReviewWorkflow_versionId")
+  pr2bProposalReviewDecisionVersionId ProposalReviewDecision[] @relation("ProposalReviewDecision_versionId")
+  pr2bReviewCommentVersionId ReviewComment[] @relation("ReviewComment_versionId")
+  pr2bDossierFinalizationVersionId DossierFinalization[] @relation("DossierFinalization_versionId")
 }
 
 model ReviewGroup {
@@ -554,6 +625,9 @@ model ReviewGroup {
   reviews ProposalReview[]
 
   @@map("REVIEW_GROUP")
+
+  pr2bReviewGroupWorkflowGroupId ReviewGroupWorkflow? @relation("ReviewGroupWorkflow_groupId")
+  pr2bReviewMembershipHistoryGroupId ReviewMembershipHistory[] @relation("ReviewMembershipHistory_groupId")
 }
 
 model ReviewGroupMember {
@@ -579,6 +653,11 @@ model ProposalReview {
   reviewGroup ReviewGroup @relation(fields: [reviewGroupId], references: [id])
 
   @@map("PROPOSAL_REVIEW")
+
+  pr2bProposalReviewWorkflowReviewId ProposalReviewWorkflow? @relation("ProposalReviewWorkflow_reviewId")
+  pr2bProposalReviewWorkflowSupersededByReviewId ProposalReviewWorkflow[] @relation("ProposalReviewWorkflow_supersededByReviewId")
+  pr2bProposalReviewDecisionReviewId ProposalReviewDecision? @relation("ProposalReviewDecision_reviewId")
+  pr2bReviewCommentReviewId ReviewComment[] @relation("ReviewComment_reviewId")
 }
 
 model ThesisDossier {
@@ -593,6 +672,10 @@ model ThesisDossier {
   proposal Proposal @relation(fields: [proposalId], references: [id])
 
   @@map("THESIS_DOSSIER")
+
+  pr2bDossierWorkflowDossierId DossierWorkflow? @relation("DossierWorkflow_dossierId")
+  pr2bDossierFinalizationDossierId DossierFinalization[] @relation("DossierFinalization_dossierId")
+  pr2bDossierHistoryDossierId DossierHistory[] @relation("DossierHistory_dossierId")
 }
 
 // ============================================
@@ -612,6 +695,12 @@ model GuidancePlan {
   phaseEvaluations PhaseEvaluation[]
 
   @@map("GUIDANCE_PLAN")
+
+  pr2bGuidancePlanWorkflowPlanId GuidancePlanWorkflow? @relation("GuidancePlanWorkflow_planId")
+  pr2bPlanHistoryPlanId PlanHistory[] @relation("PlanHistory_planId")
+  pr2bWeeklyReportObligationPlanId WeeklyReportObligation[] @relation("WeeklyReportObligation_planId")
+  pr2bTaskWorkflowPlanId TaskWorkflow[] @relation("TaskWorkflow_planId")
+  pr2bEvaluationWorkflowPlanId EvaluationWorkflow[] @relation("EvaluationWorkflow_planId")
 }
 
 model Task {
@@ -628,6 +717,12 @@ model Task {
   submissions  TaskSubmission[]
 
   @@map("TASK")
+
+  pr2bWeeklyReportObligationCurrentTaskId WeeklyReportObligation? @relation("WeeklyReportObligation_currentTaskId")
+  pr2bTaskWorkflowTaskId TaskWorkflow? @relation("TaskWorkflow_taskId")
+  pr2bTaskProgressEventTaskId TaskProgressEvent[] @relation("TaskProgressEvent_taskId")
+  pr2bTaskHistoryTaskId TaskHistory[] @relation("TaskHistory_taskId")
+  pr2bSubmissionWorkflowTaskId SubmissionWorkflow[] @relation("SubmissionWorkflow_taskId")
 }
 
 model TaskSubmission {
@@ -641,6 +736,11 @@ model TaskSubmission {
   reviews TaskReview[]
 
   @@map("TASK_SUBMISSION")
+
+  pr2bTaskWorkflowCurrentSubmissionId TaskWorkflow[] @relation("TaskWorkflow_currentSubmissionId")
+  pr2bSubmissionWorkflowSubmissionId SubmissionWorkflow? @relation("SubmissionWorkflow_submissionId")
+  pr2bProgressReviewSubmissionId ProgressReview[] @relation("ProgressReview_submissionId")
+  pr2bSubmissionAssetSubmissionId SubmissionAsset[] @relation("SubmissionAsset_submissionId")
 }
 
 model SubmissionFile {
@@ -681,6 +781,9 @@ model GuidanceMeeting {
   guidancePlan GuidancePlan @relation(fields: [guidancePlanId], references: [id], onDelete: Cascade)
 
   @@map("GUIDANCE_MEETING")
+
+  pr2bMeetingWorkflowMeetingId MeetingWorkflow? @relation("MeetingWorkflow_meetingId")
+  pr2bMeetingHistoryMeetingId MeetingHistory[] @relation("MeetingHistory_meetingId")
 }
 
 model PhaseEvaluation {
@@ -695,6 +798,10 @@ model PhaseEvaluation {
   guidancePlan GuidancePlan @relation(fields: [guidancePlanId], references: [id])
 
   @@map("PHASE_EVALUATION")
+
+  pr2bEvaluationWorkflowEvaluationId EvaluationWorkflow? @relation("EvaluationWorkflow_evaluationId")
+  pr2bEvaluationEvidenceEvaluationId EvaluationEvidence[] @relation("EvaluationEvidence_evaluationId")
+  pr2bEvaluationHistoryEvaluationId EvaluationHistory[] @relation("EvaluationHistory_evaluationId")
 }
 
 model FinalReport {
@@ -916,4 +1023,733 @@ model ExportJob {
   term ThesisTerm? @relation(fields: [termId], references: [id])
 
   @@map("EXPORT_JOB")
+}
+
+// PR2B EXPAND CANDIDATE: sidecars, no legacy scalar/cardinality changes.
+
+enum WorkflowPhaseKey {
+  PROPOSAL_EDIT
+  PROPOSAL_REVIEW
+  GUIDANCE
+}
+
+enum ProposalVersionState {
+  DRAFT
+  SEALED
+}
+
+enum ProposalSubmissionKind {
+  INITIAL
+  RESUBMISSION
+}
+
+enum ProposalReviewState {
+  ASSIGNED
+  IN_REVIEW
+  DECIDED
+  SUPERSEDED
+}
+
+enum ProposalReviewResult {
+  APPROVED
+  REVISION_REQUIRED
+}
+
+enum DossierState {
+  DRAFT
+  FINALIZED
+  RECEIVED
+  REOPENED
+}
+
+enum GuidancePlanState {
+  ACTIVE
+  PAUSED
+  ARCHIVED
+}
+
+enum GuidancePeriodType {
+  WEEK
+  MILESTONE
+}
+
+enum TaskWorkflowState {
+  TODO
+  IN_PROGRESS
+  SUBMITTED
+  REVISION_REQUESTED
+  COMPLETED
+  CANCELLED
+}
+
+enum GuidanceTaskKind {
+  WEEKLY_REPORT
+  AD_HOC
+}
+
+enum SubmissionState {
+  SUBMITTED
+  REVIEWED
+  SUPERSEDED
+}
+
+enum ProgressReviewResult {
+  PASS
+  FAIL
+  REVISION_REQUIRED
+}
+
+enum ProgressReviewState {
+  RECORDED
+  SUPERSEDED
+}
+
+enum FileAssetKind {
+  REPORT
+  SOURCE
+  EVIDENCE
+  DOSSIER_PDF
+  RECEIPT_SCAN
+}
+
+enum FileAssetState {
+  READY
+  QUARANTINED
+}
+
+enum OutboxDeliveryState {
+  PENDING
+  PROCESSING
+  DELIVERED
+  FAILED
+}
+
+model AcademicTermGrant {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  allDepartments Boolean @default(false)
+  revision Int @default(0)
+  userId String @db.VarChar(36)
+  refUserId UserAccount @relation("AcademicTermGrant_userId", fields: [userId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  termId String @db.VarChar(36)
+  refTermId ThesisTerm @relation("AcademicTermGrant_termId", fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  pr2bGrantDepartmentGrantId GrantDepartment[] @relation("GrantDepartment_grantId")
+  @@unique([userId, termId])
+  @@map("ACADEMIC_TERM_GRANT")
+}
+
+model GrantDepartment {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  grantId String @db.VarChar(36)
+  refGrantId AcademicTermGrant @relation("GrantDepartment_grantId", fields: [grantId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  departmentId String @db.VarChar(36)
+  refDepartmentId Department @relation("GrantDepartment_departmentId", fields: [departmentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([grantId, departmentId])
+  @@map("GRANT_DEPARTMENT")
+}
+
+model ResearchAreaWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  revision Int @default(0)
+  researchAreaId String @unique @db.VarChar(36)
+  refResearchAreaId ResearchArea @relation("ResearchAreaWorkflow_researchAreaId", fields: [researchAreaId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  departmentId String? @db.VarChar(36)
+  refDepartmentId Department? @relation("ResearchAreaWorkflow_departmentId", fields: [departmentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("RESEARCH_AREA_WORKFLOW")
+}
+
+model TermWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  revision Int @default(0)
+  termId String @unique @db.VarChar(36)
+  refTermId ThesisTerm @relation("TermWorkflow_termId", fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  officialAssignmentPlanId String? @unique @db.VarChar(36)
+  refOfficialAssignmentPlanId AssignmentPlan? @relation("TermWorkflow_officialAssignmentPlanId", fields: [officialAssignmentPlanId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("TERM_WORKFLOW")
+}
+
+model TermPhaseWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  key WorkflowPhaseKey?
+  revision Int @default(0)
+  phaseId String @unique @db.VarChar(36)
+  refPhaseId TermPhase @relation("TermPhaseWorkflow_phaseId", fields: [phaseId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  termId String @db.VarChar(36)
+  refTermId ThesisTerm @relation("TermPhaseWorkflow_termId", fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([termId, key])
+  @@map("TERM_PHASE_WORKFLOW")
+}
+
+model AssignmentPlanWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  revision Int @default(0)
+  finalizedAt DateTime? @db.Timestamptz(6)
+  planId String @unique @db.VarChar(36)
+  refPlanId AssignmentPlan @relation("AssignmentPlanWorkflow_planId", fields: [planId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  finalizedByUserId String? @db.VarChar(36)
+  refFinalizedByUserId UserAccount? @relation("AssignmentPlanWorkflow_finalizedByUserId", fields: [finalizedByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("ASSIGNMENT_PLAN_WORKFLOW")
+}
+
+model AssignmentChange {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  assignmentRevision Int
+  effectiveAt DateTime @db.Timestamptz(6)
+  reason String
+  assignmentId String @db.VarChar(36)
+  refAssignmentId AdvisorAssignment @relation("AssignmentChange_assignmentId", fields: [assignmentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  oldAdvisorId String @db.VarChar(36)
+  refOldAdvisorId Lecturer @relation("AssignmentChange_oldAdvisorId", fields: [oldAdvisorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  newAdvisorId String @db.VarChar(36)
+  refNewAdvisorId Lecturer @relation("AssignmentChange_newAdvisorId", fields: [newAdvisorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("AssignmentChange_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([assignmentId, assignmentRevision])
+  @@map("ASSIGNMENT_CHANGE")
+}
+
+model TopicWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  revision Int @default(0)
+  confirmedTopicRevision Int?
+  confirmedAssignmentRevision Int?
+  confirmedAt DateTime? @db.Timestamptz(6)
+  topicId String @unique @db.VarChar(36)
+  refTopicId Topic @relation("TopicWorkflow_topicId", fields: [topicId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  termStudentId String? @unique @db.VarChar(36)
+  refTermStudentId TermStudent? @relation("TopicWorkflow_termStudentId", fields: [termStudentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  termId String? @db.VarChar(36)
+  refTermId ThesisTerm? @relation("TopicWorkflow_termId", fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  confirmedByAdvisorId String? @db.VarChar(36)
+  refConfirmedByAdvisorId Lecturer? @relation("TopicWorkflow_confirmedByAdvisorId", fields: [confirmedByAdvisorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("TOPIC_WORKFLOW")
+}
+
+model ProposalWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  revision Int @default(0)
+  nextVersionNumber Int?
+  nextReviewRound Int?
+  submissionKind ProposalSubmissionKind?
+  proposalId String @unique @db.VarChar(36)
+  refProposalId Proposal @relation("ProposalWorkflow_proposalId", fields: [proposalId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  workingVersionId String? @db.VarChar(36)
+  refWorkingVersionId ProposalVersion? @relation("ProposalWorkflow_workingVersionId", fields: [workingVersionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  submittedVersionId String? @db.VarChar(36)
+  refSubmittedVersionId ProposalVersion? @relation("ProposalWorkflow_submittedVersionId", fields: [submittedVersionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("PROPOSAL_WORKFLOW")
+}
+
+model ProposalVersionWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  state ProposalVersionState?
+  contentSchemaVersion Int?
+  contentHash String?
+  submittedAt DateTime? @db.Timestamptz(6)
+  provenance Json?
+  revision Int @default(0)
+  versionId String @unique @db.VarChar(36)
+  refVersionId ProposalVersion @relation("ProposalVersionWorkflow_versionId", fields: [versionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  createdByUserId String? @db.VarChar(36)
+  refCreatedByUserId UserAccount? @relation("ProposalVersionWorkflow_createdByUserId", fields: [createdByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  submittedByUserId String? @db.VarChar(36)
+  refSubmittedByUserId UserAccount? @relation("ProposalVersionWorkflow_submittedByUserId", fields: [submittedByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  basedOnVersionId String? @db.VarChar(36)
+  refBasedOnVersionId ProposalVersion? @relation("ProposalVersionWorkflow_basedOnVersionId", fields: [basedOnVersionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("PROPOSAL_VERSION_WORKFLOW")
+}
+
+model ReviewGroupWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  revision Int @default(0)
+  groupId String @unique @db.VarChar(36)
+  refGroupId ReviewGroup @relation("ReviewGroupWorkflow_groupId", fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  departmentId String? @db.VarChar(36)
+  refDepartmentId Department? @relation("ReviewGroupWorkflow_departmentId", fields: [departmentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("REVIEW_GROUP_WORKFLOW")
+}
+
+model ReviewMembershipHistory {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  action String
+  reason String?
+  groupId String @db.VarChar(36)
+  refGroupId ReviewGroup @relation("ReviewMembershipHistory_groupId", fields: [groupId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  lecturerId String @db.VarChar(36)
+  refLecturerId Lecturer @relation("ReviewMembershipHistory_lecturerId", fields: [lecturerId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("ReviewMembershipHistory_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("REVIEW_MEMBERSHIP_HISTORY")
+}
+
+model ProposalReviewWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  roundNumber Int?
+  state ProposalReviewState?
+  phaseSnapshot Json?
+  routingSnapshot Json?
+  startedAt DateTime? @db.Timestamptz(6)
+  revision Int @default(0)
+  reviewId String @unique @db.VarChar(36)
+  refReviewId ProposalReview @relation("ProposalReviewWorkflow_reviewId", fields: [reviewId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  proposalId String @db.VarChar(36)
+  refProposalId Proposal @relation("ProposalReviewWorkflow_proposalId", fields: [proposalId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  versionId String? @db.VarChar(36)
+  refVersionId ProposalVersion? @relation("ProposalReviewWorkflow_versionId", fields: [versionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  startedByUserId String? @db.VarChar(36)
+  refStartedByUserId UserAccount? @relation("ProposalReviewWorkflow_startedByUserId", fields: [startedByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  supersededByReviewId String? @db.VarChar(36)
+  refSupersededByReviewId ProposalReview? @relation("ProposalReviewWorkflow_supersededByReviewId", fields: [supersededByReviewId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([proposalId, roundNumber])
+  @@unique([reviewId, versionId])
+  @@index([proposalId, state])
+  @@map("PROPOSAL_REVIEW_WORKFLOW")
+}
+
+model ProposalReviewDecision {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  decision ProposalReviewResult
+  comment String?
+  decidedAt DateTime @db.Timestamptz(6)
+  reviewId String @unique @db.VarChar(36)
+  refReviewId ProposalReview @relation("ProposalReviewDecision_reviewId", fields: [reviewId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  versionId String @db.VarChar(36)
+  refVersionId ProposalVersion @relation("ProposalReviewDecision_versionId", fields: [versionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  decidedByUserId String @db.VarChar(36)
+  refDecidedByUserId UserAccount @relation("ProposalReviewDecision_decidedByUserId", fields: [decidedByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("PROPOSAL_REVIEW_DECISION")
+}
+
+model ReviewComment {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  text String
+  reviewId String @db.VarChar(36)
+  refReviewId ProposalReview @relation("ReviewComment_reviewId", fields: [reviewId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  versionId String @db.VarChar(36)
+  refVersionId ProposalVersion @relation("ReviewComment_versionId", fields: [versionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  authorUserId String @db.VarChar(36)
+  refAuthorUserId UserAccount @relation("ReviewComment_authorUserId", fields: [authorUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@index([reviewId, createdAt])
+  @@map("REVIEW_COMMENT")
+}
+
+model DossierWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  state DossierState?
+  revision Int @default(0)
+  dossierId String @unique @db.VarChar(36)
+  refDossierId ThesisDossier @relation("DossierWorkflow_dossierId", fields: [dossierId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  currentFinalizationId String? @unique @db.VarChar(36)
+  refCurrentFinalizationId DossierFinalization? @relation("DossierWorkflow_currentFinalizationId", fields: [currentFinalizationId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("DOSSIER_WORKFLOW")
+}
+
+model DossierFinalization {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  sequence Int
+  templateVersion String
+  contentHash String
+  finalizedAt DateTime @db.Timestamptz(6)
+  supersededAt DateTime? @db.Timestamptz(6)
+  reason String?
+  dossierId String @db.VarChar(36)
+  refDossierId ThesisDossier @relation("DossierFinalization_dossierId", fields: [dossierId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  proposalId String @db.VarChar(36)
+  refProposalId Proposal @relation("DossierFinalization_proposalId", fields: [proposalId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  versionId String @db.VarChar(36)
+  refVersionId ProposalVersion @relation("DossierFinalization_versionId", fields: [versionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  finalizedByUserId String @db.VarChar(36)
+  refFinalizedByUserId UserAccount @relation("DossierFinalization_finalizedByUserId", fields: [finalizedByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  pdfAssetId String? @db.VarChar(36)
+  refPdfAssetId FileAsset? @relation("DossierFinalization_pdfAssetId", fields: [pdfAssetId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  pr2bDossierWorkflowCurrentFinalizationId DossierWorkflow? @relation("DossierWorkflow_currentFinalizationId")
+  pr2bDossierReceiptFinalizationId DossierReceipt? @relation("DossierReceipt_finalizationId")
+  pr2bGuidancePlanWorkflowFinalizationId GuidancePlanWorkflow[] @relation("GuidancePlanWorkflow_finalizationId")
+  @@unique([dossierId, sequence])
+  @@unique([id, dossierId])
+  @@unique([id, proposalId])
+  @@map("DOSSIER_FINALIZATION")
+}
+
+model DossierReceipt {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  receivedAt DateTime @db.Timestamptz(6)
+  note String?
+  finalizationId String @unique @db.VarChar(36)
+  refFinalizationId DossierFinalization @relation("DossierReceipt_finalizationId", fields: [finalizationId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  receivedByUserId String @db.VarChar(36)
+  refReceivedByUserId UserAccount @relation("DossierReceipt_receivedByUserId", fields: [receivedByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  scanAssetId String? @db.VarChar(36)
+  refScanAssetId FileAsset? @relation("DossierReceipt_scanAssetId", fields: [scanAssetId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("DOSSIER_RECEIPT")
+}
+
+model DossierHistory {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  action String
+  reason String
+  snapshot Json
+  dossierId String @db.VarChar(36)
+  refDossierId ThesisDossier @relation("DossierHistory_dossierId", fields: [dossierId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("DossierHistory_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("DOSSIER_HISTORY")
+}
+
+model GuidancePlanWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  state GuidancePlanState?
+  assignmentRevision Int?
+  revision Int @default(0)
+  planId String @unique @db.VarChar(36)
+  refPlanId GuidancePlan @relation("GuidancePlanWorkflow_planId", fields: [planId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  proposalId String @db.VarChar(36)
+  refProposalId Proposal @relation("GuidancePlanWorkflow_proposalId", fields: [proposalId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  finalizationId String? @db.VarChar(36)
+  refFinalizationId DossierFinalization? @relation("GuidancePlanWorkflow_finalizationId", fields: [finalizationId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  assignmentId String? @db.VarChar(36)
+  refAssignmentId AdvisorAssignment? @relation("GuidancePlanWorkflow_assignmentId", fields: [assignmentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("GUIDANCE_PLAN_WORKFLOW")
+}
+
+model PlanHistory {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  action String
+  reason String
+  snapshot Json
+  planId String @db.VarChar(36)
+  refPlanId GuidancePlan @relation("PlanHistory_planId", fields: [planId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("PlanHistory_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("PLAN_HISTORY")
+}
+
+model GuidancePeriod {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  ordinal Int
+  label String
+  type GuidancePeriodType
+  startsAt DateTime @db.Timestamptz(6)
+  endsAt DateTime @db.Timestamptz(6)
+  reportDueAt DateTime? @db.Timestamptz(6)
+  revision Int @default(0)
+  termId String @db.VarChar(36)
+  refTermId ThesisTerm @relation("GuidancePeriod_termId", fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  pr2bPeriodRequiredStudentPeriodId PeriodRequiredStudent[] @relation("PeriodRequiredStudent_periodId")
+  pr2bWeeklyReportObligationPeriodId WeeklyReportObligation[] @relation("WeeklyReportObligation_periodId")
+  pr2bTaskWorkflowPeriodId TaskWorkflow[] @relation("TaskWorkflow_periodId")
+  pr2bEvaluationWorkflowMilestoneId EvaluationWorkflow[] @relation("EvaluationWorkflow_milestoneId")
+  @@unique([termId, ordinal])
+  @@unique([id, termId])
+  @@map("GUIDANCE_PERIOD")
+}
+
+model PeriodRequiredStudent {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  periodId String @db.VarChar(36)
+  refPeriodId GuidancePeriod @relation("PeriodRequiredStudent_periodId", fields: [periodId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  termStudentId String @db.VarChar(36)
+  refTermStudentId TermStudent @relation("PeriodRequiredStudent_termStudentId", fields: [termStudentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  termId String @db.VarChar(36)
+  refTermId ThesisTerm @relation("PeriodRequiredStudent_termId", fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([periodId, termStudentId])
+  @@map("PERIOD_REQUIRED_STUDENT")
+}
+
+model WeeklyReportObligation {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  revision Int @default(0)
+  configRevision Int
+  configSnapshot Json
+  periodId String @db.VarChar(36)
+  refPeriodId GuidancePeriod @relation("WeeklyReportObligation_periodId", fields: [periodId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  termStudentId String @db.VarChar(36)
+  refTermStudentId TermStudent @relation("WeeklyReportObligation_termStudentId", fields: [termStudentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  planId String? @db.VarChar(36)
+  refPlanId GuidancePlan? @relation("WeeklyReportObligation_planId", fields: [planId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  currentTaskId String? @unique @db.VarChar(36)
+  refCurrentTaskId Task? @relation("WeeklyReportObligation_currentTaskId", fields: [currentTaskId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  pr2bTaskWorkflowObligationId TaskWorkflow[] @relation("TaskWorkflow_obligationId")
+  @@unique([periodId, termStudentId])
+  @@unique([id, periodId])
+  @@index([termStudentId, periodId])
+  @@map("WEEKLY_REPORT_OBLIGATION")
+}
+
+model TaskWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  state TaskWorkflowState?
+  kind GuidanceTaskKind?
+  requirements Json?
+  nextSubmissionNumber Int?
+  cancellationReason String?
+  revision Int @default(0)
+  taskId String @unique @db.VarChar(36)
+  refTaskId Task @relation("TaskWorkflow_taskId", fields: [taskId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  planId String? @db.VarChar(36)
+  refPlanId GuidancePlan? @relation("TaskWorkflow_planId", fields: [planId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  periodId String? @db.VarChar(36)
+  refPeriodId GuidancePeriod? @relation("TaskWorkflow_periodId", fields: [periodId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  obligationId String? @db.VarChar(36)
+  refObligationId WeeklyReportObligation? @relation("TaskWorkflow_obligationId", fields: [obligationId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  currentSubmissionId String? @db.VarChar(36)
+  refCurrentSubmissionId TaskSubmission? @relation("TaskWorkflow_currentSubmissionId", fields: [currentSubmissionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([taskId, obligationId])
+  @@map("TASK_WORKFLOW")
+}
+
+model TaskProgressEvent {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  note String
+  taskId String @db.VarChar(36)
+  refTaskId Task @relation("TaskProgressEvent_taskId", fields: [taskId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("TaskProgressEvent_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@index([taskId, createdAt])
+  @@map("TASK_PROGRESS_EVENT")
+}
+
+model TaskHistory {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  reason String
+  snapshot Json
+  taskId String @db.VarChar(36)
+  refTaskId Task @relation("TaskHistory_taskId", fields: [taskId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("TaskHistory_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("TASK_HISTORY")
+}
+
+model SubmissionWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  versionNumber Int?
+  state SubmissionState?
+  submittedAt DateTime? @db.Timestamptz(6)
+  deadlineSnapshot DateTime? @db.Timestamptz(6)
+  isLate Boolean?
+  revision Int @default(0)
+  submissionId String @unique @db.VarChar(36)
+  refSubmissionId TaskSubmission @relation("SubmissionWorkflow_submissionId", fields: [submissionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  taskId String @db.VarChar(36)
+  refTaskId Task @relation("SubmissionWorkflow_taskId", fields: [taskId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  submittedByUserId String? @db.VarChar(36)
+  refSubmittedByUserId UserAccount? @relation("SubmissionWorkflow_submittedByUserId", fields: [submittedByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  effectiveReviewId String? @unique @db.VarChar(36)
+  refEffectiveReviewId ProgressReview? @relation("SubmissionWorkflow_effectiveReviewId", fields: [effectiveReviewId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([taskId, versionNumber])
+  @@map("SUBMISSION_WORKFLOW")
+}
+
+model ProgressReview {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  decision ProgressReviewResult
+  state ProgressReviewState
+  comment String?
+  assignmentRevision Int
+  recordedAt DateTime @db.Timestamptz(6)
+  amendmentReason String?
+  revision Int @default(0)
+  submissionId String @db.VarChar(36)
+  refSubmissionId TaskSubmission @relation("ProgressReview_submissionId", fields: [submissionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  reviewerUserId String @db.VarChar(36)
+  refReviewerUserId UserAccount @relation("ProgressReview_reviewerUserId", fields: [reviewerUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  supersedesReviewId String? @unique @db.VarChar(36)
+  refSupersedesReviewId ProgressReview? @relation("ProgressReview_supersedesReviewId", fields: [supersedesReviewId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  pr2bSubmissionWorkflowEffectiveReviewId SubmissionWorkflow? @relation("SubmissionWorkflow_effectiveReviewId")
+  pr2bProgressReviewSupersedesReviewId ProgressReview? @relation("ProgressReview_supersedesReviewId")
+  @@unique([id, submissionId])
+  @@index([submissionId, recordedAt])
+  @@map("PROGRESS_REVIEW")
+}
+
+model FileAsset {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  kind FileAssetKind
+  state FileAssetState
+  storageKey String @unique
+  originalName String
+  sizeBytes Int
+  mimeType String
+  checksum String
+  createdByUserId String @db.VarChar(36)
+  refCreatedByUserId UserAccount @relation("FileAsset_createdByUserId", fields: [createdByUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  pr2bDossierFinalizationPdfAssetId DossierFinalization[] @relation("DossierFinalization_pdfAssetId")
+  pr2bDossierReceiptScanAssetId DossierReceipt[] @relation("DossierReceipt_scanAssetId")
+  pr2bSubmissionAssetFileId SubmissionAsset[] @relation("SubmissionAsset_fileId")
+  pr2bEvaluationEvidenceFileId EvaluationEvidence[] @relation("EvaluationEvidence_fileId")
+  @@map("FILE_ASSET")
+}
+
+model SubmissionAsset {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  submissionId String @db.VarChar(36)
+  refSubmissionId TaskSubmission @relation("SubmissionAsset_submissionId", fields: [submissionId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  fileId String @db.VarChar(36)
+  refFileId FileAsset @relation("SubmissionAsset_fileId", fields: [fileId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([submissionId, fileId])
+  @@map("SUBMISSION_ASSET")
+}
+
+model MeetingWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  mode String?
+  discussion String?
+  conclusion String?
+  revision Int @default(0)
+  meetingId String @unique @db.VarChar(36)
+  refMeetingId GuidanceMeeting @relation("MeetingWorkflow_meetingId", fields: [meetingId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  authorUserId String? @db.VarChar(36)
+  refAuthorUserId UserAccount? @relation("MeetingWorkflow_authorUserId", fields: [authorUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("MEETING_WORKFLOW")
+}
+
+model MeetingHistory {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  reason String
+  snapshot Json
+  meetingId String @db.VarChar(36)
+  refMeetingId GuidanceMeeting @relation("MeetingHistory_meetingId", fields: [meetingId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("MeetingHistory_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("MEETING_HISTORY")
+}
+
+model EvaluationWorkflow {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  criteriaSnapshot Json?
+  criterionScores Json?
+  revision Int @default(0)
+  evaluationId String @unique @db.VarChar(36)
+  refEvaluationId PhaseEvaluation @relation("EvaluationWorkflow_evaluationId", fields: [evaluationId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  planId String @db.VarChar(36)
+  refPlanId GuidancePlan @relation("EvaluationWorkflow_planId", fields: [planId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  milestoneId String? @db.VarChar(36)
+  refMilestoneId GuidancePeriod? @relation("EvaluationWorkflow_milestoneId", fields: [milestoneId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  evaluatorUserId String? @db.VarChar(36)
+  refEvaluatorUserId UserAccount? @relation("EvaluationWorkflow_evaluatorUserId", fields: [evaluatorUserId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([planId, milestoneId])
+  @@map("EVALUATION_WORKFLOW")
+}
+
+model EvaluationEvidence {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  evaluationId String @db.VarChar(36)
+  refEvaluationId PhaseEvaluation @relation("EvaluationEvidence_evaluationId", fields: [evaluationId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  fileId String @db.VarChar(36)
+  refFileId FileAsset @relation("EvaluationEvidence_fileId", fields: [fileId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([evaluationId, fileId])
+  @@map("EVALUATION_EVIDENCE")
+}
+
+model EvaluationHistory {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  reason String
+  snapshot Json
+  evaluationId String @db.VarChar(36)
+  refEvaluationId PhaseEvaluation @relation("EvaluationHistory_evaluationId", fields: [evaluationId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("EvaluationHistory_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@map("EVALUATION_HISTORY")
+}
+
+model OutboxEvent {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  eventId String @unique
+  type String
+  aggregateId String
+  payload Json
+  state OutboxDeliveryState @default(PENDING)
+  attempts Int @default(0)
+  nextAttemptAt DateTime? @db.Timestamptz(6)
+  @@index([state, nextAttemptAt])
+  @@map("OUTBOX_EVENT")
+}
+
+model IdempotencyRecord {
+  id String @id @default(uuid()) @db.VarChar(36)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
+  method String
+  route String
+  key String
+  payloadHash String
+  result Json?
+  expiresAt DateTime @db.Timestamptz(6)
+  actorId String @db.VarChar(36)
+  refActorId UserAccount @relation("IdempotencyRecord_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@unique([actorId, method, route, key])
+  @@map("IDEMPOTENCY_RECORD")
 }

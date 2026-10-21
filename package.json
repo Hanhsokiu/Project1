@@ -8,7 +8,15 @@
     "test": "pnpm -r test",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
-    "type-check": "pnpm -r type-check"
+    "type-check": "pnpm -r type-check",
+    "setup:dev": "node scripts/setup-dev.cjs",
+    "verify": "node scripts/verify.cjs",
+    "db:local:init": "node backend/scripts/team-local.cjs init",
+    "db:local:up": "node backend/scripts/team-local.cjs up",
+    "db:local:status": "node backend/scripts/team-local.cjs status",
+    "db:local:migrate": "node backend/scripts/team-local.cjs migrate",
+    "db:local:stop": "node backend/scripts/team-local.cjs stop",
+    "dev:local": "node backend/scripts/team-local.cjs dev"
   },
   "devDependencies": {
     "prettier": "^3.3.3",
