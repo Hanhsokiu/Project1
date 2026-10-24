@@ -28,8 +28,8 @@
       "@grading/*": ["./src/grading/*"],
       "@report/*": ["./src/report/*"],
       "@notification/*": ["./src/notification/*"],
-      "@doan/shared": ["../shared/src/index.ts"],
-      "@doan/shared/*": ["../shared/src/*"]
+      "@doan/shared": ["../shared/dist/index.d.ts"],
+      "@doan/shared/*": ["../shared/dist/*"]
     }
   },
   "include": ["./src/**/*"],

@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "existingSyntheticDataPreserved": true,
+  "legacyFalsePreserved": true,
+  "noInferredBackfill": true,
+  "facultyActions": [
+    "manage",
+    "read"
+  ],
+  "lecturerActions": [
+    "read"
+  ],
+  "adminActions": [],
+  "unrelatedActionNotGranted": true,
+  "repeatedDeploy": "no pending migrations",
+  "migrationCount": 4,
+  "step4Checksum": "924e394bf9ae7f69629abc698e9fa7d0073a2462ec9d4a7ca08905ce8389525b",
+  "sharedDatabaseDDL": false
+}

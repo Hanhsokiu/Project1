@@ -1,8 +1,19 @@
 import { createBrowserRouter } from 'react-router-dom';
+import { TaskSubmissionsPage } from '../../features/task-submissions/pages';
 import { lazy, Suspense } from 'react';
 import AdminLayout from '../layouts/AdminLayout';
+import { DossierListPage, DossierDetailPage } from '../../features/proposal-dossiers/pages';
+import { GuidancePlanListPage, GuidancePlanDetailPage, GuidanceTaskListPage, GuidanceTaskCreatePage, GuidanceTaskDetailPage } from '../../features/guidance-tasks/pages';
+import { ProposalReviewQueuePage, ProposalReviewDetailPage, ProposalReviewAssignmentPage } from '../../features/proposal-reviews/pages';
+import { ProposalEditorListPage, ProposalEditorPage } from '../../features/proposal-versions/pages';
+import { ReviewGroupLayout, ReviewGroupListPage, ReviewGroupEditorPage, ReviewGroupDetailPage } from '../../features/review-groups/pages';
 
 const LoginPage = lazy(() => import('../../features/auth/pages/LoginPage'));
+const ProgressReviewInboxPage=lazy(()=>import('../../features/guidance-reviews/pages').then(m=>({default:m.ProgressReviewInboxPage})));
+const ProgressReviewDetailPage=lazy(()=>import('../../features/guidance-reviews/pages').then(m=>({default:m.ProgressReviewDetailPage})));
+const GuidanceProgressDashboardPage=lazy(()=>import('../../features/guidance-reviews/pages').then(m=>({default:m.GuidanceProgressDashboardPage})));
+const GuidanceMeetingsPage=lazy(()=>import('../../features/guidance-reviews/pages').then(m=>({default:m.GuidanceMeetingsPage})));
+const GuidanceNotificationsPage=lazy(()=>import('../../features/guidance-reviews/pages').then(m=>({default:m.GuidanceNotificationsPage})));
 const DashboardPage = lazy(() => import('../../features/report/pages/DashboardPage'));
 const AccountsPage = lazy(() => import('../../features/auth/pages/AccountsPage'));
 const RolesPermissionsPage = lazy(() => import('../../features/auth/pages/RolesPermissionsPage'));
@@ -24,15 +35,7 @@ const AssignmentResultPage = lazy(() => import('../../features/registration/page
 const ManualAdjustPage = lazy(() => import('../../features/registration/pages/ManualAdjustPage'));
 
 const MyTopicPage = lazy(() => import('../../features/topic/pages/MyTopicPage'));
-const ProposalEditorPage = lazy(() => import('../../features/topic/pages/ProposalEditorPage'));
-const ReviewQueuePage = lazy(() => import('../../features/topic/pages/ReviewQueuePage'));
-const ReviewDetailPage = lazy(() => import('../../features/topic/pages/ReviewDetailPage'));
-const DossierPage = lazy(() => import('../../features/topic/pages/DossierPage'));
 
-const GuidancePlanPage = lazy(() => import('../../features/guidance/pages/GuidancePlanPage'));
-const TaskBoardPage = lazy(() => import('../../features/guidance/pages/TaskBoardPage'));
-const TaskReviewPage = lazy(() => import('../../features/guidance/pages/TaskReviewPage'));
-const MeetingLogPage = lazy(() => import('../../features/guidance/pages/MeetingLogPage'));
 const DefenseConfirmPage = lazy(() => import('../../features/guidance/pages/DefenseConfirmPage'));
 const FinalReportUploadPage = lazy(() => import('../../features/guidance/pages/FinalReportUploadPage'));
 
@@ -52,7 +55,41 @@ const Loader = () => <div className="flex items-center justify-center h-screen t
 const wrap = (el: React.ReactNode) => <Suspense fallback={<Loader />}>{el}</Suspense>;
 
 export const router = createBrowserRouter([
+  {path:'/guidance/review',element:<ReviewGroupLayout guidanceMode/>,children:[{index:true,element:wrap(<ProgressReviewInboxPage/>)},{path:':submissionId',element:wrap(<ProgressReviewDetailPage/>)}]},
+  {path:'/guidance/progress',element:<ReviewGroupLayout guidanceMode/>,children:[{index:true,element:wrap(<GuidanceProgressDashboardPage/>)}]},
+  {path:'/guidance/meetings',element:<ReviewGroupLayout guidanceMode/>,children:[{index:true,element:wrap(<GuidanceMeetingsPage/>)}]},
+  {path:'/guidance/notifications',element:<ReviewGroupLayout guidanceMode/>,children:[{index:true,element:wrap(<GuidanceNotificationsPage/>)}]},
+  {path:'/guidance/plan',element:<ReviewGroupLayout guidanceMode/>,children:[
+    {index:true,element:<GuidancePlanListPage/>},
+    {path:':proposalId',element:<GuidancePlanDetailPage/>},
+    {path:':proposalId/tasks/new',element:<GuidanceTaskCreatePage/>},
+  ]},
+  {path:'/guidance/tasks',element:<ReviewGroupLayout guidanceMode/>,children:[
+    {index:true,element:<GuidanceTaskListPage/>},
+    {path:':id',element:<GuidanceTaskDetailPage/>},
+    {path:':id/submissions',element:<TaskSubmissionsPage/>},
+  ]},
+  { path: '/topic/dossier', element: <ReviewGroupLayout dossierMode />, children: [
+    { index: true, element: <DossierListPage /> },
+    { path: ':proposalId', element: <DossierDetailPage /> },
+  ] },
+  { path: '/topic/proposal', element: <ReviewGroupLayout versionMode />, children: [
+    { index: true, element: <ProposalEditorListPage /> },
+    { path: ':proposalId', element: <ProposalEditorPage /> },
+    { path: ':proposalId/versions/:versionId', element: <ProposalEditorPage /> },
+  ] },
+  { path: '/topic/reviews', element: <ReviewGroupLayout reviewMode />, children: [
+    { index: true, element: <ProposalReviewQueuePage /> },
+    { path: ':id', element: <ProposalReviewDetailPage /> },
+  ] },
+  { path: '/topic/review-assignments/:proposalId', element: <ReviewGroupLayout reviewMode />, children: [{ index: true, element: <ProposalReviewAssignmentPage /> }] },
   { path: '/login', element: wrap(<LoginPage />) },
+  { path: '/topic/review-groups', element: <ReviewGroupLayout />, children: [
+    { index: true, element: <ReviewGroupListPage /> },
+    { path: 'new', element: <ReviewGroupEditorPage /> },
+    { path: ':id/edit', element: <ReviewGroupEditorPage /> },
+    { path: ':id', element: <ReviewGroupDetailPage /> },
+  ] },
   {
     path: '/',
     element: <AdminLayout />,
@@ -78,15 +115,7 @@ export const router = createBrowserRouter([
       { path: 'registration/manual', element: wrap(<ManualAdjustPage />) },
 
       { path: 'topic/my', element: wrap(<MyTopicPage />) },
-      { path: 'topic/proposal', element: wrap(<ProposalEditorPage />) },
-      { path: 'topic/reviews', element: wrap(<ReviewQueuePage />) },
-      { path: 'topic/reviews/:id', element: wrap(<ReviewDetailPage />) },
-      { path: 'topic/dossier', element: wrap(<DossierPage />) },
 
-      { path: 'guidance/plan', element: wrap(<GuidancePlanPage />) },
-      { path: 'guidance/tasks', element: wrap(<TaskBoardPage />) },
-      { path: 'guidance/review', element: wrap(<TaskReviewPage />) },
-      { path: 'guidance/meetings', element: wrap(<MeetingLogPage />) },
       { path: 'guidance/defense-confirm', element: wrap(<DefenseConfirmPage />) },
       { path: 'guidance/final-report', element: wrap(<FinalReportUploadPage />) },
 

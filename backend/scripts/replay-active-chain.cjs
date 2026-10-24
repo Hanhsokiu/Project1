@@ -24,7 +24,7 @@ async function main() {
     assert.equal(tables.n,0,'Create a fresh isolated test database; no reset/reuse');
     deploy(); deploy();
     const rows = await db.$queryRawUnsafe('SELECT migration_name,checksum,finished_at,rolled_back_at FROM public."_prisma_migrations" ORDER BY migration_name');
-    assert.equal(rows.length,3);
+    assert.equal(rows.length,fs.readdirSync(path.join(backend,'prisma/migrations')).filter(name=>fs.existsSync(path.join(backend,'prisma/migrations',name,'migration.sql'))).length);
     for (const row of rows) {
       const bytes=fs.readFileSync(path.join(backend,'prisma/migrations',row.migration_name,'migration.sql'));
       assert(row.finished_at&&!row.rolled_back_at);

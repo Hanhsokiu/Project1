@@ -29,7 +29,14 @@ const baseline = fs.readFileSync(path.join(root, 'prisma/migrations/0_init/migra
 // Existing 0_init is checked out as CRLF on Windows and LF on Linux. Verify
 // source content without changing the already-existing migration bytes.
 assert.equal(crypto.createHash('sha256').update(baseline.toString('utf8').replace(/\r\n/g, '\n')).digest('hex'), '5782fc7a04d884514644c59bf05a81d53970230c45a0e12713588cc8b6916563');
-const source = fs.readFileSync(path.join(root, 'prisma/schema.prisma'), 'utf8').replace(/\r\n/g, '\n');
-const candidate = fs.readFileSync(path.join(review, 'expand.prisma'), 'utf8').replace(/\r\n/g, '\n').replace('  output = "../../../node_modules/.pr2b-client"\n', '');
-assert(source === candidate, 'Active schema differs from tested expansion');
-console.log('PASS 56 legacy model contracts, existing enums, 0_init hash and active/review migration/schema agreement');
+// Feature migrations may ADD fields after PR2B. Preserve every PR2B field and
+// cardinality without requiring the application to remain frozen at that schema.
+const { Prisma: expanded } = require('../node_modules/.pr2b-client');
+for (const old of expanded.dmmf.datamodel.models) {
+  const now = current.dmmf.datamodel.models.find(m => m.name === old.name);
+  assert(now, `Missing PR2B model ${old.name}`);
+  for (const field of old.fields) assert.deepEqual(now.fields.find(f => f.name === field.name), field, `PR2B field changed: ${old.name}.${field.name}`);
+  assert.deepEqual(now.primaryKey, old.primaryKey);
+  for (const key of old.uniqueFields) assert(now.uniqueFields.some(k => JSON.stringify(k) === JSON.stringify(key)), `Missing unique key ${old.name}`);
+}
+console.log('PASS legacy and PR2B field contracts, enum compatibility, 0_init hash and frozen PR2B migration bytes');

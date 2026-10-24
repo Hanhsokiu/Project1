@@ -92,6 +92,55 @@ jobs:
           pnpm db:test:active-chain
           pnpm build
           pnpm test:smoke:local
+      - name: Step 4 API and populated-baseline upgrade
+        working-directory: backend
+        run: |
+          createdb btl_pr2b_ci_step4_api
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step4_api pnpm test:review-groups:api
+          createdb btl_pr2b_ci_step4_upgrade
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step4_upgrade pnpm test:review-groups:upgrade
+      - name: Step 5 API and populated-baseline upgrade
+        working-directory: backend
+        run: |
+          createdb btl_pr2b_ci_step5_api
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step5_api pnpm test:proposal-reviews:api
+          createdb btl_pr2b_ci_step5_upgrade
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step5_upgrade pnpm test:proposal-reviews:upgrade
+      - name: Step 6 versions, resubmission and populated-baseline upgrade
+        working-directory: backend
+        run: |
+          createdb btl_pr2b_ci_step6_api
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step6_api pnpm test:proposal-versions:api
+          createdb btl_pr2b_ci_step6_upgrade
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step6_upgrade pnpm test:proposal-versions:upgrade
+      - name: Step 7 finalization, private PDF, receipt and migration upgrade
+        working-directory: backend
+        run: |
+          createdb btl_pr2b_ci_step7_api
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step7_api pnpm test:proposal-dossiers:api
+          createdb btl_pr2b_ci_step7_upgrade
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step7_upgrade pnpm test:proposal-dossiers:upgrade
+      - name: Step 8A guidance plans, tasks, weekly obligations and migration upgrade
+        working-directory: backend
+        run: |
+          createdb btl_pr2b_ci_step8a_api
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step8a_api pnpm test:guidance-tasks:api
+          createdb btl_pr2b_ci_step8a_upgrade
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step8a_upgrade pnpm test:guidance-tasks:upgrade
+      - name: Step 8B private uploads, immutable submissions and additive upgrade
+        working-directory: backend
+        run: |
+          createdb btl_pr2b_ci_step8b_api
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step8b_api pnpm test:guidance-submissions:api
+          createdb btl_pr2b_ci_step8b_upgrade
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step8b_upgrade pnpm test:guidance-submissions:upgrade
+      - name: Step 8C reviews, meetings, scoped dashboard and whole 8A-8B-8C flow
+        working-directory: backend
+        run: |
+          createdb btl_pr2b_ci_step8c_api
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step8c_api pnpm test:guidance-reviews:api
+          createdb btl_pr2b_ci_step8c_upgrade
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step8c_upgrade pnpm test:guidance-reviews:upgrade
       - uses: actions/upload-artifact@v4
         with:
           name: pr2b-review-results
@@ -100,6 +149,22 @@ jobs:
             backend/prisma/review/pr2b/chain-results.json
             backend/prisma/review/pr2b/active-chain-results.json
             backend/prisma/review/pr2b/smoke-results.json
+            backend/prisma/review/step4-results.json
+            backend/prisma/review/step4-upgrade-results.json
+            backend/prisma/review/step5-results.json
+            backend/prisma/review/step5-upgrade-results.json
+            backend/prisma/review/step6-results.json
+            backend/prisma/review/step6-upgrade-results.json
+            backend/prisma/review/step7-results.json
+            backend/prisma/review/step7-upgrade-results.json
+            backend/prisma/review/step7-sample.pdf
+            backend/prisma/review/step7-long-sample.pdf
+            backend/prisma/review/step8a-results.json
+            backend/prisma/review/step8a-upgrade-results.json
+            backend/prisma/review/step8b-results.json
+            backend/prisma/review/step8b-upgrade-results.json
+            backend/prisma/review/step8c-results.json
+            backend/prisma/review/step8c-upgrade-results.json
   test:
     name: Build & Test Backend
     runs-on: ubuntu-latest

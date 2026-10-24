@@ -39,4 +39,36 @@ export class FileStorageService {
       fs.unlinkSync(filePath);
     }
   }
+
+  // Guidance bytes never use save()'s legacy path or a user-supplied path.
+  private async privateGuidancePath(key: string) {
+    if (!/^guidance\/[0-9a-f-]{36}$/.test(key)) throw new Error('Invalid private storage key');
+    const root = path.resolve(this.basePath, '.private-guidance');
+    await fs.promises.mkdir(root, { recursive: true, mode: 0o700 });
+    const stat = await fs.promises.lstat(root);
+    if (stat.isSymbolicLink() || !stat.isDirectory()) throw new Error('Invalid private storage root');
+    const real = await fs.promises.realpath(root);
+    if (real.toLowerCase() !== root.toLowerCase()) throw new Error('Private storage root must not traverse symlinks');
+    return path.join(root, key.slice('guidance/'.length));
+  }
+  async savePrivateGuidance(key: string, bytes: Buffer) {
+    const target = await this.privateGuidancePath(key);
+    const handle = await fs.promises.open(target, 'wx', 0o600);
+    try { await handle.writeFile(bytes); await handle.sync(); }
+    finally { await handle.close(); }
+  }
+  async readPrivateGuidance(key: string, maxBytes: number) {
+    const target = await this.privateGuidancePath(key);
+    const stat = await fs.promises.lstat(target);
+    if (!stat.isFile() || stat.isSymbolicLink() || stat.size > maxBytes) throw new Error('Invalid private file');
+    return fs.promises.readFile(target);
+  }
+  async deletePrivateGuidance(key: string) {
+    const target = await this.privateGuidancePath(key);
+    try {
+      const stat = await fs.promises.lstat(target);
+      if (!stat.isFile() || stat.isSymbolicLink()) throw new Error('Invalid private file');
+      await fs.promises.unlink(target);
+    } catch (e) { if ((e as NodeJS.ErrnoException).code !== 'ENOENT') throw e; }
+  }
 }

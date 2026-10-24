@@ -1,0 +1,24 @@
+{
+  "result": "FAIL",
+  "startedAt": "2026-10-23T09:04:52.299Z",
+  "finishedAt": "2026-10-23T09:05:34.316Z",
+  "database": "btl_pr2b_qa_e2e_20261023160451",
+  "postgresMajor": 17,
+  "sharedDatabaseAccess": false,
+  "mockedApi": false,
+  "checks": [
+    {
+      "name": "fresh guarded PG17 seed and canonical ten-migration replay",
+      "expected": "As stated in test case",
+      "actual": "Synthetic roster/official assignments/agreement/v1/profile only; no review, finalization, task or submission pre-created",
+      "result": "PASS"
+    },
+    {
+      "name": "all inventoried step 4–8 operations reject anonymous access",
+      "expected": "As stated in test case",
+      "actual": "66 operations returned 401; see endpoint-auth.json",
+      "result": "PASS"
+    }
+  ],
+  "failure": "Live browser E2E failed; see live-browser.json/log\n\n1 !== 0\n"
+}
