@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import { PrismaService } from '../../prisma/prisma.service';
+import { groupError } from './review-group.errors';
 
 const groupInclude = {
   members: true,
@@ -226,10 +227,17 @@ export class ReviewGroupRepository {
       } catch (e) {
         if (
           e instanceof Prisma.PrismaClientKnownRequestError &&
-          ['P2034', 'P2002'].includes(e.code) &&
-          attempt < 2
-        )
-          continue;
+          (['P2034', 'P2002'].includes(e.code) ||
+            (e.code === 'P2010' &&
+              ['40001', '40P01'].includes(String(e.meta?.code))))
+        ) {
+          if (attempt < 2) continue;
+          groupError(
+            409,
+            'REVISION_CONFLICT',
+            'Dữ liệu đã thay đổi. Hãy tải lại trước khi chỉnh sửa.',
+          );
+        }
         throw e;
       }
     }
