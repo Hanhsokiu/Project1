@@ -5,6 +5,7 @@ export const proposalInclude = Prisma.validator<Prisma.ProposalInclude>()({
   topic: true,
   versions: { orderBy: { version: "asc" } },
   dossier: true,
+  pr2bProposalWorkflowProposalId: true,
 });
 export type LoadedProposal = Prisma.ProposalGetPayload<{
   include: typeof proposalInclude;

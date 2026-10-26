@@ -1,6 +1,9 @@
 import { apiData } from "../../../shared/api/api-data";
 import type { Topic } from "../../../shared/data/types";
 export const topicApi = {
+  prepareWorkflow(id: string) {
+    return apiData<{ proposalId: string }>("POST", `/topics/${id}/prepare-workflow`);
+  },
   list(termId: string) {
     return apiData<Topic[]>("GET", `/topics/term/${termId}`);
   },

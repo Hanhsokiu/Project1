@@ -1,0 +1,104 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "checks": [
+    {
+      "name": "active migration replay and all 27 Step 5 real HTTP checks run as the producer prelude",
+      "result": "PASS"
+    },
+    {
+      "name": "version reads enforce JWT, owner/term scope and no ADMIN wildcard",
+      "result": "PASS"
+    },
+    {
+      "name": "missing PROPOSAL_EDIT mapping fails closed without creating a version",
+      "result": "PASS"
+    },
+    {
+      "name": "only SV/current official GVHD edit; PUBLISHED never grants advisor rights",
+      "result": "PASS"
+    },
+    {
+      "name": "strict DTO and feedback references reject forged actor, duplicate and cross-proposal response",
+      "result": "PASS"
+    },
+    {
+      "name": "create v2 from returned v1, preserve v1/decision exactly, record editor/time/summary/response",
+      "result": "PASS"
+    },
+    {
+      "name": "save idempotency replays one snapshot and never duplicates audit",
+      "result": "PASS"
+    },
+    {
+      "name": "account revocation is checked before returning cached snapshot",
+      "result": "PASS"
+    },
+    {
+      "name": "reviewer cannot read/compare draft or another proposal; faculty scoped reads remain available",
+      "result": "PASS"
+    },
+    {
+      "name": "real JSON comparison includes content and revision responses",
+      "result": "PASS"
+    },
+    {
+      "name": "database rejects rewriting old and new snapshot payloads or response metadata",
+      "result": "PASS"
+    },
+    {
+      "name": "only student submits current v2, seals immutable snapshot and records RESUBMISSION once",
+      "result": "PASS"
+    },
+    {
+      "name": "submitted and sealed snapshots cannot be edited or unsealed",
+      "result": "PASS"
+    },
+    {
+      "name": "Step 5 reviews v2 in a new round while old reviewer comments/decision remain linked to v1",
+      "result": "PASS"
+    },
+    {
+      "name": "incomplete draft saves successfully but cannot be submitted or partially sealed",
+      "result": "PASS"
+    },
+    {
+      "name": "current official advisor appends a new snapshot and inherits prior response evidence",
+      "result": "PASS"
+    },
+    {
+      "name": "stale Topic agreement blocks submission without inventing advisor confirmation",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent SV/GVHD edits produce one CAS winner without overwriting the other snapshot",
+      "result": "PASS"
+    },
+    {
+      "name": "audit failure rolls back snapshot, pointer, counter and revision atomically",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent phase closure blocks a waiting save and preserves the last snapshot",
+      "result": "PASS"
+    },
+    {
+      "name": "advisor handover revokes old advisor edit access and does not auto-confirm Topic for the new advisor",
+      "result": "PASS"
+    },
+    {
+      "name": "APPROVED proposal is read-only and Step 6 never reopens/finalizes it",
+      "result": "PASS"
+    },
+    {
+      "name": "finalized dossier blocks direct edits even if Proposal status is inconsistent",
+      "result": "PASS"
+    },
+    {
+      "name": "v1 payload, metadata, reviewer and decision are preserved after every revision cycle",
+      "result": "PASS"
+    }
+  ],
+  "step5Prelude": true,
+  "sharedDatabaseDDL": false
+}

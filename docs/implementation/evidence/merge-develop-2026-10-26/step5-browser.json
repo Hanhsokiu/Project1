@@ -1,0 +1,47 @@
+{
+  "result": "PASS",
+  "mockedApi": true,
+  "sharedDatabaseAccess": false,
+  "checks": [
+    {
+      "name": "faculty queue and specialty candidates never auto select/assign",
+      "result": "PASS"
+    },
+    {
+      "name": "explicit faculty selection confirms the assigned SEALED version",
+      "result": "PASS"
+    },
+    {
+      "name": "reviewer start is explicit and faculty controls are absent",
+      "result": "PASS"
+    },
+    {
+      "name": "member comment is separate from the common decision",
+      "result": "PASS"
+    },
+    {
+      "name": "revision-required cannot submit without comment",
+      "result": "PASS"
+    },
+    {
+      "name": "409 conflict preserves the pending conclusion text",
+      "result": "PASS"
+    },
+    {
+      "name": "revision decision becomes immutable and removes mutation controls",
+      "result": "PASS"
+    },
+    {
+      "name": "approval follows the same single-decision UI flow",
+      "result": "PASS"
+    },
+    {
+      "name": "mobile detail has no horizontal page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "out-of-scope error renders without proposal content",
+      "result": "PASS"
+    }
+  ]
+}

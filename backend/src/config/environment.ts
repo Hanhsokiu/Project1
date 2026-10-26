@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { readSubmissionPolicy } from '../guidance/submissions/submission-policy';
 
 const postgresUrl = z.string().refine((value) => {
   try {
@@ -25,6 +26,10 @@ const schema = z.object({
   }), 'Expected comma-separated HTTP(S) origins').default('http://localhost:5173'),
   MAIL_PORT: z.coerce.number().int().min(1).max(65535).default(1025),
   STORAGE_MAX_SIZE_MB: z.coerce.number().positive().default(50),
+  GUIDANCE_UPLOAD_ENABLED: z.enum(['true', 'false']).default('true'),
+  GUIDANCE_UPLOAD_POLICY_JSON: z.string().optional().refine(value => {
+    try { readSubmissionPolicy(value); return true; } catch { return false; }
+  }, 'Invalid guidance file policy'),
 }).passthrough();
 
 export function validateEnvironment(input: Record<string, unknown>) {

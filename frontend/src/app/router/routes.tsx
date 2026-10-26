@@ -1,3 +1,31 @@
+import { TaskSubmissionsPage } from "../../features/task-submissions/pages";
+import {
+  DossierListPage,
+  DossierDetailPage,
+} from "../../features/proposal-dossiers/pages";
+import {
+  GuidancePlanListPage,
+  GuidancePlanDetailPage,
+  GuidanceTaskListPage,
+  GuidanceTaskCreatePage,
+  GuidanceTaskDetailPage,
+} from "../../features/guidance-tasks/pages";
+import {
+  ProposalReviewQueuePage,
+  ProposalReviewDetailPage,
+  ProposalReviewAssignmentPage,
+} from "../../features/proposal-reviews/pages";
+import {
+  ProposalEditorListPage,
+  ProposalEditorPage as VersionEditorPage,
+} from "../../features/proposal-versions/pages";
+import {
+  ReviewGroupLayout,
+  ReviewGroupListPage,
+  ReviewGroupEditorPage,
+  ReviewGroupDetailPage,
+} from "../../features/review-groups/pages";
+
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import WorkspaceLayout from "../layouts/WorkspaceLayout";
@@ -11,6 +39,55 @@ import {
 import { useWorkspace } from "../../shared/hooks/use-workspace";
 import { routeManifest } from "./route-manifest";
 import { Empty } from "../../shared/components/kit";
+import { AUTH_API, getApiUser } from "../../shared/api/api-session";
+import type { ReactNode } from "react";
+
+function WorkflowAccess({ children }: { children: ReactNode }) {
+  const location = useLocation();
+  if (AUTH_API) {
+    const user = getApiUser();
+    if (!user)
+      return (
+        <Navigate to="/login" state={{ from: location.pathname }} replace />
+      );
+    if (user.mustChangePassword)
+      return <Navigate to="/change-password" replace />;
+    const route = routeManifest.find((r) =>
+      new RegExp("^" + r.path.replace(/:[^/]+/g, "[^/]+") + "$").test(
+        location.pathname,
+      ),
+    );
+    if (!route || !route.roles.some((role) => user.roles.includes(role)))
+      return <Navigate to="/forbidden" replace />;
+  }
+  return <>{children}</>;
+}
+
+const ProgressReviewInboxPage = lazy(() =>
+  import("../../features/guidance-reviews/pages").then((m) => ({
+    default: m.ProgressReviewInboxPage,
+  })),
+);
+const ProgressReviewDetailPage = lazy(() =>
+  import("../../features/guidance-reviews/pages").then((m) => ({
+    default: m.ProgressReviewDetailPage,
+  })),
+);
+const GuidanceProgressDashboardPage = lazy(() =>
+  import("../../features/guidance-reviews/pages").then((m) => ({
+    default: m.GuidanceProgressDashboardPage,
+  })),
+);
+const GuidanceMeetingsPage = lazy(() =>
+  import("../../features/guidance-reviews/pages").then((m) => ({
+    default: m.GuidanceMeetingsPage,
+  })),
+);
+const GuidanceNotificationsPage = lazy(() =>
+  import("../../features/guidance-reviews/pages").then((m) => ({
+    default: m.GuidanceNotificationsPage,
+  })),
+);
 
 const LoginPage = lazy(() => import("../../features/auth/pages/LoginPage"));
 const DashboardPage = lazy(
@@ -91,6 +168,12 @@ const NotificationsPage = lazy(
 const ReferenceCatalogPage = lazy(
   () => import("../../features/catalog/pages/ReferenceCatalogPage"),
 );
+const DefenseConfirmPage = lazy(
+  () => import("../../features/guidance/pages/DefenseConfirmPage"),
+);
+const FinalReportUploadPage = lazy(
+  () => import("../../features/guidance/pages/FinalReportUploadPage"),
+);
 function PermissionGuard() {
   const { user } = useWorkspace();
   const { pathname } = useLocation();
@@ -163,6 +246,137 @@ const wrap = (el: React.ReactNode) => (
 
 export const router = createBrowserRouter([
   {
+    path: "/guidance/review",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout guidanceMode />
+      </WorkflowAccess>
+    ),
+    children: [
+      { index: true, element: wrap(<ProgressReviewInboxPage />) },
+      { path: ":submissionId", element: wrap(<ProgressReviewDetailPage />) },
+    ],
+  },
+  {
+    path: "/guidance/progress",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout guidanceMode />
+      </WorkflowAccess>
+    ),
+    children: [
+      { index: true, element: wrap(<GuidanceProgressDashboardPage />) },
+    ],
+  },
+  {
+    path: "/guidance/meetings",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout guidanceMode />
+      </WorkflowAccess>
+    ),
+    children: [{ index: true, element: wrap(<GuidanceMeetingsPage />) }],
+  },
+  {
+    path: "/guidance/notifications",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout guidanceMode />
+      </WorkflowAccess>
+    ),
+    children: [{ index: true, element: wrap(<GuidanceNotificationsPage />) }],
+  },
+  {
+    path: "/guidance/plan",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout guidanceMode />
+      </WorkflowAccess>
+    ),
+    children: [
+      { index: true, element: <GuidancePlanListPage /> },
+      { path: ":proposalId", element: <GuidancePlanDetailPage /> },
+      { path: ":proposalId/tasks/new", element: <GuidanceTaskCreatePage /> },
+    ],
+  },
+  {
+    path: "/guidance/tasks",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout guidanceMode />
+      </WorkflowAccess>
+    ),
+    children: [
+      { index: true, element: <GuidanceTaskListPage /> },
+      { path: ":id", element: <GuidanceTaskDetailPage /> },
+      { path: ":id/submissions", element: <TaskSubmissionsPage /> },
+    ],
+  },
+  {
+    path: "/topic/dossier",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout dossierMode />
+      </WorkflowAccess>
+    ),
+    children: [
+      { index: true, element: <DossierListPage /> },
+      { path: ":proposalId", element: <DossierDetailPage /> },
+    ],
+  },
+  {
+    path: "/topic/proposal",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout versionMode />
+      </WorkflowAccess>
+    ),
+    children: [
+      { index: true, element: <ProposalEditorListPage /> },
+      { path: ":proposalId", element: <VersionEditorPage /> },
+      {
+        path: ":proposalId/versions/:versionId",
+        element: <VersionEditorPage />,
+      },
+    ],
+  },
+  {
+    path: "/topic/reviews",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout reviewMode />
+      </WorkflowAccess>
+    ),
+    children: [
+      { index: true, element: <ProposalReviewQueuePage /> },
+      { path: ":id", element: <ProposalReviewDetailPage /> },
+    ],
+  },
+  {
+    path: "/topic/review-assignments/:proposalId",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout reviewMode />
+      </WorkflowAccess>
+    ),
+    children: [{ index: true, element: <ProposalReviewAssignmentPage /> }],
+  },
+  {
+    path: "/topic/review-groups",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout />
+      </WorkflowAccess>
+    ),
+    children: [
+      { index: true, element: <ReviewGroupListPage /> },
+      { path: "new", element: <ReviewGroupEditorPage /> },
+      { path: ":id/edit", element: <ReviewGroupEditorPage /> },
+      { path: ":id", element: <ReviewGroupDetailPage /> },
+    ],
+  },
+
+  {
     path: "/login",
     element: wrap(<LoginPage />),
     errorElement: <RouteError />,
@@ -213,8 +427,16 @@ export const router = createBrowserRouter([
           { path: "registration/manual", element: wrap(<ManualAdjustPage />) },
 
           { path: "topic/my", element: wrap(<MyTopicPage />) },
-          { path: "topic/proposal", element: wrap(<ProposalEditorPage />) },
-          { path: "topic/dossier", element: wrap(<DossierPage />) },
+          { path: "topic/draft", element: wrap(<ProposalEditorPage />) },
+          { path: "topic/overview", element: wrap(<DossierPage />) },
+          {
+            path: "guidance/defense-confirm",
+            element: wrap(<DefenseConfirmPage />),
+          },
+          {
+            path: "guidance/final-report",
+            element: wrap(<FinalReportUploadPage />),
+          },
 
           { path: "report/export", element: wrap(<ExportCenterPage />) },
           { path: "profile", element: wrap(<ProfilePage />) },

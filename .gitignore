@@ -51,6 +51,7 @@ uploads/
 # pnpm
 .pnpm-store/
 .cache/
+.tmp/
 playwright-report/
 test-results/
 test-results-*/

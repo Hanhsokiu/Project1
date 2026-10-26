@@ -43,7 +43,6 @@ export class JwtAuthGuard implements CanActivate {
     ]);
     if (
       !user ||
-      user.status !== "ACTIVE" ||
       !session ||
       session.userId !== user.id ||
       session.revokedAt ||
@@ -52,6 +51,10 @@ export class JwtAuthGuard implements CanActivate {
       throw new UnauthorizedException(
         "Phiên đăng nhập đã kết thúc hoặc tài khoản bị khóa",
       );
+    if (user.status !== "ACTIVE")
+      throw new ForbiddenException({
+        error: { code: "AUTH_002", message: "Tài khoản không hoạt động." },
+      });
     if (
       user.mustChangePassword &&
       !this.reflector.getAllAndOverride(ALLOW_PASSWORD_CHANGE, [
