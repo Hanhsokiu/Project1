@@ -1,80 +1,140 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { UserAccountRepository } from '../repository/user-account.repository';
-import * as bcrypt from 'bcryptjs';
-import { BusinessException } from '../../common/exception/business.exception';
-import { ErrorCode } from '../../common/exception/error-code.enum';
-import { PasswordPolicyValidator } from '../validator/password-policy.validator';
-
+import {
+  ConflictException,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
+import { JwtService } from "@nestjs/jwt";
+import { ConfigService } from "@nestjs/config";
+import * as bcrypt from "bcryptjs";
+import { createHash, randomUUID } from "crypto";
+import { UserAccountRepository } from "../repository/user-account.repository";
+import { accountDto } from "../mapper/account.mapper";
+import { AuthValidator } from "../validator/auth.validator";
+import { AuditService } from "../../common/audit/audit.service";
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly userRepo: UserAccountRepository,
-    private readonly jwtService: JwtService,
+    private readonly users: UserAccountRepository,
+    private readonly jwt: JwtService,
+    private readonly config: ConfigService,
+    private readonly audit: AuditService,
   ) {}
-
   async login(username: string, password: string) {
-    const user = await this.userRepo.findByUsername(username);
-    if (!user) throw new BusinessException(ErrorCode.INVALID_CREDENTIALS, 'Sai tên đăng nhập hoặc mật khẩu');
-
-    if (user.status === 'LOCKED') {
-      throw new BusinessException(ErrorCode.ACCOUNT_LOCKED, 'Tài khoản đã bị khóa');
+    const user = await this.users.findByUsername(username);
+    if (!user)
+      throw new UnauthorizedException("Sai tên đăng nhập hoặc mật khẩu");
+    if (user.status !== "ACTIVE")
+      throw new UnauthorizedException("Tài khoản đã khóa hoặc chưa kích hoạt");
+    if (!(await bcrypt.compare(password, user.passwordHash))) {
+      await this.users.failLogin(user.id);
+      throw new UnauthorizedException("Sai tên đăng nhập hoặc mật khẩu");
     }
-
-    const isMatch = await bcrypt.compare(password, user.passwordHash);
-    if (!isMatch) {
-      // TODO: Tăng failedLoginCount, khóa sau 5 lần
-      throw new BusinessException(ErrorCode.INVALID_CREDENTIALS, 'Sai tên đăng nhập hoặc mật khẩu');
-    }
-
-    const roles = user.userRoles?.map((ur) => ur.role.name) || [];
-    const payload = { sub: user.id, username: user.username, roles };
-    const accessToken = this.jwtService.sign(payload);
-
-    return {
-      accessToken,
-      user: {
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        roles,
-        mustChangePassword: user.mustChangePassword,
+    await this.users.resetFailedLogin(user.id);
+    const sid = randomUUID();
+    const accessToken = await this.jwt.signAsync({ sub: user.id, sid });
+    const refreshToken = await this.jwt.signAsync(
+      { sub: user.id, sid, type: "refresh" },
+      {
+        secret: this.config.getOrThrow("JWT_REFRESH_SECRET"),
+        expiresIn: this.config.get("JWT_REFRESH_EXPIRES_IN", "7d"),
       },
-    };
+    );
+    const decoded = this.jwt.decode(refreshToken) as { exp: number };
+    await this.users.createSession({
+      id: sid,
+      userId: user.id,
+      refreshToken: await bcrypt.hash(
+        createHash("sha256").update(refreshToken).digest("hex"),
+        10,
+      ),
+      expiresAt: new Date(decoded.exp * 1000),
+    });
+    await this.audit.log({
+      userId: user.id,
+      action: "AUTH_LOGIN",
+      resource: "account",
+      resourceId: user.id,
+    });
+    return { accessToken, refreshToken, user: accountDto(user) };
   }
-
-  async changePassword(userId: string, oldPassword: string, newPassword: string) {
-    const user = await this.userRepo.findById(userId);
-    if (!user) {
-      throw new BusinessException(ErrorCode.NOT_FOUND, 'Không tìm thấy tài khoản');
+  async me(userId: string) {
+    const user = await this.users.findById(userId);
+    if (!user || user.status !== "ACTIVE") throw new UnauthorizedException();
+    return accountDto(user);
+  }
+  async changePassword(
+    userId: string,
+    oldPassword: string,
+    newPassword: string,
+    sid?: string,
+  ) {
+    const user = await this.users.findById(userId);
+    if (!user || !(await bcrypt.compare(oldPassword, user.passwordHash)))
+      throw new UnauthorizedException("Mật khẩu hiện tại không đúng");
+    AuthValidator.password(oldPassword, newPassword);
+    await this.users.updatePassword(
+      userId,
+      await bcrypt.hash(newPassword, 12),
+      sid,
+    );
+    return this.me(userId);
+  }
+  async updateProfile(
+    userId: string,
+    input: { name: string; email?: string | null; phone?: string },
+  ) {
+    if (input.email) {
+      const other = await this.users.findByEmail(input.email);
+      if (other && other.id !== userId)
+        throw new ConflictException("Email đã được sử dụng");
     }
-
-    const isMatch = await bcrypt.compare(oldPassword, user.passwordHash);
-    if (!isMatch) {
-      throw new BusinessException(ErrorCode.INVALID_CREDENTIALS, 'Mật khẩu cũ không chính xác');
-    }
-
-    const { valid, errors } = PasswordPolicyValidator.validate(newPassword);
-    if (!valid) {
-      throw new BusinessException(
-        ErrorCode.PASSWORD_POLICY_VIOLATED,
-        errors.join(', '),
+    await this.users.updateProfile(userId, input);
+    return this.me(userId);
+  }
+  async refreshToken(token: string) {
+    try {
+      const payload = await this.jwt.verifyAsync<{
+        sub: string;
+        sid: string;
+        type: string;
+      }>(token, { secret: this.config.getOrThrow("JWT_REFRESH_SECRET") });
+      if (payload.type !== "refresh") throw new Error();
+      const session = await this.users.session(payload.sid);
+      const user = await this.users.findById(payload.sub);
+      if (
+        !user ||
+        user.status !== "ACTIVE" ||
+        !session ||
+        session.userId !== user.id ||
+        session.revokedAt ||
+        session.expiresAt < new Date() ||
+        !(await bcrypt.compare(
+          createHash("sha256").update(token).digest("hex"),
+          session.refreshToken,
+        ))
+      )
+        throw new Error();
+      return {
+        accessToken: await this.jwt.signAsync({
+          sub: user.id,
+          sid: session.id,
+        }),
+        user: accountDto(user),
+      };
+    } catch {
+      throw new UnauthorizedException(
+        "Phiên đăng nhập không hợp lệ hoặc đã hết hạn",
       );
     }
-
-    const newHash = await bcrypt.hash(newPassword, 10);
-    await this.userRepo.updatePassword(userId, newHash);
-
-    return { success: true, message: 'Đổi mật khẩu thành công' };
   }
-
-  async refreshToken(_refreshToken: string) {
-    // TODO: Implement refresh token logic
-    throw new UnauthorizedException('Not implemented');
-  }
-
-  async logout(_refreshToken: string) {
-    // TODO: Revoke session
-    return { success: true };
+  async logout(userId: string, sid: string) {
+    await this.users.revokeSession(sid, userId);
+    await this.audit.log({
+      userId,
+      action: "AUTH_LOGOUT",
+      resource: "account",
+      resourceId: userId,
+    });
+    return { loggedOut: true };
   }
 }

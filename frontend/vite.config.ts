@@ -31,7 +31,12 @@ export default defineConfig(({ mode }) => {
     },
   },
   server: {
+    host: '127.0.0.1',
     port: 5173,
+    strictPort: true,
+    watch: {
+      ignored: ['**/test-results*/**', '**/playwright-report/**'],
+    },
     proxy: {
       '/api': { target: 'http://localhost:3000', changeOrigin: true },
     },

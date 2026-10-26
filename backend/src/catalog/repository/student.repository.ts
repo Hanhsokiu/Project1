@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { Injectable } from "@nestjs/common";
+import { PrismaService } from "../../prisma/prisma.service";
 
 @Injectable()
 export class StudentRepository {
@@ -8,12 +8,14 @@ export class StudentRepository {
   async findAll(params: { page: number; limit: number; search?: string }) {
     const { page, limit, search } = params;
     const skip = (page - 1) * limit;
-    const where = search ? {
-      OR: [
-        { fullName: { contains: search, mode: 'insensitive' as const } },
-        { studentCode: { contains: search, mode: 'insensitive' as const } },
-      ],
-    } : {};
+    const where = search
+      ? {
+          OR: [
+            { fullName: { contains: search, mode: "insensitive" as const } },
+            { studentCode: { contains: search, mode: "insensitive" as const } },
+          ],
+        }
+      : {};
 
     const [data, total] = await Promise.all([
       this.prisma.student.findMany({

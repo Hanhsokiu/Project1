@@ -3,6 +3,8 @@
 ## Giới thiệu
 Hệ thống quản lý đồ án tốt nghiệp dành cho khoa/bộ môn đại học, hỗ trợ toàn bộ quy trình từ đăng ký đến bảo vệ.
 
+B?n t?ch h?p b??c 1?3 g?m API auth, danh m?c, k?/??t, import, ??ng k?, ph?n c?ng v? ?? c??ng/PDF. N?n workflow PR2B ???c gi? l?i. Xem [ghi ch? t?ch h?p v? ki?m ch?ng](docs/implementation/cherry-pick-step1-3.md).
+
 ## Stack
 - **Backend**: NestJS + Prisma + PostgreSQL
 - **Frontend**: React + Vite + TypeScript + shadcn/ui + Tailwind
