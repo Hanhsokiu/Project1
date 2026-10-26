@@ -50,3 +50,10 @@ uploads/
 
 # pnpm
 .pnpm-store/
+.cache/
+playwright-report/
+test-results/
+test-results-*/
+
+# TypeScript incremental compiler caches
+*.tsbuildinfo

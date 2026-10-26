@@ -1,16 +1,24 @@
-import { format, parseISO, isValid } from 'date-fns';
-
 export class DateTimeUtil {
-  static formatVN(date: Date | string): string {
-    const d = typeof date === 'string' ? parseISO(date) : date;
-    return isValid(d) ? format(d, 'dd/MM/yyyy HH:mm') : '';
+  static formatVN(value: Date | string) {
+    const date = typeof value === "string" ? this.toDate(value) : value;
+    return Number.isFinite(date.getTime())
+      ? new Intl.DateTimeFormat("vi-VN", {
+          timeZone: "Asia/Ho_Chi_Minh",
+          dateStyle: "short",
+          timeStyle: "short",
+        }).format(date)
+      : "";
   }
-
-  static toDate(dateStr: string): Date {
-    return parseISO(dateStr);
+  static toDate(value: string) {
+    return new Date(
+      /[zZ]|[+-]\d\d:\d\d$/.test(value)
+        ? value
+        : value.length === 10
+          ? value + "T00:00:00+07:00"
+          : value + "+07:00",
+    );
   }
-
-  static isExpired(date: Date): boolean {
-    return date < new Date();
+  static isExpired(date: Date) {
+    return date.getTime() < Date.now();
   }
 }

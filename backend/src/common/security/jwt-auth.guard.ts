@@ -1,43 +1,77 @@
-import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
-import { Reflector } from '@nestjs/core';
-import { JwtService } from '@nestjs/jwt';
-import { ConfigService } from '@nestjs/config';
-import { IS_PUBLIC_KEY } from './public.decorator';
-
+import {
+  CanActivate,
+  ExecutionContext,
+  ForbiddenException,
+  Injectable,
+  UnauthorizedException,
+} from "@nestjs/common";
+import { Reflector } from "@nestjs/core";
+import { JwtService } from "@nestjs/jwt";
+import { UserAccountRepository } from "../../auth/repository/user-account.repository";
+import { accountDto } from "../../auth/mapper/account.mapper";
+import { IS_PUBLIC_KEY } from "./public.decorator";
+import { ALLOW_PASSWORD_CHANGE } from "./allow-password-change.decorator";
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
   constructor(
     private readonly reflector: Reflector,
-    private readonly jwtService: JwtService,
-    private readonly configService: ConfigService,
+    private readonly jwt: JwtService,
+    private readonly users: UserAccountRepository,
   ) {}
-
-  async canActivate(context: ExecutionContext): Promise<boolean> {
-    const isPublic = this.reflector.getAllAndOverride<boolean>(IS_PUBLIC_KEY, [
-      context.getHandler(),
-      context.getClass(),
-    ]);
-
-    if (isPublic) {
+  async canActivate(ctx: ExecutionContext) {
+    if (
+      this.reflector.getAllAndOverride(IS_PUBLIC_KEY, [
+        ctx.getHandler(),
+        ctx.getClass(),
+      ])
+    )
       return true;
-    }
-
-    const request = context.switchToHttp().getRequest();
-    const authHeader = request.headers.authorization;
-
-    if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      throw new UnauthorizedException('Thiếu hoặc sai định dạng Bearer Token');
-    }
-
-    const token = authHeader.split(' ')[1];
+    const req = ctx.switchToHttp().getRequest();
+    const auth = req.headers.authorization;
+    let payload: { sub: string; sid: string };
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: this.configService.get<string>('JWT_SECRET', 'default-secret'),
-      });
-      request.user = payload;
-      return true;
+      if (typeof auth !== "string" || !auth.startsWith("Bearer "))
+        throw new Error();
+      payload = await this.jwt.verifyAsync(auth.slice(7));
+      if (!payload.sub || !payload.sid) throw new Error();
     } catch {
-      throw new UnauthorizedException('Token không hợp lệ hoặc đã hết hạn');
+      throw new UnauthorizedException("Token không hợp lệ hoặc đã hết hạn");
     }
+    const [user, session] = await Promise.all([
+      this.users.findById(payload.sub),
+      this.users.session(payload.sid),
+    ]);
+    if (
+      !user ||
+      user.status !== "ACTIVE" ||
+      !session ||
+      session.userId !== user.id ||
+      session.revokedAt ||
+      session.expiresAt < new Date()
+    )
+      throw new UnauthorizedException(
+        "Phiên đăng nhập đã kết thúc hoặc tài khoản bị khóa",
+      );
+    if (
+      user.mustChangePassword &&
+      !this.reflector.getAllAndOverride(ALLOW_PASSWORD_CHANGE, [
+        ctx.getHandler(),
+        ctx.getClass(),
+      ])
+    )
+      throw new ForbiddenException({
+        error: {
+          code: "PASSWORD_CHANGE_REQUIRED",
+          message:
+            "Bạn phải đổi mật khẩu lần đầu trước khi sử dụng chức năng nghiệp vụ",
+        },
+      });
+    req.user = {
+      ...accountDto(user),
+      sub: user.id,
+      userId: user.id,
+      sid: session.id,
+    };
+    return true;
   }
 }

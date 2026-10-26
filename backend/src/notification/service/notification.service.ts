@@ -1,15 +1,18 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-
+import { Injectable } from "@nestjs/common";
+import { NotificationRepository } from "../repository/notification.repository";
 @Injectable()
 export class NotificationService {
-  constructor(private readonly prisma: PrismaService) {}
-
-  async getUserNotifications(userId: string) {
-    return this.prisma.notification.findMany({
-      where: { userId },
-      orderBy: { createdAt: 'desc' },
-      take: 20,
-    });
+  constructor(private readonly repo: NotificationRepository) {}
+  getUserNotifications(userId: string) {
+    return this.repo.own(userId);
+  }
+  read(userId: string, id?: string) {
+    return this.repo.read(userId, id);
+  }
+  outbox(termId: string) {
+    return this.repo.list(termId);
+  }
+  retry(id: string) {
+    return this.repo.retry(id);
   }
 }

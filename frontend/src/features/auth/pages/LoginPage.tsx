@@ -1,165 +1,238 @@
-import { useState, type FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { httpClient } from '@shared/api/http-client';
-import { getErrorMessage } from '@shared/api/error-message';
-
+import { AUTH_API } from "../../../shared/api/api-session";
+import { useState, type FormEvent } from "react";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useQueryClient } from "@tanstack/react-query";
+import {
+  ArrowRight,
+  CalendarDays,
+  CheckCircle2,
+  Eye,
+  EyeOff,
+  LockKeyhole,
+  Users,
+} from "lucide-react";
+import { authService } from "../services/auth-service";
+import { useSession } from "../../../shared/hooks/use-demo";
+import { Button, Field, Modal, Notice } from "../../../shared/components/kit";
 export default function LoginPage() {
-  const navigate = useNavigate();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
-  // Modal đổi mật khẩu lần đầu
-  const [mustChangePwd, setMustChangePwd] = useState(false);
-  const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [changePwdError, setChangePwdError] = useState('');
-
-  const handleSubmit = async (e: FormEvent) => {
+  const navigate = useNavigate(),
+    cache = useQueryClient(),
+    location = useLocation();
+  const { user } = useSession();
+  const [username, setUsername] = useState(""),
+    [password, setPassword] = useState(""),
+    [visible, setVisible] = useState(false),
+    [help, setHelp] = useState(false),
+    [error, setError] = useState(""),
+    [pending, setPending] = useState(false);
+  const isDemo =
+    !AUTH_API &&
+    (import.meta.env.DEV || import.meta.env.VITE_DEMO_MODE === "true");
+  async function login(e: FormEvent) {
     e.preventDefault();
-    setError('');
-    setIsLoading(true);
+    setPending(true);
+    setError("");
     try {
-      const res = await httpClient.post('/auth/login', { username, password });
-      const { accessToken, user } = res.data.data || res.data;
-      localStorage.setItem('accessToken', accessToken);
-
-      if (user?.mustChangePassword) {
-        setMustChangePwd(true);
-      } else {
-        navigate('/');
-      }
-    } catch (err: unknown) {
-      const msg = getErrorMessage(err, 'Tên đăng nhập hoặc mật khẩu không đúng.');
-      setError(msg);
+      const account = await authService.login(username, password);
+      await cache.invalidateQueries({ queryKey: ["demo"] });
+      navigate(
+        account.mustChangePassword
+          ? "/change-password"
+          : location.state?.from || "/",
+      );
+    } catch (e) {
+      setError((e as Error).message);
     } finally {
-      setIsLoading(false);
+      setPending(false);
     }
-  };
-
-  const handleFirstTimeChangePassword = async (e: FormEvent) => {
-    e.preventDefault();
-    setChangePwdError('');
-    if (newPassword !== confirmPassword) {
-      setChangePwdError('Mật khẩu xác nhận không khớp');
-      return;
-    }
-    if (newPassword.length < 8) {
-      setChangePwdError('Mật khẩu mới phải có ít nhất 8 ký tự');
-      return;
-    }
-
+  }
+  async function demo(id: string) {
     try {
-      await httpClient.post('/auth/change-password', {
-        oldPassword: password,
-        newPassword,
-      });
-      alert('Đổi mật khẩu thành công! Bạn sẽ được chuyển đến trang chủ.');
-      navigate('/');
-    } catch (err: unknown) {
-      setChangePwdError(getErrorMessage(err, 'Không thể đổi mật khẩu'));
+      const account = await authService.demoLogin(id);
+      await cache.invalidateQueries({ queryKey: ["demo"] });
+      navigate(account.mustChangePassword ? "/change-password" : "/");
+    } catch (e) {
+      setError((e as Error).message);
     }
-  };
-
+  }
+  if (user)
+    return (
+      <Navigate
+        to={user.mustChangePassword ? "/change-password" : "/"}
+        replace
+      />
+    );
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
-      <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full mb-4">
-            <span className="text-2xl font-bold text-blue-600">UTC</span>
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900">QLDATN</h1>
-          <p className="mt-1 text-sm text-gray-500">Quản Lý Đồ Án Tốt Nghiệp - UTC</p>
-        </div>
-
-        {error && (
-          <div className="mb-4 rounded-lg bg-red-50 border border-red-200 px-4 py-3 text-sm text-red-700">
-            {error}
-          </div>
-        )}
-
-        {!mustChangePwd ? (
-          <form onSubmit={handleSubmit} className="space-y-5">
+    <div className="login-shell">
+      <section className="login-branding">
+        <div className="relative">
+          <div className="brand">
+            <span className="brand-mark">UTC</span>
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-                Mã sinh viên / Tên đăng nhập
-              </label>
+              <strong>KHOA CÔNG NGHỆ THÔNG TIN</strong>
+              <small>
+                Trường Đại học Giao thông vận tải
+                <br />
+                University of Transport and Communications
+              </small>
+            </div>
+          </div>
+          <div className="badge bg-white mt-6">
+            ● &nbsp; GPMS · HỆ THỐNG QUẢN LÝ ĐỒ ÁN TỐT NGHIỆP
+          </div>
+        </div>
+        <div className="relative">
+          <h1>Quản lý đồ án tốt nghiệp</h1>
+          <p>
+            Nền tảng quản lý, hướng dẫn và đăng ký đồ án trực tuyến dành cho
+            sinh viên, giảng viên và Giáo vụ Khoa CNTT – UTC.
+          </p>
+          <div className="login-showcase">
+            {[
+              [
+                CalendarDays,
+                "Kỳ học & đợt đồ án",
+                "Thiết lập kế hoạch, danh sách sinh viên đủ điều kiện và chỉ tiêu giảng viên theo từng hệ đào tạo.",
+              ],
+              [
+                CheckCircle2,
+                "Đăng ký nguyện vọng rõ ràng",
+                "Một hướng đồ án, tối đa ba nguyện vọng GVHD. Theo dõi kết quả phân công sau khi Khoa công bố.",
+              ],
+              [
+                Users,
+                "Kết nối sinh viên & giảng viên",
+                "Thống nhất đề tài, cập nhật đề cương và xuất biểu mẫu PDF từ cùng một hồ sơ.",
+              ],
+            ].map(([Icon, title, desc]) => {
+              const ImageIcon = Icon as typeof Users;
+              return (
+                <div key={String(title)}>
+                  <span className="stat-icon">
+                    <ImageIcon size={20} />
+                  </span>
+                  <div>
+                    <h3>{String(title)}</h3>
+                    <p>{String(desc)}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        <footer className="institutional-footer">
+          © 2026 Khoa Công nghệ Thông tin · Trường Đại học Giao thông vận tải
+          <br />
+          <small>GPMS Portal · Không gian quản lý đồ án tốt nghiệp</small>
+        </footer>
+      </section>
+      <section className="login-form-wrap">
+        <div className="login-form">
+          <span className="badge">
+            <LockKeyhole size={13} />
+            Cổng xác thực nội bộ UTC
+          </span>
+          <h1>Chào mừng trở lại!</h1>
+          <p>
+            Đăng nhập để theo dõi đăng ký đồ án, kết quả phân công và đề cương
+            của bạn.
+          </p>
+          <div className="mb-6">
+            <Notice>
+              <b>Tự động phân luồng tài khoản</b>
+              <br />
+              Chức năng hiển thị theo vai trò được cấp cho tài khoản của bạn.
+            </Notice>
+          </div>
+          {error && (
+            <div className="mb-5">
+              <Notice tone="danger">{error}</Notice>
+            </div>
+          )}
+          <form onSubmit={login}>
+            <Field label="Tên đăng nhập / Mã định danh *">
               <input
-                id="username"
-                type="text"
-                required
+                autoComplete="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                placeholder="Ví dụ: 221231054"
-              />
-            </div>
-
-            <div>
-              <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                Mật khẩu
-              </label>
-              <input
-                id="password"
-                type="password"
                 required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                placeholder="Mật khẩu mặc định là mã SV"
+                placeholder="Ví dụ: 221230001 hoặc gv001"
               />
-            </div>
-
+            </Field>
+            <Field label="Mật khẩu *">
+              <div className="password-field">
+                <input
+                  type={visible ? "text" : "password"}
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  placeholder="Nhập mật khẩu"
+                />
+                <button
+                  type="button"
+                  className="icon-btn"
+                  aria-label={visible ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                  onClick={() => setVisible(!visible)}
+                >
+                  {visible ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
+            </Field>
             <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg text-sm transition"
+              type="button"
+              className="link-button self-end"
+              onClick={() => setHelp(true)}
             >
-              {isLoading ? 'Đang xác thực...' : 'Đăng nhập'}
+              Quên mật khẩu?
             </button>
+            <Button type="submit" disabled={pending}>
+              {pending ? "Đang đăng nhập…" : "Đăng nhập hệ thống"}
+              <ArrowRight size={17} />
+            </Button>
           </form>
-        ) : (
-          <form onSubmit={handleFirstTimeChangePassword} className="space-y-4">
-            <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
-              Đây là lần đăng nhập đầu tiên. Bạn bắt buộc phải đổi mật khẩu mặc định (tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt).
+          <div className="mt-6">
+            <Notice>
+              Tài khoản được cấp lần đầu phải đổi mật khẩu mặc định và cập nhật
+              Email/SĐT trước khi đăng ký.
+            </Notice>
+          </div>
+          {isDemo && (
+            <div className="login-demo">
+              <p>KHÔNG GIAN DEMO · BƯỚC 1–3</p>
+              <div className="grid grid-cols-1 gap-2">
+                {[
+                  ["admin", "Quản trị viên"],
+                ].map(([id, label]) => (
+                  <Button variant="secondary" key={id} onClick={() => demo(id)}>
+                    {label}
+                  </Button>
+                ))}
+              </div>
+              <p className="mt-4 leading-6">
+                Tài khoản: <b>admin</b> · Mật khẩu: <b>Demo@2026</b>
+              </p>
             </div>
-
-            {changePwdError && (
-              <div className="text-xs text-red-600">{changePwdError}</div>
-            )}
-
-            <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">Mật khẩu mới</label>
-              <input
-                type="password"
-                required
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              />
-            </div>
-
-            <div>
-              <label className="block text-xs font-medium text-gray-700 mb-1">Xác nhận mật khẩu mới</label>
-              <input
-                type="password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg text-sm transition"
-            >
-              Lưu mật khẩu mới & Tiếp tục
-            </button>
-          </form>
-        )}
-      </div>
+          )}
+        </div>
+      </section>
+      {help && (
+        <Modal title="Hỗ trợ đặt lại mật khẩu" onClose={() => setHelp(false)}>
+          <div className="stack">
+            <Notice>
+              Liên hệ quản trị viên để đặt lại mật khẩu. Sau khi đặt lại, tài
+              khoản bắt buộc đổi mật khẩu trong lần đăng nhập kế tiếp.
+            </Notice>
+            <p className="text-sm leading-7 muted">
+              Trong bản demo, chọn Quản trị viên → Tài khoản → Đặt lại mật khẩu.
+              SV dùng lại mã sinh viên; cán bộ dùng Default@2026.
+            </p>
+            <Button variant="secondary" onClick={() => setHelp(false)}>
+              Đã hiểu
+            </Button>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 }
