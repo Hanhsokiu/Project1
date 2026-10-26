@@ -29,7 +29,7 @@ async function main() {
     await assert.rejects(seedSteps48(db, url.toString()), /Seed refuses existing/);
     const legacySnapshot = async () => JSON.stringify(await Promise.all([db.student.findMany({ orderBy: { id: "asc" } }), db.termStudent.findMany({ orderBy: { id: "asc" } }), db.termLecturer.findMany({ orderBy: [{ termId: "asc" }, { lecturerId: "asc" }] }), db.registration.findMany({ orderBy: { id: "asc" } }), db.advisorAssignment.findMany({ orderBy: { id: "asc" } }), db.assignmentPlan.findMany({ orderBy: { id: "asc" } }), db.topic.findMany({ orderBy: { id: "asc" } })]));
     const beforeLegacy = await legacySnapshot();
-    pass("fresh guarded PG17 seed and canonical ten-migration replay", "Synthetic roster/official assignments/agreement/v1/profile only; no review, finalization, task or submission pre-created");
+    pass("fresh guarded PG17 seed and canonical active-migration replay", "Synthetic roster/official assignments/agreement/v1/profile only; no review, finalization, task or submission pre-created");
     const { NestFactory } = require("@nestjs/core"), { ValidationPipe } = require("@nestjs/common"), { AppModule } = require("../dist/app.module");
     const { SwaggerModule, DocumentBuilder } = require("@nestjs/swagger");
     app = await NestFactory.create(AppModule, { logger: false, abortOnError: false });
@@ -52,7 +52,8 @@ async function main() {
       const response = await fetch(api.replace(/\/api$/, "") + concrete, { method: method.toUpperCase(), headers: { "Content-Type": "application/json" }, ...(!["get", "head"].includes(method) ? { body: "{}" } : {}), signal: AbortSignal.timeout(15000) });
       assert.equal(response.status, 401, "Anonymous access: " + method + " " + route);
       const denied = await fetch(api.replace(/\/api$/, "") + concrete, { method: method.toUpperCase(), headers: { "Content-Type": "application/json", Authorization: "Bearer " + deniedToken }, ...(!["get", "head"].includes(method) ? { body: "{}" } : {}), signal: AbortSignal.timeout(15000) });
-      const expectedDenied = op.tags.includes("notification") ? (route.endsWith("/me/notifications") ? 200 : 404) : 403;
+      const legacyNotification = route.includes('/notifications/user/') || route.includes('/me/notifications');
+      const expectedDenied = op.tags.includes("notification") && legacyNotification ? (route.endsWith("/me/notifications") ? 200 : 404) : 403;
       assert.equal(denied.status, expectedDenied, "Authenticated user without permission: " + method + " " + route);
       endpoints.push({ method: method.toUpperCase(), path: route, tags: op.tags, anonymous: "PASS", actualStatus: response.status, noPermissions: "PASS", noPermissionsStatus: denied.status });
     }

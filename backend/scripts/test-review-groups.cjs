@@ -1,4 +1,5 @@
 'use strict';
+const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
 // Step 4 HTTP integration. Explicit fresh local PG17 target only; never .env fallback.
 const fs = require('node:fs'),
   path = require('node:path'),
@@ -161,6 +162,7 @@ async function main() {
     app.useGlobalPipes(
       new ValidationPipe({ whitelist: true, transform: true }),
     );
+    await prepareFixtureSessions(db);
     await app.listen(0, '127.0.0.1');
     const { SwaggerModule, DocumentBuilder } = require('@nestjs/swagger');
     const document = SwaggerModule.createDocument(
@@ -187,7 +189,7 @@ async function main() {
       };
       if (actor)
         headers.Authorization =
-          'Bearer ' + jwt.sign({ sub: actor, roles: ['FACULTY', 'ADMIN'] });
+          'Bearer ' + jwt.sign({ sub: actor, sid: actor, roles: ['FACULTY', 'ADMIN'] });
       const r = await fetch(base + route, {
         method,
         headers,
@@ -475,7 +477,7 @@ async function main() {
       data: { id: 'topic', termId: 't1', title: 'Synthetic' },
     });
     await db.proposal.create({
-      data: { id: 'p', topicId: 'topic', studentId: 'sv' },
+      data: { id: 'p', topicId: 'topic', studentId: 'sv', termId: 't1' },
     });
     const review = await db.proposalReview.create({
       data: { id: 'review', proposalId: 'p', reviewGroupId: gid },

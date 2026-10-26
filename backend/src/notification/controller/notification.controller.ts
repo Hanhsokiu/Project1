@@ -7,6 +7,8 @@ import {
   HttpCode,
   Query,
   UseFilters,
+  Patch,
+  ParseUUIDPipe,
 } from "@nestjs/common";
 import { TaskSubmissionQuerySchema } from "@doan/shared";
 import { ReviewGroupPipe } from "../../topic/review-groups/review-group.dto";
@@ -14,6 +16,8 @@ import {
   ReviewGroupExceptionFilter,
   groupError,
 } from "../../topic/review-groups/review-group.errors";
+import { RequirePermission } from "../../common/security/require-permission.decorator";
+import { CurrentUser } from "../../common/security/current-user.decorator";
 import { ApiTags } from "@nestjs/swagger";
 import { NotificationService } from "../service/notification.service";
 import { ApiResponse } from "../../common/dto/api-response.dto";
@@ -56,5 +60,34 @@ export class NotificationController {
     @Param("id") id: string,
   ) {
     return ApiResponse.ok(await this.notifService.read(this.user(r), id));
+  }
+  @Get("notifications/me")
+  @RequirePermission("notification", "own")
+  async own(@CurrentUser() u: { sub: string }) {
+    return ApiResponse.ok(await this.notifService.own(u.sub));
+  }
+  @Patch("notifications/me/read")
+  @RequirePermission("notification", "own")
+  async readAll(@CurrentUser() u: { sub: string }) {
+    return ApiResponse.ok(await this.notifService.readAll(u.sub));
+  }
+  @Patch("notifications/:id/read")
+  @RequirePermission("notification", "own")
+  async readOwn(
+    @CurrentUser() u: { sub: string },
+    @Param("id", ParseUUIDPipe) id: string,
+  ) {
+    await this.notifService.read(u.sub, id);
+    return ApiResponse.ok({ updated: 1 });
+  }
+  @Get("notifications/outbox/term/:termId")
+  @RequirePermission("assignment", "manage")
+  async outbox(@Param("termId", ParseUUIDPipe) id: string) {
+    return ApiResponse.ok(await this.notifService.outbox(id));
+  }
+  @Post("notifications/outbox/:id/retry")
+  @RequirePermission("assignment", "manage")
+  async retry(@Param("id", ParseUUIDPipe) id: string) {
+    return ApiResponse.ok(await this.notifService.retry(id));
   }
 }

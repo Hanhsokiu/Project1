@@ -1,0 +1,25 @@
+{
+  "termId": "d2d13aef-7ce2-44be-ae32-04a17ddb0e2e",
+  "outboxId": "06a6383c-88eb-44f1-86cc-6877af3d81eb",
+  "history": [
+    {
+      "case": "missing SMTP",
+      "status": "FAILED",
+      "attempts": 1,
+      "error": "Thiếu cấu hình SMTP_HOST/SMTP_FROM; email chưa được gửi."
+    },
+    {
+      "case": "SMTP connection refused",
+      "status": "FAILED",
+      "attempts": 2,
+      "error": "connect ECONNREFUSED 127.0.0.1:1026"
+    },
+    {
+      "case": "expired lease recovered; SMTP accepted",
+      "status": "SENT",
+      "attempts": 2,
+      "messageId": "<06a6383c-88eb-44f1-86cc-6877af3d81eb@gpms.local>",
+      "sentAt": "2026-10-25T16:03:57.917Z"
+    }
+  ]
+}

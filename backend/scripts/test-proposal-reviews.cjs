@@ -1,4 +1,5 @@
 'use strict';
+const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
 // Destructive fixtures/DDL are restricted to a NEW loopback btl_pr2b_* test DB.
 // Never loads backend/.env or accepts a shared/production target.
 const fs = require('node:fs'),
@@ -293,7 +294,7 @@ async function main() {
           id: 'reg' + i,
           termId,
           studentId: id,
-          advisorAssignment: {
+          advisorAssignments: {
             create: { assignmentPlanId: 'plan-' + termId, advisorId },
           },
         },
@@ -320,6 +321,7 @@ async function main() {
         data: {
           id: 'p' + i,
           topicId: 'topic' + i,
+          termId,
           studentId: id,
           status: 'SUBMITTED',
         },
@@ -348,6 +350,7 @@ async function main() {
     app.useGlobalPipes(
       new ValidationPipe({ whitelist: true, transform: true }),
     );
+    await prepareFixtureSessions(db);
     await app.listen(0, '127.0.0.1');
     const { SwaggerModule, DocumentBuilder } = require('@nestjs/swagger');
     const swagger = SwaggerModule.createDocument(
@@ -373,7 +376,7 @@ async function main() {
       };
       if (actor)
         headers.Authorization =
-          'Bearer ' + jwt.sign({ sub: actor, roles: ['ADMIN', 'FACULTY'] });
+          'Bearer ' + jwt.sign({ sub: actor, sid: actor, roles: ['ADMIN', 'FACULTY'] });
       const r = await fetch(base + route, {
           method,
           headers,

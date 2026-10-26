@@ -1,6 +1,7 @@
 // Prisma schema cho Hệ thống Quản lý Đồ án Tốt nghiệp
 generator client {
   provider = "prisma-client-js"
+
 }
 
 datasource db {
@@ -17,6 +18,7 @@ enum AccountStatus {
   ACTIVE
   LOCKED
   PENDING_ACTIVATION
+
 }
 
 enum TermStatus {
@@ -27,19 +29,25 @@ enum TermStatus {
   DEFENDING
   COMPLETED
   CANCELLED
+
 }
 
 enum RegistrationStatus {
+  DRAFT
+  SUBMITTED
+  // Legacy values are retained for existing records; new writes use DRAFT/SUBMITTED.
   PENDING
   APPROVED
   REJECTED
   CANCELLED
+
 }
 
 enum AssignmentStatus {
   DRAFT
   PUBLISHED
   FINALIZED
+
 }
 
 enum ProposalStatus {
@@ -49,6 +57,7 @@ enum ProposalStatus {
   REVISION_REQUESTED
   APPROVED
   REJECTED
+
 }
 
 enum TaskStatus {
@@ -57,6 +66,7 @@ enum TaskStatus {
   SUBMITTED
   REVIEWED
   OVERDUE
+
 }
 
 enum DefenseEligibilityStatus {
@@ -64,6 +74,7 @@ enum DefenseEligibilityStatus {
   ELIGIBLE
   INELIGIBLE
   DEFERRED
+
 }
 
 enum DefermentStatus {
@@ -71,6 +82,7 @@ enum DefermentStatus {
   DEPARTMENT_APPROVED
   FACULTY_APPROVED
   REJECTED
+
 }
 
 enum ExportJobStatus {
@@ -78,11 +90,13 @@ enum ExportJobStatus {
   PROCESSING
   DONE
   FAILED
+
 }
 
 enum NotificationStatus {
   UNREAD
   READ
+
 }
 
 enum ImportJobStatus {
@@ -90,6 +104,9 @@ enum ImportJobStatus {
   PROCESSING
   DONE
   FAILED
+  VALIDATED
+  PARTIAL
+
 }
 
 // ============================================
@@ -99,14 +116,16 @@ enum ImportJobStatus {
 model UserAccount {
   id                 String        @id @default(uuid())
   username           String        @unique
-  email              String        @unique
+  email              String?       @unique
+  displayName        String?       @map("display_name")
+  phone              String?
   passwordHash       String        @map("password_hash")
   status             AccountStatus @default(PENDING_ACTIVATION)
   failedLoginCount   Int           @default(0) @map("failed_login_count")
-  lastLoginAt        DateTime?     @map("last_login_at")
+  lastLoginAt        DateTime?     @map("last_login_at") @db.Timestamptz(6)
   mustChangePassword Boolean       @default(true) @map("must_change_password")
-  createdAt          DateTime      @default(now()) @map("created_at")
-  updatedAt          DateTime      @updatedAt @map("updated_at")
+  createdAt          DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt          DateTime      @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   userRoles     UserRole[]
   loginSessions LoginSession[]
@@ -116,7 +135,6 @@ model UserAccount {
   lecturer      Lecturer?
 
   @@map("USER_ACCOUNT")
-
   pr2bAcademicTermGrantUserId AcademicTermGrant[] @relation("AcademicTermGrant_userId")
   pr2bAssignmentPlanWorkflowFinalizedByUserId AssignmentPlanWorkflow[] @relation("AssignmentPlanWorkflow_finalizedByUserId")
   pr2bAssignmentChangeActorId AssignmentChange[] @relation("AssignmentChange_actorId")
@@ -147,12 +165,13 @@ model Role {
   id          String   @id @default(uuid())
   name        String   @unique
   description String?
-  createdAt   DateTime @default(now()) @map("created_at")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   userRoles       UserRole[]
   rolePermissions RolePermission[]
 
   @@map("ROLE")
+
 }
 
 model Permission {
@@ -160,24 +179,26 @@ model Permission {
   resource    String
   action      String
   description String?
-  createdAt   DateTime @default(now()) @map("created_at")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   rolePermissions RolePermission[]
 
   @@unique([resource, action])
   @@map("PERMISSION")
+
 }
 
 model UserRole {
   userId     String   @map("user_id")
   roleId     String   @map("role_id")
-  assignedAt DateTime @default(now()) @map("assigned_at")
+  assignedAt DateTime @default(now()) @map("assigned_at") @db.Timestamptz(6)
 
   user UserAccount @relation(fields: [userId], references: [id], onDelete: Cascade)
   role Role        @relation(fields: [roleId], references: [id], onDelete: Cascade)
 
   @@id([userId, roleId])
   @@map("USER_ROLE")
+
 }
 
 model RolePermission {
@@ -189,6 +210,7 @@ model RolePermission {
 
   @@id([roleId, permissionId])
   @@map("ROLE_PERMISSION")
+
 }
 
 model LoginSession {
@@ -197,13 +219,14 @@ model LoginSession {
   refreshToken String    @map("refresh_token")
   ipAddress    String?   @map("ip_address")
   userAgent    String?   @map("user_agent")
-  expiresAt    DateTime  @map("expires_at")
-  revokedAt    DateTime? @map("revoked_at")
-  createdAt    DateTime  @default(now()) @map("created_at")
+  expiresAt    DateTime  @map("expires_at") @db.Timestamptz(6)
+  revokedAt    DateTime? @map("revoked_at") @db.Timestamptz(6)
+  createdAt    DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
 
   user UserAccount @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("LOGIN_SESSION")
+
 }
 
 model AuditLog {
@@ -215,27 +238,30 @@ model AuditLog {
   oldValue   Json?    @map("old_value")
   newValue   Json?    @map("new_value")
   ipAddress  String?  @map("ip_address")
-  createdAt  DateTime @default(now()) @map("created_at")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   user UserAccount? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   @@map("AUDIT_LOG")
+
 }
 
 model Notification {
   @@index([userId, createdAt, id])
   id        String             @id @default(uuid())
   userId    String             @map("user_id")
+  termId    String?            @map("term_id")
   title     String
   body      String
   link      String?
   status    NotificationStatus @default(UNREAD)
-  createdAt DateTime           @default(now()) @map("created_at")
-  readAt    DateTime?          @map("read_at")
+  createdAt DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  readAt    DateTime?          @map("read_at") @db.Timestamptz(6)
 
   user UserAccount @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("NOTIFICATION")
+
 }
 
 // ============================================
@@ -246,13 +272,12 @@ model Department {
   id        String   @id @default(uuid())
   code      String   @unique
   name      String
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   lecturers Lecturer[]
 
   @@map("DEPARTMENT")
-
   pr2bGrantDepartmentDepartmentId GrantDepartment[] @relation("GrantDepartment_departmentId")
   pr2bResearchAreaWorkflowDepartmentId ResearchAreaWorkflow[] @relation("ResearchAreaWorkflow_departmentId")
   pr2bReviewGroupWorkflowDepartmentId ReviewGroupWorkflow[] @relation("ReviewGroupWorkflow_departmentId")
@@ -262,22 +287,25 @@ model TitleConfig {
   id           String   @id @default(uuid())
   name         String   @unique
   abbreviation String
-  createdAt    DateTime @default(now()) @map("created_at")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   lecturers Lecturer[]
 
   @@map("TITLE_CONFIG")
+
 }
 
 model TrainingSystem {
   id        String   @id @default(uuid())
   code      String   @unique
   name      String
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   students Student[]
+  terms    ThesisTerm[]
 
   @@map("TRAINING_SYSTEM")
+
 }
 
 model Lecturer {
@@ -290,8 +318,8 @@ model Lecturer {
   phone        String?
   isActive     Boolean  @default(true) @map("is_active")
   maxStudents  Int      @default(5) @map("max_students")
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   user                UserAccount          @relation(fields: [userId], references: [id])
   department          Department           @relation(fields: [departmentId], references: [id])
@@ -301,9 +329,9 @@ model Lecturer {
   advisorAssignments  AdvisorAssignment[]  @relation("AdvisorAssignment")
   reviewerAssignments ReviewerAssignment[] @relation("ReviewerAssignment")
   committeeMembers    CommitteeMember[]
+  registrationPreferences RegistrationPref[]
 
   @@map("LECTURER")
-
   pr2bAssignmentChangeOldAdvisorId AssignmentChange[] @relation("AssignmentChange_oldAdvisorId")
   pr2bAssignmentChangeNewAdvisorId AssignmentChange[] @relation("AssignmentChange_newAdvisorId")
   pr2bTopicWorkflowConfirmedByAdvisorId TopicWorkflow[] @relation("TopicWorkflow_confirmedByAdvisorId")
@@ -315,33 +343,38 @@ model Student {
   userId           String   @unique @map("user_id")
   studentCode      String   @unique @map("student_code")
   fullName         String   @map("full_name")
+  className        String   @default("") @map("class_name")
+  cohort           String   @default("")
+  academicEligible Boolean  @default(true) @map("academic_eligible")
   trainingSystemId String   @map("training_system_id")
   gpa              Decimal  @default(0) @db.Decimal(4, 2)
   phone            String?
   isActive         Boolean  @default(true) @map("is_active")
-  createdAt        DateTime @default(now()) @map("created_at")
-  updatedAt        DateTime @updatedAt @map("updated_at")
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   user           UserAccount    @relation(fields: [userId], references: [id])
   trainingSystem TrainingSystem @relation(fields: [trainingSystemId], references: [id])
   termStudents   TermStudent[]
   registrations  Registration[]
-  proposal       Proposal?
+  proposal       Proposal[]
 
   @@map("STUDENT")
+
 }
 
 model ResearchArea {
   id          String   @id @default(uuid())
   name        String   @unique
   description String?
-  createdAt   DateTime @default(now()) @map("created_at")
+  isActive    Boolean @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   lecturerAreas LecturerArea[]
   topics        Topic[]
+  registrations Registration[]
 
   @@map("RESEARCH_AREA")
-
   pr2bResearchAreaWorkflowResearchAreaId ResearchAreaWorkflow? @relation("ResearchAreaWorkflow_researchAreaId")
 }
 
@@ -354,39 +387,67 @@ model LecturerArea {
 
   @@id([lecturerId, researchAreaId])
   @@map("LECTURER_AREA")
+
 }
 
 model ImportJob {
   id          String          @id @default(uuid())
-  type        String          // STUDENT | LECTURER
+  type        String // STUDENT | LECTURER
   fileName    String          @map("file_name")
   filePath    String          @map("file_path")
+  termId      String?         @map("term_id")
+  createdBy   String?         @map("created_by")
+  rows        Json?
+  fileHash    String?         @map("file_hash")
+  confirmedAt DateTime?       @map("confirmed_at") @db.Timestamptz(6)
+  mode        String?
   status      ImportJobStatus @default(QUEUED)
   totalRows   Int             @default(0) @map("total_rows")
   successRows Int             @default(0) @map("success_rows")
   errorRows   Int             @default(0) @map("error_rows")
   errorReport Json?           @map("error_report")
-  createdAt   DateTime        @default(now()) @map("created_at")
-  completedAt DateTime?       @map("completed_at")
+  createdAt   DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  completedAt DateTime?       @map("completed_at") @db.Timestamptz(6)
+  term        ThesisTerm?     @relation(fields: [termId], references: [id])
 
+  @@index([termId, createdAt])
   @@map("IMPORT_JOB")
+
 }
 
 // ============================================
 // V003: TERM MODULE
 // ============================================
 
-model ThesisTerm {
-  id           String     @id @default(uuid())
-  code         String     @unique
-  name         String
-  academicYear String     @map("academic_year")
+model AcademicSemester {
+  id           String       @id @default(uuid())
+  academicYear String       @map("academic_year")
   semester     Int
-  status       TermStatus @default(DRAFT)
-  startDate    DateTime   @map("start_date")
-  endDate      DateTime   @map("end_date")
-  createdAt    DateTime   @default(now()) @map("created_at")
-  updatedAt    DateTime   @updatedAt @map("updated_at")
+  name         String
+  startDate    DateTime     @map("start_date") @db.Timestamptz(6)
+  endDate      DateTime     @map("end_date") @db.Timestamptz(6)
+  createdAt    DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt    DateTime     @updatedAt @map("updated_at") @db.Timestamptz(6)
+  terms        ThesisTerm[]
+
+  @@unique([academicYear, semester])
+  @@map("ACADEMIC_SEMESTER")
+}
+
+model ThesisTerm {
+  id               String     @id @default(uuid())
+  code             String     @unique
+  name             String
+  academicYear     String     @map("academic_year")
+  semester         Int
+  semesterId       String?    @map("semester_id")
+  trainingSystemId String?    @map("training_system_id")
+  isLocked         Boolean    @default(false) @map("is_locked")
+  status           TermStatus @default(DRAFT)
+  startDate        DateTime   @map("start_date") @db.Timestamptz(6)
+  endDate          DateTime   @map("end_date") @db.Timestamptz(6)
+  createdAt        DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt        DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   phases            TermPhase[]
   parameters        TermParameter[]
@@ -394,11 +455,16 @@ model ThesisTerm {
   termStudents      TermStudent[]
   registrations     Registration[]
   topics            Topic[]
+  assignmentPlans   AssignmentPlan[]
+  proposals         Proposal[]
   defenseCommittees DefenseCommittee[]
   exportJobs        ExportJob[]
+  importJobs        ImportJob[]
+  semesterRecord    AcademicSemester?  @relation(fields: [semesterId], references: [id])
+  trainingSystem    TrainingSystem?    @relation(fields: [trainingSystemId], references: [id])
 
+  @@index([trainingSystemId, semesterId, createdAt])
   @@map("THESIS_TERM")
-
   pr2bAcademicTermGrantTermId AcademicTermGrant[] @relation("AcademicTermGrant_termId")
   pr2bTermWorkflowTermId TermWorkflow? @relation("TermWorkflow_termId")
   pr2bTermPhaseWorkflowTermId TermPhaseWorkflow[] @relation("TermPhaseWorkflow_termId")
@@ -411,15 +477,16 @@ model TermPhase {
   id        String   @id @default(uuid())
   termId    String   @map("term_id")
   phaseName String   @map("phase_name")
-  startDate DateTime @map("start_date")
-  endDate   DateTime @map("end_date")
+  code      String?
+  startDate DateTime @map("start_date") @db.Timestamptz(6)
+  endDate   DateTime @map("end_date") @db.Timestamptz(6)
   isLocked  Boolean  @default(false) @map("is_locked")
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Cascade)
 
+  @@unique([termId, code])
   @@map("TERM_PHASE")
-
   pr2bTermPhaseWorkflowPhaseId TermPhaseWorkflow? @relation("TermPhaseWorkflow_phaseId")
 }
 
@@ -429,13 +496,14 @@ model TermParameter {
   key         String
   value       String
   description String?
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Cascade)
 
   @@unique([termId, key])
   @@map("TERM_PARAMETER")
+
 }
 
 model TermLecturer {
@@ -448,21 +516,21 @@ model TermLecturer {
 
   @@id([termId, lecturerId])
   @@map("TERM_LECTURER")
+
 }
 
 model TermStudent {
   pr2bDossierStudentProfile DossierStudentProfile?
-  id             String   @id @default(uuid())
-  termId         String   @map("term_id")
-  studentId      String   @map("student_id")
-  createdAt      DateTime @default(now()) @map("created_at")
+  id        String   @id @default(uuid())
+  termId    String   @map("term_id")
+  studentId String   @map("student_id")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
-  term         ThesisTerm    @relation(fields: [termId], references: [id], onDelete: Cascade)
-  student      Student       @relation(fields: [studentId], references: [id])
+  term    ThesisTerm @relation(fields: [termId], references: [id], onDelete: Cascade)
+  student Student    @relation(fields: [studentId], references: [id])
 
   @@unique([termId, studentId])
   @@map("TERM_STUDENT")
-
   pr2bTopicWorkflowTermStudentId TopicWorkflow? @relation("TopicWorkflow_termStudentId")
   pr2bPeriodRequiredStudentTermStudentId PeriodRequiredStudent[] @relation("PeriodRequiredStudent_termStudentId")
   pr2bWeeklyReportObligationTermStudentId WeeklyReportObligation[] @relation("WeeklyReportObligation_termStudentId")
@@ -476,18 +544,22 @@ model Registration {
   id        String             @id @default(uuid())
   termId    String             @map("term_id")
   studentId String             @map("student_id")
-  status    RegistrationStatus @default(PENDING)
+  directionId String?          @map("direction_id")
+  submittedAt DateTime?        @map("submitted_at") @db.Timestamptz(6)
+  status    RegistrationStatus @default(DRAFT)
   note      String?
-  createdAt DateTime           @default(now()) @map("created_at")
-  updatedAt DateTime           @updatedAt @map("updated_at")
+  createdAt DateTime           @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime           @updatedAt @map("updated_at") @db.Timestamptz(6)
 
-  term              ThesisTerm          @relation(fields: [termId], references: [id])
-  student           Student             @relation(fields: [studentId], references: [id])
+  term              ThesisTerm         @relation(fields: [termId], references: [id])
+  student           Student            @relation(fields: [studentId], references: [id])
+  direction         ResearchArea?      @relation(fields: [directionId], references: [id], onDelete: Restrict)
   preferences       RegistrationPref[]
-  advisorAssignment AdvisorAssignment?
+  advisorAssignments AdvisorAssignment[]
 
   @@unique([termId, studentId])
   @@map("REGISTRATION")
+
 }
 
 model RegistrationPref {
@@ -497,22 +569,30 @@ model RegistrationPref {
   preferenceOrder Int    @map("preference_order")
 
   registration Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  lecturer Lecturer @relation(fields: [lecturerId], references: [id])
 
   @@unique([registrationId, preferenceOrder])
+  @@unique([registrationId, lecturerId])
   @@map("REGISTRATION_PREF")
+
 }
 
 model AssignmentPlan {
   id          String           @id @default(uuid())
   termId      String           @map("term_id")
   status      AssignmentStatus @default(DRAFT)
-  createdAt   DateTime         @default(now()) @map("created_at")
-  publishedAt DateTime?        @map("published_at")
+  createdAt   DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  publishedAt DateTime?        @map("published_at") @db.Timestamptz(6)
+  revision    Int              @default(1)
+  inputSnapshot Json?         @map("input_snapshot")
+  outcome     Json?
+  updatedAt   DateTime         @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   advisorAssignments AdvisorAssignment[]
 
-  @@map("ASSIGNMENT_PLAN")
+  term ThesisTerm @relation(fields: [termId], references: [id])
 
+  @@map("ASSIGNMENT_PLAN")
   pr2bTermWorkflowOfficialAssignmentPlanId TermWorkflow? @relation("TermWorkflow_officialAssignmentPlanId")
   pr2bAssignmentPlanWorkflowPlanId AssignmentPlanWorkflow? @relation("AssignmentPlanWorkflow_planId")
 }
@@ -520,18 +600,18 @@ model AssignmentPlan {
 model AdvisorAssignment {
   id               String   @id @default(uuid())
   assignmentPlanId String   @map("assignment_plan_id")
-  registrationId   String   @unique @map("registration_id")
+  registrationId   String   @map("registration_id")
   advisorId        String   @map("advisor_id")
   isManual         Boolean  @default(false) @map("is_manual")
   note             String?
-  createdAt        DateTime @default(now()) @map("created_at")
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   assignmentPlan AssignmentPlan @relation(fields: [assignmentPlanId], references: [id])
   registration   Registration   @relation(fields: [registrationId], references: [id])
   advisor        Lecturer       @relation("AdvisorAssignment", fields: [advisorId], references: [id])
 
+  @@unique([assignmentPlanId, registrationId])
   @@map("ADVISOR_ASSIGNMENT")
-
   pr2bAssignmentChangeAssignmentId AssignmentChange[] @relation("AssignmentChange_assignmentId")
   pr2bGuidancePlanWorkflowAssignmentId GuidancePlanWorkflow[] @relation("GuidancePlanWorkflow_assignmentId")
 }
@@ -547,8 +627,11 @@ model Topic {
   title          String
   description    String?
   isActive       Boolean  @default(true) @map("is_active")
-  createdAt      DateTime @default(now()) @map("created_at")
-  updatedAt      DateTime @updatedAt @map("updated_at")
+  advisorAgreed  Boolean  @default(false) @map("advisor_agreed")
+  studentAgreed  Boolean  @default(false) @map("student_agreed")
+  agreedAt       DateTime? @map("agreed_at") @db.Timestamptz(6)
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   term         ThesisTerm     @relation(fields: [termId], references: [id])
   researchArea ResearchArea?  @relation(fields: [researchAreaId], references: [id])
@@ -556,7 +639,6 @@ model Topic {
   topicHistory TopicHistory[]
 
   @@map("TOPIC")
-
   pr2bTopicWorkflowTopicId TopicWorkflow? @relation("TopicWorkflow_topicId")
 }
 
@@ -566,29 +648,32 @@ model TopicHistory {
   changedBy String   @map("changed_by")
   oldValue  Json     @map("old_value")
   newValue  Json     @map("new_value")
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   topic Topic @relation(fields: [topicId], references: [id], onDelete: Cascade)
 
   @@map("TOPIC_HISTORY")
+
 }
 
 model Proposal {
   id        String         @id @default(uuid())
   topicId   String         @map("topic_id")
-  studentId String         @unique @map("student_id")
+  studentId String         @map("student_id")
+  termId    String         @map("term_id")
   status    ProposalStatus @default(DRAFT)
-  createdAt DateTime       @default(now()) @map("created_at")
-  updatedAt DateTime       @updatedAt @map("updated_at")
+  createdAt DateTime       @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime       @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   topic    Topic             @relation(fields: [topicId], references: [id])
   student  Student           @relation(fields: [studentId], references: [id])
+  term     ThesisTerm        @relation(fields: [termId], references: [id])
   versions ProposalVersion[]
   reviews  ProposalReview[]
   dossier  ThesisDossier?
 
+  @@unique([termId, studentId])
   @@map("PROPOSAL")
-
   pr2bProposalWorkflowProposalId ProposalWorkflow? @relation("ProposalWorkflow_proposalId")
   pr2bProposalReviewWorkflowProposalId ProposalReviewWorkflow[] @relation("ProposalReviewWorkflow_proposalId")
   pr2bDossierFinalizationProposalId DossierFinalization[] @relation("DossierFinalization_proposalId")
@@ -600,14 +685,16 @@ model ProposalVersion {
   proposalId String   @map("proposal_id")
   version    Int
   content    Json
+  status     ProposalStatus @default(DRAFT)
+  createdBy  String? @map("created_by")
+  submittedAt DateTime? @map("submitted_at") @db.Timestamptz(6)
   filePath   String?  @map("file_path")
-  createdAt  DateTime @default(now()) @map("created_at")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   proposal Proposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
 
   @@unique([proposalId, version])
   @@map("PROPOSAL_VERSION")
-
   pr2bProposalWorkflowWorkingVersionId ProposalWorkflow[] @relation("ProposalWorkflow_workingVersionId")
   pr2bProposalWorkflowSubmittedVersionId ProposalWorkflow[] @relation("ProposalWorkflow_submittedVersionId")
   pr2bProposalVersionWorkflowVersionId ProposalVersionWorkflow? @relation("ProposalVersionWorkflow_versionId")
@@ -618,17 +705,38 @@ model ProposalVersion {
   pr2bDossierFinalizationVersionId DossierFinalization[] @relation("DossierFinalization_versionId")
 }
 
+// Transactional email outbox. Delivery status is independent of in-app read state.
+model EmailOutbox {
+  id String @id @default(uuid())
+  eventKey String @unique @map("event_key")
+  termId String @map("term_id")
+  userId String @map("user_id")
+  recipient String?
+  subject String
+  payload Json
+  status String @default("PENDING")
+  attempts Int @default(0)
+  lastError String? @map("last_error")
+  availableAt DateTime @default(now()) @map("available_at") @db.Timestamptz(6)
+  lockedAt DateTime? @map("locked_at") @db.Timestamptz(6)
+  leaseToken String? @map("lease_token")
+  sentAt DateTime? @map("sent_at") @db.Timestamptz(6)
+  messageId String? @map("message_id")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  @@index([status, availableAt])
+  @@map("EMAIL_OUTBOX")
+}
+
 model ReviewGroup {
   id        String   @id @default(uuid())
   termId    String   @map("term_id")
   name      String
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   members ReviewGroupMember[]
   reviews ProposalReview[]
 
   @@map("REVIEW_GROUP")
-
   pr2bReviewGroupWorkflowGroupId ReviewGroupWorkflow? @relation("ReviewGroupWorkflow_groupId")
   pr2bReviewMembershipHistoryGroupId ReviewMembershipHistory[] @relation("ReviewMembershipHistory_groupId")
 }
@@ -641,22 +749,22 @@ model ReviewGroupMember {
 
   @@id([reviewGroupId, lecturerId])
   @@map("REVIEW_GROUP_MEMBER")
+
 }
 
 model ProposalReview {
   id            String    @id @default(uuid())
   proposalId    String    @map("proposal_id")
   reviewGroupId String    @map("review_group_id")
-  decision      String?   // APPROVED | REVISION_REQUESTED | REJECTED
+  decision      String? // APPROVED | REVISION_REQUESTED | REJECTED
   comment       String?
-  reviewedAt    DateTime? @map("reviewed_at")
-  createdAt     DateTime  @default(now()) @map("created_at")
+  reviewedAt    DateTime? @map("reviewed_at") @db.Timestamptz(6)
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
 
   proposal    Proposal    @relation(fields: [proposalId], references: [id])
   reviewGroup ReviewGroup @relation(fields: [reviewGroupId], references: [id])
 
   @@map("PROPOSAL_REVIEW")
-
   pr2bProposalReviewWorkflowReviewId ProposalReviewWorkflow? @relation("ProposalReviewWorkflow_reviewId")
   pr2bProposalReviewWorkflowSupersededByReviewId ProposalReviewWorkflow[] @relation("ProposalReviewWorkflow_supersededByReviewId")
   pr2bProposalReviewDecisionReviewId ProposalReviewDecision? @relation("ProposalReviewDecision_reviewId")
@@ -668,14 +776,13 @@ model ThesisDossier {
   proposalId  String    @unique @map("proposal_id")
   status      String    @default("DRAFT") // DRAFT | SUBMITTED | APPROVED
   filePath    String?   @map("file_path")
-  submittedAt DateTime? @map("submitted_at")
-  createdAt   DateTime  @default(now()) @map("created_at")
-  updatedAt   DateTime  @updatedAt @map("updated_at")
+  submittedAt DateTime? @map("submitted_at") @db.Timestamptz(6)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   proposal Proposal @relation(fields: [proposalId], references: [id])
 
   @@map("THESIS_DOSSIER")
-
   pr2bDossierWorkflowDossierId DossierWorkflow? @relation("DossierWorkflow_dossierId")
   pr2bDossierFinalizationDossierId DossierFinalization[] @relation("DossierFinalization_dossierId")
   pr2bDossierHistoryDossierId DossierHistory[] @relation("DossierHistory_dossierId")
@@ -690,15 +797,14 @@ model GuidancePlan {
   proposalId  String   @unique @map("proposal_id")
   advisorId   String   @map("advisor_id")
   description String?
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   tasks            Task[]
   meetings         GuidanceMeeting[]
   phaseEvaluations PhaseEvaluation[]
 
   @@map("GUIDANCE_PLAN")
-
   pr2bGuidancePlanWorkflowPlanId GuidancePlanWorkflow? @relation("GuidancePlanWorkflow_planId")
   pr2bPlanHistoryPlanId PlanHistory[] @relation("PlanHistory_planId")
   pr2bWeeklyReportObligationPlanId WeeklyReportObligation[] @relation("WeeklyReportObligation_planId")
@@ -712,16 +818,15 @@ model Task {
   guidancePlanId String     @map("guidance_plan_id")
   title          String
   description    String?
-  deadline       DateTime
+  deadline       DateTime   @db.Timestamptz(6)
   status         TaskStatus @default(TODO)
-  createdAt      DateTime   @default(now()) @map("created_at")
-  updatedAt      DateTime   @updatedAt @map("updated_at")
+  createdAt      DateTime   @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime   @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   guidancePlan GuidancePlan     @relation(fields: [guidancePlanId], references: [id], onDelete: Cascade)
   submissions  TaskSubmission[]
 
   @@map("TASK")
-
   pr2bWeeklyReportObligationCurrentTaskId WeeklyReportObligation? @relation("WeeklyReportObligation_currentTaskId")
   pr2bTaskWorkflowTaskId TaskWorkflow? @relation("TaskWorkflow_taskId")
   pr2bTaskProgressEventTaskId TaskProgressEvent[] @relation("TaskProgressEvent_taskId")
@@ -733,14 +838,13 @@ model TaskSubmission {
   id        String   @id @default(uuid())
   taskId    String   @map("task_id")
   content   String?
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   task    Task             @relation(fields: [taskId], references: [id], onDelete: Cascade)
   files   SubmissionFile[]
   reviews TaskReview[]
 
   @@map("TASK_SUBMISSION")
-
   pr2bTaskWorkflowCurrentSubmissionId TaskWorkflow[] @relation("TaskWorkflow_currentSubmissionId")
   pr2bSubmissionWorkflowSubmissionId SubmissionWorkflow? @relation("SubmissionWorkflow_submissionId")
   pr2bProgressReviewSubmissionId ProgressReview[] @relation("ProgressReview_submissionId")
@@ -754,11 +858,12 @@ model SubmissionFile {
   filePath     String   @map("file_path")
   fileSize     Int      @map("file_size")
   mimeType     String   @map("mime_type")
-  createdAt    DateTime @default(now()) @map("created_at")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   submission TaskSubmission @relation(fields: [submissionId], references: [id], onDelete: Cascade)
 
   @@map("SUBMISSION_FILE")
+
 }
 
 model TaskReview {
@@ -767,26 +872,26 @@ model TaskReview {
   reviewerId   String   @map("reviewer_id")
   comment      String?
   isPassed     Boolean  @map("is_passed")
-  reviewedAt   DateTime @default(now()) @map("reviewed_at")
+  reviewedAt   DateTime @default(now()) @map("reviewed_at") @db.Timestamptz(6)
 
   submission TaskSubmission @relation(fields: [submissionId], references: [id])
 
   @@map("TASK_REVIEW")
+
 }
 
 model GuidanceMeeting {
   @@index([guidancePlanId, meetingDate])
   id             String   @id @default(uuid())
   guidancePlanId String   @map("guidance_plan_id")
-  meetingDate    DateTime @map("meeting_date")
+  meetingDate    DateTime @map("meeting_date") @db.Timestamptz(6)
   location       String?
   summary        String?
-  createdAt      DateTime @default(now()) @map("created_at")
+  createdAt      DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   guidancePlan GuidancePlan @relation(fields: [guidancePlanId], references: [id], onDelete: Cascade)
 
   @@map("GUIDANCE_MEETING")
-
   pr2bMeetingWorkflowMeetingId MeetingWorkflow? @relation("MeetingWorkflow_meetingId")
   pr2bMeetingHistoryMeetingId MeetingHistory[] @relation("MeetingHistory_meetingId")
 }
@@ -797,13 +902,12 @@ model PhaseEvaluation {
   phaseName      String    @map("phase_name")
   score          Decimal?  @db.Decimal(4, 1)
   comment        String?
-  evaluatedAt    DateTime? @map("evaluated_at")
-  createdAt      DateTime  @default(now()) @map("created_at")
+  evaluatedAt    DateTime? @map("evaluated_at") @db.Timestamptz(6)
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
 
   guidancePlan GuidancePlan @relation(fields: [guidancePlanId], references: [id])
 
   @@map("PHASE_EVALUATION")
-
   pr2bEvaluationWorkflowEvaluationId EvaluationWorkflow? @relation("EvaluationWorkflow_evaluationId")
   pr2bEvaluationEvidenceEvaluationId EvaluationEvidence[] @relation("EvaluationEvidence_evaluationId")
   pr2bEvaluationHistoryEvaluationId EvaluationHistory[] @relation("EvaluationHistory_evaluationId")
@@ -813,10 +917,11 @@ model FinalReport {
   id          String    @id @default(uuid())
   proposalId  String    @unique @map("proposal_id")
   filePath    String?   @map("file_path")
-  submittedAt DateTime? @map("submitted_at")
-  createdAt   DateTime  @default(now()) @map("created_at")
+  submittedAt DateTime? @map("submitted_at") @db.Timestamptz(6)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
 
   @@map("FINAL_REPORT")
+
 }
 
 model DefenseConfirmation {
@@ -825,10 +930,11 @@ model DefenseConfirmation {
   advisorId   String    @map("advisor_id")
   status      String    @default("PENDING") // PENDING | CONFIRMED | REJECTED
   note        String?
-  confirmedAt DateTime? @map("confirmed_at")
-  createdAt   DateTime  @default(now()) @map("created_at")
+  confirmedAt DateTime? @map("confirmed_at") @db.Timestamptz(6)
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
 
   @@map("DEFENSE_CONFIRMATION")
+
 }
 
 // ============================================
@@ -839,11 +945,12 @@ model DefenseEligibility {
   id         String                   @id @default(uuid())
   proposalId String                   @unique @map("proposal_id")
   status     DefenseEligibilityStatus @default(PENDING)
-  checkedAt  DateTime?                @map("checked_at")
+  checkedAt  DateTime?                @map("checked_at") @db.Timestamptz(6)
   note       String?
-  createdAt  DateTime                 @default(now()) @map("created_at")
+  createdAt  DateTime                 @default(now()) @map("created_at") @db.Timestamptz(6)
 
   @@map("DEFENSE_ELIGIBILITY")
+
 }
 
 model DefermentRequest {
@@ -851,22 +958,24 @@ model DefermentRequest {
   proposalId  String          @map("proposal_id")
   reason      String
   status      DefermentStatus @default(PENDING)
-  requestedAt DateTime        @default(now()) @map("requested_at")
-  updatedAt   DateTime        @updatedAt @map("updated_at")
+  requestedAt DateTime        @default(now()) @map("requested_at") @db.Timestamptz(6)
+  updatedAt   DateTime        @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   @@map("DEFERMENT_REQUEST")
+
 }
 
 model ReviewerAssignment {
   id         String   @id @default(uuid())
   proposalId String   @map("proposal_id")
   reviewerId String   @map("reviewer_id")
-  assignedAt DateTime @default(now()) @map("assigned_at")
+  assignedAt DateTime @default(now()) @map("assigned_at") @db.Timestamptz(6)
 
   reviewer Lecturer @relation("ReviewerAssignment", fields: [reviewerId], references: [id])
 
   @@unique([proposalId, reviewerId])
   @@map("REVIEWER_ASSIGNMENT")
+
 }
 
 model Room {
@@ -875,24 +984,26 @@ model Room {
   name      String
   capacity  Int
   location  String?
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   defenseSessions DefenseSession[]
 
   @@map("ROOM")
+
 }
 
 model DefenseCommittee {
   id        String   @id @default(uuid())
   termId    String   @map("term_id")
   name      String
-  createdAt DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
-  term            ThesisTerm         @relation(fields: [termId], references: [id])
+  term            ThesisTerm        @relation(fields: [termId], references: [id])
   members         CommitteeMember[]
   defenseSessions DefenseSession[]
 
   @@map("DEFENSE_COMMITTEE")
+
 }
 
 model CommitteeMember {
@@ -905,15 +1016,16 @@ model CommitteeMember {
 
   @@id([committeeId, lecturerId])
   @@map("COMMITTEE_MEMBER")
+
 }
 
 model DefenseSession {
   id          String   @id @default(uuid())
   committeeId String   @map("committee_id")
   roomId      String   @map("room_id")
-  scheduledAt DateTime @map("scheduled_at")
+  scheduledAt DateTime @map("scheduled_at") @db.Timestamptz(6)
   durationMin Int      @default(30) @map("duration_min")
-  createdAt   DateTime @default(now()) @map("created_at")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   committee         DefenseCommittee   @relation(fields: [committeeId], references: [id])
   room              Room               @relation(fields: [roomId], references: [id])
@@ -921,6 +1033,7 @@ model DefenseSession {
   minutes           DefenseMinutes?
 
   @@map("DEFENSE_SESSION")
+
 }
 
 model CommitteeStudent {
@@ -932,6 +1045,7 @@ model CommitteeStudent {
 
   @@id([sessionId, proposalId])
   @@map("COMMITTEE_STUDENT")
+
 }
 
 model DefenseMinutes {
@@ -939,12 +1053,13 @@ model DefenseMinutes {
   sessionId String   @unique @map("session_id")
   content   Json?
   filePath  String?  @map("file_path")
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   session DefenseSession @relation(fields: [sessionId], references: [id])
 
   @@map("DEFENSE_MINUTES")
+
 }
 
 // ============================================
@@ -958,27 +1073,29 @@ model RubricCriteria {
   weight      Decimal  @db.Decimal(5, 2)
   maxScore    Decimal  @default(10) @map("max_score") @db.Decimal(4, 1)
   description String?
-  createdAt   DateTime @default(now()) @map("created_at")
+  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   scoreDetails ScoreDetail[]
 
   @@map("RUBRIC_CRITERIA")
+
 }
 
 model ScoreEntry {
   id         String   @id @default(uuid())
   proposalId String   @map("proposal_id")
   scorerId   String   @map("scorer_id") // Lecturer ID
-  role       String   // ADVISOR | REVIEWER | COMMITTEE_CHAIR | COMMITTEE_MEMBER
+  role       String // ADVISOR | REVIEWER | COMMITTEE_CHAIR | COMMITTEE_MEMBER
   totalScore Decimal? @map("total_score") @db.Decimal(4, 1)
   isLocked   Boolean  @default(false) @map("is_locked")
-  createdAt  DateTime @default(now()) @map("created_at")
-  updatedAt  DateTime @updatedAt @map("updated_at")
+  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   scoreDetails ScoreDetail[]
 
   @@unique([proposalId, scorerId, role])
   @@map("SCORE_ENTRY")
+
 }
 
 model ScoreDetail {
@@ -987,13 +1104,14 @@ model ScoreDetail {
   rubricCriteriaId String   @map("rubric_criteria_id")
   score            Decimal  @db.Decimal(4, 1)
   comment          String?
-  createdAt        DateTime @default(now()) @map("created_at")
+  createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
   scoreEntry     ScoreEntry     @relation(fields: [scoreEntryId], references: [id], onDelete: Cascade)
   rubricCriteria RubricCriteria @relation(fields: [rubricCriteriaId], references: [id])
 
   @@unique([scoreEntryId, rubricCriteriaId])
   @@map("SCORE_DETAIL")
+
 }
 
 model FinalResult {
@@ -1004,11 +1122,12 @@ model FinalResult {
   finalScore    Decimal?  @map("final_score") @db.Decimal(4, 1)
   isPassed      Boolean?  @map("is_passed")
   isPublished   Boolean   @default(false) @map("is_published")
-  publishedAt   DateTime? @map("published_at")
-  createdAt     DateTime  @default(now()) @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
+  publishedAt   DateTime? @map("published_at") @db.Timestamptz(6)
+  createdAt     DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt     DateTime  @updatedAt @map("updated_at") @db.Timestamptz(6)
 
   @@map("FINAL_RESULT")
+
 }
 
 // ============================================
@@ -1018,19 +1137,18 @@ model FinalResult {
 model ExportJob {
   id          String          @id @default(uuid())
   termId      String?         @map("term_id")
-  type        String          // EXCEL_STUDENT | EXCEL_RESULT | PDF_MINUTES | ...
+  type        String // EXCEL_STUDENT | EXCEL_RESULT | PDF_MINUTES | ...
   status      ExportJobStatus @default(QUEUED)
   filePath    String?         @map("file_path")
   requestedBy String          @map("requested_by")
-  createdAt   DateTime        @default(now()) @map("created_at")
-  completedAt DateTime?       @map("completed_at")
+  createdAt   DateTime        @default(now()) @map("created_at") @db.Timestamptz(6)
+  completedAt DateTime?       @map("completed_at") @db.Timestamptz(6)
 
   term ThesisTerm? @relation(fields: [termId], references: [id])
 
   @@map("EXPORT_JOB")
-}
 
-// PR2B EXPAND CANDIDATE: sidecars, no legacy scalar/cardinality changes.
+}
 
 enum WorkflowPhaseKey {
   PROPOSAL_EDIT

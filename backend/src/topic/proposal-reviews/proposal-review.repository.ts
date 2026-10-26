@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PrismaService } from '../../prisma/prisma.service';
-import { groupError } from '../review-groups/review-group.errors';
+import { Injectable } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
+import { PrismaService } from "../../prisma/prisma.service";
+import { groupError } from "../review-groups/review-group.errors";
 
 const principalInclude = {
   userRoles: {
@@ -65,7 +65,7 @@ const reviewInclude = {
   },
   pr2bReviewCommentReviewId: {
     include: { refAuthorUserId: { select: { username: true } } },
-    orderBy: [{ createdAt: 'asc' }, { id: 'asc' }],
+    orderBy: [{ createdAt: "asc" }, { id: "asc" }],
   },
 } satisfies Prisma.ProposalReviewInclude;
 export type ReviewRecord = Prisma.ProposalReviewGetPayload<{
@@ -95,14 +95,14 @@ export class ProposalReviewSession {
     return this.tx.thesisTerm.findMany({
       where,
       select: { id: true, name: true, status: true },
-      orderBy: [{ startDate: 'desc' }, { id: 'asc' }],
+      orderBy: [{ startDate: "desc" }, { id: "asc" }],
     });
   }
   departments(ids?: string[]) {
     return this.tx.department.findMany({
       where: { id: ids ? { in: ids } : undefined },
       select: { id: true, name: true },
-      orderBy: { name: 'asc' },
+      orderBy: { name: "asc" },
     });
   }
   roster(termId: string, lecturerId: string) {
@@ -125,14 +125,14 @@ export class ProposalReviewSession {
       select: { termId: true },
     });
   }
-  advisorTerms(lecturerId: string) {
-    return this.tx.registration.findMany({
+  async advisorTerms(lecturerId: string) {
+    const rows = await this.tx.registration.findMany({
       where: {
-        advisorAssignment: {
-          is: {
+        advisorAssignments: {
+          some: {
             advisorId: lecturerId,
             assignmentPlan: {
-              status: 'FINALIZED',
+              status: "FINALIZED",
               pr2bAssignmentPlanWorkflowPlanId: {
                 is: {
                   finalizedAt: { not: null },
@@ -145,10 +145,25 @@ export class ProposalReviewSession {
       },
       select: {
         termId: true,
-        advisorAssignment: { select: { assignmentPlanId: true } },
+        advisorAssignments: {
+          where: {
+            advisorId: lecturerId,
+            assignmentPlan: { status: "FINALIZED" },
+          },
+          select: { assignmentPlanId: true },
+        },
         term: { select: { pr2bTermWorkflowTermId: true } },
       },
     });
+    return rows.map((row) => ({
+      ...row,
+      advisorAssignment:
+        row.advisorAssignments.find(
+          (a) =>
+            a.assignmentPlanId ===
+            row.term.pr2bTermWorkflowTermId?.officialAssignmentPlanId,
+        ) ?? null,
+    }));
   }
   proposal(id: string) {
     return this.tx.proposal.findUnique({
@@ -162,7 +177,7 @@ export class ProposalReviewSession {
       include: proposalInclude,
       skip,
       take,
-      orderBy: [{ updatedAt: 'desc' }, { id: 'asc' }],
+      orderBy: [{ updatedAt: "desc" }, { id: "asc" }],
     });
   }
   count(where: Prisma.ProposalWhereInput) {
@@ -178,33 +193,51 @@ export class ProposalReviewSession {
     return this.tx.proposalReview.findMany({
       where: { proposalId },
       include: reviewInclude,
-      orderBy: [{ createdAt: 'desc' }, { id: 'desc' }],
+      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
     });
   }
   phase(termId: string) {
     return this.tx.termPhaseWorkflow.findUnique({
-      where: { termId_key: { termId, key: 'PROPOSAL_REVIEW' } },
+      where: { termId_key: { termId, key: "PROPOSAL_REVIEW" } },
       include: { refPhaseId: true },
     });
   }
-  advisor(termId: string, studentId: string) {
-    return this.tx.registration.findUnique({
+  async advisor(termId: string, studentId: string) {
+    const row = await this.tx.registration.findUnique({
       where: { termId_studentId: { termId, studentId } },
       include: {
-        advisorAssignment: {
+        term: { select: { pr2bTermWorkflowTermId: true } },
+        advisorAssignments: {
+          where: {
+            assignmentPlan: { status: { in: ["PUBLISHED", "FINALIZED"] } },
+          },
           include: {
             advisor: true,
             assignmentPlan: {
               include: { pr2bAssignmentPlanWorkflowPlanId: true },
             },
             pr2bAssignmentChangeAssignmentId: {
-              orderBy: { assignmentRevision: 'desc' },
+              orderBy: { assignmentRevision: "desc" },
               take: 1,
             },
           },
         },
       },
     });
+    return row
+      ? {
+          ...row,
+          advisorAssignment:
+            row.advisorAssignments.find(
+              (a) =>
+                a.assignmentPlanId ===
+                row.term.pr2bTermWorkflowTermId?.officialAssignmentPlanId,
+            ) ??
+            (row.advisorAssignments.length === 1
+              ? row.advisorAssignments[0]
+              : null),
+        }
+      : null;
   }
   group(id: string) {
     return this.tx.reviewGroup.findUnique({
@@ -224,7 +257,7 @@ export class ProposalReviewSession {
         members: true,
         reviews: { include: { pr2bProposalReviewWorkflowReviewId: true } },
       },
-      orderBy: [{ name: 'asc' }, { id: 'asc' }],
+      orderBy: [{ name: "asc" }, { id: "asc" }],
     });
   }
   lecturers(termId: string, ids: string[]) {
@@ -234,8 +267,8 @@ export class ProposalReviewSession {
         isActive: true,
         termLecturers: { some: { termId } },
         user: {
-          status: 'ACTIVE',
-          userRoles: { some: { role: { name: 'LECTURER' } } },
+          status: "ACTIVE",
+          userRoles: { some: { role: { name: "LECTURER" } } },
         },
       },
       include: { researchAreas: true },
@@ -276,7 +309,7 @@ export class ProposalReviewSession {
       data: { ...data, revision: { increment: 1 } },
     });
   }
-  status(id: string, status: Prisma.ProposalUpdateInput['status']) {
+  status(id: string, status: Prisma.ProposalUpdateInput["status"]) {
     return this.tx.proposal.update({ where: { id }, data: { status } });
   }
   createReview(data: Prisma.ProposalReviewCreateInput) {
@@ -309,7 +342,7 @@ export class ProposalReviewSession {
     return this.tx.auditLog.create({
       data: {
         userId,
-        resource: 'proposal-review',
+        resource: "proposal-review",
         resourceId: id,
         action,
         oldValue,
@@ -323,7 +356,7 @@ export class ProposalReviewSession {
   replay(actorId: string, route: string, key: string) {
     return this.tx.idempotencyRecord.findUnique({
       where: {
-        actorId_method_route_key: { actorId, method: 'POST', route, key },
+        actorId_method_route_key: { actorId, method: "POST", route, key },
       },
     });
   }
@@ -337,12 +370,12 @@ export class ProposalReviewSession {
     return this.tx.idempotencyRecord.create({
       data: {
         actorId,
-        method: 'POST',
+        method: "POST",
         route,
         key,
         payloadHash,
         result,
-        expiresAt: new Date('9999-12-31Z'),
+        expiresAt: new Date("9999-12-31Z"),
       },
     });
   }
@@ -359,22 +392,22 @@ export class ProposalReviewRepository {
         return await this.prisma.$transaction(
           (tx) => work(new ProposalReviewSession(tx)),
           {
-            isolationLevel: mutation ? 'Serializable' : 'RepeatableRead',
+            isolationLevel: mutation ? "Serializable" : "RepeatableRead",
             timeout: 20000,
           },
         );
       } catch (e) {
         if (
           e instanceof Prisma.PrismaClientKnownRequestError &&
-          (['P2034', 'P2002'].includes(e.code) ||
-            (e.code === 'P2010' &&
-              ['40001', '40P01'].includes(String(e.meta?.code))))
+          (["P2034", "P2002"].includes(e.code) ||
+            (e.code === "P2010" &&
+              ["40001", "40P01"].includes(String(e.meta?.code))))
         ) {
           if (attempt < 2) continue;
           groupError(
             409,
-            'REVISION_CONFLICT',
-            'Dữ liệu đã thay đổi. Hãy tải lại.',
+            "REVISION_CONFLICT",
+            "Dữ liệu đã thay đổi. Hãy tải lại.",
           );
         }
         throw e;

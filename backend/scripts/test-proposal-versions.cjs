@@ -1,4 +1,5 @@
 'use strict';
+const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
 // Step 6 real HTTP/PostgreSQL integration. Explicit NEW loopback database only.
 const fs = require('node:fs'),
   path = require('node:path'),
@@ -59,6 +60,7 @@ async function main() {
     app.useGlobalPipes(
       new ValidationPipe({ whitelist: true, transform: true }),
     );
+    await prepareFixtureSessions(db);
     await app.listen(0, '127.0.0.1');
     const { SwaggerModule, DocumentBuilder } = require('@nestjs/swagger'),
       swagger = SwaggerModule.createDocument(
@@ -83,7 +85,7 @@ async function main() {
       };
       if (actor)
         headers.Authorization =
-          'Bearer ' + jwt.sign({ sub: actor, roles: ['ADMIN', 'FACULTY'] });
+          'Bearer ' + jwt.sign({ sub: actor, sid: actor, roles: ['ADMIN', 'FACULTY'] });
       const response = await fetch(base + route, {
           method,
           headers,
@@ -669,7 +671,7 @@ async function main() {
       'concurrent phase closure blocks a waiting save and preserves the last snapshot',
     );
     const assignment = await db.advisorAssignment.findUnique({
-      where: { registrationId: 'reg7' },
+      where: { assignmentPlanId_registrationId: { assignmentPlanId: 'plan-t1', registrationId: 'reg7' } },
     });
     await db.advisorAssignment.update({
       where: { id: assignment.id },

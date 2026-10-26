@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "checks": [
+    {
+      "name": "injected failure rolls back nullable fields, new private tables, triggers and permissions",
+      "result": "PASS"
+    },
+    {
+      "name": "populated Step 6/legacy dossiers, versions and boolean reviews preserved; no profile/approval/receipt backfill",
+      "result": "PASS"
+    },
+    {
+      "name": "new permissions scoped to faculty/owner/advisor roles; ADMIN gets no academic grant",
+      "result": "PASS"
+    },
+    {
+      "name": "seven migration checksums match; repeat deployment is idempotent",
+      "result": "PASS"
+    }
+  ],
+  "sharedDatabaseDDL": false
+}

@@ -16,6 +16,14 @@ async function seedSteps48(db, rawUrl) {
   const now = Date.now(), start = new Date(now - 86400000), end = new Date(now + 7 * 86400000);
   const roles = ["FACULTY", "LECTURER", "STUDENT", "ADMIN"];
   for (const name of roles) await db.role.create({ data: { id: name, name } });
+  // Match the step 1-3 seed's faculty read grants for the legacy API regressions.
+  for (const resource of ['registration', 'topic']) {
+    const permission = await db.permission.upsert({
+      where: { resource_action: { resource, action: 'read' } },
+      create: { resource, action: 'read' }, update: {},
+    });
+    await db.rolePermission.create({ data: { roleId: 'FACULTY', permissionId: permission.id } });
+  }
   // Match reviewed migration grants. Roles deliberately did not exist at migrate time.
   const allow = {
     FACULTY: ["review-group:read", "review-group:manage", "proposal:read", "proposal:assign", "proposal:finalize", "proposal:export", "dossier:receive", "guidance:read", "guidance:monitor", "submission:read", "submission:download"],
@@ -26,10 +34,13 @@ async function seedSteps48(db, rawUrl) {
   for (const p of await db.permission.findMany())
     for (const roleId of roles)
       if (allow[roleId].includes(p.resource + ":" + p.action))
-        await db.rolePermission.create({ data: { roleId, permissionId: p.id } });
+        await db.rolePermission.upsert({
+          where: { roleId_permissionId: { roleId, permissionId: p.id } },
+          create: { roleId, permissionId: p.id }, update: {},
+        });
   const actors = { faculty: "FACULTY", faculty2: "FACULTY", reviewer: "LECTURER", advisor: "LECTURER", outsider: "LECTURER", foreign: "LECTURER", student: "STUDENT", student2: "STUDENT", student3: "STUDENT", admin: "ADMIN" };
   for (const [id, roleId] of Object.entries(actors))
-    await db.userAccount.create({ data: { id, username: "qa-" + id, email: id + "@example.invalid", passwordHash: hash, status: "ACTIVE", mustChangePassword: false, userRoles: { create: { roleId } } } });
+    await db.userAccount.create({ data: { id, username: "qa-" + id, email: id + "@example.invalid", phone: "0912345678", passwordHash: hash, status: "ACTIVE", mustChangePassword: false, userRoles: { create: { roleId } } } });
   await db.userAccount.create({ data: { id: "unprivileged", username: "qa-unprivileged", email: "unprivileged@example.invalid", passwordHash: hash, status: "ACTIVE", mustChangePassword: false } });
   for (const resource of ["student", "lecturer", "term"]) {
     const permission = await db.permission.upsert({ where: { resource_action: { resource, action: "read" } }, create: { resource, action: "read", description: "Synthetic compatibility read permission" }, update: {} });
@@ -58,9 +69,9 @@ async function seedSteps48(db, rawUrl) {
     await db.student.create({ data: { id, userId: id, studentCode: "QA-" + id, fullName: name, trainingSystemId: "qa-training" } });
     await db.termStudent.create({ data: { id: "ts-" + id, studentId: id, termId } });
     await db.dossierStudentProfile.create({ data: { termStudentId: "ts-" + id, className: "Công nghệ thông tin K63", majorName: "Khoa học máy tính" } });
-    await db.registration.create({ data: { id: "reg-" + id, studentId: id, termId, advisorAssignment: { create: { advisorId: "advisor", assignmentPlanId: termId + "-assign" } } } });
+    await db.registration.create({ data: { id: "reg-" + id, studentId: id, termId, advisorAssignments: { create: { advisorId: "advisor", assignmentPlanId: termId + "-assign" } } } });
     await db.topic.create({ data: { id: "topic-" + id, termId, researchAreaId: "qa-area", title: "Hệ thống quản lý đồ án — " + name, pr2bTopicWorkflowTopicId: { create: { termId, termStudentId: "ts-" + id, confirmedTopicRevision: 0, confirmedAssignmentRevision: 0, confirmedByAdvisorId: "advisor", confirmedAt: new Date(now - 8000) } } } });
-    await db.proposal.create({ data: { id: "p-" + id, studentId: id, topicId: "topic-" + id, status: "SUBMITTED" } });
+    await db.proposal.create({ data: { id: "p-" + id, termId, studentId: id, topicId: "topic-" + id, status: "SUBMITTED" } });
     await db.proposalVersion.create({ data: { id: "v1-" + id, proposalId: "p-" + id, version: 1, content, pr2bProposalVersionWorkflowVersionId: { create: { state: "SEALED", contentSchemaVersion: 1, contentHash: crypto.createHash("sha256").update(canonical(content)).digest("hex"), createdByUserId: id, submittedByUserId: id, submittedAt: new Date(now - 5000) } } } });
     await db.proposalWorkflow.create({ data: { proposalId: "p-" + id, workingVersionId: "v1-" + id, submittedVersionId: "v1-" + id, submissionKind: "INITIAL", nextReviewRound: 1, nextVersionNumber: 2 } });
   }

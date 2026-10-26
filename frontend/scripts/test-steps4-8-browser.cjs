@@ -31,9 +31,9 @@ async function main() {
         page.on("pageerror", e => errors.push(e.message));
         page.on("response", r => { if (r.url().startsWith(cfg.api)) requests.push({ actor, method: r.request().method(), path: new URL(r.url()).pathname, status: r.status() }); });
         await page.goto(origin + "/login");
-        await page.getByLabel("Mã sinh viên / Tên đăng nhập", { exact: true }).fill("qa-" + actor);
-        await page.getByLabel("Mật khẩu", { exact: true }).fill(cfg.password);
-        await page.getByRole("button", { name: "Đăng nhập", exact: true }).click();
+        await page.getByLabel(/Tên đăng nhập \/ Mã định danh/).fill("qa-" + actor);
+        await page.getByLabel(/^Mật khẩu/).fill(cfg.password);
+        await page.getByRole("button", { name: "Đăng nhập hệ thống", exact: true }).click();
         await expect(page).toHaveURL(origin + "/");
       }
       lastPage = page; await page.goto(origin + route); return page;
@@ -159,8 +159,10 @@ async function main() {
     for (const route of ["/students", "/lecturers", "/terms", "/terms/qa-t1", "/registrations/term/qa-t1", "/topics/term/qa-t1"]) {
       const response = await readAs("faculty", route), body = await response.json();
       assert.equal(body.success, true); assert(body.data);
-      if (["/students", "/lecturers"].includes(route)) assert(Array.isArray(body.data.data) && body.data.total >= 3);
-      if (["/terms", "/registrations/term/qa-t1", "/topics/term/qa-t1"].includes(route)) assert(Array.isArray(body.data) && body.data.length >= 2);
+      if (["/students", "/lecturers"].includes(route)) assert(Array.isArray(body.data.items) && body.data.total >= 3);
+      if (route === "/terms") assert(Array.isArray(body.data.items) && body.data.total >= 2);
+      if (route === "/registrations/term/qa-t1") assert(Array.isArray(body.data.items) && body.data.items.length >= 2);
+      if (route === "/topics/term/qa-t1") assert(Array.isArray(body.data) && body.data.length >= 2);
     }
     pass("Existing step 1–3 student/lecturer/term/registration/topic read APIs retain envelopes and data after full flow");
     for (const actor of ["student2", "student3", "outsider", "foreign", "admin"])

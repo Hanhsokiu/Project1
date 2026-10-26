@@ -1,4 +1,5 @@
 "use strict";
+const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
 // Step 8A real HTTP/PostgreSQL tests. Requires a new dedicated loopback DB.
 const fs = require("node:fs"),
   path = require("node:path"),
@@ -85,6 +86,7 @@ async function main() {
     app.useGlobalPipes(
       new ValidationPipe({ whitelist: true, transform: true }),
     );
+    await prepareFixtureSessions(db);
     await app.listen(0, "127.0.0.1");
     const jwt = new JwtService({ secret: process.env.JWT_SECRET }),
       base = "http://127.0.0.1:" + app.getHttpServer().address().port + "/api";
@@ -103,7 +105,7 @@ async function main() {
       if (actor)
         headers.Authorization =
           "Bearer " +
-          jwt.sign({ sub: actor, roles: ["ADMIN", "FACULTY", "LECTURER"] });
+          jwt.sign({ sub: actor, sid: actor, roles: ["ADMIN", "FACULTY", "LECTURER"] });
       const response = await fetch(base + route, {
           method,
           headers,
@@ -769,7 +771,7 @@ async function main() {
       "invalid/reopened dossier blocks new task mutation even when plan metadata still claims ACTIVE",
     );
     const assignment = await db.advisorAssignment.findUnique({
-        where: { registrationId: "reg2" },
+        where: { assignmentPlanId_registrationId: { assignmentPlanId: "plan-t1", registrationId: "reg2" } },
       }),
       planBefore = await db.guidancePlanWorkflow.findUnique({
         where: { planId },

@@ -1,4 +1,5 @@
 "use strict";
+const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
 // Real HTTP + private filesystem + PostgreSQL. Only a new isolated loopback DB.
 const fs = require("node:fs"),
   path = require("node:path"),
@@ -107,6 +108,7 @@ async function main() {
     app.useGlobalPipes(
       new ValidationPipe({ whitelist: true, transform: true }),
     );
+    await prepareFixtureSessions(db);
     await app.listen(0, "127.0.0.1");
     const base =
         "http://127.0.0.1:" + app.getHttpServer().address().port + "/api",
@@ -119,7 +121,7 @@ async function main() {
         ? {
             Authorization:
               "Bearer " +
-              jwt.sign({ sub: actor, roles: ["ADMIN", "FACULTY", "LECTURER"] }),
+              jwt.sign({ sub: actor, sid: actor, roles: ["ADMIN", "FACULTY", "LECTURER"] }),
           }
         : {};
     async function req(

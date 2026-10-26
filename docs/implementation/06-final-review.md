@@ -1,5 +1,7 @@
 # Final code review — Project 1, bước 4–8
 
+> Cập nhật 26/10/2026: đây là báo cáo lịch sử trước khi tích hợp develop. Kết quả xử lý conflict, tương thích bước 1–8 và kiểm thử mới được ghi riêng tại [merge-develop-2026-10-26.md](merge-develop-2026-10-26.md). Nội dung và bằng chứng của lần review cũ bên dưới được giữ để đối chiếu.
+
 Ngày 23/10/2026, Asia/Ho_Chi_Minh. **NOT READY FOR MERGE.** Hai finding HIGH về legacy authorization vẫn mở và có bằng chứng HTTP thực tế. Một lỗi MEDIUM ở editor đã sửa, có browser regression RED → GREEN. Còn các vấn đề MEDIUM về contract HTTP, hiệu năng và CI cần xử lý/đánh giá theo phần dưới.
 
 Review working tree, bao gồm các file untracked của bước 4–8; không chỉ xem `git diff` của file đã track. Working tree đã chứa nhiều công việc chưa commit từ trước. Không stage/commit/push, không sửa DOCX, schema/migration, dependency/lockfile, env hoặc business logic bước 1–3/9–10. Không kết nối database chung/production hoặc chạy DDL trong lượt review này.

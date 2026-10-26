@@ -12,7 +12,7 @@ async function main() {
     DATABASE_URL: url.toString(),
     DIRECT_URL: url.toString(),
   });
-  const { PrismaClient } = require('@prisma/client'),
+  const { PrismaClient } = require('../node_modules/.steps48-client'),
     db = new PrismaClient({ datasources: { db: { url: url.toString() } } });
   const backend = path.resolve(__dirname, '..'),
     source = path.join(backend, 'prisma/migrations'),

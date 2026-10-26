@@ -34,7 +34,7 @@ async function main() {
     )
     .sort();
   assert.equal(names.length, 8);
-  const { PrismaClient } = require("@prisma/client"),
+  const { PrismaClient } = require("../node_modules/.steps48-client"),
     db = new PrismaClient({ datasources: { db: { url: url.toString() } } });
   const checks = [],
     pass = (name) => {

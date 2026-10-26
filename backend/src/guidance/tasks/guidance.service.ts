@@ -234,8 +234,7 @@ export class GuidanceService {
           registrations: {
             some: {
               termId,
-              advisorAssignment: {
-                is: {
+              advisorAssignments: { some: {
                   advisorId: u.lecturer.id,
                   assignmentPlanId: officialId,
                   advisor: { isActive: true },

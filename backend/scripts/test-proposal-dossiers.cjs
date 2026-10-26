@@ -1,4 +1,5 @@
 "use strict";
+const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
 // Real HTTP + PDF + PostgreSQL. New isolated loopback database required.
 const fs = require("node:fs"),
   path = require("node:path"),
@@ -77,6 +78,7 @@ async function main() {
     app.useGlobalPipes(
       new ValidationPipe({ whitelist: true, transform: true }),
     );
+    await prepareFixtureSessions(db);
     await app.listen(0, "127.0.0.1");
     const jwt = new JwtService({ secret: process.env.JWT_SECRET }),
       base = "http://127.0.0.1:" + app.getHttpServer().address().port + "/api";
@@ -94,7 +96,7 @@ async function main() {
       };
       if (actor)
         headers.Authorization =
-          "Bearer " + jwt.sign({ sub: actor, roles: ["ADMIN", "FACULTY"] });
+          "Bearer " + jwt.sign({ sub: actor, sid: actor, roles: ["ADMIN", "FACULTY"] });
       const response = await fetch(base + route, {
           method,
           headers,
@@ -448,7 +450,7 @@ async function main() {
         `${base}/proposals/${proposalId}/dossier.pdf?finalizationId=${encodeURIComponent(fId)}`,
         {
           headers: actor
-            ? { Authorization: "Bearer " + jwt.sign({ sub: actor }) }
+            ? { Authorization: "Bearer " + jwt.sign({ sub: actor, sid: actor }) }
             : {},
         },
       );

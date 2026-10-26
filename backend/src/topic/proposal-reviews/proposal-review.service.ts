@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { randomUUID } from 'crypto';
+import { Injectable } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
+import { randomUUID } from "crypto";
 import type {
   AssignReview,
   ReviewStart,
@@ -9,24 +9,24 @@ import type {
   ReviewQuery,
   ProposalReviewSummary,
   ProposalReviewView,
-} from '@doan/shared';
+} from "@doan/shared";
 import {
   ProposalReviewRepository,
   ProposalReviewSession,
   ReviewPrincipal,
   ReviewProposal,
   ReviewRecord,
-} from './proposal-review.repository';
+} from "./proposal-review.repository";
 import {
   ProposalReviewValidator,
   reviewHash,
-} from './proposal-review.validator';
-import { groupError } from '../review-groups/review-group.errors';
+} from "./proposal-review.validator";
+import { groupError } from "../review-groups/review-group.errors";
 const json = (v: unknown) =>
   JSON.parse(JSON.stringify(v)) as Prisma.InputJsonValue;
-const active = (r: ReviewProposal['reviews'][number]) =>
+const active = (r: ReviewProposal["reviews"][number]) =>
   !r.pr2bProposalReviewWorkflowReviewId?.state ||
-  ['ASSIGNED', 'IN_REVIEW'].includes(
+  ["ASSIGNED", "IN_REVIEW"].includes(
     r.pr2bProposalReviewWorkflowReviewId.state,
   );
 @Injectable()
@@ -42,7 +42,7 @@ export class ProposalReviewService {
     departmentId: string | null | undefined,
     action: string,
   ) {
-    if (!departmentId || !this.v.role(u, 'FACULTY', action)) return false;
+    if (!departmentId || !this.v.role(u, "FACULTY", action)) return false;
     const [g] = await s.grants(u.id, termId);
     return (
       !!g &&
@@ -59,9 +59,9 @@ export class ProposalReviewService {
     action: string,
   ) {
     if (
-      !this.v.role(u, 'LECTURER', action) ||
+      !this.v.role(u, "LECTURER", action) ||
       !u.lecturer?.isActive ||
-      (action !== 'read' &&
+      (action !== "read" &&
         !!r.reviewGroup.pr2bReviewGroupWorkflowGroupId?.archivedAt) ||
       !r.reviewGroup.members.some((m) => m.lecturerId === u.lecturer!.id) ||
       r.reviewGroup.termId !== r.proposal.topic.termId ||
@@ -73,9 +73,9 @@ export class ProposalReviewService {
   }
   private async observerTerms(s: ProposalReviewSession, u: ReviewPrincipal) {
     const ids: string[] = [];
-    if (this.v.role(u, 'STUDENT', 'read') && u.student?.isActive)
+    if (this.v.role(u, "STUDENT", "read") && u.student?.isActive)
       ids.push(...(await s.studentTerms(u.student.id)).map((t) => t.termId));
-    if (this.v.role(u, 'LECTURER', 'read') && u.lecturer?.isActive) {
+    if (this.v.role(u, "LECTURER", "read") && u.lecturer?.isActive) {
       for (const r of await s.advisorTerms(u.lecturer.id))
         if (
           r.advisorAssignment?.assignmentPlanId ===
@@ -92,14 +92,14 @@ export class ProposalReviewService {
     p: ReviewProposal,
   ) {
     if (
-      this.v.role(u, 'STUDENT', 'read') &&
+      this.v.role(u, "STUDENT", "read") &&
       u.student?.isActive &&
       u.student.id === p.studentId
     ) {
       this.v.ownership(p);
       return true;
     }
-    if (this.v.role(u, 'LECTURER', 'read') && u.lecturer?.isActive) {
+    if (this.v.role(u, "LECTURER", "read") && u.lecturer?.isActive) {
       const current = await s.advisor(p.topic.termId, p.studentId);
       if (current?.advisorAssignment?.advisorId === u.lecturer.id) {
         await this.v.advisor(s, p);
@@ -112,9 +112,9 @@ export class ProposalReviewService {
     s: ProposalReviewSession,
     u: ReviewPrincipal,
     r: ReviewRecord | null,
-    action = 'read',
+    action = "read",
   ) {
-    if (!r) groupError(404, 'COMMON_001', 'Không tìm thấy vòng duyệt.');
+    if (!r) groupError(404, "COMMON_001", "Không tìm thấy vòng duyệt.");
     const departmentId =
       (
         r.pr2bProposalReviewWorkflowReviewId?.routingSnapshot as {
@@ -131,10 +131,10 @@ export class ProposalReviewService {
         action,
       )) ||
       (await this.reviewer(s, u, r, action)) ||
-      (action === 'read' && (await this.observer(s, u, r.proposal)))
+      (action === "read" && (await this.observer(s, u, r.proposal)))
     )
       return r;
-    groupError(404, 'COMMON_001', 'Không tìm thấy vòng duyệt trong phạm vi.');
+    groupError(404, "COMMON_001", "Không tìm thấy vòng duyệt trong phạm vi.");
   }
   private async facultyProposal(
     s: ProposalReviewSession,
@@ -153,7 +153,7 @@ export class ProposalReviewService {
         action,
       ))
     )
-      groupError(404, 'COMMON_001', 'Không tìm thấy đề cương trong phạm vi.');
+      groupError(404, "COMMON_001", "Không tìm thấy đề cương trong phạm vi.");
     return p;
   }
   private summary(
@@ -165,14 +165,14 @@ export class ProposalReviewService {
       route = p.topic.researchArea?.pr2bResearchAreaWorkflowResearchAreaId;
     const readiness: string[] = [];
     if (!p.topic.pr2bTopicWorkflowTopicId?.termStudentId)
-      readiness.push('OWNERSHIP_NOT_READY');
-    if (!route?.departmentId) readiness.push('ROUTING_NOT_CONFIGURED');
+      readiness.push("OWNERSHIP_NOT_READY");
+    if (!route?.departmentId) readiness.push("ROUTING_NOT_CONFIGURED");
     if (
       !w?.refSubmittedVersionId?.pr2bProposalVersionWorkflowVersionId ||
       w.refSubmittedVersionId.pr2bProposalVersionWorkflowVersionId.state !==
-        'SEALED'
+        "SEALED"
     )
-      readiness.push('SUBMITTED_VERSION_NOT_READY');
+      readiness.push("SUBMITTED_VERSION_NOT_READY");
     return {
       id: p.id,
       termId: p.topic.termId,
@@ -195,14 +195,14 @@ export class ProposalReviewService {
   async terms(userId: string) {
     return this.repo.transaction(async (s) => {
       const u = this.v.principal(await s.principal(userId));
-      const grants = this.v.role(u, 'FACULTY', 'read')
+      const grants = this.v.role(u, "FACULTY", "read")
         ? await s.grants(u.id)
         : [];
       const ids = grants
         .filter((g) => g.allDepartments || g.pr2bGrantDepartmentGrantId.length)
         .map((g) => g.termId);
       ids.push(...(await this.observerTerms(s, u)));
-      if (this.v.role(u, 'LECTURER', 'read') && u.lecturer?.isActive) {
+      if (this.v.role(u, "LECTURER", "read") && u.lecturer?.isActive) {
         for (const g of await s.memberTerms(u.lecturer.id))
           if (await s.roster(g.termId, u.lecturer.id)) ids.push(g.termId);
       }
@@ -212,11 +212,11 @@ export class ProposalReviewService {
   async options(userId: string, termId: string) {
     return this.repo.transaction(async (s) => {
       const u = this.v.principal(await s.principal(userId)),
-        [grant] = this.v.role(u, 'FACULTY', 'read')
+        [grant] = this.v.role(u, "FACULTY", "read")
           ? await s.grants(u.id, termId)
           : [];
       const lecturer =
-        this.v.role(u, 'LECTURER', 'read') &&
+        this.v.role(u, "LECTURER", "read") &&
         u.lecturer?.isActive &&
         (await s.roster(termId, u.lecturer.id)) &&
         (await s.memberTerms(u.lecturer.id)).some((g) => g.termId === termId);
@@ -226,10 +226,10 @@ export class ProposalReviewService {
         !lecturer &&
         !(await this.observerTerms(s, u)).includes(termId)
       )
-        groupError(404, 'COMMON_001', 'Không tìm thấy đợt trong phạm vi.');
+        groupError(404, "COMMON_001", "Không tìm thấy đợt trong phạm vi.");
       const phase = await s.phase(termId),
         term = await s.term(termId);
-      if (!term) groupError(404, 'COMMON_001', 'Không tìm thấy đợt.');
+      if (!term) groupError(404, "COMMON_001", "Không tìm thấy đợt.");
       return {
         term: { id: term.id, name: term.name, status: term.status },
         departments: grant
@@ -243,7 +243,7 @@ export class ProposalReviewService {
           !!grant &&
           (grant.allDepartments ||
             grant.pr2bGrantDepartmentGrantId.length > 0) &&
-          this.v.role(u, 'FACULTY', 'assign'),
+          this.v.role(u, "FACULTY", "assign"),
         phase: phase
           ? {
               startsAt: phase.refPhaseId.startDate,
@@ -257,11 +257,11 @@ export class ProposalReviewService {
   async list(userId: string, termId: string, q: ReviewQuery) {
     return this.repo.transaction(async (s) => {
       const u = this.v.principal(await s.principal(userId));
-      const [grant] = this.v.role(u, 'FACULTY', 'read')
+      const [grant] = this.v.role(u, "FACULTY", "read")
         ? await s.grants(u.id, termId)
         : [];
       const clauses: Prisma.ProposalWhereInput[] = [];
-      if (this.v.role(u, 'STUDENT', 'read') && u.student?.isActive)
+      if (this.v.role(u, "STUDENT", "read") && u.student?.isActive)
         clauses.push({
           studentId: u.student.id,
           topic: {
@@ -272,7 +272,7 @@ export class ProposalReviewService {
         ?.officialAssignmentPlanId;
       if (
         officialPlanId &&
-        this.v.role(u, 'LECTURER', 'read') &&
+        this.v.role(u, "LECTURER", "read") &&
         u.lecturer?.isActive &&
         (await s.roster(termId, u.lecturer.id))
       )
@@ -281,12 +281,12 @@ export class ProposalReviewService {
             registrations: {
               some: {
                 termId,
-                advisorAssignment: {
-                  is: {
+                advisorAssignments: {
+                  some: {
                     advisorId: u.lecturer.id,
                     assignmentPlanId: officialPlanId,
                     assignmentPlan: {
-                      status: 'FINALIZED',
+                      status: "FINALIZED",
                       pr2bAssignmentPlanWorkflowPlanId: {
                         is: {
                           finalizedAt: { not: null },
@@ -322,7 +322,7 @@ export class ProposalReviewService {
           },
         });
       if (
-        this.v.role(u, 'LECTURER', 'read') &&
+        this.v.role(u, "LECTURER", "read") &&
         u.lecturer?.isActive &&
         (await s.roster(termId, u.lecturer.id)) &&
         (await s.memberTerms(u.lecturer.id)).some((g) => g.termId === termId)
@@ -344,14 +344,19 @@ export class ProposalReviewService {
               registrations: {
                 some: {
                   termId,
-                  advisorAssignment: { is: { advisorId: u.lecturer.id } },
+                  advisorAssignments: {
+                    some: {
+                      advisorId: u.lecturer.id,
+                      assignmentPlanId: officialPlanId ?? "",
+                    },
+                  },
                 },
               },
             },
           },
         });
       if (!clauses.length)
-        groupError(404, 'COMMON_001', 'Không tìm thấy đợt trong phạm vi.');
+        groupError(404, "COMMON_001", "Không tìm thấy đợt trong phạm vi.");
       const where: Prisma.ProposalWhereInput = {
         AND: [
           { OR: clauses },
@@ -372,24 +377,24 @@ export class ProposalReviewService {
                 OR: [
                   {
                     topic: {
-                      title: { contains: q.search, mode: 'insensitive' },
+                      title: { contains: q.search, mode: "insensitive" },
                     },
                   },
                   {
                     student: {
-                      studentCode: { contains: q.search, mode: 'insensitive' },
+                      studentCode: { contains: q.search, mode: "insensitive" },
                     },
                   },
                   {
                     student: {
-                      fullName: { contains: q.search, mode: 'insensitive' },
+                      fullName: { contains: q.search, mode: "insensitive" },
                     },
                   },
                 ],
               }
             : {},
           q.groupId ? { reviews: { some: { reviewGroupId: q.groupId } } } : {},
-          q.unassigned === 'true'
+          q.unassigned === "true"
             ? {
                 reviews: {
                   none: {
@@ -402,7 +407,7 @@ export class ProposalReviewService {
                       },
                       {
                         pr2bProposalReviewWorkflowReviewId: {
-                          is: { state: { in: ['ASSIGNED', 'IN_REVIEW'] } },
+                          is: { state: { in: ["ASSIGNED", "IN_REVIEW"] } },
                         },
                       },
                     ],
@@ -421,10 +426,10 @@ export class ProposalReviewService {
               ?.departmentId;
           const summary = this.summary(
             p,
-            await this.faculty(s, u, termId, departmentId, 'assign'),
+            await this.faculty(s, u, termId, departmentId, "assign"),
           );
           if (
-            !(await this.faculty(s, u, termId, departmentId, 'read')) &&
+            !(await this.faculty(s, u, termId, departmentId, "read")) &&
             !(await this.observer(s, u, p))
           ) {
             // Reviewer inbox must never expose a newly submitted, unassigned version.
@@ -465,14 +470,14 @@ export class ProposalReviewService {
     return this.repo.transaction(async (s) => {
       const u = this.v.principal(await s.principal(userId));
       const p = await s.proposal(id);
-      if (!p) groupError(404, 'COMMON_001', 'Không tìm thấy đề cương.');
+      if (!p) groupError(404, "COMMON_001", "Không tìm thấy đề cương.");
       const faculty = await this.faculty(
         s,
         u,
         p.topic.termId,
         p.topic.researchArea?.pr2bResearchAreaWorkflowResearchAreaId
           ?.departmentId,
-        'read',
+        "read",
       );
       if (!faculty && !(await this.observer(s, u, p))) {
         let assigned = false;
@@ -480,7 +485,7 @@ export class ProposalReviewService {
           if (
             r.pr2bProposalReviewWorkflowReviewId?.versionId ===
               p.pr2bProposalWorkflowProposalId?.submittedVersionId &&
-            (await this.reviewer(s, u, r, 'read'))
+            (await this.reviewer(s, u, r, "read"))
           ) {
             assigned = true;
             break;
@@ -488,8 +493,8 @@ export class ProposalReviewService {
         if (!assigned)
           groupError(
             404,
-            'COMMON_001',
-            'Không tìm thấy phiên bản trong phạm vi.',
+            "COMMON_001",
+            "Không tìm thấy phiên bản trong phạm vi.",
           );
       }
       const context = await this.v.submitted(s, p);
@@ -501,7 +506,7 @@ export class ProposalReviewService {
             u,
             p.topic.termId,
             this.v.routing(p).departmentId,
-            'assign',
+            "assign",
           ),
         ),
         version: {
@@ -517,7 +522,7 @@ export class ProposalReviewService {
   async candidates(userId: string, id: string) {
     return this.repo.transaction(async (s) => {
       const u = this.v.principal(await s.principal(userId)),
-        p = await this.facultyProposal(s, u, await s.proposal(id), 'assign');
+        p = await this.facultyProposal(s, u, await s.proposal(id), "assign");
       const { assignment } = await this.v.submitted(s, p),
         routing = this.v.routing(p);
       const groups = await s.groups(p.topic.termId, routing.departmentId!);
@@ -543,7 +548,7 @@ export class ProposalReviewService {
             ).length,
             activeReviewCount: g.reviews.filter(active).length,
             explanation:
-              'Cùng đợt và bộ môn theo hướng đề tài. Số khớp chuyên môn chỉ để tham khảo; Khoa chọn và xác nhận, hệ thống không tự phân.',
+              "Cùng đợt và bộ môn theo hướng đề tài. Số khớp chuyên môn chỉ để tham khảo; Khoa chọn và xác nhận, hệ thống không tự phân.",
           };
         }),
       );
@@ -561,23 +566,23 @@ export class ProposalReviewService {
       !w?.state ||
       !w.roundNumber ||
       !version ||
-      meta?.state !== 'SEALED' ||
+      meta?.state !== "SEALED" ||
       !r.proposal.pr2bProposalWorkflowProposalId
     )
       groupError(
         409,
-        'INPUT_NOT_READY',
-        'Vòng legacy thiếu version/state, cần đối soát.',
+        "INPUT_NOT_READY",
+        "Vòng legacy thiếu version/state, cần đối soát.",
       );
-    const canReview = await this.reviewer(s, u, r, 'review'),
-      canComment = await this.reviewer(s, u, r, 'comment');
+    const canReview = await this.reviewer(s, u, r, "review"),
+      canComment = await this.reviewer(s, u, r, "comment");
     const phase = await s.phase(r.proposal.topic.termId),
       term = await s.term(r.proposal.topic.termId),
       now = new Date();
     const open =
       !!phase &&
       !!term &&
-      ['CLOSED_REGISTRATION', 'IN_PROGRESS'].includes(term.status) &&
+      ["CLOSED_REGISTRATION", "IN_PROGRESS"].includes(term.status) &&
       !phase.refPhaseId.isLocked &&
       now >= phase.refPhaseId.startDate &&
       now < phase.refPhaseId.endDate;
@@ -585,20 +590,20 @@ export class ProposalReviewService {
       r.proposal.pr2bProposalWorkflowProposalId?.submittedVersionId ===
       version.id;
     const d = r.pr2bProposalReviewDecisionReviewId;
-    const allowedActions: ProposalReviewView['allowedActions'] = [];
-    if (open && current && ['ASSIGNED', 'IN_REVIEW'].includes(w.state) && !d) {
-      if (canReview && w.state === 'ASSIGNED') allowedActions.push('start');
-      if (canComment) allowedActions.push('comment');
-      if (canReview && w.state === 'IN_REVIEW') allowedActions.push('decide');
+    const allowedActions: ProposalReviewView["allowedActions"] = [];
+    if (open && current && ["ASSIGNED", "IN_REVIEW"].includes(w.state) && !d) {
+      if (canReview && w.state === "ASSIGNED") allowedActions.push("start");
+      if (canComment) allowedActions.push("comment");
+      if (canReview && w.state === "IN_REVIEW") allowedActions.push("decide");
     }
     const routing = (w.routingSnapshot as { departmentId?: string } | null)
       ?.departmentId;
     if (
       open &&
-      (await this.faculty(s, u, r.proposal.topic.termId, routing, 'assign')) &&
-      ['ASSIGNED', 'IN_REVIEW'].includes(w.state)
+      (await this.faculty(s, u, r.proposal.topic.termId, routing, "assign")) &&
+      ["ASSIGNED", "IN_REVIEW"].includes(w.state)
     )
-      allowedActions.push('assign');
+      allowedActions.push("assign");
     return {
       id: r.id,
       proposalId: r.proposalId,
@@ -673,14 +678,14 @@ export class ProposalReviewService {
           } | null
         )?.departmentId;
         if (
-          (await this.faculty(s, u, r.proposal.topic.termId, dep, 'read')) ||
-          (await this.reviewer(s, u, r, 'read')) ||
+          (await this.faculty(s, u, r.proposal.topic.termId, dep, "read")) ||
+          (await this.reviewer(s, u, r, "read")) ||
           (await this.observer(s, u, r.proposal))
         )
           visible.push(r);
       }
       if (!visible.length)
-        await this.facultyProposal(s, u, await s.proposal(proposalId), 'read');
+        await this.facultyProposal(s, u, await s.proposal(proposalId), "read");
       return Promise.all(visible.map((r) => this.view(s, u, r)));
     });
   }
@@ -695,7 +700,7 @@ export class ProposalReviewService {
           s,
           u,
           await s.proposal(id),
-          'assign',
+          "assign",
         );
         return {
           p,
@@ -721,30 +726,30 @@ export class ProposalReviewService {
         )
           groupError(
             409,
-            'INPUT_NOT_READY',
-            'Vòng legacy/active cần đối soát trước khi phân lại.',
+            "INPUT_NOT_READY",
+            "Vòng legacy/active cần đối soát trước khi phân lại.",
           );
         if (current.length && !input.replacesReviewId)
           groupError(
             409,
-            'ACTIVE_REVIEW_EXISTS',
-            'Đề cương đã có vòng đang hoạt động.',
+            "ACTIVE_REVIEW_EXISTS",
+            "Đề cương đã có vòng đang hoạt động.",
           );
         if (input.replacesReviewId && current[0]?.id !== input.replacesReviewId)
           groupError(
             409,
-            'REVISION_CONFLICT',
-            'Vòng cần thay không còn hiện hành.',
+            "REVISION_CONFLICT",
+            "Vòng cần thay không còn hiện hành.",
           );
         this.v.state(
-          current.length ? ['SUBMITTED', 'UNDER_REVIEW'] : ['SUBMITTED'],
+          current.length ? ["SUBMITTED", "UNDER_REVIEW"] : ["SUBMITTED"],
           p.status,
         );
         if (!workflow.nextReviewRound || workflow.nextReviewRound < 1)
           groupError(
             409,
-            'INPUT_NOT_READY',
-            'Producer cần cung cấp nextReviewRound, không tự đoán vòng từ legacy.',
+            "INPUT_NOT_READY",
+            "Producer cần cung cấp nextReviewRound, không tự đoán vòng từ legacy.",
           );
         const group = await s.group(input.groupId),
           groupMeta = group?.pr2bReviewGroupWorkflowGroupId;
@@ -757,8 +762,8 @@ export class ProposalReviewService {
         )
           groupError(
             409,
-            'ROUTING_MISMATCH',
-            'Nhóm phải đang hoạt động, cùng đợt và bộ môn của hướng đề tài.',
+            "ROUTING_MISMATCH",
+            "Nhóm phải đang hoạt động, cùng đợt và bộ môn của hướng đề tài.",
           );
         const eligible = await s.lecturers(
           p.topic.termId,
@@ -770,14 +775,14 @@ export class ProposalReviewService {
         )
           groupError(
             409,
-            'MEMBER_INELIGIBLE',
-            'Nhóm cần thành viên hợp lệ trong đợt, có người duyệt ngoài GVHD.',
+            "MEMBER_INELIGIBLE",
+            "Nhóm cần thành viên hợp lệ trong đợt, có người duyệt ngoài GVHD.",
           );
         if (current.length) {
           const old = current[0].pr2bProposalReviewWorkflowReviewId!;
           this.v.revision(old.revision, input.expectedReviewRevision!);
           await s.advanceReview(current[0].id, old.revision, {
-            state: 'SUPERSEDED',
+            state: "SUPERSEDED",
           });
         }
         const created = await s.createReview({
@@ -788,7 +793,7 @@ export class ProposalReviewService {
               proposalId: p.id,
               versionId: version.id,
               roundNumber: workflow.nextReviewRound,
-              state: 'ASSIGNED',
+              state: "ASSIGNED",
               assignedByUserId: u.id,
               assignedAt: new Date(),
               phaseSnapshot: json({
@@ -817,12 +822,12 @@ export class ProposalReviewService {
           nextReviewRound: { increment: 1 },
         });
         if (changed.count !== 1)
-          groupError(409, 'REVISION_CONFLICT', 'Đề cương đã thay đổi.');
-        await s.status(p.id, 'SUBMITTED');
+          groupError(409, "REVISION_CONFLICT", "Đề cương đã thay đổi.");
+        await s.status(p.id, "SUBMITTED");
         await s.audit(
           u.id,
           created.id,
-          'ASSIGN',
+          "ASSIGN",
           json({ previousReviewId: current[0]?.id ?? null }),
           json({
             proposalId: p.id,
@@ -839,13 +844,13 @@ export class ProposalReviewService {
   async reviewCommand(
     userId: string,
     id: string,
-    kind: 'start' | 'comment' | 'decision',
+    kind: "start" | "comment" | "decision",
     input: ReviewStart | ReviewCommentInput | ReviewDecisionInput,
     key: string,
   ) {
     return this.command(
       userId,
-      `/proposal-reviews/${id}/${kind === 'comment' ? 'comments' : kind}`,
+      `/proposal-reviews/${id}/${kind === "comment" ? "comments" : kind}`,
       key,
       input,
       async (s, u) => {
@@ -853,20 +858,20 @@ export class ProposalReviewService {
           s,
           u,
           await s.review(id),
-          kind === 'comment' ? 'comment' : 'review',
+          kind === "comment" ? "comment" : "review",
         );
         if (
           !(await this.reviewer(
             s,
             u,
             r,
-            kind === 'comment' ? 'comment' : 'review',
+            kind === "comment" ? "comment" : "review",
           ))
         )
           groupError(
             403,
-            'AUTH_004',
-            'Chỉ thành viên hợp lệ của nhóm được thực hiện.',
+            "AUTH_004",
+            "Chỉ thành viên hợp lệ của nhóm được thực hiện.",
           );
         return { p: r.proposal, groups: [r.reviewGroupId] };
       },
@@ -877,7 +882,7 @@ export class ProposalReviewService {
         const { workflow } = await this.v.submitted(
           s,
           p,
-          'versionId' in input ? input.versionId : w.versionId!,
+          "versionId" in input ? input.versionId : w.versionId!,
         );
         const routing = this.v.routing(p);
         const snapshot = w.routingSnapshot as {
@@ -892,27 +897,27 @@ export class ProposalReviewService {
         )
           groupError(
             409,
-            'ROUTING_MISMATCH',
-            'Routing đã thay đổi. Khoa cần xác nhận phân lại vòng duyệt.',
+            "ROUTING_MISMATCH",
+            "Routing đã thay đổi. Khoa cần xác nhận phân lại vòng duyệt.",
           );
         if (w.versionId !== workflow.submittedVersionId)
-          groupError(409, 'STALE_VERSION', 'Vòng đang trỏ phiên bản cũ.');
+          groupError(409, "STALE_VERSION", "Vòng đang trỏ phiên bản cũ.");
         this.v.revision(w.revision, input.expectedReviewRevision);
-        if ('expectedProposalRevision' in input)
+        if ("expectedProposalRevision" in input)
           this.v.revision(workflow.revision, input.expectedProposalRevision);
-        if (kind === 'start') {
-          this.v.state(['ASSIGNED'], w.state!);
-          this.v.state(['SUBMITTED'], p.status);
+        if (kind === "start") {
+          this.v.state(["ASSIGNED"], w.state!);
+          this.v.state(["SUBMITTED"], p.status);
           await s.advanceReview(id, w.revision, {
-            state: 'IN_REVIEW',
+            state: "IN_REVIEW",
             startedAt: new Date(),
             startedByUserId: u.id,
           });
           await s.advanceProposal(p.id, workflow.revision, {});
-          await s.status(p.id, 'UNDER_REVIEW');
-        } else if (kind === 'comment') {
+          await s.status(p.id, "UNDER_REVIEW");
+        } else if (kind === "comment") {
           this.v.state(
-            w.state === 'ASSIGNED' ? ['SUBMITTED'] : ['UNDER_REVIEW'],
+            w.state === "ASSIGNED" ? ["SUBMITTED"] : ["UNDER_REVIEW"],
             p.status,
           );
           const comment = input as ReviewCommentInput;
@@ -924,8 +929,8 @@ export class ProposalReviewService {
           });
           await s.advanceReview(id, w.revision, {});
         } else {
-          this.v.state(['IN_REVIEW'], w.state!);
-          this.v.state(['UNDER_REVIEW'], p.status);
+          this.v.state(["IN_REVIEW"], w.state!);
+          this.v.state(["UNDER_REVIEW"], p.status);
           const decision = input as ReviewDecisionInput,
             now = new Date();
           await s.decision({
@@ -936,12 +941,12 @@ export class ProposalReviewService {
             decision: decision.decision,
             comment: decision.comment,
           });
-          await s.advanceReview(id, w.revision, { state: 'DECIDED' });
+          await s.advanceReview(id, w.revision, { state: "DECIDED" });
           await s.advanceProposal(p.id, workflow.revision, {});
           const status =
-            decision.decision === 'APPROVED'
-              ? 'APPROVED'
-              : 'REVISION_REQUESTED';
+            decision.decision === "APPROVED"
+              ? "APPROVED"
+              : "REVISION_REQUESTED";
           await s.status(p.id, status);
           // Preserve the legacy consumer shape; canonical decision stays immutable above.
           await s.mirrorDecision(id, status, decision.comment ?? null, now);
@@ -949,7 +954,7 @@ export class ProposalReviewService {
           await s.outbox({
             eventId: randomUUID(),
             aggregateId: p.id,
-            type: 'PROPOSAL_REVIEW_DECIDED',
+            type: "PROPOSAL_REVIEW_DECIDED",
             payload: json({
               proposalId: p.id,
               reviewId: id,
@@ -974,7 +979,7 @@ export class ProposalReviewService {
             proposalId: p.id,
             versionId: w.versionId,
             decision:
-              kind === 'decision'
+              kind === "decision"
                 ? (input as ReviewDecisionInput).decision
                 : null,
           }),
@@ -999,7 +1004,7 @@ export class ProposalReviewService {
     ) => Promise<ProposalReviewView>,
   ) {
     if (!key || key.length > 200 || !/^[\w.-]+$/.test(key))
-      groupError(400, 'COMMON_003', 'Thiếu hoặc sai Idempotency-Key.');
+      groupError(400, "COMMON_003", "Thiếu hoặc sai Idempotency-Key.");
     const hash = reviewHash(input);
     return this.repo.transaction(async (s) => {
       const u = this.v.principal(await s.principal(userId)),
@@ -1011,8 +1016,8 @@ export class ProposalReviewService {
         if (previous.payloadHash !== hash)
           groupError(
             409,
-            'IDEMPOTENCY_CONFLICT',
-            'Khóa gửi lại đã được dùng với nội dung khác.',
+            "IDEMPOTENCY_CONFLICT",
+            "Khóa gửi lại đã được dùng với nội dung khác.",
           );
         return previous.result as unknown as ProposalReviewView;
       }

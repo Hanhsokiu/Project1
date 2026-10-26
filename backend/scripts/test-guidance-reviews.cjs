@@ -1,4 +1,5 @@
 "use strict";
+const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
 const fs = require("node:fs"),
   path = require("node:path"),
   os = require("node:os"),
@@ -47,14 +48,12 @@ async function main() {
       0,
       "8B producer prelude: " + prelude.stdout + " " + prelude.stderr,
     );
-    assert.equal(
-      (
-        await db.$queryRaw`SELECT migration_name FROM public."_prisma_migrations" WHERE finished_at IS NOT NULL`
-      ).length,
-      10,
-    );
+    const applied = await db.$queryRaw`SELECT migration_name FROM public."_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name`;
+    const expected = fs.readdirSync(path.join(backend, 'prisma/migrations'))
+      .filter(name => fs.existsSync(path.join(backend, 'prisma/migrations', name, 'migration.sql'))).sort();
+    assert.deepEqual(applied.map(row => row.migration_name), expected);
     pass(
-      "ten-migration replay and all 8A→8B producer checks with real HTTP/private files; no shared database",
+      "complete active migration replay and all 8A→8B producer checks with real HTTP/private files; no shared database",
     );
     for (const [resource, action, roles] of [
       ["task", "review", ["LECTURER", "ADMIN"]],
@@ -83,6 +82,7 @@ async function main() {
     app.useGlobalPipes(
       new ValidationPipe({ whitelist: true, transform: true }),
     );
+    await prepareFixtureSessions(db);
     await app.listen(0, "127.0.0.1");
     const base =
         "http://127.0.0.1:" + app.getHttpServer().address().port + "/api",
@@ -92,8 +92,7 @@ async function main() {
           ? {
               Authorization:
                 "Bearer " +
-                jwt.sign({
-                  sub: actor,
+                jwt.sign({ sub: actor, sid: actor,
                   roles: ["ADMIN", "FACULTY", "LECTURER"],
                 }),
             }

@@ -23,7 +23,7 @@
     "db:deploy": "node scripts/shared-database.cjs deploy",
     "pr2b:prepare": "node scripts/prepare-pr2b.cjs",
     "pr2b:validate": "prisma validate --schema prisma/review/pr2b/expand.prisma",
-    "pr2b:generate": "prisma generate --schema prisma/review/pr2b/legacy-client.prisma && prisma generate --schema prisma/review/pr2b/expand.prisma",
+    "pr2b:generate": "prisma generate --schema prisma/review/pr2b/legacy-client.prisma && prisma generate --schema prisma/review/pr2b/expand.prisma && prisma generate --schema prisma/review/steps4-8/schema.prisma",
     "pr2b:rehearse": "node scripts/rehearse-pr2b.cjs",
     "pr2b:replay-chain": "node scripts/replay-pr2b-chain.cjs",
     "pr2b:target-test": "node --test scripts/pr2b-target.check.cjs",
@@ -48,7 +48,18 @@
     "test:guidance-reviews:upgrade": "node scripts/test-guidance-review-upgrade.cjs",
     "test:integration:steps4-8:suite": "node scripts/test-steps4-8-suite.cjs",
     "test:integration:steps4-8:browser": "node scripts/test-steps4-8-suite.cjs --browser-only",
-    "test:integration:steps4-8:e2e": "node scripts/test-steps4-8-e2e.cjs"
+    "test:integration:steps4-8:e2e": "node scripts/test-steps4-8-e2e.cjs",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "db:status": "prisma migrate status",
+    "db:seed": "node prisma/seed.cjs",
+    "test:integration": "node test/run-integration.cjs",
+    "test:http": "node test/step1-http.cjs",
+    "test:step2": "node test/step2-http.cjs",
+    "test:step3": "node test/step3-http.cjs",
+    "test:step3-mail": "node test/step3-mail.cjs",
+    "fixture:step3-browser": "node test/step3-http.cjs --browser-fixture",
+    "docs:api": "node test/export-openapi.cjs"
   },
   "dependencies": {
     "@doan/shared": "workspace:*",
@@ -77,7 +88,8 @@
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1",
     "uuid": "^10.0.0",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "playwright-core": "1.56.1"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.4.5",
@@ -96,6 +108,7 @@
     "pdfjs-dist": "4.10.38",
     "prisma": "^5.18.0",
     "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
+    "vitest": "^2.0.5",
+    "pdf-parse": "1.1.1"
   }
 }

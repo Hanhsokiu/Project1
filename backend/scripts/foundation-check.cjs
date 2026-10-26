@@ -5,7 +5,8 @@ const path = require('node:path');
 const assert = require('node:assert/strict');
 const crypto = require('node:crypto');
 const { Prisma: legacy } = require('../node_modules/.pr2b-legacy');
-const { Prisma: current } = require('@prisma/client');
+const { Prisma: current } = require('../node_modules/.pr2b-client');
+const { Prisma: integrated } = require('@prisma/client');
 const root = path.resolve(__dirname, '..');
 for (const old of legacy.dmmf.datamodel.models) {
   const now = current.dmmf.datamodel.models.find(m => m.name === old.name);
@@ -29,14 +30,40 @@ const baseline = fs.readFileSync(path.join(root, 'prisma/migrations/0_init/migra
 // Existing 0_init is checked out as CRLF on Windows and LF on Linux. Verify
 // source content without changing the already-existing migration bytes.
 assert.equal(crypto.createHash('sha256').update(baseline.toString('utf8').replace(/\r\n/g, '\n')).digest('hex'), '5782fc7a04d884514644c59bf05a81d53970230c45a0e12713588cc8b6916563');
-// Feature migrations may ADD fields after PR2B. Preserve every PR2B field and
-// cardinality without requiring the application to remain frozen at that schema.
-const { Prisma: expanded } = require('../node_modules/.pr2b-client');
-for (const old of expanded.dmmf.datamodel.models) {
-  const now = current.dmmf.datamodel.models.find(m => m.name === old.name);
-  assert(now, `Missing PR2B model ${old.name}`);
-  for (const field of old.fields) assert.deepEqual(now.fields.find(f => f.name === field.name), field, `PR2B field changed: ${old.name}.${field.name}`);
-  assert.deepEqual(now.primaryKey, old.primaryKey);
-  for (const key of old.uniqueFields) assert(now.uniqueFields.some(k => JSON.stringify(k) === JSON.stringify(key)), `Missing unique key ${old.name}`);
+// The reviewed expansion remains immutable. Explicitly check the runtime changes
+// introduced by steps 1-3 while preserving every workflow model and relation.
+const fieldChanges = {
+  'UserAccount.email': { isRequired: false },
+  'Student.proposal': { isList: true, isRequired: true },
+  'Registration.status': { default: 'DRAFT' },
+  'Registration.advisorAssignment': { name: 'advisorAssignments', isList: true, isRequired: true },
+  'RegistrationPref.lecturerId': { isReadOnly: true },
+  'AssignmentPlan.termId': { isReadOnly: true },
+  'AdvisorAssignment.registrationId': { isUnique: false },
+  'Proposal.studentId': { isUnique: false },
+};
+const uniqueChanges = {
+  TermPhase: [['termId', 'code']],
+  RegistrationPref: [['registrationId', 'preferenceOrder'], ['registrationId', 'lecturerId']],
+  AdvisorAssignment: [['assignmentPlanId', 'registrationId']],
+  Proposal: [['termId', 'studentId']],
+};
+for (const model of current.dmmf.datamodel.models) {
+  const now = integrated.dmmf.datamodel.models.find(m => m.name === model.name);
+  assert(now, 'Missing workflow/legacy model ' + model.name);
+  assert.equal(now.dbName, model.dbName);
+  assert.deepEqual(now.primaryKey, model.primaryKey);
+  assert.deepEqual(now.uniqueFields, uniqueChanges[model.name] || model.uniqueFields);
+  for (const field of model.fields) {
+    const expected = { ...field, ...fieldChanges[model.name + '.' + field.name] };
+    assert.deepEqual(now.fields.find(f => f.name === expected.name), expected, 'Unexpected contract change: ' + model.name + '.' + field.name);
+  }
 }
-console.log('PASS legacy and PR2B field contracts, enum compatibility, 0_init hash and frozen PR2B migration bytes');
+const enumAdditions = { RegistrationStatus: ['DRAFT', 'SUBMITTED'], ImportJobStatus: ['VALIDATED', 'PARTIAL'] };
+for (const old of current.dmmf.datamodel.enums) {
+  const now = integrated.dmmf.datamodel.enums.find(e => e.name === old.name);
+  assert(now, 'Missing enum ' + old.name);
+  assert.equal(now.dbName, old.dbName);
+  assert.deepEqual([...now.values].sort((a,b) => a.name.localeCompare(b.name)), [...old.values, ...(enumAdditions[old.name] || []).map(name => ({ name, dbName: null }))].sort((a,b) => a.name.localeCompare(b.name)));
+}
+console.log('PASS immutable PR2B contracts/migrations, baseline hash and explicit step 1-3 runtime compatibility');

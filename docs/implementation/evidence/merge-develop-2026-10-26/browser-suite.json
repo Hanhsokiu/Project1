@@ -1,0 +1,72 @@
+{
+  "result": "PASS",
+  "complete": true,
+  "startedAt": "2026-10-26T08:09:46.648Z",
+  "updatedAt": "2026-10-26T08:11:05.153Z",
+  "sharedDatabaseAccess": false,
+  "cases": [
+    {
+      "name": "step4:browser",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 9,
+      "elapsedMs": 9404,
+      "log": "step4-browser.log",
+      "mockedApi": true
+    },
+    {
+      "name": "step5:browser",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 10,
+      "elapsedMs": 9448,
+      "log": "step5-browser.log",
+      "mockedApi": true
+    },
+    {
+      "name": "step6:browser",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 16,
+      "elapsedMs": 11437,
+      "log": "step6-browser.log",
+      "mockedApi": true
+    },
+    {
+      "name": "step7:browser",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 8,
+      "elapsedMs": 10086,
+      "log": "step7-browser.log",
+      "mockedApi": true
+    },
+    {
+      "name": "step8a:browser",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 11,
+      "elapsedMs": 11291,
+      "log": "step8a-browser.log",
+      "mockedApi": true
+    },
+    {
+      "name": "step8b:browser",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 10,
+      "elapsedMs": 13797,
+      "log": "step8b-browser.log",
+      "mockedApi": true
+    },
+    {
+      "name": "step8c:browser",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 10,
+      "elapsedMs": 12961,
+      "log": "step8c-browser.log",
+      "mockedApi": true
+    }
+  ]
+}
