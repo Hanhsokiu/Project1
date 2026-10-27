@@ -13,6 +13,19 @@ import { useQueryClient } from "@tanstack/react-query";
 import {
   Activity,
   Bell,
+  CalendarDays,
+  ClipboardCheck,
+  FileSpreadsheet,
+  FilePenLine,
+  FolderOpen,
+  LibraryBig,
+  ListChecks,
+  ScrollText,
+  Settings2,
+  Upload,
+  UserCog,
+  UserRoundCheck,
+  type LucideIcon,
   BookOpen,
   ChevronRight,
   ClipboardList,
@@ -40,6 +53,27 @@ import {
   useWorkspace,
 } from "../../shared/hooks/use-workspace";
 import { authService } from "../../features/auth/services/auth-service";
+const navigationIcons: Record<string, LucideIcon> = {
+  "/": Home,
+  "/notifications": Bell,
+  "/admin/accounts": UserCog,
+  "/admin/roles": ShieldCheck,
+  "/admin/audit-logs": ScrollText,
+  "/catalog/students": GraduationCap,
+  "/catalog/lecturers": Users,
+  "/catalog/reference": LibraryBig,
+  "/catalog/import": Upload,
+  "/terms": CalendarDays,
+  "/registration": ClipboardList,
+  "/registration/assignment": UserRoundCheck,
+  "/registration/list": ListChecks,
+  "/registration/manual": Settings2,
+  "/registration/result": ClipboardCheck,
+  "/topic/my": BookOpen,
+  "/topic/proposal": FilePenLine,
+  "/topic/dossier": FolderOpen,
+  "/report/export": FileSpreadsheet,
+};
 export default function WorkspaceLayout() {
   const location = useLocation();
   return (
@@ -75,6 +109,9 @@ function Shell() {
   const navigate = useNavigate();
   const cache = useQueryClient();
   const [mobile, setMobile] = useState(false);
+  const [collapsedGroups, setCollapsedGroups] = useState<
+    Record<string, boolean>
+  >({});
   const [reset, setReset] = useState(false);
   useEffect(() => setMobile(false), [location.pathname]);
   const routes = routeManifest.filter(
@@ -85,15 +122,6 @@ function Shell() {
   const active = routeManifest.find((r) =>
     matchPath({ path: r.path, end: true }, location.pathname),
   );
-  const icons = [
-    Home,
-    ShieldCheck,
-    Users,
-    ClipboardList,
-    BookOpen,
-    GraduationCap,
-    FileText,
-  ];
   const isDemo =
     !AUTH_API &&
     (import.meta.env.DEV || import.meta.env.VITE_DEMO_MODE === "true");
@@ -123,25 +151,49 @@ function Shell() {
         </div>
         <nav className="sidebar-nav" aria-label="Điều hướng chính">
           {groups.map((group, i) => {
-            const Icon = icons[i % icons.length];
+            const expanded = !collapsedGroups[group];
+            const itemsId = `sidebar-group-${i}`;
             return (
               <div className="nav-group" key={group}>
-                <p className="nav-group-title">{group}</p>
-                {routes
-                  .filter((r) => r.group === group)
-                  .map((r) => (
-                    <NavLink
-                      key={r.path}
-                      to={r.path}
-                      end
-                      className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                      }
-                    >
-                      <Icon />
-                      <span>{r.title}</span>
-                    </NavLink>
-                  ))}
+                <button
+                  type="button"
+                  className="nav-group-title nav-group-toggle"
+                  aria-expanded={expanded}
+                  aria-controls={itemsId}
+                  onClick={() =>
+                    setCollapsedGroups((previous) => ({
+                      ...previous,
+                      [group]: !previous[group],
+                    }))
+                  }
+                >
+                  <span>{group}</span>
+                  <ChevronRight
+                    size={14}
+                    className="nav-group-chevron"
+                    aria-hidden="true"
+                  />
+                </button>
+                <div id={itemsId} hidden={!expanded}>
+                  {routes
+                    .filter((r) => r.group === group)
+                    .map((r) => {
+                      const Icon = navigationIcons[r.path] || FileText;
+                      return (
+                        <NavLink
+                          key={r.path}
+                          to={r.path}
+                          end
+                          className={({ isActive }) =>
+                            `nav-item ${isActive ? "active" : ""}`
+                          }
+                        >
+                          <Icon aria-hidden="true" />
+                          <span>{r.title}</span>
+                        </NavLink>
+                      );
+                    })}
+                </div>
               </div>
             );
           })}

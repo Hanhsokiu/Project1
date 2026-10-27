@@ -6,6 +6,7 @@ import { TermModule } from "../term/term.module";
 import { AssignmentController } from "./controller/assignment.controller";
 import { AssignmentRepository } from "./repository/assignment.repository";
 import { AssignmentPlanService } from "./service/assignment-plan.service";
+import { AssignmentWorkerService } from "./service/assignment-worker.service";
 
 @Module({
   imports: [TermModule],
@@ -15,6 +16,7 @@ import { AssignmentPlanService } from "./service/assignment-plan.service";
     RegistrationRepository,
     AssignmentRepository,
     AssignmentPlanService,
+    AssignmentWorkerService,
   ],
   exports: [RegistrationService, AssignmentRepository],
 })

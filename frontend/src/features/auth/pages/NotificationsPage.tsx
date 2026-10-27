@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Bell, MailCheck } from "lucide-react";
+import { Bell, MailCheck, Mail, CalendarDays, MailWarning } from "lucide-react";
 import {
   Badge,
   Button,
@@ -52,8 +52,13 @@ export default function NotificationsPage() {
       />
       <div className="stat-grid">
         <Stat label="Thông báo của bạn" value={mine.length} icon={<Bell />} />
-        <Stat label="Chưa đọc" value={mine.filter((n) => !n.read).length} />
         <Stat
+          icon={<Mail size={18} />}
+          label="Chưa đọc"
+          value={mine.filter((n) => !n.read).length}
+        />
+        <Stat
+          icon={<CalendarDays size={18} />}
           label="Thông báo trong đợt"
           value={
             manager
@@ -62,6 +67,7 @@ export default function NotificationsPage() {
           }
         />
         <Stat
+          icon={<MailWarning size={18} />}
           label="Gửi thất bại"
           value={
             (manager ? db.notifications : mine).filter(

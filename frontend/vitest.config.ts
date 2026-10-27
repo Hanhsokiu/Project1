@@ -12,7 +12,7 @@ export default defineConfig({
       VITE_IMPORT_API: "false",
       VITE_REGISTRATION_API: "false",
     },
-    include: ["src/**/*.test.ts"],
+    include: ["src/**/*.{test,spec}.ts"],
     environment: "node",
     pool: "forks",
     poolOptions: { forks: { singleFork: true } },

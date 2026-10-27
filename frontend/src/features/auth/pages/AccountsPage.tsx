@@ -1,5 +1,13 @@
 import { useState, type FormEvent } from "react";
-import { Plus, Pencil, KeyRound, LockKeyhole, Unlock } from "lucide-react";
+import {
+  Plus,
+  Pencil,
+  KeyRound,
+  LockKeyhole,
+  Unlock,
+  Users,
+  UserCheck,
+} from "lucide-react";
 import {
   Badge,
   Button,
@@ -84,16 +92,23 @@ export default function AccountsPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Tổng tài khoản" value={db.accounts.length} />
         <Stat
+          icon={<Users size={18} />}
+          label="Tổng tài khoản"
+          value={db.accounts.length}
+        />
+        <Stat
+          icon={<UserCheck size={18} />}
           label="Đang hoạt động"
           value={db.accounts.filter((a) => !a.locked).length}
         />
         <Stat
+          icon={<LockKeyhole size={18} />}
           label="Đã khóa"
           value={db.accounts.filter((a) => a.locked).length}
         />
         <Stat
+          icon={<KeyRound size={18} />}
           label="Cần đổi mật khẩu"
           value={db.accounts.filter((a) => a.mustChangePassword).length}
         />
@@ -303,9 +318,9 @@ export default function AccountsPage() {
               </fieldset>
             </div>
             <Notice>
-              Tài khoản mới có thể tự đặt mật khẩu hoặc để trống để dùng mật khẩu
-              mặc định Default@2026. Người dùng sẽ được yêu cầu đổi mật khẩu ở lần
-              đăng nhập đầu tiên.
+              Tài khoản mới có thể tự đặt mật khẩu hoặc để trống để dùng mật
+              khẩu mặc định Default@2026. Người dùng sẽ được yêu cầu đổi mật
+              khẩu ở lần đăng nhập đầu tiên.
             </Notice>
             <div className="form-actions">
               <Button

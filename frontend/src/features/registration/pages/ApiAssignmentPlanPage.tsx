@@ -1,3 +1,16 @@
+import {
+  ClipboardCheck,
+  Eye,
+  Loader2,
+  Pencil,
+  RotateCcw,
+  Save,
+  Send,
+  CheckCircle2,
+  UserCheck,
+  UserRoundSearch,
+  FileClock,
+} from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -11,9 +24,12 @@ import {
   PageHeader,
   Person,
   Stat,
+  labels,
 } from "../../../shared/components/kit";
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
+import { useAssignmentWindow } from "../hooks/use-assignment-window";
+import AssignmentWindowNotice from "../components/AssignmentWindowNotice";
 import {
   assignmentApi,
   assignmentContext,
@@ -23,8 +39,11 @@ export default function ApiAssignmentPlanPage() {
   const { db, term, termId } = useWorkspace(),
     action = useAction();
   const ctx = assignmentContext(termId);
+  const window = useAssignmentWindow(termId);
   const [preview, setPreview] = useState<AssignmentPreview | null>(null),
     [all, setAll] = useState(false);
+  const [calculating, setCalculating] = useState(false);
+  const busy = action.pending || calculating;
   const [confirm, setConfirm] = useState<"all" | "publish" | null>(null);
   const rows = ctx?.results ?? [],
     assignments = db.assignments.filter((a) => a.termId === termId);
@@ -34,14 +53,19 @@ export default function ApiAssignmentPlanPage() {
   const locked =
     term.locked ||
     term.assignmentPublished ||
-    term.status !== "CLOSED_REGISTRATION";
+    term.status !== "CLOSED_REGISTRATION" ||
+    !!window.blockedReason;
   async function calculate(full: boolean) {
+    if (locked || busy) return;
+    setCalculating(true);
     try {
       setAll(full);
       setPreview(await assignmentApi.preview(termId, full));
       setConfirm(null);
     } catch (e) {
       await action.run(() => Promise.reject(e)).catch(() => {});
+    } finally {
+      setCalculating(false);
     }
   }
   return (
@@ -53,46 +77,73 @@ export default function ApiAssignmentPlanPage() {
         actions={
           <>
             <Link className="btn btn-secondary" to="/registration/manual">
+              <Pencil size={16} />
               Điều chỉnh thủ công
             </Link>
             <Button
               variant="secondary"
-              disabled={locked || action.pending}
+              disabled={locked || busy}
               onClick={() => calculate(false)}
             >
+              {calculating ? (
+                <Loader2 size={16} className="animate-spin" />
+              ) : (
+                <Eye size={16} />
+              )}
               Xem trước phân bổ bổ sung
             </Button>
             <Button
               variant="secondary"
-              disabled={locked || action.pending}
+              disabled={locked || busy}
               onClick={() => setConfirm("all")}
             >
+              <RotateCcw size={16} />
               Tính lại toàn bộ
             </Button>
             <Button
-              disabled={locked || !assignments.length || action.pending}
+              disabled={locked || !assignments.length || busy}
               onClick={() => setConfirm("publish")}
             >
+              {term.assignmentPublished ? (
+                <CheckCircle2 size={16} />
+              ) : (
+                <Send size={16} />
+              )}
               {term.assignmentPublished ? "Đã công bố" : "Chốt & công bố"}
             </Button>
           </>
         }
       />
+      {!term.assignmentPublished && (
+        <AssignmentWindowNotice termId={termId} window={window} />
+      )}
       <Notice tone={term.assignmentPublished ? "success" : "info"}>
         {term.assignmentPublished
           ? "Kết quả chính thức được lưu tại máy chủ. Email được gửi qua SMTP sau khi công bố."
-          : "Bản nháp chỉ Giáo vụ xem được. Phân bổ bổ sung giữ các phân công đã lưu, bao gồm điều chỉnh thủ công."}{" "}
+          : ctx?.plan
+            ? "Phương án nháp đã lưu. Giáo vụ có thể điều chỉnh rồi chốt và công bố. Phân bổ bổ sung giữ các phân công đã lưu, bao gồm điều chỉnh thủ công."
+            : "Sau khi đóng đăng ký và đến giờ phân công, hệ thống tự tính và lưu phương án nháp trong vòng 10 giây. Giáo vụ kiểm tra, điều chỉnh rồi chốt và công bố để sinh viên xem kết quả."}{" "}
         GPA giảm dần trong từng vòng; bằng GPA xét thời điểm nộp rồi mã SV.
         Fallback xét tải/quota rồi mã GV.
       </Notice>
       <div className="stat-grid mt-5">
-        <Stat label="Đã nộp đăng ký" value={rows.length} />
-        <Stat label="Đã phân công" value={assignments.length} />
         <Stat
+          icon={<ClipboardCheck size={18} />}
+          label="Đã nộp đăng ký"
+          value={rows.length}
+        />
+        <Stat
+          icon={<UserCheck size={18} />}
+          label="Đã phân công"
+          value={assignments.length}
+        />
+        <Stat
+          icon={<UserRoundSearch size={18} />}
           label="Chưa phân"
           value={rows.filter((r) => !r.assignedLecturerId).length}
         />
         <Stat
+          icon={<FileClock size={18} />}
           label="Chưa nộp đăng ký"
           value={ctx?.missingSubmissions.length ?? 0}
         />
@@ -102,7 +153,7 @@ export default function ApiAssignmentPlanPage() {
           <Notice tone="warning">{ctx.violations.join(" · ")}</Notice>
         )}
         <Card
-          title={`Phương án ${ctx?.plan ? `· phiên ${ctx.plan.revision} · ${ctx.plan.status}` : "chưa lưu"}`}
+          title={`Phương án ${ctx?.plan ? `· phiên ${ctx.plan.revision} · ${labels[ctx.plan.status] || ctx.plan.status}` : "chưa lưu"}`}
         >
           <DataTable
             rows={rows}
@@ -212,7 +263,7 @@ export default function ApiAssignmentPlanPage() {
       </div>
       {preview && (
         <Modal
-          title="Xem trước — chưa ghi DB"
+          title="Xem trước phương án phân công"
           wide
           onClose={() => setPreview(null)}
         >
@@ -241,7 +292,7 @@ export default function ApiAssignmentPlanPage() {
             ]}
           />
           <Button
-            disabled={action.pending}
+            disabled={locked || busy}
             onClick={async () => {
               try {
                 await action.run(() =>
@@ -253,6 +304,7 @@ export default function ApiAssignmentPlanPage() {
               }
             }}
           >
+            <Save size={16} />
             Lưu phương án nháp
           </Button>
         </Modal>
@@ -271,16 +323,19 @@ export default function ApiAssignmentPlanPage() {
           }
           onClose={() => setConfirm(null)}
           onConfirm={async () => {
+            if (locked || busy) return;
             if (confirm === "all") await calculate(true);
             else {
               try {
                 await action.run(() => assignmentApi.publish(termId));
+              } catch {
+                // useAction displays the failure without an unhandled rejection.
               } finally {
                 setConfirm(null);
               }
             }
           }}
-          pending={action.pending}
+          pending={busy}
         />
       )}
     </>

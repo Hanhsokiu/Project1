@@ -1,5 +1,11 @@
 import { useState, type ChangeEvent } from "react";
-import { Upload, Download, FileSpreadsheet, CheckCircle2 } from "lucide-react";
+import {
+  Upload,
+  Download,
+  FileSpreadsheet,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
 import type { ImportRow } from "../../../shared/data/types";
 import {
   Badge,
@@ -228,10 +234,23 @@ export default function ImportPage() {
       {!!rows.length && (
         <div className="mt-6">
           <div className="stat-grid">
-            <Stat label="Tổng dòng" value={rows.length} />
-            <Stat label="Hợp lệ" value={valid.length} />
-            <Stat label="Có lỗi" value={invalid} />
             <Stat
+              icon={<FileSpreadsheet size={18} />}
+              label="Tổng dòng"
+              value={rows.length}
+            />
+            <Stat
+              icon={<CheckCircle2 size={18} />}
+              label="Hợp lệ"
+              value={valid.length}
+            />
+            <Stat
+              icon={<AlertCircle size={18} />}
+              label="Có lỗi"
+              value={invalid}
+            />
+            <Stat
+              icon={<Upload size={18} />}
               label="Sẵn sàng nhập"
               value={validOnly ? valid.length : invalid ? 0 : rows.length}
             />

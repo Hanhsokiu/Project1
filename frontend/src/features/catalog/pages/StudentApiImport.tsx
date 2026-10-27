@@ -1,3 +1,11 @@
+import {
+  FileSpreadsheet,
+  Download,
+  FileSearch,
+  CheckCircle2,
+  AlertCircle,
+  Upload,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
@@ -142,6 +150,7 @@ export default function StudentApiImport({
                 action.run(() => importApi.template("csv")).catch(() => {})
               }
             >
+              <Download size={16} />
               Tải mẫu CSV
             </Button>
             <Button
@@ -151,6 +160,7 @@ export default function StudentApiImport({
                 action.run(() => importApi.template("xlsx")).catch(() => {})
               }
             >
+              <FileSpreadsheet size={16} />
               Tải mẫu Excel
             </Button>
           </div>
@@ -182,6 +192,7 @@ export default function StudentApiImport({
               disabled={!selectedFile || !term.id || action.pending}
               onClick={preview}
             >
+              <FileSearch size={16} />
               {action.pending ? "Đang xử lý…" : "Kiểm tra tệp"}
             </Button>
           </div>
@@ -240,10 +251,23 @@ export default function StudentApiImport({
       {job && (
         <div className="mt-6">
           <div className="stat-grid">
-            <Stat label="Tổng dòng" value={job.totalRows} />
-            <Stat label="Hợp lệ" value={job.validRows} />
-            <Stat label="Có lỗi" value={job.invalidRows} />
             <Stat
+              icon={<FileSpreadsheet size={18} />}
+              label="Tổng dòng"
+              value={job.totalRows}
+            />
+            <Stat
+              icon={<CheckCircle2 size={18} />}
+              label="Hợp lệ"
+              value={job.validRows}
+            />
+            <Stat
+              icon={<AlertCircle size={18} />}
+              label="Có lỗi"
+              value={job.invalidRows}
+            />
+            <Stat
+              icon={<Upload size={18} />}
               label={completed ? "Đã nhập thành công" : "Sẵn sàng nhập"}
               value={
                 completed

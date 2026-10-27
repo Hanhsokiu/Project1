@@ -25,6 +25,7 @@ const schema = z.object({
   }), 'Expected comma-separated HTTP(S) origins').default('http://localhost:5173'),
   MAIL_PORT: z.coerce.number().int().min(1).max(65535).default(1025),
   STORAGE_MAX_SIZE_MB: z.coerce.number().positive().default(50),
+  ASSIGNMENT_WORKER_ENABLED: z.enum(['true', 'false']).optional(),
 }).passthrough();
 
 export function validateEnvironment(input: Record<string, unknown>) {
