@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CheckCheck, Play, Send, Users } from "lucide-react";
+import {
+  CheckCheck,
+  Play,
+  Send,
+  Users,
+  Shuffle,
+  UserRoundSearch,
+} from "lucide-react";
 import {
   Badge,
   Button,
@@ -106,11 +113,13 @@ function MockAssignmentPlanPage() {
           icon={<CheckCheck />}
         />
         <Stat
+          icon={<Shuffle size={18} />}
           label="Tự phân theo hướng"
           value={assignments.filter((a) => a.preference === 4).length}
           sub={`Điều chỉnh: ${assignments.filter((a) => a.manual).length}`}
         />
         <Stat
+          icon={<UserRoundSearch size={18} />}
           label="Chưa được phân"
           value={unassigned.length}
           sub="Cần xử lý trước khi công bố"

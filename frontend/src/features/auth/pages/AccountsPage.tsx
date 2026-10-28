@@ -1,5 +1,14 @@
-import { useState, type FormEvent } from "react";
-import { Plus, Pencil, KeyRound, LockKeyhole, Unlock } from "lucide-react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
+import {
+  Plus,
+  Pencil,
+  KeyRound,
+  Eye,
+  LockKeyhole,
+  Unlock,
+  Users,
+  UserCheck,
+} from "lucide-react";
 import {
   Badge,
   Button,
@@ -17,7 +26,7 @@ import {
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import type { Account, Role } from "../../../shared/data/types";
-import { authService } from "../services/auth-service";
+import { authService, type PasswordReveal } from "../services/auth-service";
 const roles: Role[] = ["ADMIN", "FACULTY", "LECTURER", "STUDENT", "COMMITTEE"];
 type AccountForm = Pick<
   Account,
@@ -41,6 +50,45 @@ export default function AccountsPage() {
     account: Account;
     kind: "lock" | "reset";
   } | null>(null);
+  const [passwordDialog, setPasswordDialog] = useState<{
+    account: Account;
+    result?: PasswordReveal;
+    pending: boolean;
+    error: string;
+  } | null>(null);
+  const passwordRequest = useRef(0);
+  useEffect(
+    () => () => {
+      passwordRequest.current++;
+    },
+    [],
+  );
+  useEffect(() => {
+    if (!passwordDialog?.result?.available) return;
+    const timer = setTimeout(closePasswordDialog, 60000);
+    return () => clearTimeout(timer);
+  }, [passwordDialog?.result]);
+  function closePasswordDialog() {
+    passwordRequest.current++;
+    setPasswordDialog(null);
+  }
+  async function revealPassword(account: Account) {
+    const request = ++passwordRequest.current;
+    setPasswordDialog({ account, pending: true, error: "" });
+    try {
+      const result = await authService.revealPassword(account.id);
+      if (passwordRequest.current === request)
+        setPasswordDialog({ account, result, pending: false, error: "" });
+    } catch (error) {
+      if (passwordRequest.current === request)
+        setPasswordDialog({
+          account,
+          pending: false,
+          error:
+            error instanceof Error ? error.message : "Không tải được mật khẩu.",
+        });
+    }
+  }
   const rows = db.accounts.filter(
     (a) =>
       (!role || a.roles.includes(role as Role)) &&
@@ -84,16 +132,23 @@ export default function AccountsPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Tổng tài khoản" value={db.accounts.length} />
         <Stat
+          icon={<Users size={18} />}
+          label="Tổng tài khoản"
+          value={db.accounts.length}
+        />
+        <Stat
+          icon={<UserCheck size={18} />}
           label="Đang hoạt động"
           value={db.accounts.filter((a) => !a.locked).length}
         />
         <Stat
+          icon={<LockKeyhole size={18} />}
           label="Đã khóa"
           value={db.accounts.filter((a) => a.locked).length}
         />
         <Stat
+          icon={<KeyRound size={18} />}
           label="Cần đổi mật khẩu"
           value={db.accounts.filter((a) => a.mustChangePassword).length}
         />
@@ -195,6 +250,16 @@ export default function AccountsPage() {
                   >
                     <Pencil size={15} />
                   </Button>
+                  {user.roles.includes("ADMIN") && (
+                    <Button
+                      variant="ghost"
+                      title="Xem mật khẩu"
+                      aria-label={`Xem mật khẩu ${a.username}`}
+                      onClick={() => revealPassword(a)}
+                    >
+                      <Eye size={15} />
+                    </Button>
+                  )}
                   <Button
                     variant="ghost"
                     aria-label={`Đặt lại mật khẩu ${a.username}`}
@@ -220,6 +285,36 @@ export default function AccountsPage() {
           ]}
         />
       </Card>
+      {passwordDialog && (
+        <Modal title="Mật khẩu tài khoản" onClose={closePasswordDialog}>
+          <p className="mb-4">
+            <strong>{passwordDialog.account.name}</strong> ·{" "}
+            {passwordDialog.account.username}
+          </p>
+          {passwordDialog.pending && <Notice>Đang tải mật khẩu…</Notice>}
+          {passwordDialog.error && (
+            <Notice tone="danger">{passwordDialog.error}</Notice>
+          )}
+          {passwordDialog.result?.available && (
+            <>
+              <Field label="Mật khẩu hiện tại">
+                <code className="block rounded-lg border bg-slate-50 p-4 text-lg break-all select-all">
+                  {passwordDialog.result.password}
+                </code>
+              </Field>
+              <p className="muted text-sm mt-3">
+                Mật khẩu tự ẩn sau 60 giây. Lần xem này đã được ghi nhật ký.
+              </p>
+            </>
+          )}
+          {passwordDialog.result && !passwordDialog.result.available && (
+            <Notice tone="warning">{passwordDialog.result.message}</Notice>
+          )}
+          <div className="dialog-actions">
+            <Button onClick={closePasswordDialog}>Đóng</Button>
+          </div>
+        </Modal>
+      )}
       {form && (
         <Modal
           title={form.id ? "Cập nhật tài khoản" : "Tạo tài khoản"}
@@ -303,9 +398,9 @@ export default function AccountsPage() {
               </fieldset>
             </div>
             <Notice>
-              Tài khoản mới có thể tự đặt mật khẩu hoặc để trống để dùng mật khẩu
-              mặc định Default@2026. Người dùng sẽ được yêu cầu đổi mật khẩu ở lần
-              đăng nhập đầu tiên.
+              Tài khoản mới có thể tự đặt mật khẩu hoặc để trống để dùng mật
+              khẩu mặc định Default@2026. Người dùng sẽ được yêu cầu đổi mật
+              khẩu ở lần đăng nhập đầu tiên.
             </Notice>
             <div className="form-actions">
               <Button

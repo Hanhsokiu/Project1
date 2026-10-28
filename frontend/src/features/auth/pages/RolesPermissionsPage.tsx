@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Check, Minus, ShieldCheck } from "lucide-react";
+import {
+  Check,
+  Minus,
+  ShieldCheck,
+  LockKeyhole,
+  Users,
+  KeyRound,
+} from "lucide-react";
 import { routeManifest } from "../../../app/router/route-manifest";
 import type { Role } from "../../../shared/data/types";
 import {
@@ -34,13 +41,19 @@ export default function RolesPermissionsPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Vai trò" value={5} />
-        <Stat label="Màn hình được bảo vệ" value={routeManifest.length} />
+        <Stat icon={<ShieldCheck size={18} />} label="Vai trò" value={5} />
         <Stat
+          icon={<LockKeyhole size={18} />}
+          label="Màn hình được bảo vệ"
+          value={routeManifest.length}
+        />
+        <Stat
+          icon={<Users size={18} />}
           label="Tài khoản nhiều vai trò"
           value={db.accounts.filter((a) => a.roles.length > 1).length}
         />
         <Stat
+          icon={<KeyRound size={18} />}
           label="Kiểm tra quyền"
           value="RBAC"
           sub="Theo vai trò và quan hệ phân công"

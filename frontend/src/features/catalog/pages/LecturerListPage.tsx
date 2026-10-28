@@ -1,6 +1,13 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { Plus, Pencil } from "lucide-react";
+import {
+  Plus,
+  Pencil,
+  GraduationCap,
+  Building2,
+  UserCheck,
+  Target,
+} from "lucide-react";
 import type { Lecturer } from "../../../shared/data/types";
 import {
   Badge,
@@ -74,10 +81,23 @@ export default function LecturerListPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Giảng viên" value={db.lecturers.length} />
-        <Stat label="Bộ môn" value={departments.length} />
-        <Stat label="Tham gia đợt" value={term.lecturers.length} />
         <Stat
+          icon={<GraduationCap size={18} />}
+          label="Giảng viên"
+          value={db.lecturers.length}
+        />
+        <Stat
+          icon={<Building2 size={18} />}
+          label="Bộ môn"
+          value={departments.length}
+        />
+        <Stat
+          icon={<UserCheck size={18} />}
+          label="Tham gia đợt"
+          value={term.lecturers.length}
+        />
+        <Stat
+          icon={<Target size={18} />}
           label="Tổng quota trong đợt"
           value={term.lecturers.reduce((a, l) => a + l.quota, 0)}
         />

@@ -64,11 +64,21 @@ export class UserAccountRepository {
       data: { refreshToken: hash },
     });
   }
-  updatePassword(id: string, passwordHash: string, sid?: string) {
+  updatePassword(
+    id: string,
+    passwordHash: string,
+    sid?: string,
+    passwordCiphertext?: string | null,
+  ) {
     return this.prisma.$transaction(async (tx) => {
       await tx.userAccount.update({
         where: { id },
-        data: { passwordHash, mustChangePassword: false, failedLoginCount: 0 },
+        data: {
+          passwordHash,
+          passwordCiphertext: passwordCiphertext ?? null,
+          mustChangePassword: false,
+          failedLoginCount: 0,
+        },
       });
       await tx.loginSession.updateMany({
         where: { userId: id, ...(sid ? { id: { not: sid } } : {}) },
@@ -164,6 +174,7 @@ export class UserAccountRepository {
     email?: string | null;
     phone?: string | null;
     passwordHash: string;
+    passwordCiphertext?: string | null;
     roles: string[];
     actorId?: string;
   }) {
@@ -178,6 +189,7 @@ export class UserAccountRepository {
           email: data.email || null,
           phone: data.phone || null,
           passwordHash: data.passwordHash,
+          passwordCiphertext: data.passwordCiphertext ?? null,
           status: "ACTIVE",
           mustChangePassword: true,
           userRoles: {
@@ -206,6 +218,7 @@ export class UserAccountRepository {
       email?: string | null;
       phone?: string | null;
       passwordHash?: string;
+      passwordCiphertext?: string | null;
       roles?: string[];
       actorId?: string;
     },
@@ -221,10 +234,14 @@ export class UserAccountRepository {
         });
       }
       const updateData: Prisma.UserAccountUpdateInput = {};
-      if (data.displayName !== undefined) updateData.displayName = data.displayName;
+      if (data.displayName !== undefined)
+        updateData.displayName = data.displayName;
       if (data.email !== undefined) updateData.email = data.email || null;
       if (data.phone !== undefined) updateData.phone = data.phone || null;
-      if (data.passwordHash) updateData.passwordHash = data.passwordHash;
+      if (data.passwordHash) {
+        updateData.passwordHash = data.passwordHash;
+        updateData.passwordCiphertext = data.passwordCiphertext ?? null;
+      }
 
       const user = await tx.userAccount.update({
         where: { id },
@@ -244,12 +261,29 @@ export class UserAccountRepository {
       return user;
     });
   }
-  async resetPassword(id: string, passwordHash: string, actorId?: string) {
+  recordPasswordView(id: string, actorId: string, available: boolean) {
+    return this.prisma.auditLog.create({
+      data: {
+        userId: actorId,
+        action: "ACCOUNT_PASSWORD_VIEWED",
+        resource: "account",
+        resourceId: id,
+        newValue: { available },
+      },
+    });
+  }
+  async resetPassword(
+    id: string,
+    passwordHash: string,
+    actorId?: string,
+    passwordCiphertext?: string | null,
+  ) {
     return this.prisma.$transaction(async (tx) => {
       const user = await tx.userAccount.update({
         where: { id },
         data: {
           passwordHash,
+          passwordCiphertext: passwordCiphertext ?? null,
           mustChangePassword: true,
           failedLoginCount: 0,
         },

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Bell, MailCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Badge,
   Button,
@@ -14,6 +15,7 @@ import { useAction } from "../../../shared/hooks/use-demo";
 import { notificationService } from "../services/notification-service";
 import { registrationService } from "../../registration/services/registration-service";
 import { STEP3_API } from "../../registration/services/assignment-api";
+import { Mail, CalendarDays, MailWarning } from "lucide-react";
 export default function NotificationsPage() {
   const { db, user, term } = useWorkspace();
   const action = useAction();
@@ -52,8 +54,13 @@ export default function NotificationsPage() {
       />
       <div className="stat-grid">
         <Stat label="Thông báo của bạn" value={mine.length} icon={<Bell />} />
-        <Stat label="Chưa đọc" value={mine.filter((n) => !n.read).length} />
         <Stat
+          icon={<Mail size={18} />}
+          label="Chưa đọc"
+          value={mine.filter((n) => !n.read).length}
+        />
+        <Stat
+          icon={<CalendarDays size={18} />}
           label="Thông báo trong đợt"
           value={
             manager
@@ -62,6 +69,7 @@ export default function NotificationsPage() {
           }
         />
         <Stat
+          icon={<MailWarning size={18} />}
           label="Gửi thất bại"
           value={
             (manager ? db.notifications : mine).filter(
@@ -151,6 +159,13 @@ export default function NotificationsPage() {
               title: "Thao tác",
               render: (n) => (
                 <div className="flex gap-2">
+                  {n.userId === user.id &&
+                    n.link?.startsWith("/") &&
+                    !n.link.startsWith("//") && (
+                      <Link className="btn btn-secondary" to={n.link}>
+                        Mở hồ sơ
+                      </Link>
+                    )}
                   {n.userId === user.id && !n.read && (
                     <Button
                       variant="ghost"

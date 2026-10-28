@@ -1,3 +1,4 @@
+import { ClipboardCheck, CheckCircle2, Megaphone } from "lucide-react";
 import { useState } from "react";
 import {
   Badge,
@@ -115,14 +116,17 @@ function Content({ db }: { db: DemoDb }) {
         <>
           <div className="stats-grid">
             <Stat
+              icon={<ClipboardCheck size={18} />}
               label="Đủ thành phần điểm"
               value={all.filter((r) => r.complete).length}
             />
             <Stat
+              icon={<CheckCircle2 size={18} />}
               label="Đạt yêu cầu"
               value={all.filter((r) => r.passed).length}
             />
             <Stat
+              icon={<Megaphone size={18} />}
               label="Trạng thái công bố"
               value={
                 <Badge

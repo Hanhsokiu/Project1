@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Back,
   Badge,
@@ -14,9 +15,20 @@ import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import { registrationService } from "../services/registration-service";
 import { formatGpa } from "../../../shared/utils/gpa";
+import { assignmentContext, STEP3_API } from "../services/assignment-api";
+import { useAssignmentWindow } from "../hooks/use-assignment-window";
+import AssignmentWindowNotice from "../components/AssignmentWindowNotice";
 export default function ManualAdjustPage() {
   const { db, termId, term } = useWorkspace();
   const action = useAction();
+  const window = useAssignmentWindow(termId);
+  const missingDraft = STEP3_API && !assignmentContext(termId)?.plan;
+  const blocked =
+    term.locked ||
+    term.assignmentPublished ||
+    (STEP3_API && term.status !== "CLOSED_REGISTRATION") ||
+    !!window.blockedReason ||
+    missingDraft;
   const regs = db.registrations.filter(
     (r) => r.termId === termId && r.status === "SUBMITTED",
   );
@@ -35,6 +47,10 @@ export default function ManualAdjustPage() {
       ?.directionIds.includes(r?.directionId || ""),
   );
   async function save() {
+    if (blocked) {
+      setConfirm(false);
+      return;
+    }
     try {
       await action.run(() =>
         registrationService.adjust(termId, studentId, lecturerId, reason),
@@ -54,12 +70,28 @@ export default function ManualAdjustPage() {
         title="Điều chỉnh phân công GVHD"
         description="Xử lý sinh viên chưa được phân công hoặc điều chỉnh giảng viên kèm lý do."
       />
+      {STEP3_API && !term.assignmentPublished && (
+        <AssignmentWindowNotice termId={termId} window={window} />
+      )}
+      {term.assignmentPublished ? (
+        <Notice tone="warning">
+          Phân công đã công bố, không thể điều chỉnh trực tiếp.
+        </Notice>
+      ) : missingDraft ? (
+        <Notice tone="warning">
+          Chưa có phương án nháp để điều chỉnh. Khi giai đoạn phân công mở, hệ
+          thống tự tạo nháp trong vòng 10 giây nếu backend đang chạy. Bạn cũng
+          có thể vào{" "}
+          <Link to="/registration/assignment">Phương án phân công</Link>, chọn
+          xem trước rồi lưu phương án nháp trước khi điều chỉnh.
+        </Notice>
+      ) : null}
       <div className="section-grid">
         <Card title="Thông tin điều chỉnh">
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              setConfirm(true);
+              if (!blocked) setConfirm(true);
             }}
             className="stack"
           >
@@ -110,25 +142,19 @@ export default function ManualAdjustPage() {
             </Field>
             <Field
               label="Lý do điều chỉnh *"
-              hint="Ít nhất 10 ký tự. Lý do được lưu trong nhật ký và thông báo nếu đã công bố."
+              hint="Từ 10 đến 3.000 ký tự. Lý do được lưu trong nhật ký điều chỉnh phương án nháp."
             >
               <textarea
                 required
                 minLength={10}
+                maxLength={3000}
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
                 placeholder="Ví dụ: Cân bằng tải giảng viên theo hướng chuyên môn"
               />
             </Field>
             <div className="form-actions">
-              <Button
-                disabled={
-                  action.pending ||
-                  term.locked ||
-                  term.assignmentPublished ||
-                  !regs.length
-                }
-              >
+              <Button disabled={action.pending || blocked || !regs.length}>
                 Lưu điều chỉnh
               </Button>
             </div>

@@ -54,6 +54,7 @@
     "db:status": "prisma migrate status",
     "db:seed": "node prisma/seed.cjs",
     "test:integration": "node test/run-integration.cjs",
+    "test:assignment-worker": "node test/assignment-worker.cjs",
     "test:http": "node test/step1-http.cjs",
     "test:step2": "node test/step2-http.cjs",
     "test:step3": "node test/step3-http.cjs",

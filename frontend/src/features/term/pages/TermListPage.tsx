@@ -1,6 +1,14 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Plus, Pencil, ArrowUpRight, CalendarDays } from "lucide-react";
+import {
+  Plus,
+  Pencil,
+  ArrowUpRight,
+  CalendarDays,
+  CalendarCheck,
+  Activity,
+  CheckCircle2,
+} from "lucide-react";
 import type { Term } from "../../../shared/data/types";
 import {
   Badge,
@@ -128,16 +136,19 @@ export default function TermListPage() {
           icon={<CalendarDays />}
         />
         <Stat
+          icon={<CalendarCheck size={18} />}
           label="Đang mở đăng ký"
           value={
             db.terms.filter((t) => t.status === "OPEN_REGISTRATION").length
           }
         />
         <Stat
+          icon={<Activity size={18} />}
           label="Đang thực hiện"
           value={db.terms.filter((t) => t.status === "IN_PROGRESS").length}
         />
         <Stat
+          icon={<CheckCircle2 size={18} />}
           label="Đã hoàn thành"
           value={db.terms.filter((t) => t.status === "COMPLETED").length}
         />

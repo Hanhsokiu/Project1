@@ -5,6 +5,7 @@ import {
   Pencil,
   Plus,
   Trash2,
+  CheckCircle2,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
@@ -93,6 +94,7 @@ function PlanContent({ db }: { db: DemoDb }) {
               icon={<ClipboardList size={18} />}
             />
             <Stat
+              icon={<CheckCircle2 size={18} />}
               label="Tuần đạt yêu cầu"
               value={
                 tasks.filter((t) => latestSubmission(t)?.status === "PASS")

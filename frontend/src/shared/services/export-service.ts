@@ -1,6 +1,7 @@
 import { httpClient } from "../api/http-client";
 import { STEP3_API } from "../../features/registration/services/assignment-api";
 import type { Topic } from "../data/types";
+import { renderPdfTable, tableCellValue, tableColumns } from "./table-export";
 export async function exportProposalPdf(
   topic: Topic,
   degree: string,
@@ -85,6 +86,25 @@ export async function exportPdf(
   }
   doc.save(filename.endsWith(".pdf") ? filename : `${filename}.pdf`);
 }
+export async function exportTablePdf(
+  title: string,
+  rows: Record<string, unknown>[],
+  filename = "bao-cao.pdf",
+  context: string[] = [],
+): Promise<void> {
+  const [{ jsPDF }, font] = await Promise.all([import("jspdf"), loadFont()]);
+  const doc = new jsPDF({
+    unit: "mm",
+    format: "a4",
+    orientation: tableColumns(rows).length > 6 ? "landscape" : "portrait",
+  });
+  doc.addFileToVFS("BeVietnam.ttf", font);
+  doc.addFont("BeVietnam.ttf", "BeVietnam", "normal");
+  doc.setFont("BeVietnam");
+  renderPdfTable(doc, title, rows, context);
+  doc.save(filename.endsWith(".pdf") ? filename : `${filename}.pdf`);
+}
+
 export async function exportExcel(
   title: string,
   rows: Record<string, unknown>[],
@@ -98,41 +118,85 @@ export async function exportExcel(
   const sheet = workbook.addWorksheet(
     title.slice(0, 31).replace(/[\\/*?:[\]]/g, " "),
   );
-  const keys = [...new Set(rows.flatMap((row) => Object.keys(row)))];
+  const keys = tableColumns(rows);
   if (keys.length) {
     sheet.columns = keys.map((key) => ({
-      header: key,
       key,
-      width: Math.min(55, Math.max(18, key.length + 3)),
-    }));
-    for (const row of rows)
-      sheet.addRow(
-        Object.fromEntries(
-          keys.map((k) => [
-            k,
-            row[k] === null || row[k] === undefined
-              ? ""
-              : typeof row[k] === "object"
-                ? JSON.stringify(row[k])
-                : row[k],
-          ]),
+      width: Math.min(
+        55,
+        Math.max(
+          16,
+          key.length + 3,
+          ...rows.slice(0, 100).map(
+            (row) =>
+              Math.max(
+                ...String(tableCellValue(row[key]))
+                  .split(/\r?\n/)
+                  .map((line) => line.length),
+              ) + 2,
+          ),
         ),
-      );
+      ),
+    }));
+    sheet.addTable({
+      name: "ExportData",
+      ref: "A1",
+      headerRow: true,
+      totalsRow: false,
+      style: { theme: "TableStyleMedium2", showRowStripes: true },
+      columns: keys.map((name) => ({ name, filterButton: true })),
+      rows: rows.map((row) => keys.map((key) => tableCellValue(row[key]))),
+    });
     sheet.getRow(1).font = { bold: true, color: { argb: "FFFFFFFF" } };
     sheet.getRow(1).fill = {
       type: "pattern",
       pattern: "solid",
-      fgColor: { argb: "FF1E2024" },
+      fgColor: { argb: "FF1E4078" },
     };
     sheet.getRow(1).height = 26;
     sheet.views = [{ state: "frozen", ySplit: 1 }];
-    sheet.autoFilter = {
-      from: { row: 1, column: 1 },
-      to: { row: Math.max(1, rows.length + 1), column: keys.length },
+    sheet.pageSetup = {
+      orientation: keys.length > 6 ? "landscape" : "portrait",
+      paperSize: 9,
+      fitToPage: true,
+      fitToWidth: 1,
+      fitToHeight: 0,
+      printTitlesRow: "1:1",
     };
-    sheet.eachRow(
-      (row) => (row.alignment = { vertical: "top", wrapText: true }),
-    );
+    sheet.eachRow((row, rowIndex) => {
+      row.alignment = { vertical: "top", wrapText: true };
+      if (rowIndex > 1) {
+        const lineCount = Math.max(
+          1,
+          ...keys.map((key, index) =>
+            String(tableCellValue(rows[rowIndex - 2][key]))
+              .split(/\r?\n/)
+              .reduce(
+                (count, line) =>
+                  count +
+                  Math.max(
+                    1,
+                    Math.ceil(
+                      line.length /
+                        Math.max(
+                          1,
+                          (sheet.getColumn(index + 1).width ?? 16) - 2,
+                        ),
+                    ),
+                  ),
+                0,
+              ),
+          ),
+        );
+        row.height = Math.min(409, Math.max(24, lineCount * 15 + 8));
+      }
+      row.eachCell({ includeEmpty: true }, (cell) => {
+        const edge = { style: "thin" as const, color: { argb: "FFB8C6D8" } };
+        cell.border = { top: edge, bottom: edge, left: edge, right: edge };
+        // Codes and phone numbers remain text, including leading zeroes.
+        if (typeof cell.value === "string") cell.numFmt = "@";
+      });
+    });
   } else sheet.addRow(["Không có dữ liệu phù hợp bộ lọc"]);
   const buffer = await workbook.xlsx.writeBuffer();
   saveBlob(

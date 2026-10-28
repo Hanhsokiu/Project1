@@ -6,6 +6,10 @@ import {
   LockKeyhole,
   Settings2,
   Users,
+  GraduationCap,
+  ClipboardCheck,
+  UserCheck,
+  FileText,
 } from "lucide-react";
 import type { TermStatus } from "../../../shared/data/types";
 import {
@@ -106,8 +110,13 @@ export default function TermDetailPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Sinh viên tham gia" value={t.studentIds.length} />
         <Stat
+          icon={<GraduationCap size={18} />}
+          label="Sinh viên tham gia"
+          value={t.studentIds.length}
+        />
+        <Stat
+          icon={<ClipboardCheck size={18} />}
           label="Đăng ký đã nộp"
           value={
             db.registrations.filter(
@@ -116,10 +125,12 @@ export default function TermDetailPage() {
           }
         />
         <Stat
+          icon={<UserCheck size={18} />}
           label="Đã phân GVHD"
           value={db.assignments.filter((r) => r.termId === t.id).length}
         />
         <Stat
+          icon={<FileText size={18} />}
           label="Đề cương đã nộp"
           value={
             db.topics.filter((r) => r.termId === t.id && r.status !== "DRAFT")

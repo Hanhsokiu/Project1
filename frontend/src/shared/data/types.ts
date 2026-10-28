@@ -284,6 +284,7 @@ export interface ExportJob {
   completedAt?: string;
 }
 export interface Notification {
+  link?: string | null;
   channel?: "IN_APP" | "EMAIL";
   id: string;
   termId: string;

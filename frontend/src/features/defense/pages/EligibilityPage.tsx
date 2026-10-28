@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, ShieldCheck } from "lucide-react";
+import { CheckCircle2, ShieldCheck, ClipboardList } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Badge,
@@ -54,6 +54,7 @@ function Content({ db }: { db: DemoDb }) {
           icon={<CheckCircle2 size={19} />}
         />
         <Stat
+          icon={<ClipboardList size={18} />}
           label="Cần bổ sung"
           value={all.filter((x) => !x.eligible).length}
         />
