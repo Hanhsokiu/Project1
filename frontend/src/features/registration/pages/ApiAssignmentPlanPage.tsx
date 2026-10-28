@@ -95,8 +95,10 @@ export default function ApiAssignmentPlanPage() {
         {term.assignmentPublished
           ? "Kết quả chính thức được lưu tại máy chủ. Email được gửi qua SMTP sau khi công bố."
           : "Bản nháp chỉ Giáo vụ xem được. Phân bổ bổ sung giữ các phân công đã lưu, bao gồm điều chỉnh thủ công."}{" "}
-        GPA giảm dần trong từng vòng; bằng GPA xét thời điểm nộp rồi mã SV.
-        Fallback xét tải/quota rồi mã GV.
+        Khi hết hạn đăng ký và đến giai đoạn phân công, hệ thống tự tạo bản nháp
+        trong vòng 30 giây nếu đã có đăng ký được nộp. Giáo vụ kiểm tra rồi công
+        bố kết quả. GPA giảm dần trong từng vòng; bằng GPA xét thời điểm nộp rồi
+        mã SV. Fallback xét tải/quota rồi mã GV.
       </Notice>
       <div className="stat-grid mt-5">
         <Stat label="Đã nộp đăng ký" value={rows.length} />

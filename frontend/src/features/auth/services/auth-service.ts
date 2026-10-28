@@ -19,6 +19,14 @@ import {
 } from "../../../shared/data/store";
 import { contactSchema, passwordSchema } from "../../../shared/data/schemas";
 const failures = new Map<string, number>();
+export type SaveAccountInput = Pick<
+  Account,
+  "username" | "name" | "email" | "phone" | "roles"
+> & {
+  id?: string;
+  password?: string;
+  trainingSystemId?: string;
+};
 const mockAuthService = {
   login(username: string, password: string) {
     const db = readDb();
@@ -99,12 +107,7 @@ const mockAuthService = {
       if (l) Object.assign(l, { name, ...p });
     });
   },
-  saveAccount(
-    input: Pick<Account, "username" | "name" | "email" | "phone" | "roles"> & {
-      id?: string;
-      password?: string;
-    },
-  ) {
+  saveAccount(input: SaveAccountInput) {
     return mutate("Lưu tài khoản", ["ADMIN"], (db) => {
       assert(input.roles.length, "Chọn ít nhất một vai trò");
       assert(input.username.length >= 3, "Tên đăng nhập ít nhất 3 ký tự");
@@ -116,6 +119,22 @@ const mockAuthService = {
         "Tên đăng nhập đã tồn tại",
       );
       const old = db.accounts.find((a) => a.id === input.id);
+      const program = db.catalogs.find(
+        (c) =>
+          c.kind === "program" && c.id === input.trainingSystemId && c.active,
+      );
+      if (input.roles.includes("STUDENT")) {
+        assert(program, "Vui lòng chọn hệ đào tạo cho tài khoản sinh viên.");
+        const student = db.students.find((s) => s.id === old?.studentId);
+        if (student && student.program !== program.name)
+          assert(
+            !db.terms.some(
+              (t) =>
+                t.studentIds.includes(student.id) && t.program !== program.name,
+            ),
+            "SV đang thuộc đợt khác hệ; cần xử lý danh sách tham gia trước.",
+          );
+      }
       if (old) {
         if (old.roles.includes("ADMIN") && !input.roles.includes("ADMIN"))
           assert(
@@ -146,6 +165,32 @@ const mockAuthService = {
           mustChangePassword: true,
           locked: false,
         });
+      }
+      if (input.roles.includes("STUDENT") && program) {
+        const account = db.accounts.find((a) => a.username === input.username)!;
+        let student = db.students.find((s) => s.id === account.studentId);
+        if (!student) {
+          student = {
+            id: uid("sv"),
+            code: input.username,
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            className: "",
+            program: program.name,
+            departmentId: "",
+            gpa: 0,
+            eligible: false,
+          };
+          db.students.push(student);
+          account.studentId = student.id;
+        } else
+          Object.assign(student, {
+            name: input.name,
+            email: input.email,
+            phone: input.phone,
+            program: program.name,
+          });
       }
     });
   },
@@ -216,12 +261,7 @@ export const authService = {
       .patch("/auth/profile", { name, email, phone })
       .then((r) => setApiUser(r.data.data));
   },
-  saveAccount(
-    input: Pick<Account, "username" | "name" | "email" | "phone" | "roles"> & {
-      id?: string;
-      password?: string;
-    },
-  ) {
+  saveAccount(input: SaveAccountInput) {
     if (!AUTH_API) return mockAuthService.saveAccount(input);
     return httpClient
       .request<{ data: Account }>({

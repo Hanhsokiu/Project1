@@ -8,6 +8,7 @@ import { createHash } from "node:crypto";
 import { Prisma } from "@prisma/client";
 import { TermWindowService } from "../../term/service/term-window.service";
 import { LoadedTerm } from "../../term/repository/term.repository";
+import { phasesFromTerm } from "../../term/dto/term.mapper";
 import {
   AssignmentRepository,
   WorkflowTx,
@@ -30,11 +31,15 @@ export class AssignmentPlanService {
     private readonly repo: AssignmentRepository,
     private readonly windows: TermWindowService,
   ) {}
-  private async load(termId: string, tx: WorkflowTx, write = false) {
+  private async load(
+    termId: string,
+    tx: WorkflowTx,
+    write = false,
+    at = new Date(),
+  ) {
     const term = await this.repo.term(termId, tx);
     if (!term) throw new NotFoundException("Không tìm thấy đợt.");
-    if (write)
-      await this.windows.requireOpen(termId, "ASSIGNMENT", new Date(), tx);
+    if (write) await this.windows.requireOpen(termId, "ASSIGNMENT", at, tx);
     const [registrations, plans] = await Promise.all([
       this.repo.registrations(termId, tx),
       this.repo.plans(termId, tx),
@@ -50,8 +55,13 @@ export class AssignmentPlanService {
       plan: official ?? plans.find((p) => p.status === "DRAFT") ?? null,
     };
   }
-  private async calculate(termId: string, options: RunPlan, tx: WorkflowTx) {
-    const ctx = await this.load(termId, tx, true);
+  private async calculate(
+    termId: string,
+    options: RunPlan,
+    tx: WorkflowTx,
+    at = new Date(),
+  ) {
+    const ctx = await this.load(termId, tx, true, at);
     V.revision(ctx.plan?.revision ?? 0, options.revision);
     V.require(
       options.mode !== "all" || options.confirmed,
@@ -171,47 +181,116 @@ export class AssignmentPlanService {
         throw new ConflictException(
           "Dữ liệu đầu vào đã thay đổi. Hãy xem trước lại trước khi lưu.",
         );
-      const plan = await this.repo.savePlan(
-        c.plan?.id,
-        {
-          termId,
-          revision: (c.plan?.revision ?? 0) + 1,
-          inputSnapshot: c.inputSnapshot as unknown as Prisma.InputJsonValue,
-          outcome: {
-            results: c.results,
-            missingSubmissions: c.missingSubmissions,
-          } as unknown as Prisma.InputJsonValue,
-        },
-        tx,
-      );
-      await this.repo.replaceAssignments(
-        plan.id,
-        c.results
-          .filter((r) => r.assignedLecturerId)
-          .map((r) => ({
-            registrationId: r.registrationId,
-            advisorId: r.assignedLecturerId!,
-            isManual: r.isManual,
-            note: r.reason,
-          })),
-        tx,
-      );
-      await this.repo.audit(
-        userId,
-        "ASSIGNMENT_DRAFT_SAVED",
-        plan.id,
-        {
-          inputHash: c.inputHash,
-          revision: plan.revision,
-          mode: options.mode,
+      return this.persistDraft(c, options.mode, userId, tx);
+    });
+  }
+  private async persistDraft(
+    c: Awaited<ReturnType<AssignmentPlanService["calculate"]>>,
+    mode: RunPlan["mode"],
+    userId: string | null,
+    tx: WorkflowTx,
+    action = "ASSIGNMENT_DRAFT_SAVED",
+  ) {
+    const termId = c.term.id;
+    const plan = await this.repo.savePlan(
+      c.plan?.id,
+      {
+        termId,
+        revision: (c.plan?.revision ?? 0) + 1,
+        inputSnapshot: c.inputSnapshot as unknown as Prisma.InputJsonValue,
+        outcome: {
           results: c.results,
-        },
+          missingSubmissions: c.missingSubmissions,
+        } as unknown as Prisma.InputJsonValue,
+      },
+      tx,
+    );
+    await this.repo.replaceAssignments(
+      plan.id,
+      c.results
+        .filter((r) => r.assignedLecturerId)
+        .map((r) => ({
+          registrationId: r.registrationId,
+          advisorId: r.assignedLecturerId!,
+          isManual: r.isManual,
+          note: r.reason,
+        })),
+      tx,
+    );
+    await this.repo.audit(
+      userId,
+      action,
+      plan.id,
+      {
+        inputHash: c.inputHash,
+        revision: plan.revision,
+        mode,
+        results: c.results,
+      },
+      tx,
+    );
+    return this.managerView(
+      (await this.load(termId, tx)).plan!,
+      c.registrations,
+      c.term,
+    );
+  }
+  scheduledDraft(termId: string, at = new Date()) {
+    return this.repo.transaction(async (tx) => {
+      const term = await this.repo.term(termId, tx);
+      if (
+        !term ||
+        term.isLocked ||
+        at < term.startDate ||
+        at >= term.endDate ||
+        !["OPEN_REGISTRATION", "CLOSED_REGISTRATION"].includes(term.status)
+      )
+        return;
+      const phases = phasesFromTerm(term);
+      const registration = phases.find((p) => p.code === "REGISTRATION");
+      if (!registration || at < registration.endDate) return;
+      const plans = await this.repo.plans(termId, tx);
+      if (plans.some((p) => p.status !== "DRAFT")) return;
+      if (term.status === "OPEN_REGISTRATION") {
+        await tx.thesisTerm.update({
+          where: { id: termId },
+          data: { status: "CLOSED_REGISTRATION" },
+        });
+        await this.repo.audit(
+          null,
+          "REGISTRATION_AUTO_CLOSED",
+          termId,
+          {
+            closedAt: at.toISOString(),
+            previousStatus: term.status,
+          },
+          tx,
+        );
+      }
+      // Close expired registration even when a draft was saved before reopening.
+      if (plans.length) return;
+      const assignment = phases.find((p) => p.code === "ASSIGNMENT");
+      if (
+        !assignment ||
+        assignment.isLocked ||
+        at < assignment.startDate ||
+        at >= assignment.endDate
+      )
+        return;
+      const registrations = await this.repo.registrations(termId, tx);
+      if (!registrations.some((r) => r.status === "SUBMITTED")) return;
+      const c = await this.calculate(
+        termId,
+        { mode: "remaining", confirmed: false, revision: 0 },
         tx,
+        at,
       );
-      return this.managerView(
-        (await this.load(termId, tx)).plan!,
-        c.registrations,
-        c.term,
+      return this.persistDraft(
+        c,
+        "remaining",
+        null,
+        tx,
+        "ASSIGNMENT_AUTO_DRAFT_SAVED",
       );
     });
   }

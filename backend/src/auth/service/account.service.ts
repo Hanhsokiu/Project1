@@ -5,6 +5,7 @@ import {
   NotFoundException,
 } from "@nestjs/common";
 import * as bcrypt from "bcryptjs";
+import { z } from "zod";
 import { UserAccountRepository } from "../repository/user-account.repository";
 import { accountDto } from "../mapper/account.mapper";
 
@@ -15,11 +16,27 @@ export interface SaveAccountInput {
   phone?: string | null;
   password?: string;
   roles: string[];
+  trainingSystemId?: string;
 }
 
 @Injectable()
 export class AccountService {
   constructor(private readonly users: UserAccountRepository) {}
+  private async studentTrainingSystem(
+    roles: string[],
+    id?: string,
+    currentId?: string,
+  ) {
+    if (!roles.includes("STUDENT")) return undefined;
+    const selected = id ?? currentId;
+    if (!selected || !z.string().uuid().safeParse(selected).success)
+      throw new BadRequestException(
+        "Vui lòng chọn hệ đào tạo cho tài khoản sinh viên.",
+      );
+    if (!(await this.users.trainingSystem(selected)))
+      throw new BadRequestException("Hệ đào tạo không tồn tại.");
+    return selected;
+  }
 
   async findAll(params: { page: number; limit: number; search?: string }) {
     const [items, total] = await this.users.list(
@@ -57,6 +74,10 @@ export class AccountService {
       }
     }
 
+    const trainingSystemId = await this.studentTrainingSystem(
+      data.roles,
+      data.trainingSystemId,
+    );
     const plainPassword = data.password?.trim() || "Default@2026";
     const passwordHash = await bcrypt.hash(plainPassword, 12);
 
@@ -67,6 +88,7 @@ export class AccountService {
       phone: data.phone?.trim() || null,
       passwordHash,
       roles: data.roles,
+      trainingSystemId,
       actorId,
     });
     return accountDto(user);
@@ -84,6 +106,11 @@ export class AccountService {
       }
     }
 
+    const trainingSystemId = await this.studentTrainingSystem(
+      data.roles ?? existing.userRoles.map((r) => r.role.name),
+      data.trainingSystemId,
+      existing.student?.trainingSystemId,
+    );
     let passwordHash: string | undefined;
     if (data.password?.trim()) {
       passwordHash = await bcrypt.hash(data.password.trim(), 12);
@@ -91,10 +118,11 @@ export class AccountService {
 
     const user = await this.users.updateAccount(id, {
       displayName: data.name?.trim(),
-      email: data.email !== undefined ? (data.email?.trim() || null) : undefined,
-      phone: data.phone !== undefined ? (data.phone?.trim() || null) : undefined,
+      email: data.email !== undefined ? data.email?.trim() || null : undefined,
+      phone: data.phone !== undefined ? data.phone?.trim() || null : undefined,
       passwordHash,
       roles: data.roles,
+      trainingSystemId,
       actorId,
     });
     return accountDto(user);

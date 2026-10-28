@@ -28,6 +28,39 @@ export type LoadedPlan = Prisma.AssignmentPlanGetPayload<{
 @Injectable()
 export class AssignmentRepository {
   constructor(private readonly prisma: PrismaService) {}
+  scheduledTerms(at: Date) {
+    return this.prisma.thesisTerm.findMany({
+      where: {
+        isLocked: false,
+        startDate: { lte: at },
+        endDate: { gt: at },
+        OR: [
+          {
+            status: "OPEN_REGISTRATION",
+            phases: {
+              some: {
+                code: "REGISTRATION",
+                endDate: { lte: at },
+              },
+            },
+          },
+          {
+            status: "CLOSED_REGISTRATION",
+            assignmentPlans: { none: {} },
+            phases: {
+              some: {
+                code: "ASSIGNMENT",
+                startDate: { lte: at },
+                endDate: { gt: at },
+                isLocked: false,
+              },
+            },
+          },
+        ],
+      },
+      select: { id: true },
+    });
+  }
   async transaction<T>(operation: (tx: WorkflowTx) => Promise<T>): Promise<T> {
     for (let attempt = 0; ; attempt++)
       try {
@@ -189,7 +222,7 @@ export class AssignmentRepository {
     );
   }
   audit(
-    userId: string,
+    userId: string | null,
     action: string,
     resourceId: string,
     data: unknown,

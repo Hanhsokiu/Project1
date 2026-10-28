@@ -17,12 +17,9 @@ import {
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import type { Account, Role } from "../../../shared/data/types";
-import { authService } from "../services/auth-service";
+import { authService, type SaveAccountInput } from "../services/auth-service";
 const roles: Role[] = ["ADMIN", "FACULTY", "LECTURER", "STUDENT", "COMMITTEE"];
-type AccountForm = Pick<
-  Account,
-  "username" | "name" | "email" | "phone" | "roles"
-> & { id?: string; password?: string };
+type AccountForm = SaveAccountInput;
 const blank: AccountForm = {
   username: "",
   name: "",
@@ -33,6 +30,7 @@ const blank: AccountForm = {
 };
 export default function AccountsPage() {
   const { db, user } = useWorkspace();
+  const programs = db.catalogs.filter((c) => c.kind === "program" && c.active);
   const action = useAction();
   const [form, setForm] = useState<AccountForm | null>(null);
   const [role, setRole] = useState("");
@@ -158,6 +156,14 @@ export default function AccountsPage() {
               ),
             },
             {
+              key: "program",
+              title: "Hệ đào tạo",
+              render: (a) =>
+                a.student?.program ||
+                db.students.find((s) => s.id === a.studentId)?.program ||
+                "—",
+            },
+            {
               key: "status",
               title: "Trạng thái",
               render: (a) => (
@@ -190,6 +196,15 @@ export default function AccountsPage() {
                         phone: a.phone,
                         password: "",
                         roles: [...a.roles],
+                        trainingSystemId:
+                          a.student?.trainingSystemId ||
+                          programs.find(
+                            (p) =>
+                              p.name ===
+                              db.students.find((s) => s.id === a.studentId)
+                                ?.program,
+                          )?.id ||
+                          "",
                       })
                     }
                   >
@@ -301,11 +316,31 @@ export default function AccountsPage() {
                   </label>
                 ))}
               </fieldset>
+              {form.roles.includes("STUDENT") && (
+                <Field label="Hệ đào tạo">
+                  <select
+                    required
+                    value={form.trainingSystemId || ""}
+                    onChange={(e) =>
+                      setForm({ ...form, trainingSystemId: e.target.value })
+                    }
+                  >
+                    <option value="">Chọn hệ đào tạo</option>
+                    {programs.map((program) => (
+                      <option key={program.id} value={program.id}>
+                        {program.name}
+                      </option>
+                    ))}
+                  </select>
+                </Field>
+              )}
             </div>
             <Notice>
-              Tài khoản mới có thể tự đặt mật khẩu hoặc để trống để dùng mật khẩu
-              mặc định Default@2026. Người dùng sẽ được yêu cầu đổi mật khẩu ở lần
-              đăng nhập đầu tiên.
+              Tài khoản mới có thể tự đặt mật khẩu hoặc để trống để dùng mật
+              khẩu mặc định Default@2026. Người dùng sẽ được yêu cầu đổi mật
+              khẩu ở lần đăng nhập đầu tiên.
+              {form.roles.includes("STUDENT") &&
+                " Hồ sơ sinh viên được tạo cùng hệ đào tạo đã chọn. Bổ sung lớp, GPA và điều kiện học vụ trong Danh sách sinh viên trước khi đưa vào đợt."}
             </Notice>
             <div className="form-actions">
               <Button

@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { ConflictException, Injectable } from "@nestjs/common";
 import type { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { identityInclude } from "../mapper/account.mapper";
@@ -23,6 +23,9 @@ export class UserAccountRepository {
   }
   findByEmail(email: string) {
     return this.prisma.userAccount.findUnique({ where: { email } });
+  }
+  trainingSystem(id: string) {
+    return this.prisma.trainingSystem.findUnique({ where: { id } });
   }
   async failLogin(id: string) {
     const user = await this.prisma.userAccount.update({
@@ -165,6 +168,7 @@ export class UserAccountRepository {
     phone?: string | null;
     passwordHash: string;
     roles: string[];
+    trainingSystemId?: string;
     actorId?: string;
   }) {
     return this.prisma.$transaction(async (tx) => {
@@ -180,6 +184,19 @@ export class UserAccountRepository {
           passwordHash: data.passwordHash,
           status: "ACTIVE",
           mustChangePassword: true,
+          ...(data.trainingSystemId
+            ? {
+                student: {
+                  create: {
+                    studentCode: data.username,
+                    fullName: data.displayName,
+                    trainingSystemId: data.trainingSystemId,
+                    phone: data.phone || null,
+                    academicEligible: false,
+                  },
+                },
+              }
+            : {}),
           userRoles: {
             create: roleRecords.map((r) => ({ roleId: r.id })),
           },
@@ -207,10 +224,53 @@ export class UserAccountRepository {
       phone?: string | null;
       passwordHash?: string;
       roles?: string[];
+      trainingSystemId?: string;
       actorId?: string;
     },
   ) {
     return this.prisma.$transaction(async (tx) => {
+      if (data.trainingSystemId) {
+        const existing = await tx.userAccount.findUniqueOrThrow({
+          where: { id },
+        });
+        const student = await tx.student.findUnique({ where: { userId: id } });
+        if (
+          student &&
+          student.trainingSystemId !== data.trainingSystemId &&
+          (await tx.termStudent.count({
+            where: {
+              studentId: student.id,
+              term: {
+                OR: [
+                  { trainingSystemId: { not: data.trainingSystemId } },
+                  { trainingSystemId: null },
+                ],
+              },
+            },
+          }))
+        )
+          throw new ConflictException(
+            "SV đang thuộc đợt khác hệ; cần xử lý danh sách tham gia trước.",
+          );
+        await tx.student.upsert({
+          where: { userId: id },
+          create: {
+            userId: id,
+            studentCode: existing.username,
+            fullName:
+              data.displayName ?? existing.displayName ?? existing.username,
+            trainingSystemId: data.trainingSystemId,
+            phone: data.phone ?? existing.phone,
+            academicEligible: false,
+          },
+          update: { trainingSystemId: data.trainingSystemId },
+        });
+      }
+      if (data.displayName !== undefined || data.phone !== undefined)
+        await tx.student.updateMany({
+          where: { userId: id },
+          data: { fullName: data.displayName, phone: data.phone },
+        });
       if (data.roles) {
         const roleRecords = await tx.role.findMany({
           where: { name: { in: data.roles } },
@@ -221,7 +281,8 @@ export class UserAccountRepository {
         });
       }
       const updateData: Prisma.UserAccountUpdateInput = {};
-      if (data.displayName !== undefined) updateData.displayName = data.displayName;
+      if (data.displayName !== undefined)
+        updateData.displayName = data.displayName;
       if (data.email !== undefined) updateData.email = data.email || null;
       if (data.phone !== undefined) updateData.phone = data.phone || null;
       if (data.passwordHash) updateData.passwordHash = data.passwordHash;
