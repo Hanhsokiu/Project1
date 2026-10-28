@@ -1,0 +1,181 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "checks": [
+    {
+      "name": "active migration chain replays without reset/drop",
+      "result": "PASS"
+    },
+    {
+      "name": "migration history checksums match applied files",
+      "result": "PASS"
+    },
+    {
+      "name": "Swagger exposes step4 routes and response DTO",
+      "result": "PASS"
+    },
+    {
+      "name": "unauthenticated API denied",
+      "result": "PASS"
+    },
+    {
+      "name": "faculty creates department/term group with valid member",
+      "result": "PASS"
+    },
+    {
+      "name": "idempotent create replays without duplicate audit",
+      "result": "PASS"
+    },
+    {
+      "name": "idempotency key payload conflict rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "cached create response cannot bypass revoked department scope",
+      "result": "PASS"
+    },
+    {
+      "name": "duplicate array validation",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown input fields rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "cross-term inactive missing role and nonexistent members denied",
+      "result": "PASS"
+    },
+    {
+      "name": "faculty cannot cross department or term grants",
+      "result": "PASS"
+    },
+    {
+      "name": "lecturer reads only membership and faculty only granted department",
+      "result": "PASS"
+    },
+    {
+      "name": "ADMIN/student cannot bypass policy even with permissions and forged role claims",
+      "result": "PASS"
+    },
+    {
+      "name": "lecturer cannot manage groups",
+      "result": "PASS"
+    },
+    {
+      "name": "cross-round lecturer access denied",
+      "result": "PASS"
+    },
+    {
+      "name": "pagination and name filter intersect scope",
+      "result": "PASS"
+    },
+    {
+      "name": "pagination bounds enforced",
+      "result": "PASS"
+    },
+    {
+      "name": "update CAS and stale revision rejection",
+      "result": "PASS"
+    },
+    {
+      "name": "add valid roster member including other home department",
+      "result": "PASS"
+    },
+    {
+      "name": "existing membership duplicate rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "remove member revokes access and preserves membership history",
+      "result": "PASS"
+    },
+    {
+      "name": "membership changes recorded append-only",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent updates have one CAS winner",
+      "result": "PASS"
+    },
+    {
+      "name": "audit failure rolls back revision membership and history",
+      "result": "PASS"
+    },
+    {
+      "name": "unresolved legacy review blocks membership changes",
+      "result": "PASS"
+    },
+    {
+      "name": "active assigned round blocks membership mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "assigned group deletion preserves proposal references",
+      "result": "PASS"
+    },
+    {
+      "name": "soft deletion and retry preserve group member history",
+      "result": "PASS"
+    },
+    {
+      "name": "closed term remains read-only",
+      "result": "PASS"
+    },
+    {
+      "name": "lecturer options do not expose full roster",
+      "result": "PASS"
+    }
+  ],
+  "migrations": [
+    {
+      "name": "0_init",
+      "checksum": "533ffb3d89181a690ee6afbb15b9673d4f34dd5c75ecf542c596571cd1687504"
+    },
+    {
+      "name": "202610210001_empty_baseline_bridge",
+      "checksum": "892d68d8e13c2c863e8786a841d3cbafa7603f3853ebbec35e979b919feec993"
+    },
+    {
+      "name": "202610210002_expand_workflow",
+      "checksum": "933a053c2af980cb78d182d2a9b5fa915385374ea97a7948fae9de5d34b95503"
+    },
+    {
+      "name": "202610210003_review_group_management",
+      "checksum": "924e394bf9ae7f69629abc698e9fa7d0073a2462ec9d4a7ca08905ce8389525b"
+    },
+    {
+      "name": "202610220001_proposal_review_assignment",
+      "checksum": "1a77a25e8dca6baacefaf69ae8ee67b0b96a8b97ee0d4b30a17eb22eba39dc37"
+    },
+    {
+      "name": "202610220002_proposal_version_snapshots",
+      "checksum": "69edd06f7a2aa15c5b18c19c741f0b4d52605e80286ef0ec10503d39f8712b39"
+    },
+    {
+      "name": "202610220003_dossier_finalization",
+      "checksum": "c6d8b146d02dc25374bb06e38bdf73f4213e6e66cca4b5d812aee493ef4e26a3"
+    },
+    {
+      "name": "202610220004_guidance_task_management",
+      "checksum": "505b31121767a48d7a33c06b86229f5583717d86c118fa770a78c4f10b47fed8"
+    },
+    {
+      "name": "202610220005_guidance_submissions",
+      "checksum": "c13cd1ca97e453cf765e9d861b1e08ead088dd5456dbb5a91f42a88743e1d3ae"
+    },
+    {
+      "name": "202610230001_guidance_reviews",
+      "checksum": "684722701d412f58e6dd2c824344bd74eb98f5e284ac2d97945eedc24d179b9e"
+    },
+    {
+      "name": "202610260001_step1_3_enum_values",
+      "checksum": "d5cda509149bac10a8377f41d6a8f7f6ef703c92ebb3800c77e54984d14034de"
+    },
+    {
+      "name": "202610260002_integrate_step1_3",
+      "checksum": "a2a965ad2e81460304e9e1d5bc298696528229c4ce592785f54ab299465762fc"
+    }
+  ],
+  "sharedDatabaseDDL": false
+}

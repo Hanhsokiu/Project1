@@ -130,13 +130,13 @@ export const routeManifest: RouteInfo[] = [
     roles: [...G, "STUDENT"],
   },
   {
-    path: "/topic/proposal",
+    path: "/topic/draft",
     title: "Soạn đề cương",
     group: "Đăng ký & đề cương",
     roles: ["STUDENT", "LECTURER"],
   },
   {
-    path: "/topic/dossier",
+    path: "/topic/overview",
     title: "Hồ sơ đề tài",
     group: "Đăng ký & đề cương",
     roles: A,
@@ -161,4 +161,109 @@ export const routeManifest: RouteInfo[] = [
     roles: A,
     menu: false,
   },
+  ...[
+    ["/topic/review-groups", "Nhóm duyệt đề cương", ["FACULTY", "LECTURER"]],
+    ["/topic/review-groups/new", "Tạo nhóm duyệt", ["FACULTY"]],
+    ["/topic/review-groups/:id/edit", "Sửa nhóm duyệt", ["FACULTY"]],
+    [
+      "/topic/review-groups/:id",
+      "Chi tiết nhóm duyệt",
+      ["FACULTY", "LECTURER"],
+    ],
+    [
+      "/topic/reviews",
+      "Xét duyệt đề cương",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/topic/reviews/:id",
+      "Chi tiết xét duyệt",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/topic/review-assignments/:proposalId",
+      "Phân công xét duyệt",
+      ["FACULTY"],
+    ],
+    [
+      "/topic/proposal",
+      "Đề cương & phiên bản",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/topic/proposal/:proposalId",
+      "Phiên bản đề cương",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/topic/proposal/:proposalId/versions/:versionId",
+      "Lịch sử đề cương",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/topic/dossier",
+      "Chốt đề cương & bản giấy",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/topic/dossier/:proposalId",
+      "Chi tiết hồ sơ",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/guidance/plan",
+      "Kế hoạch hướng dẫn",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/guidance/plan/:proposalId",
+      "Chi tiết kế hoạch",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    ["/guidance/plan/:proposalId/tasks/new", "Giao nhiệm vụ", ["LECTURER"]],
+    [
+      "/guidance/tasks",
+      "Nhiệm vụ & tiến độ",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/guidance/tasks/:id",
+      "Chi tiết nhiệm vụ",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/guidance/tasks/:id/submissions",
+      "Nộp báo cáo",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    ["/guidance/review", "Nhận xét báo cáo", ["LECTURER"]],
+    ["/guidance/review/:submissionId", "Chi tiết nhận xét", ["FACULTY", "LECTURER", "STUDENT"]],
+    ["/guidance/progress", "Theo dõi tiến độ", ["FACULTY"]],
+    [
+      "/guidance/meetings",
+      "Nhật ký hướng dẫn",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/guidance/notifications",
+      "Thông báo hướng dẫn",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/guidance/defense-confirm",
+      "Xác nhận bảo vệ",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+    [
+      "/guidance/final-report",
+      "Báo cáo cuối kỳ",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
+  ].map(([path, title, roles]) => ({
+    path: path as string,
+    title: title as string,
+    roles: roles as Role[],
+    group: "Xét duyệt & hướng dẫn",
+    menu: !(path as string).includes(":") && !(path as string).endsWith("/new"),
+  })),
 ];

@@ -1,0 +1,45 @@
+{
+  "result": "PASS",
+  "browser": "installed Microsoft Edge via Playwright",
+  "mockedAPI": true,
+  "checks": [
+    {
+      "name": "empty list and scoped term selector",
+      "result": "PASS"
+    },
+    {
+      "name": "create page allows an explicit scoped term selection",
+      "result": "PASS"
+    },
+    {
+      "name": "required form fields prevent submission",
+      "result": "PASS"
+    },
+    {
+      "name": "create group with selected member and success feedback",
+      "result": "PASS"
+    },
+    {
+      "name": "search does not discard previously selected members",
+      "result": "PASS"
+    },
+    {
+      "name": "revision conflict is visible and preserves user input",
+      "result": "PASS"
+    },
+    {
+      "name": "lecturer read-only detail and mobile viewport have no horizontal page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "archive confirmation requires reason and returns to list",
+      "result": "PASS"
+    },
+    {
+      "name": "scope error renders without exposing group data",
+      "result": "PASS"
+    }
+  ],
+  "apiRequests": 26,
+  "sharedDatabaseDDL": false
+}

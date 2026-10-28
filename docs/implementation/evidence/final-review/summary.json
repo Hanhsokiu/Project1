@@ -1,0 +1,24 @@
+{
+  "result": "NOT READY FOR MERGE",
+  "critical": 0,
+  "highOpen": 2,
+  "mediumOpen": 7,
+  "mediumFixed": 1,
+  "lowOpen": 2,
+  "tests": {
+    "spaBefore": "FAIL",
+    "spaAfter": {
+      "result": "PASS",
+      "checks": 16
+    },
+    "verify": "PASS",
+    "backendUnit": 107,
+    "frontendUnit": 27,
+    "toolGuards": 12,
+    "httpBodyContract": "FAIL",
+    "fullDatabaseRerunThisReview": "NOT RUN"
+  },
+  "databaseAccessThisReview": false,
+  "baselineQaHashesPreserved": true,
+  "stagedFiles": 0
+}

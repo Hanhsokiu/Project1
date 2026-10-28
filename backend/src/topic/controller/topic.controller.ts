@@ -17,6 +17,7 @@ import { ProposalPdfService } from "../service/proposal-pdf.service";
 import { RequirePermission } from "../../common/security/require-permission.decorator";
 import { CurrentUser } from "../../common/security/current-user.decorator";
 import { ZodValidationPipe } from "../../common/validation/zod.pipe";
+import { EntityIdPipe } from "../../common/validation/entity-id.pipe";
 import { ApiResponse } from "../../common/dto/api-response.dto";
 import { proposalWrite } from "../dto/proposal.dto";
 interface PdfResponse {
@@ -37,7 +38,7 @@ export class TopicController {
   @Get("term/:termId")
   @RequirePermission("topic", "read")
   async list(
-    @Param("termId", ParseUUIDPipe) id: string,
+    @Param("termId", EntityIdPipe) id: string,
     @CurrentUser() u: { sub: string },
   ) {
     return ApiResponse.ok(await this.service.list(id, u.sub));
@@ -74,6 +75,14 @@ export class TopicController {
     return ApiResponse.ok(
       await this.service.agree(id, u.sub, b.agreed, b.expectedVersion),
     );
+  }
+  @Post(":id/prepare-workflow")
+  @RequirePermission("topic", "write")
+  async prepareWorkflow(
+    @Param("id", ParseUUIDPipe) id: string,
+    @CurrentUser() u: { sub: string },
+  ) {
+    return ApiResponse.ok(await this.service.prepareWorkflow(id, u.sub));
   }
   @Get(":id/versions/:version/pdf")
   @RequirePermission("topic", "read")

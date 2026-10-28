@@ -1,0 +1,47 @@
+{
+  "result": "PASS",
+  "mockedApi": true,
+  "sharedDatabaseAccess": false,
+  "checks": [
+    {
+      "name": "advisor inbox opens exact submission version and secure download",
+      "result": "PASS"
+    },
+    {
+      "name": "required revision comment, frozen revisions, conflict preserves input and explicit reload enables valid review",
+      "result": "PASS"
+    },
+    {
+      "name": "student reads reviewer request and completes real 8B UI resubmission flow with immutable v1 history",
+      "result": "PASS"
+    },
+    {
+      "name": "stale v1 is read-only; PASS on v2 completes canonical task",
+      "result": "PASS"
+    },
+    {
+      "name": "amendment requires reason and preserves separate PASS/FAIL/revision decisions/comments",
+      "result": "PASS"
+    },
+    {
+      "name": "faculty dashboard has derived metrics, independent missing weeks and advisor filter with no review controls",
+      "result": "PASS"
+    },
+    {
+      "name": "confirmed meeting create/amend preserves prior content and student read-only view",
+      "result": "PASS"
+    },
+    {
+      "name": "student receives in-app notice, follows resource links and marks own notification read",
+      "result": "PASS"
+    },
+    {
+      "name": "mobile view fits viewport; locked phase hides mutation controls while keeping readable history",
+      "result": "PASS"
+    },
+    {
+      "name": "scope errors hide content with no unhandled page errors or missing mutation idempotency keys",
+      "result": "PASS"
+    }
+  ]
+}

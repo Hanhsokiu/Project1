@@ -14,6 +14,8 @@ export const ROUTES = {
   REGISTRATION: "/registration",
   MY_TOPIC: "/topic/my",
   PROPOSAL_EDITOR: "/topic/proposal",
+  TOPIC_DRAFT: "/topic/draft",
+  TOPIC_OVERVIEW: "/topic/overview",
   REVIEW_QUEUE: "/topic/reviews",
   DOSSIER: "/topic/dossier",
   TASK_BOARD: "/guidance/tasks",

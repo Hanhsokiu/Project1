@@ -44,7 +44,9 @@ export default function ApiAssignmentPlanPage() {
     [all, setAll] = useState(false);
   const [calculating, setCalculating] = useState(false);
   const busy = action.pending || calculating;
-  const [confirm, setConfirm] = useState<"all" | "publish" | null>(null);
+  const [confirm, setConfirm] = useState<"all" | "publish" | "finalize" | null>(
+    null,
+  );
   const rows = ctx?.results ?? [],
     assignments = db.assignments.filter((a) => a.termId === termId);
   const notices = db.notifications.filter(
@@ -111,6 +113,17 @@ export default function ApiAssignmentPlanPage() {
               )}
               {term.assignmentPublished ? "Đã công bố" : "Chốt & công bố"}
             </Button>
+            {ctx?.plan?.status === "PUBLISHED" && (
+              <Button
+                disabled={term.locked || busy}
+                onClick={() => setConfirm("finalize")}
+              >
+                Chốt phân công chính thức
+              </Button>
+            )}
+            {ctx?.plan?.status === "FINALIZED" && (
+              <Badge>Đã chốt chính thức</Badge>
+            )}
           </>
         }
       />
@@ -312,22 +325,30 @@ export default function ApiAssignmentPlanPage() {
       {confirm && (
         <Confirm
           title={
-            confirm === "all"
-              ? "Tính lại toàn bộ phương án nháp?"
-              : "Chốt và công bố phân công?"
+            confirm === "finalize"
+              ? "Chốt phân công chính thức?"
+              : confirm === "all"
+                ? "Tính lại toàn bộ phương án nháp?"
+                : "Chốt và công bố phân công?"
           }
           description={
-            confirm === "all"
-              ? "Các phân công nháp, kể cả điều chỉnh thủ công, sẽ được tính lại khi bạn lưu kết quả xem trước."
-              : "Kết quả chính thức sẽ mở cho SV/GV, chuyển đợt sang Đang thực hiện và tạo email outbox. Không sửa trực tiếp sau công bố."
+            confirm === "finalize"
+              ? "Xác nhận phương án đã công bố để sử dụng ở các bước xét duyệt và hướng dẫn. Thao tác này ghi nhận người chốt và thời điểm chốt."
+              : confirm === "all"
+                ? "Các phân công nháp, kể cả điều chỉnh thủ công, sẽ được tính lại khi bạn lưu kết quả xem trước."
+                : "Kết quả chính thức sẽ mở cho SV/GV, chuyển đợt sang Đang thực hiện và tạo email outbox. Không sửa trực tiếp sau công bố."
           }
           onClose={() => setConfirm(null)}
           onConfirm={async () => {
-            if (locked || busy) return;
+            if (busy || (confirm === "finalize" ? term.locked : locked)) return;
             if (confirm === "all") await calculate(true);
             else {
               try {
-                await action.run(() => assignmentApi.publish(termId));
+                await action.run(() =>
+                  confirm === "finalize"
+                    ? assignmentApi.finalize(termId)
+                    : assignmentApi.publish(termId),
+                );
               } catch {
                 // useAction displays the failure without an unhandled rejection.
               } finally {
