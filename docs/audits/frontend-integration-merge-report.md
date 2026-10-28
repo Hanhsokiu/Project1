@@ -10,7 +10,9 @@
 - Merge base: `0c361709df34837df65b3ed429691599e6e2d93f`.
 - Đã fetch origin; nhánh cá nhân không ahead/behind upstream (`0 0`).
 - Khi tiếp nhận: merge đã bắt đầu, 953 file mới và 53 file sửa được staged; 3 file còn conflict. Đã dừng theo mục A; người dùng cho phép tiếp tục merge đang dở. Không abort/reset/stash hoặc bắt đầu merge thứ hai.
-- Commit sau merge và push: **PENDING** — cập nhật sau các kiểm tra cuối.
+- Commit merge: `a1031d35029497488ea0c58d67079967c8d5efe9`, gồm đúng hai parent nêu trên.
+- Trạng thái: **PARTIAL về bàn giao remote**. Merge/integration và kiểm thử đã hoàn tất ở local. Yêu cầu cấp quyền chạy `git push origin HEAD:refs/heads/feature/step-9-10` bị từ chối trước khi lệnh được thực thi; chưa push bất kỳ commit nào trong phiên này. Không thử đường khác để vượt qua quyết định đó.
+- Bản cập nhật báo cáo sau merge được lưu bằng commit tài liệu riêng trên cùng nhánh; không thay đổi code đã kiểm thử.
 
 ## Phạm vi và bảng đối chiếu
 
@@ -89,6 +91,8 @@ Các script browser sử dụng localhost, API mock, chặn request bên ngoài 
 - Các blocker học vụ, source UC18–21, quorum, cửa sổ workflow, amendment/sửa sau chốt và mẫu xuất chưa được duyệt tiếp tục theo backend hiện có; không đổi policy để vượt qua kiểm thử.
 - Chưa chạy migration bổ sung trên DB; khả năng dùng lifecycle mới trong môi trường thật cần deployment được duyệt riêng.
 - Không kết nối PostgreSQL; không mở endpoint C01; không chạy seed/migration/reset/db push/Docker; không tạo PR; không sửa/push nhánh nguồn, main hoặc develop.
-- Các dependency/chromium cần quyền mạng để tải. Lần browser đầu có 24 PASS và 1 assertion 401 theo hành vi cũ; đã cập nhật assertion. Windows từng treo dọn Vite và lỗi unlink artifact cũ; kết quả cuối phải dựa trên lần chạy hoàn tất được ghi ở bảng trên.
+- Các dependency/chromium cần quyền mạng để tải. Lần browser đầu có 24 PASS và 1 assertion 401 theo hành vi cũ; đã cập nhật assertion. Windows từng treo dọn Vite và lỗi unlink artifact cũ; các lần chạy cuối đã hoàn tất: API 25/25, demo 10/10. Không xóa artifact cũ để chạy lại.
 
 Đã kiểm tra trực quan desktop 1440×1000 và mobile 375×812 trên Vite API cách ly: một shell, nội dung vừa màn hình. Nhóm menu theo thứ tự Tổng quan → quản lý → hướng dẫn → bảo vệ → điểm/kết quả, icon gắn với tên nhóm thay vì vị trí trong mảng.
+
+Sau thay đổi thứ tự menu, kiểm tra lại TypeScript, lint file layout, build production frontend và 4 browser test điều hướng (3 API + 1 demo) đều PASS. Server kiểm thử đã dừng. `git diff --cached --check` trước merge PASS; không còn conflict hoặc file bị xóa.
