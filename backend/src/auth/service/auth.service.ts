@@ -9,6 +9,7 @@ import * as bcrypt from "bcryptjs";
 import { createHash, randomUUID } from "crypto";
 import { UserAccountRepository } from "../repository/user-account.repository";
 import { accountDto } from "../mapper/account.mapper";
+import { sealAccountPassword } from "../security/password-vault";
 import { AuthValidator } from "../validator/auth.validator";
 import { AuditService } from "../../common/audit/audit.service";
 @Injectable()
@@ -76,6 +77,7 @@ export class AuthService {
       userId,
       await bcrypt.hash(newPassword, 12),
       sid,
+      sealAccountPassword(newPassword),
     );
     return this.me(userId);
   }

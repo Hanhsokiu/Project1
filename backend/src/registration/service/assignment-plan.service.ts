@@ -6,7 +6,10 @@ import {
 } from "@nestjs/common";
 import { createHash } from "node:crypto";
 import { Prisma } from "@prisma/client";
-import { TermWindowService } from "../../term/service/term-window.service";
+import {
+  operationWindow,
+  TermWindowService,
+} from "../../term/service/term-window.service";
 import { LoadedTerm } from "../../term/repository/term.repository";
 import {
   AssignmentRepository,
@@ -171,49 +174,74 @@ export class AssignmentPlanService {
         throw new ConflictException(
           "Dữ liệu đầu vào đã thay đổi. Hãy xem trước lại trước khi lưu.",
         );
-      const plan = await this.repo.savePlan(
-        c.plan?.id,
-        {
-          termId,
-          revision: (c.plan?.revision ?? 0) + 1,
-          inputSnapshot: c.inputSnapshot as unknown as Prisma.InputJsonValue,
-          outcome: {
-            results: c.results,
-            missingSubmissions: c.missingSubmissions,
-          } as unknown as Prisma.InputJsonValue,
-        },
-        tx,
-      );
-      await this.repo.replaceAssignments(
-        plan.id,
-        c.results
-          .filter((r) => r.assignedLecturerId)
-          .map((r) => ({
-            registrationId: r.registrationId,
-            advisorId: r.assignedLecturerId!,
-            isManual: r.isManual,
-            note: r.reason,
-          })),
-        tx,
-      );
-      await this.repo.audit(
-        userId,
-        "ASSIGNMENT_DRAFT_SAVED",
-        plan.id,
-        {
-          inputHash: c.inputHash,
-          revision: plan.revision,
-          mode: options.mode,
-          results: c.results,
-        },
-        tx,
-      );
-      return this.managerView(
-        (await this.load(termId, tx)).plan!,
-        c.registrations,
-        c.term,
-      );
+      return this.persistDraft(c, options.mode, userId, tx);
     });
+  }
+  createAutomaticDraft(termId: string) {
+    return this.repo.transaction(async (tx) => {
+      // Recheck within the serializable transaction: a user or another worker
+      // may have saved/published a plan or changed the window after discovery.
+      const term = await this.repo.term(termId, tx);
+      if (!term || !operationWindow(term, "ASSIGNMENT").canWrite) return null;
+      if ((await this.repo.plans(termId, tx)).length) return null;
+      const c = await this.calculate(
+        termId,
+        { mode: "remaining", confirmed: false, revision: 0 },
+        tx,
+      );
+      return this.persistDraft(c, "remaining", null, tx, true);
+    });
+  }
+  private async persistDraft(
+    c: Awaited<ReturnType<AssignmentPlanService["calculate"]>>,
+    mode: RunPlan["mode"],
+    userId: string | null,
+    tx: WorkflowTx,
+    automatic = false,
+  ) {
+    const termId = c.term.id;
+    const plan = await this.repo.savePlan(
+      c.plan?.id,
+      {
+        termId,
+        revision: (c.plan?.revision ?? 0) + 1,
+        inputSnapshot: c.inputSnapshot as unknown as Prisma.InputJsonValue,
+        outcome: {
+          results: c.results,
+          missingSubmissions: c.missingSubmissions,
+        } as unknown as Prisma.InputJsonValue,
+      },
+      tx,
+    );
+    await this.repo.replaceAssignments(
+      plan.id,
+      c.results
+        .filter((r) => r.assignedLecturerId)
+        .map((r) => ({
+          registrationId: r.registrationId,
+          advisorId: r.assignedLecturerId!,
+          isManual: r.isManual,
+          note: r.reason,
+        })),
+      tx,
+    );
+    await this.repo.audit(
+      userId,
+      automatic ? "ASSIGNMENT_AUTO_DRAFT_SAVED" : "ASSIGNMENT_DRAFT_SAVED",
+      plan.id,
+      {
+        inputHash: c.inputHash,
+        revision: plan.revision,
+        mode,
+        results: c.results,
+      },
+      tx,
+    );
+    return this.managerView(
+      (await this.load(termId, tx)).plan!,
+      c.registrations,
+      c.term,
+    );
   }
   private managerView(
     plan: LoadedPlan | null,

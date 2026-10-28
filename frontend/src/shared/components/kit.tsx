@@ -15,6 +15,10 @@ import { useDemo } from "../hooks/use-demo";
 import type { DemoDb, StoredFile } from "../data/types";
 export const labels: Record<string, string> = {
   DRAFT: "Bản nháp",
+  PUBLISHED: "Đã công bố",
+  VALIDATED: "Đã kiểm tra",
+  DONE: "Hoàn tất",
+  PARTIAL: "Nhập một phần",
   OPEN_REGISTRATION: "Mở đăng ký",
   CLOSED_REGISTRATION: "Đóng đăng ký",
   IN_PROGRESS: "Đang thực hiện",
@@ -195,28 +199,44 @@ export function Modal({
   closeRef.current = onClose;
   useEffect(() => {
     const previous = document.activeElement as HTMLElement;
+    const focusable = () =>
+      Array.from(
+        ref.current?.querySelectorAll<HTMLElement>(
+          'button:not(:disabled),input:not(:disabled):not([type="hidden"]),select:not(:disabled),textarea:not(:disabled),a[href],[tabindex]',
+        ) ?? [],
+      ).filter(
+        (node) =>
+          node.tabIndex >= 0 &&
+          !node.matches(":disabled") &&
+          node.getClientRects().length > 0 &&
+          getComputedStyle(node).visibility !== "hidden",
+      );
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeRef.current();
       if (e.key === "Tab") {
-        const nodes = ref.current?.querySelectorAll<HTMLElement>(
-          "button,input,select,textarea,a[href]",
-        );
-        if (!nodes?.length) return;
+        const nodes = focusable();
+        if (!nodes.length) {
+          e.preventDefault();
+          ref.current?.focus();
+          return;
+        }
         const first = nodes[0],
           last = nodes[nodes.length - 1];
-        if (e.shiftKey && document.activeElement === first) {
+        const outside = !ref.current?.contains(document.activeElement);
+        if (e.shiftKey && (document.activeElement === first || outside)) {
           e.preventDefault();
           last.focus();
-        } else if (!e.shiftKey && document.activeElement === last) {
+        } else if (
+          !e.shiftKey &&
+          (document.activeElement === last || outside)
+        ) {
           e.preventDefault();
           first.focus();
         }
       }
     };
     document.addEventListener("keydown", handler);
-    ref.current
-      ?.querySelector<HTMLElement>("input,select,textarea,button")
-      ?.focus();
+    (focusable()[0] ?? ref.current)?.focus();
     const old = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -235,6 +255,7 @@ export function Modal({
       <div
         className={`modal ${wide ? "modal-wide" : ""}`}
         ref={ref}
+        tabIndex={-1}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -434,13 +455,17 @@ export function Stat({
   label: string;
   value: ReactNode;
   sub?: string;
-  icon?: ReactNode;
+  icon: ReactNode;
 }) {
   return (
     <div className="stat-card">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center gap-3">
         <span className="muted text-sm">{label}</span>
-        <span className="stat-icon">{icon}</span>
+        {icon && (
+          <span className="stat-icon" aria-hidden="true">
+            {icon}
+          </span>
+        )}
       </div>
       <strong>{value}</strong>
       {sub && <small>{sub}</small>}

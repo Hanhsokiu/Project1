@@ -20,6 +20,19 @@ import { useQueryClient } from "@tanstack/react-query";
 import {
   Activity,
   Bell,
+  CalendarDays,
+  ClipboardCheck,
+  FileSpreadsheet,
+  FilePenLine,
+  FolderOpen,
+  LibraryBig,
+  ListChecks,
+  ScrollText,
+  Settings2,
+  Upload,
+  UserCog,
+  UserRoundCheck,
+  type LucideIcon,
   BookOpen,
   ChevronRight,
   ClipboardList,
@@ -134,15 +147,6 @@ function Shell({ children }: { children?: ReactNode }) {
   const active = routeManifest.find((r) =>
     matchPath({ path: r.path, end: true }, location.pathname),
   );
-  const icons = [
-    Home,
-    ShieldCheck,
-    Users,
-    ClipboardList,
-    BookOpen,
-    GraduationCap,
-    FileText,
-  ];
   const isDemo =
     !AUTH_API &&
     (import.meta.env.DEV || import.meta.env.VITE_DEMO_MODE === "true");
@@ -178,10 +182,9 @@ function Shell({ children }: { children?: ReactNode }) {
         </div>
         <nav className="sidebar-nav" aria-label="Điều hướng chính">
           {groups.map((group, i) => {
-            const Icon = icons[i % icons.length];
+            const itemsId = `sidebar-group-${i}`;
             return (
-              <div className="nav-group" key={group}>
-                <p className="nav-group-title">{group}</p>
+              <NavigationGroup key={group} title={group} itemsId={itemsId}>
                 {routes
                   .filter((r) => r.group === group)
                   .map((r) => (
@@ -196,11 +199,11 @@ function Shell({ children }: { children?: ReactNode }) {
                         `nav-item ${isActive ? "active" : ""}`
                       }
                     >
-                      <Icon />
+                      <NavigationIcon path={r.path} />
                       <span>{r.title}</span>
                     </NavLink>
                   ))}
-              </div>
+              </NavigationGroup>
             );
           })}
         </nav>
@@ -373,4 +376,61 @@ function Shell({ children }: { children?: ReactNode }) {
       )}
     </div>
   );
+}
+function NavigationGroup({
+  title,
+  itemsId,
+  children,
+}: {
+  title: string;
+  itemsId: string;
+  children: ReactNode;
+}) {
+  const [expanded, setExpanded] = useState(true);
+  return (
+    <div className="nav-group">
+      <button
+        type="button"
+        className="nav-group-title nav-group-toggle"
+        aria-expanded={expanded}
+        aria-controls={itemsId}
+        onClick={() => setExpanded((previous) => !previous)}
+      >
+        <span>{title}</span>
+        <ChevronRight
+          size={14}
+          className="nav-group-chevron"
+          aria-hidden="true"
+        />
+      </button>
+      <div id={itemsId} hidden={!expanded}>
+        {children}
+      </div>
+    </div>
+  );
+}
+const navigationIcons: Record<string, LucideIcon> = {
+  "/": Home,
+  "/notifications": Bell,
+  "/admin/accounts": UserCog,
+  "/admin/roles": ShieldCheck,
+  "/admin/audit-logs": ScrollText,
+  "/catalog/students": GraduationCap,
+  "/catalog/lecturers": Users,
+  "/catalog/reference": LibraryBig,
+  "/catalog/import": Upload,
+  "/terms": CalendarDays,
+  "/registration": ClipboardList,
+  "/registration/assignment": UserRoundCheck,
+  "/registration/list": ListChecks,
+  "/registration/manual": Settings2,
+  "/registration/result": ClipboardCheck,
+  "/topic/my": BookOpen,
+  "/topic/proposal": FilePenLine,
+  "/topic/dossier": FolderOpen,
+  "/report/export": FileSpreadsheet,
+};
+function NavigationIcon({ path }: { path: string }) {
+  const Icon = navigationIcons[path] || FileText;
+  return <Icon aria-hidden="true" />;
 }

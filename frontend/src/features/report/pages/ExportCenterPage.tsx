@@ -101,6 +101,9 @@ function Content({ db }: { db: DemoDb }) {
   } catch (e) {
     reportError = e instanceof Error ? e.message : "Không thể đọc biểu mẫu";
   }
+  const reportColumns = [
+    ...new Set(report?.rows.flatMap((row) => Object.keys(row)) ?? []),
+  ];
   const execute = (
     selectedKind = kind,
     selectedFormat = format,
@@ -273,7 +276,11 @@ function Content({ db }: { db: DemoDb }) {
               value={format}
               onChange={(e) => setFormat(e.target.value as ExportJob["format"])}
             >
-              <option value="PDF">PDF · Bản in</option>
+              <option value="PDF">
+                {kind === "PROPOSAL"
+                  ? "PDF · Biểu mẫu đề cương"
+                  : "PDF · Bảng in"}
+              </option>
               <option value="XLSX">Excel · Bảng dữ liệu</option>
             </select>
           </Field>
@@ -399,29 +406,44 @@ function Content({ db }: { db: DemoDb }) {
           wide
         >
           <Notice>
-            Nội dung dưới đây phản ánh dữ liệu và bộ lọc hiện tại. Bản đề cương
-            có bốn vùng ký trống; dữ liệu demo và bản chưa phê duyệt được ghi
-            rõ.
+            {kind === "PROPOSAL"
+              ? "Bảng dưới đây là thông tin các hồ sơ đang chọn. PDF đề cương được trình bày theo biểu mẫu của từng hồ sơ."
+              : "Bảng dưới đây phản ánh dữ liệu và bộ lọc hiện tại. Mỗi dòng là một bản ghi; tiêu đề cột được giữ khi xuất PDF hoặc Excel."}
           </Notice>
-          <div className="space-y-4 mt-4 max-h-[60vh] overflow-auto">
-            {report.rows.map((row, index) => (
-              <div className="border rounded-lg p-4" key={index}>
-                <strong>Hồ sơ {index + 1}</strong>
-                <dl className="space-y-2 mt-3">
-                  {Object.entries(row)
-                    .filter(
-                      ([, value]) =>
-                        value !== undefined && value !== null && value !== "",
-                    )
-                    .map(([key, value]) => (
-                      <div key={key}>
-                        <dt className="text-sm text-slate-500">{key}</dt>
-                        <dd className="whitespace-pre-wrap">{String(value)}</dd>
-                      </div>
+          <div className="table-scroll mt-4 max-h-[60vh] overflow-auto">
+            <table>
+              <thead>
+                <tr>
+                  {reportColumns.map((key) => (
+                    <th
+                      key={key}
+                      scope="col"
+                      className="sticky top-0 z-10 bg-slate-100 whitespace-nowrap"
+                    >
+                      {key}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {report.rows.map((row, index) => (
+                  <tr key={index}>
+                    {reportColumns.map((key) => (
+                      <td
+                        key={key}
+                        className="min-w-[120px] max-w-[320px] whitespace-pre-wrap break-words"
+                      >
+                        {row[key] === null ||
+                        row[key] === undefined ||
+                        row[key] === ""
+                          ? "—"
+                          : String(row[key])}
+                      </td>
                     ))}
-                </dl>
-              </div>
-            ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
           <div className="dialog-actions">
             <Button variant="secondary" onClick={() => setPreview(false)}>

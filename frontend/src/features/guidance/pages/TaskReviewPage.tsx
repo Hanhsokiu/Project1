@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CheckCircle2, MessageSquare, Send } from "lucide-react";
+import { CheckCircle2, MessageSquare, Send, FilePenLine } from "lucide-react";
 import {
   Button,
   Card,
@@ -156,6 +156,7 @@ function ReviewContent({ db }: { db: DemoDb }) {
               icon={<CheckCircle2 size={18} />}
             />
             <Stat
+              icon={<FilePenLine size={18} />}
               label="Cần sửa / không đạt"
               value={
                 all.filter((t) =>

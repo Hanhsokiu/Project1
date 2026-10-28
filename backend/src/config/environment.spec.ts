@@ -29,4 +29,8 @@ describe('backend environment', () => {
     expect(validateEnvironment({ ...base, FRONTEND_URL: 'http://localhost:5173,http://127.0.0.1:5173' }).FRONTEND_URL).toContain(',');
     expect(() => validateEnvironment({ ...base, FRONTEND_URL: 'http://localhost:5173,invalid' })).toThrow('FRONTEND_URL');
   });
+  it('validates the automatic assignment switch', () => {
+    expect(validateEnvironment({ ...base, ASSIGNMENT_WORKER_ENABLED: 'false' }).ASSIGNMENT_WORKER_ENABLED).toBe('false');
+    expect(() => validateEnvironment({ ...base, ASSIGNMENT_WORKER_ENABLED: 'invalid' })).toThrow('ASSIGNMENT_WORKER_ENABLED');
+  });
 });

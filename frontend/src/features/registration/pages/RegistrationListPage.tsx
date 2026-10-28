@@ -1,3 +1,4 @@
+import { ClipboardList, Send, FilePenLine, FileClock } from "lucide-react";
 import {
   Badge,
   Card,
@@ -22,19 +23,23 @@ export default function RegistrationListPage() {
       />
       <div className="stat-grid">
         <Stat
+          icon={<ClipboardList size={18} />}
           label="Tổng đăng ký"
           value={rows.length}
           sub={`${term.studentIds.length} sinh viên trong đợt`}
         />
         <Stat
+          icon={<Send size={18} />}
           label="Đã nộp"
           value={rows.filter((r) => r.status === "SUBMITTED").length}
         />
         <Stat
+          icon={<FilePenLine size={18} />}
           label="Bản nháp"
           value={rows.filter((r) => r.status === "DRAFT").length}
         />
         <Stat
+          icon={<FileClock size={18} />}
           label="Chưa đăng ký"
           value={
             term.studentIds.filter(

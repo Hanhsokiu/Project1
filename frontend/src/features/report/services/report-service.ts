@@ -10,6 +10,7 @@ import type { Account, DemoDb, ExportJob } from "../../../shared/data/types";
 import {
   exportExcel,
   exportPdf,
+  exportTablePdf,
   exportProposalPdf,
 } from "../../../shared/services/export-service";
 import { proposalLines } from "../../topic/components/ProposalDocument";
@@ -374,7 +375,14 @@ export async function createReport(
           filters.degree ?? "Cử nhân",
           async () => {},
         );
-    } else if (format === "PDF")
+    } else if (format === "PDF" && kind !== "PROPOSAL")
+      await exportTablePdf(
+        report.title,
+        report.rows,
+        `${kind.toLowerCase()}-${termId}.pdf`,
+        report.lines.slice(0, 4),
+      );
+    else if (format === "PDF")
       await exportPdf(
         report.title,
         report.lines,

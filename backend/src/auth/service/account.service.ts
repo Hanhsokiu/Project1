@@ -1,12 +1,18 @@
 import {
   BadRequestException,
   ConflictException,
+  ForbiddenException,
+  ServiceUnavailableException,
   Injectable,
   NotFoundException,
 } from "@nestjs/common";
 import * as bcrypt from "bcryptjs";
 import { UserAccountRepository } from "../repository/user-account.repository";
 import { accountDto } from "../mapper/account.mapper";
+import {
+  openAccountPassword,
+  sealAccountPassword,
+} from "../security/password-vault";
 
 export interface SaveAccountInput {
   username: string;
@@ -66,6 +72,7 @@ export class AccountService {
       email: data.email?.trim() || null,
       phone: data.phone?.trim() || null,
       passwordHash,
+      passwordCiphertext: sealAccountPassword(plainPassword),
       roles: data.roles,
       actorId,
     });
@@ -91,13 +98,46 @@ export class AccountService {
 
     const user = await this.users.updateAccount(id, {
       displayName: data.name?.trim(),
-      email: data.email !== undefined ? (data.email?.trim() || null) : undefined,
-      phone: data.phone !== undefined ? (data.phone?.trim() || null) : undefined,
+      email: data.email !== undefined ? data.email?.trim() || null : undefined,
+      phone: data.phone !== undefined ? data.phone?.trim() || null : undefined,
       passwordHash,
+      passwordCiphertext: passwordHash
+        ? sealAccountPassword(data.password!.trim())
+        : undefined,
       roles: data.roles,
       actorId,
     });
     return accountDto(user);
+  }
+
+  async revealPassword(id: string, actorId: string) {
+    const actor = await this.users.findById(actorId);
+    if (!actor?.userRoles.some((link) => link.role.name === "ADMIN"))
+      throw new ForbiddenException(
+        "Chỉ quản trị viên được xem mật khẩu tài khoản.",
+      );
+    const user = await this.users.findById(id);
+    if (!user) throw new NotFoundException("Không tìm thấy tài khoản");
+    if (!user.passwordCiphertext) {
+      await this.users.recordPasswordView(id, actorId, false);
+      return {
+        available: false,
+        password: null,
+        message:
+          "Mật khẩu này được lưu trước khi bật kho mã hóa nên chưa thể xem. Có thể xem sau lần đổi hoặc đặt lại mật khẩu tiếp theo.",
+      };
+    }
+    let password: string;
+    try {
+      password = openAccountPassword(user.passwordCiphertext);
+    } catch {
+      throw new ServiceUnavailableException(
+        "Không mở được kho mật khẩu. Kiểm tra khóa mã hóa trên máy chủ.",
+      );
+    }
+    // Logging must succeed before the credential is returned. Never log the secret.
+    await this.users.recordPasswordView(id, actorId, true);
+    return { available: true, password, message: "" };
   }
 
   async resetPassword(id: string, actorId: string) {
@@ -107,7 +147,12 @@ export class AccountService {
     }
     const defaultPassword = existing.student?.studentCode || "Default@2026";
     const passwordHash = await bcrypt.hash(defaultPassword, 12);
-    const user = await this.users.resetPassword(id, passwordHash, actorId);
+    const user = await this.users.resetPassword(
+      id,
+      passwordHash,
+      actorId,
+      sealAccountPassword(defaultPassword),
+    );
     return accountDto(user);
   }
 

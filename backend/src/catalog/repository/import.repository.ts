@@ -1,5 +1,6 @@
 import { ConflictException, Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
+import { sealAccountPassword } from "../../auth/security/password-vault";
 import { PrismaService } from "../../prisma/prisma.service";
 import { AuditService } from "../../common/audit/audit.service";
 import type { ConfirmMode, StudentImportRow } from "../dto/catalog.dto";
@@ -83,6 +84,7 @@ export class ImportUnitOfWork {
               displayName: v.fullName,
               email: v.email,
               passwordHash: passwordHash!,
+              passwordCiphertext: sealAccountPassword(v.studentCode),
               status: "ACTIVE" as const,
               mustChangePassword: true,
               userRoles: { create: { roleId } },

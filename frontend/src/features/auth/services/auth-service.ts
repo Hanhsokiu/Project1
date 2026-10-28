@@ -18,6 +18,11 @@ import {
   uid,
 } from "../../../shared/data/store";
 import { contactSchema, passwordSchema } from "../../../shared/data/schemas";
+export interface PasswordReveal {
+  available: boolean;
+  password: string | null;
+  message: string;
+}
 const failures = new Map<string, number>();
 const mockAuthService = {
   login(username: string, password: string) {
@@ -236,6 +241,23 @@ export const authService = {
     return httpClient
       .patch<{ data: Account }>(`/accounts/${id}/status`)
       .then((res) => res.data.data);
+  },
+  async revealPassword(id: string): Promise<PasswordReveal> {
+    if (!AUTH_API) {
+      return mutate("Xem mật khẩu tài khoản", ["ADMIN"], (db) => {
+        const account = db.accounts.find((item) => item.id === id);
+        assert(account, "Không tìm thấy tài khoản");
+        return {
+          available: !!account.password,
+          password: account.password || null,
+          message: account.password ? "" : "Chưa có dữ liệu mật khẩu để xem.",
+        };
+      });
+    }
+    const response = await httpClient.post<{ data: PasswordReveal }>(
+      `/accounts/${id}/reveal-password`,
+    );
+    return response.data.data;
   },
   resetPassword(id: string) {
     if (!AUTH_API) return mockAuthService.resetPassword(id);
