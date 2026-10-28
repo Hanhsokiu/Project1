@@ -8,22 +8,165 @@ import { Prisma } from "@prisma/client";
 import {
   AssignmentRepository,
   WorkflowTx,
+  type LoadedPlan,
 } from "../../registration/repository/assignment.repository";
 import { TermWindowService } from "../../term/service/term-window.service";
 import {
   LoadedProposal,
   TopicRepository,
+  type TopicAssignmentReadContext,
 } from "../repository/topic.repository";
 import { ProposalContent } from "../dto/proposal.dto";
 import { ProposalValidator as V } from "../validator/proposal.validator";
-import { reviewHash } from "../proposal-reviews/proposal-review.validator";
+import {
+  ProposalReviewValidator,
+  reviewHash,
+} from "../proposal-reviews/proposal-review.validator";
+import {
+  ProposalReviewSession,
+  type ReviewPrincipal,
+} from "../proposal-reviews/proposal-review.repository";
+import { academicTermScope } from "../../common/security/academic-term-scope.policy";
 @Injectable()
 export class TopicService {
   constructor(
     private readonly assignments: AssignmentRepository,
     private readonly repo: TopicRepository,
     private readonly windows: TermWindowService,
+    private readonly policy: ProposalReviewValidator,
   ) {}
+  private async principal(
+    userId: string,
+    tx: WorkflowTx,
+    action: "read" | "write",
+  ) {
+    const session = new ProposalReviewSession(tx);
+    const actor = this.policy.principal(await session.principal(userId));
+    if (
+      actor.id !== userId ||
+      actor.mustChangePassword ||
+      !actor.userRoles.some((r) =>
+        r.role.rolePermissions.some(
+          (p) =>
+            p.permission.resource === "topic" && p.permission.action === action,
+        ),
+      )
+    )
+      throw new ForbiddenException("Thiếu quyền thao tác đề tài.");
+    return { actor, session };
+  }
+  private manager(actor: ReviewPrincipal) {
+    return actor.userRoles.some((r) =>
+      ["ADMIN", "FACULTY"].includes(r.role.name),
+    );
+  }
+  private async scope(actor: ReviewPrincipal, termId: string, tx: WorkflowTx) {
+    return academicTermScope(
+      this.manager(actor)
+        ? await new ProposalReviewSession(tx).grants(actor.id, termId)
+        : [],
+      actor.id,
+      termId,
+    );
+  }
+  private async assignment(
+    termId: string,
+    studentId: string,
+    tx: WorkflowTx,
+    handedOver: boolean,
+    plans?: LoadedPlan[],
+    facts?: TopicAssignmentReadContext,
+  ) {
+    const available = plans ?? (await this.assignments.plans(termId, tx));
+    const term = facts
+      ? facts.term
+      : await tx.termWorkflow.findUnique({ where: { termId } });
+    const official =
+      handedOver ||
+      !!term?.officialAssignmentPlanId ||
+      available.some((p) => p.status === "FINALIZED");
+    const plan = official
+      ? available.find(
+          (p) =>
+            p.id === term?.officialAssignmentPlanId &&
+            p.termId === termId &&
+            p.status === "FINALIZED",
+        )
+      : available.find((p) => p.termId === termId && p.status === "PUBLISHED");
+    if (official) {
+      const meta = plan
+        ? facts
+          ? facts.metadata.get(plan.id)
+          : await tx.assignmentPlanWorkflow.findUnique({
+              where: { planId: plan.id },
+            })
+        : null;
+      if (
+        !plan ||
+        !meta?.finalizedAt ||
+        !meta.finalizedByUserId ||
+        meta.finalizedAt > new Date()
+      )
+        throw new ConflictException(
+          "Thiếu phân công FINALIZED và officialAssignmentPlanId hợp lệ.",
+        );
+    }
+    const assignment = plan?.advisorAssignments.find(
+      (a) =>
+        a.registration.termId === termId &&
+        a.registration.studentId === studentId,
+    );
+    if (!assignment) return null;
+    if (official) {
+      const change = facts
+        ? facts.changes.get(assignment.id)
+        : await tx.assignmentChange.findFirst({
+            where: { assignmentId: assignment.id },
+            orderBy: { assignmentRevision: "desc" },
+          });
+      const roster = facts
+        ? facts.roster.get(assignment.advisorId)
+        : await tx.termLecturer.findUnique({
+            where: {
+              termId_lecturerId: { termId, lecturerId: assignment.advisorId },
+            },
+          });
+      if (
+        assignment.advisor.id !== assignment.advisorId ||
+        !assignment.advisor.isActive ||
+        assignment.advisor.user.status !== "ACTIVE" ||
+        !roster ||
+        roster.termId !== termId ||
+        roster.lecturerId !== assignment.advisorId ||
+        (change &&
+          (change.assignmentId !== assignment.id ||
+            change.newAdvisorId !== assignment.advisorId ||
+            !Number.isInteger(change.assignmentRevision) ||
+            change.assignmentRevision < 1 ||
+            !Number.isFinite(change.effectiveAt?.getTime()) ||
+            change.effectiveAt > new Date()))
+      )
+        throw new ConflictException(
+          "Phân công GVHD hoặc lịch sử bàn giao hiện hành không hợp lệ.",
+        );
+    }
+    return assignment;
+  }
+  private async department(
+    p: LoadedProposal,
+    tx: WorkflowTx,
+    facts?: TopicAssignmentReadContext,
+  ) {
+    if (p.termId !== p.topic.termId)
+      throw new ConflictException("Hồ sơ không khớp đợt.");
+    if (facts) return facts.departments.get(p.topic.researchAreaId ?? "");
+    const mapping = p.topic.researchAreaId
+      ? await tx.researchAreaWorkflow.findUnique({
+          where: { researchAreaId: p.topic.researchAreaId },
+        })
+      : null;
+    return mapping?.departmentId;
+  }
   private async access(
     termId: string,
     studentId: string,
@@ -31,21 +174,44 @@ export class TopicService {
     tx: WorkflowTx,
     write: boolean,
   ) {
-    const plans = await this.assignments.plans(termId, tx);
-    const plan = plans.find((p) => p.status !== "DRAFT");
-    const assignment = plan?.advisorAssignments.find(
-      (a) => a.registration.studentId === studentId,
+    const { actor } = await this.principal(
+      userId,
+      tx,
+      write ? "write" : "read",
+    );
+    const p = (await this.repo.proposals(termId, tx)).find(
+      (p) => p.studentId === studentId,
+    );
+    if (p && p.topic.termId !== termId)
+      throw new ConflictException("Hồ sơ không khớp đợt.");
+    const assignment = await this.assignment(
+      termId,
+      studentId,
+      tx,
+      !!p?.pr2bProposalWorkflowProposalId,
     );
     if (!assignment)
       throw new ForbiddenException("Chưa có GVHD chính thức trong đợt.");
-    const actor = await this.assignments.actor(userId, tx);
+    const owner = !!actor.student?.isActive && actor.student.id === studentId;
+    const advisor =
+      !!actor.lecturer?.isActive && actor.lecturer.id === assignment.advisorId;
     if (write) {
+      if (!owner && !advisor)
+        throw new ForbiddenException(
+          "Chỉ chủ hồ sơ và GVHD hiện hành được ghi.",
+        );
       V.owner(studentId, assignment.advisorId, actor);
       await this.windows.requireOpen(termId, "PROPOSAL", new Date(), tx);
-    } else if (
-      !actor.userRoles.some((r) => ["ADMIN", "FACULTY"].includes(r.role.name))
-    )
-      V.owner(studentId, assignment.advisorId, actor);
+    } else if (!owner && !advisor) {
+      const scope = await this.scope(actor, termId, tx);
+      if (!p || !scope.contains(await this.department(p, tx)))
+        throw new ForbiddenException({
+          error: {
+            code: "TOPIC_SCOPE_FORBIDDEN",
+            message: "Hồ sơ nằm ngoài AcademicTermGrant được cấp.",
+          },
+        });
+    }
     return { assignment, actor };
   }
   private dto(
@@ -90,25 +256,48 @@ export class TopicService {
   }
   list(termId: string, userId: string) {
     return this.assignments.transaction(async (tx) => {
-      const plans = await this.assignments.plans(termId, tx),
-        plan = plans.find((p) => p.status !== "DRAFT");
-      if (!plan) return [];
-      const actor = await this.assignments.actor(userId, tx),
-        manager = actor.userRoles.some((r) =>
-          ["ADMIN", "FACULTY"].includes(r.role.name),
-        );
+      const { actor } = await this.principal(userId, tx, "read");
+      const scope = await this.scope(actor, termId, tx);
+      if (
+        this.manager(actor) &&
+        !scope.configured &&
+        !actor.student?.isActive &&
+        !actor.lecturer?.isActive
+      )
+        throw new ForbiddenException({
+          error: {
+            code: "TOPIC_SCOPE_FORBIDDEN",
+            message: "Thiếu AcademicTermGrant cho đợt.",
+          },
+        });
+      const plans = await this.assignments.plans(termId, tx);
       const rows = await this.repo.proposals(termId, tx);
-      return rows.flatMap((p) => {
-        const a = plan.advisorAssignments.find(
-          (a) => a.registration.studentId === p.studentId,
+      const facts = await this.repo.assignmentReadContext(
+        termId,
+        plans,
+        rows,
+        tx,
+      );
+      const result = [];
+      for (const p of rows) {
+        if (p.termId !== termId || p.topic.termId !== termId) continue;
+        const a = await this.assignment(
+          termId,
+          p.studentId,
+          tx,
+          !!p.pr2bProposalWorkflowProposalId,
+          plans,
+          facts,
         );
-        return a &&
-          (manager ||
-            actor.student?.id === p.studentId ||
-            actor.lecturer?.id === a.advisorId)
-          ? [this.dto(p, a.advisorId, a.registration.directionId)]
-          : [];
-      });
+        if (
+          a &&
+          ((actor.student?.isActive && actor.student.id === p.studentId) ||
+            (actor.lecturer?.isActive && actor.lecturer.id === a.advisorId) ||
+            scope.contains(await this.department(p, tx, facts)))
+        )
+          result.push(this.dto(p, a.advisorId, a.registration.directionId));
+      }
+      return result;
     });
   }
   save(

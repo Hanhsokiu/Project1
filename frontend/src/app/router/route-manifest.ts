@@ -10,6 +10,68 @@ const M: Role[] = ["ADMIN", "FACULTY"];
 const G: Role[] = [...M, "LECTURER"];
 const A: Role[] = [...G, "STUDENT", "COMMITTEE"];
 export const routeManifest: RouteInfo[] = [
+  {
+    path: "/grading/reviewer",
+    title: "Phiếu phản biện",
+    group: "Điểm và kết quả",
+    roles: ["LECTURER"],
+  },
+  {
+    path: "/grading/committee",
+    title: "Phiếu hội đồng",
+    group: "Điểm và kết quả",
+    roles: ["LECTURER", "COMMITTEE"],
+  },
+  {
+    path: "/grading/results",
+    title: "Kết quả đồ án",
+    group: "Điểm và kết quả",
+    roles: ["FACULTY", "STUDENT"],
+  },
+  {
+    path: "/grading/policy",
+    title: "Cấu hình chấm điểm",
+    group: "Điểm và kết quả",
+    roles: ["FACULTY"],
+    menu: import.meta.env.VITE_GRADING_API === "true",
+  },
+  {
+    path: "/report/official",
+    title: "Xuất dữ liệu bảo vệ chính thức",
+    group: "Điểm và kết quả",
+    roles: ["FACULTY"],
+    menu: import.meta.env.VITE_GRADING_API === "true",
+  },
+  {
+    path: "/defense/published",
+    title: "Lịch bảo vệ đã công bố",
+    group: "Bảo vệ đồ án",
+    roles: A,
+  },
+  {
+    path: "/defense/committees",
+    title: "Hội đồng bảo vệ UC19",
+    group: "Bảo vệ đồ án",
+    roles: M,
+  },
+  {
+    path: "/defense/reviewers",
+    title: "Phân công phản biện UC20",
+    group: "Bảo vệ đồ án",
+    roles: M,
+  },
+  {
+    path: "/defense/schedule",
+    title: "Lịch bảo vệ UC21",
+    group: "Bảo vệ đồ án",
+    roles: M,
+  },
+  {
+    path: "/defense/eligibility",
+    title: "Xét điều kiện bảo vệ UC18",
+    group: "Xét duyệt & hướng dẫn",
+    roles: M,
+  },
   { path: "/", title: "Tổng quan", group: "Không gian làm việc", roles: A },
   {
     path: "/notifications",
@@ -237,7 +299,11 @@ export const routeManifest: RouteInfo[] = [
       ["FACULTY", "LECTURER", "STUDENT"],
     ],
     ["/guidance/review", "Nhận xét báo cáo", ["LECTURER"]],
-    ["/guidance/review/:submissionId", "Chi tiết nhận xét", ["FACULTY", "LECTURER", "STUDENT"]],
+    [
+      "/guidance/review/:submissionId",
+      "Chi tiết nhận xét",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
     ["/guidance/progress", "Theo dõi tiến độ", ["FACULTY"]],
     [
       "/guidance/meetings",

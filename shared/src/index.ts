@@ -1,9 +1,18 @@
-import { z } from 'zod';
-export * from './contracts/review-groups';
-export * from './contracts/proposal-reviews';
-export * from './contracts/proposal-versions';
+import { z } from "zod";
+export * from "./contracts/review-groups";
+export * from "./contracts/proposal-reviews";
+export * from "./contracts/proposal-versions";
 
-export type { Id, Instant, Revision, CurrentUserResponse, OfficialAdvisorContext, TopicAgreement, SubmittedProposalContext, GuidancePeriodContext } from './contracts/academic-context';
+export type {
+  Id,
+  Instant,
+  Revision,
+  CurrentUserResponse,
+  OfficialAdvisorContext,
+  TopicAgreement,
+  SubmittedProposalContext,
+  GuidancePeriodContext,
+} from "./contracts/academic-context";
 import { RegistrationWriteSchema } from "./step2";
 export * from "./step1";
 export * from "./step2";
@@ -44,7 +53,10 @@ export type LoginInput = z.infer<typeof LoginSchema>;
 export const RegistrationPrefSchema = RegistrationWriteSchema;
 
 export type RegistrationPrefInput = z.infer<typeof RegistrationPrefSchema>;
-export * from './contracts/proposal-dossiers';
-export * from './contracts/guidance-tasks';
-export * from './contracts/task-submissions';
-export * from './contracts/guidance-reviews';
+export * from "./contracts/proposal-dossiers";
+export * from "./contracts/guidance-tasks";
+export * from "./contracts/task-submissions";
+export * from "./contracts/guidance-reviews";
+export * from "./contracts/defense-planning";
+export * from "./contracts/defense-workflow";
+export * from "./contracts/grading-workflow";

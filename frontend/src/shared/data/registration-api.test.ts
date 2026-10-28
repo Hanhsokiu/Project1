@@ -82,6 +82,56 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 describe("API registration ownership", () => {
+  it("keeps permitted workspace data when topic/outbox grants are denied, with explicit notices and no demo fallback", async () => {
+    const previous = f.request.getMockImplementation()!;
+    f.request.mockImplementation(async (request) => {
+      if (request.url === "/terms") {
+        const response = await previous(request);
+        response.data.data.items[0].assignmentPublished = true;
+        return response;
+      }
+      if (request.url === `/topics/term/${termId}`)
+        throw Object.assign(new Error("Denied"), {
+          status: 403,
+          code: "TOPIC_SCOPE_FORBIDDEN",
+        });
+      if (request.url === `/notifications/outbox/term/${termId}`)
+        throw Object.assign(new Error("Denied"), {
+          status: 403,
+          code: "OUTBOX_SCOPE_FORBIDDEN",
+        });
+      return previous(request);
+    });
+    const { hydrateStep1Snapshot } = await import("./snapshot-api");
+    const hydrated = await hydrateStep1Snapshot(createSeed());
+    expect(hydrated.registrations[0].id).toBe(row.id);
+    expect(hydrated.topics).toEqual([]);
+    expect(hydrated.notifications).toEqual([]);
+    expect(hydrated.academicAccessWarnings).toHaveLength(2);
+    expect(hydrated.academicAccessWarnings!.join(" ")).toContain(
+      "chưa được tải",
+    );
+  });
+  it.each([401, 403, 500])(
+    "does not hide other HTTP %s errors while hydrating outbox",
+    async (status) => {
+      const previous = f.request.getMockImplementation()!;
+      f.request.mockImplementation((request) =>
+        request.url === `/notifications/outbox/term/${termId}`
+          ? Promise.reject(
+              Object.assign(new Error("API failed"), {
+                status,
+                code: "OTHER_ERROR",
+              }),
+            )
+          : previous(request),
+      );
+      const { hydrateStep1Snapshot } = await import("./snapshot-api");
+      await expect(hydrateStep1Snapshot(createSeed())).rejects.toThrow(
+        "API failed",
+      );
+    },
+  );
   it("rejects mixed registration API with mock catalogs instead of using mock IDs", async () => {
     vi.stubEnv("VITE_CATALOG_API", "false");
     const { hydrateStep1Snapshot } = await import("./snapshot-api");

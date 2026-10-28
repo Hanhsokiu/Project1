@@ -33,6 +33,7 @@ import {
   Person,
   Confirm,
   labels,
+  Notice,
 } from "../../shared/components/kit";
 import { currentUser, resetDemo } from "../../shared/data/store";
 import {
@@ -237,6 +238,11 @@ function Shell() {
           </div>
         </header>
         <main className="page-content" key={`${termId}-${user.id}`}>
+          {db.academicAccessWarnings?.length ? (
+            <Notice tone="warning">
+              {db.academicAccessWarnings.join(" ")}
+            </Notice>
+          ) : null}
           <Outlet />
         </main>
       </div>

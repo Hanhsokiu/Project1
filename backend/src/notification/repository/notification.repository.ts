@@ -3,10 +3,70 @@ import {
   ConflictException,
   NotFoundException,
 } from "@nestjs/common";
-import { EmailOutbox } from "@prisma/client";
+import { EmailOutbox, Prisma } from "@prisma/client";
 import { randomUUID } from "node:crypto";
 import { PrismaService } from "../../prisma/prisma.service";
 import { ProposalReviewSession } from "../../topic/proposal-reviews/proposal-review.repository";
+
+// Keep the fields consumed by Step 3; do not return student payloads or leases.
+export const outboxStatusSelect = {
+  id: true,
+  termId: true,
+  userId: true,
+  subject: true,
+  status: true,
+  attempts: true,
+  lastError: true,
+  availableAt: true,
+  sentAt: true,
+  messageId: true,
+  createdAt: true,
+} satisfies Prisma.EmailOutboxSelect;
+
+export class NotificationOutboxSession extends ProposalReviewSession {
+  constructor(private readonly db: Prisma.TransactionClient) {
+    super(db);
+  }
+  async lockTerm(termId: string) {
+    await this.db
+      .$queryRaw`SELECT id FROM public."THESIS_TERM" WHERE id=${termId} FOR UPDATE`;
+  }
+  async lockOutbox(id: string) {
+    await this.db
+      .$queryRaw`SELECT id FROM public."EMAIL_OUTBOX" WHERE id=${id} FOR UPDATE`;
+  }
+  listOutbox(termId: string) {
+    return this.db.emailOutbox.findMany({
+      where: { termId },
+      orderBy: [{ createdAt: "desc" }, { id: "desc" }],
+      select: outboxStatusSelect,
+    });
+  }
+  record(id: string) {
+    return this.db.emailOutbox.findUnique({
+      where: { id },
+      select: { id: true, termId: true, status: true },
+    });
+  }
+  async retry(id: string, termId: string) {
+    const result = await this.db.emailOutbox.updateMany({
+      where: { id, termId, status: "FAILED" },
+      data: {
+        status: "PENDING",
+        attempts: 0,
+        availableAt: new Date(),
+        lastError: null,
+        leaseToken: null,
+        lockedAt: null,
+      },
+    });
+    if (result.count !== 1)
+      throw new ConflictException(
+        "Chỉ gửi lại email thất bại; trạng thái vừa thay đổi.",
+      );
+    return { id, status: "PENDING" };
+  }
+}
 @Injectable()
 export class NotificationRepository {
   constructor(private readonly prisma: PrismaService) {}
@@ -26,29 +86,20 @@ export class NotificationRepository {
       throw new NotFoundException("Không tìm thấy thông báo của bạn.");
     return { updated: r.count };
   }
-  outbox(termId: string) {
-    return this.prisma.emailOutbox.findMany({
-      where: { termId },
-      orderBy: { createdAt: "desc" },
-    });
-  }
-  async retry(id: string) {
-    const row = await this.prisma.emailOutbox.findUnique({ where: { id } });
-    if (!row) throw new NotFoundException("Không tìm thấy sự kiện email.");
-    const result = await this.prisma.emailOutbox.updateMany({
-      where: { id, status: "FAILED" },
-      data: {
-        status: "PENDING",
-        attempts: 0,
-        availableAt: new Date(),
-        lastError: null,
-        leaseToken: null,
-        lockedAt: null,
+  outboxTransaction<T>(
+    operation: (
+      s: NotificationOutboxSession,
+      tx: Prisma.TransactionClient,
+    ) => Promise<T>,
+  ) {
+    return this.prisma.$transaction(
+      (tx) => operation(new NotificationOutboxSession(tx), tx),
+      {
+        isolationLevel: Prisma.TransactionIsolationLevel.ReadCommitted,
+        maxWait: 10000,
+        timeout: 15000,
       },
-    });
-    if (!result.count)
-      throw new ConflictException("Chỉ gửi lại email thất bại.");
-    return { id, status: "PENDING" };
+    );
   }
   async claim(termId?: string) {
     const token = randomUUID();

@@ -82,12 +82,18 @@ export class NotificationController {
   }
   @Get("notifications/outbox/term/:termId")
   @RequirePermission("assignment", "manage")
-  async outbox(@Param("termId", ParseUUIDPipe) id: string) {
-    return ApiResponse.ok(await this.notifService.outbox(id));
+  async outbox(
+    @Param("termId", ParseUUIDPipe) id: string,
+    @Req() r: { user: { sub?: string; userId?: string } },
+  ) {
+    return ApiResponse.ok(await this.notifService.outbox(this.user(r), id));
   }
   @Post("notifications/outbox/:id/retry")
   @RequirePermission("assignment", "manage")
-  async retry(@Param("id", ParseUUIDPipe) id: string) {
-    return ApiResponse.ok(await this.notifService.retry(id));
+  async retry(
+    @Param("id", ParseUUIDPipe) id: string,
+    @Req() r: { user: { sub?: string; userId?: string } },
+  ) {
+    return ApiResponse.ok(await this.notifService.retry(this.user(r), id));
   }
 }

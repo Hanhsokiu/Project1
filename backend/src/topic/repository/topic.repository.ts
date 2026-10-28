@@ -12,6 +12,51 @@ export type LoadedProposal = Prisma.ProposalGetPayload<{
 }>;
 @Injectable()
 export class TopicRepository {
+  async assignmentReadContext(
+    termId: string,
+    plans: { id: string; advisorAssignments: { id: string }[] }[],
+    rows: LoadedProposal[],
+    tx: WorkflowTx,
+  ) {
+    // One set of facts for the entire list, not several remote queries per row.
+    const [term, metadata, changes, roster, departments] = await Promise.all([
+      tx.termWorkflow.findUnique({ where: { termId } }),
+      tx.assignmentPlanWorkflow.findMany({
+        where: { planId: { in: plans.map((p) => p.id) } },
+      }),
+      tx.assignmentChange.findMany({
+        where: {
+          assignmentId: {
+            in: plans.flatMap((p) => p.advisorAssignments.map((a) => a.id)),
+          },
+        },
+        orderBy: { assignmentRevision: "desc" },
+        distinct: ["assignmentId"],
+      }),
+      tx.termLecturer.findMany({
+        where: { termId },
+        select: { termId: true, lecturerId: true },
+      }),
+      tx.researchAreaWorkflow.findMany({
+        where: {
+          researchAreaId: {
+            in: rows
+              .map((p) => p.topic.researchAreaId)
+              .filter((id): id is string => !!id),
+          },
+        },
+      }),
+    ]);
+    return {
+      term,
+      metadata: new Map(metadata.map((m) => [m.planId, m])),
+      changes: new Map(changes.map((c) => [c.assignmentId, c])),
+      roster: new Map(roster.map((r) => [r.lecturerId, r])),
+      departments: new Map(
+        departments.map((d) => [d.researchAreaId, d.departmentId]),
+      ),
+    };
+  }
   proposals(termId: string, tx: WorkflowTx) {
     return tx.proposal.findMany({
       where: { termId },
@@ -142,3 +187,6 @@ export class TopicRepository {
     });
   }
 }
+export type TopicAssignmentReadContext = Awaited<
+  ReturnType<TopicRepository["assignmentReadContext"]>
+>;

@@ -77,6 +77,31 @@ enum DefenseEligibilityStatus {
 
 }
 
+// Whole-term UC18 lifecycle. UNKNOWN is a read result, never persisted here.
+enum DefenseListState {
+  DRAFT
+  OPEN
+  FINALIZED
+}
+
+enum DefenseStage {
+  COMMITTEES
+  REVIEWERS
+  SCHEDULE
+}
+
+enum DefenseStageState {
+  DRAFT
+  FINALIZED
+  PUBLISHED
+}
+
+enum DefenseAcademicVerdict {
+  SATISFIED
+  NOT_SATISFIED
+  SPECIAL
+}
+
 enum DefermentStatus {
   PENDING
   DEPARTMENT_APPROVED
@@ -114,6 +139,10 @@ enum ImportJobStatus {
 // ============================================
 
 model UserAccount {
+  gradingPolicyRevisions GradingPolicyRevision[]
+  gradingSheetRevisions GradingSheetRevision[]
+  gradingResultRevisions GradingResultRevision[]
+  gradingSheets GradingSheet[]
   id                 String        @id @default(uuid())
   username           String        @unique
   email              String?       @unique
@@ -133,6 +162,14 @@ model UserAccount {
   notifications Notification[]
   student       Student?
   lecturer      Lecturer?
+  defenseConfirmationsDecided DefenseConfirmation[] @relation("DefenseConfirmation_decidedByUserId")
+  defenseConfirmationHistory DefenseConfirmationHistory[] @relation("DefenseConfirmationHistory_actorId")
+  defenseListsOpened DefenseList[] @relation("DefenseList_openedByUserId")
+  defenseListFinalizations DefenseListFinalization[] @relation("DefenseListFinalization_finalizedByUserId")
+  defensePoliciesUpdated DefenseList[] @relation("DefenseList_policyActor")
+  defenseAcademicEvidence DefenseAcademicEvidence[]
+  defenseStagesUpdated DefenseStageWorkflow[]
+  defenseArtifactsSealed DefenseStageArtifact[]
 
   @@map("USER_ACCOUNT")
   pr2bAcademicTermGrantUserId AcademicTermGrant[] @relation("AcademicTermGrant_userId")
@@ -330,6 +367,8 @@ model Lecturer {
   reviewerAssignments ReviewerAssignment[] @relation("ReviewerAssignment")
   committeeMembers    CommitteeMember[]
   registrationPreferences RegistrationPref[]
+  defenseConfirmations DefenseConfirmation[] @relation("DefenseConfirmation_advisorId")
+  defenseConfirmationHistory DefenseConfirmationHistory[] @relation("DefenseConfirmationHistory_advisorId")
 
   @@map("LECTURER")
   pr2bAssignmentChangeOldAdvisorId AssignmentChange[] @relation("AssignmentChange_oldAdvisorId")
@@ -435,6 +474,9 @@ model AcademicSemester {
 }
 
 model ThesisTerm {
+  gradingPolicy GradingPolicy?
+  gradingSheets GradingSheet[]
+  gradingResults GradingResult[]
   id               String     @id @default(uuid())
   code             String     @unique
   name             String
@@ -459,6 +501,10 @@ model ThesisTerm {
   proposals         Proposal[]
   defenseCommittees DefenseCommittee[]
   exportJobs        ExportJob[]
+  finalReportSubmissionWindow FinalReportSubmissionWindow?
+  defenseConfirmationWindow DefenseConfirmationWindow?
+  defenseList DefenseList?
+  defenseAcademicEvidence DefenseAcademicEvidence[]
   importJobs        ImportJob[]
   semesterRecord    AcademicSemester?  @relation(fields: [semesterId], references: [id])
   trainingSystem    TrainingSystem?    @relation(fields: [trainingSystemId], references: [id])
@@ -488,6 +534,36 @@ model TermPhase {
   @@unique([termId, code])
   @@map("TERM_PHASE")
   pr2bTermPhaseWorkflowPhaseId TermPhaseWorkflow? @relation("TermPhaseWorkflow_phaseId")
+}
+
+// Independent FINAL_REPORT_SUBMISSION milestone; not part of the six-phase plan.
+model FinalReportSubmissionWindow {
+  termId    String   @id @map("term_id") @db.VarChar(36)
+  opensAt   DateTime @map("opens_at") @db.Timestamptz(6)
+  closesAt  DateTime @map("closes_at") @db.Timestamptz(6)
+  isLocked  Boolean  @default(true) @map("is_locked")
+  revision  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@map("FINAL_REPORT_SUBMISSION_WINDOW")
+}
+
+// Independent DEFENSE_CONFIRMATION milestone; not part of the six-phase plan.
+model DefenseConfirmationWindow {
+  termId    String   @id @map("term_id") @db.VarChar(36)
+  opensAt   DateTime @map("opens_at") @db.Timestamptz(6)
+  closesAt  DateTime @map("closes_at") @db.Timestamptz(6)
+  isLocked  Boolean  @default(true) @map("is_locked")
+  revision  Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+
+  @@map("DEFENSE_CONFIRMATION_WINDOW")
 }
 
 model TermParameter {
@@ -657,6 +733,9 @@ model TopicHistory {
 }
 
 model Proposal {
+  gradingSheets GradingSheet[]
+  gradingResult GradingResult?
+  @@unique([id, termId], map: "proposal_grading_term_key")
   id        String         @id @default(uuid())
   topicId   String         @map("topic_id")
   studentId String         @map("student_id")
@@ -671,6 +750,8 @@ model Proposal {
   versions ProposalVersion[]
   reviews  ProposalReview[]
   dossier  ThesisDossier?
+  finalReport FinalReport?
+  defenseConfirmation DefenseConfirmation?
 
   @@unique([termId, studentId])
   @@map("PROPOSAL")
@@ -917,8 +998,14 @@ model FinalReport {
   id          String    @id @default(uuid())
   proposalId  String    @unique @map("proposal_id")
   filePath    String?   @map("file_path")
+  fileAssetId String?   @unique @map("file_asset_id") @db.VarChar(36)
+  revision    Int       @default(0)
   submittedAt DateTime? @map("submitted_at") @db.Timestamptz(6)
   createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  // Match the FK already created by 0_init; do not recreate or change it.
+  proposal Proposal   @relation(fields: [proposalId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "FINAL_REPORT_proposal_id_fkey")
+  fileAsset FileAsset? @relation(fields: [fileAssetId], references: [id], onDelete: Restrict, onUpdate: Cascade)
 
   @@map("FINAL_REPORT")
 
@@ -932,14 +1019,175 @@ model DefenseConfirmation {
   note        String?
   confirmedAt DateTime? @map("confirmed_at") @db.Timestamptz(6)
   createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  // Revision zero and nullable context distinguish untouched legacy records.
+  revision        Int       @default(0)
+  decidedAt       DateTime? @map("decided_at") @db.Timestamptz(6)
+  decidedByUserId String?   @map("decided_by_user_id") @db.VarChar(36)
+  decisionContext Json?     @map("decision_context")
+  updatedAt       DateTime? @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  // Match the existing 0_init FKs, including their original referential actions.
+  proposal Proposal @relation(fields: [proposalId], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "DEFENSE_CONFIRMATION_proposal_id_fkey")
+  advisor Lecturer @relation("DefenseConfirmation_advisorId", fields: [advisorId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "DEFENSE_CONFIRMATION_advisor_id_fkey")
+  decidedBy UserAccount? @relation("DefenseConfirmation_decidedByUserId", fields: [decidedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  history DefenseConfirmationHistory[]
 
   @@map("DEFENSE_CONFIRMATION")
 
 }
 
+// Append-only decision metadata. PDF/assignment snapshots are JSON values, not
+// foreign keys: replacing a PDF must never retain its old FileAsset or bytes.
+model DefenseConfirmationHistory {
+  id              String   @id @default(uuid()) @db.VarChar(36)
+  confirmationId  String   @map("confirmation_id") @db.VarChar(36)
+  revision        Int
+  status          String   @db.VarChar(50)
+  note            String?
+  changeReason    String?  @map("change_reason")
+  decidedAt       DateTime @map("decided_at") @db.Timestamptz(6)
+  actorId         String   @map("actor_id") @db.VarChar(36)
+  advisorId       String   @map("advisor_id") @db.VarChar(36)
+  decisionContext Json     @map("decision_context")
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  confirmation DefenseConfirmation @relation(fields: [confirmationId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  actor UserAccount @relation("DefenseConfirmationHistory_actorId", fields: [actorId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  advisor Lecturer @relation("DefenseConfirmationHistory_advisorId", fields: [advisorId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+
+  @@unique([confirmationId, revision])
+  @@index([actorId, decidedAt])
+  @@map("DEFENSE_CONFIRMATION_HISTORY")
+}
+
 // ============================================
 // V007: DEFENSE MODULE
 // ============================================
+
+// One coordinator for the entire term. Opening/reopening is always explicit;
+// there is no default configuration or inference from DefenseEligibility.
+model DefenseList {
+  termId                String           @id @map("term_id") @db.VarChar(36)
+  state                 DefenseListState @default(DRAFT)
+  revision              Int              @default(0)
+  openedAt              DateTime?        @map("opened_at") @db.Timestamptz(6)
+  openedByUserId        String?          @map("opened_by_user_id") @db.VarChar(36)
+  currentFinalizationId String?          @map("current_finalization_id") @db.VarChar(36)
+  workflowPolicy Json? @map("workflow_policy")
+  workflowPolicyRevision Int @default(0) @map("workflow_policy_revision")
+  workflowPolicyUpdatedAt DateTime? @map("workflow_policy_updated_at") @db.Timestamptz(6)
+  workflowPolicyUpdatedByUserId String? @map("workflow_policy_updated_by_user_id") @db.VarChar(36)
+  createdAt             DateTime         @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt             DateTime         @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+
+  term     ThesisTerm   @relation(fields: [termId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  openedBy UserAccount? @relation("DefenseList_openedByUserId", fields: [openedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  finalizations DefenseListFinalization[] @relation("DefenseListFinalization_termId")
+  policyActor UserAccount? @relation("DefenseList_policyActor", fields: [workflowPolicyUpdatedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  stages DefenseStageWorkflow[] @relation("DefenseStageWorkflow_list")
+  // One FK verifies ownership and the revision sealed by this pointer. Clear
+  // the pointer in the same UPDATE that reopens/increments the coordinator.
+  currentFinalization DefenseListFinalization? @relation("DefenseList_currentFinalization", fields: [currentFinalizationId, termId, revision], references: [id, termId, listRevision], onDelete: Restrict, onUpdate: NoAction)
+
+  @@unique([currentFinalizationId, termId, revision], map: "DEFENSE_LIST_current_finalization_id_term_id_revision_key")
+  @@map("DEFENSE_LIST")
+}
+
+// Append-only metadata for each successful whole-term finalization. Student,
+// proposal, UC17 and PDF evidence stays in JSON, with no FK to old PDF assets.
+model DefenseListFinalization {
+  id                    String   @id @default(uuid()) @db.VarChar(36)
+  termId                String   @map("term_id") @db.VarChar(36)
+  version               Int
+  listRevision          Int      @map("list_revision")
+  snapshotSchemaVersion Int      @map("snapshot_schema_version")
+  snapshot              Json
+  contentHash           String   @map("content_hash") @db.VarChar(64)
+  finalizedAt           DateTime @map("finalized_at") @db.Timestamptz(6)
+  finalizedByUserId     String   @map("finalized_by_user_id") @db.VarChar(36)
+
+  list DefenseList @relation("DefenseListFinalization_termId", fields: [termId], references: [termId], onDelete: Restrict, onUpdate: NoAction)
+  finalizedBy UserAccount @relation("DefenseListFinalization_finalizedByUserId", fields: [finalizedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  currentFor DefenseList? @relation("DefenseList_currentFinalization")
+  sourceForStages DefenseStageWorkflow[] @relation("DefenseStageWorkflow_uc18")
+
+  @@unique([termId, version], map: "DEFENSE_LIST_FINALIZATION_term_id_version_key")
+  @@unique([termId, listRevision], map: "DEFENSE_LIST_FINALIZATION_term_id_list_revision_key")
+  @@unique([id, termId, listRevision], map: "DEFENSE_LIST_FINALIZATION_id_term_id_list_revision_key")
+  @@map("DEFENSE_LIST_FINALIZATION")
+}
+
+// Manual UC18 proof stream. IDs of roster members are captured, not deletion-
+// blocking foreign keys into the editable Step 1 roster. No legacy backfill.
+model DefenseAcademicEvidence {
+  id String @id @default(uuid()) @db.VarChar(36)
+  termId String @map("term_id") @db.VarChar(36)
+  termStudentId String @map("term_student_id") @db.VarChar(36)
+  studentId String @map("student_id") @db.VarChar(36)
+  revision Int
+  verdict DefenseAcademicVerdict
+  sourceReference String @map("source_reference")
+  note String
+  schemaVersion Int @map("schema_version")
+  contentHash String @map("content_hash") @db.VarChar(64)
+  verifiedAt DateTime @map("verified_at") @db.Timestamptz(6)
+  verifiedByUserId String @map("verified_by_user_id") @db.VarChar(36)
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  verifiedBy UserAccount @relation(fields: [verifiedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  @@unique([termId, termStudentId, revision])
+  @@index([termId, studentId, revision])
+  @@map("DEFENSE_ACADEMIC_EVIDENCE")
+}
+
+model DefenseStageWorkflow {
+  termId String @map("term_id") @db.VarChar(36)
+  stage DefenseStage
+  state DefenseStageState @default(DRAFT)
+  revision Int @default(0)
+  draft Json?
+  sourceFinalizationId String @map("source_finalization_id") @db.VarChar(36)
+  sourceListRevision Int @map("source_list_revision")
+  upstreamArtifactId String? @map("upstream_artifact_id") @db.VarChar(36)
+  upstreamStage DefenseStage? @map("upstream_stage")
+  upstreamRevision Int? @map("upstream_revision")
+  currentArtifactId String? @map("current_artifact_id") @db.VarChar(36)
+  updatedByUserId String @map("updated_by_user_id") @db.VarChar(36)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt DateTime @default(now()) @updatedAt @map("updated_at") @db.Timestamptz(6)
+  list DefenseList @relation("DefenseStageWorkflow_list", fields: [termId], references: [termId], onDelete: Restrict, onUpdate: NoAction)
+  source DefenseListFinalization @relation("DefenseStageWorkflow_uc18", fields: [sourceFinalizationId, termId, sourceListRevision], references: [id, termId, listRevision], onDelete: Restrict, onUpdate: NoAction, map: "defense_stage_source_fkey")
+  updatedBy UserAccount @relation(fields: [updatedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  currentArtifact DefenseStageArtifact? @relation("DefenseStageWorkflow_current", fields: [currentArtifactId, termId, stage, revision], references: [id, termId, stage, workflowRevision], onDelete: Restrict, onUpdate: NoAction, map: "defense_stage_current_fkey")
+  upstream DefenseStageArtifact? @relation("DefenseStageWorkflow_upstream", fields: [upstreamArtifactId, termId, upstreamStage, upstreamRevision], references: [id, termId, stage, workflowRevision], onDelete: Restrict, onUpdate: NoAction, map: "defense_stage_upstream_fkey")
+  artifacts DefenseStageArtifact[] @relation("DefenseStageArtifact_workflow")
+  @@id([termId, stage])
+  @@unique([currentArtifactId, termId, stage, revision], map: "defense_stage_current_key")
+  @@index([termId, state])
+  @@map("DEFENSE_STAGE_WORKFLOW")
+}
+
+model DefenseStageArtifact {
+  gradingSources GradingSheetRevision[]
+  id String @id @default(uuid()) @db.VarChar(36)
+  termId String @map("term_id") @db.VarChar(36)
+  stage DefenseStage
+  state DefenseStageState
+  version Int
+  workflowRevision Int @map("workflow_revision")
+  snapshotSchemaVersion Int @map("snapshot_schema_version")
+  snapshot Json
+  contentHash String @map("content_hash") @db.VarChar(64)
+  sealedAt DateTime @map("sealed_at") @db.Timestamptz(6)
+  sealedByUserId String @map("sealed_by_user_id") @db.VarChar(36)
+  workflow DefenseStageWorkflow @relation("DefenseStageArtifact_workflow", fields: [termId, stage], references: [termId, stage], onDelete: Restrict, onUpdate: NoAction, map: "defense_artifact_workflow_fkey")
+  sealedBy UserAccount @relation(fields: [sealedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  currentFor DefenseStageWorkflow? @relation("DefenseStageWorkflow_current")
+  upstreamFor DefenseStageWorkflow[] @relation("DefenseStageWorkflow_upstream")
+  @@unique([termId, stage, version], map: "defense_artifact_version_key")
+  @@unique([termId, stage, workflowRevision], map: "defense_artifact_revision_key")
+  @@unique([id, termId, stage, workflowRevision], map: "defense_artifact_identity_key")
+  @@map("DEFENSE_STAGE_ARTIFACT")
+}
 
 model DefenseEligibility {
   id         String                   @id @default(uuid())
@@ -1133,6 +1381,126 @@ model FinalResult {
 // ============================================
 // V009: REPORT & EXPORT MODULE
 // ============================================
+
+enum GradingKind {
+  REVIEWER
+  COMMITTEE
+}
+
+enum GradingSheetState {
+  DRAFT
+  SEALED
+}
+
+enum GradingResultState {
+  SEALED
+  PUBLISHED
+}
+
+model GradingPolicy {
+  termId String @id @map("term_id") @db.VarChar(36)
+  revision Int @default(0)
+  currentRevisionId String? @unique @map("current_revision_id") @db.VarChar(36)
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  current GradingPolicyRevision? @relation("GradingPolicy_current", fields: [currentRevisionId, termId, revision], references: [id, termId, revision], onDelete: Restrict, onUpdate: NoAction, map: "grading_policy_current_fk")
+  history GradingPolicyRevision[] @relation("GradingPolicy_history")
+  @@unique([currentRevisionId, termId, revision], map: "grading_policy_pointer_key")
+  @@map("GRADING_POLICY")
+}
+
+model GradingPolicyRevision {
+  id String @id @default(uuid()) @db.VarChar(36)
+  termId String @map("term_id") @db.VarChar(36)
+  revision Int
+  config Json
+  contentHash String @map("content_hash") @db.VarChar(64)
+  recordedAt DateTime @map("recorded_at") @db.Timestamptz(6)
+  recordedByUserId String @map("recorded_by_user_id") @db.VarChar(36)
+  policy GradingPolicy @relation("GradingPolicy_history", fields: [termId], references: [termId], onDelete: Restrict, onUpdate: NoAction)
+  currentFor GradingPolicy? @relation("GradingPolicy_current")
+  actor UserAccount @relation(fields: [recordedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  resultRevisions GradingResultRevision[]
+  @@unique([termId, revision], map: "grading_policy_version_key")
+  @@unique([id, termId, revision], map: "grading_policy_identity_key")
+  @@map("GRADING_POLICY_REVISION")
+}
+
+model GradingSheet {
+  id String @id @default(uuid()) @db.VarChar(36)
+  termId String @map("term_id") @db.VarChar(36)
+  proposalId String @map("proposal_id") @db.VarChar(36)
+  scorerUserId String @map("scorer_user_id") @db.VarChar(36)
+  kind GradingKind
+  state GradingSheetState @default(DRAFT)
+  revision Int @default(0)
+  currentRevisionId String? @unique @map("current_revision_id") @db.VarChar(36)
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  proposal Proposal @relation(fields: [proposalId, termId], references: [id, termId], onDelete: Restrict, onUpdate: NoAction, map: "grading_sheet_proposal_fk")
+  scorer UserAccount @relation(fields: [scorerUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  current GradingSheetRevision? @relation("GradingSheet_current", fields: [currentRevisionId, id, revision], references: [id, sheetId, revision], onDelete: Restrict, onUpdate: NoAction, map: "grading_sheet_current_fk")
+  history GradingSheetRevision[] @relation("GradingSheet_history")
+  @@unique([termId, proposalId, scorerUserId, kind], map: "grading_sheet_owner_key")
+  @@unique([id, termId], map: "grading_sheet_term_key")
+  @@unique([currentRevisionId, id, revision], map: "grading_sheet_pointer_key")
+  @@map("GRADING_SHEET")
+}
+
+model GradingSheetRevision {
+  id String @id @default(uuid()) @db.VarChar(36)
+  sheetId String @map("sheet_id") @db.VarChar(36)
+  termId String @map("term_id") @db.VarChar(36)
+  revision Int
+  state GradingSheetState
+  snapshot Json
+  contentHash String @map("content_hash") @db.VarChar(64)
+  sourceArtifactId String @map("source_artifact_id") @db.VarChar(36)
+  sourceStage DefenseStage @map("source_stage")
+  sourceRevision Int @map("source_revision")
+  recordedAt DateTime @map("recorded_at") @db.Timestamptz(6)
+  recordedByUserId String @map("recorded_by_user_id") @db.VarChar(36)
+  sheet GradingSheet @relation("GradingSheet_history", fields: [sheetId, termId], references: [id, termId], onDelete: Restrict, onUpdate: NoAction, map: "grading_sheet_history_fk")
+  currentFor GradingSheet? @relation("GradingSheet_current")
+  source DefenseStageArtifact @relation(fields: [sourceArtifactId, termId, sourceStage, sourceRevision], references: [id, termId, stage, workflowRevision], onDelete: Restrict, onUpdate: NoAction, map: "grading_sheet_source_fk")
+  actor UserAccount @relation(fields: [recordedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  @@unique([sheetId, revision], map: "grading_sheet_version_key")
+  @@unique([id, sheetId, revision], map: "grading_sheet_revision_identity_key")
+  @@map("GRADING_SHEET_REVISION")
+}
+
+model GradingResult {
+  proposalId String @id @map("proposal_id") @db.VarChar(36)
+  termId String @map("term_id") @db.VarChar(36)
+  revision Int @default(0)
+  state GradingResultState @default(SEALED)
+  currentRevisionId String? @unique @map("current_revision_id") @db.VarChar(36)
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  proposal Proposal @relation(fields: [proposalId, termId], references: [id, termId], onDelete: Restrict, onUpdate: NoAction, map: "grading_result_proposal_fk")
+  current GradingResultRevision? @relation("GradingResult_current", fields: [currentRevisionId, proposalId, revision], references: [id, proposalId, revision], onDelete: Restrict, onUpdate: NoAction, map: "grading_result_current_fk")
+  history GradingResultRevision[] @relation("GradingResult_history")
+  @@unique([proposalId, termId], map: "grading_result_term_key")
+  @@unique([currentRevisionId, proposalId, revision], map: "grading_result_pointer_key")
+  @@map("GRADING_RESULT")
+}
+
+model GradingResultRevision {
+  id String @id @default(uuid()) @db.VarChar(36)
+  proposalId String @map("proposal_id") @db.VarChar(36)
+  termId String @map("term_id") @db.VarChar(36)
+  revision Int
+  state GradingResultState
+  snapshot Json
+  contentHash String @map("content_hash") @db.VarChar(64)
+  policyRevision Int @map("policy_revision")
+  recordedAt DateTime @map("recorded_at") @db.Timestamptz(6)
+  recordedByUserId String @map("recorded_by_user_id") @db.VarChar(36)
+  result GradingResult @relation("GradingResult_history", fields: [proposalId, termId], references: [proposalId, termId], onDelete: Restrict, onUpdate: NoAction, map: "grading_result_history_fk")
+  currentFor GradingResult? @relation("GradingResult_current")
+  policy GradingPolicyRevision @relation(fields: [termId, policyRevision], references: [termId, revision], onDelete: Restrict, onUpdate: NoAction, map: "grading_result_policy_fk")
+  actor UserAccount @relation(fields: [recordedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  @@unique([proposalId, revision], map: "grading_result_version_key")
+  @@unique([id, proposalId, revision], map: "grading_result_revision_identity_key")
+  @@map("GRADING_RESULT_REVISION")
+}
 
 model ExportJob {
   id          String          @id @default(uuid())
@@ -1760,6 +2128,7 @@ model ProgressReview {
 }
 
 model FileAsset {
+  finalReport FinalReport?
   guidanceUpload GuidanceSubmissionUpload?
   pr2bDossierPdfContent DossierPdfContent?
   id String @id @default(uuid()) @db.VarChar(36)

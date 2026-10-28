@@ -1,0 +1,328 @@
+import {
+  test,
+  expect,
+  signInFixture,
+  gate,
+  inboxPath,
+  inbox,
+  detailPath,
+  assignedRow,
+  gradeContext,
+} from "./fixtures";
+
+test("API mode hides demo account selectors", async ({ page }) => {
+  await page.goto("/login");
+  await expect(
+    page.getByRole("heading", { name: "Chào mừng trở lại!" }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Quản trị viên", exact: true }),
+  ).toHaveCount(0);
+  await expect(page.getByText("KHÔNG GIAN DEMO · BƯỚC 1–3")).toHaveCount(0);
+});
+test("empty required login fields block submission before any HTTP request", async ({
+  page,
+  network,
+}) => {
+  await page.goto("/login");
+  await page.getByRole("button", { name: "Đăng nhập hệ thống" }).click();
+  expect(
+    await page
+      .locator("input[autocomplete=username]")
+      .evaluate((input: HTMLInputElement) => input.validity.valueMissing),
+  ).toBe(true);
+  expect(network.requests).toEqual([]);
+});
+test("login401 displays API error and never creates a demo session", async ({
+  page,
+  network,
+}) => {
+  network.error(
+    "POST",
+    "/api/auth/login",
+    401,
+    "INVALID_CREDENTIALS",
+    "Browser mock: invalid credentials",
+  );
+  await page.goto("/login");
+  await page
+    .getByPlaceholder("Ví dụ: 221230001 hoặc gv001")
+    .fill("not-a-real-user");
+  await page
+    .getByPlaceholder("Nhập mật khẩu")
+    .fill("test-only-not-a-real-password");
+  await page.getByRole("button", { name: "Đăng nhập hệ thống" }).click();
+  await expect(
+    page.getByText("Browser mock: invalid credentials", { exact: true }),
+  ).toBeVisible();
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("utc-thesis-session")),
+  ).toBe(null);
+  expect(network.requests.filter((r) => r.method === "POST")).toHaveLength(1);
+});
+test("login shows loading and disables duplicate submit until API finishes", async ({
+  page,
+  network,
+}) => {
+  const pending = gate();
+  network.handle("POST", "/api/auth/login", async (route) => {
+    await pending.promise;
+    await route.fulfill({
+      status: 401,
+      json: {
+        error: {
+          code: "INVALID_CREDENTIALS",
+          message: "Browser delayed rejection",
+        },
+      },
+    });
+  });
+  await page.goto("/login");
+  await page
+    .getByPlaceholder("Ví dụ: 221230001 hoặc gv001")
+    .fill("browser-test");
+  await page.getByPlaceholder("Nhập mật khẩu").fill("test-only");
+  await page.getByRole("button", { name: "Đăng nhập hệ thống" }).click();
+  try {
+    await expect(
+      page.getByRole("button", { name: "Đang đăng nhập…" }),
+    ).toBeDisabled();
+  } finally {
+    pending.release();
+  }
+  await expect(
+    page.getByText("Browser delayed rejection", { exact: true }),
+  ).toBeVisible();
+});
+test("grading navigation retains real API mode and term query", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  network.mock("GET", inboxPath, inbox());
+  await page.goto("/grading/reviewer?termId=browser-term");
+  await expect(
+    page.getByText("Không có hồ sơ được phân công chính thức", { exact: true }),
+  ).toBeVisible();
+  await page.getByRole("link", { name: "Hội đồng", exact: true }).click();
+  await expect(page).toHaveURL(/\/grading\/committee\?termId=browser-term$/);
+  await expect(
+    page.getByText(
+      "Dữ liệu API thật, theo phân công/permission/grant hiện hành.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+  expect(network.requests.length).toBeGreaterThanOrEqual(2);
+});
+test("empty term validation does not send an inbox request", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  await page.goto("/grading/reviewer");
+  await page.getByRole("button", { name: "Đọc dữ liệu đợt" }).click();
+  const input = page.getByLabel("ID đợt tốt nghiệp");
+  expect(
+    await input.evaluate(
+      (node: HTMLInputElement) => node.validity.valueMissing,
+    ),
+  ).toBe(true);
+  await expect(
+    page.getByText("Chọn đợt để bắt đầu", { exact: true }),
+  ).toBeVisible();
+  expect(network.requests).toEqual([]);
+});
+test("inbox loading becomes empty only after the mocked response", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  const pending = gate();
+  network.handle("GET", inboxPath, async (route) => {
+    await pending.promise;
+    await route.fulfill({ json: { data: inbox() } });
+  });
+  await page.goto("/grading/reviewer?termId=browser-term");
+  try {
+    await expect(
+      page.getByText("Đang đọc phân công chính thức…", { exact: true }),
+    ).toBeVisible();
+    await expect(
+      page.getByText("Không có hồ sơ được phân công chính thức", {
+        exact: true,
+      }),
+    ).toHaveCount(0);
+  } finally {
+    pending.release();
+  }
+  await expect(
+    page.getByText("Không có hồ sơ được phân công chính thức", { exact: true }),
+  ).toBeVisible();
+});
+test("API403 explains permission/grant without displaying demo rows", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  network.error(
+    "GET",
+    inboxPath,
+    403,
+    "GRADING_FORBIDDEN",
+    "Denied by browser mock",
+  );
+  await page.goto("/grading/reviewer?termId=browser-term");
+  await expect(
+    page.getByText("403 — Không có permission, grant hoặc phân công phù hợp.", {
+      exact: true,
+    }),
+  ).toBeVisible();
+  await expect(page.getByText("Browser Student", { exact: false })).toHaveCount(
+    0,
+  );
+  expect(network.requests.every((r) => r.method === "GET")).toBe(true);
+});
+test("API401 clears the API session and shows login guidance", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  network.error(
+    "GET",
+    inboxPath,
+    401,
+    "UNAUTHENTICATED",
+    "Expired test-only session",
+  );
+  await page.goto("/grading/reviewer?termId=browser-term");
+  await expect(
+    page.getByText("401 — Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.", {
+      exact: true,
+    }),
+  ).toBeVisible();
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("utc-api-access")),
+  ).toBe(null);
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("utc-thesis-session")),
+  ).toBe(null);
+});
+test("network failure stays an API error with no mock fallback", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  network.handle("GET", inboxPath, (route) => route.abort("failed"));
+  await page.goto("/grading/reviewer?termId=browser-term");
+  await expect(page.getByText(/Không kết nối được máy chủ/)).toBeVisible();
+  await expect(
+    page.getByText("Không có hồ sơ được phân công chính thức", { exact: true }),
+  ).toHaveCount(0);
+});
+test("own assigned context is shown using API revision and no automatic save", async ({
+  page,
+  network,
+}) => {
+  await prepareDetail(page, network);
+  await expect(
+    page.getByRole("heading", {
+      name: "Browser Student · Browser-only thesis",
+    }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Phiếu: DRAFT · Revision 1", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Tải PDF đúng revision context" }),
+  ).toBeDisabled();
+  expect(network.requests.every((r) => r.method === "GET")).toBe(true);
+});
+test("out-of-range score is rejected locally without a PUT", async ({
+  page,
+  network,
+}) => {
+  await prepareDetail(page, network);
+  await page
+    .getByRole("button", { name: "Nạp phiếu, đã xem lại nguồn hiện hành" })
+    .click();
+  await page.getByLabel("Browser criterion (0–10)").fill("11");
+  expect(
+    await page
+      .getByLabel("Browser criterion (0–10)")
+      .evaluate((input: HTMLInputElement) => input.validity.rangeOverflow),
+  ).toBe(true);
+  await page.getByRole("button", { name: "Lưu draft vào backend" }).click();
+  await expect(page.getByText(/too_big/)).toBeVisible();
+  expect(network.requests.filter((r) => r.method === "PUT")).toHaveLength(0);
+});
+test("409 context conflict requires another explicit review, with no automatic retry", async ({
+  page,
+  network,
+}) => {
+  await prepareDetail(page, network);
+  await page
+    .getByRole("button", { name: "Nạp phiếu, đã xem lại nguồn hiện hành" })
+    .click();
+  network.handle("PUT", `${detailPath}/draft`, async (route) => {
+    expect(route.request().headers().authorization).toBe(
+      "Bearer browser-test-token-not-a-real-jwt",
+    );
+    expect(route.request().postDataJSON()).toMatchObject({
+      expectedRevision: 1,
+      expectedContext: "1".repeat(64),
+    });
+    network.mock("GET", detailPath, gradeContext(2));
+    await route.fulfill({
+      status: 409,
+      json: {
+        error: {
+          code: "GRADING_CONTEXT_CHANGED",
+          message: "Context changed in browser mock",
+        },
+      },
+    });
+  });
+  await page.getByRole("button", { name: "Lưu draft vào backend" }).click();
+  await expect(page.getByText(/409 — Nguồn, revision/)).toBeVisible();
+  await expect(
+    page.getByText("Phiếu: DRAFT · Revision 2", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: "Lưu draft vào backend" }),
+  ).toHaveCount(0);
+  expect(network.requests.filter((r) => r.method === "PUT")).toHaveLength(1);
+});
+test("UC17 API inbox can be empty without inserting a demo proposal", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  network.mock("GET", "/api/defense-confirmations/terms", { items: [] });
+  await page.goto("/guidance/defense-confirm");
+  await expect(
+    page.getByRole("heading", { name: "Xác nhận bảo vệ UC17", exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Chưa có đợt trong phạm vi", { exact: true }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Chọn hồ sơ thực để xem UC17", { exact: true }),
+  ).toBeVisible();
+});
+
+async function prepareDetail(
+  page: Parameters<typeof signInFixture>[0],
+  network: import("./fixtures").MockNetwork,
+) {
+  await signInFixture(page);
+  network.mock("GET", inboxPath, inbox([assignedRow]));
+  network.mock("GET", detailPath, gradeContext());
+  network.mock("GET", `${detailPath}/history`, {
+    items: [],
+    nextRevision: null,
+  });
+  await page.goto("/grading/reviewer?termId=browser-term");
+  await page
+    .getByRole("button", { name: /Browser Student · Browser-only thesis/ })
+    .click();
+}

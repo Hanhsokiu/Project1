@@ -12,6 +12,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
+    "test:uc17:harness": "node --test test/uc17/harness.check.cjs",
+    "test:uc17:postgres": "node scripts/test-uc17.cjs",
     "prisma": "prisma",
     "db:test:init": "node scripts/database-test.cjs init",
     "db:test:up": "node scripts/database-test.cjs up",

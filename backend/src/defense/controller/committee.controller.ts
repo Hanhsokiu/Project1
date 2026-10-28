@@ -1,16 +1,19 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { CommitteeService } from '../service/committee.service';
-import { ApiResponse } from '../../common/dto/api-response.dto';
+import { Controller, ForbiddenException, Get } from '@nestjs/common';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('defense')
 @Controller('committees')
 export class CommitteeController {
-  constructor(private readonly committeeService: CommitteeService) {}
-
   @Get('term/:termId')
-  async getCommittees(@Param('termId') termId: string) {
-    const list = await this.committeeService.findByTerm(termId);
-    return ApiResponse.ok(list);
+  @ApiForbiddenResponse({ description: 'Chức năng đọc hội đồng chưa được mở.' })
+  getCommittees(): never {
+    // Keep this legacy reader closed until the UC19 access policy is approved.
+    // The existing global authentication guards still run before this handler.
+    throw new ForbiddenException({
+      error: {
+        code: 'COMMITTEE_READING_NOT_ENABLED',
+        message: 'Chức năng đọc hội đồng chưa được mở.',
+      },
+    });
   }
 }

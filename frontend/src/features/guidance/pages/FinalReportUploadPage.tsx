@@ -1,10 +1,7 @@
 import { useState } from "react";
-import {
-  CheckCircle2,
-  FileCheck2,
-  FileUp,
-  UploadCloud,
-} from "lucide-react";
+import FinalReportApiPage from "../final-reports/page";
+import { finalReportApiEnabled } from "../final-reports/config";
+import { CheckCircle2, FileCheck2, FileUp, UploadCloud } from "lucide-react";
 import {
   Badge,
   Button,
@@ -291,5 +288,6 @@ function FinalContent({ db }: { db: DemoDb }) {
   );
 }
 export default function FinalReportUploadPage() {
+  if (finalReportApiEnabled()) return <FinalReportApiPage />;
   return <DataBoundary>{(db) => <FinalContent db={db} />}</DataBoundary>;
 }

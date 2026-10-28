@@ -5,13 +5,13 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const require = createRequire(resolve(root, "backend/package.json"));
 const bcrypt = require("bcryptjs");
-import { client } from "./db-client.mjs";
+import { connectDisposableTestClient, verifyDisposableTestIdentity } from "./disposable-test-target.mjs";
 
-const pg = client();
-await pg.connect();
+const { client: pg, target } = await connectDisposableTestClient(process.env);
 
 try {
   await pg.query("BEGIN");
+  await verifyDisposableTestIdentity(pg, target);
 
   console.log("Cleaning operational tables...");
 
@@ -150,9 +150,9 @@ try {
 
   await pg.query("COMMIT");
   console.log("Database successfully cleaned! Only admin account remains.");
-} catch (error) {
+} catch {
   await pg.query("ROLLBACK");
-  console.error("Error cleaning database:", error);
+  console.error("Cleanup aborted and rolled back; diagnostic details suppressed.");
   process.exitCode = 1;
 } finally {
   await pg.end();

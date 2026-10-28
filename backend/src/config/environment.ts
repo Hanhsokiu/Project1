@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { readSubmissionPolicy } from '../guidance/submissions/submission-policy';
+import { finalReportMaxBytesSchema, TEMPORARY_FINAL_REPORT_MAX_BYTES } from '../guidance/final-reports/final-report-policy';
 
 const postgresUrl = z.string().refine((value) => {
   try {
@@ -26,6 +27,7 @@ const schema = z.object({
   }), 'Expected comma-separated HTTP(S) origins').default('http://localhost:5173'),
   MAIL_PORT: z.coerce.number().int().min(1).max(65535).default(1025),
   STORAGE_MAX_SIZE_MB: z.coerce.number().positive().default(50),
+  FINAL_REPORT_MAX_FILE_BYTES: finalReportMaxBytesSchema.default(TEMPORARY_FINAL_REPORT_MAX_BYTES),
   GUIDANCE_UPLOAD_ENABLED: z.enum(['true', 'false']).default('true'),
   GUIDANCE_UPLOAD_POLICY_JSON: z.string().optional().refine(value => {
     try { readSubmissionPolicy(value); return true; } catch { return false; }

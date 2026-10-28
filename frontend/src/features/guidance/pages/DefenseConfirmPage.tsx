@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { CheckCircle2, CircleX, FileCheck2, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import DefenseConfirmationApiPage from "../defense-confirmations/page";
+import { defenseConfirmationApiEnabled } from "../defense-confirmations/config";
 import {
   Badge,
   Button,
@@ -311,5 +313,6 @@ function ConfirmContent({ db }: { db: DemoDb }) {
   );
 }
 export default function DefenseConfirmPage() {
+  if (defenseConfirmationApiEnabled()) return <DefenseConfirmationApiPage />;
   return <DataBoundary>{(db) => <ConfirmContent db={db} />}</DataBoundary>;
 }

@@ -77,6 +77,7 @@ interface ApiPage<T> {
   totalPages?: number;
 }
 interface Step1Resources {
+  academicAccessWarnings?: string[];
   assignments?: DemoDb["assignments"];
   topics?: DemoDb["topics"];
   notifications?: DemoDb["notifications"];
@@ -140,6 +141,7 @@ function overlay(mock: DemoDb, api: Step1Resources): DemoDb {
   if (REGISTRATION_API)
     result.registrations = structuredClone(api.registrations ?? []);
   if (STEP3_API) {
+    result.academicAccessWarnings = [...(api.academicAccessWarnings ?? [])];
     result.assignments = structuredClone(api.assignments ?? []);
     result.topics = structuredClone(api.topics ?? []);
     result.notifications = structuredClone(api.notifications ?? []);
@@ -321,6 +323,34 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
     value.topics = [];
     value.notifications = [];
     value.assignedStudents = [];
+    value.academicAccessWarnings = [];
+    const scopedRead = async <T>(
+      read: () => Promise<T>,
+      unavailable: T,
+      term: Term,
+      label: string,
+    ): Promise<T> => {
+      try {
+        return await read();
+      } catch (error) {
+        if (
+          error &&
+          typeof error === "object" &&
+          "status" in error &&
+          error.status === 403 &&
+          "code" in error &&
+          ["TOPIC_SCOPE_FORBIDDEN", "OUTBOX_SCOPE_FORBIDDEN"].includes(
+            String(error.code),
+          )
+        ) {
+          value.academicAccessWarnings!.push(
+            `Đợt ${term.code}: không có quyền đọc ${label}; phần dữ liệu này chưa được tải.`,
+          );
+          return unavailable;
+        }
+        throw error;
+      }
+    };
     const actor = getApiUser();
     if (manager || actor?.studentId || actor?.lecturerId) {
       const contexts = await Promise.all(
@@ -328,18 +358,26 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
           if (!manager && !t.assignmentPublished) return null;
           const c = await assignmentApi.load(t.id, !!manager);
           cacheAssignment(t.id, c);
-          const topics = t.assignmentPublished ? await topicApi.list(t.id) : [];
+          const topics = t.assignmentPublished
+            ? await scopedRead(() => topicApi.list(t.id), [], t, "đề tài")
+            : [];
           const events = manager
-            ? await apiData<
-                {
-                  id: string;
-                  userId: string;
-                  subject: string;
-                  status: DemoDb["notifications"][number]["status"];
-                  attempts: number;
-                  lastError: string | null;
-                }[]
-              >("GET", `/notifications/outbox/term/${t.id}`)
+            ? await scopedRead(
+                () =>
+                  apiData<
+                    {
+                      id: string;
+                      userId: string;
+                      subject: string;
+                      status: DemoDb["notifications"][number]["status"];
+                      attempts: number;
+                      lastError: string | null;
+                    }[]
+                  >("GET", `/notifications/outbox/term/${t.id}`),
+                [],
+                t,
+                "outbox toàn đợt",
+              )
             : [];
           return { c, topics, events, termId: t.id };
         }),
@@ -389,5 +427,6 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
     }
   }
   resources = value;
+  value.academicAccessWarnings?.sort();
   return overlay(mock, value);
 }

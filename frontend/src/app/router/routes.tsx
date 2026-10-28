@@ -38,9 +38,59 @@ import {
 } from "react-router-dom";
 import { useWorkspace } from "../../shared/hooks/use-workspace";
 import { routeManifest } from "./route-manifest";
-import { Empty } from "../../shared/components/kit";
+import { Empty, Notice } from "../../shared/components/kit";
 import { AUTH_API, getApiUser } from "../../shared/api/api-session";
 import type { ReactNode } from "react";
+import { defenseConfirmationApiEnabled } from "../../features/guidance/defense-confirmations/config";
+import { finalReportApiEnabled } from "../../features/guidance/final-reports/config";
+import { defenseListMode } from "../../features/defense/defense-lists/api";
+import { defensePlanningMode } from "../../features/defense/planning/api";
+import { gradingMode } from "../../features/grading/workflow/api";
+const GradingWorkflowPage = lazy(
+  () => import("../../features/grading/workflow/pages"),
+);
+const DemoScoreEntryPage = lazy(
+  () => import("../../features/grading/pages/ScoreEntryPage"),
+);
+const DemoResultPage = lazy(
+  () => import("../../features/grading/pages/ResultPage"),
+);
+const DemoRubricPage = lazy(
+  () => import("../../features/grading/pages/RubricPage"),
+);
+const DefensePlanningLayout = lazy(
+  () => import("../../features/defense/planning/layout"),
+);
+const CommitteePlanningPage = lazy(() =>
+  import("../../features/defense/planning/pages").then((m) => ({
+    default: m.CommitteePlanningPage,
+  })),
+);
+const ReviewerPlanningPage = lazy(() =>
+  import("../../features/defense/planning/pages").then((m) => ({
+    default: m.ReviewerPlanningPage,
+  })),
+);
+const SchedulePlanningPage = lazy(() =>
+  import("../../features/defense/planning/pages").then((m) => ({
+    default: m.SchedulePlanningPage,
+  })),
+);
+const DemoCommitteePage = lazy(
+  () => import("../../features/defense/pages/CommitteePage"),
+);
+const DemoReviewerPage = lazy(
+  () => import("../../features/defense/pages/ReviewerAssignPage"),
+);
+const DemoSchedulePage = lazy(
+  () => import("../../features/defense/pages/SchedulePage"),
+);
+const DefenseListPage = lazy(
+  () => import("../../features/defense/defense-lists/page"),
+);
+const PublishedSchedulePage = lazy(
+  () => import("../../features/defense/workflow/published"),
+);
 
 function WorkflowAccess({ children }: { children: ReactNode }) {
   const location = useLocation();
@@ -245,6 +295,70 @@ const wrap = (el: React.ReactNode) => (
 );
 
 export const router = createBrowserRouter([
+  ...(gradingMode() !== "DEMO"
+    ? (
+        [
+          ["/grading/scores", "REVIEWER"],
+          ["/grading/reviewer", "REVIEWER"],
+          ["/grading/committee", "COMMITTEE"],
+          ["/grading/results", "RESULTS"],
+          ["/grading/policy", "POLICY"],
+          ["/report/official", "REPORTS"],
+        ] as const
+      ).map(([path, mode]) => ({
+        path,
+        element: wrap(<GradingWorkflowPage mode={mode} />),
+        errorElement: <RouteError />,
+      }))
+    : []),
+  {
+    path: "/defense/published",
+    element: wrap(<PublishedSchedulePage />),
+    errorElement: <RouteError />,
+  },
+  ...(defensePlanningMode() !== "DEMO"
+    ? [
+        {
+          path: "/defense",
+          element: wrap(<DefensePlanningLayout />),
+          errorElement: <RouteError />,
+          children: [
+            { path: "committees", element: wrap(<CommitteePlanningPage />) },
+            { path: "reviewers", element: wrap(<ReviewerPlanningPage />) },
+            { path: "schedule", element: wrap(<SchedulePlanningPage />) },
+          ],
+        },
+      ]
+    : []),
+  ...(defenseListMode() !== "DEMO"
+    ? [
+        {
+          path: "/defense/eligibility",
+          element: wrap(<DefenseListPage />),
+          errorElement: <RouteError />,
+        },
+      ]
+    : []),
+  // Student real PDF details must not hydrate the demo workspace/roster.
+  ...(finalReportApiEnabled()
+    ? [
+        {
+          path: "/guidance/final-report",
+          element: wrap(<FinalReportUploadPage />),
+          errorElement: <RouteError />,
+        },
+      ]
+    : []),
+  // Real UC17 details authenticate independently of the demo workspace/roster.
+  ...(defenseConfirmationApiEnabled()
+    ? [
+        {
+          path: "/guidance/defense-confirm",
+          element: wrap(<DefenseConfirmPage />),
+          errorElement: <RouteError />,
+        },
+      ]
+    : []),
   {
     path: "/guidance/review",
     element: (
@@ -429,15 +543,84 @@ export const router = createBrowserRouter([
           { path: "topic/my", element: wrap(<MyTopicPage />) },
           { path: "topic/draft", element: wrap(<ProposalEditorPage />) },
           { path: "topic/overview", element: wrap(<DossierPage />) },
-          {
-            path: "guidance/defense-confirm",
-            element: wrap(<DefenseConfirmPage />),
-          },
-          {
-            path: "guidance/final-report",
-            element: wrap(<FinalReportUploadPage />),
-          },
+          ...(defensePlanningMode() === "DEMO"
+            ? [
+                {
+                  path: "defense/committees",
+                  element: wrap(
+                    <>
+                      <Notice>
+                        DEMO UC19 — không phải hội đồng chính thức.
+                      </Notice>
+                      <DemoCommitteePage />
+                    </>,
+                  ),
+                },
+                {
+                  path: "defense/reviewers",
+                  element: wrap(
+                    <>
+                      <Notice>
+                        DEMO UC20 — không phải phân công chính thức.
+                      </Notice>
+                      <DemoReviewerPage />
+                    </>,
+                  ),
+                },
+                {
+                  path: "defense/schedule",
+                  element: wrap(
+                    <>
+                      <Notice>DEMO UC21 — không phải lịch chính thức.</Notice>
+                      <DemoSchedulePage />
+                    </>,
+                  ),
+                },
+              ]
+            : []),
+          ...(defenseListMode() === "DEMO"
+            ? [
+                {
+                  path: "defense/eligibility",
+                  element: wrap(<DefenseListPage />),
+                },
+              ]
+            : []),
+          ...(!defenseConfirmationApiEnabled()
+            ? [
+                {
+                  path: "guidance/defense-confirm",
+                  element: wrap(<DefenseConfirmPage />),
+                },
+              ]
+            : []),
+          ...(!finalReportApiEnabled()
+            ? [
+                {
+                  path: "guidance/final-report",
+                  element: wrap(<FinalReportUploadPage />),
+                },
+              ]
+            : []),
 
+          ...(gradingMode() === "DEMO"
+            ? [
+                {
+                  path: "grading/scores",
+                  element: wrap(<DemoScoreEntryPage />),
+                },
+                {
+                  path: "grading/reviewer",
+                  element: wrap(<DemoScoreEntryPage />),
+                },
+                {
+                  path: "grading/committee",
+                  element: wrap(<DemoScoreEntryPage />),
+                },
+                { path: "grading/results", element: wrap(<DemoResultPage />) },
+                { path: "grading/rubric", element: wrap(<DemoRubricPage />) },
+              ]
+            : []),
           { path: "report/export", element: wrap(<ExportCenterPage />) },
           { path: "profile", element: wrap(<ProfilePage />) },
           { path: "change-password", element: wrap(<ChangePasswordPage />) },

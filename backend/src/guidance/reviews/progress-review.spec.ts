@@ -16,6 +16,7 @@ import type {
 } from "./progress-review.repository";
 import { NotificationService } from "../../notification/service/notification.service";
 import { ProposalReviewValidator } from "../../topic/proposal-reviews/proposal-review.validator";
+import type { AuditService } from "../../common/audit/audit.service";
 const v = new ProgressReviewValidator();
 function fixture() {
   const files = ["REPORT", "SOURCE"].map((kind, n) => ({
@@ -238,6 +239,7 @@ describe("8C notification access regression", () => {
           legacy,
         } as never,
         new ProposalReviewValidator(),
+        { log: vi.fn() } as unknown as AuditService,
       );
     expect(await service.getUserNotifications("me", "me")).toEqual([]);
     expect(legacy).toHaveBeenCalledTimes(1);
@@ -256,6 +258,7 @@ describe("8C notification access regression", () => {
           read,
         } as never,
         new ProposalReviewValidator(),
+        { log: vi.fn() } as unknown as AuditService,
       );
     expect(await service.read("me", "own")).toMatchObject({
       userId: "me",

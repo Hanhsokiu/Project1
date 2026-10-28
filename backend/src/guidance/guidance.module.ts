@@ -1,4 +1,6 @@
 import { Module } from "@nestjs/common";
+import { FinalReportModule } from "./final-reports/final-report.module";
+import { DefenseConfirmationModule } from "./defense-confirmations/defense-confirmation.module";
 import { ProgressReviewController } from "./reviews/progress-review.controller";
 import { ProgressReviewService } from "./reviews/progress-review.service";
 import { ProgressRepository } from "./reviews/progress-review.repository";
@@ -19,6 +21,7 @@ import { GuidanceValidator } from "./tasks/guidance.validator";
 import { ProposalReviewValidator } from "../topic/proposal-reviews/proposal-review.validator";
 
 @Module({
+  imports: [FinalReportModule, DefenseConfirmationModule],
   controllers: [
     TaskController,
     GuidanceController,
@@ -39,6 +42,6 @@ import { ProposalReviewValidator } from "../topic/proposal-reviews/proposal-revi
     GuidanceValidator,
     ProposalReviewValidator,
   ],
-  exports: [TaskService],
+  exports: [TaskService, DefenseConfirmationModule],
 })
 export class GuidanceModule {}

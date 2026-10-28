@@ -1,16 +1,19 @@
-import { Controller, Get, Param } from '@nestjs/common';
-import { ApiTags } from '@nestjs/swagger';
-import { ScoreService } from '../service/score.service';
-import { ApiResponse } from '../../common/dto/api-response.dto';
+import { Controller, ForbiddenException, Get } from '@nestjs/common';
+import { ApiForbiddenResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('grading')
 @Controller('scores')
 export class ScoreController {
-  constructor(private readonly scoreService: ScoreService) {}
-
   @Get('proposal/:proposalId')
-  async getScores(@Param('proposalId') proposalId: string) {
-    const res = await this.scoreService.getScoresByProposal(proposalId);
-    return ApiResponse.ok(res);
+  @ApiForbiddenResponse({ description: 'Chức năng đọc điểm chưa được mở.' })
+  getScores(): never {
+    // Keep this legacy route closed until the score-reading policy is approved.
+    // Authentication still runs through the existing global guards first.
+    throw new ForbiddenException({
+      error: {
+        code: 'SCORE_READING_NOT_ENABLED',
+        message: 'Chức năng đọc điểm chưa được mở.',
+      },
+    });
   }
 }

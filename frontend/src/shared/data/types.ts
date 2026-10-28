@@ -308,6 +308,8 @@ export interface ImportRow {
   errors: string[];
 }
 export interface DemoDb {
+  /** API-only scope notices; omitted data must never be replaced with demo rows. */
+  academicAccessWarnings?: string[];
   version: number;
   accounts: Account[];
   catalogs: CatalogItem[];
