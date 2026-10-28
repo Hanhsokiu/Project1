@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "sharedDatabaseDDL": false,
+  "checks": [
+    {
+      "name": "injected DDL failure atomically rolls back review consistency guards, indexes and permissions",
+      "result": "PASS"
+    },
+    {
+      "name": "legacy bool result, task/submission, meeting summary and notification remain byte-for-byte data equivalent; no guessed split/backfill",
+      "result": "PASS"
+    },
+    {
+      "name": "review/monitor grants are separated by role and never assigned to ADMIN",
+      "result": "PASS"
+    },
+    {
+      "name": "ten applied checksums match original SQL and repeat deploy applies nothing twice",
+      "result": "PASS"
+    }
+  ]
+}

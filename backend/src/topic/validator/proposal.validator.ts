@@ -7,6 +7,10 @@ import { LoadedProposal } from "../repository/topic.repository";
 import { ProposalContent } from "../dto/proposal.dto";
 export class ProposalValidator {
   static editable(p: LoadedProposal) {
+    if (p.pr2bProposalWorkflowProposalId)
+      throw new ConflictException(
+        "Đề cương đã chuyển sang quản lý phiên bản. Hãy chỉnh sửa trong Đề cương & phiên bản.",
+      );
     if (
       ["APPROVED", "UNDER_REVIEW"].includes(p.status) ||
       p.dossier?.status === "APPROVED"

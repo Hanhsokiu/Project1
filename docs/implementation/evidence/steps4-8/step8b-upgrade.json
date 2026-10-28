@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "sharedDatabaseDDL": false,
+  "checks": [
+    {
+      "name": "injected failure rolls back staging table, snapshot columns, triggers, indexes and permission grants",
+      "result": "PASS"
+    },
+    {
+      "name": "legacy tasks/submissions/false review remain identical; no fabricated owner, result, files, policy or backfill",
+      "result": "PASS"
+    },
+    {
+      "name": "only scoped read/download and student create permissions; no implicit ADMIN academic grant",
+      "result": "PASS"
+    },
+    {
+      "name": "all nine migration checksums match and repeat deploy changes nothing",
+      "result": "PASS"
+    }
+  ]
+}

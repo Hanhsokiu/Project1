@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Download, Eye, Plus, Save, Send, Trash2 } from "lucide-react";
 import {
   Back,
@@ -19,6 +19,7 @@ import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import type { Topic, ProposalVersion } from "../../../shared/data/types";
 import { topicService } from "../services/topic-service";
+import { topicApi } from "../services/topic-api";
 import {
   exportPdf,
   exportProposalPdf,
@@ -37,6 +38,8 @@ export default function ProposalEditorPage() {
   );
 }
 function ProposalEditor({ studentId }: { studentId: string }) {
+  const navigate = useNavigate();
+  const [handoff, setHandoff] = useState(false);
   const { db, user, termId, term } = useWorkspace();
   const action = useAction();
   const topic = db.topics.find(
@@ -62,6 +65,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
     topic?.versions.slice(-1)[0]?.version ?? 0,
   );
   const readonly =
+    !!topic?.workflowReady ||
     term.locked ||
     (!!topic &&
       ![
@@ -132,6 +136,23 @@ function ProposalEditor({ studentId }: { studentId: string }) {
               Xem trước
             </Button>
             <Badge value={topic?.status || "DRAFT"} />
+            {STEP3_API &&
+              topic &&
+              (topic.workflowReady ? (
+                <Link
+                  className="btn btn-primary"
+                  to={`/topic/proposal/${topic.id}`}
+                >
+                  Mở đề cương & phiên bản
+                </Link>
+              ) : (
+                <Button
+                  disabled={action.pending}
+                  onClick={() => setHandoff(true)}
+                >
+                  Chuyển sang xét duyệt & phiên bản
+                </Button>
+              ))}
           </>
         }
       />
@@ -422,6 +443,20 @@ function ProposalEditor({ studentId }: { studentId: string }) {
             </Button>
           )}
         </Modal>
+      )}
+      {handoff && topic && (
+        <Confirm
+          title="Chuyển sang quản lý phiên bản?"
+          description="Cần chốt phân công chính thức trước. Hệ thống giữ nguyên các phiên bản bước 3 và tạo bản nháp mới. Bạn cần bổ sung nội dung, thời gian và mốc thực hiện trước khi nộp xét duyệt."
+          pending={action.pending}
+          onClose={() => setHandoff(false)}
+          onConfirm={async () => {
+            const result = await action.run(() =>
+              topicApi.prepareWorkflow(topic.id),
+            );
+            if (result) navigate(`/topic/proposal/${topic.id}`);
+          }}
+        />
       )}
       {confirm && (
         <Confirm

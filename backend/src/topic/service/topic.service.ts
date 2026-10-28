@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   ForbiddenException,
+  ConflictException,
 } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import {
@@ -15,6 +16,7 @@ import {
 } from "../repository/topic.repository";
 import { ProposalContent } from "../dto/proposal.dto";
 import { ProposalValidator as V } from "../validator/proposal.validator";
+import { reviewHash } from "../proposal-reviews/proposal-review.validator";
 @Injectable()
 export class TopicService {
   constructor(
@@ -55,6 +57,7 @@ export class TopicService {
       {}) as unknown as ProposalContent;
     return {
       id: p.id,
+      workflowReady: !!p.pr2bProposalWorkflowProposalId,
       termId: p.termId,
       studentId: p.studentId,
       lecturerId: advisorId,
@@ -220,6 +223,142 @@ export class TopicService {
         tx,
       );
       return this.dto(saved, a.advisorId, a.registration.directionId);
+    });
+  }
+  prepareWorkflow(id: string, userId: string) {
+    return this.assignments.transaction(async (tx) => {
+      const p = await this.repo.find(id, tx);
+      if (!p) throw new NotFoundException("Không tìm thấy đề cương.");
+      const { assignment } = await this.access(
+        p.termId,
+        p.studentId,
+        userId,
+        tx,
+        true,
+      );
+      if (p.pr2bProposalWorkflowProposalId) return { proposalId: p.id };
+      V.editable(p);
+      const planMeta = await tx.assignmentPlanWorkflow.findUnique({
+        where: { planId: assignment.assignmentPlanId },
+      });
+      const termMeta = await tx.termWorkflow.findUnique({
+        where: { termId: p.termId },
+      });
+      if (
+        !planMeta?.finalizedAt ||
+        !planMeta.finalizedByUserId ||
+        termMeta?.officialAssignmentPlanId !== assignment.assignmentPlanId ||
+        (
+          await tx.assignmentPlan.findUnique({
+            where: { id: assignment.assignmentPlanId },
+          })
+        )?.status !== "FINALIZED"
+      )
+        throw new ConflictException(
+          "Cần chốt phân công chính thức trước khi chuyển đề cương.",
+        );
+      if (await tx.proposalReview.count({ where: { proposalId: id } }))
+        throw new ConflictException(
+          "Đề cương đã có vòng duyệt; cần đối soát trước khi chuyển.",
+        );
+      const roster = await tx.termStudent.findUnique({
+        where: {
+          termId_studentId: { termId: p.termId, studentId: p.studentId },
+        },
+      });
+      if (!roster)
+        throw new ConflictException("Sinh viên chưa thuộc danh sách đợt.");
+      const owner = await tx.topicWorkflow.findUnique({
+        where: { topicId: p.topicId },
+      });
+      if (
+        owner &&
+        (owner.termId !== p.termId || owner.termStudentId !== roster.id)
+      )
+        throw new ConflictException(
+          "Ownership đề tài không khớp đợt/sinh viên.",
+        );
+      const change = await tx.assignmentChange.findFirst({
+        where: { assignmentId: assignment.id },
+        orderBy: { assignmentRevision: "desc" },
+      });
+      if (!owner)
+        await tx.topicWorkflow.create({
+          data: {
+            topicId: p.topicId,
+            termId: p.termId,
+            termStudentId: roster.id,
+            ...(p.topic.advisorAgreed && p.topic.agreedAt
+              ? {
+                  confirmedAt: p.topic.agreedAt,
+                  confirmedByAdvisorId: assignment.advisorId,
+                  confirmedTopicRevision: 0,
+                  confirmedAssignmentRevision: change?.assignmentRevision ?? 0,
+                }
+              : {}),
+          },
+        });
+      const latest = p.versions[p.versions.length - 1];
+      const source = (latest?.content ?? {}) as Record<string, unknown>;
+      const text = (key: string) =>
+        typeof source[key] === "string" ? (source[key] as string) : "";
+      // Missing academic dates, milestones and main content require explicit input.
+      // Keep the source snapshot intact; this is a new draft, never a submission.
+      const content = {
+        schemaVersion: 1,
+        objectives: text("objectives"),
+        scope: text("scope"),
+        mainContents: "",
+        tools: text("technology"),
+        expectedResults: text("expected"),
+        startsAt: "",
+        endsAt: "",
+        schedule: [],
+      };
+      const version = await tx.proposalVersion.create({
+        data: {
+          proposalId: p.id,
+          version: (latest?.version ?? 0) + 1,
+          content,
+          createdBy: userId,
+          status: "DRAFT",
+          pr2bProposalVersionWorkflowVersionId: {
+            create: {
+              state: "DRAFT",
+              contentSchemaVersion: 1,
+              contentHash: reviewHash(content),
+              createdByUserId: userId,
+              basedOnVersionId: latest?.id,
+              revisionResponses: [],
+              provenance: {
+                source: "STEP3_HANDOFF",
+                sourceVersionId: latest?.id ?? null,
+              },
+            },
+          },
+        },
+      });
+      await tx.proposalWorkflow.create({
+        data: {
+          proposalId: p.id,
+          workingVersionId: version.id,
+          nextVersionNumber: version.version + 1,
+          nextReviewRound: 1,
+        },
+      });
+      await tx.proposal.update({ where: { id }, data: { status: "DRAFT" } });
+      await this.repo.audit(
+        id,
+        userId,
+        "PROPOSAL_WORKFLOW_PREPARED",
+        {
+          sourceVersionId: latest?.id ?? null,
+          workingVersionId: version.id,
+          previousStatus: p.status,
+        },
+        tx,
+      );
+      return { proposalId: p.id };
     });
   }
   version(id: string, version: number, userId: string) {

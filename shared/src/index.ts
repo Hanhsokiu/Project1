@@ -1,4 +1,9 @@
-import { z } from "zod";
+import { z } from 'zod';
+export * from './contracts/review-groups';
+export * from './contracts/proposal-reviews';
+export * from './contracts/proposal-versions';
+
+export type { Id, Instant, Revision, CurrentUserResponse, OfficialAdvisorContext, TopicAgreement, SubmittedProposalContext, GuidancePeriodContext } from './contracts/academic-context';
 import { RegistrationWriteSchema } from "./step2";
 export * from "./step1";
 export * from "./step2";
@@ -39,5 +44,7 @@ export type LoginInput = z.infer<typeof LoginSchema>;
 export const RegistrationPrefSchema = RegistrationWriteSchema;
 
 export type RegistrationPrefInput = z.infer<typeof RegistrationPrefSchema>;
-
-export type { Id, Instant, Revision, CurrentUserResponse, OfficialAdvisorContext, TopicAgreement, SubmittedProposalContext, GuidancePeriodContext } from "./contracts/academic-context";
+export * from './contracts/proposal-dossiers';
+export * from './contracts/guidance-tasks';
+export * from './contracts/task-submissions';
+export * from './contracts/guidance-reviews';

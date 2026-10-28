@@ -1,0 +1,39 @@
+{
+  "result": "PASS",
+  "mockedApi": true,
+  "sharedDatabaseAccess": false,
+  "checks": [
+    {
+      "name": "faculty queue filters approved proposals and previews confirmed student/advisor/content before finalize",
+      "result": "PASS"
+    },
+    {
+      "name": "finalize binds approved v2 and hides duplicate finalize; PDF and physical receipt remain separate",
+      "result": "PASS"
+    },
+    {
+      "name": "student downloads real sample PDF via authenticated blob flow without finalize/receive controls or inferred paper receipt",
+      "result": "PASS"
+    },
+    {
+      "name": "receipt revision conflict preserves note and does not mark paper received",
+      "result": "PASS"
+    },
+    {
+      "name": "faculty receipt updates explicit received state/history once and removes receipt action",
+      "result": "PASS"
+    },
+    {
+      "name": "dossier status, preview and actions fit mobile viewport",
+      "result": "PASS"
+    },
+    {
+      "name": "missing producer class/major blocks finalization instead of offering invented values",
+      "result": "PASS"
+    },
+    {
+      "name": "scope error hides dossier content/download actions and causes no unhandled page errors",
+      "result": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,1452 @@
+[
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-group-options/terms",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-group-options/terms",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/review-group-options",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/review-group-options",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/review-groups",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/review-groups",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/terms/qa-missing/review-groups",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/terms/qa-missing/review-groups",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-groups/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-groups/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/review-groups/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/review-groups/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/review-groups/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/review-groups/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-groups/qa-missing/members",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-groups/qa-missing/members",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/review-groups/qa-missing/members",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/review-groups/qa-missing/members",
+    "status": 403
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/review-groups/qa-missing/members/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/review-groups/qa-missing/members/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/proposal-review-options",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/proposal-review-options",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/proposals",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/proposals",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/review-candidates",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/review-candidates",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/review-history",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/review-history",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/review-assignments",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/review-assignments",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/qa-missing/start",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/qa-missing/start",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/qa-missing/comments",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/qa-missing/comments",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/qa-missing/decision",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/qa-missing/decision",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/editing-context",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/editing-context",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/versions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/versions",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/versions",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/versions",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/versions/compare",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/versions/compare",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/versions/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/versions/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/submit",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/submit",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/dossier",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/dossier",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/finalize",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/finalize",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/dossier/receipt",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/dossier/receipt",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/dossier/pdf",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/dossier/pdf",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/dossier.pdf",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/dossier.pdf",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/plan/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/plan/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/guidance-context",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/guidance-context",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/guidance-plan",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/qa-missing/guidance-plan",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/guidance-plan",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/qa-missing/guidance-plan",
+    "status": 403
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/guidance-plans/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/guidance-plans/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/qa-missing/resume",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/qa-missing/resume",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-plans/qa-missing/tasks",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-plans/qa-missing/tasks",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/qa-missing/tasks",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/qa-missing/tasks",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/guidance-tasks",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/guidance-tasks",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/guidance-periods",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/guidance-periods",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/weekly-report-coverage",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/weekly-report-coverage",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/weekly-report-obligations/qa-missing/task",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/weekly-report-obligations/qa-missing/task",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/tasks/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/tasks/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/qa-missing/progress",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/qa-missing/progress",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/qa-missing/cancel",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/qa-missing/cancel",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/qa-missing/submission-context",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/qa-missing/submission-context",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/qa-missing/submission-uploads",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/qa-missing/submission-uploads",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/qa-missing/submissions",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/qa-missing/submissions",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/qa-missing/submissions",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/qa-missing/submissions",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/qa-missing/files/qa-missing/download",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/qa-missing/files/qa-missing/download",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-review-options/terms",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-review-options/terms",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/qa-missing/review-context",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/qa-missing/review-context",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/task-submissions/qa-missing/reviews",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/task-submissions/qa-missing/reviews",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/task-reviews/qa-missing/amendments",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/task-reviews/qa-missing/amendments",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/progress-review-inbox",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/progress-review-inbox",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/guidance-dashboard",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-missing/guidance-dashboard",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-plans/qa-missing/meetings",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-plans/qa-missing/meetings",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/qa-missing/meetings",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/qa-missing/meetings",
+    "status": 403
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/guidance-meetings/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/guidance-meetings/qa-missing",
+    "status": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/notifications/user/qa-missing",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/notifications/user/qa-missing",
+    "status": 404
+  },
+  {
+    "method": "GET",
+    "path": "/api/me/notifications",
+    "status": 401
+  },
+  {
+    "method": "GET",
+    "path": "/api/me/notifications",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/me/notifications/qa-missing/read",
+    "status": 401
+  },
+  {
+    "method": "POST",
+    "path": "/api/me/notifications/qa-missing/read",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-group-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-t1/review-group-options",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/terms/qa-t1/review-groups",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-groups/031c37e3-b991-45f1-9273-86885d10b2f2",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-t1/review-group-options",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-candidates",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/p-student/review-assignments",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/387e4018-1ec0-490f-ab6d-02d823c942c4",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/387e4018-1ec0-490f-ab6d-02d823c942c4",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/387e4018-1ec0-490f-ab6d-02d823c942c4/start",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/387e4018-1ec0-490f-ab6d-02d823c942c4",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/387e4018-1ec0-490f-ab6d-02d823c942c4/decision",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/387e4018-1ec0-490f-ab6d-02d823c942c4",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/p-student/versions",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/p-student/submit",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-candidates",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/p-student/review-assignments",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/1766711e-4ffe-4eb0-a84e-f3b2ea28c182",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/1766711e-4ffe-4eb0-a84e-f3b2ea28c182",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/1766711e-4ffe-4eb0-a84e-f3b2ea28c182/start",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/1766711e-4ffe-4eb0-a84e-f3b2ea28c182",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/1766711e-4ffe-4eb0-a84e-f3b2ea28c182/decision",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/1766711e-4ffe-4eb0-a84e-f3b2ea28c182",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/dossier",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/p-student/finalize",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/dossier",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/p-student/dossier/pdf",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/dossier.pdf",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/guidance-context",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/p-student/guidance-plan",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/guidance-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-plans/01005337-4017-4d73-b871-a2753e1aa228/tasks",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/01005337-4017-4d73-b871-a2753e1aa228/tasks",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student/guidance-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submission-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submissions",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submission-uploads",
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submission-uploads",
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submissions",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submissions",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submission-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/174f050c-801d-4472-8b27-ab1b9b0eff19/review-context",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/task-submissions/174f050c-801d-4472-8b27-ab1b9b0eff19/reviews",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/174f050c-801d-4472-8b27-ab1b9b0eff19/review-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/174f050c-801d-4472-8b27-ab1b9b0eff19/review-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submissions",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submission-context",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submission-uploads",
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submission-uploads",
+    "status": 201
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submissions",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submissions",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e/submission-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/reviews",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-t1/guidance-dashboard",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-t1/guidance-dashboard",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-t1",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/topics/term/qa-t1",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/86f24245-bb6e-4779-89d2-e6e947248f8e",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-groups/031c37e3-b991-45f1-9273-86885d10b2f2",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/1766711e-4ffe-4eb0-a84e-f3b2ea28c182",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/qa-t1/guidance-dashboard",
+    "status": 404
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 404
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/de66df9f-2345-4dbe-a715-f0eea6d246e7/review-context",
+    "status": 404
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/174f050c-801d-4472-8b27-ab1b9b0eff19/review-context",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/topics/term/qa-t1",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1",
+    "status": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "method": "GET",
+    "path": "/api/topics/term/qa-t1",
+    "status": 200
+  },
+  {
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1",
+    "status": 200
+  }
+]

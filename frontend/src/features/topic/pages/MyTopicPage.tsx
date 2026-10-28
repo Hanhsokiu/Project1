@@ -46,7 +46,7 @@ export default function MyTopicPage() {
         description="Sau công bố phân công, SV gặp GVHD thống nhất đề tài, lập đề cương và xuất theo biểu mẫu."
         actions={
           user.studentId ? (
-            <Link className="btn btn-primary" to="/topic/proposal">
+            <Link className="btn btn-primary" to="/topic/draft">
               <FilePenLine size={16} />
               {own ? "Mở đề cương" : "Tạo đề cương"}
             </Link>
@@ -64,7 +64,7 @@ export default function MyTopicPage() {
                   <Link
                     key={a.id}
                     className="btn btn-secondary"
-                    to={`/topic/proposal?student=${a.studentId}`}
+                    to={`/topic/draft?student=${a.studentId}`}
                   >
                     Tạo đề tài ·{" "}
                     {db.students.find((s) => s.id === a.studentId)?.code}
@@ -91,7 +91,7 @@ export default function MyTopicPage() {
             }
             action={
               user.studentId && term.assignmentPublished ? (
-                <Link className="btn btn-primary" to="/topic/proposal">
+                <Link className="btn btn-primary" to="/topic/draft">
                   Bắt đầu lập đề cương
                 </Link>
               ) : undefined
@@ -163,7 +163,7 @@ export default function MyTopicPage() {
                     {user.lecturerId === t.lecturerId && (
                       <Link
                         className="btn btn-secondary"
-                        to={`/topic/proposal?student=${t.studentId}`}
+                        to={`/topic/draft?student=${t.studentId}`}
                       >
                         Chỉnh sửa đề tài
                       </Link>

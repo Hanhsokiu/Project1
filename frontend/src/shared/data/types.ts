@@ -116,6 +116,7 @@ export interface ProposalVersion {
   comment: string;
 }
 export interface Topic {
+  workflowReady?: boolean;
   studentAgreed?: boolean;
   id: string;
   termId: string;

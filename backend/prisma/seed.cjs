@@ -75,6 +75,20 @@ async function main() {
           });
       }
     }
+  // These roles are created after migrations on a fresh installation. Apply the
+  // same explicit workflow grants as the step 4-8 migrations; no ADMIN wildcard.
+  const workflowPermissions = {
+    FACULTY: ["review-group:read", "review-group:manage", "proposal:read", "proposal:assign", "proposal:finalize", "proposal:export", "dossier:receive", "guidance:read", "guidance:monitor", "submission:read", "submission:download"],
+    LECTURER: ["review-group:read", "proposal:read", "proposal:comment", "proposal:review", "proposal:edit", "proposal:export", "guidance:read", "guidance:manage", "task:manage", "task:ensure-weekly", "task:review", "submission:read", "submission:download"],
+    STUDENT: ["proposal:read", "proposal:edit", "proposal:submit", "proposal:export", "guidance:read", "task:progress", "task:ensure-weekly", "submission:read", "submission:create", "submission:download"],
+  };
+  for (const permission of await prisma.permission.findMany())
+    for (const [roleName, grants] of Object.entries(workflowPermissions))
+      if (grants.includes(`${permission.resource}:${permission.action}`))
+        await prisma.rolePermission.upsert({
+          where: { roleId_permissionId: { roleId: roles[roleName].id, permissionId: permission.id } },
+          create: { roleId: roles[roleName].id, permissionId: permission.id }, update: {},
+        });
   const systems = [];
   for (const [code, name] of [
     ["CQ", "Chính quy"],

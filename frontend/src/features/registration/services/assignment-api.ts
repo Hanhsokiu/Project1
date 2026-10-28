@@ -94,6 +94,13 @@ export const assignmentApi = {
       { revision: assignmentContext(termId)?.plan?.revision ?? 0 },
     );
   },
+  finalize(termId: string) {
+    return apiData<AssignmentContext>(
+      "POST",
+      `/assignments/term/${termId}/finalize`,
+      { revision: assignmentContext(termId)?.plan?.revision ?? 0 },
+    );
+  },
   retry(id: string) {
     return apiData("POST", `/notifications/outbox/${id}/retry`);
   },

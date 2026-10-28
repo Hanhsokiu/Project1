@@ -500,7 +500,7 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
             <QuickLink
               title="Đề tài và đề cương"
               description="Theo dõi hồ sơ cá nhân và biểu mẫu PDF."
-              to="/topic/dossier"
+              to="/topic/overview"
               icon={<FileCheck2 size={20} />}
             />
           </div>
@@ -539,7 +539,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
     {
       title: "Đề cương và PDF",
       done: submittedProposal,
-      to: "/topic/proposal",
+      to: "/topic/draft",
     },
   ];
   const first = steps.find((s) => !s.done);
@@ -562,7 +562,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
   const target =
     !data.students.length || !eligible
       ? "/profile"
-      : first?.to || "/topic/dossier";
+      : first?.to || "/topic/overview";
   return (
     <>
       <DarkHero
@@ -699,7 +699,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
               <div className="my-4">
                 <Badge value={submittedProposal ? "SUBMITTED" : "DRAFT"} />
               </div>
-              <Link to="/topic/proposal" className="text-xs text-[#665399]">
+              <Link to="/topic/draft" className="text-xs text-[#665399]">
                 Soạn đề cương / xuất PDF →
               </Link>
             </Card>
@@ -928,7 +928,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                     {Math.max(0, data.students.length - submitted)}
                   </strong>
                 </div>
-                <RouteButton to="/topic/dossier" secondary>
+                <RouteButton to="/topic/overview" secondary>
                   Xem hồ sơ và PDF
                 </RouteButton>
               </div>

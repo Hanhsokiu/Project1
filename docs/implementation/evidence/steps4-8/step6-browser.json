@@ -1,0 +1,67 @@
+{
+  "result": "PASS",
+  "mockedApi": true,
+  "sharedDatabaseAccess": false,
+  "checks": [
+    {
+      "name": "review queue navigation handles unsupported demo options without a render crash and can return to editor list",
+      "result": "PASS"
+    },
+    {
+      "name": "unsupported sidebar API returns a demo error; navigation back still works",
+      "result": "PASS"
+    },
+    {
+      "name": "unsupported reads/writes never enter mutation validation or reach a backend",
+      "result": "PASS"
+    },
+    {
+      "name": "missing idempotency key, invalid JSON and stale revision return errors without stopping preview",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown comparison version returns 404 without crashing the route handler",
+      "result": "PASS"
+    },
+    {
+      "name": "returned v1 loads with exact feedback and no submit before a new snapshot is saved",
+      "result": "PASS"
+    },
+    {
+      "name": "save creates v2 with response/summary, preserving v1",
+      "result": "PASS"
+    },
+    {
+      "name": "comparison displays actual changed field path and values",
+      "result": "PASS"
+    },
+    {
+      "name": "historical version is rendered as read-only without edit controls",
+      "result": "PASS"
+    },
+    {
+      "name": "student submits exactly v2; sealed/submitted state hides editing controls",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent edit conflict preserves unsaved form content",
+      "result": "PASS"
+    },
+    {
+      "name": "incomplete draft can save but frontend blocks resubmission until content is valid",
+      "result": "PASS"
+    },
+    {
+      "name": "advisor can save but cannot submit as student",
+      "result": "PASS"
+    },
+    {
+      "name": "mobile editor and history have no horizontal page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "scope error hides all editor content",
+      "result": "PASS"
+    }
+  ]
+}

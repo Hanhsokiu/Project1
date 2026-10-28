@@ -442,6 +442,91 @@ export class AssignmentPlanService {
       );
     });
   }
+  finalize(termId: string, revision: number, userId: string) {
+    return this.repo.transaction(async (tx) => {
+      const c = await this.load(termId, tx);
+      V.require(c.plan, "Chưa có phương án phân công.");
+      const workflow = await tx.termWorkflow.findUnique({ where: { termId } });
+      if (c.plan.status === "FINALIZED") {
+        const meta = await tx.assignmentPlanWorkflow.findUnique({
+          where: { planId: c.plan.id },
+        });
+        V.require(
+          workflow?.officialAssignmentPlanId === c.plan.id &&
+            meta?.finalizedAt &&
+            meta.finalizedByUserId,
+          "Phân công đã chốt thiếu bằng chứng; cần đối soát trước khi tiếp tục.",
+        );
+        return this.managerView(c.plan, c.registrations, c.term);
+      }
+      V.require(
+        c.plan.status === "PUBLISHED",
+        "Cần công bố phân công trước khi chốt.",
+      );
+      V.require(
+        !c.term.isLocked &&
+          ["CLOSED_REGISTRATION", "IN_PROGRESS"].includes(c.term.status),
+        "Đợt đã khóa hoặc không cho phép chốt phân công.",
+      );
+      V.require(
+        new Date() >= c.term.startDate && new Date() < c.term.endDate,
+        "Chỉ chốt phân công trong thời gian thực hiện đợt.",
+      );
+      V.revision(c.plan.revision, revision);
+      V.require(
+        !workflow?.officialAssignmentPlanId ||
+          workflow.officialAssignmentPlanId === c.plan.id,
+        "Đợt đã có phương án chính thức khác.",
+      );
+      const view = this.managerView(c.plan, c.registrations, c.term);
+      V.require(
+        c.plan.advisorAssignments.length &&
+          !view.violations.length &&
+          !view.results.some((r) => !r.assignedLecturerId),
+        "Phân công chưa hợp lệ hoặc còn đăng ký chưa được phân công.",
+      );
+      const changed = await tx.assignmentPlan.updateMany({
+        where: { id: c.plan.id, status: "PUBLISHED", revision },
+        data: { status: "FINALIZED", revision: { increment: 1 } },
+      });
+      V.require(changed.count === 1, "Phương án đã thay đổi. Hãy tải lại.");
+      const now = new Date();
+      await tx.assignmentPlanWorkflow.upsert({
+        where: { planId: c.plan.id },
+        create: {
+          planId: c.plan.id,
+          finalizedAt: now,
+          finalizedByUserId: userId,
+        },
+        update: {
+          finalizedAt: now,
+          finalizedByUserId: userId,
+          revision: { increment: 1 },
+        },
+      });
+      await tx.termWorkflow.upsert({
+        where: { termId },
+        create: { termId, officialAssignmentPlanId: c.plan.id },
+        update: {
+          officialAssignmentPlanId: c.plan.id,
+          revision: { increment: 1 },
+        },
+      });
+      await this.repo.audit(
+        userId,
+        "ASSIGNMENT_FINALIZED",
+        c.plan.id,
+        { termId, revision: revision + 1, finalizedAt: now.toISOString() },
+        tx,
+        { status: "PUBLISHED", revision },
+      );
+      return this.managerView(
+        (await this.load(termId, tx)).plan!,
+        c.registrations,
+        c.term,
+      );
+    });
+  }
   publish(termId: string, revision: number, userId: string) {
     return this.repo.transaction(async (tx) => {
       const c = await this.load(termId, tx);

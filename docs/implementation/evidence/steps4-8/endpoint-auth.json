@@ -1,0 +1,728 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/review-group-options/terms",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/review-group-options",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/review-groups",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/terms/{termId}/review-groups",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-groups/{id}",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/review-groups/{id}",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/review-groups/{id}",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/review-groups/{id}/members",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/review-groups/{id}/members",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/review-groups/{id}/members/{lecturerId}",
+    "tags": [
+      "review-groups"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/proposal-review-options",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/proposals",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{id}",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{id}/review-candidates",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{id}/review-history",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposal-reviews/{id}",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/{id}/review-assignments",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/{id}/start",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/{id}/comments",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposal-reviews/{id}/decision",
+    "tags": [
+      "proposal-reviews"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{proposalId}/editing-context",
+    "tags": [
+      "proposal-versions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{proposalId}/versions",
+    "tags": [
+      "proposal-versions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/{proposalId}/versions",
+    "tags": [
+      "proposal-versions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{proposalId}/versions/compare",
+    "tags": [
+      "proposal-versions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{proposalId}/versions/{versionId}",
+    "tags": [
+      "proposal-versions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/{proposalId}/submit",
+    "tags": [
+      "proposal-versions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{proposalId}/dossier",
+    "tags": [
+      "proposal-dossiers"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/{proposalId}/finalize",
+    "tags": [
+      "proposal-dossiers"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/{proposalId}/dossier/receipt",
+    "tags": [
+      "proposal-dossiers"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/{proposalId}/dossier/pdf",
+    "tags": [
+      "proposal-dossiers"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{proposalId}/dossier.pdf",
+    "tags": [
+      "proposal-dossiers"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/plan/{planId}",
+    "tags": [
+      "guidance"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{proposalId}/guidance-context",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/proposals/{proposalId}/guidance-plan",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/proposals/{proposalId}/guidance-plan",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/guidance-plans/{planId}",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/{planId}/resume",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-plans/{planId}/tasks",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/{planId}/tasks",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/guidance-tasks",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/guidance-periods",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/weekly-report-coverage",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/weekly-report-obligations/{id}/task",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/{id}",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/tasks/{id}",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/{id}/progress",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/{id}/cancel",
+    "tags": [
+      "guidance-plans-tasks"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/{taskId}/submission-context",
+    "tags": [
+      "guidance-submissions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/{taskId}/submission-uploads",
+    "tags": [
+      "guidance-submissions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/tasks/{taskId}/submissions",
+    "tags": [
+      "guidance-submissions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/tasks/{taskId}/submissions",
+    "tags": [
+      "guidance-submissions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/{submissionId}",
+    "tags": [
+      "guidance-submissions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/{submissionId}/files/{fileId}/download",
+    "tags": [
+      "guidance-submissions"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-review-options/terms",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/task-submissions/{id}/review-context",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/task-submissions/{id}/reviews",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/task-reviews/{id}/amendments",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/progress-review-inbox",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/terms/{termId}/guidance-dashboard",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/guidance-plans/{id}/meetings",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "POST",
+    "path": "/api/guidance-plans/{id}/meetings",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "PATCH",
+    "path": "/api/guidance-meetings/{id}",
+    "tags": [
+      "guidance-reviews-monitoring"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 403
+  },
+  {
+    "method": "GET",
+    "path": "/api/notifications/user/{userId}",
+    "tags": [
+      "notification"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 404
+  },
+  {
+    "method": "GET",
+    "path": "/api/me/notifications",
+    "tags": [
+      "notification"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 200
+  },
+  {
+    "method": "POST",
+    "path": "/api/me/notifications/{id}/read",
+    "tags": [
+      "notification"
+    ],
+    "anonymous": "PASS",
+    "actualStatus": 401,
+    "noPermissions": "PASS",
+    "noPermissionsStatus": 404
+  }
+]

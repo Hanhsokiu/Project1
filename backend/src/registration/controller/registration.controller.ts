@@ -13,6 +13,7 @@ import { ApiResponse } from "../../common/dto/api-response.dto";
 import { RequirePermission } from "../../common/security/require-permission.decorator";
 import { CurrentUser } from "../../common/security/current-user.decorator";
 import { ZodValidationPipe } from "../../common/validation/zod.pipe";
+import { EntityIdPipe } from "../../common/validation/entity-id.pipe";
 import {
   RegistrationWrite,
   RegistrationWriteSchema,
@@ -55,7 +56,7 @@ export class RegistrationController {
   @Get("term/:termId")
   @RequirePermission("registration", "read")
   @ApiOperation({ summary: "UC09: Danh sách đăng ký theo đợt" })
-  async getByTerm(@Param("termId", ParseUUIDPipe) termId: string) {
+  async getByTerm(@Param("termId", EntityIdPipe) termId: string) {
     const list = await this.regService.findByTerm(termId);
     return ApiResponse.ok(list);
   }

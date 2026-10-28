@@ -1,0 +1,127 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "migrations": [
+    "0_init",
+    "202610210001_empty_baseline_bridge",
+    "202610210002_expand_workflow",
+    "202610210003_review_group_management",
+    "202610220001_proposal_review_assignment",
+    "202610220002_proposal_version_snapshots",
+    "202610220003_dossier_finalization",
+    "202610220004_guidance_task_management",
+    "202610220005_guidance_submissions",
+    "202610230001_guidance_reviews"
+  ],
+  "checks": [
+    {
+      "name": "active migration chain replays with matching history/checksums",
+      "result": "PASS"
+    },
+    {
+      "name": "Swagger exposes step 5 assignment/decision endpoints",
+      "result": "PASS"
+    },
+    {
+      "name": "401, ADMIN deny despite permission and forged claims, cross-term/department isolation",
+      "result": "PASS"
+    },
+    {
+      "name": "specialty candidates are advisory, scoped and have no assignment side effects",
+      "result": "PASS"
+    },
+    {
+      "name": "cross-term and wrong-department group assignment rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "assignment binds submitted version, actor, history, idempotency and duplicate-active guard",
+      "result": "PASS"
+    },
+    {
+      "name": "only assigned roster members or academic owners/advisors read; faculty cannot review as faculty",
+      "result": "PASS"
+    },
+    {
+      "name": "owner/current advisor read scoped evidence but cannot comment or decide as reviewers",
+      "result": "PASS"
+    },
+    {
+      "name": "decision before explicit start is an invalid transition",
+      "result": "PASS"
+    },
+    {
+      "name": "valid assign → comments by multiple members → explicit start flow",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent decisions commit exactly once; APPROVED never finalizes a dossier",
+      "result": "PASS"
+    },
+    {
+      "name": "decided rounds reject later comments/decisions",
+      "result": "PASS"
+    },
+    {
+      "name": "revision-required needs comment, preserves canonical result and legacy state, replay emits one outbox event",
+      "result": "PASS"
+    },
+    {
+      "name": "revoked account cannot replay cached academic response",
+      "result": "PASS"
+    },
+    {
+      "name": "new submitted version blocks stale decision and never leaks the unassigned content to reviewer",
+      "result": "PASS"
+    },
+    {
+      "name": "reassignment atomically supersedes prior round with reason and preserves scoped history",
+      "result": "PASS"
+    },
+    {
+      "name": "missing producer counter fails closed, never guessed/backfilled",
+      "result": "PASS"
+    },
+    {
+      "name": "locked phase blocks assignment",
+      "result": "PASS"
+    },
+    {
+      "name": "audit failure rolls back assignment, revisions and idempotency atomically",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent assignments create exactly one active round",
+      "result": "PASS"
+    },
+    {
+      "name": "second term review remains isolated from first-term reviewer",
+      "result": "PASS"
+    },
+    {
+      "name": "step 5 does not implement/fabricate dossier, guidance or task workflows",
+      "result": "PASS"
+    },
+    {
+      "name": "phase lock racing with assignment commits first and prevents the blocked assignment",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent comments honor review revision and reject stale append",
+      "result": "PASS"
+    },
+    {
+      "name": "PUBLISHED is not official and obsolete Topic agreement never enables assignment",
+      "result": "PASS"
+    },
+    {
+      "name": "routing revision change requires explicit faculty reassignment before review can continue",
+      "result": "PASS"
+    },
+    {
+      "name": "malformed legacy review pointing to an unsealed version never exposes draft content",
+      "result": "PASS"
+    }
+  ],
+  "sharedDatabaseDDL": false
+}

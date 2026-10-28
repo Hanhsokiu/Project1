@@ -87,4 +87,13 @@ export class AssignmentController {
   ) {
     return ApiResponse.ok(await this.service.publish(id, b.revision, u.sub));
   }
+  @Post("finalize")
+  @RequirePermission("assignment", "manage")
+  async finalize(
+    @Param("termId", ParseUUIDPipe) id: string,
+    @CurrentUser() u: { sub: string },
+    @Body(new ZodValidationPipe(revision)) b: z.infer<typeof revision>,
+  ) {
+    return ApiResponse.ok(await this.service.finalize(id, b.revision, u.sub));
+  }
 }
