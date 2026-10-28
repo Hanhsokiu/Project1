@@ -372,6 +372,7 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
           title: string;
           body: string;
           status: "READ" | "UNREAD";
+          link?: string | null;
         }[]
       >("GET", "/notifications/me");
       value.notifications.push(
@@ -381,6 +382,7 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
           termId: n.termId ?? "",
           title: n.title,
           content: n.body,
+          link: n.link,
           status: n.status,
           read: n.status === "READ",
           channel: "IN_APP" as const,

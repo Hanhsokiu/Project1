@@ -1,0 +1,193 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:17.075Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "F08-real-pagination-next-previous",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:18.937Z",
+    "detail": {
+      "page1": [
+        "p-student2",
+        "p-student",
+        "p-page-21",
+        "p-page-20",
+        "p-page-19",
+        "p-page-18",
+        "p-page-17",
+        "p-page-16",
+        "p-page-15",
+        "p-page-14",
+        "p-page-13",
+        "p-page-12",
+        "p-page-11",
+        "p-page-10",
+        "p-page-09",
+        "p-page-08",
+        "p-page-07",
+        "p-page-06",
+        "p-page-05",
+        "p-page-04"
+      ],
+      "page2": [
+        "p-page-03",
+        "p-page-02",
+        "p-page-01"
+      ],
+      "noDuplicateOrMissing": true,
+      "filterResetsPage": true
+    }
+  },
+  {
+    "id": "S5-01-vietnamese-case-NFC-NFD-real-UI",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:19.811Z",
+    "detail": [
+      {
+        "search": "Nguyễn Văn Sinh",
+        "total": 1,
+        "id": "p-student"
+      },
+      {
+        "search": "NGUYỄN VĂN SINH",
+        "total": 1,
+        "id": "p-student"
+      },
+      {
+        "search": "nGUYỄN vĂN sINH",
+        "total": 1,
+        "id": "p-student"
+      },
+      {
+        "search": "  NGUYỄN VĂN SINH  ",
+        "total": 1,
+        "id": "p-student"
+      },
+      {
+        "search": "NGUYỄN VĂN SINH",
+        "total": 1,
+        "id": "p-student"
+      }
+    ]
+  },
+  {
+    "id": "S5-01-literal-symbols-and-filter-recovery",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:20.179Z",
+    "detail": [
+      {
+        "search": "%",
+        "total": 0
+      },
+      {
+        "search": "_",
+        "total": 0
+      },
+      {
+        "search": "' OR 1=1 --",
+        "total": 0
+      },
+      {
+        "search": "\\",
+        "total": 0
+      }
+    ]
+  },
+  {
+    "id": "U04-real-network-loading-and-recovery",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:21.042Z",
+    "detail": {
+      "actualApi": true,
+      "responseMocked": false,
+      "latencyMs": 800,
+      "loadingVisible": true,
+      "recovered": true
+    }
+  },
+  {
+    "id": "S5-02-whitespace-no-write-accessible-error",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:25.504Z",
+    "detail": {
+      "noPost": true,
+      "revisionUnchanged": true,
+      "commentsUnchanged": true,
+      "ariaErrorLinked": true
+    }
+  },
+  {
+    "id": "S5-02-axe-error-state",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:26.511Z",
+    "detail": []
+  },
+  {
+    "id": "S5-02-correct-input-saves-once",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:26.913Z",
+    "detail": {
+      "id": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+      "proposalId": "p-page-01",
+      "state": "IN_REVIEW",
+      "proposalStatus": "UNDER_REVIEW",
+      "revision": 3,
+      "proposalRevision": 2,
+      "roundNumber": 1,
+      "versionId": "v1-page-01",
+      "contentHash": "ecbf0fed97478e511e431df7d3c81b2013d30f7092cc0df054d8edf5d7df8725",
+      "groupId": "qa-g2",
+      "allowedActions": [
+        "comment",
+        "decide"
+      ],
+      "comments": [
+        {
+          "id": "32f59619-d9a1-4bde-8bd8-a6da38c83d63",
+          "versionId": "v1-page-01",
+          "authorUserId": "reviewer",
+          "authorName": "qa-reviewer",
+          "createdAt": "2026-10-28T02:29:24.758Z",
+          "text": "QA FIX: nhận xét hợp lệ trước khi kiểm tra lỗi nhập."
+        },
+        {
+          "id": "1d0182c2-92ba-4dfa-b595-36be521ab134",
+          "versionId": "v1-page-01",
+          "authorUserId": "reviewer",
+          "authorName": "qa-reviewer",
+          "createdAt": "2026-10-28T02:29:26.693Z",
+          "text": "QA FIX: đã sửa nội dung nhận xét."
+        }
+      ],
+      "decision": null,
+      "supersededByReviewId": null
+    }
+  },
+  {
+    "id": "S5-02-new-error-clears-prior-feedback",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:27.046Z",
+    "detail": {
+      "oldSuccessRemoved": true,
+      "commentCount": 2
+    }
+  },
+  {
+    "id": "S5-01-scope-does-not-leak-search-matches",
+    "result": "PASS",
+    "at": "2026-10-28T02:29:29.650Z",
+    "detail": {
+      "ownerOwnTotal": 1,
+      "ownerOtherTotal": 0,
+      "otherTermFacultyStatus": 404
+    }
+  }
+]

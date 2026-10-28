@@ -39,13 +39,15 @@ import {
 import { useWorkspace } from "../../shared/hooks/use-workspace";
 import { routeManifest } from "./route-manifest";
 import { Empty } from "../../shared/components/kit";
-import { AUTH_API, getApiUser } from "../../shared/api/api-session";
+import { AUTH_API } from "../../shared/api/api-session";
+import { useApiSession } from "../../shared/hooks/use-api-session";
 import type { ReactNode } from "react";
 
 function WorkflowAccess({ children }: { children: ReactNode }) {
   const location = useLocation();
+  const apiUser = useApiSession();
   if (AUTH_API) {
-    const user = getApiUser();
+    const user = apiUser;
     if (!user)
       return (
         <Navigate to="/login" state={{ from: location.pathname }} replace />

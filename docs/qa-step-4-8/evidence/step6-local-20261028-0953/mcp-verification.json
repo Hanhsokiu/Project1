@@ -1,0 +1,17 @@
+{
+  "method": "Playwright MCP",
+  "frontend": "http://127.0.0.1:50185",
+  "initialAttempt": "ERR_CONNECTION_REFUSED: previous QA API/Vite were no longer listening",
+  "restoration": "Resumed original synthetic database without seeding or migration; Vite esbuild required sandbox escalation after spawn EPERM",
+  "openedPage": "http://127.0.0.1:50185/login",
+  "interaction": { "passwordToggle": ["text", "password"], "successful": true, "passwordWasEmpty": true },
+  "anonymousStep6": "Navigated /topic/proposal/p-student2; redirected to /login",
+  "result": "PASS: actual page opened and interaction succeeded",
+  "authenticatedMcpTests": "NOT RUN: attempted local credential-file import was unavailable in the MCP VM (ERR_VM_DYNAMIC_IMPORT_CALLBACK_MISSING); no credential supplied, no authentication attempted",
+  "authenticatedStep6Method": "Separate local Playwright with real Microsoft Edge and live API, not MCP",
+  "console": "0 browser errors; React Router future-flag warning on each navigation",
+  "network": "See mcp-network*.log; initial connection-refused attempt recorded separately above",
+  "screenshot": "mcp-login.png",
+  "snapshot": "mcp-anonymous-step6.yml",
+  "cleanup": "MCP page closed"
+}

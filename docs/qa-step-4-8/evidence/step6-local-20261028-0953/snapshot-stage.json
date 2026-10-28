@@ -1,0 +1,61 @@
+{
+  "proposalId": "p-student2",
+  "current": {
+    "id": "8c20fe65-4772-40bd-bbe6-ac7810dfbe3f",
+    "proposalId": "p-student2",
+    "versionNumber": 23,
+    "state": "DRAFT",
+    "contentHash": "12418d62cb9e3a29943282dc45a328b8f553694f913ad3bbd1cd5cd22e805580",
+    "createdAt": "2026-10-28T02:55:45.711Z",
+    "createdByUserId": "student2",
+    "authorName": "qa-student2",
+    "submittedAt": null,
+    "submittedByUserId": null,
+    "basedOnVersionId": "762c1ee3-e80a-4550-99c3-3716d1e31f7d",
+    "changeSummary": "Bản lịch sử 23",
+    "responses": [],
+    "provenance": null,
+    "contentBytes": 564,
+    "fieldLengths": {
+      "scope": 30,
+      "tools": 35,
+      "endsAt": 24,
+      "startsAt": 24,
+      "objectives": 31,
+      "mainContents": 52,
+      "expectedResults": 27
+    }
+  },
+  "revision": 25,
+  "validContent": {
+    "scope": "Phạm vi hệ thống quản lý đồ án",
+    "tools": "NestJS, Prisma, React và PostgreSQL",
+    "endsAt": "2026-11-04T02:51:53.477Z",
+    "schedule": [
+      {
+        "label": "Phân tích và kiểm thử",
+        "endsAt": "2026-11-04T02:51:53.477Z",
+        "startsAt": "2026-10-27T02:51:53.477Z",
+        "deliverables": "Báo cáo PDF và source ZIP"
+      }
+    ],
+    "startsAt": "2026-10-27T02:51:53.477Z",
+    "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+    "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+    "schemaVersion": 1,
+    "expectedResults": "Phần mềm và báo cáo tiến độ"
+  },
+  "feedback": {
+    "targetType": "COMMENT",
+    "targetId": "690d3990-b11a-4315-a54d-0a98b088df20",
+    "reviewId": "81ffccca-a92d-4ef0-83c6-eb90f7b73c3e",
+    "sourceVersionId": "v1-student2",
+    "versionNumber": 1,
+    "roundNumber": 1,
+    "authorUserId": "reviewer",
+    "authorName": "qa-reviewer",
+    "text": "QA STEP6: bổ sung tiêu chí kiểm thử cho p-student2.",
+    "createdAt": "2026-10-28T02:52:48.304Z"
+  },
+  "currentVersionCount": 23
+}

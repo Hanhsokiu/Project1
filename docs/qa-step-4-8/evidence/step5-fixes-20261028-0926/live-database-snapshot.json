@@ -1,0 +1,1071 @@
+{
+  "database": "btl_pr2b_step5_1793154429481_788d51_live",
+  "coreHashBefore": "308d2bb07922620ee37a31ae388fbc1c65248ee2af042da0c7a0db43a51aa21e",
+  "coreHashAfter": "308d2bb07922620ee37a31ae388fbc1c65248ee2af042da0c7a0db43a51aa21e",
+  "coreUnchanged": true,
+  "states": {
+    "proposal": [
+      {
+        "id": "p-student3",
+        "topicId": "topic-student3",
+        "studentId": "student3",
+        "termId": "qa-t2",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:13.952Z",
+        "updatedAt": "2026-10-28T02:27:13.952Z"
+      },
+      {
+        "id": "p-page-02",
+        "topicId": "topic-page-02",
+        "studentId": "qa-page-02",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.195Z",
+        "updatedAt": "2026-10-28T02:27:14.195Z"
+      },
+      {
+        "id": "p-page-03",
+        "topicId": "topic-page-03",
+        "studentId": "qa-page-03",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.210Z",
+        "updatedAt": "2026-10-28T02:27:14.210Z"
+      },
+      {
+        "id": "p-page-04",
+        "topicId": "topic-page-04",
+        "studentId": "qa-page-04",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.226Z",
+        "updatedAt": "2026-10-28T02:27:14.226Z"
+      },
+      {
+        "id": "p-page-05",
+        "topicId": "topic-page-05",
+        "studentId": "qa-page-05",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.237Z",
+        "updatedAt": "2026-10-28T02:27:14.237Z"
+      },
+      {
+        "id": "p-page-06",
+        "topicId": "topic-page-06",
+        "studentId": "qa-page-06",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.246Z",
+        "updatedAt": "2026-10-28T02:27:14.246Z"
+      },
+      {
+        "id": "p-page-07",
+        "topicId": "topic-page-07",
+        "studentId": "qa-page-07",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.257Z",
+        "updatedAt": "2026-10-28T02:27:14.257Z"
+      },
+      {
+        "id": "p-page-08",
+        "topicId": "topic-page-08",
+        "studentId": "qa-page-08",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.268Z",
+        "updatedAt": "2026-10-28T02:27:14.268Z"
+      },
+      {
+        "id": "p-page-09",
+        "topicId": "topic-page-09",
+        "studentId": "qa-page-09",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.283Z",
+        "updatedAt": "2026-10-28T02:27:14.283Z"
+      },
+      {
+        "id": "p-page-10",
+        "topicId": "topic-page-10",
+        "studentId": "qa-page-10",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.298Z",
+        "updatedAt": "2026-10-28T02:27:14.298Z"
+      },
+      {
+        "id": "p-page-11",
+        "topicId": "topic-page-11",
+        "studentId": "qa-page-11",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.314Z",
+        "updatedAt": "2026-10-28T02:27:14.314Z"
+      },
+      {
+        "id": "p-page-12",
+        "topicId": "topic-page-12",
+        "studentId": "qa-page-12",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.327Z",
+        "updatedAt": "2026-10-28T02:27:14.327Z"
+      },
+      {
+        "id": "p-page-13",
+        "topicId": "topic-page-13",
+        "studentId": "qa-page-13",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.337Z",
+        "updatedAt": "2026-10-28T02:27:14.337Z"
+      },
+      {
+        "id": "p-page-14",
+        "topicId": "topic-page-14",
+        "studentId": "qa-page-14",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.347Z",
+        "updatedAt": "2026-10-28T02:27:14.347Z"
+      },
+      {
+        "id": "p-page-15",
+        "topicId": "topic-page-15",
+        "studentId": "qa-page-15",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.357Z",
+        "updatedAt": "2026-10-28T02:27:14.357Z"
+      },
+      {
+        "id": "p-page-16",
+        "topicId": "topic-page-16",
+        "studentId": "qa-page-16",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.366Z",
+        "updatedAt": "2026-10-28T02:27:14.366Z"
+      },
+      {
+        "id": "p-page-17",
+        "topicId": "topic-page-17",
+        "studentId": "qa-page-17",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.377Z",
+        "updatedAt": "2026-10-28T02:27:14.377Z"
+      },
+      {
+        "id": "p-page-18",
+        "topicId": "topic-page-18",
+        "studentId": "qa-page-18",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.389Z",
+        "updatedAt": "2026-10-28T02:27:14.389Z"
+      },
+      {
+        "id": "p-page-19",
+        "topicId": "topic-page-19",
+        "studentId": "qa-page-19",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.399Z",
+        "updatedAt": "2026-10-28T02:27:14.399Z"
+      },
+      {
+        "id": "p-page-20",
+        "topicId": "topic-page-20",
+        "studentId": "qa-page-20",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.410Z",
+        "updatedAt": "2026-10-28T02:27:14.410Z"
+      },
+      {
+        "id": "p-page-21",
+        "topicId": "topic-page-21",
+        "studentId": "qa-page-21",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T02:27:14.424Z",
+        "updatedAt": "2026-10-28T02:27:14.424Z"
+      },
+      {
+        "id": "p-student",
+        "topicId": "topic-student",
+        "studentId": "student",
+        "termId": "qa-t1",
+        "status": "REVISION_REQUESTED",
+        "createdAt": "2026-10-28T02:27:13.925Z",
+        "updatedAt": "2026-10-28T02:28:22.484Z"
+      },
+      {
+        "id": "p-student2",
+        "topicId": "topic-student2",
+        "studentId": "student2",
+        "termId": "qa-t1",
+        "status": "APPROVED",
+        "createdAt": "2026-10-28T02:27:13.941Z",
+        "updatedAt": "2026-10-28T02:28:24.022Z"
+      },
+      {
+        "id": "p-page-01",
+        "topicId": "topic-page-01",
+        "studentId": "qa-page-01",
+        "termId": "qa-t1",
+        "status": "UNDER_REVIEW",
+        "createdAt": "2026-10-28T02:27:14.182Z",
+        "updatedAt": "2026-10-28T02:29:24.150Z"
+      }
+    ],
+    "proposalWorkflow": [
+      {
+        "id": "fc7449fd-5fb0-4fe1-98fc-8a0c23566600",
+        "createdAt": "2026-10-28T02:27:13.955Z",
+        "updatedAt": "2026-10-28T02:27:13.955Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-student3",
+        "workingVersionId": "v1-student3",
+        "submittedVersionId": "v1-student3"
+      },
+      {
+        "id": "976762ff-5ce1-496d-840d-e64dbb31a8dc",
+        "createdAt": "2026-10-28T02:27:14.198Z",
+        "updatedAt": "2026-10-28T02:27:14.198Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-02",
+        "workingVersionId": "v1-page-02",
+        "submittedVersionId": "v1-page-02"
+      },
+      {
+        "id": "26b4cec7-4d78-43e4-819c-68f9dbb05dcc",
+        "createdAt": "2026-10-28T02:27:14.215Z",
+        "updatedAt": "2026-10-28T02:27:14.215Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-03",
+        "workingVersionId": "v1-page-03",
+        "submittedVersionId": "v1-page-03"
+      },
+      {
+        "id": "1e1c90ce-a1de-4ac2-bab4-93fe7be2139d",
+        "createdAt": "2026-10-28T02:27:14.229Z",
+        "updatedAt": "2026-10-28T02:27:14.229Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-04",
+        "workingVersionId": "v1-page-04",
+        "submittedVersionId": "v1-page-04"
+      },
+      {
+        "id": "bcdd38d9-83ea-4c94-9267-1db406a3231a",
+        "createdAt": "2026-10-28T02:27:14.239Z",
+        "updatedAt": "2026-10-28T02:27:14.239Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-05",
+        "workingVersionId": "v1-page-05",
+        "submittedVersionId": "v1-page-05"
+      },
+      {
+        "id": "36c2e0af-f79c-4b59-bd9d-085f697c46d8",
+        "createdAt": "2026-10-28T02:27:14.249Z",
+        "updatedAt": "2026-10-28T02:27:14.249Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-06",
+        "workingVersionId": "v1-page-06",
+        "submittedVersionId": "v1-page-06"
+      },
+      {
+        "id": "1bd9b4b9-5f72-4226-a66a-e5f406d746f9",
+        "createdAt": "2026-10-28T02:27:14.259Z",
+        "updatedAt": "2026-10-28T02:27:14.259Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-07",
+        "workingVersionId": "v1-page-07",
+        "submittedVersionId": "v1-page-07"
+      },
+      {
+        "id": "20f35447-0c04-4ef4-8692-6aba1a727b59",
+        "createdAt": "2026-10-28T02:27:14.272Z",
+        "updatedAt": "2026-10-28T02:27:14.272Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-08",
+        "workingVersionId": "v1-page-08",
+        "submittedVersionId": "v1-page-08"
+      },
+      {
+        "id": "1f354633-0f83-4e8c-9f44-97aff84eb76e",
+        "createdAt": "2026-10-28T02:27:14.287Z",
+        "updatedAt": "2026-10-28T02:27:14.287Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-09",
+        "workingVersionId": "v1-page-09",
+        "submittedVersionId": "v1-page-09"
+      },
+      {
+        "id": "8e90e47e-7698-49c1-b912-d757499ae9b8",
+        "createdAt": "2026-10-28T02:27:14.301Z",
+        "updatedAt": "2026-10-28T02:27:14.301Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-10",
+        "workingVersionId": "v1-page-10",
+        "submittedVersionId": "v1-page-10"
+      },
+      {
+        "id": "5fbda5aa-0cc2-4675-bc2e-a89523e5649f",
+        "createdAt": "2026-10-28T02:27:14.317Z",
+        "updatedAt": "2026-10-28T02:27:14.317Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-11",
+        "workingVersionId": "v1-page-11",
+        "submittedVersionId": "v1-page-11"
+      },
+      {
+        "id": "d33991ac-b4dc-42ce-89c4-d46244768f3f",
+        "createdAt": "2026-10-28T02:27:14.329Z",
+        "updatedAt": "2026-10-28T02:27:14.329Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-12",
+        "workingVersionId": "v1-page-12",
+        "submittedVersionId": "v1-page-12"
+      },
+      {
+        "id": "6d3a6fa8-ac9f-4a4a-9cf7-8ada7a0e0c33",
+        "createdAt": "2026-10-28T02:27:14.340Z",
+        "updatedAt": "2026-10-28T02:27:14.340Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-13",
+        "workingVersionId": "v1-page-13",
+        "submittedVersionId": "v1-page-13"
+      },
+      {
+        "id": "7585e465-6295-4311-ba82-1fb2594db4e4",
+        "createdAt": "2026-10-28T02:27:14.350Z",
+        "updatedAt": "2026-10-28T02:27:14.350Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-14",
+        "workingVersionId": "v1-page-14",
+        "submittedVersionId": "v1-page-14"
+      },
+      {
+        "id": "68b5b75e-1a37-4aa3-ba7c-851e8ea8bad4",
+        "createdAt": "2026-10-28T02:27:14.360Z",
+        "updatedAt": "2026-10-28T02:27:14.360Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-15",
+        "workingVersionId": "v1-page-15",
+        "submittedVersionId": "v1-page-15"
+      },
+      {
+        "id": "3e07e0aa-c5bb-4176-9a77-d06c39b6a8c7",
+        "createdAt": "2026-10-28T02:27:14.369Z",
+        "updatedAt": "2026-10-28T02:27:14.369Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-16",
+        "workingVersionId": "v1-page-16",
+        "submittedVersionId": "v1-page-16"
+      },
+      {
+        "id": "7a8c1cc2-a361-4c5e-890e-96378639648e",
+        "createdAt": "2026-10-28T02:27:14.381Z",
+        "updatedAt": "2026-10-28T02:27:14.381Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-17",
+        "workingVersionId": "v1-page-17",
+        "submittedVersionId": "v1-page-17"
+      },
+      {
+        "id": "05fe2f86-493a-4e15-b409-4b2b064880bc",
+        "createdAt": "2026-10-28T02:27:14.391Z",
+        "updatedAt": "2026-10-28T02:27:14.391Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-18",
+        "workingVersionId": "v1-page-18",
+        "submittedVersionId": "v1-page-18"
+      },
+      {
+        "id": "ec269a86-4bce-42d1-b1e4-3abd60fef793",
+        "createdAt": "2026-10-28T02:27:14.402Z",
+        "updatedAt": "2026-10-28T02:27:14.402Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-19",
+        "workingVersionId": "v1-page-19",
+        "submittedVersionId": "v1-page-19"
+      },
+      {
+        "id": "c5a4b1a3-10cf-4388-bd62-888cd3a183cc",
+        "createdAt": "2026-10-28T02:27:14.413Z",
+        "updatedAt": "2026-10-28T02:27:14.413Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-20",
+        "workingVersionId": "v1-page-20",
+        "submittedVersionId": "v1-page-20"
+      },
+      {
+        "id": "2f44c2af-353b-47f1-8b9d-71a69c54df3c",
+        "createdAt": "2026-10-28T02:27:14.428Z",
+        "updatedAt": "2026-10-28T02:27:14.428Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-21",
+        "workingVersionId": "v1-page-21",
+        "submittedVersionId": "v1-page-21"
+      },
+      {
+        "id": "a3b760ff-14e1-4187-9742-cf8d9de644c3",
+        "createdAt": "2026-10-28T02:27:13.933Z",
+        "updatedAt": "2026-10-28T02:28:22.482Z",
+        "revision": 5,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 3,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-student",
+        "workingVersionId": "v1-student",
+        "submittedVersionId": "v1-student"
+      },
+      {
+        "id": "6df8c942-d929-428c-838d-43781b9cd125",
+        "createdAt": "2026-10-28T02:27:13.944Z",
+        "updatedAt": "2026-10-28T02:28:24.021Z",
+        "revision": 3,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 2,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-student2",
+        "workingVersionId": "v1-student2",
+        "submittedVersionId": "v1-student2"
+      },
+      {
+        "id": "cd77d936-d085-4a3f-b984-8d682d5b5a39",
+        "createdAt": "2026-10-28T02:27:14.185Z",
+        "updatedAt": "2026-10-28T02:29:24.148Z",
+        "revision": 2,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 2,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-01",
+        "workingVersionId": "v1-page-01",
+        "submittedVersionId": "v1-page-01"
+      }
+    ],
+    "proposalReview": [
+      {
+        "id": "f395be45-dd84-4c7f-ae60-2918a532018a",
+        "proposalId": "p-student",
+        "reviewGroupId": "qa-g1",
+        "decision": null,
+        "comment": null,
+        "reviewedAt": null,
+        "createdAt": "2026-10-28T02:28:09.251Z"
+      },
+      {
+        "id": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+        "proposalId": "p-student",
+        "reviewGroupId": "qa-g2",
+        "decision": "REVISION_REQUESTED",
+        "comment": "QA STEP5: bổ sung tiêu chí đánh giá và kế hoạch kiểm thử.",
+        "reviewedAt": "2026-10-28T02:28:22.473Z",
+        "createdAt": "2026-10-28T02:28:16.218Z"
+      },
+      {
+        "id": "d4984e16-72af-4e6a-820b-de8496de4af5",
+        "proposalId": "p-student2",
+        "reviewGroupId": "qa-g1",
+        "decision": "APPROVED",
+        "comment": "QA STEP5: đề cương đạt yêu cầu của vòng xét.",
+        "reviewedAt": "2026-10-28T02:28:24.014Z",
+        "createdAt": "2026-10-28T02:28:10.197Z"
+      },
+      {
+        "id": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+        "proposalId": "p-page-01",
+        "reviewGroupId": "qa-g2",
+        "decision": null,
+        "comment": null,
+        "reviewedAt": null,
+        "createdAt": "2026-10-28T02:29:21.593Z"
+      }
+    ],
+    "proposalReviewWorkflow": [
+      {
+        "id": "fb809f2a-13c0-46bb-8f0b-4c01f25da766",
+        "createdAt": "2026-10-28T02:28:09.251Z",
+        "updatedAt": "2026-10-28T02:28:16.225Z",
+        "roundNumber": 1,
+        "state": "SUPERSEDED",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T02:27:13.743Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T02:27:13.743Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T02:28:13.876Z",
+        "assignedAt": "2026-10-28T02:28:09.249Z",
+        "assignedByUserId": "faculty",
+        "revision": 4,
+        "reviewId": "f395be45-dd84-4c7f-ae60-2918a532018a",
+        "proposalId": "p-student",
+        "versionId": "v1-student",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": "e31457dc-9f93-47ac-b352-88a69d7bf90d"
+      },
+      {
+        "id": "bf37f3fd-d468-4220-9e91-6732c687820f",
+        "createdAt": "2026-10-28T02:29:21.593Z",
+        "updatedAt": "2026-10-28T02:29:26.695Z",
+        "roundNumber": 1,
+        "state": "IN_REVIEW",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T02:27:13.743Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T02:27:13.743Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T02:29:24.145Z",
+        "assignedAt": "2026-10-28T02:29:21.591Z",
+        "assignedByUserId": "faculty",
+        "revision": 3,
+        "reviewId": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+        "proposalId": "p-page-01",
+        "versionId": "v1-page-01",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": null
+      },
+      {
+        "id": "9ae9089c-9ef9-42ff-9c22-95cd216eb2b4",
+        "createdAt": "2026-10-28T02:28:16.218Z",
+        "updatedAt": "2026-10-28T02:28:22.479Z",
+        "roundNumber": 2,
+        "state": "DECIDED",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T02:27:13.743Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T02:27:13.743Z"
+        },
+        "routingSnapshot": {
+          "reason": "QA STEP5: chuyển sang nhóm có thành viên độc lập.",
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T02:28:18.208Z",
+        "assignedAt": "2026-10-28T02:28:16.216Z",
+        "assignedByUserId": "faculty",
+        "revision": 4,
+        "reviewId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+        "proposalId": "p-student",
+        "versionId": "v1-student",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": null
+      },
+      {
+        "id": "e73648c6-1f4e-4f0f-93cd-ca1c0d14451e",
+        "createdAt": "2026-10-28T02:28:10.197Z",
+        "updatedAt": "2026-10-28T02:28:24.019Z",
+        "roundNumber": 1,
+        "state": "DECIDED",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T02:27:13.743Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T02:27:13.743Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T02:28:23.651Z",
+        "assignedAt": "2026-10-28T02:28:10.195Z",
+        "assignedByUserId": "faculty",
+        "revision": 2,
+        "reviewId": "d4984e16-72af-4e6a-820b-de8496de4af5",
+        "proposalId": "p-student2",
+        "versionId": "v1-student2",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": null
+      }
+    ],
+    "reviewComment": [
+      {
+        "id": "d8ece487-e087-460e-b305-5a4b23e8dfef",
+        "createdAt": "2026-10-28T02:28:14.715Z",
+        "updatedAt": "2026-10-28T02:28:14.715Z",
+        "text": "QA STEP5: nhận xét vòng cũ phải được bảo toàn.",
+        "reviewId": "f395be45-dd84-4c7f-ae60-2918a532018a",
+        "versionId": "v1-student",
+        "authorUserId": "reviewer"
+      },
+      {
+        "id": "90490d67-88e6-4d5d-af6a-93b6f250df46",
+        "createdAt": "2026-10-28T02:28:18.667Z",
+        "updatedAt": "2026-10-28T02:28:18.667Z",
+        "text": "QA STEP5: nhận xét thành viên thứ nhất vòng mới.",
+        "reviewId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+        "versionId": "v1-student",
+        "authorUserId": "reviewer"
+      },
+      {
+        "id": "121a10cb-a25b-4a62-adcf-a33a7d0737b3",
+        "createdAt": "2026-10-28T02:28:21.618Z",
+        "updatedAt": "2026-10-28T02:28:21.618Z",
+        "text": "QA STEP5: nhận xét độc lập của thành viên thứ hai.",
+        "reviewId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+        "versionId": "v1-student",
+        "authorUserId": "outsider"
+      },
+      {
+        "id": "32f59619-d9a1-4bde-8bd8-a6da38c83d63",
+        "createdAt": "2026-10-28T02:29:24.758Z",
+        "updatedAt": "2026-10-28T02:29:24.758Z",
+        "text": "QA FIX: nhận xét hợp lệ trước khi kiểm tra lỗi nhập.",
+        "reviewId": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+        "versionId": "v1-page-01",
+        "authorUserId": "reviewer"
+      },
+      {
+        "id": "1d0182c2-92ba-4dfa-b595-36be521ab134",
+        "createdAt": "2026-10-28T02:29:26.693Z",
+        "updatedAt": "2026-10-28T02:29:26.693Z",
+        "text": "QA FIX: đã sửa nội dung nhận xét.",
+        "reviewId": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+        "versionId": "v1-page-01",
+        "authorUserId": "reviewer"
+      }
+    ],
+    "proposalReviewDecision": [
+      {
+        "id": "6e1bed00-b493-427f-a833-cb90003a3773",
+        "createdAt": "2026-10-28T02:28:22.475Z",
+        "updatedAt": "2026-10-28T02:28:22.475Z",
+        "decision": "REVISION_REQUIRED",
+        "comment": "QA STEP5: bổ sung tiêu chí đánh giá và kế hoạch kiểm thử.",
+        "decidedAt": "2026-10-28T02:28:22.473Z",
+        "reviewId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+        "versionId": "v1-student",
+        "decidedByUserId": "outsider"
+      },
+      {
+        "id": "0bef9b9a-378b-4d96-9128-9efbdafcba23",
+        "createdAt": "2026-10-28T02:28:24.016Z",
+        "updatedAt": "2026-10-28T02:28:24.016Z",
+        "decision": "APPROVED",
+        "comment": "QA STEP5: đề cương đạt yêu cầu của vòng xét.",
+        "decidedAt": "2026-10-28T02:28:24.014Z",
+        "reviewId": "d4984e16-72af-4e6a-820b-de8496de4af5",
+        "versionId": "v1-student2",
+        "decidedByUserId": "reviewer"
+      }
+    ],
+    "outboxEvent": [
+      {
+        "id": "5a13c108-e55a-46cc-8732-7b969adb2ca4",
+        "createdAt": "2026-10-28T02:28:22.504Z",
+        "updatedAt": "2026-10-28T02:28:22.504Z",
+        "eventId": "37f19133-d6ca-43c3-91c1-f0d734c1bdd5",
+        "type": "PROPOSAL_REVIEW_DECIDED",
+        "aggregateId": "p-student",
+        "payload": {
+          "decision": "REVISION_REQUIRED",
+          "reviewId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+          "versionId": "v1-student",
+          "proposalId": "p-student",
+          "advisorUserId": "advisor",
+          "studentUserId": "student"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      },
+      {
+        "id": "a2c5ecd3-d4f2-4ce7-9c32-369f852c38a9",
+        "createdAt": "2026-10-28T02:28:24.039Z",
+        "updatedAt": "2026-10-28T02:28:24.039Z",
+        "eventId": "bca263ae-0b53-424b-b24f-9f1b64609eb6",
+        "type": "PROPOSAL_REVIEW_DECIDED",
+        "aggregateId": "p-student2",
+        "payload": {
+          "decision": "APPROVED",
+          "reviewId": "d4984e16-72af-4e6a-820b-de8496de4af5",
+          "versionId": "v1-student2",
+          "proposalId": "p-student2",
+          "advisorUserId": "advisor",
+          "studentUserId": "student2"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      }
+    ],
+    "notification": [
+      {
+        "id": "cf819501-f39b-47f5-8f26-c3d5cc7bdfbb",
+        "userId": "student",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/e31457dc-9f93-47ac-b352-88a69d7bf90d",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T02:28:22.497Z",
+        "readAt": null
+      },
+      {
+        "id": "a17f2d4c-bf5d-4550-b060-98b215dfa554",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/e31457dc-9f93-47ac-b352-88a69d7bf90d",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T02:28:22.501Z",
+        "readAt": null
+      },
+      {
+        "id": "bead0dd7-e5b1-4f20-a02c-aa52381d060d",
+        "userId": "student2",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/d4984e16-72af-4e6a-820b-de8496de4af5",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T02:28:24.035Z",
+        "readAt": null
+      },
+      {
+        "id": "a6646cd7-61a6-40ed-b51d-d74abb1add7a",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/d4984e16-72af-4e6a-820b-de8496de4af5",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T02:28:24.038Z",
+        "readAt": null
+      }
+    ]
+  },
+  "counts": {
+    "thesisDossier": 0,
+    "dossierFinalization": 0,
+    "guidancePlan": 0,
+    "task": 0,
+    "progressReview": 0,
+    "finalResult": 0
+  },
+  "audit": [
+    {
+      "id": "564a6c4e-9e70-423d-ab14-7dbb5decc072",
+      "userId": "faculty",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:28:07.601Z"
+    },
+    {
+      "id": "8984e662-2166-4938-9ad9-98bf6b034c6e",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "f395be45-dd84-4c7f-ae60-2918a532018a",
+      "createdAt": "2026-10-28T02:28:09.269Z"
+    },
+    {
+      "id": "d3b0554b-bc95-4a56-a1ec-f92ed9e243bd",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "d4984e16-72af-4e6a-820b-de8496de4af5",
+      "createdAt": "2026-10-28T02:28:10.206Z"
+    },
+    {
+      "id": "933a242e-7e2f-4893-a474-e1b11cbb6e69",
+      "userId": "reviewer",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T02:28:11.534Z"
+    },
+    {
+      "id": "4ca284c3-a8e0-4d26-84a2-3ccc97339468",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "f395be45-dd84-4c7f-ae60-2918a532018a",
+      "createdAt": "2026-10-28T02:28:13.885Z"
+    },
+    {
+      "id": "9b8e6073-8672-48b2-af88-84dbc5e22652",
+      "userId": "reviewer",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "f395be45-dd84-4c7f-ae60-2918a532018a",
+      "createdAt": "2026-10-28T02:28:14.721Z"
+    },
+    {
+      "id": "af7870de-14fb-45c0-8fe4-e95b51988540",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+      "createdAt": "2026-10-28T02:28:16.233Z"
+    },
+    {
+      "id": "46d0b26c-d85e-4acf-9863-20dcbb49a62c",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+      "createdAt": "2026-10-28T02:28:18.217Z"
+    },
+    {
+      "id": "cca7e3a2-33fa-44ba-bd7b-833a229c4768",
+      "userId": "reviewer",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+      "createdAt": "2026-10-28T02:28:18.673Z"
+    },
+    {
+      "id": "6c071bda-3a3b-4611-8447-0e7735eab3d8",
+      "userId": "outsider",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "outsider",
+      "createdAt": "2026-10-28T02:28:20.360Z"
+    },
+    {
+      "id": "19e0a810-1522-4592-a6bb-d147efc3dc1f",
+      "userId": "outsider",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+      "createdAt": "2026-10-28T02:28:21.622Z"
+    },
+    {
+      "id": "1e19e065-a0b5-4e6e-82be-d3efd3aa1aaa",
+      "userId": "outsider",
+      "action": "DECISION",
+      "resource": "proposal-review",
+      "resourceId": "e31457dc-9f93-47ac-b352-88a69d7bf90d",
+      "createdAt": "2026-10-28T02:28:22.511Z"
+    },
+    {
+      "id": "e2b48749-e8ca-4dee-bf11-d4292ff245fd",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "d4984e16-72af-4e6a-820b-de8496de4af5",
+      "createdAt": "2026-10-28T02:28:23.660Z"
+    },
+    {
+      "id": "7ed78e9a-24b0-4393-b82a-0cc1732094ac",
+      "userId": "reviewer",
+      "action": "DECISION",
+      "resource": "proposal-review",
+      "resourceId": "d4984e16-72af-4e6a-820b-de8496de4af5",
+      "createdAt": "2026-10-28T02:28:24.043Z"
+    },
+    {
+      "id": "1fb911cb-3a84-4002-958f-1f87a94f2b10",
+      "userId": "faculty",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:28:25.043Z"
+    },
+    {
+      "id": "cb3f4e12-0fd4-4eab-82d5-5ff946b4f60a",
+      "userId": "reviewer",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T02:28:25.259Z"
+    },
+    {
+      "id": "12018f3d-a494-4483-9a6f-e7a244a3c5a0",
+      "userId": "outsider",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "outsider",
+      "createdAt": "2026-10-28T02:28:25.466Z"
+    },
+    {
+      "id": "76b0da6a-cf3f-46d7-b696-f1a4024c4e23",
+      "userId": "faculty",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:29:17.546Z"
+    },
+    {
+      "id": "04a35c66-330f-40a0-a657-cf31fa5893d6",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+      "createdAt": "2026-10-28T02:29:21.604Z"
+    },
+    {
+      "id": "1ef35059-c035-4146-bb14-367016a25423",
+      "userId": "reviewer",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T02:29:23.003Z"
+    },
+    {
+      "id": "e7c9a604-e915-4b67-87bc-b3e50517f429",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+      "createdAt": "2026-10-28T02:29:24.151Z"
+    },
+    {
+      "id": "ea3fa29e-90b8-46a9-ba98-1decf12b58bc",
+      "userId": "reviewer",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+      "createdAt": "2026-10-28T02:29:24.763Z"
+    },
+    {
+      "id": "32ccfc3e-0524-4500-b4f7-1dd501bf3e60",
+      "userId": "reviewer",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74",
+      "createdAt": "2026-10-28T02:29:26.697Z"
+    },
+    {
+      "id": "dda11861-546c-48b2-b6d8-f20bd2f86c1d",
+      "userId": "student",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "student",
+      "createdAt": "2026-10-28T02:29:27.956Z"
+    },
+    {
+      "id": "d0bd35f2-c231-4122-8074-905dbab0957c",
+      "userId": "faculty2",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty2",
+      "createdAt": "2026-10-28T02:29:29.303Z"
+    },
+    {
+      "id": "0df8c8d9-b467-4580-9f26-d8d27b59d8ff",
+      "userId": "faculty",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:29:29.704Z"
+    },
+    {
+      "id": "e40e85fa-2ad8-4a0e-9059-877ca1a688cf",
+      "userId": "reviewer",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T02:29:29.913Z"
+    },
+    {
+      "id": "5ecb9dcc-c1e6-4409-a0bc-247136a5e1d6",
+      "userId": "student",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "student",
+      "createdAt": "2026-10-28T02:29:30.122Z"
+    },
+    {
+      "id": "961d8def-a27c-405a-9a0b-2a4c2d42f9bd",
+      "userId": "faculty2",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty2",
+      "createdAt": "2026-10-28T02:29:30.317Z"
+    }
+  ]
+}

@@ -8,6 +8,7 @@ export class DossierPdfService {
     snapshot: DossierPrintSnapshot,
     reference: string,
     finalizedAt: Date,
+    preview = false,
   ) {
     const doc = new PDFDocument({
       size: "A4",
@@ -67,19 +68,52 @@ export class DossierPdfService {
       });
     doc.moveDown();
     const field = (label: string, value: string) => {
+      doc.font("regular").fontSize(11);
+      ensure(doc.heightOfString(`${label}: ${value}`, { width }) + 5);
       doc
         .font("regular")
         .fontSize(11)
         .text(`${label}: ${value}`, 50, doc.y, { width });
       doc.moveDown(0.35);
     };
+    const pair = (
+      left: [string, string | null | undefined],
+      right: [string, string | null | undefined],
+    ) => {
+      doc.font("regular").fontSize(11);
+      const texts = [left, right].map(
+        ([label, value]) => `${label}: ${value || "...................."}`,
+      );
+      const cellWidth = width / 2 - 8;
+      const height = Math.max(
+        ...texts.map((t) => doc.heightOfString(t, { width: cellWidth })),
+      );
+      ensure(height + 5);
+      const y = doc.y;
+      texts.forEach((text, i) =>
+        doc.text(text, 50 + (i * width) / 2, y, { width: cellWidth }),
+      );
+      doc.y = y + height + 5;
+      doc.x = 50;
+    };
     field("Họ và tên sinh viên", snapshot.student.name);
     field("Mã SV", snapshot.student.code);
-    field("Lớp", snapshot.student.className);
+    pair(
+      ["Lớp", snapshot.student.className],
+      ["Khóa", snapshot.student.cohort],
+    );
+    pair(
+      ["Số điện thoại", snapshot.student.phone],
+      ["Email", snapshot.student.email],
+    );
     field("Ngành", snapshot.student.majorName);
     field("Hệ đào tạo", snapshot.student.trainingSystem);
     field("Giảng viên hướng dẫn", snapshot.advisor.name);
     field("Đơn vị công tác", snapshot.advisor.department);
+    pair(
+      ["Số điện thoại GVHD", snapshot.advisor.phone],
+      ["Email GVHD", snapshot.advisor.email],
+    );
     field("Tên đề tài", snapshot.title);
     const section = (heading: string, text: string) => {
       ensure(55);
@@ -147,7 +181,11 @@ export class DossierPdfService {
         true,
       );
     const date = (v: string) =>
-      new Date(v).toLocaleDateString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
+      v
+        ? new Date(v).toLocaleDateString("vi-VN", {
+            timeZone: "Asia/Ho_Chi_Minh",
+          })
+        : "……";
     header();
     for (const [index, period] of snapshot.content.schedule.entries()) {
       doc.font("regular").fontSize(9);
@@ -206,11 +244,24 @@ export class DossierPdfService {
       // Footer is inside the bottom margin; keep it from creating a new page.
       const margin = doc.page.margins.bottom;
       doc.page.margins.bottom = 0;
+      if (preview) {
+        doc
+          .save()
+          .font("bold")
+          .fontSize(12)
+          .fillColor("#b91c1c")
+          .text("BẢN XEM TRƯỚC — CHƯA CHỐT", 50, 25, {
+            width,
+            align: "center",
+            lineBreak: false,
+          })
+          .restore();
+      }
       doc
         .font("regular")
         .fontSize(7)
         .text(
-          `Hồ sơ ${reference} · ${i + 1}/${pages}`,
+          `${preview ? "KHÔNG DÙNG NỘP HỒ SƠ · " : "Hồ sơ "}${reference} · ${i + 1}/${pages}`,
           50,
           doc.page.height - 35,
           { width, align: "center", lineBreak: false },

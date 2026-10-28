@@ -1,0 +1,6 @@
+﻿{
+    "ComparedAgainst":  "Báo cáo QA trước, final-verification.json",
+    "GroupViewsUnchanged":  true,
+    "HistoricalQaReportUnchanged":  true,
+    "Scope":  "So sánh group views qua API; không hash toàn DB"
+}

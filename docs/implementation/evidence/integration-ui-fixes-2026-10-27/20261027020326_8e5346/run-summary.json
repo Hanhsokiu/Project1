@@ -1,0 +1,83 @@
+{
+  "runId": "20261027020326_8e5346",
+  "startedAt": "2026-10-27T02:03:26.903Z",
+  "branch": "fix/integration-ui",
+  "sourceCommit": "0c361709df34837df65b3ed429691599e6e2d93f",
+  "syntheticDataOnly": true,
+  "resetOrDrop": false,
+  "cases": [
+    {
+      "name": "live-e2e",
+      "database": "btl_pr2b_audit_20261027020326_8e5346_live_e2e",
+      "startedAt": "2026-10-27T02:03:27.405Z",
+      "finishedAt": "2026-10-27T02:04:37.781Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "live-e2e/console.log"
+    },
+    {
+      "name": "step4",
+      "database": "btl_pr2b_audit_20261027020326_8e5346_step4",
+      "startedAt": "2026-10-27T02:04:38.111Z",
+      "finishedAt": "2026-10-27T02:04:44.414Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "step4/console.log"
+    },
+    {
+      "name": "step5",
+      "database": "btl_pr2b_audit_20261027020326_8e5346_step5",
+      "startedAt": "2026-10-27T02:04:44.684Z",
+      "finishedAt": "2026-10-27T02:04:53.408Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "step5/console.log"
+    },
+    {
+      "name": "step6",
+      "database": "btl_pr2b_audit_20261027020326_8e5346_step6",
+      "startedAt": "2026-10-27T02:04:53.625Z",
+      "finishedAt": "2026-10-27T02:05:08.833Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "step6/console.log"
+    },
+    {
+      "name": "step7",
+      "database": "btl_pr2b_audit_20261027020326_8e5346_step7",
+      "startedAt": "2026-10-27T02:05:09.126Z",
+      "finishedAt": "2026-10-27T02:05:25.230Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "step7/console.log"
+    },
+    {
+      "name": "step8a",
+      "database": "btl_pr2b_audit_20261027020326_8e5346_step8a",
+      "startedAt": "2026-10-27T02:05:25.439Z",
+      "finishedAt": "2026-10-27T02:05:50.310Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "step8a/console.log"
+    },
+    {
+      "name": "step8b",
+      "database": "btl_pr2b_audit_20261027020326_8e5346_step8b",
+      "startedAt": "2026-10-27T02:05:50.530Z",
+      "finishedAt": "2026-10-27T02:06:30.569Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "step8b/console.log"
+    },
+    {
+      "name": "step8c",
+      "database": "btl_pr2b_audit_20261027020326_8e5346_step8c",
+      "startedAt": "2026-10-27T02:06:30.814Z",
+      "finishedAt": "2026-10-27T02:07:18.074Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "step8c/console.log"
+    }
+  ],
+  "finishedAt": "2026-10-27T02:07:18.090Z"
+}

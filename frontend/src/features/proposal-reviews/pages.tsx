@@ -554,7 +554,7 @@ export function ProposalReviewDetailPage() {
   return <ProposalReviewDetail key={id} id={id} />;
 }
 function ProposalReviewDetail({ id }: { id: string }) {
-  const [params] = useSearchParams(),
+  const [params, setParams] = useSearchParams(),
     client = useQueryClient(),
     key = useRequestKey();
   const review = useQuery({
@@ -567,9 +567,26 @@ function ProposalReviewDetail({ id }: { id: string }) {
     enabled: !!review.data,
   });
   const [text, setText] = useState(''),
-    [feedback, setFeedback] = useState('');
+    [feedback, setFeedback] = useState(''),
+    [commentError, setCommentError] = useState('');
   const commentRevision = useRef<number>();
+  const clearFeedback = () => {
+    setFeedback('');
+    if (params.has('saved'))
+      setParams(
+        (previous) => {
+          const next = new URLSearchParams(previous);
+          next.delete('saved');
+          return next;
+        },
+        { replace: true },
+      );
+  };
   const mutation = useMutation({
+    onMutate: () => {
+      clearFeedback();
+      setCommentError('');
+    },
     mutationFn: ({
       kind,
       input,
@@ -703,19 +720,32 @@ function ProposalReviewDetail({ id }: { id: string }) {
                 className="rg-panel space-y-4 p-5"
                 onSubmit={(e) => {
                   e.preventDefault();
+                  clearFeedback();
                   const parsed = ReviewCommentSchema.safeParse({
                     expectedReviewRevision:
                       commentRevision.current ?? r.revision,
                     versionId: r.versionId,
                     text,
                   });
-                  if (parsed.success)
-                    mutation.mutate({ kind: 'comment', input: parsed.data });
+                  if (!parsed.success) {
+                    setCommentError(
+                      text.trim()
+                        ? 'Nhận xét không hợp lệ. Hãy tải lại vòng duyệt và thử lại.'
+                        : 'Nội dung nhận xét không được để trống hoặc chỉ gồm khoảng trắng.',
+                    );
+                    return;
+                  }
+                  setCommentError('');
+                  mutation.mutate({ kind: 'comment', input: parsed.data });
                 }}
               >
                 <h2 className="font-semibold">Thêm nhận xét thành viên</h2>
                 <textarea
                   aria-label="Nội dung nhận xét"
+                  aria-invalid={!!commentError}
+                  aria-describedby={
+                    commentError ? 'review-comment-error' : undefined
+                  }
                   required
                   maxLength={10000}
                   rows={4}
@@ -724,9 +754,21 @@ function ProposalReviewDetail({ id }: { id: string }) {
                   disabled={mutation.isPending}
                   onChange={(e) => {
                     commentRevision.current ??= r.revision;
+                    clearFeedback();
+                    setCommentError('');
+                    mutation.reset();
                     setText(e.target.value);
                   }}
                 />
+                {commentError && (
+                  <p
+                    id="review-comment-error"
+                    role="alert"
+                    className="text-red-700"
+                  >
+                    {commentError}
+                  </p>
+                )}
                 <button
                   className="rounded bg-blue-600 px-4 py-2 text-sm text-white"
                   disabled={mutation.isPending}

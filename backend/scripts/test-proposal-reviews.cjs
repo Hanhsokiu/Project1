@@ -376,7 +376,8 @@ async function main() {
       };
       if (actor)
         headers.Authorization =
-          'Bearer ' + jwt.sign({ sub: actor, sid: actor, roles: ['ADMIN', 'FACULTY'] });
+          'Bearer ' +
+          jwt.sign({ sub: actor, sid: actor, roles: ['ADMIN', 'FACULTY'] });
       const r = await fetch(base + route, {
           method,
           headers,
@@ -421,6 +422,114 @@ async function main() {
     pass(
       '401, ADMIN deny despite permission and forged claims, cross-term/department isolation',
     );
+    const originalStudent = await db.student.findUniqueOrThrow({
+      where: { id: 's1' },
+    });
+    const originalOther = await db.student.findUniqueOrThrow({
+      where: { id: 's9' },
+    });
+    const originalTopic = await db.topic.findUniqueOrThrow({
+      where: { id: 'topic1' },
+    });
+    const searchList = (actor, termId, search, extra = '') =>
+      req(
+        actor,
+        'GET',
+        `/terms/${termId}/proposals?search=${encodeURIComponent(search)}${extra}`,
+      );
+    try {
+      await db.student.update({
+        where: { id: 's1' },
+        data: { fullName: 'Nguyễn Văn Sinh' },
+      });
+      await db.student.update({
+        where: { id: 's9' },
+        data: { fullName: 'Nguyễn Văn Sinh' },
+      });
+      await db.topic.update({
+        where: { id: 'topic1' },
+        data: { title: 'Đề cương xét duyệt tiếng Việt' },
+      });
+      for (const search of [
+        'Nguyễn Văn Sinh',
+        'NGUYỄN VĂN SINH',
+        'nGUYỄN vĂN sINH',
+        '  NGUYỄN VĂN SINH  ',
+        'NGUYỄN VĂN SINH'.normalize('NFD'),
+        'ĐỀ CƯƠNG XÉT DUYỆT',
+        'S1',
+      ]) {
+        const result = (await searchList('f', 't1', search)).data;
+        assert.equal(result.total, 1, 'Unicode search mismatch');
+        assert.deepEqual(
+          result.data.map((p) => p.id),
+          ['p1'],
+        );
+      }
+      for (const search of ['%', '_', '\\', "' OR 1=1 --", 'Nguyen Van Sinh'])
+        assert.equal(
+          (await searchList('f', 't1', search)).data.total,
+          0,
+          'Search must remain literal and accent sensitive',
+        );
+      assert.equal(
+        (await searchList('fd2', 't1', 'NGUYỄN VĂN SINH')).data.total,
+        0,
+      );
+      assert.equal(
+        (await searchList('s2', 't1', 'NGUYỄN VĂN SINH')).data.total,
+        0,
+      );
+      assert.deepEqual(
+        (await searchList('f2', 't2', 'NGUYỄN VĂN SINH')).data.data.map(
+          (p) => p.id,
+        ),
+        ['p9'],
+      );
+      assert.equal(
+        (await searchList('f', 't1', 'NGUYỄN VĂN SINH', '&departmentId=d2'))
+          .data.total,
+        0,
+      );
+      assert.equal(
+        (await searchList('f', 't1', 'NGUYỄN VĂN SINH', '&status=APPROVED'))
+          .data.total,
+        0,
+      );
+      await db.student.update({
+        where: { id: 's1' },
+        data: { fullName: 'Nguyễn Văn Sinh'.normalize('NFD') },
+      });
+      assert.equal(
+        (await searchList('f', 't1', 'NGUYỄN VĂN SINH')).data.total,
+        1,
+      );
+      pass(
+        'Unicode NFC/NFD search preserves Vietnamese casing, literal matching, term/department/owner scope and filters',
+      );
+    } finally {
+      await db.student.update({
+        where: { id: 's1' },
+        data: {
+          fullName: originalStudent.fullName,
+          updatedAt: originalStudent.updatedAt,
+        },
+      });
+      await db.student.update({
+        where: { id: 's9' },
+        data: {
+          fullName: originalOther.fullName,
+          updatedAt: originalOther.updatedAt,
+        },
+      });
+      await db.topic.update({
+        where: { id: 'topic1' },
+        data: {
+          title: originalTopic.title,
+          updatedAt: originalTopic.updatedAt,
+        },
+      });
+    }
     const candidates = (
       await req('f', 'GET', '/proposals/p1/review-candidates')
     ).data;

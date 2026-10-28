@@ -1,5 +1,5 @@
 "use strict";
-const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
+const { prepareFixtureSessions } = require("./integration/auth-fixture.cjs");
 // Real HTTP + PDF + PostgreSQL. New isolated loopback database required.
 const fs = require("node:fs"),
   path = require("node:path"),
@@ -96,7 +96,8 @@ async function main() {
       };
       if (actor)
         headers.Authorization =
-          "Bearer " + jwt.sign({ sub: actor, sid: actor, roles: ["ADMIN", "FACULTY"] });
+          "Bearer " +
+          jwt.sign({ sub: actor, sid: actor, roles: ["ADMIN", "FACULTY"] });
       const response = await fetch(base + route, {
           method,
           headers,
@@ -283,11 +284,94 @@ async function main() {
         revision: 1,
       },
     });
+    await db.student.update({
+      where: { id: "s2" },
+      data: { cohort: "K63", phone: "0912345678" },
+    });
+    await db.lecturer.update({
+      where: { id: "advisor" },
+      data: { phone: "0987654321" },
+    });
     d = await dossier();
     assert(d.allowedActions.includes("finalize"));
     assert.equal(
       d.previewSnapshot.student.className,
       "Công nghệ thông tin K63",
+    );
+    assert.equal(d.previewSnapshot.student.cohort, "K63");
+    assert.equal(d.previewSnapshot.student.phone, "0912345678");
+    assert.equal(d.previewSnapshot.advisor.phone, "0987654321");
+    assert.equal(
+      d.previewSnapshot.student.email,
+      (await db.userAccount.findUniqueOrThrow({ where: { id: "s2" } })).email,
+    );
+    const previewCounts = async () =>
+      Promise.all(
+        [
+          "thesisDossier",
+          "dossierFinalization",
+          "dossierReceipt",
+          "fileAsset",
+          "dossierPdfContent",
+          "idempotencyRecord",
+          "proposalVersion",
+          "dossierHistory",
+          "auditLog",
+        ].map((m) => db[m].count()),
+      );
+    const beforePreview = await previewCounts();
+    async function binary(actor, route) {
+      const response = await fetch(base + route, {
+        headers: actor
+          ? { Authorization: "Bearer " + jwt.sign({ sub: actor, sid: actor }) }
+          : {},
+      });
+      return { response, bytes: Buffer.from(await response.arrayBuffer()) };
+    }
+    let previewBytes;
+    for (const actor of ["s2", "advisor", "f"]) {
+      const result = await binary(
+        actor,
+        "/proposals/p2/preview.pdf?versionId=" + sealed.id,
+      );
+      assert.equal(result.response.status, 200);
+      assert.match(result.response.headers.get("cache-control"), /no-store/);
+      assert.equal(
+        result.response.headers.get("x-content-type-options"),
+        "nosniff",
+      );
+      assert.equal(result.bytes.subarray(0, 5).toString(), "%PDF-");
+      previewBytes = result.bytes;
+    }
+    for (const actor of ["a", "s1", "s9", "f2", "admin"])
+      assert.equal(
+        (
+          await binary(
+            actor,
+            "/proposals/p2/preview.pdf?versionId=" + sealed.id,
+          )
+        ).response.status,
+        404,
+      );
+    assert.equal(
+      (await binary(null, "/proposals/p2/preview.pdf?versionId=" + sealed.id))
+        .response.status,
+      401,
+    );
+    for (const query of ["", "?versionId=" + sealed.id + "&path=x"])
+      assert.equal(
+        (await binary("s2", "/proposals/p2/preview.pdf" + query)).response
+          .status,
+        400,
+      );
+    assert.equal(
+      (await binary("s2", "/proposals/p2/preview.pdf?versionId=v1")).response
+        .status,
+      404,
+    );
+    assert.deepEqual(await previewCounts(), beforePreview);
+    pass(
+      "watermarked preview is scoped to owner/current advisor/faculty, strict query, and performs no writes",
     );
     await req(
       "f",
@@ -305,7 +389,19 @@ async function main() {
     await db.$executeRawUnsafe(
       `CREATE TRIGGER step7_test_audit_failure BEFORE INSERT ON public."AUDIT_LOG" FOR EACH ROW EXECUTE FUNCTION public.step7_test_audit_failure()`,
     );
+    const faultState = async () =>
+      Promise.all(
+        [
+          "proposalWorkflow",
+          "dossierWorkflow",
+          "dossierFinalization",
+          "dossierHistory",
+          "idempotencyRecord",
+        ].map((m) => db[m].findMany({ orderBy: { id: "asc" } })),
+      );
+    const beforeFault = await faultState();
     await req("f", "POST", "/proposals/p2/finalize", inputFor(d), 500);
+    assert.deepEqual(await faultState(), beforeFault);
     assert.equal(await db.thesisDossier.count(), 0);
     assert.equal(await db.dossierFinalization.count(), 0);
     await db.$executeRawUnsafe(
@@ -421,15 +517,30 @@ async function main() {
     );
     await req("f", "GET", "/proposals/p2/dossier.pdf", undefined, 409);
     const generateInput = { expectedRevision: d.revision, finalizationId },
-      generateKey = crypto.randomUUID();
-    const pdfCreated = await req(
-      "s2",
-      "POST",
-      "/proposals/p2/dossier/pdf",
-      generateInput,
-      200,
-      generateKey,
-    );
+      competingKey = crypto.randomUUID();
+    let generateKey = crypto.randomUUID();
+    const pdfRace = await Promise.all([
+      req(
+        "s2",
+        "POST",
+        "/proposals/p2/dossier/pdf",
+        generateInput,
+        [200, 409],
+        generateKey,
+      ),
+      req(
+        "s2",
+        "POST",
+        "/proposals/p2/dossier/pdf",
+        generateInput,
+        [200, 409],
+        competingKey,
+      ),
+    ]);
+    const pdfCreated = pdfRace.find((r) => r.status === 200);
+    assert(pdfCreated);
+    if (pdfRace[0].status !== 200) generateKey = competingKey;
+    assert.equal(pdfRace.filter((r) => r.status === 200).length, 1);
     assert.equal(pdfCreated.data.state, "FINALIZED");
     assert.equal(pdfCreated.data.receipt, null);
     const generatedAgain = await req(
@@ -442,6 +553,16 @@ async function main() {
     );
     assert.deepEqual(generatedAgain.data, pdfCreated.data);
     assert.equal(await db.dossierPdfContent.count(), 1);
+    const pdfContent = await db.dossierPdfContent.findFirstOrThrow();
+    await assert.rejects(
+      db.dossierPdfContent.update({
+        where: { assetId: pdfContent.assetId },
+        data: { bytes: Buffer.from("tampered") },
+      }),
+    );
+    await assert.rejects(
+      db.dossierPdfContent.delete({ where: { assetId: pdfContent.assetId } }),
+    );
     pass(
       "student creates private PDF once; PDF generation never claims a signature or physical submission",
     );
@@ -450,7 +571,9 @@ async function main() {
         `${base}/proposals/${proposalId}/dossier.pdf?finalizationId=${encodeURIComponent(fId)}`,
         {
           headers: actor
-            ? { Authorization: "Bearer " + jwt.sign({ sub: actor, sid: actor }) }
+            ? {
+                Authorization: "Bearer " + jwt.sign({ sub: actor, sid: actor }),
+              }
             : {},
         },
       );
@@ -516,6 +639,10 @@ async function main() {
       return { text, pages };
     }
     const parsed = await inspect(actual.bytes);
+    const previewParsed = await inspect(previewBytes);
+    assert(previewParsed.text.includes("BẢN XEM TRƯỚC — CHƯA CHỐT"));
+    assert(previewParsed.text.includes("KHÔNG DÙNG NỘP HỒ SƠ"));
+    assert(!parsed.text.includes("BẢN XEM TRƯỚC"));
     for (const field of [
       "ĐỀ CƯƠNG ĐỒ ÁN TỐT NGHIỆP",
       "Công nghệ thông tin K63",
@@ -528,11 +655,20 @@ async function main() {
       "Trưởng Bộ môn",
       "Giảng viên hướng dẫn",
       "Sinh viên thực hiện",
+      "Khóa: K63",
+      "Số điện thoại: 0912345678",
+      "Email:",
+      "Số điện thoại GVHD: 0987654321",
+      "Email GVHD:",
     ])
       assert(parsed.text.includes(field), `Missing Unicode field ${field}`);
     fs.writeFileSync(
       path.join(backend, "prisma/review/step7-sample.pdf"),
       actual.bytes,
+    );
+    fs.writeFileSync(
+      path.join(backend, "prisma/review/step7-preview.pdf"),
+      previewBytes,
     );
     pass(
       "real PDF text extraction verifies Vietnamese Unicode, all required fields, A4 and page bounds",
@@ -565,6 +701,17 @@ async function main() {
     assert(longParsed.text.includes("Công việc 35"));
     assert(longParsed.text.includes("Sinh viên thực hiện"));
     assert(longParsed.text.split("Nội dung công việc").length > 2);
+    const longPreview = await new DossierPdfService().render(
+      longSnapshot,
+      "preview-long-table",
+      new Date(finalization.finalizedAt),
+      true,
+    );
+    const longPreviewParsed = await inspect(longPreview.bytes);
+    assert.equal(
+      longPreviewParsed.text.split("BẢN XEM TRƯỚC — CHƯA CHỐT").length - 1,
+      longPreview.pages,
+    );
     fs.writeFileSync(
       path.join(backend, "prisma/review/step7-long-sample.pdf"),
       long.bytes,
@@ -581,12 +728,36 @@ async function main() {
     });
     await db.student.update({
       where: { id: "s2" },
-      data: { fullName: "Changed after finalization" },
+      data: {
+        fullName: "Changed after finalization",
+        cohort: "Changed cohort",
+        phone: "0000000000",
+      },
+    });
+    await db.userAccount.update({
+      where: { id: "s2" },
+      data: { email: "changed-s2@example.invalid" },
+    });
+    await db.lecturer.update({
+      where: { id: "advisor" },
+      data: { phone: "0000000001" },
     });
     assert.deepEqual((await download("s2")).bytes, actual.bytes);
     assert.equal(
       (await dossier()).currentFinalization.snapshot.student.className,
       "Công nghệ thông tin K63",
+    );
+    assert.equal(
+      (await dossier()).currentFinalization.snapshot.student.cohort,
+      "K63",
+    );
+    assert.equal(
+      (await dossier()).currentFinalization.snapshot.student.phone,
+      "0912345678",
+    );
+    assert.equal(
+      (await dossier()).currentFinalization.snapshot.advisor.phone,
+      "0987654321",
     );
     pass(
       "changes to live catalog/profile do not alter official snapshot or stored PDF bytes",
@@ -695,6 +866,50 @@ async function main() {
     );
     pass(
       "grant revocation blocks cached replay and approved version remains unchanged after finalization/PDF/receipt",
+    );
+    // Separate malformed legacy fixture: a matching hash does not make an
+    // incomplete print structure safe to render. No existing snapshot is changed.
+    const malformed = { ...finalization.printSnapshot, student: null };
+    const legacy = await db.thesisDossier.create({
+      data: {
+        proposalId: "p1",
+        pr2bDossierWorkflowDossierId: { create: { state: "FINALIZED" } },
+      },
+    });
+    const legacyVersion = await db.proposalVersion.findFirstOrThrow({
+      where: { proposalId: "p1" },
+    });
+    const malformedHash =
+      require("../dist/topic/proposal-reviews/proposal-review.validator").reviewHash(
+        malformed,
+      );
+    const badFinalization = await db.dossierFinalization.create({
+      data: {
+        dossierId: legacy.id,
+        proposalId: "p1",
+        versionId: legacyVersion.id,
+        sequence: 1,
+        templateVersion: finalization.templateVersion,
+        contentHash: malformedHash,
+        printSnapshot: malformed,
+        finalizedAt: new Date(),
+        finalizedByUserId: "f",
+      },
+    });
+    await db.dossierWorkflow.update({
+      where: { dossierId: legacy.id },
+      data: { currentFinalizationId: badFinalization.id },
+    });
+    assert.equal(
+      (await req("s1", "GET", "/proposals/p1/dossier", undefined, 409)).code,
+      "INPUT_NOT_READY",
+    );
+    const invalidDownload = await download("s1", "p1", badFinalization.id);
+    assert.equal(invalidDownload.response.status, 409);
+    assert.notEqual(invalidDownload.bytes.subarray(0, 5).toString(), "%PDF-");
+    assert.equal(await db.dossierPdfContent.count(), 1);
+    pass(
+      "matching-hash legacy snapshot with malformed profile returns a business conflict instead of rendering or creating PDF",
     );
     fs.writeFileSync(
       path.join(backend, "prisma/review/step7-results.json"),

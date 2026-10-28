@@ -1,0 +1,9 @@
+{
+  "suite": "lifecycle",
+  "database": "btl_pr2b_step7fix_lifecycle_1793191434201_8930e1",
+  "exitCode": 0,
+  "result": "PASS",
+  "finishedAt": "2026-10-28T12:44:11.470Z",
+  "newEmptyDatabase": true,
+  "regressionAssertionsAdded": true
+}

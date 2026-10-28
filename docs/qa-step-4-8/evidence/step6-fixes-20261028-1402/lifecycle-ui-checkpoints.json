@@ -1,0 +1,98 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:22.896Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "U01-actions-cancel-and-owner-scope",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:29.085Z",
+    "detail": {
+      "cancelNoWrite": true,
+      "advisorAndFacultyCannotWithdraw": true
+    }
+  },
+  {
+    "id": "U02-owner-withdraw-and-editor-remount",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:29.635Z",
+    "detail": {
+      "revision": 1,
+      "sourcePreserved": true,
+      "noAutomaticDraft": true
+    }
+  },
+  {
+    "id": "U03-save-and-resubmit-after-withdraw",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:30.621Z",
+    "detail": {
+      "versionId": "11954fe6-e030-4548-a3e6-675aa952e54c",
+      "version": 2,
+      "status": "SUBMITTED"
+    }
+  },
+  {
+    "id": "U04-faculty-return-reason-and-superseded-history",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:32.175Z",
+    "detail": {
+      "supersededId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+      "commentsPreserved": true,
+      "facultyCannotEdit": true
+    }
+  },
+  {
+    "id": "U05-reopen-reason-mobile-and-axe",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:35.726Z",
+    "detail": {
+      "width": 390,
+      "axeViolations": 0,
+      "reopenFrom": "RECEIVED",
+      "planWasActive": true
+    }
+  },
+  {
+    "id": "U06-reopen-atomic-state-and-preserved-evidence",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:35.951Z",
+    "detail": {
+      "status": "DRAFT",
+      "dossier": "REOPENED",
+      "plan": "PAUSED",
+      "preserved": [
+        "SEALED content",
+        "approval",
+        "finalization snapshot",
+        "receipt"
+      ]
+    }
+  },
+  {
+    "id": "U07-resubmit-after-reopen-does-not-resume-plan",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:36.888Z",
+    "detail": {
+      "version": 4,
+      "planState": "PAUSED"
+    }
+  },
+  {
+    "id": "U08-stale-withdraw-keeps-reason-and-never-overwrites-review",
+    "result": "PASS",
+    "at": "2026-10-28T07:10:40.094Z",
+    "detail": {
+      "conflictPreservesInput": true,
+      "serverState": "UNDER_REVIEW",
+      "explicitReload": true
+    }
+  }
+]

@@ -165,7 +165,7 @@ Git từ đầu lượt đã có thay đổi chưa commit của bước 4/5. Kh�
 - Auth/bootstrap cấp read/edit/submit theo manifest cho role tạo sau migration; role/action không thay official advisor relation. SV vẫn có thể lưu nháp sở hữu khi thiếu advisor hợp lệ, nhưng không gửi được; GVHD chưa có assignment chính thức không được sửa.
 - Topic agreement/routing, official plan và assignment/history phải được bàn giao thật từ bước 1–3. Thiếu dữ liệu sẽ có lỗi readiness; fixture không thay dữ liệu chính thức.
 - Outbox `PROPOSAL_VERSION_SUBMITTED` lưu cùng submit; worker gửi thông báo/email cho event mới chưa triển khai, không tuyên bố đã gửi mail.
-- Chưa làm withdraw/return-to-draft/reopen/finalize/PDF/signature/receipt hoặc hướng dẫn, task, upload. Không dùng trạng thái APPROVED làm dossier đã chốt/đã nhận giấy.
+- Ở lượt triển khai ban đầu chưa làm withdraw/return-to-draft/reopen; ba lệnh này đã được bổ sung và kiểm thật trong mục 11. Finalize/PDF/receipt và hướng dẫn/task thuộc các bước tiếp theo. Không dùng trạng thái APPROVED làm bằng chứng đã nhận giấy.
 - Cần nhóm review SQL/backup/inspect và phê duyệt deploy riêng trước áp migration lên Supabase. Không tự bắt đầu bước 7–8.
 
 ## 10. Sửa lỗi preview Idempotency-Key
@@ -183,3 +183,23 @@ Người dùng tiếp tục báo `Cannot read properties of undefined (reading '
 Đã tái hiện bằng ca browser chuyển menu thực: ca mới FAIL trước khi sửa fixture. Sau đó bổ sung đầy đủ field của summary trong mock: revision, submitted version ID/number, routing và active review/group nullable, readiness array, canAssign=false. Không tự cấp quyền Khoa hoặc mô phỏng phân công mới. API options bước 5 vẫn trả thông báo ngoài phạm vi demo; giao diện giữ layout và cho quay lại editor.
 
 Sau sửa: `node --check`, Prettier check và **15 Edge browser checks PASS**. Ca mới kiểm không xuất hiện trang Unexpected Application Error, không có pageerror và trở lại danh sách editor bình thường; 10 luồng bước 6 cũ tiếp tục PASS. Lượt này chỉ sửa script browser, evidence browser bước 6 và báo cáo; không sửa trang bước 5/business code/schema, không chạy database hoặc DDL.
+
+## 11. Hoàn thiện vòng đời theo QA ngày 28/10/2026
+
+Đã xử lý G6-01/G6-02/G6-03 của đợt QA thực tế: thêm API và UI cho owner rút SUBMITTED, Khoa trả UNDER_REVIEW về nháp, Khoa mở APPROVED để sửa. Không sửa trực tiếp snapshot SEALED hoặc suy quyết định từ status. [Báo cáo sửa và kiểm chứng](../qa-step-4-8/evidence/step6-fixes-20261028-1402/report.md).
+
+Các command trả HTTP 200, yêu cầu `Idempotency-Key`; input strict được export từ shared:
+
+- `POST /proposals/:id/withdraw`: `expectedProposalRevision`, `versionId`, và cặp `reviewId`/`expectedReviewRevision` khi có vòng ASSIGNED; `reason` tùy chọn.
+- `POST /proposals/:id/return-to-draft`: `expectedProposalRevision`, `versionId`, `reviewId`, `expectedReviewRevision`, `reason` bắt buộc.
+- `POST /proposals/:id/reopen`: `expectedProposalRevision`, `versionId`, `reason`; `expectedDossierRevision` bắt buộc về nghiệp vụ khi đã có dossier.
+
+Action permission lần lượt `proposal:submit` cho owner, `proposal:assign` cho FACULTY trong academic grant, `proposal:reopen` cho FACULTY trong academic grant. ADMIN/JWT claims không bypass. Capability `lifecycle` trong editing-context được tính từ guard thật; GET không thay đổi trạng thái.
+
+Mỗi command khóa term → review groups theo ID → proposal → phase/assignment, kiểm quyền trước replay, CAS proposal/review/dossier và nguồn SEALED/hash hợp lệ. Rút/trả nháp cần phase EDIT mở. Reopen của Khoa là ngoại lệ phase theo contract §3.2; không cho ghi khi DEFENDING/COMPLETED/CANCELLED và không mở phase cho SV. Guard ngoại lệ đã được sửa và kiểm hồi quy trong [lượt hoàn thiện bước 7](../qa-step-4-8/evidence/step7-fixes-20261028-1933/report.md). Rút/trả nháp supersede vòng active và giữ nhận xét. Mở lại giữ approval, finalization snapshot, PDF/receipt và lịch sử; bỏ current-finalization pointer, đánh dấu bản chốt đã thay thế, dossier REOPENED, plan PAUSED cùng transaction. Plan chỉ ACTIVE trở lại qua GVHD acknowledge/rebase sau khi chốt bản mới. Audit, reason, outbox, in-app notification và idempotency commit cùng thay đổi aggregate.
+
+Sau transition, working pointer vẫn là nguồn SEALED cũ; lần lưu kế tiếp mới append DRAFT. UI remount editor để dùng revision mới, giữ input/lý do khi conflict và cho tải lại chủ động. Không tự nộp lại, phân nhóm, gia hạn phase hoặc khôi phục kế hoạch.
+
+Migration additive `202610280001_proposal_lifecycle` chỉ thêm `proposal:reopen` và cấp cho role FACULTY hiện hữu; seed cũng khai báo capability cho role được tạo sau migration. Không chỉnh migration cũ, không backfill dữ liệu học thuật. Migration đã chạy trên DB test mới; **chưa áp dụng lên DB giao diện hiện tại/Supabase** để giữ dữ liệu hiện tại theo yêu cầu.
+
+Kiểm chứng mới: 26 nhóm API vòng đời, suite phiên bản cũ 24 nhóm (gồm producer prelude bước 5 có 28 checks), 8 nhóm nghiệp vụ UI Edge thực + kiểm điều khiển browser; unit backend 191/frontend 115, build và lint đạt. Đây là browser/API/DB thực, không dùng demo mock trong mục 7. SMTP thực chưa kiểm; không dùng outbox PENDING làm bằng chứng gửi email.

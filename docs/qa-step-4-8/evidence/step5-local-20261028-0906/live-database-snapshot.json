@@ -1,0 +1,806 @@
+{
+  "database": "btl_pr2b_step5_1793153364374_e5b031_live",
+  "coreHashBefore": "059be13228fb738a44ec66bc967cf36159d4e1656e35ff9d9eb1a566e1b567ad",
+  "coreHashAfter": "059be13228fb738a44ec66bc967cf36159d4e1656e35ff9d9eb1a566e1b567ad",
+  "coreUnchanged": true,
+  "states": {
+    "proposal": [
+      {
+        "id": "p-student",
+        "topicId": "topic-student",
+        "studentId": "student",
+        "termId": "qa-t1",
+        "status": "REVISION_REQUESTED",
+        "createdAt": "2026-10-28T02:09:37.176Z",
+        "updatedAt": "2026-10-28T02:12:23.285Z"
+      },
+      {
+        "id": "p-student2",
+        "topicId": "topic-student2",
+        "studentId": "student2",
+        "termId": "qa-t1",
+        "status": "APPROVED",
+        "createdAt": "2026-10-28T02:09:37.198Z",
+        "updatedAt": "2026-10-28T02:12:24.905Z"
+      },
+      {
+        "id": "p-student3",
+        "topicId": "topic-student3",
+        "studentId": "student3",
+        "termId": "qa-t2",
+        "status": "UNDER_REVIEW",
+        "createdAt": "2026-10-28T02:09:37.210Z",
+        "updatedAt": "2026-10-28T02:16:07.584Z"
+      }
+    ],
+    "proposalWorkflow": [
+      {
+        "id": "c5c99a87-f097-4951-9fd8-0d8e6d3ab096",
+        "createdAt": "2026-10-28T02:09:37.187Z",
+        "updatedAt": "2026-10-28T02:12:23.283Z",
+        "revision": 5,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 3,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-student",
+        "workingVersionId": "v1-student",
+        "submittedVersionId": "v1-student"
+      },
+      {
+        "id": "df5690b0-5ecd-43dd-92e5-661579364a2c",
+        "createdAt": "2026-10-28T02:09:37.201Z",
+        "updatedAt": "2026-10-28T02:12:24.904Z",
+        "revision": 3,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 2,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-student2",
+        "workingVersionId": "v1-student2",
+        "submittedVersionId": "v1-student2"
+      },
+      {
+        "id": "f5d506be-c3d9-421f-a850-0050effdb7ad",
+        "createdAt": "2026-10-28T02:09:37.215Z",
+        "updatedAt": "2026-10-28T02:16:07.583Z",
+        "revision": 2,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 2,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-student3",
+        "workingVersionId": "v1-student3",
+        "submittedVersionId": "v1-student3"
+      }
+    ],
+    "proposalReview": [
+      {
+        "id": "e1ec9801-9374-4357-a1a1-be95ce115f3f",
+        "proposalId": "p-student",
+        "reviewGroupId": "qa-g1",
+        "decision": null,
+        "comment": null,
+        "reviewedAt": null,
+        "createdAt": "2026-10-28T02:12:11.565Z"
+      },
+      {
+        "id": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+        "proposalId": "p-student",
+        "reviewGroupId": "qa-g2",
+        "decision": "REVISION_REQUESTED",
+        "comment": "QA STEP5: bổ sung tiêu chí đánh giá và kế hoạch kiểm thử.",
+        "reviewedAt": "2026-10-28T02:12:23.267Z",
+        "createdAt": "2026-10-28T02:12:18.297Z"
+      },
+      {
+        "id": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "proposalId": "p-student2",
+        "reviewGroupId": "qa-g1",
+        "decision": "APPROVED",
+        "comment": "QA STEP5: đề cương đạt yêu cầu của vòng xét.",
+        "reviewedAt": "2026-10-28T02:12:24.890Z",
+        "createdAt": "2026-10-28T02:12:12.562Z"
+      },
+      {
+        "id": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+        "proposalId": "p-student3",
+        "reviewGroupId": "qa-g3",
+        "decision": null,
+        "comment": null,
+        "reviewedAt": null,
+        "createdAt": "2026-10-28T02:16:03.311Z"
+      }
+    ],
+    "proposalReviewWorkflow": [
+      {
+        "id": "192cfd90-13f8-4d36-8af1-fd337adda9d9",
+        "createdAt": "2026-10-28T02:12:11.565Z",
+        "updatedAt": "2026-10-28T02:12:18.302Z",
+        "roundNumber": 1,
+        "state": "SUPERSEDED",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T02:09:36.972Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T02:09:36.972Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T02:12:16.289Z",
+        "assignedAt": "2026-10-28T02:12:11.555Z",
+        "assignedByUserId": "faculty",
+        "revision": 4,
+        "reviewId": "e1ec9801-9374-4357-a1a1-be95ce115f3f",
+        "proposalId": "p-student",
+        "versionId": "v1-student",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45"
+      },
+      {
+        "id": "f83f7666-bb49-491e-9530-d0cb6d59fc74",
+        "createdAt": "2026-10-28T02:16:03.311Z",
+        "updatedAt": "2026-10-28T02:17:28.323Z",
+        "roundNumber": 1,
+        "state": "IN_REVIEW",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T02:09:36.972Z",
+          "phaseId": "qa-t2-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T02:09:36.972Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T02:16:07.579Z",
+        "assignedAt": "2026-10-28T02:16:03.309Z",
+        "assignedByUserId": "faculty2",
+        "revision": 3,
+        "reviewId": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+        "proposalId": "p-student3",
+        "versionId": "v1-student3",
+        "startedByUserId": "foreign",
+        "supersededByReviewId": null
+      },
+      {
+        "id": "9a280618-a546-4306-8859-00d0241d8937",
+        "createdAt": "2026-10-28T02:12:18.297Z",
+        "updatedAt": "2026-10-28T02:12:23.281Z",
+        "roundNumber": 2,
+        "state": "DECIDED",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T02:09:36.972Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T02:09:36.972Z"
+        },
+        "routingSnapshot": {
+          "reason": "QA STEP5: chuyển sang nhóm có thành viên độc lập.",
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T02:12:19.885Z",
+        "assignedAt": "2026-10-28T02:12:18.288Z",
+        "assignedByUserId": "faculty",
+        "revision": 4,
+        "reviewId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+        "proposalId": "p-student",
+        "versionId": "v1-student",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": null
+      },
+      {
+        "id": "697e8fd3-59ea-428c-8ed7-fee8f559c181",
+        "createdAt": "2026-10-28T02:12:12.562Z",
+        "updatedAt": "2026-10-28T02:12:24.902Z",
+        "roundNumber": 1,
+        "state": "DECIDED",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T02:09:36.972Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T02:09:36.972Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T02:12:24.569Z",
+        "assignedAt": "2026-10-28T02:12:12.553Z",
+        "assignedByUserId": "faculty",
+        "revision": 2,
+        "reviewId": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "proposalId": "p-student2",
+        "versionId": "v1-student2",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": null
+      }
+    ],
+    "reviewComment": [
+      {
+        "id": "aafcdc40-c3db-499c-bcfe-1b1eb342a854",
+        "createdAt": "2026-10-28T02:12:16.989Z",
+        "updatedAt": "2026-10-28T02:12:16.989Z",
+        "text": "QA STEP5: nhận xét vòng cũ phải được bảo toàn.",
+        "reviewId": "e1ec9801-9374-4357-a1a1-be95ce115f3f",
+        "versionId": "v1-student",
+        "authorUserId": "reviewer"
+      },
+      {
+        "id": "e4ffb55d-08c4-44a2-a03d-0a876c977a75",
+        "createdAt": "2026-10-28T02:12:20.205Z",
+        "updatedAt": "2026-10-28T02:12:20.205Z",
+        "text": "QA STEP5: nhận xét thành viên thứ nhất vòng mới.",
+        "reviewId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+        "versionId": "v1-student",
+        "authorUserId": "reviewer"
+      },
+      {
+        "id": "9585eef2-410e-4da3-91b0-4392946f431b",
+        "createdAt": "2026-10-28T02:12:22.554Z",
+        "updatedAt": "2026-10-28T02:12:22.554Z",
+        "text": "QA STEP5: nhận xét độc lập của thành viên thứ hai.",
+        "reviewId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+        "versionId": "v1-student",
+        "authorUserId": "outsider"
+      },
+      {
+        "id": "efda8250-ddda-4f1c-914d-315a9840e325",
+        "createdAt": "2026-10-28T02:16:07.990Z",
+        "updatedAt": "2026-10-28T02:16:07.990Z",
+        "text": "QA STEP5: thao tác nhận xét trên màn hình 390px.",
+        "reviewId": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+        "versionId": "v1-student3",
+        "authorUserId": "foreign"
+      },
+      {
+        "id": "18703d00-fc50-4191-81dd-2039cb8d2dd9",
+        "createdAt": "2026-10-28T02:17:28.321Z",
+        "updatedAt": "2026-10-28T02:17:28.321Z",
+        "text": "QA STEP5: một nhận xét duy nhất khi replay và thu hồi quyền.",
+        "reviewId": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+        "versionId": "v1-student3",
+        "authorUserId": "foreign"
+      }
+    ],
+    "proposalReviewDecision": [
+      {
+        "id": "db08096b-5fff-438e-831c-34ab58d7f8a4",
+        "createdAt": "2026-10-28T02:12:23.276Z",
+        "updatedAt": "2026-10-28T02:12:23.276Z",
+        "decision": "REVISION_REQUIRED",
+        "comment": "QA STEP5: bổ sung tiêu chí đánh giá và kế hoạch kiểm thử.",
+        "decidedAt": "2026-10-28T02:12:23.267Z",
+        "reviewId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+        "versionId": "v1-student",
+        "decidedByUserId": "outsider"
+      },
+      {
+        "id": "ea3e8c7a-6bed-48bf-a601-5e1e7ec3d82d",
+        "createdAt": "2026-10-28T02:12:24.899Z",
+        "updatedAt": "2026-10-28T02:12:24.899Z",
+        "decision": "APPROVED",
+        "comment": "QA STEP5: đề cương đạt yêu cầu của vòng xét.",
+        "decidedAt": "2026-10-28T02:12:24.890Z",
+        "reviewId": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "versionId": "v1-student2",
+        "decidedByUserId": "reviewer"
+      }
+    ],
+    "outboxEvent": [
+      {
+        "id": "3ab9af22-b193-445a-8c5b-3f05fc0a239f",
+        "createdAt": "2026-10-28T02:12:23.306Z",
+        "updatedAt": "2026-10-28T02:12:23.306Z",
+        "eventId": "6b7af651-0ce3-44cf-a305-704b12f625bb",
+        "type": "PROPOSAL_REVIEW_DECIDED",
+        "aggregateId": "p-student",
+        "payload": {
+          "decision": "REVISION_REQUIRED",
+          "reviewId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+          "versionId": "v1-student",
+          "proposalId": "p-student",
+          "advisorUserId": "advisor",
+          "studentUserId": "student"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      },
+      {
+        "id": "a54c4215-00ce-4f48-8021-b8f234c0f394",
+        "createdAt": "2026-10-28T02:12:24.921Z",
+        "updatedAt": "2026-10-28T02:12:24.921Z",
+        "eventId": "c6ad24c9-5acc-4fee-af61-e8be9d1f4df3",
+        "type": "PROPOSAL_REVIEW_DECIDED",
+        "aggregateId": "p-student2",
+        "payload": {
+          "decision": "APPROVED",
+          "reviewId": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+          "versionId": "v1-student2",
+          "proposalId": "p-student2",
+          "advisorUserId": "advisor",
+          "studentUserId": "student2"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      }
+    ],
+    "notification": [
+      {
+        "id": "f4790ecb-376b-444a-97b2-a0c353c6bcad",
+        "userId": "student",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T02:12:23.298Z",
+        "readAt": null
+      },
+      {
+        "id": "47ed9126-1b28-45a8-a89b-8f6e547bc496",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T02:12:23.305Z",
+        "readAt": null
+      },
+      {
+        "id": "49388bfd-0145-4b7d-ab31-2e2dcdd93d1c",
+        "userId": "student2",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T02:12:24.917Z",
+        "readAt": null
+      },
+      {
+        "id": "5d3307ff-4dbc-4832-a5a5-aaafe76be6bf",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T02:12:24.920Z",
+        "readAt": null
+      }
+    ]
+  },
+  "counts": {
+    "thesisDossier": 0,
+    "dossierFinalization": 0,
+    "guidancePlan": 0,
+    "task": 0,
+    "progressReview": 0,
+    "finalResult": 0
+  },
+  "audit": [
+    {
+      "id": "841ccf4c-09e3-48ee-8743-e31652ccd8ff",
+      "userId": "faculty",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:12:09.605Z"
+    },
+    {
+      "id": "8afb921e-631b-4f59-b703-c95d1e22d672",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "e1ec9801-9374-4357-a1a1-be95ce115f3f",
+      "createdAt": "2026-10-28T02:12:11.584Z"
+    },
+    {
+      "id": "0a20f3ca-17ad-46ea-ba56-ee17ff70392b",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+      "createdAt": "2026-10-28T02:12:12.570Z"
+    },
+    {
+      "id": "5b53a16d-d487-428b-acb4-9c8b88917355",
+      "userId": "reviewer",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T02:12:14.130Z"
+    },
+    {
+      "id": "47bf5a16-38e7-463f-b765-28c9221c284a",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "e1ec9801-9374-4357-a1a1-be95ce115f3f",
+      "createdAt": "2026-10-28T02:12:16.305Z"
+    },
+    {
+      "id": "98e221b3-2679-425d-8ca8-699f6c159bd0",
+      "userId": "reviewer",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "e1ec9801-9374-4357-a1a1-be95ce115f3f",
+      "createdAt": "2026-10-28T02:12:17.025Z"
+    },
+    {
+      "id": "b1364957-e96a-4909-9bf1-581d3057c1c0",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+      "createdAt": "2026-10-28T02:12:18.308Z"
+    },
+    {
+      "id": "0210aa9a-595d-4ee3-8640-6d43b4ceaa58",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+      "createdAt": "2026-10-28T02:12:19.900Z"
+    },
+    {
+      "id": "e1f78b1e-a487-496a-947b-7f398b70333d",
+      "userId": "reviewer",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+      "createdAt": "2026-10-28T02:12:20.209Z"
+    },
+    {
+      "id": "9a10c7f5-8e2f-4302-89ff-5fc38f3db898",
+      "userId": "outsider",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "outsider",
+      "createdAt": "2026-10-28T02:12:21.523Z"
+    },
+    {
+      "id": "92768621-12ee-4991-b3d1-6b7fb9277b14",
+      "userId": "outsider",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+      "createdAt": "2026-10-28T02:12:22.556Z"
+    },
+    {
+      "id": "2e44ab48-99d4-48f6-b9bf-91b0bb060789",
+      "userId": "outsider",
+      "action": "DECISION",
+      "resource": "proposal-review",
+      "resourceId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+      "createdAt": "2026-10-28T02:12:23.313Z"
+    },
+    {
+      "id": "12df3512-b3ba-47db-bbfa-649d7a2e6b50",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+      "createdAt": "2026-10-28T02:12:24.583Z"
+    },
+    {
+      "id": "612ea3fa-1e99-4e55-8aca-d5c67fe98215",
+      "userId": "reviewer",
+      "action": "DECISION",
+      "resource": "proposal-review",
+      "resourceId": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+      "createdAt": "2026-10-28T02:12:24.924Z"
+    },
+    {
+      "id": "8112000a-4fc2-414c-8102-187b53e1d455",
+      "userId": "faculty",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:12:25.773Z"
+    },
+    {
+      "id": "888944c6-10f9-4547-b332-8c6f803eb870",
+      "userId": "reviewer",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T02:12:25.958Z"
+    },
+    {
+      "id": "e93e5e9e-1fa8-4b79-b062-7c1726839c20",
+      "userId": "outsider",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "outsider",
+      "createdAt": "2026-10-28T02:12:26.131Z"
+    },
+    {
+      "id": "9ee4c406-3ffc-41a4-bef2-7d43e28ff6de",
+      "userId": "faculty",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:13:44.141Z"
+    },
+    {
+      "id": "9eea1a12-cb1e-4e56-9a4c-93f54a522381",
+      "userId": "advisor",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "advisor",
+      "createdAt": "2026-10-28T02:13:54.422Z"
+    },
+    {
+      "id": "45414ebd-1d86-43c0-9d52-f52a21deed7f",
+      "userId": "student",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "student",
+      "createdAt": "2026-10-28T02:13:56.631Z"
+    },
+    {
+      "id": "935d56a7-b4c8-42be-91e3-71fe4cd50fd2",
+      "userId": "outsider",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "outsider",
+      "createdAt": "2026-10-28T02:14:00.731Z"
+    },
+    {
+      "id": "dc1f3982-9cc3-4829-b41f-4526cd8ba38c",
+      "userId": "foreign",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "foreign",
+      "createdAt": "2026-10-28T02:14:03.730Z"
+    },
+    {
+      "id": "96adbe44-ee81-4083-9669-535fccca8d41",
+      "userId": "faculty2",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty2",
+      "createdAt": "2026-10-28T02:14:06.801Z"
+    },
+    {
+      "id": "3068ebe6-f00f-4dce-8d2a-9d6d8d707849",
+      "userId": "unprivileged",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "unprivileged",
+      "createdAt": "2026-10-28T02:14:08.395Z"
+    },
+    {
+      "id": "a41a56d9-6a79-4ec2-bab4-5c42440ba360",
+      "userId": "admin",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "admin",
+      "createdAt": "2026-10-28T02:14:09.926Z"
+    },
+    {
+      "id": "ef7d6a52-ac34-478a-abc5-971d6a468209",
+      "userId": "committee",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "committee",
+      "createdAt": "2026-10-28T02:14:11.396Z"
+    },
+    {
+      "id": "771a6df3-3464-4c27-8b96-aa35d545025a",
+      "userId": "reviewer",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T02:14:13.198Z"
+    },
+    {
+      "id": "1ac8badf-9fa0-4e5e-8c29-4d3e458d05a2",
+      "userId": "faculty",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:14:13.800Z"
+    },
+    {
+      "id": "63ee680f-9bce-452e-83cb-37d6b970dc5e",
+      "userId": "advisor",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "advisor",
+      "createdAt": "2026-10-28T02:14:14.063Z"
+    },
+    {
+      "id": "70adbfa4-ee03-4a9f-8c68-935c472f832a",
+      "userId": "student",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "student",
+      "createdAt": "2026-10-28T02:14:14.272Z"
+    },
+    {
+      "id": "df173510-d887-4fc2-b645-7fe19d47c051",
+      "userId": "outsider",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "outsider",
+      "createdAt": "2026-10-28T02:14:14.468Z"
+    },
+    {
+      "id": "250ae837-d565-466a-9a78-3ecb98403a32",
+      "userId": "foreign",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "foreign",
+      "createdAt": "2026-10-28T02:14:14.645Z"
+    },
+    {
+      "id": "2ac67900-152a-4105-bc03-e41592d35e26",
+      "userId": "faculty2",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty2",
+      "createdAt": "2026-10-28T02:14:14.820Z"
+    },
+    {
+      "id": "986b5f7a-409d-47f4-a8bd-6c09f9260371",
+      "userId": "committee",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "committee",
+      "createdAt": "2026-10-28T02:14:15.132Z"
+    },
+    {
+      "id": "5784c73e-308e-498b-9a99-3641dcfaa42e",
+      "userId": "reviewer",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T02:14:15.287Z"
+    },
+    {
+      "id": "ac049f1a-c14c-441f-8dd2-69e47893ff4d",
+      "userId": "faculty",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:14:50.525Z"
+    },
+    {
+      "id": "a2213ee1-f9d3-4588-bc7f-f34cb996680e",
+      "userId": "faculty2",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty2",
+      "createdAt": "2026-10-28T02:14:53.433Z"
+    },
+    {
+      "id": "547f1b95-11b0-4edc-91e9-36557aa74c9b",
+      "userId": "faculty",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T02:14:56.437Z"
+    },
+    {
+      "id": "73096ab3-2e07-4876-a27e-65cf3283199b",
+      "userId": "faculty2",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty2",
+      "createdAt": "2026-10-28T02:14:56.614Z"
+    },
+    {
+      "id": "48870b0b-e693-43ee-9368-1036ef8922c8",
+      "userId": "faculty2",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty2",
+      "createdAt": "2026-10-28T02:16:02.666Z"
+    },
+    {
+      "id": "33b18e70-36b5-41a7-9bf9-ef3421af6027",
+      "userId": "faculty2",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+      "createdAt": "2026-10-28T02:16:03.319Z"
+    },
+    {
+      "id": "d5b5ffe1-6ae3-42ed-a936-2b32851cbd7c",
+      "userId": "advisor",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "advisor",
+      "createdAt": "2026-10-28T02:16:04.559Z"
+    },
+    {
+      "id": "037eefee-76b2-4407-833f-c050fce0403f",
+      "userId": "foreign",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "foreign",
+      "createdAt": "2026-10-28T02:16:06.546Z"
+    },
+    {
+      "id": "9ca9c5c8-d58d-4b5c-8c23-bb55577aa19c",
+      "userId": "faculty2",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty2",
+      "createdAt": "2026-10-28T02:16:10.125Z"
+    },
+    {
+      "id": "e8364bbb-f6fa-42f5-b360-7a1f80b87f4c",
+      "userId": "foreign",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+      "createdAt": "2026-10-28T02:16:07.585Z"
+    },
+    {
+      "id": "247707c1-5304-4b60-9796-9e9c5b095ce2",
+      "userId": "foreign",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+      "createdAt": "2026-10-28T02:16:07.993Z"
+    },
+    {
+      "id": "af3e6082-df36-4411-8f89-1ebd3e48d9ec",
+      "userId": "advisor",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "advisor",
+      "createdAt": "2026-10-28T02:16:10.320Z"
+    },
+    {
+      "id": "0338017d-d969-4937-a5b7-f8440cc806b1",
+      "userId": "foreign",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "foreign",
+      "createdAt": "2026-10-28T02:16:10.601Z"
+    },
+    {
+      "id": "1423b3b6-6218-4d45-a029-46d5cf27797e",
+      "userId": "foreign",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "foreign",
+      "createdAt": "2026-10-28T02:17:27.273Z"
+    },
+    {
+      "id": "4a1dba21-bb13-465d-8faf-0caff32df1f5",
+      "userId": "foreign",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+      "createdAt": "2026-10-28T02:17:28.324Z"
+    },
+    {
+      "id": "9bba7d92-e141-4148-b611-473d88f77c84",
+      "userId": "foreign",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "foreign",
+      "createdAt": "2026-10-28T02:17:28.665Z"
+    }
+  ]
+}

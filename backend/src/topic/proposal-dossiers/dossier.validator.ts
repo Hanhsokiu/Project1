@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
+import { z } from "zod";
 import { SubmittedProposalContentSchema } from "@doan/shared";
-import type { DossierPrintSnapshot } from "@doan/shared";
+import type { DossierPrintSnapshot, ProposalContent } from "@doan/shared";
 import {
   ProposalReviewValidator,
   reviewHash,
@@ -8,6 +9,36 @@ import {
 import type { ReviewProposal } from "../proposal-reviews/proposal-review.repository";
 import type { DossierRecord, DossierSession } from "./dossier.repository";
 import { groupError } from "../review-groups/review-group.errors";
+// Validate stored structure without transforming or backfilling the frozen payload.
+const optionalContact = z.string().nullable().optional();
+const snapshotSchema = z.object({
+  schemaVersion: z.literal(1),
+  title: z.string().min(1),
+  termName: z.string().min(1),
+  student: z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    code: z.string().min(1),
+    className: z.string().min(1),
+    majorName: z.string().min(1),
+    trainingSystem: z.string().min(1),
+    cohort: optionalContact,
+    phone: optionalContact,
+    email: optionalContact,
+  }),
+  advisor: z.object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    department: z.string().min(1),
+    phone: optionalContact,
+    email: optionalContact,
+  }),
+  academicProfileRevision: z.number().int().nonnegative(),
+  assignmentId: z.string().min(1),
+  assignmentRevision: z.number().int().nonnegative(),
+  topicRevision: z.number().int().nonnegative(),
+  content: SubmittedProposalContentSchema,
+});
 @Injectable()
 export class DossierValidator {
   constructor(private readonly review: ProposalReviewValidator) {}
@@ -106,7 +137,11 @@ export class DossierValidator {
   async snapshot(
     s: DossierSession,
     p: ReviewProposal,
-    approved: Awaited<ReturnType<DossierValidator["approval"]>>,
+    approved: {
+      assignment: { id: string; advisorId: string };
+      revision: number;
+      content: ProposalContent;
+    },
   ): Promise<DossierPrintSnapshot> {
     const owner = this.review.ownership(p),
       profile = await s.profile(owner.termStudentId!),
@@ -137,11 +172,16 @@ export class DossierValidator {
         className: profile.className,
         majorName: profile.majorName,
         trainingSystem: student.trainingSystem.name,
+        cohort: student.cohort.trim() || null,
+        phone: student.phone?.trim() || student.user.phone?.trim() || null,
+        email: student.user.email?.trim() || null,
       },
       advisor: {
         id: advisor.id,
         name: advisor.fullName,
         department: advisor.department.name,
+        phone: advisor.phone?.trim() || advisor.user.phone?.trim() || null,
+        email: advisor.user.email?.trim() || null,
       },
       academicProfileRevision: profile.revision,
       assignmentId: approved.assignment.id,
@@ -152,17 +192,12 @@ export class DossierValidator {
   }
   snapshotIntegrity(snapshot: unknown, hash: string) {
     const value = snapshot as DossierPrintSnapshot | null;
-    if (
-      !value ||
-      value.schemaVersion !== 1 ||
-      reviewHash(value) !== hash ||
-      !SubmittedProposalContentSchema.safeParse(value.content).success
-    )
+    if (!snapshotSchema.safeParse(value).success || reviewHash(value) !== hash)
       groupError(
         409,
         "INPUT_NOT_READY",
         "Snapshot in chưa sẵn sàng hoặc không khớp hash.",
       );
-    return value;
+    return value as DossierPrintSnapshot;
   }
 }

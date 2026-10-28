@@ -1,0 +1,40 @@
+{
+  "backendBuildExitCode": 0,
+  "frontendTypeCheckExitCode": 0,
+  "frontendBuildExitCode": 0,
+  "targetedLintExitCode": 0,
+  "frontendUnit": {
+    "scope": "entire frontend Vitest suite",
+    "files": 20,
+    "passed": 118,
+    "failed": 0
+  },
+  "backendUnit": {
+    "scope": "dossier, proposal version, proposal review",
+    "files": 3,
+    "passed": 52,
+    "failed": 0
+  },
+  "localBrowser": {
+    "passed": 3,
+    "failed": 0,
+    "includesBrowserControl": true,
+    "pageErrors": 0,
+    "requestFailed": 0
+  },
+  "mcp": {
+    "authenticated": true,
+    "realPreviewBusinessErrorVerified": true,
+    "historicalPdfDownloaded": true,
+    "logout": true,
+    "browserClosed": true
+  },
+  "mainDatabaseTablesUnchanged": 100,
+  "unitEvidenceNote": "Counts and exit codes transcribed from successful exec/write_stdin tool results in this continuation; no synthetic raw unit log was created.",
+  "dossierApi": {
+    "groups": 21,
+    "result": "PASS",
+    "includesProducerPrelude": true
+  },
+  "historicalPdfChecksum": "7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462"
+}

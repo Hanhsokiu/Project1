@@ -744,10 +744,10 @@ async function main() {
       409,
     );
     pass(
-      'APPROVED proposal is read-only and Step 6 never reopens/finalizes it',
+      'APPROVED blocks direct edits and never reopens or finalizes implicitly',
     );
     // Independent malformed producer fixture demonstrates dossier lock cannot
-    // be bypassed just by changing a Proposal status. No dossier API is added.
+    // be bypassed just by changing a Proposal status; explicit reopen has its own regression suite.
     await db.thesisDossier.create({
       data: {
         proposalId: 'p2',

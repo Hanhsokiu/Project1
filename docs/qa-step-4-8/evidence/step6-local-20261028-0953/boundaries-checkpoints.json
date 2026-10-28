@@ -1,0 +1,514 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:27.582Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T33-T35-T36-invalid-DTO-feedback-limits",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:29.423Z",
+    "detail": {
+      "probes": [
+        {
+          "name": "unknown field",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'unexpected'"
+          }
+        },
+        {
+          "name": "actor injection",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'createdByUserId'"
+          }
+        },
+        {
+          "name": "status injection",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'status'"
+          }
+        },
+        {
+          "name": "negative revision",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "expectedRevision: Number must be greater than or equal to 0"
+          }
+        },
+        {
+          "name": "string revision",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "expectedRevision: Expected number, received string"
+          }
+        },
+        {
+          "name": "missing content",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "content: Required"
+          }
+        },
+        {
+          "name": "null content",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "content: Expected object, received null"
+          }
+        },
+        {
+          "name": "field 20001",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "content.objectives: String must contain at most 20000 character(s)"
+          }
+        },
+        {
+          "name": "schedule 101",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "content.schedule: Array must contain at most 100 element(s)"
+          }
+        },
+        {
+          "name": "date no timezone",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "content.startsAt: Thời gian phải có timezone ISO-8601."
+          }
+        },
+        {
+          "name": "invalid target type",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "responses.0.targetType: Invalid enum value. Expected 'COMMENT' | 'DECISION', received 'VOTE'"
+          }
+        },
+        {
+          "name": "empty response",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "responses.0.text: String must contain at least 1 character(s)"
+          }
+        },
+        {
+          "name": "duplicate target",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "responses: Một góp ý chỉ có một phản hồi trong mỗi snapshot."
+          }
+        },
+        {
+          "name": "cross proposal target",
+          "status": 400,
+          "error": {
+            "code": "FEEDBACK_SCOPE_INVALID",
+            "message": "Phản hồi phải gắn đúng góp ý đã lưu của đề cương, không trùng mục."
+          }
+        },
+        {
+          "name": "nonexistent target",
+          "status": 400,
+          "error": {
+            "code": "FEEDBACK_SCOPE_INVALID",
+            "message": "Phản hồi phải gắn đúng góp ý đã lưu của đề cương, không trùng mục."
+          }
+        },
+        {
+          "name": "responses 201",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "responses: Array must contain at most 200 element(s)"
+          }
+        },
+        {
+          "name": "missing key",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "Thiếu hoặc sai Idempotency-Key."
+          }
+        },
+        {
+          "name": "malformed key",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "Thiếu hoặc sai Idempotency-Key."
+          }
+        },
+        {
+          "name": "malformed key",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "Thiếu hoặc sai Idempotency-Key."
+          }
+        },
+        {
+          "name": "malformed JSON",
+          "status": 400,
+          "error": {
+            "code": "VALIDATION_ERROR",
+            "message": "Unexpected token '\"', \"\"{\\\"expect\"... is not valid JSON"
+          }
+        }
+      ],
+      "noWrites": true
+    }
+  },
+  {
+    "id": "T34-query-and-cross-proposal-version-validation",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:29.549Z",
+    "detail": {
+      "result": [
+        {
+          "query": "page=0",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "page: Number must be greater than or equal to 1"
+          }
+        },
+        {
+          "query": "page=1.2",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "page: Expected integer, received float"
+          }
+        },
+        {
+          "query": "page=abc",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "page: Expected number, received nan"
+          }
+        },
+        {
+          "query": "limit=0",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "limit: Number must be greater than or equal to 1"
+          }
+        },
+        {
+          "query": "limit=101",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "limit: Number must be less than or equal to 100"
+          }
+        },
+        {
+          "query": "unexpected=1",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'unexpected'"
+          }
+        },
+        {
+          "query": "fromVersionId=v1-student2",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "toVersionId: Required"
+          }
+        },
+        {
+          "query": "fromVersionId=v1-student2&toVersionId=v1-student2&unknown=1",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'unknown'"
+          }
+        }
+      ],
+      "crossProposalStatus": 404,
+      "noWrites": true
+    }
+  },
+  {
+    "id": "T29-T30-phase-guards-restored",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:30.052Z",
+    "detail": {
+      "rows": [
+        {
+          "mode": "future",
+          "route": "versions",
+          "status": 409,
+          "error": {
+            "code": "TERM_003",
+            "message": "Phase chỉnh sửa chưa mở, đã khóa hoặc hết hạn."
+          }
+        },
+        {
+          "mode": "future",
+          "route": "submit",
+          "status": 409,
+          "error": {
+            "code": "TERM_003",
+            "message": "Phase chỉnh sửa chưa mở, đã khóa hoặc hết hạn."
+          }
+        },
+        {
+          "mode": "expired",
+          "route": "versions",
+          "status": 409,
+          "error": {
+            "code": "TERM_003",
+            "message": "Phase chỉnh sửa chưa mở, đã khóa hoặc hết hạn."
+          }
+        },
+        {
+          "mode": "expired",
+          "route": "submit",
+          "status": 409,
+          "error": {
+            "code": "TERM_003",
+            "message": "Phase chỉnh sửa chưa mở, đã khóa hoặc hết hạn."
+          }
+        },
+        {
+          "mode": "locked",
+          "route": "versions",
+          "status": 409,
+          "error": {
+            "code": "TERM_003",
+            "message": "Phase chỉnh sửa chưa mở, đã khóa hoặc hết hạn."
+          }
+        },
+        {
+          "mode": "locked",
+          "route": "submit",
+          "status": 409,
+          "error": {
+            "code": "TERM_003",
+            "message": "Phase chỉnh sửa chưa mở, đã khóa hoặc hết hạn."
+          }
+        },
+        {
+          "mode": "cancelled",
+          "route": "versions",
+          "status": 409,
+          "error": {
+            "code": "TERM_003",
+            "message": "Đợt không cho phép sửa/gửi đề cương."
+          }
+        },
+        {
+          "mode": "cancelled",
+          "route": "submit",
+          "status": 409,
+          "error": {
+            "code": "TERM_003",
+            "message": "Đợt không cho phép sửa/gửi đề cương."
+          }
+        }
+      ],
+      "restored": true
+    }
+  },
+  {
+    "id": "T39-parser-caps-no-partial-write",
+    "result": "FAIL",
+    "at": "2026-10-28T02:58:30.391Z",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n+ actual - expected\n\n+ null\n- undefined\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\boundaries.cjs:13:335\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\browser-common.cjs:19:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\boundaries.cjs:13:2"
+  },
+  {
+    "id": "T37-incomplete-temporal-draft-cannot-submit",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:31.256Z",
+    "detail": [
+      {
+        "name": "start equals end",
+        "versionId": "d3a44c60-9db1-4d81-b697-d6df64e29393",
+        "status": 400,
+        "error": {
+          "code": "PROPOSAL_CONTENT_INVALID",
+          "message": "endsAt: Ngày kết thúc phải sau ngày bắt đầu.; schedule.0: Mốc cần tên, sản phẩm và thời gian hợp lệ trong khoảng thực hiện."
+        }
+      },
+      {
+        "name": "milestone outside range",
+        "versionId": "f189058f-0cf2-43b7-8127-6167e8cc37a5",
+        "status": 400,
+        "error": {
+          "code": "PROPOSAL_CONTENT_INVALID",
+          "message": "schedule.0: Mốc cần tên, sản phẩm và thời gian hợp lệ trong khoảng thực hiện."
+        }
+      },
+      {
+        "name": "empty deliverable",
+        "versionId": "7dfcaea5-3d55-474f-9e3e-b8d433acb629",
+        "status": 400,
+        "error": {
+          "code": "PROPOSAL_CONTENT_INVALID",
+          "message": "schedule.0: Mốc cần tên, sản phẩm và thời gian hợp lệ trong khoảng thực hiện."
+        }
+      }
+    ]
+  },
+  {
+    "id": "T36-valid-maximum-and-overlap-not-invented",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:31.541Z",
+    "detail": {
+      "id": "10fcede8-6d2a-4cff-bab2-eb3b069453ad",
+      "proposalId": "p-student2",
+      "versionNumber": 27,
+      "state": "DRAFT",
+      "contentHash": "63f7eef451d5ecc678a3b2f2e1fc77282e68dbd59caacebd60223a858d8276a8",
+      "createdAt": "2026-10-28T02:58:31.433Z",
+      "createdByUserId": "student2",
+      "authorName": "qa-student2",
+      "submittedAt": null,
+      "submittedByUserId": null,
+      "basedOnVersionId": "7dfcaea5-3d55-474f-9e3e-b8d433acb629",
+      "changeSummary": null,
+      "responses": [],
+      "provenance": null,
+      "contentBytes": 54461,
+      "fieldLengths": {
+        "scope": 30,
+        "tools": 35,
+        "endsAt": 24,
+        "startsAt": 24,
+        "objectives": 20000,
+        "mainContents": 52,
+        "expectedResults": 27
+      },
+      "scheduleCount": 100,
+      "overlapAllowedByContract": true
+    }
+  },
+  {
+    "id": "T38-large-UTF8-real-UI-save",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:34.291Z",
+    "detail": {
+      "version": {
+        "id": "14143778-8457-4e17-9a06-ac1778060ddd",
+        "proposalId": "p-student2",
+        "versionNumber": 29,
+        "state": "DRAFT",
+        "contentHash": "94b96083224906612a26b089ef692f31267086d8a1d34ff2c18cfda8eb280b88",
+        "createdAt": "2026-10-28T02:58:33.973Z",
+        "createdByUserId": "student2",
+        "authorName": "qa-student2",
+        "submittedAt": null,
+        "submittedByUserId": null,
+        "basedOnVersionId": "c13ce7da-4dff-4432-b50b-070148060820",
+        "changeSummary": null,
+        "responses": [],
+        "provenance": null,
+        "contentBytes": 240344,
+        "fieldLengths": {
+          "scope": 20000,
+          "tools": 20000,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 20000,
+          "mainContents": 20000,
+          "expectedResults": 20000
+        }
+      },
+      "bytes": 240344,
+      "exceedsOld100KiBLimit": true
+    }
+  },
+  {
+    "id": "T12-T13-large-submit-idempotency",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:40.548Z",
+    "detail": {
+      "version": {
+        "id": "14143778-8457-4e17-9a06-ac1778060ddd",
+        "proposalId": "p-student2",
+        "versionNumber": 29,
+        "state": "SEALED",
+        "contentHash": "94b96083224906612a26b089ef692f31267086d8a1d34ff2c18cfda8eb280b88",
+        "createdAt": "2026-10-28T02:58:33.973Z",
+        "createdByUserId": "student2",
+        "authorName": "qa-student2",
+        "submittedAt": "2026-10-28T02:58:39.854Z",
+        "submittedByUserId": "student2",
+        "basedOnVersionId": "c13ce7da-4dff-4432-b50b-070148060820",
+        "changeSummary": null,
+        "responses": [],
+        "provenance": null,
+        "contentBytes": 240344,
+        "fieldLengths": {
+          "scope": 20000,
+          "tools": 20000,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 20000,
+          "mainContents": 20000,
+          "expectedResults": 20000
+        }
+      },
+      "replayStatus": 200,
+      "differentPayload": {
+        "code": "IDEMPOTENCY_CONFLICT",
+        "message": "Khóa gửi lại có payload khác."
+      },
+      "noNewSnapshot": true
+    }
+  },
+  {
+    "id": "T21-current-permission-before-replay",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:40.591Z",
+    "detail": {
+      "status": 403,
+      "error": {
+        "code": "AUTH_004",
+        "message": "Bạn không có quyền [proposal:submit] để thực hiện thao tác này"
+      },
+      "permissionRestored": true,
+      "noCachedResultLeak": true
+    }
+  },
+  {
+    "id": "T32-submitted-readonly",
+    "result": "PASS",
+    "at": "2026-10-28T02:58:41.676Z",
+    "detail": {
+      "status": "SUBMITTED",
+      "saveStatus": 409,
+      "error": {
+        "code": "STATE_TRANSITION_INVALID",
+        "message": "Trạng thái hiện tại không cho phép thao tác."
+      }
+    }
+  }
+]

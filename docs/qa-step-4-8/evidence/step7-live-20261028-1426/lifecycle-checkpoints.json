@@ -1,0 +1,86 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T12:13:36.349Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "integration-guidance-before-paper",
+    "result": "PASS",
+    "at": "2026-10-28T12:13:40.709Z",
+    "detail": {
+      "proposalId": "p-student2",
+      "dossierState": "FINALIZED",
+      "receipt": null,
+      "planState": "ACTIVE"
+    }
+  },
+  {
+    "id": "T37-contract-reopen-exception-to-edit-phase",
+    "result": "FAIL",
+    "at": "2026-10-28T12:13:40.792Z",
+    "error": "AssertionError [ERR_ASSERTION]: {\"id\":\"S7-01\",\"requirement\":\"Business contract §3.2 line 98: faculty reopen is a phase exception while term has not ended; must not unlock student edit\",\"actual\":{\"status\":409,\"error\":{\"code\":\"TERM_003\",\"message\":\"Phase chỉnh sửa chưa mở, đã khóa hoặc hết hạn.\"}},\"termStatus\":\"IN_PROGRESS\",\"phase\":\"PROPOSAL_EDIT locked\",\"expectedStatus\":200}\n\n409 !== 200\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\lifecycle.cjs:12:683\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\browser-common.cjs:20:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\lifecycle.cjs:12:2"
+  },
+  {
+    "id": "T37-positive-reopen-preserves-frozen-evidence",
+    "result": "PASS",
+    "at": "2026-10-28T12:13:41.130Z",
+    "detail": {
+      "state": "REOPENED",
+      "current": null,
+      "plan": "PAUSED",
+      "oldReceiptCount": 1,
+      "oldBytesRetained": true
+    }
+  },
+  {
+    "id": "T38-historical-PDF-after-reopen",
+    "result": "FAIL",
+    "at": "2026-10-28T12:13:41.151Z",
+    "error": "AssertionError [ERR_ASSERTION]: {\"id\":\"S7-02\",\"requirement\":\"Contract §4.4/§6: superseded finalized snapshots remain readable by historical scope and carry superseded labels\",\"stage\":\"REOPENED without current finalization\",\"finalizationId\":\"08ed514b-a877-43b7-a1d9-f3624dfa023a\",\"expectedStatus\":200,\"actual\":{\"status\":409,\"error\":{\"code\":\"DOSSIER_NOT_FINALIZED\",\"message\":\"Hồ sơ chưa có bản chốt hiện hành.\"}},\"storedFileChecksum\":\"ae86f894145fe529fc0383a0518539a7374d5a0e352bcd204a76efeda9bdc2cb\"}\n\n409 !== 200\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\lifecycle.cjs:15:522\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\browser-common.cjs:20:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\lifecycle.cjs:15:2"
+  },
+  {
+    "id": "T40-preview-watermark-availability",
+    "result": "FAIL",
+    "at": "2026-10-28T12:13:41.155Z",
+    "error": "AssertionError [ERR_ASSERTION]: {\"id\":\"S7-03\",\"requirement\":\"Contract API GET /proposals/:id/preview.pdf?versionId returns watermarked preview for visible version\",\"expectedStatus\":200,\"actual\":{\"status\":404,\"error\":{\"code\":\"NOT_FOUND\",\"message\":\"Cannot GET /api/proposals/p-student/preview.pdf?versionId=v1-student\"}},\"actor\":\"current owner\",\"versionId\":\"v1-student\"}\n\n404 !== 200\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\lifecycle.cjs:16:500\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\browser-common.cjs:20:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\lifecycle.cjs:16:2"
+  },
+  {
+    "id": "T39-refinalize-does-not-transfer-PDF-receipt",
+    "result": "PASS",
+    "at": "2026-10-28T12:13:42.041Z",
+    "detail": {
+      "oldId": "08ed514b-a877-43b7-a1d9-f3624dfa023a",
+      "newId": "76301022-91cc-46bf-b6d4-26faee75a9f4",
+      "newVersion": 2,
+      "sequence": 2,
+      "newReceipt": null,
+      "newPDF": null,
+      "oldReceiptRetained": true,
+      "planStillPaused": true
+    }
+  },
+  {
+    "id": "T38-historical-PDF-after-refinalize",
+    "result": "FAIL",
+    "at": "2026-10-28T12:13:42.103Z",
+    "error": "AssertionError [ERR_ASSERTION]: {\"id\":\"S7-02\",\"stage\":\"new current finalization exists\",\"oldFinalizationId\":\"08ed514b-a877-43b7-a1d9-f3624dfa023a\",\"newFinalizationId\":\"76301022-91cc-46bf-b6d4-26faee75a9f4\",\"expectedStatus\":200,\"actual\":{\"status\":409,\"error\":{\"code\":\"STALE_FINALIZATION\",\"message\":\"Bản chốt đã thay đổi hoặc không thuộc hồ sơ.\"}}}\n\n409 !== 200\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\lifecycle.cjs:20:333\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\browser-common.cjs:20:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-live-20261028-1426\\harness\\lifecycle.cjs:20:2"
+  },
+  {
+    "id": "T39-new-PDF-distinct-current-and-readonly",
+    "result": "PASS",
+    "at": "2026-10-28T12:13:42.297Z",
+    "detail": {
+      "version": 2,
+      "checksum": "65f16352fc69ddd2354c7745c21176eaa99553cfffeb9a2bd56a34e8aed2bf0c",
+      "oldChecksum": "ae86f894145fe529fc0383a0518539a7374d5a0e352bcd204a76efeda9bdc2cb",
+      "receipt": null
+    }
+  }
+]

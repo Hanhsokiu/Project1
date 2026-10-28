@@ -133,6 +133,36 @@ describe("Step 7 contract and dossier validator", () => {
     );
     fail(() => v.snapshotIntegrity(null, "legacy"), "INPUT_NOT_READY");
   });
+  it("rejects malformed stored profile even when its hash matches", () => {
+    for (const corrupt of [
+      { ...snapshot, student: null },
+      { ...snapshot, advisor: { id: "a" } },
+      {
+        ...snapshot,
+        student: { ...snapshot.student, email: { value: "invalid" } },
+      },
+    ])
+      fail(
+        () => v.snapshotIntegrity(corrupt, reviewHash(corrupt)),
+        "INPUT_NOT_READY",
+      );
+  });
+  it("reads old snapshots without contacts and preserves the exact frozen payload", () => {
+    const old = structuredClone(snapshot);
+    expect(v.snapshotIntegrity(old, reviewHash(old))).toBe(old);
+    expect(old.student).not.toHaveProperty("phone");
+    const current = {
+      ...old,
+      student: {
+        ...old.student,
+        phone: null,
+        email: "sv@example.invalid",
+        cohort: "K63",
+      },
+      advisor: { ...old.advisor, phone: "0912345678" },
+    };
+    expect(v.snapshotIntegrity(current, reviewHash(current))).toBe(current);
+  });
   it("permits scoped faculty finalization and rejects ADMIN even with all actions", async () => {
     const p = {
       id: "p",
@@ -161,21 +191,17 @@ describe("Step 7 contract and dossier validator", () => {
     const session = {
       principal: vi.fn().mockResolvedValue(faculty),
       proposal: vi.fn().mockResolvedValue(p),
-      grants: vi
-        .fn()
-        .mockResolvedValue([
-          {
-            allDepartments: false,
-            pr2bGrantDepartmentGrantId: [{ departmentId: "d" }],
-          },
-        ]),
+      grants: vi.fn().mockResolvedValue([
+        {
+          allDepartments: false,
+          pr2bGrantDepartmentGrantId: [{ departmentId: "d" }],
+        },
+      ]),
       lock: vi.fn(),
-      replay: vi
-        .fn()
-        .mockResolvedValue({
-          payloadHash: reviewHash({}),
-          result: { ok: true },
-        }),
+      replay: vi.fn().mockResolvedValue({
+        payloadHash: reviewHash({}),
+        result: { ok: true },
+      }),
     };
     const repo = {
       transaction: async (fn: (s: unknown) => unknown) => fn(session),

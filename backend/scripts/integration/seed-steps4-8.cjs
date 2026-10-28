@@ -26,7 +26,7 @@ async function seedSteps48(db, rawUrl) {
   }
   // Match reviewed migration grants. Roles deliberately did not exist at migrate time.
   const allow = {
-    FACULTY: ["review-group:read", "review-group:manage", "proposal:read", "proposal:assign", "proposal:finalize", "proposal:export", "dossier:receive", "guidance:read", "guidance:monitor", "submission:read", "submission:download"],
+    FACULTY: ["review-group:read", "review-group:manage", "proposal:read", "proposal:assign", "proposal:reopen", "proposal:finalize", "proposal:export", "dossier:receive", "guidance:read", "guidance:monitor", "submission:read", "submission:download"],
     LECTURER: ["review-group:read", "proposal:read", "proposal:comment", "proposal:review", "proposal:edit", "proposal:export", "guidance:read", "guidance:manage", "task:manage", "task:ensure-weekly", "task:review", "submission:read", "submission:download"],
     STUDENT: ["proposal:read", "proposal:edit", "proposal:submit", "proposal:export", "guidance:read", "task:progress", "task:ensure-weekly", "submission:read", "submission:create", "submission:download"],
     ADMIN: [],

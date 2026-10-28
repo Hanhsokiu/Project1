@@ -1,0 +1,20 @@
+{
+  "runId": "20261026182454_8541c6",
+  "startedAt": "2026-10-26T18:24:54.759Z",
+  "branch": "fix/integration-ui",
+  "sourceCommit": "0c361709df34837df65b3ed429691599e6e2d93f",
+  "syntheticDataOnly": true,
+  "resetOrDrop": false,
+  "cases": [
+    {
+      "name": "live-e2e",
+      "database": "btl_pr2b_audit_20261026182454_8541c6_live_e2e",
+      "startedAt": "2026-10-26T18:24:55.135Z",
+      "finishedAt": "2026-10-26T18:25:55.868Z",
+      "exitCode": 0,
+      "result": "PASS",
+      "log": "live-e2e/console.log"
+    }
+  ],
+  "finishedAt": "2026-10-26T18:25:55.886Z"
+}

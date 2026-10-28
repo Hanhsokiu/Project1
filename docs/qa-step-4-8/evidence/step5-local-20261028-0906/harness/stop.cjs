@@ -1,0 +1,5 @@
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'../../../../..'),out=path.dirname(__dirname),ready=JSON.parse(fs.readFileSync(path.join(out,'live-ready.json'),'utf8'));
+assert.equal(ready.frontend,'http://127.0.0.1:50185');assert(/^btl_pr2b_step5_.*_live$/.test(ready.database));assert.equal(new URL(ready.apiOrigin).hostname,'127.0.0.1');
+fs.writeFileSync(path.join(root,'.cache/step5-local-20261028-0906/stop'),'QA finished\n');
+(async()=>{await new Promise(r=>setTimeout(r,2000));const result=[];for(const url of [ready.frontend,ready.apiOrigin+'/api/health']){let reachable=false;try{await fetch(url,{signal:AbortSignal.timeout(2000)});reachable=true;}catch{}result.push({url,reachable});assert.equal(reachable,false,'Private QA service still listening');}fs.writeFileSync(path.join(out,'cleanup.json'),JSON.stringify({at:new Date().toISOString(),services:result,privateDatabaseRetained:true,existingDatabaseUntouched:true,postgresCluster:'left running; no cluster shutdown'},null,2));console.log(JSON.stringify(result));})().catch(e=>{console.error(e.message);process.exitCode=1;});

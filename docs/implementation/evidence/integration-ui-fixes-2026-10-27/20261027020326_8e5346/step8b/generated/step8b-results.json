@@ -1,0 +1,77 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "sharedDatabaseDDL": false,
+  "privateFilesystem": true,
+  "step8aPrelude": true,
+  "checks": [
+    {
+      "name": "active migration chain replays with all Step 8A/7/5 real producer checks; only private loopback DB",
+      "result": "PASS"
+    },
+    {
+      "name": "unauthorized/non-owner/ADMIN/advisor/faculty upload rejected before staging metadata or IO",
+      "result": "PASS"
+    },
+    {
+      "name": "extension, MIME, content, unsafe ZIP paths/filename and oversized multipart rejected without orphan intent",
+      "result": "PASS"
+    },
+    {
+      "name": "READY private staging is idempotent, has no public URL/path and does not create a submission",
+      "result": "PASS"
+    },
+    {
+      "name": "owner commits report+source atomically with version, actor/time, official advisor/term and policy snapshot; idempotent replay",
+      "result": "PASS"
+    },
+    {
+      "name": "student/current advisor/scoped faculty can download attachments; cross-student/term/department/reviewer/old advisor/ADMIN denied",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent resubmission commits one v2; v1 bytes/content/links preserved, old state SUPERSEDED and DB immutability guards hold",
+      "result": "PASS"
+    },
+    {
+      "name": "staged/committed assets cannot be replayed onto a different task or student",
+      "result": "PASS"
+    },
+    {
+      "name": "deadline passed does not lock submission while phase open; server captures isLate/deadline snapshot",
+      "result": "PASS"
+    },
+    {
+      "name": "audit/metadata failure rolls back submission, current pointer, version counter, links and file claims together",
+      "result": "PASS"
+    },
+    {
+      "name": "locked GUIDANCE phase rejects both upload and uncommitted READY staging; no partial submission",
+      "result": "PASS"
+    },
+    {
+      "name": "real concurrent phase closure serializes against submission commit and rejects upload started before lock",
+      "result": "PASS"
+    },
+    {
+      "name": "storage failure leaves no READY metadata/submission and retains recoverable expired intent",
+      "result": "PASS"
+    },
+    {
+      "name": "metadata failure after writing bytes rolls back FileAsset and removes private orphan while retaining cleanup intent",
+      "result": "PASS"
+    },
+    {
+      "name": "expired unclaimed staging is quarantined/cleaned; committed files survive sweeps and expired references cannot submit",
+      "result": "PASS"
+    },
+    {
+      "name": "weekly obligation coverage consumes real submission pointer; no PASS/completion/evaluation is fabricated",
+      "result": "PASS"
+    },
+    {
+      "name": "explicit disabled policy and invalid/reopened dossier block upload without inventing missing ownership/finalization",
+      "result": "PASS"
+    }
+  ]
+}

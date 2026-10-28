@@ -1,0 +1,564 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:43.729Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "B03-read-snapshot-stable",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:45.691Z",
+    "detail": {
+      "paths": [
+        "/terms/qa-t1/proposal-review-options",
+        "/terms/qa-t1/proposals",
+        "/proposals/p-student/review-history",
+        "/proposal-reviews/2e363cc4-dedf-4cc7-9c28-0a2474fffe45"
+      ],
+      "unchanged": true
+    }
+  },
+  {
+    "id": "F08-api-pagination-and-ui-single-page",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:45.802Z",
+    "detail": {
+      "page1": [
+        "p-student2"
+      ],
+      "page2": [
+        "p-student"
+      ],
+      "page3": 0,
+      "uiTwoPages": "NOT RUN: only two records, page size20"
+    }
+  },
+  {
+    "id": "B01-query-validation",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:45.923Z",
+    "detail": [
+      {
+        "query": "page=0",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "page: Number must be greater than or equal to 1"
+        }
+      },
+      {
+        "query": "page=-1",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "page: Number must be greater than or equal to 1"
+        }
+      },
+      {
+        "query": "page=1.5",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "page: Expected integer, received float"
+        }
+      },
+      {
+        "query": "page=abc",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "page: Expected number, received nan"
+        }
+      },
+      {
+        "query": "limit=0",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "limit: Number must be greater than or equal to 1"
+        }
+      },
+      {
+        "query": "limit=101",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "limit: Number must be less than or equal to 100"
+        }
+      },
+      {
+        "query": "status=NOT_A_STATE",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "status: Invalid enum value. Expected 'DRAFT' | 'SUBMITTED' | 'UNDER_REVIEW' | 'REVISION_REQUESTED' | 'APPROVED' | 'REJECTED', received 'NOT_A_STATE'"
+        }
+      },
+      {
+        "query": "unassigned=1",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "unassigned: Invalid enum value. Expected 'true' | 'false', received '1'"
+        }
+      },
+      {
+        "query": "unexpected=x",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": ": Unrecognized key(s) in object: 'unexpected'"
+        }
+      },
+      {
+        "query": "search length256",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "search: String must contain at most 255 character(s)"
+        }
+      }
+    ]
+  },
+  {
+    "id": "B02-case-trim-group-filter",
+    "result": "FAIL",
+    "at": "2026-10-28T02:13:45.964Z",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:\n\n0 !== 1\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\roles-ui.cjs:10:159\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\browser-common.cjs:19:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\roles-ui.cjs:10:2"
+  },
+  {
+    "id": "U04-empty-and-recover",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:46.086Z",
+    "detail": {
+      "emptyAndRecovery": true
+    }
+  },
+  {
+    "id": "U04-real-GET-error-recover",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:47.954Z",
+    "detail": {
+      "error": "Không tìm thấy vòng duyệt.",
+      "recoveredViaBackLink": true
+    }
+  },
+  {
+    "id": "U03-axe-desktop-queue",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:49.081Z",
+    "detail": {
+      "violations": []
+    }
+  },
+  {
+    "id": "U01-U02-mobile-queue-keyboard",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:49.273Z",
+    "detail": {
+      "dimensions": {
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "escapeReturnsFocus": true,
+      "tabFocus": {
+        "tag": "SELECT",
+        "label": "Đợt làm việc"
+      }
+    }
+  },
+  {
+    "id": "U03-axe-mobile-queue",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:49.926Z",
+    "detail": {
+      "violations": []
+    }
+  },
+  {
+    "id": "U02-mobile-detail",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:50.428Z",
+    "detail": {
+      "width": 390,
+      "scrollWidth": 390
+    }
+  },
+  {
+    "id": "U03-axe-detail",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:51.208Z",
+    "detail": {
+      "violations": []
+    }
+  },
+  {
+    "id": "U02-mobile-assignment",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:53.248Z",
+    "detail": {
+      "width": 390,
+      "scrollWidth": 390,
+      "form": "Readonly after REVISION_REQUESTED; editable form measured separately"
+    }
+  },
+  {
+    "id": "R04-advisor-member-read-only",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:55.359Z",
+    "detail": {
+      "read": {
+        "id": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "proposalId": "p-student2",
+        "state": "DECIDED",
+        "proposalStatus": "APPROVED",
+        "revision": 2,
+        "proposalRevision": 3,
+        "roundNumber": 1,
+        "versionId": "v1-student2",
+        "contentHash": "a8816e49d937e135cc9132986c5460405662fad3a3ac2c8a53c4ba2848a7cbab",
+        "groupId": "qa-g1",
+        "allowedActions": [],
+        "comments": [],
+        "decision": {
+          "id": "ea3e8c7a-6bed-48bf-a601-5e1e7ec3d82d",
+          "versionId": "v1-student2",
+          "decision": "APPROVED",
+          "comment": "QA STEP5: đề cương đạt yêu cầu của vòng xét.",
+          "decidedByUserId": "reviewer",
+          "deciderName": "qa-reviewer",
+          "decidedAt": "2026-10-28T02:12:24.890Z"
+        },
+        "supersededByReviewId": null
+      },
+      "negative": {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01/start",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      },
+      "note": "Active self-review prohibition independently tested in prior 27-case API run"
+    }
+  },
+  {
+    "id": "R06-student-owner-read-only",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:57.539Z",
+    "detail": {
+      "read": {
+        "id": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+        "proposalId": "p-student",
+        "state": "DECIDED",
+        "proposalStatus": "REVISION_REQUESTED",
+        "revision": 4,
+        "proposalRevision": 5,
+        "roundNumber": 2,
+        "versionId": "v1-student",
+        "contentHash": "a8816e49d937e135cc9132986c5460405662fad3a3ac2c8a53c4ba2848a7cbab",
+        "groupId": "qa-g2",
+        "allowedActions": [],
+        "comments": [
+          {
+            "id": "e4ffb55d-08c4-44a2-a03d-0a876c977a75",
+            "versionId": "v1-student",
+            "authorUserId": "reviewer",
+            "authorName": "qa-reviewer",
+            "createdAt": "2026-10-28T02:12:20.205Z",
+            "text": "QA STEP5: nhận xét thành viên thứ nhất vòng mới."
+          },
+          {
+            "id": "9585eef2-410e-4da3-91b0-4392946f431b",
+            "versionId": "v1-student",
+            "authorUserId": "outsider",
+            "authorName": "qa-outsider",
+            "createdAt": "2026-10-28T02:12:22.554Z",
+            "text": "QA STEP5: nhận xét độc lập của thành viên thứ hai."
+          }
+        ],
+        "decision": {
+          "id": "db08096b-5fff-438e-831c-34ab58d7f8a4",
+          "versionId": "v1-student",
+          "decision": "REVISION_REQUIRED",
+          "comment": "QA STEP5: bổ sung tiêu chí đánh giá và kế hoạch kiểm thử.",
+          "decidedByUserId": "outsider",
+          "deciderName": "qa-outsider",
+          "decidedAt": "2026-10-28T02:12:23.267Z"
+        },
+        "supersededByReviewId": null
+      },
+      "start": {
+        "endpoint": "/proposal-reviews/2e363cc4-dedf-4cc7-9c28-0a2474fffe45/start",
+        "status": 403,
+        "error": {
+          "code": "AUTH_004",
+          "message": "Bạn không có quyền [proposal:review] để thực hiện thao tác này"
+        }
+      },
+      "candidates": {
+        "endpoint": "/proposals/p-student/review-candidates",
+        "status": 403,
+        "error": {
+          "code": "AUTH_004",
+          "message": "Bạn không có quyền [proposal:assign] để thực hiện thao tác này"
+        }
+      }
+    }
+  },
+  {
+    "id": "R07-other-student-denied",
+    "result": "PASS",
+    "at": "2026-10-28T02:13:59.381Z",
+    "detail": [
+      {
+        "endpoint": "/proposals/p-student2",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy phiên bản trong phạm vi."
+        }
+      },
+      {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      }
+    ]
+  },
+  {
+    "id": "R05-outside-group-no-content",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:02.555Z",
+    "detail": [
+      {
+        "endpoint": "/proposals/p-student2",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy phiên bản trong phạm vi."
+        }
+      },
+      {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      },
+      {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01/start",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      }
+    ]
+  },
+  {
+    "id": "R05-cross-term-denied",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:05.553Z",
+    "detail": [
+      {
+        "endpoint": "/proposals/p-student2",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy phiên bản trong phạm vi."
+        }
+      },
+      {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      }
+    ]
+  },
+  {
+    "id": "R10-faculty-outside-grant",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:07.277Z",
+    "detail": [
+      {
+        "endpoint": "/proposals/p-student",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy phiên bản trong phạm vi."
+        }
+      },
+      {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      },
+      {
+        "endpoint": "/proposals/p-student/review-candidates",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy đề cương trong phạm vi."
+        }
+      }
+    ]
+  },
+  {
+    "id": "R10-missing-permission",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:08.681Z",
+    "detail": [
+      {
+        "endpoint": "/proposal-review-options/terms",
+        "status": 403,
+        "error": {
+          "code": "AUTH_004",
+          "message": "Bạn không có quyền [proposal:read] để thực hiện thao tác này"
+        }
+      },
+      {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": 403,
+        "error": {
+          "code": "AUTH_004",
+          "message": "Bạn không có quyền [proposal:read] để thực hiện thao tác này"
+        }
+      }
+    ]
+  },
+  {
+    "id": "R08-admin-no-academic-bypass",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:10.240Z",
+    "detail": [
+      {
+        "endpoint": "/proposal-review-options/terms",
+        "status": 403,
+        "error": {
+          "code": "AUTH_004",
+          "message": "Bạn không có quyền [proposal:read] để thực hiện thao tác này"
+        }
+      },
+      {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": 403,
+        "error": {
+          "code": "AUTH_004",
+          "message": "Bạn không có quyền [proposal:read] để thực hiện thao tác này"
+        }
+      },
+      {
+        "endpoint": "/proposals/p-student/review-candidates",
+        "status": 403,
+        "error": {
+          "code": "AUTH_004",
+          "message": "Bạn không có quyền [proposal:assign] để thực hiện thao tác này"
+        }
+      }
+    ]
+  },
+  {
+    "id": "R09-committee-with-permissions-no-membership",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:11.873Z",
+    "detail": {
+      "terms": [],
+      "detail": {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      },
+      "start": {
+        "endpoint": "/proposal-reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01/start",
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      }
+    }
+  },
+  {
+    "id": "W07-strict-command-validation",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:13.745Z",
+    "detail": [
+      {
+        "name": "unknown field",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": ": Unrecognized key(s) in object: 'extra'"
+        }
+      },
+      {
+        "name": "forged actor",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": ": Unrecognized key(s) in object: 'actorUserId'"
+        }
+      },
+      {
+        "name": "REJECTED",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "decision: Invalid enum value. Expected 'APPROVED' | 'REVISION_REQUIRED', received 'REJECTED'"
+        }
+      },
+      {
+        "name": "negative revision",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "expectedReviewRevision: Number must be greater than or equal to 0"
+        }
+      },
+      {
+        "name": "string revision",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "expectedReviewRevision: Expected number, received string"
+        }
+      },
+      {
+        "name": "missing key",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "Thiếu hoặc sai Idempotency-Key."
+        }
+      },
+      {
+        "name": "blank revision comment",
+        "status": 400,
+        "error": {
+          "code": "COMMON_003",
+          "message": "comment: Yêu cầu sửa phải có nhận xét."
+        }
+      }
+    ]
+  }
+]

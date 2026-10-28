@@ -1,0 +1,22 @@
+{
+  "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+  "code": "UI-DEMO-48-20261027",
+  "syntheticOnly": true,
+  "originalTermPreserved": true,
+  "originalTermDigest": "d3d89f36be74435a5aa22d57b34ebec599e78557cbc0d16e687be3dec0ba176e",
+  "createdByApi": [
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "route": "/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "route": "/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "status": 200
+    }
+  ],
+  "completedAt": "2026-10-27T03:02:00.938Z"
+}

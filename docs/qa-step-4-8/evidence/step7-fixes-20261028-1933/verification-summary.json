@@ -1,0 +1,51 @@
+{
+  "at": "2026-10-28T12:59:44.824Z",
+  "backendUnitTests": 50,
+  "frontendComponentTests": 3,
+  "dossierApiGroups": 20,
+  "lifecycleApiGroups": 29,
+  "apiResults": [
+    "PASS",
+    "PASS"
+  ],
+  "uiSuites": {
+    "workflow": {
+      "passed": 10,
+      "failed": 0
+    },
+    "scope-boundaries": {
+      "passed": 11,
+      "failed": 0
+    },
+    "lifecycle": {
+      "passed": 9,
+      "failed": 0
+    },
+    "supplemental": {
+      "passed": 7,
+      "failed": 0
+    },
+    "remaining": {
+      "passed": 6,
+      "failed": 1
+    },
+    "search-proof": {
+      "passed": 2,
+      "failed": 0
+    },
+    "mobile-history": {
+      "passed": 2,
+      "failed": 0
+    }
+  },
+  "resolvedFindingIds": [
+    "S7-01",
+    "S7-02",
+    "S7-03",
+    "S7-04"
+  ],
+  "initialSearchTimeoutRetained": true,
+  "searchRetest": true,
+  "mainDatabaseUnchanged": true,
+  "sourceFilesChanged": 14
+}

@@ -1,0 +1,81 @@
+{
+  "startedAt": "2026-10-27T02:06:03.539Z",
+  "cases": [
+    {
+      "name": "giaovu uses one shared shell and a role-filtered menu without duplicate entries",
+      "actual": "http://127.0.0.1:5173/topic/review-groups?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "result": "PASS"
+    },
+    {
+      "name": "giaovu can open the single shared notification inbox",
+      "actual": "http://127.0.0.1:5173/notifications",
+      "result": "PASS"
+    },
+    {
+      "name": "giaovu mobile viewport and Escape navigation",
+      "actual": "390px, no horizontal document overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "gv001 uses one shared shell and a role-filtered menu without duplicate entries",
+      "actual": "http://127.0.0.1:5173/guidance/tasks",
+      "result": "PASS"
+    },
+    {
+      "name": "gv001 can open the single shared notification inbox",
+      "actual": "http://127.0.0.1:5173/notifications",
+      "result": "PASS"
+    },
+    {
+      "name": "gv001 mobile viewport and Escape navigation",
+      "actual": "390px, no horizontal document overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "sv001 uses one shared shell and a role-filtered menu without duplicate entries",
+      "actual": "http://127.0.0.1:5173/topic/proposal?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "result": "PASS"
+    },
+    {
+      "name": "sv001 can open the single shared notification inbox",
+      "actual": "http://127.0.0.1:5173/notifications",
+      "result": "PASS"
+    },
+    {
+      "name": "sv001 mobile viewport and Escape navigation",
+      "actual": "390px, no horizontal document overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "401 and failed refresh redirect immediately to login",
+      "actual": "http://127.0.0.1:5173/login",
+      "result": "PASS"
+    }
+  ],
+  "violations": [
+    {
+      "actor": "giaovu",
+      "route": "/topic/review-groups",
+      "items": []
+    },
+    {
+      "actor": "giaovu",
+      "route": "group-form",
+      "items": []
+    },
+    {
+      "actor": "gv001",
+      "route": "/guidance/tasks",
+      "items": []
+    },
+    {
+      "actor": "sv001",
+      "route": "/topic/proposal",
+      "items": []
+    }
+  ],
+  "pageErrors": [],
+  "networkErrors": [],
+  "result": "PASS",
+  "finishedAt": "2026-10-27T02:06:23.774Z"
+}

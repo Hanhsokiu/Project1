@@ -1,0 +1,17 @@
+### Result
+{"method":"Playwright MCP","url":"http://127.0.0.1:50187/topic/dossier/p-student","login":true,"errorMessage":"Bước 1–3 chưa cung cấp lớp/ngành đã xác nhận cho sinh viên trong đợt.","historicalDownloadSaved":true}
+### Ran Playwright code
+```js
+await (async (page) => { const base='D:/Project1/BTL/docs/qa-step-4-8/evidence/step7-completion-20261028-2011/'; await page.locator('input[autocomplete="username"]').fill('qa-faculty');await page.locator('input[autocomplete="current-password"]').fill("[REDACTED LOCAL CREDENTIAL]");await page.getByRole('button',{name:'Đăng nhập hệ thống',exact:true}).click();await page.getByRole('heading',{name:'Hồ sơ đề cương chính thức',exact:true}).waitFor();await page.getByRole('button',{name:'Tải PDF xem trước (chưa chốt)',exact:true}).click();const alert=page.getByRole('alert');await alert.waitFor();const error=await alert.innerText();if(!error.includes('Bước 1–3 chưa cung cấp lớp/ngành đã xác nhận'))throw new Error('Business message missing: '+error);await page.screenshot({path:base+'mcp-preview-error.png',fullPage:true});await page.goto('http://127.0.0.1:50187/topic/dossier/p-student');const download=page.waitForEvent('download');await page.getByRole('button',{name:'Tải PDF bản chốt 1 (đã thay thế)',exact:true}).click();await (await download).saveAs(base+'mcp-historical.pdf');return {method:'Playwright MCP',url:page.url(),login:true,errorMessage:error,historicalDownloadSaved:true}; })(page);
+```
+### Open tabs
+- 0: (current) [UTC GPMS · Quản lý đồ án tốt nghiệp](http://127.0.0.1:50187/topic/dossier/p-student)
+- 1: [Downloads](edge://downloads-hub/)
+### Page
+- Page URL: http://127.0.0.1:50187/topic/dossier/p-student
+- Page Title: UTC GPMS · Quản lý đồ án tốt nghiệp
+- Console: 0 errors, 1 warnings
+### Events
+- New console entries: .playwright-mcp\console-2026-10-28T13-14-16-517Z.log#L3-L5
+- Downloading file de-cuong-ban-chot-f1166ac7-a1be-40f1-8d46-f27dae63f475.pdf ...
+- Downloaded file de-cuong-ban-chot-f1166ac7-a1be-40f1-8d46-f27dae63f475.pdf to ".playwright-mcp\de-cuong-ban-chot-f1166ac7-a1be-40f1-8d46-f27dae63f475.pdf"

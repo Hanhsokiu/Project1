@@ -499,6 +499,14 @@ export class SubmissionService {
           versionNumber: number,
         }),
       );
+      const official = await this.review.advisor(s, a.p);
+      await s.notify({
+        userId: official.assignment.advisor.userId,
+        termId: a.p.topic.termId,
+        title: "Bài nộp hướng dẫn mới",
+        body: "Sinh viên đã nộp báo cáo mới. Mở hồ sơ để xem bài và ghi nhận đánh giá.",
+        link: `/guidance/review/${sub.id}`,
+      });
       const result = this.view((await s.submission(sub.id))!);
       await this.gv.phase(s, a.p.topic.termId);
       await s.guidanceRemember(userId, "POST", route, key, hash, json(result));

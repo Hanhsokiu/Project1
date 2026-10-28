@@ -125,7 +125,7 @@ export const routeManifest: RouteInfo[] = [
   },
   {
     path: "/topic/my",
-    title: "Đề tài đồ án",
+    title: "Thống nhất đề tài",
     group: "Đăng ký & đề cương",
     roles: [...G, "STUDENT"],
   },
@@ -134,12 +134,14 @@ export const routeManifest: RouteInfo[] = [
     title: "Soạn đề cương",
     group: "Đăng ký & đề cương",
     roles: ["STUDENT", "LECTURER"],
+    menu: false,
   },
   {
     path: "/topic/overview",
     title: "Hồ sơ đề tài",
     group: "Đăng ký & đề cương",
     roles: A,
+    menu: false,
   },
   {
     path: "/report/export",
@@ -237,7 +239,11 @@ export const routeManifest: RouteInfo[] = [
       ["FACULTY", "LECTURER", "STUDENT"],
     ],
     ["/guidance/review", "Nhận xét báo cáo", ["LECTURER"]],
-    ["/guidance/review/:submissionId", "Chi tiết nhận xét", ["FACULTY", "LECTURER", "STUDENT"]],
+    [
+      "/guidance/review/:submissionId",
+      "Chi tiết nhận xét",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
     ["/guidance/progress", "Theo dõi tiến độ", ["FACULTY"]],
     [
       "/guidance/meetings",
@@ -264,6 +270,9 @@ export const routeManifest: RouteInfo[] = [
     title: title as string,
     roles: roles as Role[],
     group: "Xét duyệt & hướng dẫn",
-    menu: !(path as string).includes(":") && !(path as string).endsWith("/new"),
+    menu:
+      !(path as string).includes(":") &&
+      !(path as string).endsWith("/new") &&
+      path !== "/guidance/notifications",
   })),
 ];

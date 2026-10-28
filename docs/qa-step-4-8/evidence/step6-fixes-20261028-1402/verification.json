@@ -1,0 +1,144 @@
+{
+  "finishedAt": "2026-10-28T07:19:39.589Z",
+  "apiGroups": 26,
+  "regressionGroups": 24,
+  "step5PreludeChecks": 28,
+  "uiBusinessGroups": 8,
+  "browserControlGroups": 1,
+  "ui": {
+    "finishedAt": "2026-10-28T07:10:41.406Z",
+    "method": "local Playwright + real Edge",
+    "frontend": "http://127.0.0.1:50185",
+    "database": "btl_pr2b_step6fix_1793171312226_08290c_live",
+    "passed": 9,
+    "failed": 0,
+    "consoleErrors": 17,
+    "pageErrors": 0,
+    "failedRequests": 0
+  },
+  "mainDatabase": {
+    "tables": 100,
+    "allHashesUnchanged": true,
+    "readOnly": true
+  },
+  "cleanup": {
+    "at": "2026-10-28T07:18:29.746Z",
+    "services": [
+      {
+        "url": "http://127.0.0.1:50185",
+        "reachable": false
+      },
+      {
+        "url": "http://127.0.0.1:49297/api/health",
+        "reachable": false
+      }
+    ],
+    "privateDatabaseRetained": true,
+    "existingDatabaseUntouched": true,
+    "postgresCluster": "left running; no cluster shutdown"
+  },
+  "validation": {
+    "sharedBuild": "PASS",
+    "backendBuild": "PASS",
+    "frontendBuild": "PASS",
+    "backendUnitTests": 191,
+    "frontendUnitTests": 115,
+    "backendLint": "PASS",
+    "frontendLint": "PASS",
+    "ciRemote": "NOT RUN",
+    "mainDatabaseMigration": "NOT APPLIED",
+    "smtpDelivery": "NOT RUN"
+  },
+  "httpErrors": [
+    {
+      "request": "GET /api/registrations/term/qa-t1/me 403",
+      "count": 4
+    },
+    {
+      "request": "GET /api/assignments/term/qa-t2/plan 403",
+      "count": 2
+    },
+    {
+      "request": "GET /api/assignments/term/qa-t1/plan 403",
+      "count": 2
+    },
+    {
+      "request": "GET /api/assignments/term/qa-t2/results 400",
+      "count": 4
+    },
+    {
+      "request": "GET /api/assignments/term/qa-t1/results 400",
+      "count": 4
+    },
+    {
+      "request": "POST /api/proposals/p-student2/withdraw 409",
+      "count": 1
+    }
+  ],
+  "sourceFiles": [
+    {
+      "file": "shared/src/contracts/proposal-versions.ts",
+      "sha256": "4c5be33acccd0d854f043343f27d4f0537565833c1e129e6f8251c2bafdfd39a"
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-lifecycle.service.ts",
+      "sha256": "a9b32eb75fe400c3e7384c7508b7873f58966e0ed5644f31b448e18efa76aa6a"
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-version.controller.ts",
+      "sha256": "0ee1779a4f5ee6d08bb1f41ff4ebd013a57e1cff59836bee9a6db39a27e3a5c6"
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-version.repository.ts",
+      "sha256": "6c8d540f292cee873133172aa79aabbd219d489a347579f11f81448993e403d3"
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-version.service.ts",
+      "sha256": "97fb697c2d439e9a47794293fbab999d9073bd25245a339367a4443058b1e5fb"
+    },
+    {
+      "file": "backend/src/topic/topic.module.ts",
+      "sha256": "88e26291b69e4a8dee136a2d549fddb8420f5cad1d99492d84713f239dfd63ae"
+    },
+    {
+      "file": "backend/prisma/migrations/202610280001_proposal_lifecycle/migration.sql",
+      "sha256": "4313b7c8e390560977e3fc419054b99e6f3c4c3181ef4c9f173775ba37548880"
+    },
+    {
+      "file": "backend/prisma/seed.cjs",
+      "sha256": "fa43a81530e560684a2194fabe2438db034052ae73bdfb3efcceb37948e50d45"
+    },
+    {
+      "file": "backend/scripts/integration/seed-steps4-8.cjs",
+      "sha256": "490a6d73999553f7ea3ffec9b3dddfe235e6ab5df45878ab3fb271adc438f507"
+    },
+    {
+      "file": "backend/scripts/test-proposal-lifecycle.cjs",
+      "sha256": "25f68866e53b7cf9a371d1fc9959780410c788fbed2bbac01b61eedc966e968a"
+    },
+    {
+      "file": "backend/scripts/test-proposal-versions.cjs",
+      "sha256": "3164377935a4e24aa1ef020d190bc3622cb508118c46f634ddac625ac6f01e03"
+    },
+    {
+      "file": "backend/package.json",
+      "sha256": "e4d85773aa06001aa6af09242e17fdc33ad80bb2cdc2df9c3dffc59eafdfd1b9"
+    },
+    {
+      "file": "frontend/src/features/proposal-versions/api.ts",
+      "sha256": "abf49660f900387fd167ea246866875048a6c80831477c67d03cf8c101561318"
+    },
+    {
+      "file": "frontend/src/features/proposal-versions/pages.tsx",
+      "sha256": "ba8b47677ed7d901c506fd225f23f3b130875ae3db7eeacb929c3a45deb11ac4"
+    },
+    {
+      "file": "frontend/src/features/proposal-versions/lifecycle-actions.tsx",
+      "sha256": "683a2a125dfa2f59c774c86fc482efe1ab5af1ad77e7ff15e50c704b376576cd"
+    },
+    {
+      "file": ".github/workflows/backend-ci.yml",
+      "sha256": "b9716dc66591169cade172d0f85027039e58cd9a59cf95fa442b0f2b0db8d7f5"
+    }
+  ]
+}

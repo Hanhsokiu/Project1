@@ -14,6 +14,16 @@ import { DossierSnapshotPreview, DossierStatus } from "./components";
 import { getErrorMessage } from "../../shared/api/error-message";
 const issue = (e: unknown) =>
   e ? getErrorMessage(e, "Không thể xử lý hồ sơ. Hãy thử lại.") : undefined;
+function savePdf(blob: Blob, filename: string) {
+  const url = URL.createObjectURL(blob),
+    link = document.createElement("a");
+  link.href = url;
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
 const readiness: Record<string, string> = {
   STUDENT_PROFILE_NOT_READY:
     "Bước 1–3 chưa cung cấp lớp/ngành đã xác nhận. Chưa thể chốt hồ sơ.",
@@ -160,7 +170,17 @@ function DossierActions({
     return requestKeys.current.get(signature)!;
   };
   const mutation = useMutation({
-    mutationFn: async (action: "finalize" | "receive" | "download") => {
+    mutationFn: async (
+      action: "finalize" | "receive" | "download" | "preview",
+    ) => {
+      if (action === "preview") {
+        if (!d.previewVersionId) throw Error("Chưa có phiên bản để xem trước.");
+        savePdf(
+          await api.preview(d.proposalId, d.previewVersionId),
+          "de-cuong-xem-truoc-chua-chot.pdf",
+        );
+        return "Đã tải bản xem trước có watermark. Bản này không dùng nộp hồ sơ chính thức.";
+      }
       if (action === "finalize") {
         const input = DossierFinalizeSchema.parse({
           expectedProposalRevision: d.proposalRevision,
@@ -196,21 +216,25 @@ function DossierActions({
         const input = { expectedRevision: d.revision, finalizationId: f.id };
         onResult(await api.generate(d.proposalId, input, key(action, input)));
       }
-      const blob = await api.download(d.proposalId, f.id),
-        url = URL.createObjectURL(blob),
-        link = document.createElement("a");
-      link.href = url;
-      link.download = "de-cuong-chinh-thuc.pdf";
-      document.body.appendChild(link);
-      link.click();
-      link.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      savePdf(
+        await api.download(d.proposalId, f.id),
+        "de-cuong-chinh-thuc.pdf",
+      );
       return "Đã tải PDF. Hãy in, xin đủ bốn chữ ký giấy và nộp Khoa. Việc tải không xác nhận đã ký/nộp.";
     },
     onSuccess: setSuccess,
   });
   return (
     <section className="rg-panel p-5 space-y-4">
+      {d.previewVersionId && (
+        <button
+          className="rounded border px-4 py-2"
+          disabled={mutation.isPending}
+          onClick={() => mutation.mutate("preview")}
+        >
+          Tải PDF xem trước (chưa chốt)
+        </button>
+      )}
       {d.allowedActions.includes("finalize") && (
         <div>
           <p className="mb-3 text-sm">
@@ -274,6 +298,67 @@ function DossierActions({
     </section>
   );
 }
+function FinalizationHistory({ d }: { d: DossierView }) {
+  const download = useMutation({
+    mutationFn: async (id: string) => {
+      savePdf(
+        await api.download(d.proposalId, id),
+        `de-cuong-ban-chot-${id}.pdf`,
+      );
+    },
+  });
+  return (
+    <section className="rg-panel p-5 space-y-4" aria-label="Các bản chốt">
+      <h2 className="font-semibold">Các bản chốt chính thức</h2>
+      {(d.finalizations ?? []).map((f) => (
+        <article key={f.id} className="border rounded p-4 space-y-3">
+          <h3>
+            Bản chốt {f.sequence} · v{f.versionNumber} ·{" "}
+            {f.supersededAt ? "Đã thay thế" : "Hiện hành"}
+          </h3>
+          <p>Chốt lúc {new Date(f.finalizedAt).toLocaleString("vi-VN")}</p>
+          {f.supersededAt && (
+            <p>
+              Đã thay thế lúc {new Date(f.supersededAt).toLocaleString("vi-VN")}
+              . Đây là chứng cứ của bản chốt cũ.
+            </p>
+          )}
+          <p>
+            Tiếp nhận bản giấy của bản chốt này:{" "}
+            {f.receipt
+              ? new Date(f.receipt.receivedAt).toLocaleString("vi-VN")
+              : "Chưa ghi nhận"}
+          </p>
+          {f.receipt?.note && (
+            <p className="break-words">Ghi chú: {f.receipt.note}</p>
+          )}
+          {f.snapshot ? (
+            <details>
+              <summary>Xem nội dung bản chốt {f.sequence}</summary>
+              <DossierSnapshotPreview snapshot={f.snapshot} />
+            </details>
+          ) : (
+            <p>Bản chốt cần đối soát dữ liệu in.</p>
+          )}
+          {f.canDownload && (
+            <button
+              className="rounded border px-4 py-2"
+              disabled={download.isPending}
+              onClick={() => download.mutate(f.id)}
+            >
+              Tải PDF bản chốt {f.sequence}
+              {f.supersededAt ? " (đã thay thế)" : ""}
+            </button>
+          )}
+        </article>
+      ))}
+      {download.error && <p role="alert">{issue(download.error)}</p>}
+      {download.isSuccess && (
+        <p role="status">Đã tải đúng PDF của bản chốt được chọn.</p>
+      )}
+    </section>
+  );
+}
 export function DossierDetailPage() {
   const { proposalId = "" } = useParams(),
     client = useQueryClient();
@@ -306,12 +391,16 @@ export function DossierDetailPage() {
             ))}
             {snapshot && <DossierSnapshotPreview snapshot={snapshot} />}
             <DossierActions
+              key={proposalId}
               d={d}
               onResult={(value) => {
                 client.setQueryData(["proposal-dossier", proposalId], value);
                 void client.invalidateQueries({ queryKey: ["dossier-list"] });
               }}
             />
+            {!!d.finalizations?.length && (
+              <FinalizationHistory key={"history-" + proposalId} d={d} />
+            )}
             <button
               className="text-blue-700"
               onClick={() => void query.refetch()}

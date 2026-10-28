@@ -1,0 +1,206 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:34.360Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "fixture-resumed-after-harness-correction",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:36.303Z",
+    "detail": {
+      "ids": {
+        "p-student": "d93537a1-612d-45c1-804d-9655beed55a0",
+        "p-student2": "81ffccca-a92d-4ef0-83c6-eb90f7b73c3e",
+        "v2": "642c76d2-a799-46f7-b055-8d18141f6313",
+        "newReview": "f72b4bfc-4ae3-4005-9792-74fb7603617a"
+      },
+      "reason": "Review view contains current proposal status/revision; compare immutable review evidence independently."
+    }
+  },
+  {
+    "id": "T07-T08-save-v2-immutable-source",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:37.995Z",
+    "detail": {
+      "status": "DRAFT",
+      "version": {
+        "id": "642c76d2-a799-46f7-b055-8d18141f6313",
+        "proposalId": "p-student",
+        "versionNumber": 2,
+        "state": "DRAFT",
+        "contentHash": "9590e8ac3bce9cf9c6bd873049d3c48c50624ae557ed489c72abf8e2854cca29",
+        "createdAt": "2026-10-28T02:52:50.926Z",
+        "createdByUserId": "student",
+        "authorName": "qa-student",
+        "submittedAt": null,
+        "submittedByUserId": null,
+        "basedOnVersionId": "v1-student",
+        "changeSummary": "QA STEP6: cập nhật mục tiêu và phản hồi hai góp ý.",
+        "responses": [
+          {
+            "targetType": "COMMENT",
+            "targetId": "168296b2-1d24-4104-9651-d73fdd86d1cb",
+            "text": "Đã bổ sung theo COMMENT trong bản mới."
+          },
+          {
+            "targetType": "DECISION",
+            "targetId": "4a02675a-53c1-41c9-ac63-8346bd157341",
+            "text": "Đã bổ sung theo DECISION trong bản mới."
+          }
+        ],
+        "provenance": null,
+        "contentBytes": 604,
+        "fieldLengths": {
+          "scope": 30,
+          "tools": 35,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 58,
+          "mainContents": 52,
+          "expectedResults": 27
+        }
+      },
+      "feedbackUnchanged": true
+    }
+  },
+  {
+    "id": "T14-reviewer-no-draft-leak",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:38.365Z",
+    "detail": {
+      "reviewerWorkingNull": true,
+      "versionAndCompareDenied": true
+    }
+  },
+  {
+    "id": "T26-real-diff",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:38.476Z",
+    "detail": {
+      "fromVersionId": "v1-student",
+      "toVersionId": "642c76d2-a799-46f7-b055-8d18141f6313",
+      "changes": [
+        {
+          "path": "/content/objectives",
+          "before": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "after": "QA STEP6: bổ sung kiểm thử và tiêu chí đánh giá sau góp ý.",
+          "beforeExists": true,
+          "afterExists": true
+        },
+        {
+          "path": "/responses/0",
+          "before": null,
+          "after": {
+            "targetType": "COMMENT",
+            "targetId": "168296b2-1d24-4104-9651-d73fdd86d1cb",
+            "text": "Đã bổ sung theo COMMENT trong bản mới."
+          },
+          "beforeExists": false,
+          "afterExists": true
+        },
+        {
+          "path": "/responses/1",
+          "before": null,
+          "after": {
+            "targetType": "DECISION",
+            "targetId": "4a02675a-53c1-41c9-ac63-8346bd157341",
+            "text": "Đã bổ sung theo DECISION trong bản mới."
+          },
+          "beforeExists": false,
+          "afterExists": true
+        }
+      ]
+    }
+  },
+  {
+    "id": "T25-history-readonly",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:38.822Z",
+    "detail": {
+      "version": "v1-student",
+      "contentHash": "328b565ea77cc32696f70f3e3d52c16a03d325847fa861f316b2aecf4e3a1346"
+    }
+  },
+  {
+    "id": "T11-dirty-submit-blocked",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:39.338Z",
+    "detail": {
+      "noUnstoredSubmit": true
+    }
+  },
+  {
+    "id": "T12-submit-same-v2",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:39.664Z",
+    "detail": {
+      "status": "SUBMITTED",
+      "version": {
+        "id": "642c76d2-a799-46f7-b055-8d18141f6313",
+        "proposalId": "p-student",
+        "versionNumber": 2,
+        "state": "SEALED",
+        "contentHash": "9590e8ac3bce9cf9c6bd873049d3c48c50624ae557ed489c72abf8e2854cca29",
+        "createdAt": "2026-10-28T02:52:50.926Z",
+        "createdByUserId": "student",
+        "authorName": "qa-student",
+        "submittedAt": "2026-10-28T02:53:39.460Z",
+        "submittedByUserId": "student",
+        "basedOnVersionId": "v1-student",
+        "changeSummary": "QA STEP6: cập nhật mục tiêu và phản hồi hai góp ý.",
+        "responses": [
+          {
+            "targetType": "COMMENT",
+            "targetId": "168296b2-1d24-4104-9651-d73fdd86d1cb",
+            "text": "Đã bổ sung theo COMMENT trong bản mới."
+          },
+          {
+            "targetType": "DECISION",
+            "targetId": "4a02675a-53c1-41c9-ac63-8346bd157341",
+            "text": "Đã bổ sung theo DECISION trong bản mới."
+          }
+        ],
+        "provenance": null,
+        "contentBytes": 604,
+        "fieldLengths": {
+          "scope": 30,
+          "tools": 35,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 58,
+          "mainContents": 52,
+          "expectedResults": 27
+        }
+      },
+      "noNewSnapshot": true
+    }
+  },
+  {
+    "id": "T14-no-auto-review-after-submit",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:39.970Z",
+    "detail": {
+      "reviewCount": 1,
+      "newVersionDenied": 404
+    }
+  },
+  {
+    "id": "T15-review-new-round-correct-version",
+    "result": "PASS",
+    "at": "2026-10-28T02:53:40.208Z",
+    "detail": {
+      "oldReviewId": "d93537a1-612d-45c1-804d-9655beed55a0",
+      "newReviewId": "f72b4bfc-4ae3-4005-9792-74fb7603617a",
+      "round": 2,
+      "versionId": "642c76d2-a799-46f7-b055-8d18141f6313",
+      "oldEvidenceUnchanged": true
+    }
+  }
+]

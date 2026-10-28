@@ -1,0 +1,88 @@
+[
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "committee",
+    "phase": "login-committee",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T35-T42-stale-finalize-PDF-receipt-and-SPA-keys",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T35-T42-stale-finalize-PDF-receipt-and-SPA-keys",
+    "kind": "http-error",
+    "method": "POST",
+    "url": "http://127.0.0.1:61158/api/proposals/p-page-01/finalize",
+    "status": 409
+  },
+  {
+    "user": "faculty",
+    "phase": "T35-T42-stale-finalize-PDF-receipt-and-SPA-keys",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "user": "page-01",
+    "phase": "login-page-01",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "page-01",
+    "phase": "login-page-01",
+    "kind": "http-error",
+    "method": "POST",
+    "url": "http://127.0.0.1:61158/api/proposals/p-page-01/dossier/pdf",
+    "status": 409
+  },
+  {
+    "user": "page-01",
+    "phase": "login-page-01",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "user": "faculty",
+    "phase": "login-page-01",
+    "kind": "http-error",
+    "method": "POST",
+    "url": "http://127.0.0.1:61158/api/proposals/p-page-01/dossier/receipt",
+    "status": 409
+  },
+  {
+    "user": "faculty",
+    "phase": "login-page-01",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "user": "faculty",
+    "phase": "login-page-01",
+    "kind": "http-error",
+    "method": "POST",
+    "url": "http://127.0.0.1:61158/api/proposals/p-page-01/dossier/receipt",
+    "status": 409
+  },
+  {
+    "user": "faculty",
+    "phase": "login-page-01",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "user": "faculty",
+    "phase": "S7-02-historical-UI-download-and-snapshot",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  }
+]

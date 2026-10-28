@@ -52,6 +52,94 @@ export class ProposalVersionSession extends ProposalReviewSession {
       },
     });
   }
+  planFor(proposalId: string) {
+    return this.local.guidancePlan.findUnique({
+      where: { proposalId },
+      include: { pr2bGuidancePlanWorkflowPlanId: true },
+    });
+  }
+  async reopenDossier(
+    dossierId: string,
+    revision: number,
+    finalizationId: string | null,
+    actorId: string,
+    reason: string,
+    now: Date,
+  ) {
+    const changed = await this.local.dossierWorkflow.updateMany({
+      where: { dossierId, revision, currentFinalizationId: finalizationId },
+      data: {
+        state: 'REOPENED',
+        currentFinalizationId: null,
+        revision: { increment: 1 },
+      },
+    });
+    if (changed.count !== 1)
+      groupError(409, 'REVISION_CONFLICT', 'Hồ sơ đã thay đổi.');
+    if (finalizationId) {
+      const sealed = await this.local.dossierFinalization.updateMany({
+        where: { id: finalizationId, dossierId, supersededAt: null },
+        data: { supersededAt: now, reason },
+      });
+      if (sealed.count !== 1)
+        groupError(409, 'STALE_FINALIZATION', 'Bản chốt đã thay đổi.');
+    }
+    const snapshot = {
+      finalizationId,
+      oldRevision: revision,
+      state: 'REOPENED',
+    };
+    await this.local.dossierHistory.create({
+      data: {
+        dossierId,
+        actorId,
+        reason,
+        action: 'REOPENED',
+        snapshot,
+      },
+    });
+    await this.local.auditLog.create({
+      data: {
+        userId: actorId,
+        resource: 'dossier',
+        resourceId: dossierId,
+        action: 'REOPENED',
+        newValue: { ...snapshot, reason },
+      },
+    });
+  }
+  async pausePlan(
+    planId: string,
+    revision: number,
+    actorId: string,
+    reason: string,
+    snapshot: Prisma.InputJsonValue,
+  ) {
+    const changed = await this.local.guidancePlanWorkflow.updateMany({
+      where: { planId, revision, state: { in: ['ACTIVE', 'PAUSED'] } },
+      data: { state: 'PAUSED', revision: { increment: 1 } },
+    });
+    if (changed.count !== 1)
+      groupError(409, 'REVISION_CONFLICT', 'Kế hoạch đã thay đổi.');
+    await this.local.planHistory.create({
+      data: {
+        planId,
+        actorId,
+        reason,
+        action: 'PROPOSAL_REOPENED',
+        snapshot,
+      },
+    });
+    await this.local.auditLog.create({
+      data: {
+        userId: actorId,
+        resource: 'guidance-plan',
+        resourceId: planId,
+        action: 'PROPOSAL_REOPENED',
+        newValue: snapshot,
+      },
+    });
+  }
   addVersion(data: Prisma.ProposalVersionUncheckedCreateInput) {
     return this.local.proposalVersion.create({ data, include });
   }

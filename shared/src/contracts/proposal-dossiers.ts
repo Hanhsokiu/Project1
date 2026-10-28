@@ -23,6 +23,9 @@ export const DossierReceiptSchema = z
 export const DossierPdfQuerySchema = z
   .object({ finalizationId: id.optional() })
   .strict();
+export const ProposalPreviewPdfQuerySchema = z
+  .object({ versionId: id })
+  .strict();
 export const DossierPdfGenerateSchema = z
   .object({ finalizationId: id, expectedRevision: revision })
   .strict();
@@ -39,13 +42,34 @@ export type DossierPrintSnapshot = {
     className: string;
     majorName: string;
     trainingSystem: string;
+    // Optional for snapshots finalized before contact fields were introduced.
+    cohort?: string | null;
+    phone?: string | null;
+    email?: string | null;
   };
-  advisor: { id: string; name: string; department: string };
+  advisor: {
+    id: string;
+    name: string;
+    department: string;
+    phone?: string | null;
+    email?: string | null;
+  };
   academicProfileRevision: number;
   assignmentId: string;
   assignmentRevision: number;
   topicRevision: number;
   content: ProposalContent;
+};
+export type DossierHistoricalFinalization = {
+  id: string;
+  sequence: number;
+  versionNumber: number;
+  finalizedAt: string;
+  supersededAt: string | null;
+  templateVersion: string;
+  snapshot: DossierPrintSnapshot | null;
+  canDownload: boolean;
+  receipt: DossierView["receipt"];
 };
 export type DossierView = {
   proposalId: string;
@@ -58,6 +82,8 @@ export type DossierView = {
   revision: number;
   readiness: string[];
   previewSnapshot: DossierPrintSnapshot | null;
+  previewVersionId: string | null;
+  finalizations: DossierHistoricalFinalization[];
   allowedActions: Array<"finalize" | "receive" | "download">;
   currentFinalization: null | {
     id: string;

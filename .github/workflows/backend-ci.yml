@@ -111,6 +111,8 @@ jobs:
         run: |
           createdb btl_pr2b_ci_step6_api
           PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step6_api pnpm test:proposal-versions:api
+          createdb btl_pr2b_ci_step6_lifecycle
+          PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step6_lifecycle pnpm test:proposal-lifecycle:api
           createdb btl_pr2b_ci_step6_upgrade
           PR2B_TEST_URL=postgresql://test_user:test_password@127.0.0.1:5432/btl_pr2b_ci_step6_upgrade pnpm test:proposal-versions:upgrade
       - name: Step 7 finalization, private PDF, receipt and migration upgrade
@@ -154,6 +156,7 @@ jobs:
             backend/prisma/review/step5-results.json
             backend/prisma/review/step5-upgrade-results.json
             backend/prisma/review/step6-results.json
+            backend/prisma/review/step6-lifecycle-results.json
             backend/prisma/review/step6-upgrade-results.json
             backend/prisma/review/step7-results.json
             backend/prisma/review/step7-upgrade-results.json

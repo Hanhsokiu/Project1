@@ -23,6 +23,7 @@ import {
 } from '../proposal-reviews/components';
 import { proposalVersionApi as api } from './api';
 import { ProposalFields, RevisionFeedback, VersionChanges } from './components';
+import { ProposalLifecycleActions } from './lifecycle-actions';
 import { getErrorMessage } from '../../shared/api/error-message';
 const errorText = (e: unknown) =>
   e ? getErrorMessage(e, 'Không thể tải/lưu đề cương.') : undefined;
@@ -505,6 +506,7 @@ function ProposalEditorPageContent({
   proposalId: string;
   versionId?: string;
 }) {
+  const [editorEpoch, setEditorEpoch] = useState(0);
   const context = useQuery({
     queryKey: ['proposal-editing-context', proposalId],
     queryFn: () => api.context(proposalId),
@@ -525,7 +527,10 @@ function ProposalEditorPageContent({
         ← Danh sách đề cương
       </Link>
       <ReviewState
-        loading={context.isLoading || (!context.isFetchedAfterMount && context.isFetching)}
+        loading={
+          context.isLoading ||
+          (!context.isFetchedAfterMount && context.isFetching)
+        }
         error={errorText(context.error)}
       >
         {context.data && (
@@ -595,7 +600,16 @@ function ProposalEditorPageContent({
                 )}
               </ReviewState>
             ) : (
-              <Editor key={proposalId} context={context.data} />
+              <>
+                <ProposalLifecycleActions
+                  context={context.data}
+                  onTransition={() => setEditorEpoch((value) => value + 1)}
+                />
+                <Editor
+                  key={`${proposalId}:${editorEpoch}`}
+                  context={context.data}
+                />
+              </>
             )}
             <VersionHistory proposalId={proposalId} />
           </div>

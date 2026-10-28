@@ -1,0 +1,25 @@
+{
+  "result": "FAIL",
+  "workflowResult": "NOT RUN",
+  "startedAt": "2026-10-26T18:19:41.602Z",
+  "finishedAt": "2026-10-26T18:20:26.148Z",
+  "database": "btl_pr2b_audit_20261026181941_fb86c1_live_e2e",
+  "postgresMajor": 17,
+  "sharedDatabaseAccess": false,
+  "mockedApi": false,
+  "checks": [
+    {
+      "name": "fresh guarded PG17 seed and canonical active-migration replay",
+      "expected": "As stated in test case",
+      "actual": "Synthetic roster/official assignments/agreement/v1/profile only; no review, finalization, task or submission pre-created",
+      "result": "PASS"
+    },
+    {
+      "name": "all inventoried step 4–8 operations reject anonymous access",
+      "expected": "As stated in test case",
+      "actual": "71 operations returned 401; see endpoint-auth.json",
+      "result": "PASS"
+    }
+  ],
+  "failure": "Live browser E2E failed; see live-browser.json/log\n\n1 !== 0\n"
+}

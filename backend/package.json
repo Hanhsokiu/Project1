@@ -37,6 +37,7 @@
     "test:proposal-reviews:api": "node scripts/test-proposal-reviews.cjs",
     "test:proposal-reviews:upgrade": "node scripts/test-proposal-review-upgrade.cjs",
     "test:proposal-versions:api": "node scripts/test-proposal-versions.cjs",
+    "test:proposal-lifecycle:api": "node scripts/test-proposal-lifecycle.cjs",
     "test:proposal-versions:upgrade": "node scripts/test-proposal-version-upgrade.cjs",
     "test:proposal-dossiers:api": "node scripts/test-proposal-dossiers.cjs",
     "test:proposal-dossiers:upgrade": "node scripts/test-proposal-dossier-upgrade.cjs",

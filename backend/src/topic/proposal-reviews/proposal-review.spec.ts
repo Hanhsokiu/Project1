@@ -269,6 +269,40 @@ describe('Step 5 business validators', () => {
       response: { error: { code: 'TERM_003' } },
     });
   });
+  it.each([
+    [-1, false],
+    [0, true],
+    [999, true],
+    [1000, false],
+    [1001, false],
+  ])(
+    'enforces [start, end) at exact boundary offset %d ms',
+    async (offset, allowed) => {
+      const start = new Date('2026-10-28T02:00:00.000Z');
+      const s = {
+        term: vi.fn().mockResolvedValue({ status: 'IN_PROGRESS' }),
+        phase: vi.fn().mockResolvedValue({
+          refPhaseId: {
+            termId: 't',
+            isLocked: false,
+            startDate: start,
+            endDate: new Date(start.getTime() + 1000),
+          },
+        }),
+      } as unknown as ProposalReviewSession;
+      vi.useFakeTimers();
+      try {
+        vi.setSystemTime(start.getTime() + offset);
+        if (allowed) await expect(v.phase(s, 't')).resolves.toBeDefined();
+        else
+          await expect(v.phase(s, 't')).rejects.toMatchObject({
+            response: { error: { code: 'TERM_003' } },
+          });
+      } finally {
+        vi.useRealTimers();
+      }
+    },
+  );
   it('requires a SEALED submitted version, correct hash and current agreement', async () => {
     const validator = new ProposalReviewValidator();
     vi.spyOn(validator, 'advisor').mockResolvedValue({

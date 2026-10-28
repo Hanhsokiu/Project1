@@ -234,7 +234,8 @@ export class GuidanceService {
           registrations: {
             some: {
               termId,
-              advisorAssignments: { some: {
+              advisorAssignments: {
+                some: {
                   advisorId: u.lecturer.id,
                   assignmentPlanId: officialId,
                   advisor: { isActive: true },
@@ -855,6 +856,13 @@ export class GuidanceService {
           "TASK_CREATED",
           true,
         );
+        await s.notify({
+          userId: a.p.student.userId,
+          termId: a.p.topic.termId,
+          title: "Nhiệm vụ hướng dẫn mới",
+          body: "GVHD đã giao một nhiệm vụ mới. Mở hồ sơ để xem yêu cầu và thời hạn.",
+          link: `/guidance/tasks/${task.id}`,
+        });
         return this.taskView(s, u, a, (await s.task(task.id))!);
       },
     );
@@ -1115,6 +1123,13 @@ export class GuidanceService {
           "WEEKLY_TASK_MATERIALIZED",
           true,
         );
+        await s.notify({
+          userId: a.p.student.userId,
+          termId: a.p.topic.termId,
+          title: "Nhiệm vụ báo cáo tuần",
+          body: "Nhiệm vụ báo cáo tuần đã được tạo theo kế hoạch. Mở hồ sơ để xem yêu cầu và thời hạn.",
+          link: `/guidance/tasks/${t.id}`,
+        });
         return this.taskView(s, u, a, (await s.task(t.id))!);
       },
     );

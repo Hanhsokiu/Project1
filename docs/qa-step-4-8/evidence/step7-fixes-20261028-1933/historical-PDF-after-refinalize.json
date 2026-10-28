@@ -1,0 +1,10 @@
+{
+  "id": "S7-02",
+  "stage": "new current finalization exists",
+  "oldFinalizationId": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+  "newFinalizationId": "0855599c-b878-4290-9291-c797b817e6b3",
+  "expectedStatus": 200,
+  "actual": {
+    "status": 200
+  }
+}

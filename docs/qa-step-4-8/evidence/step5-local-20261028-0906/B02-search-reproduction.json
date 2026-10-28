@@ -1,0 +1,68 @@
+{
+  "searchResults": [
+    {
+      "search": "Nguyễn Văn Sinh",
+      "total": 1,
+      "ids": [
+        "p-student"
+      ]
+    },
+    {
+      "search": "  Nguyễn Văn Sinh  ",
+      "total": 1,
+      "ids": [
+        "p-student"
+      ]
+    },
+    {
+      "search": "nguyễn văn sinh",
+      "total": 1,
+      "ids": [
+        "p-student"
+      ]
+    },
+    {
+      "search": "NGUYỄN VĂN SINH",
+      "total": 0,
+      "ids": []
+    },
+    {
+      "search": "nGUYỄN vĂN sINH",
+      "total": 0,
+      "ids": []
+    },
+    {
+      "search": "QA-STUDENT",
+      "total": 2,
+      "ids": [
+        "p-student2",
+        "p-student"
+      ]
+    },
+    {
+      "search": "qa-student",
+      "total": 2,
+      "ids": [
+        "p-student2",
+        "p-student"
+      ]
+    }
+  ],
+  "locale": [
+    {
+      "datname": "btl_integration_ui",
+      "datcollate": "C",
+      "datctype": "C"
+    },
+    {
+      "datname": "btl_pr2b_step5_1793153364374_e5b031_live",
+      "datcollate": "C",
+      "datctype": "C"
+    }
+  ],
+  "postgresLower": [
+    {
+      "result": "nguyỄn vĂn sinh"
+    }
+  ]
+}

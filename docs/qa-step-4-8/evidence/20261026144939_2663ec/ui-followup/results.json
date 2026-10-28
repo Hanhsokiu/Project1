@@ -1,0 +1,44 @@
+{
+  "startedAt": "2026-10-26T17:38:23.535Z",
+  "cases": [
+    {
+      "name": "student-forbidden-stable",
+      "url": "http://127.0.0.1:5173/forbidden",
+      "body": "KHOA CNTT – UTC\nGPMS Portal\nKhông gian làm việc\nKhoa Công nghệ thông tin\n\nKHÔNG GIAN LÀM VIỆC\n\nTổng quan\nThông báo\n\nĐĂNG KÝ & ĐỀ CƯƠNG\n\nĐăng ký nguyện vọng\nKết quả phân công\nĐề tài đồ án\nSoạn đề cương\nHồ sơ đề tài\n\nBÁO CÁO BƯỚC 1–3\n\nBiểu mẫu & xuất dữ liệu\n\nXÉT DUYỆT & HƯỚNG DẪN\n\nXét duyệt đề cương\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhật ký hướng dẫn\nThông báo hướng dẫn\nXác nhận bảo vệ\nBáo cáo cuối kỳ\nvA\nSinh viên A\nSinh viên\nUTC GPMS Portal\nTrang không tồn tại\nSTEP3-1793022429323 · Chính quy\nvA\nSinh viên A\nSinh viên\n403 · Không đủ quyền\n\nVai trò hiện tại chưa được cấp quyền truy cập chức năng này.\n\nVề tổng quan",
+      "screenshot": "student-forbidden-stable.png"
+    },
+    {
+      "name": "back-to-tasks",
+      "url": "http://127.0.0.1:5173/guidance/tasks?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nKế hoạch & nhiệm vụ hướng dẫn\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhiệm vụ & tiến độ hướng dẫn\n\nXem trong phạm vi được cấp; Khoa tổng hợp theo đợt, GVHD và SV xem hồ sơ của mình.\n\nMở kế hoạch để giao nhiệm vụ →\nĐợt\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nTuần / mốc\nTất cả mốc\nTrạng thái\nTất cả trạng thái\nChưa bắt đầu\nĐang thực hiện\nĐã nộp\nCần làm lại\nĐã hoàn thành\nĐã hủy\nChỉ nhiệm vụ quá hạn\n\n0 nhiệm vụ · 0 quá hạn trong bộ lọc · Trang 1/1\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nNghĩa vụ báo cáo tuần\n\nHiển thị theo lịch và danh sách áp dụng, kể cả chưa có nhiệm vụ. Tạo task hoặc ghi tiến độ không được coi là đã nộp báo cáo hay hoàn thành.\n\nChưa cấu hình đầy đủ nghĩa vụ tuần. Không thể kết luận không thiếu báo cáo.\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "back-to-tasks.png"
+    },
+    {
+      "name": "downstream-404-stable",
+      "url": "http://127.0.0.1:5173/defense/committee",
+      "body": "KHOA CNTT – UTC\nGPMS Portal\nKhông gian làm việc\nKhoa Công nghệ thông tin\n\nKHÔNG GIAN LÀM VIỆC\n\nTổng quan\nThông báo\n\nĐĂNG KÝ & ĐỀ CƯƠNG\n\nĐăng ký nguyện vọng\nKết quả phân công\nĐề tài đồ án\nSoạn đề cương\nHồ sơ đề tài\n\nBÁO CÁO BƯỚC 1–3\n\nBiểu mẫu & xuất dữ liệu\n\nXÉT DUYỆT & HƯỚNG DẪN\n\nXét duyệt đề cương\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhật ký hướng dẫn\nThông báo hướng dẫn\nXác nhận bảo vệ\nBáo cáo cuối kỳ\nvA\nSinh viên A\nSinh viên\nUTC GPMS Portal\nTrang không tồn tại\nSTEP3-1793022429323 · Chính quy\nvA\nSinh viên A\nSinh viên\n404 · Không tìm thấy trang\n\nĐường dẫn không tồn tại. Chọn một chức năng trong điều hướng để tiếp tục.\n\nVề tổng quan",
+      "screenshot": "downstream-404-stable.png"
+    },
+    {
+      "name": "refresh-tasks",
+      "url": "http://127.0.0.1:5173/guidance/tasks?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nKế hoạch & nhiệm vụ hướng dẫn\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhiệm vụ & tiến độ hướng dẫn\n\nXem trong phạm vi được cấp; Khoa tổng hợp theo đợt, GVHD và SV xem hồ sơ của mình.\n\nMở kế hoạch để giao nhiệm vụ →\nĐợt\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nTuần / mốc\nTất cả mốc\nTrạng thái\nTất cả trạng thái\nChưa bắt đầu\nĐang thực hiện\nĐã nộp\nCần làm lại\nĐã hoàn thành\nĐã hủy\nChỉ nhiệm vụ quá hạn\n\n0 nhiệm vụ · 0 quá hạn trong bộ lọc · Trang 1/1\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nNghĩa vụ báo cáo tuần\n\nHiển thị theo lịch và danh sách áp dụng, kể cả chưa có nhiệm vụ. Tạo task hoặc ghi tiến độ không được coi là đã nộp báo cáo hay hoàn thành.\n\nChưa cấu hình đầy đủ nghĩa vụ tuần. Không thể kết luận không thiếu báo cáo.\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "refresh-tasks.png"
+    },
+    {
+      "name": "expired-session-after-10s",
+      "url": "http://127.0.0.1:5173/topic/proposal",
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nĐề cương & phiên bản\nĐề cương & phiên bản\n\nSV và GVHD hiện hành chỉnh sửa hồ sơ trong quyền của mình. Khoa và reviewer chỉ đọc theo phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nTìm đề cương\n\nToken không hợp lệ hoặc đã hết hạn\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "expired-session-after-10s.png"
+    },
+    {
+      "name": "expired-session-recovery-controls",
+      "loginLinks": 0,
+      "buttons": [
+        ""
+      ],
+      "sessionCleared": true
+    }
+  ],
+  "finishedAt": "2026-10-26T17:38:38.094Z"
+}

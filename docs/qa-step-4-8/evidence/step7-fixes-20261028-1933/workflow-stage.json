@@ -1,0 +1,311 @@
+{
+  "reviewIds": {
+    "p-student": "f3e52446-533e-4ac9-81eb-9e39e9f4a839",
+    "p-student2": "1403532c-a50e-45f1-9148-834cccf18ad4",
+    "p-page-01": "29099358-49e7-4acb-8252-950cb6a0a78d"
+  },
+  "primary": {
+    "proposalId": "p-student",
+    "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+    "proposalStatus": "APPROVED",
+    "proposalRevision": 4,
+    "submittedVersionId": "v1-student",
+    "submittedVersionNumber": 1,
+    "state": "RECEIVED",
+    "revision": 3,
+    "readiness": [
+      "DOSSIER_LOCKED"
+    ],
+    "previewSnapshot": null,
+    "previewVersionId": "v1-student",
+    "finalizations": [
+      {
+        "id": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+        "sequence": 1,
+        "versionNumber": 1,
+        "finalizedAt": "2026-10-28T12:45:05.316Z",
+        "supersededAt": null,
+        "templateVersion": "project1-docx-individual-v1",
+        "snapshot": {
+          "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+          "advisor": {
+            "id": "advisor",
+            "name": "Trần Văn Hướng Dẫn",
+            "email": "advisor@example.invalid",
+            "phone": "0987654321",
+            "department": "Bộ môn kiểm thử tổng hợp"
+          },
+          "content": {
+            "scope": "Phạm vi hệ thống quản lý đồ án",
+            "tools": "NestJS, Prisma, React và PostgreSQL",
+            "endsAt": "2026-11-04T12:44:14.581Z",
+            "schedule": [
+              {
+                "label": "Phân tích và kiểm thử",
+                "endsAt": "2026-11-04T12:44:14.581Z",
+                "startsAt": "2026-10-27T12:44:14.581Z",
+                "deliverables": "Báo cáo PDF và source ZIP"
+              }
+            ],
+            "startsAt": "2026-10-27T12:44:14.581Z",
+            "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+            "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+            "schemaVersion": 1,
+            "expectedResults": "Phần mềm và báo cáo tiến độ"
+          },
+          "student": {
+            "id": "student",
+            "code": "QA-student",
+            "name": "Nguyễn Văn Sinh",
+            "email": "student@example.invalid",
+            "phone": "0912345678",
+            "cohort": "K63",
+            "className": "Công nghệ thông tin K63",
+            "majorName": "Khoa học máy tính",
+            "trainingSystem": "Đại học — dữ liệu kiểm thử"
+          },
+          "termName": "Đợt kiểm thử qa-t1",
+          "assignmentId": "00d89501-2924-4433-afd1-53bf46ee4089",
+          "schemaVersion": 1,
+          "topicRevision": 0,
+          "assignmentRevision": 0,
+          "academicProfileRevision": 0
+        },
+        "canDownload": true,
+        "receipt": {
+          "id": "b17324ea-f0f5-49f9-a61c-dbf55d69b830",
+          "finalizationId": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+          "receivedAt": "2026-10-28T12:45:08.193Z",
+          "receivedByUserId": "faculty",
+          "note": "ĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐ"
+        }
+      }
+    ],
+    "allowedActions": [
+      "download"
+    ],
+    "currentFinalization": {
+      "id": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+      "approvedVersionId": "v1-student",
+      "versionNumber": 1,
+      "finalizedAt": "2026-10-28T12:45:05.316Z",
+      "finalizedByUserId": "faculty",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdfGeneratedAt": "2026-10-28T12:45:07.310Z",
+      "pdfChecksum": "7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462",
+      "snapshot": {
+        "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+        "advisor": {
+          "id": "advisor",
+          "name": "Trần Văn Hướng Dẫn",
+          "email": "advisor@example.invalid",
+          "phone": "0987654321",
+          "department": "Bộ môn kiểm thử tổng hợp"
+        },
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T12:44:14.581Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T12:44:14.581Z",
+              "startsAt": "2026-10-27T12:44:14.581Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T12:44:14.581Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "student": {
+          "id": "student",
+          "code": "QA-student",
+          "name": "Nguyễn Văn Sinh",
+          "email": "student@example.invalid",
+          "phone": "0912345678",
+          "cohort": "K63",
+          "className": "Công nghệ thông tin K63",
+          "majorName": "Khoa học máy tính",
+          "trainingSystem": "Đại học — dữ liệu kiểm thử"
+        },
+        "termName": "Đợt kiểm thử qa-t1",
+        "assignmentId": "00d89501-2924-4433-afd1-53bf46ee4089",
+        "schemaVersion": 1,
+        "topicRevision": 0,
+        "assignmentRevision": 0,
+        "academicProfileRevision": 0
+      }
+    },
+    "receipt": {
+      "id": "b17324ea-f0f5-49f9-a61c-dbf55d69b830",
+      "finalizationId": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+      "receivedAt": "2026-10-28T12:45:08.193Z",
+      "receivedByUserId": "faculty",
+      "note": "ĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐ"
+    },
+    "history": [
+      {
+        "id": "7bbe033b-8e91-4f6f-8f90-9ecfded78058",
+        "action": "PHYSICAL_RECEIVED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:45:08.198Z"
+      },
+      {
+        "id": "f19e6267-972c-434b-a03d-712d08af4913",
+        "action": "PDF_GENERATED",
+        "actorId": "student",
+        "createdAt": "2026-10-28T12:45:07.331Z"
+      },
+      {
+        "id": "65971b06-9da4-4640-afe7-b1ad05ac92e7",
+        "action": "FINALIZED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:45:05.322Z"
+      }
+    ]
+  },
+  "secondary": {
+    "proposalId": "p-student2",
+    "title": "Hệ thống quản lý đồ án — Sinh viên khác",
+    "proposalStatus": "APPROVED",
+    "proposalRevision": 4,
+    "submittedVersionId": "v1-student2",
+    "submittedVersionNumber": 1,
+    "state": "FINALIZED",
+    "revision": 1,
+    "readiness": [
+      "DOSSIER_LOCKED"
+    ],
+    "previewSnapshot": null,
+    "previewVersionId": "v1-student2",
+    "finalizations": [
+      {
+        "id": "a481371f-9415-48f6-b472-2e458be94b4f",
+        "sequence": 1,
+        "versionNumber": 1,
+        "finalizedAt": "2026-10-28T12:45:05.607Z",
+        "supersededAt": null,
+        "templateVersion": "project1-docx-individual-v1",
+        "snapshot": {
+          "title": "Hệ thống quản lý đồ án — Sinh viên khác",
+          "advisor": {
+            "id": "advisor",
+            "name": "Trần Văn Hướng Dẫn",
+            "email": "advisor@example.invalid",
+            "phone": "0987654321",
+            "department": "Bộ môn kiểm thử tổng hợp"
+          },
+          "content": {
+            "scope": "Phạm vi hệ thống quản lý đồ án",
+            "tools": "NestJS, Prisma, React và PostgreSQL",
+            "endsAt": "2026-11-04T12:44:14.581Z",
+            "schedule": [
+              {
+                "label": "Phân tích và kiểm thử",
+                "endsAt": "2026-11-04T12:44:14.581Z",
+                "startsAt": "2026-10-27T12:44:14.581Z",
+                "deliverables": "Báo cáo PDF và source ZIP"
+              }
+            ],
+            "startsAt": "2026-10-27T12:44:14.581Z",
+            "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+            "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+            "schemaVersion": 1,
+            "expectedResults": "Phần mềm và báo cáo tiến độ"
+          },
+          "student": {
+            "id": "student2",
+            "code": "QA-student2",
+            "name": "Sinh viên khác",
+            "email": "student2@example.invalid",
+            "phone": "0912345678",
+            "cohort": "K63",
+            "className": "Công nghệ thông tin K63",
+            "majorName": "Khoa học máy tính",
+            "trainingSystem": "Đại học — dữ liệu kiểm thử"
+          },
+          "termName": "Đợt kiểm thử qa-t1",
+          "assignmentId": "83f980ae-a207-4264-b2e1-a047a4c72dc9",
+          "schemaVersion": 1,
+          "topicRevision": 0,
+          "assignmentRevision": 0,
+          "academicProfileRevision": 0
+        },
+        "canDownload": false,
+        "receipt": null
+      }
+    ],
+    "allowedActions": [
+      "download",
+      "receive"
+    ],
+    "currentFinalization": {
+      "id": "a481371f-9415-48f6-b472-2e458be94b4f",
+      "approvedVersionId": "v1-student2",
+      "versionNumber": 1,
+      "finalizedAt": "2026-10-28T12:45:05.607Z",
+      "finalizedByUserId": "faculty",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdfGeneratedAt": null,
+      "pdfChecksum": null,
+      "snapshot": {
+        "title": "Hệ thống quản lý đồ án — Sinh viên khác",
+        "advisor": {
+          "id": "advisor",
+          "name": "Trần Văn Hướng Dẫn",
+          "email": "advisor@example.invalid",
+          "phone": "0987654321",
+          "department": "Bộ môn kiểm thử tổng hợp"
+        },
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T12:44:14.581Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T12:44:14.581Z",
+              "startsAt": "2026-10-27T12:44:14.581Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T12:44:14.581Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "student": {
+          "id": "student2",
+          "code": "QA-student2",
+          "name": "Sinh viên khác",
+          "email": "student2@example.invalid",
+          "phone": "0912345678",
+          "cohort": "K63",
+          "className": "Công nghệ thông tin K63",
+          "majorName": "Khoa học máy tính",
+          "trainingSystem": "Đại học — dữ liệu kiểm thử"
+        },
+        "termName": "Đợt kiểm thử qa-t1",
+        "assignmentId": "83f980ae-a207-4264-b2e1-a047a4c72dc9",
+        "schemaVersion": 1,
+        "topicRevision": 0,
+        "assignmentRevision": 0,
+        "academicProfileRevision": 0
+      }
+    },
+    "receipt": null,
+    "history": [
+      {
+        "id": "33946e37-4133-47e0-81af-db443506e0ea",
+        "action": "FINALIZED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:45:05.611Z"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-28T12:45:09.399Z"
+}

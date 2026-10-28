@@ -1,0 +1,110 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "Producer inputs and sealed versions remain bound",
+      "result": "PASS",
+      "detail": {
+        "coreHash": "308d2bb07922620ee37a31ae388fbc1c65248ee2af042da0c7a0db43a51aa21e"
+      }
+    },
+    {
+      "name": "Round states and immutable history",
+      "result": "PASS",
+      "detail": {
+        "rounds": 4,
+        "activeReviewId": "f89bb3fd-3f72-4a7d-a5b7-9e3181572a74"
+      }
+    },
+    {
+      "name": "Canonical decisions and proposal statuses",
+      "result": "PASS",
+      "detail": {
+        "decisions": 2
+      }
+    },
+    {
+      "name": "Rejected whitespace never becomes a comment",
+      "result": "PASS",
+      "detail": {
+        "totalComments": 5,
+        "validRegressionComments": 2
+      }
+    },
+    {
+      "name": "Audit equals accepted writes only",
+      "result": "PASS",
+      "detail": {
+        "ASSIGN": 4,
+        "START": 4,
+        "COMMENT": 5,
+        "DECISION": 2
+      }
+    },
+    {
+      "name": "Notification recipients and one pending outbox per decision",
+      "result": "PASS",
+      "detail": {
+        "notifications": 4,
+        "outbox": 2,
+        "emailDelivery": "NOT TESTED"
+      }
+    },
+    {
+      "name": "No STEP6–8 data created",
+      "result": "PASS",
+      "detail": {
+        "thesisDossier": 0,
+        "dossierFinalization": 0,
+        "guidancePlan": 0,
+        "task": 0,
+        "progressReview": 0,
+        "finalResult": 0
+      }
+    },
+    {
+      "name": "All real-browser assertions passed",
+      "result": "PASS",
+      "detail": [
+        {
+          "name": "workflow",
+          "passed": 18,
+          "failed": 0,
+          "pageErrors": 0,
+          "failedRequests": 0,
+          "consoleErrors": 13
+        },
+        {
+          "name": "fixes",
+          "passed": 10,
+          "failed": 0,
+          "pageErrors": 0,
+          "failedRequests": 0,
+          "consoleErrors": 14
+        }
+      ]
+    },
+    {
+      "name": "Fresh API regression passed",
+      "result": "PASS",
+      "detail": {
+        "groups": 28,
+        "postgres": "170011"
+      }
+    }
+  ],
+  "events": {
+    "pageErrors": 0,
+    "failedRequests": 0,
+    "consoleErrors": 27,
+    "warnings": 20,
+    "httpGroups": {
+      "GET /api/assignments/term/qa-t2/plan 403": 6,
+      "GET /api/assignments/term/qa-t1/plan 403": 6,
+      "GET /api/assignments/term/qa-t2/results 400": 6,
+      "GET /api/assignments/term/qa-t1/results 400": 6,
+      "POST /api/proposal-reviews/:id/comments 409": 1,
+      "GET /api/registrations/term/qa-t1/me 403": 2
+    }
+  }
+}

@@ -18,6 +18,7 @@ import { ProposalVersionController } from "./proposal-versions/proposal-version.
 import { ProposalVersionRepository } from "./proposal-versions/proposal-version.repository";
 import { ProposalVersionValidator } from "./proposal-versions/proposal-version.validator";
 import { ProposalVersionService } from "./proposal-versions/proposal-version.service";
+import { ProposalLifecycleService } from "./proposal-versions/proposal-lifecycle.service";
 
 import { TopicRepository } from "./repository/topic.repository";
 import { ProposalPdfService } from "./service/proposal-pdf.service";
@@ -46,6 +47,7 @@ import { TermModule } from "../term/term.module";
     ProposalVersionRepository,
     ProposalVersionValidator,
     ProposalVersionService,
+    ProposalLifecycleService,
     DossierRepository,
     DossierService,
     DossierValidator,

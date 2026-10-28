@@ -1,0 +1,177 @@
+{
+  "method": "actual PDF.js canvas rendering in real Edge; file viewer only, no application API mocked",
+  "files": {
+    "official": {
+      "path": "student-official.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 79
+        }
+      ],
+      "a4": true,
+      "overflow": 0,
+      "allFourSignatureLabels": true,
+      "annotationCount": 0,
+      "textCharacters": 1186,
+      "sourceTemplateLabels": {
+        "studentPhone": false,
+        "email": false,
+        "cohort": false
+      }
+    },
+    "mcp": {
+      "path": "mcp-student2-official.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 79
+        }
+      ],
+      "a4": true,
+      "overflow": 0,
+      "allFourSignatureLabels": true,
+      "annotationCount": 0,
+      "textCharacters": 1185,
+      "sourceTemplateLabels": {
+        "studentPhone": false,
+        "email": false,
+        "cohort": false
+      }
+    },
+    "stress": {
+      "path": "api/generated/step7-long-sample.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 81
+        },
+        {
+          "page": 2,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 83
+        },
+        {
+          "page": 3,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 83
+        },
+        {
+          "page": 4,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 83
+        },
+        {
+          "page": 5,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 83
+        },
+        {
+          "page": 6,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 89
+        },
+        {
+          "page": 7,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 123
+        },
+        {
+          "page": 8,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 115
+        },
+        {
+          "page": 9,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 151
+        },
+        {
+          "page": 10,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 145
+        },
+        {
+          "page": 11,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 145
+        },
+        {
+          "page": 12,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 147
+        },
+        {
+          "page": 13,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 143
+        },
+        {
+          "page": 14,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 149
+        },
+        {
+          "page": 15,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 141
+        },
+        {
+          "page": 16,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 57
+        }
+      ],
+      "a4": true,
+      "overflow": 0,
+      "allFourSignatureLabels": true,
+      "annotationCount": 0,
+      "textCharacters": 39530,
+      "sourceTemplateLabels": {
+        "studentPhone": false,
+        "email": false,
+        "cohort": false
+      }
+    }
+  },
+  "events": []
+}

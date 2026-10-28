@@ -1,0 +1,134 @@
+{
+  "capturedAt": "2026-10-28T12:24:43.010Z",
+  "counts": {
+    "proposal": 24,
+    "proposalVersion": 25,
+    "thesisDossier": 3,
+    "dossierWorkflow": 2,
+    "dossierFinalization": 3,
+    "dossierReceipt": 2,
+    "dossierPdfContent": 3,
+    "guidancePlan": 2,
+    "task": 0,
+    "progressReview": 0,
+    "finalResult": 0
+  },
+  "files": [
+    {
+      "finalizationId": "08ed514b-a877-43b7-a1d9-f3624dfa023a",
+      "proposalId": "p-student",
+      "sequence": 1,
+      "approvedVersionId": "v1-student",
+      "finalizedByUserId": "faculty",
+      "supersededAt": "2026-10-28T12:13:40.864Z",
+      "contentHash": "b266ddbd8bcc9869be088bee544d14d2ab1da323d3eda3790c3fac785dd6e7f1",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdf": {
+        "assetId": "4e759e33-6962-4e75-9544-c612bf4fbdb9",
+        "checksum": "ae86f894145fe529fc0383a0518539a7374d5a0e352bcd204a76efeda9bdc2cb",
+        "size": 29318,
+        "bytesMatch": true
+      },
+      "receipt": {
+        "id": "ca533883-4150-4feb-96b3-3f60f2a00c63",
+        "receivedByUserId": "faculty",
+        "receivedAt": "2026-10-28T12:06:18.866Z",
+        "noteCharacters": 2000
+      }
+    },
+    {
+      "finalizationId": "76301022-91cc-46bf-b6d4-26faee75a9f4",
+      "proposalId": "p-student",
+      "sequence": 2,
+      "approvedVersionId": "0bcf931a-6768-4381-a405-60ce4b820abf",
+      "finalizedByUserId": "faculty",
+      "supersededAt": null,
+      "contentHash": "c029b8b35b2d4224f7adf18c4348ea28c7d7cbc62aee8305809007920e38bc60",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdf": {
+        "assetId": "906e7ae1-e89c-4955-b4ad-e465b43f7035",
+        "checksum": "65f16352fc69ddd2354c7745c21176eaa99553cfffeb9a2bd56a34e8aed2bf0c",
+        "size": 29500,
+        "bytesMatch": true
+      },
+      "receipt": null
+    },
+    {
+      "finalizationId": "cf2e5906-3cb4-4236-add2-050f1112dc7f",
+      "proposalId": "p-student2",
+      "sequence": 1,
+      "approvedVersionId": "v1-student2",
+      "finalizedByUserId": "faculty",
+      "supersededAt": null,
+      "contentHash": "d988b10ec303bc796c06494b49b88d6ea6bce197308deab7f0bd90405c5dc192",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdf": {
+        "assetId": "d0120d56-7250-4d5a-8bcf-a91ef4e820f5",
+        "checksum": "3f21511b43c0f88bf5caa050b9e5447afc11e72a661c506d01b941d10690482e",
+        "size": 29062,
+        "bytesMatch": true
+      },
+      "receipt": {
+        "id": "3e20826f-07c5-489c-9374-5ae5e66d3116",
+        "receivedByUserId": "faculty",
+        "receivedAt": "2026-10-28T12:23:03.488Z",
+        "noteCharacters": 0
+      }
+    }
+  ],
+  "dossierWorkflows": [
+    {
+      "id": "c293ea31-7e85-4dcd-b844-cffb26d7878d",
+      "createdAt": "2026-10-28T12:06:15.254Z",
+      "updatedAt": "2026-10-28T12:13:42.261Z",
+      "state": "FINALIZED",
+      "revision": 6,
+      "dossierId": "10043056-60ea-49fe-b9c2-e3f7435507f0",
+      "currentFinalizationId": "76301022-91cc-46bf-b6d4-26faee75a9f4"
+    },
+    {
+      "id": "31b28dab-97f4-42ac-9c95-d85e03f71ed4",
+      "createdAt": "2026-10-28T12:06:15.540Z",
+      "updatedAt": "2026-10-28T12:23:03.491Z",
+      "state": "RECEIVED",
+      "revision": 3,
+      "dossierId": "1ee053ac-1367-4a34-b142-163cc1c3939a",
+      "currentFinalizationId": "cf2e5906-3cb4-4236-add2-050f1112dc7f"
+    }
+  ],
+  "guidancePlans": [
+    {
+      "id": "6a569f15-e36a-48a1-bd7f-750497ddd3c4",
+      "createdAt": "2026-10-28T12:13:40.678Z",
+      "updatedAt": "2026-10-28T12:13:40.678Z",
+      "state": "ACTIVE",
+      "assignmentRevision": 0,
+      "revision": 0,
+      "planId": "d3c7209d-5c61-40cf-a60e-437a9f418357",
+      "proposalId": "p-student2",
+      "finalizationId": "cf2e5906-3cb4-4236-add2-050f1112dc7f",
+      "assignmentId": "2cb28c35-6cc6-4a2b-b758-38c5edf510f5"
+    },
+    {
+      "id": "d1fd3a0d-aff9-448a-ac89-e51c20f4469d",
+      "createdAt": "2026-10-28T12:13:40.552Z",
+      "updatedAt": "2026-10-28T12:13:40.896Z",
+      "state": "PAUSED",
+      "assignmentRevision": 0,
+      "revision": 1,
+      "planId": "144148e7-54c7-4d13-ae2a-4e130f633735",
+      "proposalId": "p-student",
+      "finalizationId": "08ed514b-a877-43b7-a1d9-f3624dfa023a",
+      "assignmentId": "3874be59-c268-4d8b-a367-a10e0cda58c6"
+    }
+  ],
+  "legacyFixture": {
+    "id": "cbe93aff-f74c-4e40-8f87-173d2aab9010",
+    "proposalId": "p-page-02",
+    "status": "APPROVED",
+    "filePath": "qa-legacy-missing-snapshot.pdf",
+    "submittedAt": null,
+    "createdAt": "2026-10-28T12:23:03.404Z",
+    "updatedAt": "2026-10-28T12:23:03.404Z"
+  }
+}

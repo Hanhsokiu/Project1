@@ -1,0 +1,123 @@
+{
+  "startedAt": "2026-10-27T14:04:31.961Z",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search="
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=Gi%E1%BA%A3ng+vi%C3%AAn+Z"
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=",
+      "body": {
+        "success": true,
+        "data": {
+          "term": {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          "canManage": true,
+          "departments": [
+            {
+              "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "name": "Công nghệ phần mềm"
+            }
+          ],
+          "lecturers": {
+            "data": [
+              {
+                "id": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+                "fullName": "Giảng viên T",
+                "lecturerCode": "S3L17930224293233",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "199ee947-055e-4560-81b3-74d15625c2ad",
+                "fullName": "Giảng viên X",
+                "lecturerCode": "S3L17930224293230",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "932282fd-756b-407d-a662-12c946059077",
+                "fullName": "Giảng viên Y",
+                "lecturerCode": "S3L17930224293231",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "0bf21346-ca5e-441f-b934-e02567d2b288",
+                "fullName": "Giảng viên Z",
+                "lecturerCode": "S3L17930224293232",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              }
+            ],
+            "total": 4,
+            "page": 1,
+            "limit": 20,
+            "totalPages": 1
+          }
+        },
+        "timestamp": "2026-10-27T14:04:34.017Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=Gi%E1%BA%A3ng+vi%C3%AAn+Z",
+      "body": {
+        "success": true,
+        "data": {
+          "term": {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          "canManage": true,
+          "departments": [
+            {
+              "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "name": "Công nghệ phần mềm"
+            }
+          ],
+          "lecturers": {
+            "data": [
+              {
+                "id": "0bf21346-ca5e-441f-b934-e02567d2b288",
+                "fullName": "Giảng viên Z",
+                "lecturerCode": "S3L17930224293232",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              }
+            ],
+            "total": 1,
+            "page": 1,
+            "limit": 20,
+            "totalPages": 1
+          }
+        },
+        "timestamp": "2026-10-27T14:04:39.074Z"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "observations": {
+    "before": {
+      "selectedLabel": "Giảng viên T ×",
+      "chips": 1
+    },
+    "after": {
+      "selectedLabel": "93355433-df35-48b3-b85a-cb1ddf0545e4 ×",
+      "chips": 1,
+      "candidateLabels": [
+        "Giảng viên ZS3L17930224293232"
+      ]
+    }
+  },
+  "finishedAt": "2026-10-27T14:04:43.347Z"
+}

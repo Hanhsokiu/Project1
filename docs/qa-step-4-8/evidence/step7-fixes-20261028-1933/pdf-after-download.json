@@ -1,0 +1,143 @@
+{
+  "proposalId": "p-student",
+  "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+  "proposalStatus": "APPROVED",
+  "proposalRevision": 4,
+  "submittedVersionId": "v1-student",
+  "submittedVersionNumber": 1,
+  "state": "FINALIZED",
+  "revision": 2,
+  "readiness": [],
+  "previewSnapshot": null,
+  "previewVersionId": "v1-student",
+  "finalizations": [
+    {
+      "id": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+      "sequence": 1,
+      "versionNumber": 1,
+      "finalizedAt": "2026-10-28T12:45:05.316Z",
+      "supersededAt": null,
+      "templateVersion": "project1-docx-individual-v1",
+      "snapshot": {
+        "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+        "advisor": {
+          "id": "advisor",
+          "name": "Trần Văn Hướng Dẫn",
+          "email": "advisor@example.invalid",
+          "phone": "0987654321",
+          "department": "Bộ môn kiểm thử tổng hợp"
+        },
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T12:44:14.581Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T12:44:14.581Z",
+              "startsAt": "2026-10-27T12:44:14.581Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T12:44:14.581Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "student": {
+          "id": "student",
+          "code": "QA-student",
+          "name": "Nguyễn Văn Sinh",
+          "email": "student@example.invalid",
+          "phone": "0912345678",
+          "cohort": "K63",
+          "className": "Công nghệ thông tin K63",
+          "majorName": "Khoa học máy tính",
+          "trainingSystem": "Đại học — dữ liệu kiểm thử"
+        },
+        "termName": "Đợt kiểm thử qa-t1",
+        "assignmentId": "00d89501-2924-4433-afd1-53bf46ee4089",
+        "schemaVersion": 1,
+        "topicRevision": 0,
+        "assignmentRevision": 0,
+        "academicProfileRevision": 0
+      },
+      "canDownload": true,
+      "receipt": null
+    }
+  ],
+  "allowedActions": [
+    "download"
+  ],
+  "currentFinalization": {
+    "id": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+    "approvedVersionId": "v1-student",
+    "versionNumber": 1,
+    "finalizedAt": "2026-10-28T12:45:05.316Z",
+    "finalizedByUserId": "faculty",
+    "templateVersion": "project1-docx-individual-v1",
+    "pdfGeneratedAt": "2026-10-28T12:45:07.310Z",
+    "pdfChecksum": "7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462",
+    "snapshot": {
+      "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+      "advisor": {
+        "id": "advisor",
+        "name": "Trần Văn Hướng Dẫn",
+        "email": "advisor@example.invalid",
+        "phone": "0987654321",
+        "department": "Bộ môn kiểm thử tổng hợp"
+      },
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T12:44:14.581Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T12:44:14.581Z",
+            "startsAt": "2026-10-27T12:44:14.581Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T12:44:14.581Z",
+        "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "student": {
+        "id": "student",
+        "code": "QA-student",
+        "name": "Nguyễn Văn Sinh",
+        "email": "student@example.invalid",
+        "phone": "0912345678",
+        "cohort": "K63",
+        "className": "Công nghệ thông tin K63",
+        "majorName": "Khoa học máy tính",
+        "trainingSystem": "Đại học — dữ liệu kiểm thử"
+      },
+      "termName": "Đợt kiểm thử qa-t1",
+      "assignmentId": "00d89501-2924-4433-afd1-53bf46ee4089",
+      "schemaVersion": 1,
+      "topicRevision": 0,
+      "assignmentRevision": 0,
+      "academicProfileRevision": 0
+    }
+  },
+  "receipt": null,
+  "history": [
+    {
+      "id": "f19e6267-972c-434b-a03d-712d08af4913",
+      "action": "PDF_GENERATED",
+      "actorId": "student",
+      "createdAt": "2026-10-28T12:45:07.331Z"
+    },
+    {
+      "id": "65971b06-9da4-4640-afe7-b1ad05ac92e7",
+      "action": "FINALIZED",
+      "actorId": "faculty",
+      "createdAt": "2026-10-28T12:45:05.322Z"
+    }
+  ]
+}

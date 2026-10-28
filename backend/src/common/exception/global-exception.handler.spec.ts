@@ -46,6 +46,16 @@ function render(exception: unknown) {
 afterEach(() => vi.restoreAllMocks());
 
 describe("GlobalExceptionHandler public business error contract", () => {
+  it("maps body-parser size errors to a redacted 413, not an internal error", () => {
+    const error = Object.assign(new Error("private parser details"), {
+      type: "entity.too.large",
+      status: 413,
+    });
+    const result = render(error);
+    expect(result.status).toBe(413);
+    expect(result.body.error.code).toBe("PAYLOAD_TOO_LARGE");
+    expect(JSON.stringify(result.body)).not.toContain("private parser details");
+  });
   it("normalizes catalog fieldErrors and preserves valid existing field issues", () => {
     const { status, body } = render(
       new BadRequestException({

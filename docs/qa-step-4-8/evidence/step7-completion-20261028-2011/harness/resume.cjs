@@ -1,0 +1,22 @@
+// QA services only: resume the existing guarded database, without seeding/migration.
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),crypto=require('node:crypto'),cp=require('node:child_process'),{createRequire}=require('node:module'),assert=require('node:assert/strict');
+const root=path.resolve(__dirname,'../../../../..'),out=path.dirname(__dirname),cache=path.join(root,'.cache/step7-fixes-20261028-1933');
+const req=createRequire(path.join(root,'backend/package.json')),front=createRequire(path.join(root,'frontend/package.json'));
+const runtime=JSON.parse(fs.readFileSync(path.join(cache,'runtime.json'),'utf8'));
+assert(/^btl_pr2b_step7fix_.*_live$/.test(runtime.database));const url=new URL(runtime.url);assert.equal(url.hostname,'127.0.0.1');assert.equal(url.pathname,'/'+runtime.database);assert(!fs.existsSync(path.join(cache,'stop')));
+Object.assign(process.env,{DATABASE_URL:runtime.url,DIRECT_URL:runtime.url,PR2B_TEST_URL:runtime.url,PORT:'50585',NODE_ENV:'test',API_PREFIX:'api',JWT_SECRET:crypto.randomBytes(32).toString('hex'),JWT_REFRESH_SECRET:crypto.randomBytes(32).toString('hex'),EMAIL_WORKER_ENABLED:'false',FRONTEND_URL:'http://127.0.0.1:50187',STORAGE_LOCAL_PATH:path.join(cache,'uploads')});
+(async()=>{console.log('QA resume: checking existing DB');const {connect}=require('./private-db.cjs'),db=await connect();let app,vite;try{
+ const count=await db.proposalVersion.count();assert(count>=24,'Refuse resuming a different/empty fixture');
+ console.log('QA resume: loading Nest modules');const {NestFactory}=req('@nestjs/core'),{ValidationPipe}=req('@nestjs/common'),{AppModule}=req('./dist/app.module'),{GlobalExceptionHandler}=req('./dist/common/exception/global-exception.handler'),{configureBodyParsers}=req('./dist/common/http/body-parsers');console.log('QA resume: creating Nest application');
+ app=await NestFactory.create(AppModule,{logger:['error','warn','log'],abortOnError:false,bodyParser:false});configureBodyParsers(app,'api');app.setGlobalPrefix('api');app.enableCors({origin:'http://127.0.0.1:50187',credentials:true});app.useGlobalPipes(new ValidationPipe({whitelist:true,transform:true}));app.useGlobalFilters(new GlobalExceptionHandler());
+ const traffic=[];app.use((request,response,next)=>{response.on('finish',()=>{traffic.push({at:new Date().toISOString(),method:request.method,path:request.path,status:response.statusCode});fs.writeFileSync(path.join(out,'resumed-server-traffic.json'),JSON.stringify(traffic,null,2));});next();});
+ console.log('QA resume: listening on loopback');await app.listen(0,'127.0.0.1');const apiOrigin='http://127.0.0.1:'+app.getHttpServer().address().port;
+ const flags=Object.fromEntries(['AUTH','TERM','CATALOG','IMPORT','REGISTRATION','ASSIGNMENT','TOPIC','PROPOSAL'].map(n=>['VITE_'+n+'_API','true']));
+ const fd=fs.openSync(path.join(out,'resumed-vite.log'),'w');vite=cp.spawn(process.execPath,[path.join(path.dirname(front.resolve('vite/package.json')),'bin/vite.js'),'--host','127.0.0.1','--port','50187','--strictPort'],{cwd:path.join(root,'frontend'),env:{...process.env,...flags,VITE_API_URL:apiOrigin+'/api'},windowsHide:true,stdio:['ignore',fd,fd]});
+ let ok=false;for(let i=0;i<100;i++){assert(vite.exitCode===null,'Vite exited');try{if((await fetch('http://127.0.0.1:50187')).ok){ok=true;break}}catch{}await new Promise(r=>setTimeout(r,100));}assert(ok);
+ const previous=JSON.parse(fs.readFileSync(path.join(out,'live-ready.json'),'utf8'));fs.writeFileSync(path.join(out,'live-ready-original.json'),JSON.stringify(previous,null,2),{flag:'wx'});
+ fs.writeFileSync(path.join(out,'live-ready.json'),JSON.stringify({...previous,apiOrigin,api:apiOrigin+'/api',resumedAt:new Date().toISOString(),resumedWithoutSeeding:true,versionsAtResume:count},null,2));console.log(JSON.stringify({ready:true,frontend:previous.frontend,apiOrigin,existingPrivateDatabase:runtime.database,versions:count}));
+ await new Promise(resolve=>{const timer=setInterval(()=>{if(fs.existsSync(path.join(cache,'stop'))){clearInterval(timer);resolve()}},500);process.once('SIGINT',()=>{clearInterval(timer);resolve()})});
+ }finally{vite?.kill();if(app)await app.close();await db.$disconnect();fs.writeFileSync(path.join(out,'resumed-stopped.json'),JSON.stringify({at:new Date().toISOString(),databaseRetained:runtime.database}));}
+})().catch(e=>{console.error(String(e.message).replace(/postgres(?:ql)?:\/\/[^\s]+/gi,'[REDACTED DATABASE URL]'));process.exitCode=1;});

@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-10-26T17:58:33.493Z",
+  "reportsPresent": 16,
+  "missingReports": [],
+  "sourceFilesCompared": 416,
+  "changedSourceFiles": [],
+  "brokenLinks": [],
+  "sensitiveFiles": [],
+  "sensitiveScanScope": "Exact local test DB password and JWT-shaped tokens; not a claim of exhaustive secret scanning",
+  "sourceModifiedByAudit": false,
+  "result": "PASS"
+}

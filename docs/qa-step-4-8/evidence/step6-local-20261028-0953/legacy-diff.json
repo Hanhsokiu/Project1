@@ -1,0 +1,104 @@
+{
+  "diff": {
+    "fromVersionId": "v1-page-21",
+    "toVersionId": "qa-step6-legacy-2",
+    "changes": [
+      {
+        "path": "/content/a~1b~0c",
+        "before": null,
+        "after": 1,
+        "beforeExists": false,
+        "afterExists": true
+      },
+      {
+        "path": "/content/endsAt",
+        "before": "2026-11-04T02:51:53.477Z",
+        "after": null,
+        "beforeExists": true,
+        "afterExists": false
+      },
+      {
+        "path": "/content/expectedResults",
+        "before": "Phần mềm và báo cáo tiến độ",
+        "after": null,
+        "beforeExists": true,
+        "afterExists": false
+      },
+      {
+        "path": "/content/legacy",
+        "before": null,
+        "after": null,
+        "beforeExists": false,
+        "afterExists": true
+      },
+      {
+        "path": "/content/mainContents",
+        "before": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "after": null,
+        "beforeExists": true,
+        "afterExists": false
+      },
+      {
+        "path": "/content/note",
+        "before": null,
+        "after": "<script>window.__qaInjected=true</script>",
+        "beforeExists": false,
+        "afterExists": true
+      },
+      {
+        "path": "/content/objectives",
+        "before": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+        "after": null,
+        "beforeExists": true,
+        "afterExists": false
+      },
+      {
+        "path": "/content/schedule",
+        "before": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T02:51:53.477Z",
+            "startsAt": "2026-10-27T02:51:53.477Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "after": null,
+        "beforeExists": true,
+        "afterExists": false
+      },
+      {
+        "path": "/content/schemaVersion",
+        "before": 1,
+        "after": 0,
+        "beforeExists": true,
+        "afterExists": true
+      },
+      {
+        "path": "/content/scope",
+        "before": "Phạm vi hệ thống quản lý đồ án",
+        "after": null,
+        "beforeExists": true,
+        "afterExists": false
+      },
+      {
+        "path": "/content/startsAt",
+        "before": "2026-10-27T02:51:53.477Z",
+        "after": null,
+        "beforeExists": true,
+        "afterExists": false
+      },
+      {
+        "path": "/content/tools",
+        "before": "NestJS, Prisma, React và PostgreSQL",
+        "after": null,
+        "beforeExists": true,
+        "afterExists": false
+      }
+    ]
+  },
+  "equal": {
+    "fromVersionId": "qa-step6-legacy-2",
+    "toVersionId": "qa-step6-legacy-3",
+    "changes": []
+  }
+}

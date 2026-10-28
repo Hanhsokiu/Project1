@@ -13,12 +13,21 @@ import {
 } from "lucide-react";
 import { authService } from "../services/auth-service";
 import { useSession } from "../../../shared/hooks/use-demo";
+import { useApiSession } from "../../../shared/hooks/use-api-session";
+import type { Account } from "../../../shared/data/types";
 import { Button, Field, Modal, Notice } from "../../../shared/components/kit";
 export default function LoginPage() {
+  const user = useApiSession();
+  return AUTH_API ? <LoginForm user={user} /> : <DemoLoginPage />;
+}
+function DemoLoginPage() {
+  const { user } = useSession();
+  return <LoginForm user={user} />;
+}
+function LoginForm({ user }: { user?: Account }) {
   const navigate = useNavigate(),
     cache = useQueryClient(),
     location = useLocation();
-  const { user } = useSession();
   const [username, setUsername] = useState(""),
     [password, setPassword] = useState(""),
     [visible, setVisible] = useState(false),
@@ -58,7 +67,11 @@ export default function LoginPage() {
   if (user)
     return (
       <Navigate
-        to={user.mustChangePassword ? "/change-password" : "/"}
+        to={
+          user.mustChangePassword
+            ? "/change-password"
+            : location.state?.from || "/"
+        }
         replace
       />
     );
@@ -201,9 +214,7 @@ export default function LoginPage() {
             <div className="login-demo">
               <p>KHÔNG GIAN DEMO · BƯỚC 1–3</p>
               <div className="grid grid-cols-1 gap-2">
-                {[
-                  ["admin", "Quản trị viên"],
-                ].map(([id, label]) => (
+                {[["admin", "Quản trị viên"]].map(([id, label]) => (
                   <Button variant="secondary" key={id} onClick={() => demo(id)}>
                     {label}
                   </Button>

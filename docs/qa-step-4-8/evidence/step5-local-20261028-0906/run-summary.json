@@ -1,0 +1,147 @@
+{
+  "createdAt": "2026-10-28T02:18:41.832Z",
+  "gitHead": "unavailable in nested sandbox process",
+  "suites": [
+    "workflow",
+    "roles-ui",
+    "boundaries",
+    "reviewer-mobile",
+    "replay"
+  ],
+  "results": [
+    {
+      "suite": "workflow",
+      "passed": 18,
+      "failed": 0,
+      "pageErrors": 0,
+      "consoleErrors": 17,
+      "failedRequests": 0
+    },
+    {
+      "suite": "roles-ui",
+      "passed": 22,
+      "failed": 1,
+      "pageErrors": 0,
+      "consoleErrors": 72,
+      "failedRequests": 0
+    },
+    {
+      "suite": "boundaries",
+      "passed": 9,
+      "failed": 1,
+      "pageErrors": 0,
+      "consoleErrors": 8,
+      "failedRequests": 0
+    },
+    {
+      "suite": "reviewer-mobile",
+      "passed": 4,
+      "failed": 1,
+      "pageErrors": 0,
+      "consoleErrors": 12,
+      "failedRequests": 0
+    },
+    {
+      "suite": "replay",
+      "passed": 6,
+      "failed": 0,
+      "pageErrors": 0,
+      "consoleErrors": 4,
+      "failedRequests": 0
+    }
+  ],
+  "totalBrowserCheckpoints": 62,
+  "passedCheckpoints": 59,
+  "failedObservations": 3,
+  "distinctBugs": 2,
+  "events": {
+    "pageErrors": 0,
+    "consoleErrors": 113,
+    "consoleWarnings": 43,
+    "failedRequests": 0,
+    "httpErrorResponses": 113,
+    "httpGroups": {
+      "GET /api/assignments/term/qa-t1/plan 403": 12,
+      "GET /api/assignments/term/qa-t2/plan 403": 12,
+      "GET /api/terms 403": 9,
+      "GET /api/semesters 403": 9,
+      "GET /api/lecturers 403": 9,
+      "POST /api/proposal-reviews/:id/comments 409": 1,
+      "GET /api/proposal-reviews/:id 404": 8,
+      "GET /api/proposals/:id 404": 2,
+      "GET /api/proposals/:id/review-history 404": 2,
+      "GET /api/assignments/term/qa-t1/results 400": 14,
+      "GET /api/assignments/term/qa-t2/results 400": 14,
+      "GET /api/registrations/term/qa-t1/me 403": 2,
+      "GET /api/training-systems 403": 5,
+      "GET /api/departments 403": 5,
+      "GET /api/research-areas 403": 5,
+      "GET /api/students 403": 2,
+      "GET /api/accounts 403": 2
+    }
+  },
+  "axe": [
+    {
+      "file": "U03-desktop-queue-axe.json",
+      "violations": 0,
+      "incomplete": 1
+    },
+    {
+      "file": "U03-mobile-active-reviewer-axe.json",
+      "violations": 0,
+      "incomplete": 0
+    },
+    {
+      "file": "U03-mobile-detail-axe.json",
+      "violations": 0,
+      "incomplete": 0
+    },
+    {
+      "file": "U03-mobile-editable-assignment-axe.json",
+      "violations": 0,
+      "incomplete": 0
+    },
+    {
+      "file": "U03-mobile-queue-axe.json",
+      "violations": 0,
+      "incomplete": 0
+    }
+  ],
+  "source": [
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.service.ts",
+      "sha256": "173c92dea2f28f61619dfe3ece6f4d7ffec7a6fda3faa090639e72b5f4372140",
+      "modifiedAt": "2026-10-27T01:33:57.989Z"
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.repository.ts",
+      "sha256": "127d67715bad8aee313c9ad7b70386c0acfbe08f398cd05f2b176c2e1160c5f2",
+      "modifiedAt": "2026-10-26T18:15:23.961Z"
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.validator.ts",
+      "sha256": "0f122b06fc73d6d83e0c36294183187e692faaaacc8c771fa785dd734e5b477e",
+      "modifiedAt": "2026-10-22T03:37:02.940Z"
+    },
+    {
+      "file": "backend/dist/topic/proposal-reviews/proposal-review.service.js",
+      "sha256": "c225982b57b7708aa3e376b14c4f0390fbc513f4ba65d651222facc1cde54a28",
+      "modifiedAt": "2026-10-27T02:00:48.707Z"
+    },
+    {
+      "file": "frontend/src/features/proposal-reviews/pages.tsx",
+      "sha256": "c1a8f7abedcbdf6725b835ed68a5e417a0101259c36af2e18c92156a0ec8cbf8",
+      "modifiedAt": "2026-10-22T03:53:04.274Z"
+    },
+    {
+      "file": "frontend/src/features/proposal-reviews/components.tsx",
+      "sha256": "329647a01d33bd43bd1309fc65f05880af6da2ab2f9d4d3f1d576b7de5d9d90b",
+      "modifiedAt": "2026-10-22T03:47:57.917Z"
+    },
+    {
+      "file": "shared/src/contracts/proposal-reviews.ts",
+      "sha256": "a0374defc978e26e1448774a0a0af981d965b348758c8c175bf3a6a4b4552d83",
+      "modifiedAt": "2026-10-22T03:37:02.961Z"
+    }
+  ]
+}

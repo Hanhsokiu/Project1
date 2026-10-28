@@ -1,0 +1,179 @@
+{
+  "reviewIds": {
+    "p-student": "b654b89c-39ee-4d1c-ab76-53821fbe195d",
+    "p-student2": "0f17b86f-094a-48ff-bd28-c7b5c5c851ea",
+    "p-page-01": "0cd6239c-3e26-4f59-bd15-35ad1739b787"
+  },
+  "primary": {
+    "proposalId": "p-student",
+    "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+    "proposalStatus": "APPROVED",
+    "proposalRevision": 4,
+    "submittedVersionId": "v1-student",
+    "submittedVersionNumber": 1,
+    "state": "RECEIVED",
+    "revision": 3,
+    "readiness": [
+      "DOSSIER_LOCKED"
+    ],
+    "previewSnapshot": null,
+    "allowedActions": [
+      "download"
+    ],
+    "currentFinalization": {
+      "id": "08ed514b-a877-43b7-a1d9-f3624dfa023a",
+      "approvedVersionId": "v1-student",
+      "versionNumber": 1,
+      "finalizedAt": "2026-10-28T12:06:15.264Z",
+      "finalizedByUserId": "faculty",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdfGeneratedAt": "2026-10-28T12:06:17.868Z",
+      "pdfChecksum": "ae86f894145fe529fc0383a0518539a7374d5a0e352bcd204a76efeda9bdc2cb",
+      "snapshot": {
+        "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+        "advisor": {
+          "id": "advisor",
+          "name": "Trần Văn Hướng Dẫn",
+          "department": "Bộ môn kiểm thử tổng hợp"
+        },
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:29:53.775Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:29:53.775Z",
+              "startsAt": "2026-10-27T07:29:53.775Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:29:53.775Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "student": {
+          "id": "student",
+          "code": "QA-student",
+          "name": "Nguyễn Văn Sinh",
+          "className": "Công nghệ thông tin K63",
+          "majorName": "Khoa học máy tính",
+          "trainingSystem": "Đại học — dữ liệu kiểm thử"
+        },
+        "termName": "Đợt kiểm thử qa-t1",
+        "assignmentId": "3874be59-c268-4d8b-a367-a10e0cda58c6",
+        "schemaVersion": 1,
+        "topicRevision": 0,
+        "assignmentRevision": 0,
+        "academicProfileRevision": 0
+      }
+    },
+    "receipt": {
+      "id": "ca533883-4150-4feb-96b3-3f60f2a00c63",
+      "finalizationId": "08ed514b-a877-43b7-a1d9-f3624dfa023a",
+      "receivedAt": "2026-10-28T12:06:18.866Z",
+      "receivedByUserId": "faculty",
+      "note": "ĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐĐ"
+    },
+    "history": [
+      {
+        "id": "eb24c749-7a14-4eaf-bde7-c0831328692b",
+        "action": "PHYSICAL_RECEIVED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:06:18.870Z"
+      },
+      {
+        "id": "61f922e4-9dcf-48d8-a0a5-3651fb3c482a",
+        "action": "PDF_GENERATED",
+        "actorId": "student",
+        "createdAt": "2026-10-28T12:06:17.921Z"
+      },
+      {
+        "id": "d0bb15f9-3797-4260-8b84-e18e7f917c61",
+        "action": "FINALIZED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:06:15.270Z"
+      }
+    ]
+  },
+  "secondary": {
+    "proposalId": "p-student2",
+    "title": "Hệ thống quản lý đồ án — Sinh viên khác",
+    "proposalStatus": "APPROVED",
+    "proposalRevision": 4,
+    "submittedVersionId": "v1-student2",
+    "submittedVersionNumber": 1,
+    "state": "FINALIZED",
+    "revision": 1,
+    "readiness": [
+      "DOSSIER_LOCKED"
+    ],
+    "previewSnapshot": null,
+    "allowedActions": [
+      "download",
+      "receive"
+    ],
+    "currentFinalization": {
+      "id": "cf2e5906-3cb4-4236-add2-050f1112dc7f",
+      "approvedVersionId": "v1-student2",
+      "versionNumber": 1,
+      "finalizedAt": "2026-10-28T12:06:15.541Z",
+      "finalizedByUserId": "faculty",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdfGeneratedAt": null,
+      "pdfChecksum": null,
+      "snapshot": {
+        "title": "Hệ thống quản lý đồ án — Sinh viên khác",
+        "advisor": {
+          "id": "advisor",
+          "name": "Trần Văn Hướng Dẫn",
+          "department": "Bộ môn kiểm thử tổng hợp"
+        },
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:29:53.775Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:29:53.775Z",
+              "startsAt": "2026-10-27T07:29:53.775Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:29:53.775Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "student": {
+          "id": "student2",
+          "code": "QA-student2",
+          "name": "Sinh viên khác",
+          "className": "Công nghệ thông tin K63",
+          "majorName": "Khoa học máy tính",
+          "trainingSystem": "Đại học — dữ liệu kiểm thử"
+        },
+        "termName": "Đợt kiểm thử qa-t1",
+        "assignmentId": "2cb28c35-6cc6-4a2b-b758-38c5edf510f5",
+        "schemaVersion": 1,
+        "topicRevision": 0,
+        "assignmentRevision": 0,
+        "academicProfileRevision": 0
+      }
+    },
+    "receipt": null,
+    "history": [
+      {
+        "id": "94c00d21-3eb3-4eb3-8774-1357c52fde52",
+        "action": "FINALIZED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:06:15.544Z"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-28T12:06:20.026Z"
+}

@@ -1,0 +1,287 @@
+{
+  "startedAt": "2026-10-27T13:56:06.443Z",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/review-group-options/terms"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-groups?page=1&limit=20&search="
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search="
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=QA_NO_LECTURER_2047"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-group-options?page=1&limit=20&search="
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/review-group-options/terms",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          }
+        ],
+        "timestamp": "2026-10-27T13:56:06.505Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-groups?page=1&limit=20&search=",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "name": "hkt",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "revision": 0,
+              "createdAt": "2026-10-27T03:28:43.187Z",
+              "updatedAt": "2026-10-27T03:28:43.187Z",
+              "activeReviewCount": 1,
+              "canManage": true,
+              "members": [
+                {
+                  "lecturerId": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+                  "fullName": "Giảng viên T",
+                  "lecturerCode": "S3L17930224293233",
+                  "role": "MEMBER"
+                },
+                {
+                  "lecturerId": "199ee947-055e-4560-81b3-74d15625c2ad",
+                  "fullName": "Giảng viên X",
+                  "lecturerCode": "S3L17930224293230",
+                  "role": "MEMBER"
+                }
+              ]
+            },
+            {
+              "id": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "name": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "revision": 0,
+              "createdAt": "2026-10-27T02:57:39.000Z",
+              "updatedAt": "2026-10-27T02:57:39.000Z",
+              "activeReviewCount": 1,
+              "canManage": true,
+              "members": [
+                {
+                  "lecturerId": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+                  "fullName": "Giảng viên T",
+                  "lecturerCode": "S3L17930224293233",
+                  "role": "MEMBER"
+                },
+                {
+                  "lecturerId": "0bf21346-ca5e-441f-b934-e02567d2b288",
+                  "fullName": "Giảng viên Z",
+                  "lecturerCode": "S3L17930224293232",
+                  "role": "MEMBER"
+                }
+              ]
+            }
+          ],
+          "total": 2,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T13:56:06.532Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=",
+      "body": {
+        "success": true,
+        "data": {
+          "term": {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          "canManage": true,
+          "departments": [
+            {
+              "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "name": "Công nghệ phần mềm"
+            }
+          ],
+          "lecturers": {
+            "data": [
+              {
+                "id": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+                "fullName": "Giảng viên T",
+                "lecturerCode": "S3L17930224293233",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "199ee947-055e-4560-81b3-74d15625c2ad",
+                "fullName": "Giảng viên X",
+                "lecturerCode": "S3L17930224293230",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "932282fd-756b-407d-a662-12c946059077",
+                "fullName": "Giảng viên Y",
+                "lecturerCode": "S3L17930224293231",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "0bf21346-ca5e-441f-b934-e02567d2b288",
+                "fullName": "Giảng viên Z",
+                "lecturerCode": "S3L17930224293232",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              }
+            ],
+            "total": 4,
+            "page": 1,
+            "limit": 20,
+            "totalPages": 1
+          }
+        },
+        "timestamp": "2026-10-27T13:56:06.570Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=QA_NO_LECTURER_2047",
+      "body": {
+        "success": true,
+        "data": {
+          "term": {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          "canManage": true,
+          "departments": [
+            {
+              "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "name": "Công nghệ phần mềm"
+            }
+          ],
+          "lecturers": {
+            "data": [],
+            "total": 0,
+            "page": 1,
+            "limit": 20,
+            "totalPages": 0
+          }
+        },
+        "timestamp": "2026-10-27T13:56:06.674Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-group-options?page=1&limit=20&search=",
+      "body": {
+        "success": true,
+        "data": {
+          "term": {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          },
+          "canManage": true,
+          "departments": [
+            {
+              "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "name": "Công nghệ phần mềm"
+            }
+          ],
+          "lecturers": {
+            "data": [
+              {
+                "id": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+                "fullName": "Giảng viên T",
+                "lecturerCode": "S3L17930224293233",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "199ee947-055e-4560-81b3-74d15625c2ad",
+                "fullName": "Giảng viên X",
+                "lecturerCode": "S3L17930224293230",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "932282fd-756b-407d-a662-12c946059077",
+                "fullName": "Giảng viên Y",
+                "lecturerCode": "S3L17930224293231",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "0bf21346-ca5e-441f-b934-e02567d2b288",
+                "fullName": "Giảng viên Z",
+                "lecturerCode": "S3L17930224293232",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              }
+            ],
+            "total": 4,
+            "page": 1,
+            "limit": 20,
+            "totalPages": 1
+          }
+        },
+        "timestamp": "2026-10-27T13:56:06.878Z"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "observations": {
+    "create": {
+      "url": "http://127.0.0.1:5173/topic/review-groups/new?termId=d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "text": "Tìm kiếm\n← Danh sách nhóm\nTạo nhóm duyệt\nĐợt tạo nhóm\nChọn đợt đồ án\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nĐổi đợt sẽ xóa lựa chọn chưa lưu.\nThông tin nhóm\nTên nhóm\nĐợt đồ án\nBộ môn\nChọn bộ môn\nCông nghệ phần mềm\nThành viên 0 đã chọn\n\nChọn giảng viên hoạt động trong roster của đợt. Mỗi giảng viên có vai trò thành viên duyệt.\n\nTìm giảng viên\nGiảng viên TS3L17930224293233\nGiảng viên XS3L17930224293230\nGiảng viên YS3L17930224293231\nGiảng viên ZS3L17930224293232\nTrước\nTrang 1 / 1\nSau\nTạo nhóm duyệt\nHủy",
+      "checkboxes": 4,
+      "nameMax": "255",
+      "departmentDisabled": false
+    },
+    "selectedBeforeSearch": "Giảng viên T ×",
+    "selectedAfterSearch": "93355433-df35-48b3-b85a-cb1ddf0545e4 ×",
+    "selectedChipCount": 1,
+    "selectedAfterClear": "Giảng viên T ×",
+    "firstStillChecked": true,
+    "oldTermForm": {
+      "url": "http://127.0.0.1:5173/topic/review-groups/new?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "name": "",
+      "nameDisabled": true,
+      "selectedChips": 0,
+      "submitDisabled": true
+    },
+    "demoFormReset": {
+      "name": "",
+      "selectedChips": 0,
+      "submitDisabled": false
+    },
+    "cancelledRows": 2
+  },
+  "finishedAt": "2026-10-27T13:56:07.082Z"
+}

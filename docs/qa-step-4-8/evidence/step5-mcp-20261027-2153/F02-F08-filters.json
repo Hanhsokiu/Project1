@@ -1,0 +1,515 @@
+{
+  "startedAt": "2026-10-27T14:57:23.964Z",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=Sinh+vi%C3%AAn+B"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=S3S17930224293230"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=QA_NONE_STEP5"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&status=SUBMITTED"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&status=UNDER_REVIEW"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&status=REVISION_REQUESTED"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&status=APPROVED"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&unassigned=true"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&departmentId=e10282e3-59c0-408e-9f54-853f2a6c6609"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposal-review-options"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals?page=1&limit=20&search="
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=Sinh+vi%C3%AAn+B",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+              "studentName": "Sinh viên B",
+              "studentCode": "S3S17930224293231",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 5,
+              "submittedVersionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+              "versionNumber": 3,
+              "activeReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+              "groupName": "hkt",
+              "readiness": [],
+              "canAssign": true
+            }
+          ],
+          "total": 1,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T14:57:24.036Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=S3S17930224293230",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+              "studentName": "Sinh viên A",
+              "studentCode": "S3S17930224293230",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 9,
+              "submittedVersionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+              "versionNumber": 4,
+              "activeReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "readiness": [],
+              "canAssign": true
+            }
+          ],
+          "total": 1,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T14:57:25.080Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=QA_NONE_STEP5",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [],
+          "total": 0,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 0
+        },
+        "timestamp": "2026-10-27T14:57:25.199Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&status=SUBMITTED",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+              "studentName": "Sinh viên B",
+              "studentCode": "S3S17930224293231",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 5,
+              "submittedVersionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+              "versionNumber": 3,
+              "activeReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+              "groupName": "hkt",
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+              "studentName": "Sinh viên A",
+              "studentCode": "S3S17930224293230",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 9,
+              "submittedVersionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+              "versionNumber": 4,
+              "activeReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "readiness": [],
+              "canAssign": true
+            }
+          ],
+          "total": 2,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T14:57:27.170Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&status=UNDER_REVIEW",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [],
+          "total": 0,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 0
+        },
+        "timestamp": "2026-10-27T14:57:28.151Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&status=REVISION_REQUESTED",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [],
+          "total": 0,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 0
+        },
+        "timestamp": "2026-10-27T14:57:29.154Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&status=APPROVED",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "73d376de-3359-4de8-b88d-ba742cb0a3a1",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn",
+              "studentName": "Sinh viên N",
+              "studentCode": "S3S17930224293233",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 6,
+              "submittedVersionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt",
+              "studentName": "Sinh viên C",
+              "studentCode": "S3S17930224293232",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 5,
+              "submittedVersionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true
+            }
+          ],
+          "total": 2,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T14:57:30.172Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&unassigned=true",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "73d376de-3359-4de8-b88d-ba742cb0a3a1",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn",
+              "studentName": "Sinh viên N",
+              "studentCode": "S3S17930224293233",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 6,
+              "submittedVersionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt",
+              "studentName": "Sinh viên C",
+              "studentCode": "S3S17930224293232",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 5,
+              "submittedVersionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true
+            }
+          ],
+          "total": 2,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T14:57:33.181Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=&departmentId=e10282e3-59c0-408e-9f54-853f2a6c6609",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+              "studentName": "Sinh viên B",
+              "studentCode": "S3S17930224293231",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 5,
+              "submittedVersionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+              "versionNumber": 3,
+              "activeReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+              "groupName": "hkt",
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+              "studentName": "Sinh viên A",
+              "studentCode": "S3S17930224293230",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 9,
+              "submittedVersionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+              "versionNumber": 4,
+              "activeReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "73d376de-3359-4de8-b88d-ba742cb0a3a1",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn",
+              "studentName": "Sinh viên N",
+              "studentCode": "S3S17930224293233",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 6,
+              "submittedVersionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt",
+              "studentName": "Sinh viên C",
+              "studentCode": "S3S17930224293232",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 5,
+              "submittedVersionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true
+            }
+          ],
+          "total": 4,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T14:57:36.219Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposal-review-options",
+      "body": {
+        "success": true,
+        "data": {
+          "term": {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          },
+          "departments": [
+            {
+              "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "name": "Công nghệ phần mềm"
+            }
+          ],
+          "canAssign": true,
+          "phase": null
+        },
+        "timestamp": "2026-10-27T14:57:36.225Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals?page=1&limit=20&search=",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [],
+          "total": 0,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 0
+        },
+        "timestamp": "2026-10-27T14:57:36.237Z"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "console": [],
+  "failedRequests": [],
+  "observations": {
+    "byName": {
+      "rows": 1,
+      "text": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt\nSinh viên B · S3S17930224293231\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tChờ duyệt\nhkt\n\t\nHồ sơ / phân công\nXem vòng được phân"
+    },
+    "byCode": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa\nSinh viên A · S3S17930224293230\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv4\tChờ duyệt\nNhóm duyệt DEMO 4–8 · Công nghệ phần mềm\n\t\nHồ sơ / phân công\nXem vòng được phân",
+    "empty": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nPhase duyệt: 09:57:33 26/10/2026 — 09:57:33 25/1/2027 · Theo lịch mở (Asia/Ho_Chi_Minh)\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.",
+    "statusFilters": [
+      {
+        "value": "SUBMITTED",
+        "rows": 2,
+        "text": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nPhase duyệt: 09:57:33 26/10/2026 — 09:57:33 25/1/2027 · Theo lịch mở (Asia/Ho_Chi_Minh)\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nĐỀ CƯƠNG / SINH VIÊN\tBỘ MÔN\tPHIÊN BẢN\tTRẠNG THÁI / NHÓM\tTHAO TÁC\n\n[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt\nSinh viên B · S3S17930224293231\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tChờ duyệt\nhkt\n\t\nHồ sơ / phân công\nXem vòng được phân\n\n\n[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa\nSinh viên A · S3S17930224293230\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv4\tChờ duyệt\nNhóm duyệt DEMO 4–8 · Công nghệ phần mềm\n\t\nHồ sơ / phân công\nXem vòng được phân\n2 hồ sơ · Trang 1/1\nTrước\nSau"
+      },
+      {
+        "value": "UNDER_REVIEW",
+        "rows": 0,
+        "text": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nPhase duyệt: 09:57:33 26/10/2026 — 09:57:33 25/1/2027 · Theo lịch mở (Asia/Ho_Chi_Minh)\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn."
+      },
+      {
+        "value": "REVISION_REQUESTED",
+        "rows": 0,
+        "text": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nPhase duyệt: 09:57:33 26/10/2026 — 09:57:33 25/1/2027 · Theo lịch mở (Asia/Ho_Chi_Minh)\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn."
+      },
+      {
+        "value": "APPROVED",
+        "rows": 2,
+        "text": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nPhase duyệt: 09:57:33 26/10/2026 — 09:57:33 25/1/2027 · Theo lịch mở (Asia/Ho_Chi_Minh)\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nĐỀ CƯƠNG / SINH VIÊN\tBỘ MÔN\tPHIÊN BẢN\tTRẠNG THÁI / NHÓM\tTHAO TÁC\n\n[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn\nSinh viên N · S3S17930224293233\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tĐã duyệt\nChưa phân nhóm\n\t\nHồ sơ / phân công\n\n\n[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt\nSinh viên C · S3S17930224293232\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tĐã duyệt\nChưa phân nhóm\n\t\nHồ sơ / phân công\n2 hồ sơ · Trang 1/1\nTrước\nSau"
+      }
+    ],
+    "unassigned": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nPhase duyệt: 09:57:33 26/10/2026 — 09:57:33 25/1/2027 · Theo lịch mở (Asia/Ho_Chi_Minh)\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nĐỀ CƯƠNG / SINH VIÊN\tBỘ MÔN\tPHIÊN BẢN\tTRẠNG THÁI / NHÓM\tTHAO TÁC\n\n[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn\nSinh viên N · S3S17930224293233\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tĐã duyệt\nChưa phân nhóm\n\t\nHồ sơ / phân công\n\n\n[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt\nSinh viên C · S3S17930224293232\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tĐã duyệt\nChưa phân nhóm\n\t\nHồ sơ / phân công\n2 hồ sơ · Trang 1/1\nTrước\nSau",
+    "department": {
+      "value": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+    },
+    "oldTerm": {
+      "url": "http://127.0.0.1:5173/topic/reviews?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "header": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "department": "",
+      "text": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nChưa có phase PROPOSAL_REVIEW. Không thể ghi phân công hoặc kết luận khi đầu vào chưa sẵn sàng.\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn."
+    },
+    "restored": {
+      "rows": 4,
+      "previousDisabled": true,
+      "nextDisabled": true
+    }
+  },
+  "finishedAt": "2026-10-27T14:57:38.286Z"
+}

@@ -23,11 +23,17 @@ import {
   ProposalVersionSubmitSchema,
   VersionCompareSchema,
   VersionPageQuerySchema,
+  ProposalWithdrawSchema,
+  ProposalReturnToDraftSchema,
+  ProposalReopenSchema,
 } from '@doan/shared';
 import type {
   ProposalVersionSave,
   ProposalVersionSubmit,
   VersionPageQuery,
+  ProposalWithdraw,
+  ProposalReturnToDraft,
+  ProposalReopen,
 } from '@doan/shared';
 import { RequirePermission } from '../../common/security/require-permission.decorator';
 import { ReviewGroupPipe } from '../review-groups/review-group.dto';
@@ -36,6 +42,7 @@ import {
   groupError,
 } from '../review-groups/review-group.errors';
 import { ProposalVersionService } from './proposal-version.service';
+import { ProposalLifecycleService } from './proposal-lifecycle.service';
 type PrincipalRequest = { user: { sub?: string; userId?: string } };
 const success = (data: unknown) => ({
   success: true,
@@ -62,7 +69,10 @@ const success = (data: unknown) => ({
 @UseFilters(ReviewGroupExceptionFilter)
 @Controller('proposals/:proposalId')
 export class ProposalVersionController {
-  constructor(private readonly service: ProposalVersionService) {}
+  constructor(
+    private readonly service: ProposalVersionService,
+    private readonly lifecycle: ProposalLifecycleService,
+  ) {}
   private user(req: PrincipalRequest) {
     const id = req.user?.sub ?? req.user?.userId;
     if (
@@ -183,5 +193,60 @@ export class ProposalVersionController {
     @Headers('idempotency-key') key: string,
   ) {
     return this.service.submit(this.user(req), id, body, key).then(success);
+  }
+  @Post('withdraw')
+  @HttpCode(200)
+  @RequirePermission('proposal', 'submit')
+  @ApiHeader({ name: 'Idempotency-Key', required: true })
+  @ApiOperation({
+    summary:
+      'Owner withdraws SUBMITTED proposal; preserves SEALED source and supersedes assigned review',
+  })
+  withdraw(
+    @Req() req: PrincipalRequest,
+    @Param('proposalId') id: string,
+    @Body(new ReviewGroupPipe(ProposalWithdrawSchema)) body: ProposalWithdraw,
+    @Headers('idempotency-key') key: string,
+  ) {
+    return this.lifecycle
+      .transition(this.user(req), id, 'withdraw', body, key)
+      .then(success);
+  }
+  @Post('return-to-draft')
+  @HttpCode(200)
+  @RequirePermission('proposal', 'assign')
+  @ApiHeader({ name: 'Idempotency-Key', required: true })
+  @ApiOperation({
+    summary:
+      'Scoped faculty returns UNDER_REVIEW proposal to draft with reason and review CAS',
+  })
+  returnToDraft(
+    @Req() req: PrincipalRequest,
+    @Param('proposalId') id: string,
+    @Body(new ReviewGroupPipe(ProposalReturnToDraftSchema))
+    body: ProposalReturnToDraft,
+    @Headers('idempotency-key') key: string,
+  ) {
+    return this.lifecycle
+      .transition(this.user(req), id, 'return-to-draft', body, key)
+      .then(success);
+  }
+  @Post('reopen')
+  @HttpCode(200)
+  @RequirePermission('proposal', 'reopen')
+  @ApiHeader({ name: 'Idempotency-Key', required: true })
+  @ApiOperation({
+    summary:
+      'Scoped faculty reopens APPROVED proposal; supersedes finalization and pauses guidance atomically',
+  })
+  reopen(
+    @Req() req: PrincipalRequest,
+    @Param('proposalId') id: string,
+    @Body(new ReviewGroupPipe(ProposalReopenSchema)) body: ProposalReopen,
+    @Headers('idempotency-key') key: string,
+  ) {
+    return this.lifecycle
+      .transition(this.user(req), id, 'reopen', body, key)
+      .then(success);
   }
 }

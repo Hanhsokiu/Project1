@@ -1,0 +1,195 @@
+{
+  "context": {
+    "proposalId": "p-student",
+    "topicId": "topic-student",
+    "termId": "qa-t1",
+    "termStudentId": "ts-student",
+    "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+    "studentName": "Nguyễn Văn Sinh",
+    "status": "REVISION_REQUESTED",
+    "revision": 3,
+    "workingVersionId": "v1-student",
+    "submittedVersionId": "v1-student",
+    "workingVersion": {
+      "id": "v1-student",
+      "proposalId": "p-student",
+      "versionNumber": 1,
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T02:51:53.477Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T02:51:53.477Z",
+            "startsAt": "2026-10-27T02:51:53.477Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T02:51:53.477Z",
+        "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "state": "SEALED",
+      "contentHash": "328b565ea77cc32696f70f3e3d52c16a03d325847fa861f316b2aecf4e3a1346",
+      "createdAt": "2026-10-28T02:51:53.719Z",
+      "createdByUserId": "student",
+      "authorName": "qa-student",
+      "submittedAt": "2026-10-28T02:51:48.477Z",
+      "submittedByUserId": "student",
+      "basedOnVersionId": null,
+      "changeSummary": null,
+      "responses": [],
+      "provenance": null
+    },
+    "submittedVersion": {
+      "id": "v1-student",
+      "proposalId": "p-student",
+      "versionNumber": 1,
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T02:51:53.477Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T02:51:53.477Z",
+            "startsAt": "2026-10-27T02:51:53.477Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T02:51:53.477Z",
+        "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "state": "SEALED",
+      "contentHash": "328b565ea77cc32696f70f3e3d52c16a03d325847fa861f316b2aecf4e3a1346",
+      "createdAt": "2026-10-28T02:51:53.719Z",
+      "createdByUserId": "student",
+      "authorName": "qa-student",
+      "submittedAt": "2026-10-28T02:51:48.477Z",
+      "submittedByUserId": "student",
+      "basedOnVersionId": null,
+      "changeSummary": null,
+      "responses": [],
+      "provenance": null
+    },
+    "feedback": [
+      {
+        "targetType": "COMMENT",
+        "targetId": "168296b2-1d24-4104-9651-d73fdd86d1cb",
+        "reviewId": "d93537a1-612d-45c1-804d-9655beed55a0",
+        "sourceVersionId": "v1-student",
+        "versionNumber": 1,
+        "roundNumber": 1,
+        "authorUserId": "reviewer",
+        "authorName": "qa-reviewer",
+        "text": "QA STEP6: bổ sung tiêu chí kiểm thử cho p-student.",
+        "createdAt": "2026-10-28T02:52:47.889Z"
+      },
+      {
+        "targetType": "DECISION",
+        "targetId": "4a02675a-53c1-41c9-ac63-8346bd157341",
+        "reviewId": "d93537a1-612d-45c1-804d-9655beed55a0",
+        "sourceVersionId": "v1-student",
+        "versionNumber": 1,
+        "roundNumber": 1,
+        "authorUserId": "reviewer",
+        "authorName": "qa-reviewer",
+        "text": "QA STEP6: làm rõ phạm vi và sản phẩm của từng mốc.",
+        "createdAt": "2026-10-28T02:52:47.988Z"
+      }
+    ],
+    "allowedActions": [
+      "save"
+    ],
+    "readiness": [],
+    "phase": {
+      "startsAt": "2026-10-27T02:51:53.477Z",
+      "endsAt": "2026-11-04T02:51:53.477Z",
+      "isLocked": false
+    }
+  },
+  "review": {
+    "id": "d93537a1-612d-45c1-804d-9655beed55a0",
+    "proposalId": "p-student",
+    "termId": "qa-t1",
+    "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+    "studentName": "Nguyễn Văn Sinh",
+    "studentCode": "QA-student",
+    "proposalStatus": "REVISION_REQUESTED",
+    "proposalRevision": 3,
+    "revision": 3,
+    "state": "DECIDED",
+    "roundNumber": 1,
+    "groupId": "qa-g1",
+    "groupName": "Nhóm kiểm thử qa-g1",
+    "versionId": "v1-student",
+    "versionNumber": 1,
+    "version": {
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T02:51:53.477Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T02:51:53.477Z",
+            "startsAt": "2026-10-27T02:51:53.477Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T02:51:53.477Z",
+        "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "contentHash": "328b565ea77cc32696f70f3e3d52c16a03d325847fa861f316b2aecf4e3a1346",
+      "submittedAt": "2026-10-28T02:51:48.477Z",
+      "submittedByUserId": "student"
+    },
+    "assignedAt": "2026-10-28T02:52:47.605Z",
+    "assignedByUserId": "faculty",
+    "startedAt": "2026-10-28T02:52:47.776Z",
+    "startedByUserId": "reviewer",
+    "routingSnapshot": {
+      "reason": null,
+      "revision": 0,
+      "departmentId": "qa-d",
+      "groupRevision": 0,
+      "researchAreaId": "qa-area"
+    },
+    "phaseSnapshot": {
+      "endsAt": "2026-11-04T02:51:53.477Z",
+      "phaseId": "qa-t1-PROPOSAL_REVIEW",
+      "revision": 0,
+      "startsAt": "2026-10-27T02:51:53.477Z"
+    },
+    "supersededByReviewId": null,
+    "allowedActions": [],
+    "comments": [
+      {
+        "id": "168296b2-1d24-4104-9651-d73fdd86d1cb",
+        "versionId": "v1-student",
+        "authorUserId": "reviewer",
+        "authorName": "qa-reviewer",
+        "createdAt": "2026-10-28T02:52:47.889Z",
+        "text": "QA STEP6: bổ sung tiêu chí kiểm thử cho p-student."
+      }
+    ],
+    "decision": {
+      "id": "4a02675a-53c1-41c9-ac63-8346bd157341",
+      "versionId": "v1-student",
+      "decision": "REVISION_REQUIRED",
+      "comment": "QA STEP6: làm rõ phạm vi và sản phẩm của từng mốc.",
+      "decidedByUserId": "reviewer",
+      "deciderName": "qa-reviewer",
+      "decidedAt": "2026-10-28T02:52:47.988Z"
+    }
+  }
+}

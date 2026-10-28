@@ -46,7 +46,14 @@ export default function MyTopicPage() {
         description="Sau công bố phân công, SV gặp GVHD thống nhất đề tài, lập đề cương và xuất theo biểu mẫu."
         actions={
           user.studentId ? (
-            <Link className="btn btn-primary" to="/topic/draft">
+            <Link
+              className="btn btn-primary"
+              to={
+                own?.workflowReady
+                  ? `/topic/proposal/${own.id}`
+                  : "/topic/draft"
+              }
+            >
               <FilePenLine size={16} />
               {own ? "Mở đề cương" : "Tạo đề cương"}
             </Link>
@@ -163,7 +170,11 @@ export default function MyTopicPage() {
                     {user.lecturerId === t.lecturerId && (
                       <Link
                         className="btn btn-secondary"
-                        to={`/topic/draft?student=${t.studentId}`}
+                        to={
+                          t.workflowReady
+                            ? `/topic/proposal/${t.id}`
+                            : `/topic/draft?student=${t.studentId}`
+                        }
                       >
                         Chỉnh sửa đề tài
                       </Link>
@@ -237,8 +248,8 @@ export default function MyTopicPage() {
               await action.run(() => topicService.agree(agree.id, true));
               setAgree(null);
             } catch {
-      // useAction displays the failure; keep the current form available for correction.
-    }
+              // useAction displays the failure; keep the current form available for correction.
+            }
           }}
           pending={action.pending}
         />
