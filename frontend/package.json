@@ -11,7 +11,20 @@
     "format": "prettier --write src/**/*.{ts,tsx}",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "test:review-groups:browser": "node scripts/test-review-groups-browser.cjs",
+    "preview:review-groups": "node scripts/test-review-groups-browser.cjs --interactive",
+    "test:proposal-reviews:browser": "node scripts/test-proposal-reviews-browser.cjs",
+    "test:proposal-versions:browser": "node scripts/test-proposal-versions-browser.cjs",
+    "preview:proposal-versions": "node scripts/test-proposal-versions-browser.cjs --interactive",
+    "test:proposal-dossiers:browser": "node scripts/test-proposal-dossiers-browser.cjs",
+    "preview:proposal-dossiers": "node scripts/test-proposal-dossiers-browser.cjs --interactive",
+    "test:guidance-tasks:browser": "node scripts/test-guidance-tasks-browser.cjs",
+    "preview:guidance-tasks": "node scripts/test-guidance-tasks-browser.cjs --interactive",
+    "test:guidance-submissions:browser": "node scripts/test-guidance-submissions-browser.cjs",
+    "preview:guidance-submissions": "node scripts/test-guidance-submissions-browser.cjs --interactive",
+    "test:guidance-reviews:browser": "node scripts/test-guidance-reviews-browser.cjs",
+    "preview:guidance-reviews": "node scripts/test-guidance-reviews-browser.cjs --interactive"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -27,7 +40,9 @@
     "react-router-dom": "^6.26.1",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "exceljs": "^4.4.0",
+    "jspdf": "^4.2.1"
   },
   "devDependencies": {
     "@playwright/test": "^1.47.2",

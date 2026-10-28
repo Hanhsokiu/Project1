@@ -1,0 +1,220 @@
+{
+  "termId": "74c4faad-fbad-44c8-acaa-f7ea152b0cf8",
+  "outbox": [
+    {
+      "id": "3ff8033d-93b5-488d-a4a2-b53b4fcd8e95",
+      "status": "SENT",
+      "attempts": 1,
+      "messageId": "<3ff8033d-93b5-488d-a4a2-b53b4fcd8e95@gpms.local>",
+      "sentAt": "2026-10-25T16:10:14.045Z"
+    },
+    {
+      "id": "24ff57f0-d696-4c2c-815d-5614c77577b4",
+      "status": "SENT",
+      "attempts": 1,
+      "messageId": "<24ff57f0-d696-4c2c-815d-5614c77577b4@gpms.local>",
+      "sentAt": "2026-10-25T16:10:14.057Z"
+    },
+    {
+      "id": "4bf9fab4-90b6-43e8-9506-e63d829711ba",
+      "status": "SENT",
+      "attempts": 1,
+      "messageId": "<4bf9fab4-90b6-43e8-9506-e63d829711ba@gpms.local>",
+      "sentAt": "2026-10-25T16:10:14.074Z"
+    }
+  ],
+  "messages": [
+    {
+      "ID": "pGIHx0P-81jDl-FPVLSvYabLR4lWJLDwFZAdxeMrmFM=@mailhog.example",
+      "From": {
+        "Relays": null,
+        "Mailbox": "gpms",
+        "Domain": "example.test",
+        "Params": ""
+      },
+      "To": [
+        {
+          "Relays": null,
+          "Mailbox": "s3_l1792944610367_1",
+          "Domain": "example.test",
+          "Params": ""
+        }
+      ],
+      "Content": {
+        "Headers": {
+          "Content-Transfer-Encoding": [
+            "quoted-printable"
+          ],
+          "Content-Type": [
+            "text/html; charset=utf-8"
+          ],
+          "Date": [
+            "Sun, 25 Oct 2026 16:10:14 +0000"
+          ],
+          "From": [
+            "gpms@example.test"
+          ],
+          "MIME-Version": [
+            "1.0"
+          ],
+          "Message-ID": [
+            "<4bf9fab4-90b6-43e8-9506-e63d829711ba@gpms.local>"
+          ],
+          "Received": [
+            "from [127.0.0.1] by mailhog.example (MailHog)\r\n          id pGIHx0P-81jDl-FPVLSvYabLR4lWJLDwFZAdxeMrmFM=@mailhog.example; Sun, 25 Oct 2026 23:10:14 +0700"
+          ],
+          "Return-Path": [
+            "<gpms@example.test>"
+          ],
+          "Subject": [
+            "=?UTF-8?Q?Ph=C3=A2n_c=C3=B4ng_GVHD_=E2=80=94_B?= =?UTF-8?Q?=C6=B0=E1=BB=9Bc_3_ki=E1=BB=83m_th?= =?UTF-8?Q?=E1=BB=AD_1792944610367?="
+          ],
+          "To": [
+            "s3_l1792944610367_1@example.test"
+          ]
+        },
+        "Body": "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <meta charset=3D\"utf-8\">\r\n  <title>Th=C3=B4ng b=C3=A1o ph=C3=A2n c=C3=B4ng GVHD</title>\r\n</head>\r\n<body style=3D\"font-family: Arial, sans-serif; line-height: 1.6; color: =\r\n#333;\">\r\n  <h2>K=C3=ADnh g=E1=BB=ADi Th=E1=BA=A7y/C=C3=B4 Gi=E1=BA=A3ng =\r\nvi=C3=AAn Y,</h2>\r\n  <p>Khoa C=C3=B4ng ngh=E1=BB=87 Th=C3=B4ng tin - =\r\nTr=C6=B0=E1=BB=9Dng =C4=90=E1=BA=A1i h=E1=BB=8Dc Giao th=C3=B4ng =\r\nv=E1=BA=ADn t=E1=BA=A3i xin th=C3=B4ng b=C3=A1o k=E1=BA=BFt qu=E1=BA=A3 =\r\nph=C3=A2n c=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn =C4=91=E1=BB=93 =C3=A1n =\r\nt=E1=BB=91t nghi=E1=BB=87p =C4=91=E1=BB=A3t <strong>B=C6=B0=E1=BB=9Bc 3 =\r\nki=E1=BB=83m th=E1=BB=AD 1792944610367</strong>.</p>\r\n  <p>Th=E1=BA=A7y/C=C3=B4 =C4=91=C3=A3 =C4=91=C6=B0=E1=BB=A3c ph=C3=A2n =\r\nc=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn c=C3=A1c sinh vi=C3=AAn sau:</p>\r\n  <ul>\r\n   =20\r\n    <li><strong>S3S17929446103672</strong> - Sinh vi=C3=AAn C=\r\n (L=E1=BB=9Bp: Ki=E1=BB=83m th=E1=BB=AD ti=E1=BA=BFng =\r\nVi=E1=BB=87t)<br>H=C6=B0=E1=BB=9Bng: H=C6=B0=E1=BB=9Bng ki=E1=BB=83m =\r\nth=E1=BB=AD B=C6=B0=E1=BB=9Bc 3 1792944610367 =C2=B7 Email: =\r\ns3_s1792944610367_2@example.test =C2=B7 S=C4=90T: 0912345678</li>\r\n   =20\r\n  </ul>\r\n  <p>Xin tr=C3=A2n tr=E1=BB=8Dng c=E1=BA=A3m =C6=A1n =\r\nTh=E1=BA=A7y/C=C3=B4!</p>\r\n</body>\r\n</html>",
+        "Size": 1727,
+        "MIME": null
+      },
+      "Created": "2026-10-25T23:10:14.0732454+07:00",
+      "MIME": null,
+      "Raw": {
+        "From": "gpms@example.test",
+        "To": [
+          "s3_l1792944610367_1@example.test"
+        ],
+        "Data": "From: gpms@example.test\r\nTo: s3_l1792944610367_1@example.test\r\nSubject: =?UTF-8?Q?Ph=C3=A2n_c=C3=B4ng_GVHD_=E2=80=94_B?=\r\n =?UTF-8?Q?=C6=B0=E1=BB=9Bc_3_ki=E1=BB=83m_th?=\r\n =?UTF-8?Q?=E1=BB=AD_1792944610367?=\r\nMessage-ID: <4bf9fab4-90b6-43e8-9506-e63d829711ba@gpms.local>\r\nContent-Transfer-Encoding: quoted-printable\r\nDate: Sun, 25 Oct 2026 16:10:14 +0000\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=utf-8\r\n\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <meta charset=3D\"utf-8\">\r\n  <title>Th=C3=B4ng b=C3=A1o ph=C3=A2n c=C3=B4ng GVHD</title>\r\n</head>\r\n<body style=3D\"font-family: Arial, sans-serif; line-height: 1.6; color: =\r\n#333;\">\r\n  <h2>K=C3=ADnh g=E1=BB=ADi Th=E1=BA=A7y/C=C3=B4 Gi=E1=BA=A3ng =\r\nvi=C3=AAn Y,</h2>\r\n  <p>Khoa C=C3=B4ng ngh=E1=BB=87 Th=C3=B4ng tin - =\r\nTr=C6=B0=E1=BB=9Dng =C4=90=E1=BA=A1i h=E1=BB=8Dc Giao th=C3=B4ng =\r\nv=E1=BA=ADn t=E1=BA=A3i xin th=C3=B4ng b=C3=A1o k=E1=BA=BFt qu=E1=BA=A3 =\r\nph=C3=A2n c=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn =C4=91=E1=BB=93 =C3=A1n =\r\nt=E1=BB=91t nghi=E1=BB=87p =C4=91=E1=BB=A3t <strong>B=C6=B0=E1=BB=9Bc 3 =\r\nki=E1=BB=83m th=E1=BB=AD 1792944610367</strong>.</p>\r\n  <p>Th=E1=BA=A7y/C=C3=B4 =C4=91=C3=A3 =C4=91=C6=B0=E1=BB=A3c ph=C3=A2n =\r\nc=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn c=C3=A1c sinh vi=C3=AAn sau:</p>\r\n  <ul>\r\n   =20\r\n    <li><strong>S3S17929446103672</strong> - Sinh vi=C3=AAn C=\r\n (L=E1=BB=9Bp: Ki=E1=BB=83m th=E1=BB=AD ti=E1=BA=BFng =\r\nVi=E1=BB=87t)<br>H=C6=B0=E1=BB=9Bng: H=C6=B0=E1=BB=9Bng ki=E1=BB=83m =\r\nth=E1=BB=AD B=C6=B0=E1=BB=9Bc 3 1792944610367 =C2=B7 Email: =\r\ns3_s1792944610367_2@example.test =C2=B7 S=C4=90T: 0912345678</li>\r\n   =20\r\n  </ul>\r\n  <p>Xin tr=C3=A2n tr=E1=BB=8Dng c=E1=BA=A3m =C6=A1n =\r\nTh=E1=BA=A7y/C=C3=B4!</p>\r\n</body>\r\n</html>",
+        "Helo": "[127.0.0.1]"
+      }
+    },
+    {
+      "ID": "gVqTRtXTTlA6QEvAn7856oSizkmrEOnUedJnXfeZwcY=@mailhog.example",
+      "From": {
+        "Relays": null,
+        "Mailbox": "gpms",
+        "Domain": "example.test",
+        "Params": ""
+      },
+      "To": [
+        {
+          "Relays": null,
+          "Mailbox": "s3_l1792944610367_3",
+          "Domain": "example.test",
+          "Params": ""
+        }
+      ],
+      "Content": {
+        "Headers": {
+          "Content-Transfer-Encoding": [
+            "quoted-printable"
+          ],
+          "Content-Type": [
+            "text/html; charset=utf-8"
+          ],
+          "Date": [
+            "Sun, 25 Oct 2026 16:10:14 +0000"
+          ],
+          "From": [
+            "gpms@example.test"
+          ],
+          "MIME-Version": [
+            "1.0"
+          ],
+          "Message-ID": [
+            "<24ff57f0-d696-4c2c-815d-5614c77577b4@gpms.local>"
+          ],
+          "Received": [
+            "from [127.0.0.1] by mailhog.example (MailHog)\r\n          id gVqTRtXTTlA6QEvAn7856oSizkmrEOnUedJnXfeZwcY=@mailhog.example; Sun, 25 Oct 2026 23:10:14 +0700"
+          ],
+          "Return-Path": [
+            "<gpms@example.test>"
+          ],
+          "Subject": [
+            "=?UTF-8?Q?Ph=C3=A2n_c=C3=B4ng_GVHD_=E2=80=94_B?= =?UTF-8?Q?=C6=B0=E1=BB=9Bc_3_ki=E1=BB=83m_th?= =?UTF-8?Q?=E1=BB=AD_1792944610367?="
+          ],
+          "To": [
+            "s3_l1792944610367_3@example.test"
+          ]
+        },
+        "Body": "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <meta charset=3D\"utf-8\">\r\n  <title>Th=C3=B4ng b=C3=A1o ph=C3=A2n c=C3=B4ng GVHD</title>\r\n</head>\r\n<body style=3D\"font-family: Arial, sans-serif; line-height: 1.6; color: =\r\n#333;\">\r\n  <h2>K=C3=ADnh g=E1=BB=ADi Th=E1=BA=A7y/C=C3=B4 Gi=E1=BA=A3ng =\r\nvi=C3=AAn T,</h2>\r\n  <p>Khoa C=C3=B4ng ngh=E1=BB=87 Th=C3=B4ng tin - =\r\nTr=C6=B0=E1=BB=9Dng =C4=90=E1=BA=A1i h=E1=BB=8Dc Giao th=C3=B4ng =\r\nv=E1=BA=ADn t=E1=BA=A3i xin th=C3=B4ng b=C3=A1o k=E1=BA=BFt qu=E1=BA=A3 =\r\nph=C3=A2n c=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn =C4=91=E1=BB=93 =C3=A1n =\r\nt=E1=BB=91t nghi=E1=BB=87p =C4=91=E1=BB=A3t <strong>B=C6=B0=E1=BB=9Bc 3 =\r\nki=E1=BB=83m th=E1=BB=AD 1792944610367</strong>.</p>\r\n  <p>Th=E1=BA=A7y/C=C3=B4 =C4=91=C3=A3 =C4=91=C6=B0=E1=BB=A3c ph=C3=A2n =\r\nc=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn c=C3=A1c sinh vi=C3=AAn sau:</p>\r\n  <ul>\r\n   =20\r\n    <li><strong>S3S17929446103670</strong> - Sinh vi=C3=AAn A=\r\n (L=E1=BB=9Bp: Ki=E1=BB=83m th=E1=BB=AD ti=E1=BA=BFng =\r\nVi=E1=BB=87t)<br>H=C6=B0=E1=BB=9Bng: H=C6=B0=E1=BB=9Bng ki=E1=BB=83m =\r\nth=E1=BB=AD B=C6=B0=E1=BB=9Bc 3 1792944610367 =C2=B7 Email: =\r\ns3_s1792944610367_0@example.test =C2=B7 S=C4=90T: 0912345678</li>\r\n   =20\r\n  </ul>\r\n  <p>Xin tr=C3=A2n tr=E1=BB=8Dng c=E1=BA=A3m =C6=A1n =\r\nTh=E1=BA=A7y/C=C3=B4!</p>\r\n</body>\r\n</html>",
+        "Size": 1727,
+        "MIME": null
+      },
+      "Created": "2026-10-25T23:10:14.0574499+07:00",
+      "MIME": null,
+      "Raw": {
+        "From": "gpms@example.test",
+        "To": [
+          "s3_l1792944610367_3@example.test"
+        ],
+        "Data": "From: gpms@example.test\r\nTo: s3_l1792944610367_3@example.test\r\nSubject: =?UTF-8?Q?Ph=C3=A2n_c=C3=B4ng_GVHD_=E2=80=94_B?=\r\n =?UTF-8?Q?=C6=B0=E1=BB=9Bc_3_ki=E1=BB=83m_th?=\r\n =?UTF-8?Q?=E1=BB=AD_1792944610367?=\r\nMessage-ID: <24ff57f0-d696-4c2c-815d-5614c77577b4@gpms.local>\r\nContent-Transfer-Encoding: quoted-printable\r\nDate: Sun, 25 Oct 2026 16:10:14 +0000\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=utf-8\r\n\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <meta charset=3D\"utf-8\">\r\n  <title>Th=C3=B4ng b=C3=A1o ph=C3=A2n c=C3=B4ng GVHD</title>\r\n</head>\r\n<body style=3D\"font-family: Arial, sans-serif; line-height: 1.6; color: =\r\n#333;\">\r\n  <h2>K=C3=ADnh g=E1=BB=ADi Th=E1=BA=A7y/C=C3=B4 Gi=E1=BA=A3ng =\r\nvi=C3=AAn T,</h2>\r\n  <p>Khoa C=C3=B4ng ngh=E1=BB=87 Th=C3=B4ng tin - =\r\nTr=C6=B0=E1=BB=9Dng =C4=90=E1=BA=A1i h=E1=BB=8Dc Giao th=C3=B4ng =\r\nv=E1=BA=ADn t=E1=BA=A3i xin th=C3=B4ng b=C3=A1o k=E1=BA=BFt qu=E1=BA=A3 =\r\nph=C3=A2n c=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn =C4=91=E1=BB=93 =C3=A1n =\r\nt=E1=BB=91t nghi=E1=BB=87p =C4=91=E1=BB=A3t <strong>B=C6=B0=E1=BB=9Bc 3 =\r\nki=E1=BB=83m th=E1=BB=AD 1792944610367</strong>.</p>\r\n  <p>Th=E1=BA=A7y/C=C3=B4 =C4=91=C3=A3 =C4=91=C6=B0=E1=BB=A3c ph=C3=A2n =\r\nc=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn c=C3=A1c sinh vi=C3=AAn sau:</p>\r\n  <ul>\r\n   =20\r\n    <li><strong>S3S17929446103670</strong> - Sinh vi=C3=AAn A=\r\n (L=E1=BB=9Bp: Ki=E1=BB=83m th=E1=BB=AD ti=E1=BA=BFng =\r\nVi=E1=BB=87t)<br>H=C6=B0=E1=BB=9Bng: H=C6=B0=E1=BB=9Bng ki=E1=BB=83m =\r\nth=E1=BB=AD B=C6=B0=E1=BB=9Bc 3 1792944610367 =C2=B7 Email: =\r\ns3_s1792944610367_0@example.test =C2=B7 S=C4=90T: 0912345678</li>\r\n   =20\r\n  </ul>\r\n  <p>Xin tr=C3=A2n tr=E1=BB=8Dng c=E1=BA=A3m =C6=A1n =\r\nTh=E1=BA=A7y/C=C3=B4!</p>\r\n</body>\r\n</html>",
+        "Helo": "[127.0.0.1]"
+      }
+    },
+    {
+      "ID": "tivQErJHzUbEcHM2FGJxjnuRcRGnsB-uarQaYzpitUE=@mailhog.example",
+      "From": {
+        "Relays": null,
+        "Mailbox": "gpms",
+        "Domain": "example.test",
+        "Params": ""
+      },
+      "To": [
+        {
+          "Relays": null,
+          "Mailbox": "s3_l1792944610367_2",
+          "Domain": "example.test",
+          "Params": ""
+        }
+      ],
+      "Content": {
+        "Headers": {
+          "Content-Transfer-Encoding": [
+            "quoted-printable"
+          ],
+          "Content-Type": [
+            "text/html; charset=utf-8"
+          ],
+          "Date": [
+            "Sun, 25 Oct 2026 16:10:14 +0000"
+          ],
+          "From": [
+            "gpms@example.test"
+          ],
+          "MIME-Version": [
+            "1.0"
+          ],
+          "Message-ID": [
+            "<3ff8033d-93b5-488d-a4a2-b53b4fcd8e95@gpms.local>"
+          ],
+          "Received": [
+            "from [127.0.0.1] by mailhog.example (MailHog)\r\n          id tivQErJHzUbEcHM2FGJxjnuRcRGnsB-uarQaYzpitUE=@mailhog.example; Sun, 25 Oct 2026 23:10:14 +0700"
+          ],
+          "Return-Path": [
+            "<gpms@example.test>"
+          ],
+          "Subject": [
+            "=?UTF-8?Q?Ph=C3=A2n_c=C3=B4ng_GVHD_=E2=80=94_B?= =?UTF-8?Q?=C6=B0=E1=BB=9Bc_3_ki=E1=BB=83m_th?= =?UTF-8?Q?=E1=BB=AD_1792944610367?="
+          ],
+          "To": [
+            "s3_l1792944610367_2@example.test"
+          ]
+        },
+        "Body": "<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <meta charset=3D\"utf-8\">\r\n  <title>Th=C3=B4ng b=C3=A1o ph=C3=A2n c=C3=B4ng GVHD</title>\r\n</head>\r\n<body style=3D\"font-family: Arial, sans-serif; line-height: 1.6; color: =\r\n#333;\">\r\n  <h2>K=C3=ADnh g=E1=BB=ADi Th=E1=BA=A7y/C=C3=B4 Gi=E1=BA=A3ng =\r\nvi=C3=AAn Z,</h2>\r\n  <p>Khoa C=C3=B4ng ngh=E1=BB=87 Th=C3=B4ng tin - =\r\nTr=C6=B0=E1=BB=9Dng =C4=90=E1=BA=A1i h=E1=BB=8Dc Giao th=C3=B4ng =\r\nv=E1=BA=ADn t=E1=BA=A3i xin th=C3=B4ng b=C3=A1o k=E1=BA=BFt qu=E1=BA=A3 =\r\nph=C3=A2n c=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn =C4=91=E1=BB=93 =C3=A1n =\r\nt=E1=BB=91t nghi=E1=BB=87p =C4=91=E1=BB=A3t <strong>B=C6=B0=E1=BB=9Bc 3 =\r\nki=E1=BB=83m th=E1=BB=AD 1792944610367</strong>.</p>\r\n  <p>Th=E1=BA=A7y/C=C3=B4 =C4=91=C3=A3 =C4=91=C6=B0=E1=BB=A3c ph=C3=A2n =\r\nc=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn c=C3=A1c sinh vi=C3=AAn sau:</p>\r\n  <ul>\r\n   =20\r\n    <li><strong>S3S17929446103671</strong> - Sinh vi=C3=AAn B=\r\n (L=E1=BB=9Bp: Ki=E1=BB=83m th=E1=BB=AD ti=E1=BA=BFng =\r\nVi=E1=BB=87t)<br>H=C6=B0=E1=BB=9Bng: H=C6=B0=E1=BB=9Bng ki=E1=BB=83m =\r\nth=E1=BB=AD B=C6=B0=E1=BB=9Bc 3 1792944610367 =C2=B7 Email: =\r\ns3_s1792944610367_1@example.test =C2=B7 S=C4=90T: 0912345678</li>\r\n   =20\r\n  </ul>\r\n  <p>Xin tr=C3=A2n tr=E1=BB=8Dng c=E1=BA=A3m =C6=A1n =\r\nTh=E1=BA=A7y/C=C3=B4!</p>\r\n</body>\r\n</html>",
+        "Size": 1727,
+        "MIME": null
+      },
+      "Created": "2026-10-25T23:10:14.0443221+07:00",
+      "MIME": null,
+      "Raw": {
+        "From": "gpms@example.test",
+        "To": [
+          "s3_l1792944610367_2@example.test"
+        ],
+        "Data": "From: gpms@example.test\r\nTo: s3_l1792944610367_2@example.test\r\nSubject: =?UTF-8?Q?Ph=C3=A2n_c=C3=B4ng_GVHD_=E2=80=94_B?=\r\n =?UTF-8?Q?=C6=B0=E1=BB=9Bc_3_ki=E1=BB=83m_th?=\r\n =?UTF-8?Q?=E1=BB=AD_1792944610367?=\r\nMessage-ID: <3ff8033d-93b5-488d-a4a2-b53b4fcd8e95@gpms.local>\r\nContent-Transfer-Encoding: quoted-printable\r\nDate: Sun, 25 Oct 2026 16:10:14 +0000\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=utf-8\r\n\r\n<!DOCTYPE html>\r\n<html>\r\n<head>\r\n  <meta charset=3D\"utf-8\">\r\n  <title>Th=C3=B4ng b=C3=A1o ph=C3=A2n c=C3=B4ng GVHD</title>\r\n</head>\r\n<body style=3D\"font-family: Arial, sans-serif; line-height: 1.6; color: =\r\n#333;\">\r\n  <h2>K=C3=ADnh g=E1=BB=ADi Th=E1=BA=A7y/C=C3=B4 Gi=E1=BA=A3ng =\r\nvi=C3=AAn Z,</h2>\r\n  <p>Khoa C=C3=B4ng ngh=E1=BB=87 Th=C3=B4ng tin - =\r\nTr=C6=B0=E1=BB=9Dng =C4=90=E1=BA=A1i h=E1=BB=8Dc Giao th=C3=B4ng =\r\nv=E1=BA=ADn t=E1=BA=A3i xin th=C3=B4ng b=C3=A1o k=E1=BA=BFt qu=E1=BA=A3 =\r\nph=C3=A2n c=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn =C4=91=E1=BB=93 =C3=A1n =\r\nt=E1=BB=91t nghi=E1=BB=87p =C4=91=E1=BB=A3t <strong>B=C6=B0=E1=BB=9Bc 3 =\r\nki=E1=BB=83m th=E1=BB=AD 1792944610367</strong>.</p>\r\n  <p>Th=E1=BA=A7y/C=C3=B4 =C4=91=C3=A3 =C4=91=C6=B0=E1=BB=A3c ph=C3=A2n =\r\nc=C3=B4ng h=C6=B0=E1=BB=9Bng d=E1=BA=ABn c=C3=A1c sinh vi=C3=AAn sau:</p>\r\n  <ul>\r\n   =20\r\n    <li><strong>S3S17929446103671</strong> - Sinh vi=C3=AAn B=\r\n (L=E1=BB=9Bp: Ki=E1=BB=83m th=E1=BB=AD ti=E1=BA=BFng =\r\nVi=E1=BB=87t)<br>H=C6=B0=E1=BB=9Bng: H=C6=B0=E1=BB=9Bng ki=E1=BB=83m =\r\nth=E1=BB=AD B=C6=B0=E1=BB=9Bc 3 1792944610367 =C2=B7 Email: =\r\ns3_s1792944610367_1@example.test =C2=B7 S=C4=90T: 0912345678</li>\r\n   =20\r\n  </ul>\r\n  <p>Xin tr=C3=A2n tr=E1=BB=8Dng c=E1=BA=A3m =C6=A1n =\r\nTh=E1=BA=A7y/C=C3=B4!</p>\r\n</body>\r\n</html>",
+        "Helo": "[127.0.0.1]"
+      }
+    }
+  ]
+}

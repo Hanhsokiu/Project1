@@ -1,0 +1,762 @@
+{
+  "result": "PASS",
+  "startedAt": "2026-10-26T12:33:28.394Z",
+  "finishedAt": "2026-10-26T12:34:29.440Z",
+  "mockedApi": false,
+  "sharedDatabaseAccess": false,
+  "checks": [
+    {
+      "name": "Khoa logs in and creates real review group with eligible roster member",
+      "result": "PASS"
+    },
+    {
+      "name": "Khoa confirms assignment to the group created in step 4, exact sealed v1",
+      "result": "PASS"
+    },
+    {
+      "name": "Assigned reviewer starts v1 and records one common REVISION_REQUIRED decision",
+      "result": "PASS"
+    },
+    {
+      "name": "Student logs in, responds to v1 feedback, saves immutable v2 and resubmits",
+      "result": "PASS"
+    },
+    {
+      "name": "Khoa assigns v2 to a new round; reviewer approves exact current v2",
+      "result": "PASS"
+    },
+    {
+      "name": "Khoa finalizes approved v2 with real class/major profile; no implied paper receipt",
+      "result": "PASS"
+    },
+    {
+      "name": "Student securely generates/downloads real finalized PDF; download does not mark signed/received",
+      "result": "PASS"
+    },
+    {
+      "name": "Current official advisor creates guidance plan and assigns dated task through UI",
+      "result": "PASS"
+    },
+    {
+      "name": "Student uploads real PDF/ZIP to private storage and commits immutable submission v1",
+      "result": "PASS"
+    },
+    {
+      "name": "Advisor requests revision on submission v1; student sees exact reviewer feedback",
+      "result": "PASS"
+    },
+    {
+      "name": "Student resubmits v2; advisor PASS completes task while v1/review history remains",
+      "result": "PASS"
+    },
+    {
+      "name": "Khoa sees real completion metrics and independent weekly obligation without a manual task",
+      "result": "PASS"
+    },
+    {
+      "name": "Existing step 1–3 student/lecturer/term/registration/topic read APIs retain envelopes and data after full flow",
+      "result": "PASS"
+    },
+    {
+      "name": "Live cross-student/round/review-group and ADMIN access denied by server; UI hides foreign content",
+      "result": "PASS"
+    },
+    {
+      "name": "Old submission is read-only on mobile; no unhandled React errors in real role sessions",
+      "result": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "requests": [
+    {
+      "actor": "faculty",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/review-group-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/terms/qa-t1/review-group-options",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "POST",
+      "path": "/api/terms/qa-t1/review-groups",
+      "status": 201
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/review-groups/8dde284e-f2a0-4890-9c4d-23a307ed043a",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-history",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposals/p-student",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-candidates",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "POST",
+      "path": "/api/proposals/p-student/review-assignments",
+      "status": 201
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposal-reviews/a1911d86-ab30-4421-bf51-ce570f7f14e5",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposal-reviews/a1911d86-ab30-4421-bf51-ce570f7f14e5",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-history",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "POST",
+      "path": "/api/proposal-reviews/a1911d86-ab30-4421-bf51-ce570f7f14e5/start",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-history",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposal-reviews/a1911d86-ab30-4421-bf51-ce570f7f14e5",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "POST",
+      "path": "/api/proposal-reviews/a1911d86-ab30-4421-bf51-ce570f7f14e5/decision",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposal-reviews/a1911d86-ab30-4421-bf51-ce570f7f14e5",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-history",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposals/p-student/editing-context",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposals/p-student/versions",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/proposals/p-student/versions",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposals/p-student/versions",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposals/p-student/editing-context",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/proposals/p-student/submit",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposals/p-student/versions",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposals/p-student/editing-context",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-history",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposals/p-student",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-candidates",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "POST",
+      "path": "/api/proposals/p-student/review-assignments",
+      "status": 201
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposal-reviews/071e57c0-3b22-4bff-a5fd-0bfe31ed35f2",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposal-reviews/071e57c0-3b22-4bff-a5fd-0bfe31ed35f2",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-history",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "POST",
+      "path": "/api/proposal-reviews/071e57c0-3b22-4bff-a5fd-0bfe31ed35f2/start",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposal-reviews/071e57c0-3b22-4bff-a5fd-0bfe31ed35f2",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-history",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "POST",
+      "path": "/api/proposal-reviews/071e57c0-3b22-4bff-a5fd-0bfe31ed35f2/decision",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposal-reviews/071e57c0-3b22-4bff-a5fd-0bfe31ed35f2",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "method": "GET",
+      "path": "/api/proposals/p-student/review-history",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposals/p-student/dossier",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "POST",
+      "path": "/api/proposals/p-student/finalize",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposals/p-student/dossier",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/proposals/p-student/dossier/pdf",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposals/p-student/dossier.pdf",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/proposals/p-student/guidance-context",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "POST",
+      "path": "/api/proposals/p-student/guidance-plan",
+      "status": 201
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/proposals/p-student/guidance-context",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/guidance-plans/58caf990-153d-499e-bf3d-2b48a2669624/tasks",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "POST",
+      "path": "/api/guidance-plans/58caf990-153d-499e-bf3d-2b48a2669624/tasks",
+      "status": 201
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/proposals/p-student/guidance-context",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submissions",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submission-context",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submission-uploads",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submission-uploads",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submissions",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submissions",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submission-context",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/task-submissions/af509959-8cf3-48de-987c-93fbc0501a10/review-context",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "POST",
+      "path": "/api/task-submissions/af509959-8cf3-48de-987c-93fbc0501a10/reviews",
+      "status": 201
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/task-submissions/af509959-8cf3-48de-987c-93fbc0501a10/review-context",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/task-submissions/af509959-8cf3-48de-987c-93fbc0501a10/review-context",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submissions",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submission-context",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submission-uploads",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submission-uploads",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "POST",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submissions",
+      "status": 201
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submissions",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a",
+      "status": 200
+    },
+    {
+      "actor": "student",
+      "method": "GET",
+      "path": "/api/tasks/7cd4201d-1c01-45d6-bd89-0ce8c1aea47a/submission-context",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/task-submissions/803e3bfc-0d55-46a1-bbf0-344273c462c7/review-context",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "POST",
+      "path": "/api/task-submissions/803e3bfc-0d55-46a1-bbf0-344273c462c7/reviews",
+      "status": 201
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/task-submissions/803e3bfc-0d55-46a1-bbf0-344273c462c7/review-context",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/guidance-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/terms/qa-t1/guidance-dashboard",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/terms/qa-t1/guidance-dashboard",
+      "status": 200
+    },
+    {
+      "actor": "student2",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201
+    },
+    {
+      "actor": "student2",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "student2",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "student2",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "student2",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "student2",
+      "method": "GET",
+      "path": "/api/task-submissions/803e3bfc-0d55-46a1-bbf0-344273c462c7/review-context",
+      "status": 404
+    },
+    {
+      "actor": "student2",
+      "method": "GET",
+      "path": "/api/task-submissions/803e3bfc-0d55-46a1-bbf0-344273c462c7/review-context",
+      "status": 404
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200
+    },
+    {
+      "actor": "advisor",
+      "method": "GET",
+      "path": "/api/task-submissions/af509959-8cf3-48de-987c-93fbc0501a10/review-context",
+      "status": 200
+    }
+  ]
+}

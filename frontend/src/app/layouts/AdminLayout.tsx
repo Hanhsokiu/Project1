@@ -14,6 +14,7 @@ export default function AdminLayout() {
           <Link to="/catalog/students" className="block px-3 py-2 rounded hover:bg-slate-800">Sinh viên</Link>
           <Link to="/catalog/lecturers" className="block px-3 py-2 rounded hover:bg-slate-800">Giảng viên</Link>
           <Link to="/terms" className="block px-3 py-2 rounded hover:bg-slate-800">Đợt đồ án</Link>
+          <Link to="/topic/review-groups" className="block px-3 py-2 rounded hover:bg-slate-800">Nhóm duyệt đề cương</Link>
           <Link to="/report/export" className="block px-3 py-2 rounded hover:bg-slate-800">Báo cáo & Thống kê</Link>
         </nav>
       </aside>

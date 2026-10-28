@@ -1,5 +1,7 @@
 FROM node:20-alpine
 RUN npm install -g pnpm@9
+RUN apk add --no-cache chromium font-noto
+ENV PDF_CHROME_PATH=/usr/bin/chromium-browser
 WORKDIR /workspace
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY backend/package.json backend/package.json
