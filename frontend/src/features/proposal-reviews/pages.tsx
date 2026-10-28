@@ -1,30 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 import {
   Link,
   useNavigate,
   useParams,
   useSearchParams,
-} from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { AssignReviewSchema, ReviewCommentSchema } from '@doan/shared';
+} from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { AssignReviewSchema, ReviewCommentSchema } from "@doan/shared";
 import type {
   AssignReview,
   ProposalReviewView,
   ReviewCandidate,
   ReviewDecisionInput,
   ReviewQuery,
-} from '@doan/shared';
-import { proposalReviewApi as api, ReviewProposalDetail } from './api';
+} from "@doan/shared";
+import { proposalReviewApi as api, ReviewProposalDetail } from "./api";
 import {
   DecisionForm,
   ProposalContent,
   ReviewEvidence,
   ReviewState,
   reviewStatusLabel,
-} from './components';
-import { getErrorMessage } from '../../shared/api/error-message';
+} from "./components";
+import { getErrorMessage } from "../../shared/api/error-message";
 const message = (e: unknown) =>
-  e ? getErrorMessage(e, 'Không thể xử lý đề cương. Hãy thử lại.') : undefined;
+  e ? getErrorMessage(e, "Không thể xử lý đề cương. Hãy thử lại.") : undefined;
 function useRequestKey() {
   const saved = useRef<{ payload: string; key: string }>();
   return (payload: unknown) => {
@@ -35,20 +35,20 @@ function useRequestKey() {
   };
 }
 const date = (v: string) =>
-  new Date(v).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+  new Date(v).toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
 export function ProposalReviewQueuePage() {
   const [params, setParams] = useSearchParams(),
-    termId = params.get('termId') ?? '';
+    termId = params.get("termId") ?? "";
   const [page, setPage] = useState(1),
-    [search, setSearch] = useState(params.get('search') ?? ''),
-    [departmentId, setDepartment] = useState(''),
-    [status, setStatus] = useState(''),
+    [search, setSearch] = useState(params.get("search") ?? ""),
+    [departmentId, setDepartment] = useState(""),
+    [status, setStatus] = useState(""),
     [unassigned, setUnassigned] = useState(false);
   const terms = useQuery({
-    queryKey: ['proposal-review-terms'],
+    queryKey: ["proposal-review-terms"],
     queryFn: api.terms,
   });
-  const requestedSearch = params.get('search');
+  const requestedSearch = params.get("search");
   useEffect(() => {
     if (requestedSearch !== null) {
       setSearch(requestedSearch);
@@ -60,14 +60,14 @@ export function ProposalReviewQueuePage() {
       setParams(
         (previous) => {
           const next = new URLSearchParams(previous);
-          next.set('termId', terms.data![0].id);
+          next.set("termId", terms.data![0].id);
           return next;
         },
         { replace: true },
       );
   }, [termId, terms.data, setParams]);
   const options = useQuery({
-    queryKey: ['proposal-review-options', termId],
+    queryKey: ["proposal-review-options", termId],
     queryFn: () => api.options(termId),
     enabled: !!termId,
   });
@@ -76,11 +76,11 @@ export function ProposalReviewQueuePage() {
     limit: 20,
     search,
     departmentId: departmentId || undefined,
-    status: (status || undefined) as ReviewQuery['status'],
-    unassigned: unassigned ? 'true' : undefined,
+    status: (status || undefined) as ReviewQuery["status"],
+    unassigned: unassigned ? "true" : undefined,
   };
   const list = useQuery({
-    queryKey: ['proposal-queue', termId, q],
+    queryKey: ["proposal-queue", termId, q],
     queryFn: () => api.list(termId, q),
     enabled: !!termId,
   });
@@ -101,9 +101,9 @@ export function ProposalReviewQueuePage() {
       </div>
       {options.data?.phase ? (
         <p className="mb-5 rounded border bg-white p-4 text-sm">
-          Phase duyệt: {date(options.data.phase.startsAt)} —{' '}
-          {date(options.data.phase.endsAt)} ·{' '}
-          {options.data.phase.isLocked ? 'Đã khóa' : 'Theo lịch mở'}{' '}
+          Phase duyệt: {date(options.data.phase.startsAt)} —{" "}
+          {date(options.data.phase.endsAt)} ·{" "}
+          {options.data.phase.isLocked ? "Đã khóa" : "Theo lịch mở"}{" "}
           (Asia/Ho_Chi_Minh)
         </p>
       ) : (
@@ -128,7 +128,7 @@ export function ProposalReviewQueuePage() {
               onChange={(e) => {
                 setParams({ termId: e.target.value });
                 setPage(1);
-                setDepartment('');
+                setDepartment("");
               }}
             >
               <option value="">Chọn đợt</option>
@@ -171,10 +171,10 @@ export function ProposalReviewQueuePage() {
             >
               <option value="">Tất cả trạng thái</option>
               {[
-                'SUBMITTED',
-                'UNDER_REVIEW',
-                'REVISION_REQUESTED',
-                'APPROVED',
+                "SUBMITTED",
+                "UNDER_REVIEW",
+                "REVISION_REQUESTED",
+                "APPROVED",
               ].map((s) => (
                 <option key={s} value={s}>
                   {reviewStatusLabel(s)}
@@ -237,7 +237,7 @@ export function ProposalReviewQueuePage() {
                       </span>
                     </td>
                     <td className="p-4">
-                      {p.departmentName ?? 'Chưa có routing'}
+                      {p.departmentName ?? "Chưa có routing"}
                       <small className="block text-slate-500">
                         {p.researchAreaName}
                       </small>
@@ -245,12 +245,12 @@ export function ProposalReviewQueuePage() {
                     <td className="p-4">
                       {p.versionNumber
                         ? `v${p.versionNumber}`
-                        : 'Chưa sẵn sàng'}
+                        : "Chưa sẵn sàng"}
                     </td>
                     <td className="p-4">
                       {reviewStatusLabel(p.status)}
                       <small className="block text-slate-500">
-                        {p.groupName ?? 'Chưa phân nhóm'}
+                        {p.groupName ?? "Chưa phân nhóm"}
                       </small>
                     </td>
                     <td className="p-4">
@@ -330,9 +330,9 @@ function AssignmentForm({
     reviewId: activeReview?.id,
     reviewRevision: activeReview?.revision,
   });
-  const [groupId, setGroup] = useState(''),
-    [reason, setReason] = useState(''),
-    [error, setError] = useState('');
+  const [groupId, setGroup] = useState(""),
+    [reason, setReason] = useState(""),
+    [error, setError] = useState("");
   return (
     <form
       className="rg-panel space-y-4 p-5"
@@ -351,10 +351,10 @@ function AssignmentForm({
             : {}),
         });
         if (!parsed.success) {
-          setError(parsed.error.issues.map((i) => i.message).join('; '));
+          setError(parsed.error.issues.map((i) => i.message).join("; "));
           return;
         }
-        setError('');
+        setError("");
         onSubmit(parsed.data);
       }}
     >
@@ -378,7 +378,7 @@ function AssignmentForm({
           <option value="">Khoa chọn nhóm duyệt</option>
           {candidates.map((g) => (
             <option value={g.id} key={g.id} disabled={!g.eligibleReviewerCount}>
-              {g.name} · {g.eligibleReviewerCount} người hợp lệ ·{' '}
+              {g.name} · {g.eligibleReviewerCount} người hợp lệ ·{" "}
               {g.specialtyMatchCount} khớp hướng · {g.activeReviewCount} vòng
               active
             </option>
@@ -417,39 +417,39 @@ function AssignmentForm({
         className="rounded bg-blue-600 px-4 py-2 text-sm text-white"
       >
         {busy
-          ? 'Đang xác nhận…'
+          ? "Đang xác nhận…"
           : snapshot.reviewId
-            ? 'Xác nhận phân lại'
-            : 'Xác nhận phân công'}
+            ? "Xác nhận phân lại"
+            : "Xác nhận phân công"}
       </button>
     </form>
   );
 }
 export function ProposalReviewAssignmentPage() {
-  const { proposalId = '' } = useParams(),
+  const { proposalId = "" } = useParams(),
     navigate = useNavigate(),
     client = useQueryClient(),
     key = useRequestKey();
   const proposal = useQuery({
-    queryKey: ['review-proposal', proposalId],
+    queryKey: ["review-proposal", proposalId],
     queryFn: () => api.proposal(proposalId),
   });
   const candidates = useQuery({
-    queryKey: ['review-candidates', proposalId],
+    queryKey: ["review-candidates", proposalId],
     queryFn: () => api.candidates(proposalId),
     enabled:
       !!proposal.data?.canAssign &&
-      ['SUBMITTED', 'UNDER_REVIEW'].includes(proposal.data.status),
+      ["SUBMITTED", "UNDER_REVIEW"].includes(proposal.data.status),
   });
   const history = useQuery({
-    queryKey: ['review-history', proposalId],
+    queryKey: ["review-history", proposalId],
     queryFn: () => api.history(proposalId),
   });
   const mutation = useMutation({
     mutationFn: (input: AssignReview) =>
       api.assign(proposalId, input, key(input)),
     onSuccess: async (r) => {
-      await client.invalidateQueries({ queryKey: ['proposal-queue'] });
+      await client.invalidateQueries({ queryKey: ["proposal-queue"] });
       navigate(`/topic/reviews/${r.id}?saved=assigned`);
     },
   });
@@ -472,11 +472,11 @@ export function ProposalReviewAssignmentPage() {
           <div className="space-y-5">
             <h1>{proposal.data.title}</h1>
             <p>
-              {proposal.data.studentName} · {proposal.data.studentCode} ·{' '}
+              {proposal.data.studentName} · {proposal.data.studentCode} ·{" "}
               {reviewStatusLabel(proposal.data.status)}
             </p>
             <p className="rounded border bg-white p-4 text-sm">
-              Phiên bản đã nộp v{proposal.data.version.versionNumber} ·{' '}
+              Phiên bản đã nộp v{proposal.data.version.versionNumber} ·{" "}
               {date(proposal.data.version.submittedAt)}
               <span className="mt-2 block break-all text-xs text-slate-500">
                 Hash: {proposal.data.version.contentHash}
@@ -487,7 +487,7 @@ export function ProposalReviewAssignmentPage() {
                 role="alert"
                 className="rounded border border-red-200 bg-red-50 p-4"
               >
-                {message(mutation.error)}{' '}
+                {message(mutation.error)}{" "}
                 <button
                   onClick={() => window.location.reload()}
                   className="underline"
@@ -497,7 +497,7 @@ export function ProposalReviewAssignmentPage() {
               </p>
             )}
             {proposal.data.canAssign &&
-              ['SUBMITTED', 'UNDER_REVIEW'].includes(proposal.data.status) && (
+              ["SUBMITTED", "UNDER_REVIEW"].includes(proposal.data.status) && (
                 <ReviewState
                   loading={candidates.isLoading}
                   error={message(candidates.error)}
@@ -536,12 +536,12 @@ export function ReviewHistory({ reviews }: { reviews: ProposalReviewView[] }) {
               Vòng {r.roundNumber} · v{r.versionNumber} · {r.groupName}
             </Link>
             <p className="mt-1 text-slate-500">
-              {reviewStatusLabel(r.state)} ·{' '}
+              {reviewStatusLabel(r.state)} ·{" "}
               {r.decision
                 ? reviewStatusLabel(r.decision.decision)
-                : 'Chưa có kết luận'}
-              {r.assignedAt ? ` · Phân lúc ${date(r.assignedAt)}` : ''}
-              {r.assignedByUserId ? ` · Actor ${r.assignedByUserId}` : ''}
+                : "Chưa có kết luận"}
+              {r.assignedAt ? ` · Phân lúc ${date(r.assignedAt)}` : ""}
+              {r.assignedByUserId ? ` · Actor ${r.assignedByUserId}` : ""}
             </p>
           </li>
         ))}
@@ -550,37 +550,54 @@ export function ReviewHistory({ reviews }: { reviews: ProposalReviewView[] }) {
   );
 }
 export function ProposalReviewDetailPage() {
-  const { id = '' } = useParams();
+  const { id = "" } = useParams();
   return <ProposalReviewDetail key={id} id={id} />;
 }
 function ProposalReviewDetail({ id }: { id: string }) {
-  const [params] = useSearchParams(),
+  const [params, setParams] = useSearchParams(),
     client = useQueryClient(),
     key = useRequestKey();
   const review = useQuery({
-    queryKey: ['proposal-review', id],
+    queryKey: ["proposal-review", id],
     queryFn: () => api.detail(id),
   });
   const history = useQuery({
-    queryKey: ['review-history', review.data?.proposalId],
+    queryKey: ["review-history", review.data?.proposalId],
     queryFn: () => api.history(review.data!.proposalId),
     enabled: !!review.data,
   });
-  const [text, setText] = useState(''),
-    [feedback, setFeedback] = useState('');
+  const [text, setText] = useState(""),
+    [feedback, setFeedback] = useState(""),
+    [commentError, setCommentError] = useState("");
   const commentRevision = useRef<number>();
+  const clearFeedback = () => {
+    setFeedback("");
+    if (params.has("saved"))
+      setParams(
+        (previous) => {
+          const next = new URLSearchParams(previous);
+          next.delete("saved");
+          return next;
+        },
+        { replace: true },
+      );
+  };
   const mutation = useMutation({
+    onMutate: () => {
+      clearFeedback();
+      setCommentError("");
+    },
     mutationFn: ({
       kind,
       input,
     }: {
-      kind: 'start' | 'comment' | 'decision';
+      kind: "start" | "comment" | "decision";
       input: unknown;
     }) => {
       const requestKey = key({ kind, input });
-      return kind === 'start'
+      return kind === "start"
         ? api.start(id, input as Parameters<typeof api.start>[1], requestKey)
-        : kind === 'comment'
+        : kind === "comment"
           ? api.comment(
               id,
               input as Parameters<typeof api.comment>[1],
@@ -590,20 +607,20 @@ function ProposalReviewDetail({ id }: { id: string }) {
     },
     onSuccess: async (_, v) => {
       setFeedback(
-        v.kind === 'decision'
-          ? 'Đã lưu kết luận chung.'
-          : v.kind === 'start'
-            ? 'Đã bắt đầu vòng duyệt.'
-            : 'Đã lưu nhận xét.',
+        v.kind === "decision"
+          ? "Đã lưu kết luận chung."
+          : v.kind === "start"
+            ? "Đã bắt đầu vòng duyệt."
+            : "Đã lưu nhận xét.",
       );
-      if (v.kind === 'comment') {
-        setText('');
+      if (v.kind === "comment") {
+        setText("");
         commentRevision.current = undefined;
       }
       await Promise.all([
-        client.invalidateQueries({ queryKey: ['proposal-review', id] }),
-        client.invalidateQueries({ queryKey: ['review-history'] }),
-        client.invalidateQueries({ queryKey: ['proposal-queue'] }),
+        client.invalidateQueries({ queryKey: ["proposal-review", id] }),
+        client.invalidateQueries({ queryKey: ["review-history"] }),
+        client.invalidateQueries({ queryKey: ["proposal-queue"] }),
       ]);
     },
   });
@@ -630,18 +647,18 @@ function ProposalReviewDetail({ id }: { id: string }) {
                 Đang xem phiên bản v{r.versionNumber} · Vòng {r.roundNumber}
               </strong>
               <p className="mt-2 text-sm">
-                {reviewStatusLabel(r.state)} · Đề cương:{' '}
+                {reviewStatusLabel(r.state)} · Đề cương:{" "}
                 {reviewStatusLabel(r.proposalStatus)}
               </p>
               <p className="mt-2 break-all text-xs text-slate-500">
                 Version ID: {r.versionId}
                 <br />
-                Hash: {r.version.contentHash ?? 'Chưa có hash'}
+                Hash: {r.version.contentHash ?? "Chưa có hash"}
                 <br />
-                Nộp lúc:{' '}
+                Nộp lúc:{" "}
                 {r.version.submittedAt
                   ? date(r.version.submittedAt)
-                  : 'Chưa có dữ liệu'}
+                  : "Chưa có dữ liệu"}
               </p>
               {r.supersededByReviewId && (
                 <p className="mt-3 text-amber-700">
@@ -649,12 +666,12 @@ function ProposalReviewDetail({ id }: { id: string }) {
                 </p>
               )}
             </div>
-            {(feedback || params.get('saved')) && (
+            {(feedback || params.get("saved")) && (
               <p
                 role="status"
                 className="rounded border border-emerald-200 bg-emerald-50 p-4 text-emerald-800"
               >
-                {feedback || 'Đã xác nhận phân công nhóm duyệt.'}
+                {feedback || "Đã xác nhận phân công nhóm duyệt."}
               </p>
             )}
             {mutation.error && (
@@ -662,7 +679,7 @@ function ProposalReviewDetail({ id }: { id: string }) {
                 role="alert"
                 className="rounded border border-red-200 bg-red-50 p-4"
               >
-                {message(mutation.error)}{' '}
+                {message(mutation.error)}{" "}
                 <button
                   className="underline"
                   onClick={() => window.location.reload()}
@@ -671,7 +688,7 @@ function ProposalReviewDetail({ id }: { id: string }) {
                 </button>
               </p>
             )}
-            {r.allowedActions.includes('assign') && (
+            {r.allowedActions.includes("assign") && (
               <Link
                 className="inline-block text-sm text-blue-700"
                 to={`/topic/review-assignments/${r.proposalId}`}
@@ -679,13 +696,13 @@ function ProposalReviewDetail({ id }: { id: string }) {
                 Khoa điều chỉnh phân công →
               </Link>
             )}
-            {r.allowedActions.includes('start') && (
+            {r.allowedActions.includes("start") && (
               <button
                 className="rounded bg-blue-600 px-4 py-2 text-white"
                 disabled={mutation.isPending}
                 onClick={() =>
                   mutation.mutate({
-                    kind: 'start',
+                    kind: "start",
                     input: {
                       expectedProposalRevision: r.proposalRevision,
                       expectedReviewRevision: r.revision,
@@ -698,24 +715,37 @@ function ProposalReviewDetail({ id }: { id: string }) {
             )}
             <ProposalContent content={r.version.content} />
             <ReviewEvidence review={r} />
-            {r.allowedActions.includes('comment') && (
+            {r.allowedActions.includes("comment") && (
               <form
                 className="rg-panel space-y-4 p-5"
                 onSubmit={(e) => {
                   e.preventDefault();
+                  clearFeedback();
                   const parsed = ReviewCommentSchema.safeParse({
                     expectedReviewRevision:
                       commentRevision.current ?? r.revision,
                     versionId: r.versionId,
                     text,
                   });
-                  if (parsed.success)
-                    mutation.mutate({ kind: 'comment', input: parsed.data });
+                  if (!parsed.success) {
+                    setCommentError(
+                      text.trim()
+                        ? "Nhận xét không hợp lệ. Hãy tải lại vòng duyệt và thử lại."
+                        : "Nội dung nhận xét không được để trống hoặc chỉ gồm khoảng trắng.",
+                    );
+                    return;
+                  }
+                  setCommentError("");
+                  mutation.mutate({ kind: "comment", input: parsed.data });
                 }}
               >
                 <h2 className="font-semibold">Thêm nhận xét thành viên</h2>
                 <textarea
                   aria-label="Nội dung nhận xét"
+                  aria-invalid={!!commentError}
+                  aria-describedby={
+                    commentError ? "review-comment-error" : undefined
+                  }
                   required
                   maxLength={10000}
                   rows={4}
@@ -724,9 +754,21 @@ function ProposalReviewDetail({ id }: { id: string }) {
                   disabled={mutation.isPending}
                   onChange={(e) => {
                     commentRevision.current ??= r.revision;
+                    clearFeedback();
+                    setCommentError("");
+                    mutation.reset();
                     setText(e.target.value);
                   }}
                 />
+                {commentError && (
+                  <p
+                    id="review-comment-error"
+                    role="alert"
+                    className="text-red-700"
+                  >
+                    {commentError}
+                  </p>
+                )}
                 <button
                   className="rounded bg-blue-600 px-4 py-2 text-sm text-white"
                   disabled={mutation.isPending}
@@ -735,13 +777,13 @@ function ProposalReviewDetail({ id }: { id: string }) {
                 </button>
               </form>
             )}
-            {r.allowedActions.includes('decide') && (
+            {r.allowedActions.includes("decide") && (
               <DecisionForm
                 key={id}
                 review={r}
                 busy={mutation.isPending}
                 onSubmit={(input) =>
-                  mutation.mutate({ kind: 'decision', input })
+                  mutation.mutate({ kind: "decision", input })
                 }
               />
             )}

@@ -28,7 +28,19 @@ export function DossierSnapshotPreview({
         Lớp: {snapshot.student.className} · Ngành: {snapshot.student.majorName}
       </p>
       <p>
+        Khóa: {snapshot.student.cohort || "Chưa có dữ liệu"} · Hệ đào tạo:{" "}
+        {snapshot.student.trainingSystem}
+      </p>
+      <p>
+        Số điện thoại: {snapshot.student.phone || "Chưa có dữ liệu"} · Email:{" "}
+        {snapshot.student.email || "Chưa có dữ liệu"}
+      </p>
+      <p>
         GVHD: {snapshot.advisor.name} · {snapshot.advisor.department}
+      </p>
+      <p>
+        Số điện thoại GVHD: {snapshot.advisor.phone || "Chưa có dữ liệu"} ·
+        Email GVHD: {snapshot.advisor.email || "Chưa có dữ liệu"}
       </p>
       <ProposalContent content={snapshot.content} />
       <p className="text-sm text-slate-500">

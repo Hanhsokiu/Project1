@@ -1,0 +1,101 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T06:50:14.687Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T39-parser-caps-corrected-assertion",
+    "result": "PASS",
+    "at": "2026-10-28T06:50:17.385Z",
+    "detail": {
+      "results": [
+        {
+          "route": "versions",
+          "paddingBytes": 33555456,
+          "status": 413,
+          "error": {
+            "code": "PAYLOAD_TOO_LARGE",
+            "message": "Nội dung yêu cầu vượt dung lượng cho phép. Vui lòng giảm kích thước và thử lại."
+          },
+          "data": null
+        },
+        {
+          "route": "submit",
+          "paddingBytes": 103424,
+          "status": 413,
+          "error": {
+            "code": "PAYLOAD_TOO_LARGE",
+            "message": "Nội dung yêu cầu vượt dung lượng cho phép. Vui lòng giảm kích thước và thử lại."
+          },
+          "data": null
+        }
+      ],
+      "noPartialWrite": true,
+      "correction": "Parser envelope allows data:null; original raw failed assertion retained."
+    }
+  },
+  {
+    "id": "T44-large-diff-mobile",
+    "result": "FAIL",
+    "at": "2026-10-28T06:50:43.764Z",
+    "error": "page.screenshot: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - taking page screenshot\u001b[22m\n\u001b[2m  - waiting for fonts to load...\u001b[22m\n\u001b[2m  - fonts loaded\u001b[22m\n\n    at Object.shot (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\browser-common.cjs:49:97)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\final-cases.cjs:8:821\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\browser-common.cjs:19:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\final-cases.cjs:8:2"
+  },
+  {
+    "id": "T47-SPA-no-draft-feedback-or-compare-leak",
+    "result": "FAIL",
+    "at": "2026-10-28T06:51:07.341Z",
+    "error": "locator.click: Timeout 12000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('a[href=\"/topic/proposal/p-page-02\"]')\u001b[22m\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\final-cases.cjs:19:1026\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\browser-common.cjs:19:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\final-cases.cjs:19:2"
+  },
+  {
+    "id": "T46-real-network-latency-loading-recovery",
+    "result": "PASS",
+    "at": "2026-10-28T06:51:09.371Z",
+    "detail": {
+      "realNetwork": true,
+      "latencyMs": 1500,
+      "mockedResponse": false,
+      "recovered": true
+    }
+  },
+  {
+    "id": "T32-reviewing-and-approved-readonly",
+    "result": "PASS",
+    "at": "2026-10-28T06:51:14.449Z",
+    "detail": [
+      {
+        "state": "UNDER_REVIEW",
+        "saveStatus": 409
+      },
+      {
+        "state": "APPROVED",
+        "saveStatus": 409
+      }
+    ]
+  },
+  {
+    "id": "T27-T48-legacy-diff-raw-XSS-no-backfill",
+    "result": "FAIL",
+    "at": "2026-10-28T06:51:22.450Z",
+    "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByText('Không có khác biệt dữ liệu.', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByText('Không có khác biệt dữ liệu.', { exact: true }) with timeout 5000ms\n  - waiting for getByText('Không có khác biệt dữ liệu.', { exact: true })\n\n    at captureRawStack (D:\\Project1\\BTL\\node_modules\\.pnpm\\playwright-core@1.64.1\\node_modules\\playwright-core\\lib\\coreBundle.js:9282:17)\n    at callMatcherAsStep (D:\\Project1\\BTL\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\matchers\\expect.js:13316:57)\n    at Object.toBeVisible (D:\\Project1\\BTL\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\matchers\\expect.js:13308:23)\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\final-cases.cjs:26:1538\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\browser-common.cjs:19:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step6-local-20261028-0953\\harness\\final-cases.cjs:26:2"
+  },
+  {
+    "id": "contract-withdraw-return-reopen-availability",
+    "result": "PASS",
+    "at": "2026-10-28T06:51:22.482Z",
+    "detail": {
+      "missingRoutes": [
+        "withdraw",
+        "return-to-draft",
+        "reopen"
+      ],
+      "observation": "All 404; recorded as contract GAP, not feature PASS."
+    }
+  }
+]

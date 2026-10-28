@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { randomUUID, createHash } from "crypto";
-import { DOSSIER_TEMPLATE_VERSION } from "@doan/shared";
+import { DOSSIER_TEMPLATE_VERSION, ProposalContentSchema } from "@doan/shared";
 import type {
   DossierFinalize,
   DossierReceiptInput,
@@ -207,6 +207,11 @@ export class DossierService {
       revision: w?.revision ?? 0,
       readiness,
       previewSnapshot,
+      previewVersionId:
+        p.pr2bProposalWorkflowProposalId?.workingVersionId ??
+        p.pr2bProposalWorkflowProposalId?.submittedVersionId ??
+        null,
+      finalizations: await this.finalizations(s, u, p, d),
       allowedActions: actions,
       currentFinalization: f?.printSnapshot
         ? {
@@ -237,6 +242,83 @@ export class DossierService {
         createdAt: h.createdAt.toISOString(),
       })),
     };
+  }
+  private async finalizations(
+    s: DossierSession,
+    u: ReviewPrincipal,
+    p: ReviewProposal,
+    d: DossierRecord | null,
+  ): Promise<DossierView["finalizations"]> {
+    const canExport = await this.access(s, u, p, "export");
+    return (d?.pr2bDossierFinalizationDossierId ?? []).map((f) => {
+      const snapshot = f.printSnapshot
+        ? this.validator.snapshotIntegrity(f.printSnapshot, f.contentHash)
+        : null;
+      const receipt = f.pr2bDossierReceiptFinalizationId;
+      return {
+        id: f.id,
+        sequence: f.sequence,
+        versionNumber: f.refVersionId.version,
+        finalizedAt: f.finalizedAt.toISOString(),
+        supersededAt: f.supersededAt?.toISOString() ?? null,
+        templateVersion: f.templateVersion,
+        snapshot,
+        canDownload:
+          canExport &&
+          !!snapshot &&
+          f.refPdfAssetId?.kind === "DOSSIER_PDF" &&
+          f.refPdfAssetId.state === "READY",
+        receipt: receipt
+          ? {
+              id: receipt.id,
+              finalizationId: f.id,
+              receivedAt: receipt.receivedAt.toISOString(),
+              receivedByUserId: receipt.receivedByUserId,
+              note: receipt.note,
+            }
+          : null,
+      };
+    });
+  }
+
+  async preview(userId: string, proposalId: string, versionId: string) {
+    return this.repo.transaction(async (s) => {
+      const { user, p } = await this.load(s, userId, proposalId);
+      // Preview is for scoped faculty, owner and current advisor, not review membership.
+      await this.requireAccess(s, user, p, "read");
+      const version = await s.version(versionId);
+      if (!version || version.proposalId !== p.id)
+        groupError(404, "COMMON_001", "Không tìm thấy phiên bản trong hồ sơ.");
+      const meta = version.pr2bProposalVersionWorkflowVersionId;
+      const content = ProposalContentSchema.safeParse(version.content);
+      if (
+        !content.success ||
+        !meta ||
+        !["DRAFT", "SEALED"].includes(meta.state ?? "") ||
+        (meta.state === "SEALED" &&
+          reviewHash(version.content) !== meta.contentHash)
+      )
+        groupError(
+          409,
+          "TEMPLATE_NOT_READY",
+          "Phiên bản chưa đủ dữ liệu để xem trước theo mẫu.",
+        );
+      const assignment = await this.review.advisor(s, p);
+      const snapshot = await this.validator.snapshot(s, p, {
+        ...assignment,
+        content: content.data,
+      });
+      const rendered = await this.pdf.render(
+        snapshot,
+        `preview-${version.id}`,
+        version.createdAt,
+        true,
+      );
+      return {
+        bytes: rendered.bytes,
+        filename: `de-cuong-xem-truoc-${encodeURIComponent(version.id)}.pdf`,
+      };
+    });
   }
   async detail(userId: string, proposalId: string) {
     return this.repo.transaction(async (s) => {
@@ -477,8 +559,16 @@ export class DossierService {
     return this.repo.transaction(async (s) => {
       const { user, p } = await this.load(s, userId, proposalId);
       await this.requireAccess(s, user, p, "export");
-      const f = this.current(await s.dossier(p.id), finalizationId),
-        asset = f.refPdfAssetId;
+      const dossier = await s.dossier(p.id);
+      const f = finalizationId
+        ? dossier?.pr2bDossierFinalizationDossierId.find(
+            (f) => f.id === finalizationId,
+          )
+        : this.current(dossier);
+      if (!f)
+        groupError(409, "STALE_FINALIZATION", "Bản chốt không thuộc hồ sơ.");
+      this.validator.snapshotIntegrity(f.printSnapshot, f.contentHash);
+      const asset = f.refPdfAssetId;
       if (!asset || asset.kind !== "DOSSIER_PDF" || asset.state !== "READY")
         groupError(
           409,
@@ -494,7 +584,8 @@ export class DossierService {
         groupError(409, "FILE_NOT_READY", "File PDF không khớp metadata.");
       return {
         bytes: Buffer.from(content.bytes),
-        filename: `de-cuong-${encodeURIComponent(f.id)}.pdf`,
+        filename: `de-cuong-${f.supersededAt ? "da-thay-the-" : ""}${encodeURIComponent(f.id)}.pdf`,
+        state: f.supersededAt ? "SUPERSEDED" : "CURRENT",
       };
     });
   }

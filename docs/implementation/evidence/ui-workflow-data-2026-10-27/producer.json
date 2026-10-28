@@ -1,0 +1,154 @@
+{
+  "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+  "code": "UI-DEMO-48-20261027",
+  "syntheticOnly": true,
+  "originalTermPreserved": true,
+  "originalTermDigest": "d3d89f36be74435a5aa22d57b34ebec599e78557cbc0d16e687be3dec0ba176e",
+  "createdByApi": [
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "route": "/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "route": "/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "status": 200
+    },
+    {
+      "actor": "giaovu",
+      "method": "POST",
+      "route": "/assignments/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/publish",
+      "status": 201
+    },
+    {
+      "actor": "giaovu",
+      "method": "POST",
+      "route": "/assignments/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/finalize",
+      "status": 201
+    },
+    {
+      "actor": "sv001",
+      "method": "PUT",
+      "route": "/topics/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/student/c6c02a01-41e4-46e1-8aae-39357d73c48c/draft",
+      "status": 200
+    },
+    {
+      "actor": "gv001",
+      "method": "POST",
+      "route": "/topics/a7bc28c0-873e-4dde-9a2d-ca97f351895d/agree",
+      "status": 201
+    },
+    {
+      "actor": "sv001",
+      "method": "POST",
+      "route": "/topics/a7bc28c0-873e-4dde-9a2d-ca97f351895d/prepare-workflow",
+      "status": 201
+    },
+    {
+      "actor": "sv001",
+      "method": "POST",
+      "route": "/proposals/a7bc28c0-873e-4dde-9a2d-ca97f351895d/versions",
+      "status": 201
+    },
+    {
+      "actor": "sv001",
+      "method": "POST",
+      "route": "/proposals/a7bc28c0-873e-4dde-9a2d-ca97f351895d/submit",
+      "status": 200
+    },
+    {
+      "actor": "sv002",
+      "method": "PUT",
+      "route": "/topics/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/student/ddcdaa66-5949-49bb-9bda-33c03b1f15a0/draft",
+      "status": 200
+    },
+    {
+      "actor": "gv001",
+      "method": "POST",
+      "route": "/topics/201335e2-9fe4-49b6-bc2e-1c805f44803a/agree",
+      "status": 201
+    },
+    {
+      "actor": "sv002",
+      "method": "POST",
+      "route": "/topics/201335e2-9fe4-49b6-bc2e-1c805f44803a/prepare-workflow",
+      "status": 201
+    },
+    {
+      "actor": "sv002",
+      "method": "POST",
+      "route": "/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/versions",
+      "status": 201
+    },
+    {
+      "actor": "sv002",
+      "method": "POST",
+      "route": "/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/submit",
+      "status": 200
+    },
+    {
+      "actor": "sv003",
+      "method": "PUT",
+      "route": "/topics/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/student/0e4453a0-6263-4516-a394-6fb44a46abc1/draft",
+      "status": 200
+    },
+    {
+      "actor": "gv001",
+      "method": "POST",
+      "route": "/topics/8c447530-71bb-4033-a3be-9ec680a6b1e3/agree",
+      "status": 201
+    },
+    {
+      "actor": "sv003",
+      "method": "POST",
+      "route": "/topics/8c447530-71bb-4033-a3be-9ec680a6b1e3/prepare-workflow",
+      "status": 201
+    },
+    {
+      "actor": "sv003",
+      "method": "POST",
+      "route": "/proposals/8c447530-71bb-4033-a3be-9ec680a6b1e3/versions",
+      "status": 201
+    },
+    {
+      "actor": "sv003",
+      "method": "POST",
+      "route": "/proposals/8c447530-71bb-4033-a3be-9ec680a6b1e3/submit",
+      "status": 200
+    },
+    {
+      "actor": "sv004",
+      "method": "PUT",
+      "route": "/topics/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/student/750cab61-48b7-4422-824f-21973db37570/draft",
+      "status": 200
+    },
+    {
+      "actor": "gv001",
+      "method": "POST",
+      "route": "/topics/73d376de-3359-4de8-b88d-ba742cb0a3a1/agree",
+      "status": 201
+    },
+    {
+      "actor": "sv004",
+      "method": "POST",
+      "route": "/topics/73d376de-3359-4de8-b88d-ba742cb0a3a1/prepare-workflow",
+      "status": 201
+    },
+    {
+      "actor": "sv004",
+      "method": "POST",
+      "route": "/proposals/73d376de-3359-4de8-b88d-ba742cb0a3a1/versions",
+      "status": 201
+    },
+    {
+      "actor": "sv004",
+      "method": "POST",
+      "route": "/proposals/73d376de-3359-4de8-b88d-ba742cb0a3a1/submit",
+      "status": 200
+    }
+  ],
+  "completedAt": "2026-10-27T02:58:25.685Z"
+}

@@ -28,12 +28,12 @@ export default function FinalReportApiPage() {
   const user = getApiUser();
   if (finalReportMode() !== "API")
     return (
-      <main className="p-6">
+      <section className="p-6">
         <Notice tone="danger">
           Chế độ PDF thật yêu cầu VITE_FINAL_REPORT_API=true và
           VITE_AUTH_API=true. Không dùng dữ liệu demo để thay thế.
         </Notice>
-      </main>
+      </section>
     );
   if (!user || !getAccessToken())
     return (
@@ -47,16 +47,16 @@ export default function FinalReportApiPage() {
     return <Navigate to="/change-password" replace />;
   if (!user.roles.includes("STUDENT"))
     return (
-      <main className="p-6 space-y-4">
+      <section className="p-6 space-y-4">
         <Notice tone="danger">
           API nộp PDF này dành cho sinh viên của hồ sơ. GVHD sử dụng màn hình
           UC17 để tải PDF theo quyền được cấp.
         </Notice>
         <Link to="/guidance/defense-confirm">Mở UC17</Link>
-      </main>
+      </section>
     );
   return (
-    <main className="max-w-5xl mx-auto p-6 space-y-6">
+    <section className="max-w-5xl mx-auto space-y-6">
       <Link className="text-indigo-600" to="/">
         ← Về không gian làm việc
       </Link>
@@ -100,7 +100,7 @@ export default function FinalReportApiPage() {
           description="Nhập proposalId của bạn để đọc cửa sổ nộp và PDF hiện hành."
         />
       )}
-    </main>
+    </section>
   );
 }
 

@@ -1,0 +1,158 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T12:22:59.583Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T41-T42-mobile-form-keyboard-SPA-note-isolation",
+    "result": "PASS",
+    "at": "2026-10-28T12:23:02.719Z",
+    "detail": {
+      "viewport": 390,
+      "keyboardFocus": true,
+      "axeViolations": 0,
+      "spaWithoutReload": true,
+      "noteIsolated": true,
+      "noBusinessWrite": true
+    }
+  },
+  {
+    "id": "T13-missing-future-expired-locked-ended-phase",
+    "result": "PASS",
+    "at": "2026-10-28T12:23:03.236Z",
+    "detail": {
+      "observations": [
+        {
+          "name": "missing",
+          "receipt": 409,
+          "finalize": 409,
+          "code": "INPUT_NOT_READY"
+        },
+        {
+          "name": "locked",
+          "receipt": 409,
+          "finalize": 409,
+          "code": "TERM_003"
+        },
+        {
+          "name": "future",
+          "receipt": 409,
+          "finalize": 409,
+          "code": "TERM_003"
+        },
+        {
+          "name": "expired",
+          "receipt": 409,
+          "finalize": 409,
+          "code": "TERM_003"
+        },
+        {
+          "name": "COMPLETED",
+          "receipt": 409,
+          "finalize": 409,
+          "code": "TERM_003"
+        },
+        {
+          "name": "CANCELLED",
+          "receipt": 409,
+          "finalize": 409,
+          "code": "TERM_003"
+        },
+        {
+          "name": "DEFENDING",
+          "receipt": 409,
+          "finalize": 409,
+          "code": "TERM_003"
+        }
+      ],
+      "fixturesRestored": true,
+      "noPartialWrites": true,
+      "finalizeProbe": "phase checked before missing-profile candidate; no successful finalize claimed"
+    }
+  },
+  {
+    "id": "T34-receipt-wrong-finalization-stale-and-unfinalized",
+    "result": "PASS",
+    "at": "2026-10-28T12:23:03.372Z",
+    "detail": {
+      "observations": [
+        {
+          "name": "stale",
+          "status": 409,
+          "error": {
+            "code": "REVISION_CONFLICT",
+            "message": "Dữ liệu đã thay đổi. Hãy tải lại trước khi gửi."
+          }
+        },
+        {
+          "name": "foreign-finalization",
+          "status": 409,
+          "error": {
+            "code": "STALE_FINALIZATION",
+            "message": "Bản chốt đã thay đổi hoặc không thuộc hồ sơ."
+          }
+        },
+        {
+          "name": "not-finalized",
+          "status": 409,
+          "error": {
+            "code": "DOSSIER_NOT_FINALIZED",
+            "message": "Hồ sơ chưa có bản chốt hiện hành."
+          }
+        }
+      ],
+      "noPartialWrites": true
+    }
+  },
+  {
+    "id": "T36-locked-account-existing-token",
+    "result": "PASS",
+    "at": "2026-10-28T12:23:03.387Z",
+    "detail": {
+      "status": 403,
+      "error": {
+        "code": "AUTH_004",
+        "message": "Forbidden Exception"
+      },
+      "fixtureRestoredInFinally": true
+    }
+  },
+  {
+    "id": "T43-legacy-dossier-missing-workflow-no-backfill",
+    "result": "PASS",
+    "at": "2026-10-28T12:23:03.420Z",
+    "detail": {
+      "fixtureCreatedExplicitly": true,
+      "legacyId": "cbe93aff-f74c-4e40-8f87-173d2aab9010",
+      "state": null,
+      "readiness": [
+        "DOSSIER_LOCKED"
+      ],
+      "noGETBackfill": true,
+      "legacyRetainedForAudit": true
+    }
+  },
+  {
+    "id": "T32-T33-concurrent-optional-note-and-replay",
+    "result": "PASS",
+    "at": "2026-10-28T12:23:03.635Z",
+    "detail": {
+      "statuses": [
+        201,
+        409
+      ],
+      "singleReceipt": true,
+      "optionalNote": null,
+      "replay": 201,
+      "changedPayload": 409,
+      "singleHistoryAndAudit": true
+    }
+  }
+]

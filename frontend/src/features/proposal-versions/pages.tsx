@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useParams, useSearchParams } from "react-router-dom";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   ProposalContentSchema,
   ProposalVersionSaveSchema,
   SubmittedProposalContentSchema,
   emptyProposalContent,
-} from '@doan/shared';
+} from "@doan/shared";
 import type {
   ProposalContent,
   ProposalEditorContext,
@@ -14,25 +14,26 @@ import type {
   ProposalVersionSubmit,
   ProposalVersionView,
   RevisionResponse,
-} from '@doan/shared';
-import { proposalReviewApi } from '../proposal-reviews/api';
+} from "@doan/shared";
+import { proposalReviewApi } from "../proposal-reviews/api";
 import {
   ProposalContent as ProposalContentView,
   ReviewState,
   reviewStatusLabel,
-} from '../proposal-reviews/components';
-import { proposalVersionApi as api } from './api';
-import { ProposalFields, RevisionFeedback, VersionChanges } from './components';
-import { getErrorMessage } from '../../shared/api/error-message';
+} from "../proposal-reviews/components";
+import { proposalVersionApi as api } from "./api";
+import { ProposalFields, RevisionFeedback, VersionChanges } from "./components";
+import { ProposalLifecycleActions } from "./lifecycle-actions";
+import { getErrorMessage } from "../../shared/api/error-message";
 const errorText = (e: unknown) =>
-  e ? getErrorMessage(e, 'Không thể tải/lưu đề cương.') : undefined;
+  e ? getErrorMessage(e, "Không thể tải/lưu đề cương.") : undefined;
 const readinessText: Record<string, string> = {
-  INPUT_NOT_READY: 'Thiếu dữ liệu đầu vào đã xác nhận từ bước trước',
-  TERM_003: 'Đợt hoặc giai đoạn chỉnh sửa chưa mở, đã khóa hoặc hết hạn',
-  DOSSIER_LOCKED: 'Hồ sơ đã chốt/khóa hoặc cần đối soát',
-  STATE_TRANSITION_INVALID: 'Trạng thái hiện tại chỉ cho phép xem',
-  ACTIVE_REVIEW_EXISTS: 'Còn vòng duyệt đang hoạt động',
-  TOPIC_NOT_AGREED: 'GVHD cần xác nhận lại đề tài theo phân công hiện hành',
+  INPUT_NOT_READY: "Thiếu dữ liệu đầu vào đã xác nhận từ bước trước",
+  TERM_003: "Đợt hoặc giai đoạn chỉnh sửa chưa mở, đã khóa hoặc hết hạn",
+  DOSSIER_LOCKED: "Hồ sơ đã chốt/khóa hoặc cần đối soát",
+  STATE_TRANSITION_INVALID: "Trạng thái hiện tại chỉ cho phép xem",
+  ACTIVE_REVIEW_EXISTS: "Còn vòng duyệt đang hoạt động",
+  TOPIC_NOT_AGREED: "GVHD cần xác nhận lại đề tài theo phân công hiện hành",
 };
 function useRequestKey() {
   const last = useRef<{ payload: string; key: string }>();
@@ -44,21 +45,21 @@ function useRequestKey() {
   };
 }
 const timestamp = (value: string) =>
-  new Date(value).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
+  new Date(value).toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
 export function ProposalEditorListPage() {
   const [params, setParams] = useSearchParams(),
-    termId = params.get('termId') ?? '';
+    termId = params.get("termId") ?? "";
   const [page, setPage] = useState(1),
-    [search, setSearch] = useState(params.get('search') ?? '');
+    [search, setSearch] = useState(params.get("search") ?? "");
   const terms = useQuery({
-    queryKey: ['proposal-review-terms'],
+    queryKey: ["proposal-review-terms"],
     queryFn: proposalReviewApi.terms,
   });
   useEffect(() => {
     if (!termId && terms.data?.[0])
       setParams({ termId: terms.data[0].id }, { replace: true });
   }, [termId, terms.data, setParams]);
-  const requestedSearch = params.get('search');
+  const requestedSearch = params.get("search");
   useEffect(() => {
     if (requestedSearch !== null) {
       setSearch(requestedSearch);
@@ -66,7 +67,7 @@ export function ProposalEditorListPage() {
     }
   }, [requestedSearch]);
   const list = useQuery({
-    queryKey: ['proposal-editor-list', termId, page, search],
+    queryKey: ["proposal-editor-list", termId, page, search],
     queryFn: () => proposalReviewApi.list(termId, { page, limit: 20, search }),
     enabled: !!termId,
   });
@@ -124,7 +125,7 @@ export function ProposalEditorListPage() {
               <div>
                 <h2 className="font-semibold">{p.title}</h2>
                 <p className="mt-2 text-sm text-slate-500">
-                  {p.studentName} · {p.studentCode} ·{' '}
+                  {p.studentName} · {p.studentCode} ·{" "}
                   {reviewStatusLabel(p.status)}
                 </p>
               </div>
@@ -160,7 +161,7 @@ function Editor({ context }: { context: ProposalEditorContext }) {
   const client = useQueryClient(),
     key = useRequestKey();
   const [initial] = useState(() =>
-    context.status === 'REVISION_REQUESTED'
+    context.status === "REVISION_REQUESTED"
       ? context.submittedVersion
       : (context.workingVersion ?? context.submittedVersion),
   );
@@ -175,33 +176,33 @@ function Editor({ context }: { context: ProposalEditorContext }) {
   const [responses, setResponses] = useState<RevisionResponse[]>(
       initial?.responses ?? [],
     ),
-    [summary, setSummary] = useState(''),
+    [summary, setSummary] = useState(""),
     [revision, setRevision] = useState(context.revision),
     [baseId, setBaseId] = useState(initial?.id),
     [baseNumber, setBaseNumber] = useState(initial?.versionNumber),
     [currentId, setCurrentId] = useState(context.workingVersionId),
     [dirty, setDirty] = useState(false),
-    [feedback, setFeedback] = useState(''),
-    [validation, setValidation] = useState('');
-  const allowed = context.allowedActions.includes('save') && parsed.success;
+    [feedback, setFeedback] = useState(""),
+    [validation, setValidation] = useState("");
+  const allowed = context.allowedActions.includes("save") && parsed.success;
   const refresh = async () => {
     await Promise.all([
       client.invalidateQueries({
-        queryKey: ['proposal-editing-context', context.proposalId],
+        queryKey: ["proposal-editing-context", context.proposalId],
       }),
       client.invalidateQueries({
-        queryKey: ['proposal-version-history', context.proposalId],
+        queryKey: ["proposal-version-history", context.proposalId],
       }),
-      client.invalidateQueries({ queryKey: ['proposal-editor-list'] }),
-      client.invalidateQueries({ queryKey: ['proposal-queue'] }),
+      client.invalidateQueries({ queryKey: ["proposal-editor-list"] }),
+      client.invalidateQueries({ queryKey: ["proposal-queue"] }),
       client.invalidateQueries({
-        queryKey: ['review-proposal', context.proposalId],
+        queryKey: ["review-proposal", context.proposalId],
       }),
     ]);
   };
   const save = useMutation({
     mutationFn: (input: ProposalVersionSave) =>
-      api.save(context.proposalId, input, key({ kind: 'save', input })),
+      api.save(context.proposalId, input, key({ kind: "save", input })),
     onSuccess: async (result) => {
       setRevision(result.proposalRevision);
       setBaseId(result.id);
@@ -209,14 +210,14 @@ function Editor({ context }: { context: ProposalEditorContext }) {
       setResponses(result.responses);
       setCurrentId(result.id);
       setDirty(false);
-      setSummary('');
+      setSummary("");
       setFeedback(`Đã lưu snapshot v${result.versionNumber}. Chưa gửi duyệt.`);
       await refresh();
     },
   });
   const submit = useMutation({
     mutationFn: (input: ProposalVersionSubmit) =>
-      api.submit(context.proposalId, input, key({ kind: 'submit', input })),
+      api.submit(context.proposalId, input, key({ kind: "submit", input })),
     onSuccess: async (result) => {
       setRevision(result.proposalRevision);
       setDirty(false);
@@ -236,27 +237,27 @@ function Editor({ context }: { context: ProposalEditorContext }) {
       responses,
     });
     if (!result.success) {
-      setValidation(result.error.issues.map((i) => i.message).join('; '));
+      setValidation(result.error.issues.map((i) => i.message).join("; "));
       return;
     }
-    setValidation('');
+    setValidation("");
     save.mutate(result.data);
   }
   function send() {
     if (dirty || !currentId) {
-      setValidation('Hãy lưu nháp trước khi gửi bản đang chỉnh sửa.');
+      setValidation("Hãy lưu nháp trước khi gửi bản đang chỉnh sửa.");
       return;
     }
     const parsed = SubmittedProposalContentSchema.safeParse(content);
     if (!parsed.success) {
       setValidation(
         parsed.error.issues
-          .map((i) => `${i.path.join('.')}: ${i.message}`)
-          .join('; '),
+          .map((i) => `${i.path.join(".")}: ${i.message}`)
+          .join("; "),
       );
       return;
     }
-    setValidation('');
+    setValidation("");
     submit.mutate({ expectedRevision: revision, versionId: currentId });
   }
   return (
@@ -274,7 +275,7 @@ function Editor({ context }: { context: ProposalEditorContext }) {
           role="alert"
           className="rounded border border-red-200 bg-red-50 p-4 text-red-800"
         >
-          {validation || errorText(save.error || submit.error)}{' '}
+          {validation || errorText(save.error || submit.error)}{" "}
           <button
             type="button"
             className="underline"
@@ -297,9 +298,9 @@ function Editor({ context }: { context: ProposalEditorContext }) {
         <div>
           <h2 className="font-semibold">Bản làm việc hiện hành</h2>
           <p className="mt-2 text-xs text-slate-500">
-            {baseNumber ? `Dựa trên v${baseNumber}` : 'Bản đầu tiên'} · Mỗi lần
+            {baseNumber ? `Dựa trên v${baseNumber}` : "Bản đầu tiên"} · Mỗi lần
             lưu tạo một bản mới
-            {dirty ? ' · Có thay đổi chưa lưu' : ''}
+            {dirty ? " · Có thay đổi chưa lưu" : ""}
           </p>
         </div>
         {parsed.success ? (
@@ -336,20 +337,20 @@ function Editor({ context }: { context: ProposalEditorContext }) {
               disabled={busy}
               onClick={saveDraft}
             >
-              {save.isPending ? 'Đang lưu…' : 'Lưu nháp mới'}
+              {save.isPending ? "Đang lưu…" : "Lưu nháp mới"}
             </button>
           )}
-          {context.allowedActions.includes('submit') && (
+          {context.allowedActions.includes("submit") && (
             <button
               className="rounded border border-blue-300 px-4 py-2 text-sm text-blue-700"
               disabled={busy || dirty || !currentId}
               onClick={send}
             >
               {submit.isPending
-                ? 'Đang gửi…'
+                ? "Đang gửi…"
                 : context.submittedVersionId
-                  ? 'Gửi duyệt lại'
-                  : 'Gửi duyệt'}
+                  ? "Gửi duyệt lại"
+                  : "Gửi duyệt"}
             </button>
           )}
         </div>
@@ -375,10 +376,10 @@ function Editor({ context }: { context: ProposalEditorContext }) {
 function VersionHistory({ proposalId }: { proposalId: string }) {
   const [page, setPage] = useState(1),
     [known, setKnown] = useState<ProposalVersionView[]>([]),
-    [from, setFrom] = useState(''),
-    [to, setTo] = useState('');
+    [from, setFrom] = useState(""),
+    [to, setTo] = useState("");
   const history = useQuery({
-    queryKey: ['proposal-version-history', proposalId, page],
+    queryKey: ["proposal-version-history", proposalId, page],
     queryFn: () => api.list(proposalId, page),
   });
   useEffect(() => {
@@ -392,7 +393,7 @@ function VersionHistory({ proposalId }: { proposalId: string }) {
       });
   }, [history.data]);
   const compare = useQuery({
-    queryKey: ['proposal-version-compare', proposalId, from, to],
+    queryKey: ["proposal-version-compare", proposalId, from, to],
     queryFn: () => api.compare(proposalId, from, to),
     enabled: !!from && !!to,
   });
@@ -412,13 +413,13 @@ function VersionHistory({ proposalId }: { proposalId: string }) {
                   to={`/topic/proposal/${proposalId}/versions/${v.id}`}
                   className="font-semibold text-blue-700"
                 >
-                  Phiên bản v{v.versionNumber} ·{' '}
-                  {v.state ?? 'LEGACY chưa đối soát'}
+                  Phiên bản v{v.versionNumber} ·{" "}
+                  {v.state ?? "LEGACY chưa đối soát"}
                 </Link>
                 <p className="mt-2 text-xs text-slate-500">
-                  {v.authorName ?? 'Chưa có tác giả legacy'} ·{' '}
+                  {v.authorName ?? "Chưa có tác giả legacy"} ·{" "}
                   {timestamp(v.createdAt)}
-                  {v.submittedAt ? ` · Gửi ${timestamp(v.submittedAt)}` : ''}
+                  {v.submittedAt ? ` · Gửi ${timestamp(v.submittedAt)}` : ""}
                 </p>
                 {v.changeSummary && (
                   <p className="mt-2 whitespace-pre-wrap break-words">
@@ -455,8 +456,8 @@ function VersionHistory({ proposalId }: { proposalId: string }) {
         <h2 className="font-semibold sm:col-span-2">So sánh hai phiên bản</h2>
         {(
           [
-            ['Bản trước', from, setFrom],
-            ['Bản sau', to, setTo],
+            ["Bản trước", from, setFrom],
+            ["Bản sau", to, setTo],
           ] as const
         ).map(([label, value, set]) => (
           <label className="text-sm" key={label}>
@@ -470,7 +471,7 @@ function VersionHistory({ proposalId }: { proposalId: string }) {
               <option value="">Chọn phiên bản</option>
               {known.map((v) => (
                 <option key={v.id} value={v.id}>
-                  v{v.versionNumber} · {v.state ?? 'LEGACY'}
+                  v{v.versionNumber} · {v.state ?? "LEGACY"}
                 </option>
               ))}
             </select>
@@ -489,7 +490,7 @@ function VersionHistory({ proposalId }: { proposalId: string }) {
   );
 }
 export function ProposalEditorPage() {
-  const { proposalId = '', versionId } = useParams();
+  const { proposalId = "", versionId } = useParams();
   return (
     <ProposalEditorPageContent
       key={proposalId}
@@ -505,14 +506,15 @@ function ProposalEditorPageContent({
   proposalId: string;
   versionId?: string;
 }) {
+  const [editorEpoch, setEditorEpoch] = useState(0);
   const context = useQuery({
-    queryKey: ['proposal-editing-context', proposalId],
+    queryKey: ["proposal-editing-context", proposalId],
     queryFn: () => api.context(proposalId),
     staleTime: 0,
     refetchOnWindowFocus: false,
   });
   const historical = useQuery({
-    queryKey: ['proposal-version', proposalId, versionId],
+    queryKey: ["proposal-version", proposalId, versionId],
     queryFn: () => api.detail(proposalId, versionId!),
     enabled: !!versionId,
   });
@@ -525,25 +527,28 @@ function ProposalEditorPageContent({
         ← Danh sách đề cương
       </Link>
       <ReviewState
-        loading={context.isLoading || (!context.isFetchedAfterMount && context.isFetching)}
+        loading={
+          context.isLoading ||
+          (!context.isFetchedAfterMount && context.isFetching)
+        }
         error={errorText(context.error)}
       >
         {context.data && (
           <div className="space-y-5">
             <h1>{context.data.title}</h1>
             <p className="text-sm text-slate-500">
-              {context.data.studentName} ·{' '}
+              {context.data.studentName} ·{" "}
               {reviewStatusLabel(context.data.status)} · Hồ sơ {proposalId}
             </p>
             {context.data.readiness.length > 0 && (
               <p className="rounded border border-amber-200 bg-amber-50 p-4 text-sm">
-                Không thể chỉnh sửa hiện tại:{' '}
+                Không thể chỉnh sửa hiện tại:{" "}
                 {context.data.readiness
                   .map(
                     (code) =>
-                      readinessText[code] ?? 'Dữ liệu cần được kiểm tra lại',
+                      readinessText[code] ?? "Dữ liệu cần được kiểm tra lại",
                   )
-                  .join('; ')}
+                  .join("; ")}
                 . Kiểm tra trạng thái, giai đoạn và dữ liệu đầu vào; hệ thống
                 không tự tạo xác nhận.
               </p>
@@ -562,12 +567,12 @@ function ProposalEditorPageContent({
                       </h2>
                       <p className="mt-2 text-xs text-slate-500">
                         {historical.data.authorName ??
-                          'Tác giả legacy chưa xác định'}{' '}
+                          "Tác giả legacy chưa xác định"}{" "}
                         · {timestamp(historical.data.createdAt)}
                       </p>
                       <p className="mt-2 break-all text-xs">
-                        Hash:{' '}
-                        {historical.data.contentHash ?? 'Chưa có metadata'}
+                        Hash:{" "}
+                        {historical.data.contentHash ?? "Chưa có metadata"}
                       </p>
                       <Link
                         className="mt-3 inline-block text-sm text-blue-700"
@@ -595,7 +600,16 @@ function ProposalEditorPageContent({
                 )}
               </ReviewState>
             ) : (
-              <Editor key={proposalId} context={context.data} />
+              <>
+                <ProposalLifecycleActions
+                  context={context.data}
+                  onTransition={() => setEditorEpoch((value) => value + 1)}
+                />
+                <Editor
+                  key={`${proposalId}:${editorEpoch}`}
+                  context={context.data}
+                />
+              </>
             )}
             <VersionHistory proposalId={proposalId} />
           </div>

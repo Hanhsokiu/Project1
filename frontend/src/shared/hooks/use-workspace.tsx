@@ -37,13 +37,23 @@ const emptyTerm: Term = {
 const Context = createContext<Workspace | null>(null);
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const { data: db } = useDemo();
+  return db ? (
+    <WorkspaceSnapshotProvider db={db}>{children}</WorkspaceSnapshotProvider>
+  ) : null;
+}
+export function WorkspaceSnapshotProvider({
+  children,
+  db,
+}: {
+  children: ReactNode;
+  db: DemoDb;
+}) {
   const [termId, setTerm] = useState(
     () => getWorkspaceSelection().termId || "dot1",
   );
   const [studentId, setStudent] = useState(
     () => getWorkspaceSelection().studentId || "sv1",
   );
-  if (!db) return null;
   const user = currentUser(db);
   if (!user) return null;
   const visibleTerms = user.studentId

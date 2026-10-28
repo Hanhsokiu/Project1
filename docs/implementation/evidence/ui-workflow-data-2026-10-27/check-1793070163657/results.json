@@ -1,0 +1,112 @@
+{
+  "startedAt": "2026-10-27T03:02:44.287Z",
+  "origin": "http://127.0.0.1:5173",
+  "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+  "readOnly": true,
+  "checks": [
+    {
+      "name": "Nhóm duyệt có dữ liệu và có thao tác tạo nhóm",
+      "actual": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+      "result": "PASS"
+    },
+    {
+      "name": "Bộ lọc xét duyệt trả đúng 1 hồ sơ chờ duyệt, bỏ lọc có 4 hồ sơ",
+      "actual": "4 → 1 → 4",
+      "result": "PASS"
+    },
+    {
+      "name": "gv003 mở đúng vòng chờ duyệt và có nút bắt đầu",
+      "actual": "54d650c9-5a7b-4c7a-a2e7-c3a9e30f1d0f",
+      "result": "PASS"
+    },
+    {
+      "name": "sv001 có nội dung, phản hồi kết luận và được lưu bản sửa",
+      "actual": "REVISION_REQUIRED",
+      "result": "PASS"
+    },
+    {
+      "name": "sv002 không sửa trực tiếp bản SEALED đang chờ duyệt",
+      "actual": "read-only as required",
+      "result": "PASS"
+    },
+    {
+      "name": "sv003 sẵn sàng chốt, không chốt hộ người dùng",
+      "actual": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+      "result": "PASS"
+    },
+    {
+      "name": "sv004 có bản chốt/PDF và thao tác tiếp nhận giấy vẫn chưa bị tiêu thụ",
+      "actual": "FINALIZED, receipt absent",
+      "result": "PASS"
+    },
+    {
+      "name": "sv004 thấy đủ 5 nhiệm vụ và phần báo cáo tuần",
+      "actual": "5 task states",
+      "result": "PASS"
+    },
+    {
+      "name": "Đổi đợt ở header thực sự đổi dữ liệu và quay lại được",
+      "actual": "old empty → demo populated",
+      "result": "PASS"
+    },
+    {
+      "name": "Danh sách có dữ liệu không tràn ngang trên mobile",
+      "actual": "390px",
+      "result": "PASS"
+    },
+    {
+      "name": "Task cần sửa mở được form upload/nộp lại thật",
+      "actual": "PDF and ZIP enabled",
+      "result": "PASS"
+    },
+    {
+      "name": "GVHD có bài chờ đánh giá và form đánh giá thao tác được",
+      "actual": "pending submission",
+      "result": "PASS"
+    },
+    {
+      "name": "Nhật ký đã lưu hiển thị đúng trong kế hoạch",
+      "actual": "da9cc485-f464-4008-93df-e6628e9055bf",
+      "result": "PASS"
+    },
+    {
+      "name": "Hộp thư chung có notice nghiệp vụ và link mở hồ sơ",
+      "actual": "non-empty shared inbox",
+      "result": "PASS"
+    }
+  ],
+  "axe": [
+    {
+      "name": "step4-populated-list",
+      "violations": []
+    },
+    {
+      "name": "step4-populated-editor",
+      "violations": []
+    },
+    {
+      "name": "step5-ready-review",
+      "violations": []
+    },
+    {
+      "name": "step6-revision-editor",
+      "violations": []
+    },
+    {
+      "name": "step8-populated-tasks",
+      "violations": []
+    },
+    {
+      "name": "step8-resubmission-form",
+      "violations": []
+    },
+    {
+      "name": "step8-advisor-review",
+      "violations": []
+    }
+  ],
+  "pageErrors": [],
+  "httpErrors": [],
+  "result": "PASS",
+  "finishedAt": "2026-10-27T03:03:43.830Z"
+}

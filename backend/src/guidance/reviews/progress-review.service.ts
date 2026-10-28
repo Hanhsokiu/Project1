@@ -266,6 +266,7 @@ export class ProgressReviewService {
       await s.notify({
         id: notificationId,
         userId: a.p.student.userId,
+        termId: a.p.topic.termId,
         title: "Cập nhật đánh giá báo cáo",
         body: "GVHD đã cập nhật đánh giá bài nộp. Mở hồ sơ để xem nhận xét và yêu cầu tiếp theo.",
         link: `/guidance/review/${sub.id}`,

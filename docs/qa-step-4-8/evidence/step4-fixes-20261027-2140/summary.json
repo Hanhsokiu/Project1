@@ -1,0 +1,32 @@
+{
+  "knownBugs": {
+    "STEP4-MCP-001": "FIXED",
+    "STEP4-MCP-002": "FIXED"
+  },
+  "retestedQaCases": [
+    "G09",
+    "U01",
+    "U02"
+  ],
+  "liveCheckpoints": 25,
+  "livePassed": 25,
+  "liveFailed": 0,
+  "pageErrors": [],
+  "failedRequests": [],
+  "httpErrorsDuringObservedRetest": [],
+  "businessMutations": [],
+  "validation": {
+    "typeCheck": "PASS",
+    "eslintChangedTsx": "PASS",
+    "prettierChangedFiles": "PASS",
+    "frontendUnit": {
+      "files": 19,
+      "passed": 115,
+      "failed": 0
+    },
+    "frontendBuild": "PASS"
+  },
+  "originalMatrixNotRerunInFull": true,
+  "originalBlockedCasesRemain": 5,
+  "originalMutationGroupsNotRunRemain": 9
+}

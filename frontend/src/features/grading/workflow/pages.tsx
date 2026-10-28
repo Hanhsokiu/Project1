@@ -11,6 +11,7 @@ import type {
 } from "@doan/shared";
 import { gradingPolicySchema } from "@doan/shared";
 import { getAccessToken, getApiUser } from "../../../shared/api/api-session";
+import { routeManifest } from "../../../app/router/route-manifest";
 import {
   Button,
   Card,
@@ -824,7 +825,7 @@ function GradingContent({
         <Results key={termId} termId={termId} />
       );
   return (
-    <main className="max-w-6xl mx-auto p-6 space-y-4">
+    <section className="max-w-6xl mx-auto space-y-4">
       <Link to="/">← Không gian làm việc</Link>
       <PageHeader
         title="Chấm điểm và kết quả đồ án"
@@ -837,14 +838,20 @@ function GradingContent({
           ["/grading/results", "Kết quả"],
           ["/grading/policy", "Cấu hình Khoa"],
           ["/report/official", "Báo cáo"],
-        ].map(([url, label]) => (
-          <Link
-            key={url}
-            to={`${url}${termId ? `?termId=${encodeURIComponent(termId)}` : ""}`}
-          >
-            {label}
-          </Link>
-        ))}
+        ]
+          .filter(([url]) =>
+            routeManifest
+              .find((route) => route.path === url)
+              ?.roles.some((role) => getApiUser()?.roles.includes(role)),
+          )
+          .map(([url, label]) => (
+            <Link
+              key={url}
+              to={`${url}${termId ? `?termId=${encodeURIComponent(termId)}` : ""}`}
+            >
+              {label}
+            </Link>
+          ))}
       </nav>
       <form
         onSubmit={(e) => {
@@ -863,6 +870,6 @@ function GradingContent({
         <Button type="submit">Đọc dữ liệu đợt</Button>
       </form>
       {body || <Empty title="Chọn đợt để bắt đầu" />}
-    </main>
+    </section>
   );
 }

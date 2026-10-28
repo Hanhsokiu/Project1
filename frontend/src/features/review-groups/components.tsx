@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import type { GroupCreate, GroupOptions, ReviewGroupView } from '@doan/shared';
-import { GroupCreateSchema, GroupUpdateSchema } from '@doan/shared';
-import { Button } from '../../shared/components/ui/Button';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import type { GroupCreate, GroupOptions, ReviewGroupView } from "@doan/shared";
+import { GroupCreateSchema, GroupUpdateSchema } from "@doan/shared";
+import { Button } from "../../shared/components/ui/Button";
 
 export function GroupState({
   loading,
@@ -47,7 +47,7 @@ export function GroupState({
 export function MemberTable({
   members,
 }: {
-  members: ReviewGroupView['members'];
+  members: ReviewGroupView["members"];
 }) {
   if (!members.length)
     return (
@@ -103,38 +103,45 @@ export function GroupForm({
   onPage: (page: number) => void;
   currentPage: number;
 }) {
-  const [name, setName] = useState(initial?.name ?? '');
-  const [departmentId, setDepartmentId] = useState(initial?.departmentId ?? '');
-  const [selected, setSelected] = useState(
-    initial?.members.map((m) => m.lecturerId) ?? [],
+  const [name, setName] = useState(initial?.name ?? "");
+  const [departmentId, setDepartmentId] = useState(initial?.departmentId ?? "");
+  const [selected, setSelected] = useState<
+    Array<Pick<ReviewGroupView["members"][number], "lecturerId" | "fullName">>
+  >(
+    () =>
+      initial?.members.map(({ lecturerId, fullName }) => ({
+        lecturerId,
+        fullName,
+      })) ?? [],
   );
-  const [reason, setReason] = useState('');
+  const [reason, setReason] = useState("");
   const [originalRevision] = useState(initial?.revision);
-  const [validation, setValidation] = useState('');
+  const [validation, setValidation] = useState("");
   const locked = !!initial?.activeReviewCount;
   const canWrite =
     options.canManage &&
-    ['DRAFT', 'CLOSED_REGISTRATION', 'IN_PROGRESS'].includes(
+    ["DRAFT", "CLOSED_REGISTRATION", "IN_PROGRESS"].includes(
       options.term.status,
     );
   const inputClass =
-    'mt-2 w-full rounded border border-slate-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-slate-100';
+    "mt-2 w-full rounded border border-slate-300 bg-white px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-200 disabled:bg-slate-100";
   function submit(event: React.FormEvent) {
     event.preventDefault();
-    const input = { name, departmentId, memberLecturerIds: selected };
+    const memberLecturerIds = selected.map((member) => member.lecturerId);
+    const input = { name, departmentId, memberLecturerIds };
     const parsed = initial
       ? GroupUpdateSchema.safeParse({
           name,
-          ...(locked ? {} : { memberLecturerIds: selected }),
+          ...(locked ? {} : { memberLecturerIds }),
           expectedRevision: initial.revision,
           reason,
         })
       : GroupCreateSchema.safeParse(input);
     if (!parsed.success) {
-      setValidation(parsed.error.issues.map((i) => i.message).join(' '));
+      setValidation(parsed.error.issues.map((i) => i.message).join(" "));
       return;
     }
-    setValidation('');
+    setValidation("");
     onSubmit(GroupCreateSchema.parse(input), reason.trim(), originalRevision);
   }
   return (
@@ -200,7 +207,7 @@ export function GroupForm({
         </div>
         <div className="rounded-lg border border-slate-200 bg-white p-5 sm:p-6">
           <h2 className="font-semibold">
-            Thành viên{' '}
+            Thành viên{" "}
             <span className="ml-2 rounded-full bg-blue-50 px-2 py-1 text-xs text-blue-800">
               {selected.length} đã chọn
             </span>
@@ -238,12 +245,12 @@ export function GroupForm({
                   >
                     <input
                       type="checkbox"
-                      checked={selected.includes(l.id)}
+                      checked={selected.some((m) => m.lecturerId === l.id)}
                       onChange={(e) =>
                         setSelected((v) =>
                           e.target.checked
-                            ? [...v, l.id]
-                            : v.filter((id) => id !== l.id),
+                            ? [...v, { lecturerId: l.id, fullName: l.fullName }]
+                            : v.filter((m) => m.lecturerId !== l.id),
                         )
                       }
                     />
@@ -271,7 +278,7 @@ export function GroupForm({
                   Trước
                 </Button>
                 <span>
-                  Trang {currentPage} /{' '}
+                  Trang {currentPage} /{" "}
                   {Math.max(1, options.lecturers.totalPages)}
                 </span>
                 <Button
@@ -285,24 +292,22 @@ export function GroupForm({
               </div>
               <div
                 className="mt-3 flex flex-wrap gap-2"
+                role="group"
                 aria-label="Thành viên đã chọn"
               >
-                {selected.map((id) => (
+                {selected.map((member) => (
                   <button
                     type="button"
-                    key={id}
+                    key={member.lecturerId}
                     className="rounded-full bg-blue-50 px-3 py-1 text-xs text-blue-800"
-                    aria-label={`Bỏ chọn ${id}`}
+                    aria-label={`Bỏ chọn ${member.fullName}`}
                     onClick={() =>
-                      setSelected((v) => v.filter((x) => x !== id))
+                      setSelected((v) =>
+                        v.filter((m) => m.lecturerId !== member.lecturerId),
+                      )
                     }
                   >
-                    {options.lecturers.data.find((l) => l.id === id)
-                      ?.fullName ??
-                      initial?.members.find((m) => m.lecturerId === id)
-                        ?.fullName ??
-                      id}{' '}
-                    ×
+                    {member.fullName} ×
                   </button>
                 ))}
               </div>
@@ -325,7 +330,7 @@ export function GroupForm({
         )}
         <div className="flex flex-wrap gap-3">
           <Button type="submit" disabled={busy}>
-            {busy ? 'Đang lưu…' : initial ? 'Lưu thay đổi' : 'Tạo nhóm duyệt'}
+            {busy ? "Đang lưu…" : initial ? "Lưu thay đổi" : "Tạo nhóm duyệt"}
           </Button>
           <Link
             className="rounded border bg-white px-4 py-2 text-sm"

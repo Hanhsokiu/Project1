@@ -206,7 +206,7 @@ function ListContent({ sessionKey }: { sessionKey: string }) {
     !preview.isError &&
     !state.isError;
   return (
-    <main className="max-w-6xl mx-auto p-6 space-y-6">
+    <section className="max-w-6xl mx-auto space-y-6">
       <Link to="/">← Về không gian làm việc</Link>
       <PageHeader
         title="UC18 · Đối soát danh sách bảo vệ"
@@ -329,6 +329,6 @@ function ListContent({ sessionKey }: { sessionKey: string }) {
           </>
         )}
       </Card>
-    </main>
+    </section>
   );
 }

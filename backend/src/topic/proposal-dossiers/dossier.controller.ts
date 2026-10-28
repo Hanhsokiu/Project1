@@ -9,6 +9,7 @@ import {
   Post,
   Query,
   Req,
+  Res,
   StreamableFile,
   UseFilters,
 } from "@nestjs/common";
@@ -26,6 +27,7 @@ import {
   DossierReceiptSchema,
   DossierPdfGenerateSchema,
   DossierPdfQuerySchema,
+  ProposalPreviewPdfQuerySchema,
 } from "@doan/shared";
 import type { DossierFinalize, DossierReceiptInput } from "@doan/shared";
 import { RequirePermission } from "../../common/security/require-permission.decorator";
@@ -35,6 +37,7 @@ import {
   groupError,
 } from "../review-groups/review-group.errors";
 import { DossierService } from "./dossier.service";
+import type { Response } from "express";
 type Request = { user: { sub?: string; userId?: string } };
 const success = (data: unknown) => ({
   success: true,
@@ -69,6 +72,28 @@ export class DossierController {
   })
   detail(@Req() req: Request, @Param("proposalId") id: string) {
     return this.service.detail(this.user(req), id).then(success);
+  }
+  @Get("preview.pdf")
+  @Header("Cache-Control", "private, no-store")
+  @Header("X-Content-Type-Options", "nosniff")
+  @RequirePermission("proposal", "read")
+  @ApiProduces("application/pdf")
+  @ApiOperation({
+    summary:
+      "Watermarked preview of a visible proposal version; never finalizes or stores a PDF",
+  })
+  async preview(
+    @Req() req: Request,
+    @Param("proposalId") id: string,
+    @Query(new ReviewGroupPipe(ProposalPreviewPdfQuerySchema))
+    q: { versionId: string },
+  ) {
+    const file = await this.service.preview(this.user(req), id, q.versionId);
+    return new StreamableFile(file.bytes, {
+      type: "application/pdf",
+      disposition: `attachment; filename="${file.filename}"`,
+      length: file.bytes.length,
+    });
   }
   @Post("finalize")
   @RequirePermission("proposal", "finalize")
@@ -159,19 +184,21 @@ export class DossierController {
   @ApiProduces("application/pdf")
   @ApiOperation({
     summary:
-      "Secure download of current finalized PDF; never accepts a storage path or asset ID",
+      "Download current or explicitly selected historical finalization within academic scope",
   })
   async download(
     @Req() req: Request,
     @Param("proposalId") id: string,
     @Query(new ReviewGroupPipe(DossierPdfQuerySchema))
     q: { finalizationId?: string },
+    @Res({ passthrough: true }) response: Response,
   ) {
     const file = await this.service.download(
       this.user(req),
       id,
       q.finalizationId,
     );
+    response.setHeader("X-Dossier-Status", file.state);
     const result = new StreamableFile(file.bytes, {
       type: "application/pdf",
       disposition: `attachment; filename="${file.filename}"`,

@@ -39,12 +39,12 @@ export default function DefenseConfirmationApiPage() {
   const user = getApiUser();
   if (defenseConfirmationMode() !== "API")
     return (
-      <main className="p-6">
+      <section className="p-6">
         <Notice tone="danger">
           Chế độ UC17 API thật yêu cầu cả VITE_DEFENSE_CONFIRMATION_API=true và
           VITE_AUTH_API=true. Không dùng dữ liệu demo để thay thế.
         </Notice>
-      </main>
+      </section>
     );
   if (!user || !getAccessToken())
     return (
@@ -57,7 +57,7 @@ export default function DefenseConfirmationApiPage() {
   if (user.mustChangePassword)
     return <Navigate to="/change-password" replace />;
   return (
-    <main className="max-w-7xl mx-auto p-6 space-y-6">
+    <section className="max-w-7xl mx-auto space-y-6">
       <Link className="text-indigo-600" to="/">
         ← Về không gian làm việc
       </Link>
@@ -105,7 +105,7 @@ export default function DefenseConfirmationApiPage() {
           description="Cần proposalId thuộc phạm vi GVHD hiện hành. Trang không tự tạo hồ sơ hoặc dữ liệu mẫu."
         />
       )}
-    </main>
+    </section>
   );
 }
 

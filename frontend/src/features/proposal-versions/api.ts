@@ -6,15 +6,24 @@ import type {
   ProposalVersionSave,
   ProposalVersionSubmit,
   DataChange,
-} from '@doan/shared';
-import { httpClient } from '../../shared/api/http-client';
+  ProposalLifecycleAction,
+  ProposalLifecycleView,
+  ProposalWithdraw,
+  ProposalReturnToDraft,
+  ProposalReopen,
+} from "@doan/shared";
+import { httpClient } from "../../shared/api/http-client";
 type Envelope<T> = { success: true; data: T; timestamp: string };
 const read = async <T>(path: string, params?: object) =>
   (await httpClient.get<Envelope<T>>(path, { params })).data.data;
-const post = async (path: string, body: unknown, key: string) =>
+const post = async <T = ProposalVersionMutationView>(
+  path: string,
+  body: unknown,
+  key: string,
+) =>
   (
-    await httpClient.post<Envelope<ProposalVersionMutationView>>(path, body, {
-      headers: { 'Idempotency-Key': key },
+    await httpClient.post<Envelope<T>>(path, body, {
+      headers: { "Idempotency-Key": key },
     })
   ).data.data;
 const root = (id: string) => `/proposals/${encodeURIComponent(id)}`;
@@ -36,4 +45,10 @@ export const proposalVersionApi = {
     post(`${root(id)}/versions`, body, key),
   submit: (id: string, body: ProposalVersionSubmit, key: string) =>
     post(`${root(id)}/submit`, body, key),
+  transition: (
+    id: string,
+    action: ProposalLifecycleAction,
+    body: ProposalWithdraw | ProposalReturnToDraft | ProposalReopen,
+    key: string,
+  ) => post<ProposalLifecycleView>(`${root(id)}/${action}`, body, key),
 };

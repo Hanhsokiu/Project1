@@ -67,9 +67,6 @@ export class ProgressSession extends SubmissionSession {
     if (r.count !== 1)
       groupError(409, "REVISION_CONFLICT", "Bài nộp đã thay đổi.");
   }
-  async notify(data: Prisma.NotificationUncheckedCreateInput) {
-    return this.progressDb.notification.create({ data });
-  }
   termPlanIds(termId: string) {
     return this.progressDb.$queryRaw<
       Array<{ id: string }>

@@ -1,0 +1,93 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "checks": [
+    {
+      "name": "active migration chain/checksums and 27 Step 5 API producer checks replay successfully",
+      "result": "PASS"
+    },
+    {
+      "name": "valid Step 6 resubmission and Step 5 APPROVED decision provide exact input to finalization",
+      "result": "PASS"
+    },
+    {
+      "name": "missing producer class/major blocks finalize and never invents official metadata",
+      "result": "PASS"
+    },
+    {
+      "name": "faculty/student/advisor scopes, cross-term/department and ADMIN denial do not trust JWT roles",
+      "result": "PASS"
+    },
+    {
+      "name": "unapproved proposals and approved but incomplete legacy content cannot finalize",
+      "result": "PASS"
+    },
+    {
+      "name": "watermarked preview is scoped to owner/current advisor/faculty, strict query, and performs no writes",
+      "result": "PASS"
+    },
+    {
+      "name": "faculty preview uses confirmed producer profile; stale/cross-proposal approved version is rejected",
+      "result": "PASS"
+    },
+    {
+      "name": "audit failure rolls back dossier, finalization, pointers and revisions atomically",
+      "result": "PASS"
+    },
+    {
+      "name": "routing changed after approval cannot silently finalize under stale review evidence",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent finalize commits once; exact approvedVersionId/time stored separately from PDF and receipt",
+      "result": "PASS"
+    },
+    {
+      "name": "duplicate same-key request replays one finalization; different payload conflicts",
+      "result": "PASS"
+    },
+    {
+      "name": "DB and API preserve finalized snapshot and the SEALED approved version",
+      "result": "PASS"
+    },
+    {
+      "name": "student creates private PDF once; PDF generation never claims a signature or physical submission",
+      "result": "PASS"
+    },
+    {
+      "name": "authenticated PDF download rechecks ownership/current advisor/grants and blocks ID tampering and ADMIN",
+      "result": "PASS"
+    },
+    {
+      "name": "real PDF text extraction verifies Vietnamese Unicode, all required fields, A4 and page bounds",
+      "result": "PASS"
+    },
+    {
+      "name": "long content and oversized schedule rows paginate, repeat table header and retain all final rows/signatures",
+      "result": "PASS"
+    },
+    {
+      "name": "changes to live catalog/profile do not alter official snapshot or stored PDF bytes",
+      "result": "PASS"
+    },
+    {
+      "name": "receipt requires scoped faculty and open review phase; historical PDF reads remain available when phase locks",
+      "result": "PASS"
+    },
+    {
+      "name": "physical receipt has server actor/time, unique finalization, immutable evidence and idempotent atomic audit",
+      "result": "PASS"
+    },
+    {
+      "name": "grant revocation blocks cached replay and approved version remains unchanged after finalization/PDF/receipt",
+      "result": "PASS"
+    },
+    {
+      "name": "matching-hash legacy snapshot with malformed profile returns a business conflict instead of rendering or creating PDF",
+      "result": "PASS"
+    }
+  ],
+  "sharedDatabaseDDL": false,
+  "pdfPages": 1,
+  "longPdfPages": 16
+}

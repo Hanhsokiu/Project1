@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Bell, MailCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Badge,
   Button,
@@ -151,6 +152,13 @@ export default function NotificationsPage() {
               title: "Thao tác",
               render: (n) => (
                 <div className="flex gap-2">
+                  {n.userId === user.id &&
+                    n.link?.startsWith("/") &&
+                    !n.link.startsWith("//") && (
+                      <Link className="btn btn-secondary" to={n.link}>
+                        Mở hồ sơ
+                      </Link>
+                    )}
                   {n.userId === user.id && !n.read && (
                     <Button
                       variant="ghost"

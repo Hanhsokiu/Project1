@@ -1,0 +1,318 @@
+[
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty",
+    "phase": "W01-first",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "W01-second",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/terms?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/semesters",
+    "status": 403
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/lecturers?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/terms?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/semesters",
+    "status": 403
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/lecturers?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "W03-first",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "W03-first",
+    "kind": "http-error",
+    "method": "POST",
+    "url": "http://127.0.0.1:62033/api/proposal-reviews/e1ec9801-9374-4357-a1a1-be95ce115f3f/comments",
+    "status": 409
+  },
+  {
+    "user": "reviewer",
+    "phase": "W03-first",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "W03-first",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "W03-first",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/terms?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/semesters",
+    "status": 403
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/lecturers?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/terms?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/semesters",
+    "status": 403
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:62033/api/lecturers?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-outsider",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-outsider",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  }
+]

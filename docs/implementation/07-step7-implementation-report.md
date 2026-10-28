@@ -1,5 +1,17 @@
 # BƯỚC 7 — Chốt đề cương chính thức, PDF và tiếp nhận giấy
 
+**Cập nhật 28/10/2026:** bốn lỗi QA thực tế đã được xử lý và kiểm lại bằng HTTP/PostgreSQL, Edge và Playwright MCP. Xem [báo cáo sửa lỗi mới](../qa-step-4-8/evidence/step7-fixes-20261028-1933/report.md). Các số kiểm thử bên dưới là lịch sử lượt triển khai ban đầu.
+
+Lượt rà soát tiếp bổ sung giải mã JSON lỗi trong response PDF Blob và kiểm cấu trúc snapshot trước render, giữ tương thích snapshot cũ. Frontend 118 test, backend liên quan 52 test, API dossier 21 nhóm đạt; có kiểm chứng lỗi UI và tải PDF lịch sử bằng Edge/MCP. [Báo cáo mới nhất](../qa-step-4-8/evidence/step7-completion-20261028-2011/report.md).
+
+- Khoa reopen theo ngoại lệ phase; SV vẫn phải chịu phase EDIT, đợt kết thúc/DEFENDING bị chặn.
+- `GET dossier.pdf?finalizationId=...` cho tải đúng bản chốt lịch sử trong scope; bỏ ID dùng current. UI có nhãn “Đã thay thế”, snapshot và biên nhận riêng từng bản. Command ghi vẫn chỉ chấp nhận current.
+- `GET preview.pdf?versionId=...` có query strict, scope F/O/A, watermark mọi trang, private/no-store/nosniff và không ghi DB/asset/receipt.
+- Snapshot mới lưu `student.cohort`, phone/email của SV/GVHD; lấy khóa từ Student.cohort, email từ UserAccount.email, điện thoại từ Student/Lecturer.phone rồi fallback UserAccount.phone. Thiếu dữ liệu để ô trống, không suy từ tên lớp. Các field là optional ở schemaVersion 1 để đọc snapshot cũ; không backfill hoặc sửa PDF đã lưu.
+- Trang login API dùng session auth trực tiếp, không nạp toàn bộ dữ liệu demo/catalog/assignment. Form tìm kiếm chờ có đợt; state/note/key của thao tác dossier được tách theo proposal.
+
+Lượt sửa này không thêm dependency/migration và không áp dụng DDL/seed lên DB nghiệp vụ hiện tại. Bằng chứng và mẫu PDF mới nằm trong thư mục báo cáo được liên kết ở trên.
+
 Ngày 22/10/2026, Asia/Ho_Chi_Minh. Triển khai riêng bước 7, tích hợp bước 5–6. Không triển khai bước 8 hoặc sửa nghiệp vụ bước 1–3/9–10. Không kết nối/chạy DDL lên Supabase chung; không stage/commit/push.
 
 ## 1. Căn cứ và quyết định đã xác nhận

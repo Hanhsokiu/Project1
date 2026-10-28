@@ -1,0 +1,97 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T02:16:02.189Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "R04-active-advisor-member-cannot-self-review",
+    "result": "PASS",
+    "at": "2026-10-28T02:16:05.476Z",
+    "detail": {
+      "read": {
+        "id": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+        "proposalId": "p-student3",
+        "state": "ASSIGNED",
+        "proposalStatus": "SUBMITTED",
+        "revision": 0,
+        "proposalRevision": 1,
+        "roundNumber": 1,
+        "versionId": "v1-student3",
+        "contentHash": "a8816e49d937e135cc9132986c5460405662fad3a3ac2c8a53c4ba2848a7cbab",
+        "groupId": "qa-g3",
+        "allowedActions": [],
+        "comments": [],
+        "decision": null,
+        "supersededByReviewId": null
+      },
+      "write": {
+        "status": 404,
+        "error": {
+          "code": "COMMON_001",
+          "message": "Không tìm thấy vòng duyệt trong phạm vi."
+        }
+      },
+      "groupMembershipVerified": true
+    }
+  },
+  {
+    "id": "U02-mobile-reviewer-active-form",
+    "result": "PASS",
+    "at": "2026-10-28T02:16:08.292Z",
+    "detail": {
+      "dimensions": {
+        "width": 390,
+        "scrollWidth": 390
+      },
+      "review": {
+        "id": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+        "proposalId": "p-student3",
+        "state": "IN_REVIEW",
+        "proposalStatus": "UNDER_REVIEW",
+        "revision": 2,
+        "proposalRevision": 2,
+        "roundNumber": 1,
+        "versionId": "v1-student3",
+        "contentHash": "a8816e49d937e135cc9132986c5460405662fad3a3ac2c8a53c4ba2848a7cbab",
+        "groupId": "qa-g3",
+        "allowedActions": [
+          "comment",
+          "decide"
+        ],
+        "comments": [
+          {
+            "id": "efda8250-ddda-4f1c-914d-315a9840e325",
+            "versionId": "v1-student3",
+            "authorUserId": "foreign",
+            "authorName": "qa-foreign",
+            "createdAt": "2026-10-28T02:16:07.990Z",
+            "text": "QA STEP5: thao tác nhận xét trên màn hình 390px."
+          }
+        ],
+        "decision": null,
+        "supersededByReviewId": null
+      }
+    }
+  },
+  {
+    "id": "U03-axe-active-reviewer",
+    "result": "PASS",
+    "at": "2026-10-28T02:16:09.141Z",
+    "detail": {
+      "violations": []
+    }
+  },
+  {
+    "id": "U04-whitespace-comment-feedback",
+    "result": "FAIL",
+    "at": "2026-10-28T02:16:10.037Z",
+    "error": "AssertionError [ERR_ASSERTION]: Whitespace comment silently rejected; previous success remains visible\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\reviewer-mobile.cjs:14:1360\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\browser-common.cjs:19:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\reviewer-mobile.cjs:14:2"
+  }
+]

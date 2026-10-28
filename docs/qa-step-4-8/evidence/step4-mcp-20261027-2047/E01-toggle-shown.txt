@@ -1,0 +1,6 @@
+{
+  "url": "http://127.0.0.1:5173/login",
+  "type": "text",
+  "toggle": "Ẩn mật khẩu",
+  "vite": true
+}

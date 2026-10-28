@@ -69,6 +69,20 @@ export class GlobalExceptionHandler implements ExceptionFilter {
       message = "Không thể xử lý yêu cầu. Vui lòng thử lại.",
       fields: FieldIssue[] | undefined,
       details: unknown;
+    // body-parser errors are ordinary Errors, not Nest HttpExceptions. Only
+    // recognize the exact transport error; never trust arbitrary status fields.
+    if (
+      exception instanceof Error &&
+      "type" in exception &&
+      exception.type === "entity.too.large" &&
+      "status" in exception &&
+      exception.status === 413
+    ) {
+      status = 413;
+      code = "PAYLOAD_TOO_LARGE";
+      message =
+        "Nội dung yêu cầu vượt dung lượng cho phép. Vui lòng giảm kích thước và thử lại.";
+    }
     if (exception instanceof Prisma.PrismaClientKnownRequestError) {
       if (exception.code === "P2002") {
         status = 409;

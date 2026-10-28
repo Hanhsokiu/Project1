@@ -1,0 +1,154 @@
+{
+  "startedAt": "2026-10-27T02:00:24.072Z",
+  "database": "btl_pr2b_audit_20261026182454_8541c6_live_e2e",
+  "syntheticOnly": true,
+  "checks": [
+    {
+      "name": "live workflow delivers all ten notices to the exact student/advisor recipients",
+      "actual": [
+        {
+          "userId": "student",
+          "title": "Kết quả xét duyệt đề cương",
+          "termId": "qa-t1",
+          "link": "/topic/reviews/fcab6b1b-ef89-4f78-8a1e-147b69898499"
+        },
+        {
+          "userId": "advisor",
+          "title": "Kết quả xét duyệt đề cương",
+          "termId": "qa-t1",
+          "link": "/topic/reviews/fcab6b1b-ef89-4f78-8a1e-147b69898499"
+        },
+        {
+          "userId": "advisor",
+          "title": "Đề cương được nộp xét duyệt",
+          "termId": "qa-t1",
+          "link": "/topic/proposal/p-student"
+        },
+        {
+          "userId": "student",
+          "title": "Kết quả xét duyệt đề cương",
+          "termId": "qa-t1",
+          "link": "/topic/reviews/f9411d09-ca50-48f7-85e7-12a0c23df848"
+        },
+        {
+          "userId": "advisor",
+          "title": "Kết quả xét duyệt đề cương",
+          "termId": "qa-t1",
+          "link": "/topic/reviews/f9411d09-ca50-48f7-85e7-12a0c23df848"
+        },
+        {
+          "userId": "student",
+          "title": "Nhiệm vụ hướng dẫn mới",
+          "termId": "qa-t1",
+          "link": "/guidance/tasks/610759d7-b0e6-4425-8864-9d09c4798f58"
+        },
+        {
+          "userId": "advisor",
+          "title": "Bài nộp hướng dẫn mới",
+          "termId": "qa-t1",
+          "link": "/guidance/review/15fe0638-7d02-42d4-ada7-7b4f584befdd"
+        },
+        {
+          "userId": "student",
+          "title": "Cập nhật đánh giá báo cáo",
+          "termId": "qa-t1",
+          "link": "/guidance/review/15fe0638-7d02-42d4-ada7-7b4f584befdd"
+        },
+        {
+          "userId": "advisor",
+          "title": "Bài nộp hướng dẫn mới",
+          "termId": "qa-t1",
+          "link": "/guidance/review/e66dfce3-2146-449b-aa3d-ac6a66255546"
+        },
+        {
+          "userId": "student",
+          "title": "Cập nhật đánh giá báo cáo",
+          "termId": "qa-t1",
+          "link": "/guidance/review/e66dfce3-2146-449b-aa3d-ac6a66255546"
+        }
+      ],
+      "result": "PASS"
+    },
+    {
+      "name": "replayed common proposal decision delivers one notice per recipient",
+      "actual": "two notices, no duplicates",
+      "result": "PASS"
+    },
+    {
+      "name": "authenticated schema-valid UTF-8 proposal above 100 KiB saves through the production parser",
+      "actual": {
+        "bytes": 110377,
+        "status": 201,
+        "versionsAdded": 1
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "proposal hard cap returns a redacted 413 and appends no partial version",
+      "actual": "32 MiB scoped cap",
+      "result": "PASS"
+    },
+    {
+      "name": "failure after notification insertion rolls task, revision and notice back together",
+      "actual": {
+        "tasks": 1,
+        "notices": 12,
+        "revision": 1
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "task request replay never duplicates its student notification",
+      "actual": {
+        "tasks": 2,
+        "notices": 13,
+        "revision": 2
+      },
+      "result": "PASS"
+    }
+  ],
+  "traffic": [
+    {
+      "actor": "faculty",
+      "route": "/proposals/p-student2/review-assignments",
+      "status": 201
+    },
+    {
+      "actor": "reviewer",
+      "route": "/proposal-reviews/6aa93f42-f3f9-41df-88af-de24bd95f011/start",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "route": "/proposal-reviews/6aa93f42-f3f9-41df-88af-de24bd95f011/decision",
+      "status": 200
+    },
+    {
+      "actor": "reviewer",
+      "route": "/proposal-reviews/6aa93f42-f3f9-41df-88af-de24bd95f011/decision",
+      "status": 200
+    },
+    {
+      "actor": "student2",
+      "route": "/proposals/p-student2/versions",
+      "status": 201
+    },
+    {
+      "actor": "advisor",
+      "route": "/guidance-plans/a4f75e7f-2a12-4daa-8bc1-121281f70b61/tasks",
+      "status": 500
+    },
+    {
+      "actor": "advisor",
+      "route": "/guidance-plans/a4f75e7f-2a12-4daa-8bc1-121281f70b61/tasks",
+      "status": 201
+    },
+    {
+      "actor": "advisor",
+      "route": "/guidance-plans/a4f75e7f-2a12-4daa-8bc1-121281f70b61/tasks",
+      "status": 201
+    }
+  ],
+  "result": "PASS",
+  "finishedAt": "2026-10-27T02:01:46.002Z"
+}

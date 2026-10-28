@@ -1,0 +1,11 @@
+{
+  "databaseGuard": "btl_pr2b_step6_*_live; identity checked",
+  "proposalId": "p-page-21",
+  "createdVersions": [
+    "qa-step6-legacy-2",
+    "qa-step6-legacy-3"
+  ],
+  "noWorkflowMetadata": true,
+  "originalSealedVersionUntouched": true,
+  "explicitFixtureWrites": true
+}

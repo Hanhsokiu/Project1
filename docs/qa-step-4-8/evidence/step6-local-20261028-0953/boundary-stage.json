@@ -1,0 +1,48 @@
+{
+  "submittedVersion": {
+    "id": "14143778-8457-4e17-9a06-ac1778060ddd",
+    "proposalId": "p-student2",
+    "versionNumber": 29,
+    "state": "SEALED",
+    "contentHash": "94b96083224906612a26b089ef692f31267086d8a1d34ff2c18cfda8eb280b88",
+    "createdAt": "2026-10-28T02:58:33.973Z",
+    "createdByUserId": "student2",
+    "authorName": "qa-student2",
+    "submittedAt": "2026-10-28T02:58:39.854Z",
+    "submittedByUserId": "student2",
+    "basedOnVersionId": "c13ce7da-4dff-4432-b50b-070148060820",
+    "changeSummary": null,
+    "responses": [],
+    "provenance": null,
+    "contentBytes": 240344,
+    "fieldLengths": {
+      "scope": 20000,
+      "tools": 20000,
+      "endsAt": 24,
+      "startsAt": 24,
+      "objectives": 20000,
+      "mainContents": 20000,
+      "expectedResults": 20000
+    }
+  },
+  "proposalRevision": 32,
+  "versionCount": 29,
+  "metricAfter": {
+    "workflow": {
+      "id": "56d8cc40-2676-441d-82e9-3a383cc9e40e",
+      "createdAt": "2026-10-28T02:51:53.746Z",
+      "updatedAt": "2026-10-28T02:58:39.861Z",
+      "revision": 32,
+      "nextVersionNumber": 30,
+      "nextReviewRound": 2,
+      "submissionKind": "RESUBMISSION",
+      "proposalId": "p-student2",
+      "workingVersionId": "14143778-8457-4e17-9a06-ac1778060ddd",
+      "submittedVersionId": "14143778-8457-4e17-9a06-ac1778060ddd"
+    },
+    "versions": 29,
+    "audits": 29,
+    "outbox": 2,
+    "keys": 40
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "startedAt": "2026-10-27T14:07:53.566Z",
+  "requests": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:3000/api/auth/logout"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/auth/pages/LoginPage.tsx"
+    }
+  ],
+  "responses": [
+    {
+      "status": 201,
+      "method": "POST",
+      "url": "http://127.0.0.1:3000/api/auth/logout"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/auth/pages/LoginPage.tsx"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "observations": {
+    "restoredInitialState": {
+      "url": "http://127.0.0.1:5173/login",
+      "loginVisible": true,
+      "hasAccessToken": false
+    }
+  },
+  "finishedAt": "2026-10-27T14:07:53.716Z"
+}

@@ -1,0 +1,14 @@
+{
+  "id": "S7-03",
+  "requirement": "Contract API GET /proposals/:id/preview.pdf?versionId returns watermarked preview for visible version",
+  "expectedStatus": 200,
+  "actual": {
+    "status": 404,
+    "error": {
+      "code": "NOT_FOUND",
+      "message": "Cannot GET /api/proposals/p-student/preview.pdf?versionId=v1-student"
+    }
+  },
+  "actor": "current owner",
+  "versionId": "v1-student"
+}

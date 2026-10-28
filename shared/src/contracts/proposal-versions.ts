@@ -1,12 +1,12 @@
-import { z } from 'zod';
-import type { GroupPage } from './review-groups';
+import { z } from "zod";
+import type { GroupPage } from "./review-groups";
 const id = z.string().trim().min(1).max(100);
 const date = z
   .string()
   .refine(
     (v) =>
-      v === '' || z.string().datetime({ offset: true }).safeParse(v).success,
-    'Thời gian phải có timezone ISO-8601.',
+      v === "" || z.string().datetime({ offset: true }).safeParse(v).success,
+    "Thời gian phải có timezone ISO-8601.",
   );
 const text = z.string().max(20000);
 export const ProposalContentSchema = z
@@ -36,33 +36,33 @@ export const ProposalContentSchema = z
 export const SubmittedProposalContentSchema = ProposalContentSchema.superRefine(
   (v, c) => {
     for (const key of [
-      'objectives',
-      'scope',
-      'mainContents',
-      'tools',
-      'expectedResults',
-      'startsAt',
-      'endsAt',
+      "objectives",
+      "scope",
+      "mainContents",
+      "tools",
+      "expectedResults",
+      "startsAt",
+      "endsAt",
     ] as const)
       if (!v[key].trim())
         c.addIssue({
-          code: 'custom',
+          code: "custom",
           path: [key],
-          message: 'Nội dung bắt buộc khi gửi duyệt.',
+          message: "Nội dung bắt buộc khi gửi duyệt.",
         });
     const start = Date.parse(v.startsAt),
       end = Date.parse(v.endsAt);
     if (!Number.isNaN(start) && !Number.isNaN(end) && start >= end)
       c.addIssue({
-        code: 'custom',
-        path: ['endsAt'],
-        message: 'Ngày kết thúc phải sau ngày bắt đầu.',
+        code: "custom",
+        path: ["endsAt"],
+        message: "Ngày kết thúc phải sau ngày bắt đầu.",
       });
     if (!v.schedule.length)
       c.addIssue({
-        code: 'custom',
-        path: ['schedule'],
-        message: 'Cần có kế hoạch thực hiện khi gửi duyệt.',
+        code: "custom",
+        path: ["schedule"],
+        message: "Cần có kế hoạch thực hiện khi gửi duyệt.",
       });
     v.schedule.forEach((s, i) => {
       const a = Date.parse(s.startsAt),
@@ -77,17 +77,17 @@ export const SubmittedProposalContentSchema = ProposalContentSchema.superRefine(
         b > end
       )
         c.addIssue({
-          code: 'custom',
-          path: ['schedule', i],
+          code: "custom",
+          path: ["schedule", i],
           message:
-            'Mốc cần tên, sản phẩm và thời gian hợp lệ trong khoảng thực hiện.',
+            "Mốc cần tên, sản phẩm và thời gian hợp lệ trong khoảng thực hiện.",
         });
     });
   },
 );
 export const RevisionResponseSchema = z
   .object({
-    targetType: z.enum(['COMMENT', 'DECISION']),
+    targetType: z.enum(["COMMENT", "DECISION"]),
     targetId: id,
     text: z.string().trim().min(1).max(10000),
   })
@@ -108,14 +108,67 @@ export const ProposalVersionSaveSchema = z
         v.responses.length
     )
       c.addIssue({
-        code: 'custom',
-        path: ['responses'],
-        message: 'Một góp ý chỉ có một phản hồi trong mỗi snapshot.',
+        code: "custom",
+        path: ["responses"],
+        message: "Một góp ý chỉ có một phản hồi trong mỗi snapshot.",
       });
   });
 export const ProposalVersionSubmitSchema = z
   .object({ expectedRevision: z.number().int().nonnegative(), versionId: id })
   .strict();
+const proposalRevision = z.number().int().nonnegative();
+const lifecycleBase = z.object({
+  expectedProposalRevision: proposalRevision,
+  versionId: id,
+});
+export const ProposalWithdrawSchema = lifecycleBase
+  .extend({
+    reviewId: id.optional(),
+    expectedReviewRevision: proposalRevision.optional(),
+    reason: z.string().trim().min(1).max(2000).optional(),
+  })
+  .strict()
+  .superRefine((v, c) => {
+    if ((v.reviewId === undefined) !== (v.expectedReviewRevision === undefined))
+      c.addIssue({
+        code: "custom",
+        message: "Cần cung cấp cả vòng duyệt và revision.",
+      });
+  });
+export const ProposalReturnToDraftSchema = lifecycleBase
+  .extend({
+    reviewId: id,
+    expectedReviewRevision: proposalRevision,
+    reason: z.string().trim().min(1, "Cần nhập lý do trả nháp.").max(2000),
+  })
+  .strict();
+export const ProposalReopenSchema = lifecycleBase
+  .extend({
+    expectedDossierRevision: proposalRevision.optional(),
+    reason: z.string().trim().min(1, "Cần nhập lý do mở lại.").max(2000),
+  })
+  .strict();
+export type ProposalWithdraw = z.infer<typeof ProposalWithdrawSchema>;
+export type ProposalReturnToDraft = z.infer<typeof ProposalReturnToDraftSchema>;
+export type ProposalReopen = z.infer<typeof ProposalReopenSchema>;
+export type ProposalLifecycleAction = "withdraw" | "return-to-draft" | "reopen";
+export type ProposalLifecycleContext = {
+  allowedActions: ProposalLifecycleAction[];
+  reviewId: string | null;
+  reviewRevision: number | null;
+  dossierRevision: number | null;
+  readiness: string[];
+};
+export type ProposalLifecycleView = {
+  proposalId: string;
+  status: "DRAFT";
+  revision: number;
+  workingVersionId: string;
+  submittedVersionId: string;
+  supersededReviewId: string | null;
+  reopenedDossierId: string | null;
+  pausedPlanId: string | null;
+};
 export const VersionPageQuerySchema = z
   .object({
     page: z.coerce.number().int().min(1).default(1),
@@ -131,7 +184,7 @@ export type ProposalVersionSave = z.infer<typeof ProposalVersionSaveSchema>;
 export type ProposalVersionSubmit = z.infer<typeof ProposalVersionSubmitSchema>;
 export type VersionPageQuery = z.infer<typeof VersionPageQuerySchema>;
 export type ProposalFeedback = {
-  targetType: 'COMMENT' | 'DECISION';
+  targetType: "COMMENT" | "DECISION";
   targetId: string;
   reviewId: string;
   sourceVersionId: string;
@@ -146,7 +199,7 @@ export type ProposalVersionView = {
   id: string;
   proposalId: string;
   versionNumber: number;
-  state: 'DRAFT' | 'SEALED' | null;
+  state: "DRAFT" | "SEALED" | null;
   content: unknown;
   contentHash: string | null;
   createdAt: string;
@@ -173,9 +226,10 @@ export type ProposalEditorContext = {
   workingVersion: ProposalVersionView | null;
   submittedVersion: ProposalVersionView | null;
   feedback: ProposalFeedback[];
-  allowedActions: Array<'save' | 'submit'>;
+  allowedActions: Array<"save" | "submit">;
   readiness: string[];
   phase: { startsAt: string; endsAt: string; isLocked: boolean } | null;
+  lifecycle?: ProposalLifecycleContext;
 };
 export type ProposalVersionPage = GroupPage<ProposalVersionView>;
 export type ProposalVersionMutationView = ProposalVersionView & {
@@ -206,8 +260,8 @@ export function compareProposalData(
       bExists &&
       a !== null &&
       b !== null &&
-      typeof a === 'object' &&
-      typeof b === 'object' &&
+      typeof a === "object" &&
+      typeof b === "object" &&
       Array.isArray(a) === Array.isArray(b)
     ) {
       for (const key of [
@@ -216,30 +270,30 @@ export function compareProposalData(
         visit(
           (a as Record<string, unknown>)[key],
           (b as Record<string, unknown>)[key],
-          `${path}/${key.replace(/~/g, '~0').replace(/\//g, '~1')}`,
+          `${path}/${key.replace(/~/g, "~0").replace(/\//g, "~1")}`,
           Object.prototype.hasOwnProperty.call(a, key),
           Object.prototype.hasOwnProperty.call(b, key),
         );
     } else
       changes.push({
-        path: path || '/',
+        path: path || "/",
         before: aExists ? a : null,
         after: bExists ? b : null,
         beforeExists: aExists,
         afterExists: bExists,
       });
   }
-  visit(before, after, '');
+  visit(before, after, "");
   return changes;
 }
 export const emptyProposalContent: ProposalContent = {
   schemaVersion: 1,
-  objectives: '',
-  scope: '',
-  mainContents: '',
-  tools: '',
-  expectedResults: '',
-  startsAt: '',
-  endsAt: '',
+  objectives: "",
+  scope: "",
+  mainContents: "",
+  tools: "",
+  expectedResults: "",
+  startsAt: "",
+  endsAt: "",
   schedule: [],
 };

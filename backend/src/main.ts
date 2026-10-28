@@ -6,12 +6,14 @@ import { ConfigService } from "@nestjs/config";
 import { GlobalExceptionHandler } from "./common/exception/global-exception.handler";
 import { describeStep1 } from "./common/swagger/step1-document";
 import { describeStep3 } from "./common/swagger/step3-document";
+import { configureBodyParsers } from "./common/http/body-parsers";
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { bodyParser: false });
   const config = app.get(ConfigService);
 
   const apiPrefix = config.get<string>("API_PREFIX", "api");
+  configureBodyParsers(app, apiPrefix);
   app.setGlobalPrefix(apiPrefix);
 
   app.enableCors({

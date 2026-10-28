@@ -1,0 +1,239 @@
+{
+  "startedAt": "2026-10-26T17:32:06.077Z",
+  "cases": [
+    {
+      "name": "group-empty-submit",
+      "url": "http://127.0.0.1:5173/topic/review-groups/new?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "submitDisabled": true,
+      "invalidFields": 0,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nNhóm duyệt đề cương\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nNhóm duyệt đề cương\n← Danh sách nhóm\nTạo nhóm duyệt\nĐợt tạo nhóm\nChọn đợt đồ án\nĐợt mẫu kiểm tra giao diện sau merge\nĐổi đợt sẽ xóa lựa chọn chưa lưu.\n\nBạn không có quyền quản lý hoặc đợt đang khóa thay đổi.\n\nThông tin nhóm\nTên nhóm\nĐợt đồ án\nBộ môn\nChọn bộ môn\nCông nghệ phần mềm\nThành viên 0 đã chọn\n\nChọn giảng viên hoạt động trong roster của đợt. Mỗi giảng viên có vai trò thành viên duyệt.\n\nTìm giảng viên\nGiảng viên TS3L17930224293233\nGiảng viên XS3L17930224293230\nGiảng viên YS3L17930224293231\nGiảng viên ZS3L17930224293232\nTrước\nTrang 1 / 1\nSau\nTạo nhóm duyệt\nHủy\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "group-validation.png"
+    },
+    {
+      "name": "missing-proposal-error",
+      "url": "http://127.0.0.1:5173/topic/proposal/qa-does-not-exist",
+      "alerts": [
+        "Không tìm thấy đề cương."
+      ],
+      "screenshot": "missing-proposal-error.png"
+    },
+    {
+      "name": "loading-state",
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhiệm vụ & tiến độ hướng dẫn\n\nXem trong phạm vi được cấp; Khoa tổng hợp theo đợt, GVHD và SV xem hồ sơ của mình.\n\nMở kế hoạch để giao nhiệm vụ →\nĐợt\nChọn đợt\nTuần / mốc\nTất cả mốc\nTrạng thái\nTất cả trạng thái\nChưa bắt đầu\nĐang thực hiện\nĐã nộp\nCần làm lại\nĐã hoàn thành\nĐã hủy\nChỉ nhiệm vụ quá hạn\n\n0 nhiệm vụ · 0 quá hạn trong bộ lọc · Trang 1/1\n\nĐang tải kế hoạch/nhiệm vụ…\n\nNghĩa vụ báo cáo tuần\n\nHiển thị theo lịch và danh sách áp dụng, kể cả chưa có nhiệm vụ. Tạo task hoặc ghi tiến độ không được coi là đã nộp báo cáo hay hoàn thành.\n\nChưa cấu hình đầy đủ nghĩa vụ tuần. Không thể kết luận không thiếu báo cáo.\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "loading-real-response.png"
+    },
+    {
+      "name": "student-sidebar-ineligible-link",
+      "expected": "Sidebar should only offer permitted destinations",
+      "url": "http://127.0.0.1:5173/forbidden",
+      "body": "Đang tải dữ liệu…",
+      "screenshot": "student-sidebar-forbidden.png"
+    },
+    {
+      "name": "downstream-sidebar-link",
+      "url": "http://127.0.0.1:5173/defense/committee",
+      "body": "Đang tải dữ liệu…",
+      "screenshot": "downstream-404.png"
+    },
+    {
+      "name": "expired-session-ui",
+      "url": "http://127.0.0.1:5173/topic/proposal",
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nĐề cương & phiên bản\nĐề cương & phiên bản\n\nSV và GVHD hiện hành chỉnh sửa hồ sơ trong quyền của mình. Khoa và reviewer chỉ đọc theo phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nTìm đề cương\n\nToken không hợp lệ hoặc đã hết hạn\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "sessionCleared": true,
+      "screenshot": "expired-session.png"
+    }
+  ],
+  "a11y": [
+    {
+      "name": "login",
+      "passes": 19,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        }
+      ],
+      "violations": []
+    },
+    {
+      "name": "group-create",
+      "passes": 23,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        }
+      ],
+      "violations": [
+        {
+          "id": "aria-prohibited-attr",
+          "impact": "serious",
+          "description": "Ensure ARIA attributes are not prohibited for an element's role",
+          "help": "Elements must only use permitted ARIA attributes",
+          "nodes": [
+            {
+              "target": [
+                ".gap-2"
+              ],
+              "html": "<div class=\"mt-3 flex flex-wrap gap-2\" aria-label=\"Thành viên đã chọn\"></div>",
+              "failureSummary": "Fix all of the following:\n  aria-label attribute cannot be used on \"div\" elements with no valid role attribute."
+            }
+          ]
+        },
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".rg-nav-section"
+              ],
+              "html": "<p class=\"rg-nav-section\">QUẢN LÝ ĐÀO TẠO</p>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #929bad, background color: #ffffff, font size: 6.8pt (9px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".rg-breadcrumb > span:nth-child(2)"
+              ],
+              "html": "<span>Cổng thông tin Khoa CNTT</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #6e788d, background color: #f8f9ff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span:nth-child(4)"
+              ],
+              "html": "<span>Nhóm duyệt đề cương</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #6e788d, background color: #f8f9ff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "footer > span:nth-child(1)"
+              ],
+              "html": "<span>Hệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.69 (foreground color: #919aab, background color: #f8f9ff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "footer > span:nth-child(2)"
+              ],
+              "html": "<span>Không gian học thuật · UTC</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.69 (foreground color: #919aab, background color: #f8f9ff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "guidance-empty-list",
+      "passes": 23,
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "impact": "serious"
+        }
+      ],
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "description": "Ensure the contrast between foreground and background colors meets WCAG 2 AA minimum contrast ratio thresholds",
+          "help": "Elements must meet minimum color contrast ratio thresholds",
+          "nodes": [
+            {
+              "target": [
+                ".rg-nav-section"
+              ],
+              "html": "<p class=\"rg-nav-section\">QUẢN LÝ ĐÀO TẠO</p>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.79 (foreground color: #929bad, background color: #ffffff, font size: 6.8pt (9px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".rg-breadcrumb > span:nth-child(2)"
+              ],
+              "html": "<span>Cổng thông tin Khoa CNTT</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #6e788d, background color: #f8f9ff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "span:nth-child(4)"
+              ],
+              "html": "<span>Kế hoạch &amp; nhiệm vụ hướng dẫn</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 4.22 (foreground color: #6e788d, background color: #f8f9ff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "footer > span:nth-child(1)"
+              ],
+              "html": "<span>Hệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.69 (foreground color: #919aab, background color: #f8f9ff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                "footer > span:nth-child(2)"
+              ],
+              "html": "<span>Không gian học thuật · UTC</span>",
+              "failureSummary": "Fix any of the following:\n  Element has insufficient color contrast of 2.69 (foreground color: #919aab, background color: #f8f9ff, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "metrics": [
+    {
+      "route": "/api/proposal-review-options/terms",
+      "samples": [
+        {
+          "status": 200,
+          "elapsedMs": 44.48
+        },
+        {
+          "status": 200,
+          "elapsedMs": 20.51
+        },
+        {
+          "status": 200,
+          "elapsedMs": 21.26
+        },
+        {
+          "status": 200,
+          "elapsedMs": 20.21
+        },
+        {
+          "status": 200,
+          "elapsedMs": 18.89
+        }
+      ],
+      "condition": "loopback, sequential 5 reads, synthetic sample DB; no load/stress test"
+    },
+    {
+      "route": "/api/me/notifications?page=1&limit=20",
+      "samples": [
+        {
+          "status": 200,
+          "elapsedMs": 13.18
+        },
+        {
+          "status": 200,
+          "elapsedMs": 14.87
+        },
+        {
+          "status": 200,
+          "elapsedMs": 12.44
+        },
+        {
+          "status": 200,
+          "elapsedMs": 18.12
+        },
+        {
+          "status": 200,
+          "elapsedMs": 13.65
+        }
+      ],
+      "condition": "loopback, sequential 5 reads, synthetic sample DB; no load/stress test"
+    }
+  ],
+  "finishedAt": "2026-10-26T17:32:21.461Z"
+}

@@ -1,0 +1,28 @@
+{
+  "identity": {
+    "db": "btl_integration_ui",
+    "ro": "on"
+  },
+  "audits": [
+    {
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "createdAt": "2026-10-28T06:39:18.963Z"
+    }
+  ],
+  "sessions": [
+    {
+      "createdAt": "2026-10-28T06:39:18.903Z",
+      "revokedAt": null
+    }
+  ],
+  "recentAccountTimes": [
+    {
+      "lastLoginAt": "2026-10-28T06:39:18.579Z",
+      "updatedAt": "2026-10-28T06:39:18.587Z"
+    }
+  ],
+  "rawTokensAndCredentialsExcluded": true,
+  "readOnly": true,
+  "conclusion": "97 table hashes unchanged. Three authentication table hashes differ. Do not claim the entire database is unchanged or infer unobserved field-level history."
+}

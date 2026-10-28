@@ -58,6 +58,20 @@ httpClient.interceptors.response.use(
       }
     }
     if (error.response?.status === 401 && !credentialRequest) clearApiSession();
+    // Binary endpoints still return the standard JSON envelope on failure.
+    // Axios keeps that envelope as a Blob when responseType is "blob".
+    const body = error.response?.data;
+    if (
+      typeof Blob !== "undefined" &&
+      body instanceof Blob &&
+      /application\/(?:[\w.-]+\+)?json\b/i.test(body.type)
+    ) {
+      try {
+        error.response.data = JSON.parse(await body.text());
+      } catch {
+        // Preserve the HTTP status and fallback message for malformed responses.
+      }
+    }
     const details = error.response?.data?.error;
     const message =
       details?.message ||

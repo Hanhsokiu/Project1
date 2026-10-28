@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-28T13:17:20.865Z",
+  "filesChecked": 139,
+  "knownCredentialsChecked": 3,
+  "sensitiveFindings": [],
+  "brokenReportLinks": [],
+  "mainTablesUnchanged": 100,
+  "apiSuitesPass": true,
+  "qaServicesStopped": true,
+  "initialSearchFailurePreservedAndRetested": true
+}

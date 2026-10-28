@@ -1,0 +1,117 @@
+{
+  "proposal": {
+    "proposalId": "p-student",
+    "topicId": "topic-student",
+    "termId": "qa-t1",
+    "termStudentId": "ts-student",
+    "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+    "studentName": "Nguyễn Văn Sinh",
+    "status": "SUBMITTED",
+    "revision": 15,
+    "workingVersionId": "9e1f9e5d-fd82-4114-b393-a937bc9506e4",
+    "submittedVersionId": "9e1f9e5d-fd82-4114-b393-a937bc9506e4",
+    "workingVersion": {
+      "id": "9e1f9e5d-fd82-4114-b393-a937bc9506e4",
+      "proposalId": "p-student",
+      "versionNumber": 4,
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T07:08:36.140Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T07:08:36.140Z",
+            "startsAt": "2026-10-27T07:08:36.140Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T07:08:36.140Z",
+        "objectives": "UI lifecycle v4 — bảo toàn bản cũ",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "state": "SEALED",
+      "contentHash": "d13ae290e66cdbb48ed6c7f3a4ce7d0f0267b30d1c9080a3e88c476d0b627eb5",
+      "createdAt": "2026-10-28T07:10:36.567Z",
+      "createdByUserId": "student",
+      "authorName": "qa-student",
+      "submittedAt": "2026-10-28T07:10:36.711Z",
+      "submittedByUserId": "student",
+      "basedOnVersionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+      "changeSummary": null,
+      "responses": [],
+      "provenance": null
+    },
+    "submittedVersion": {
+      "id": "9e1f9e5d-fd82-4114-b393-a937bc9506e4",
+      "proposalId": "p-student",
+      "versionNumber": 4,
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T07:08:36.140Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T07:08:36.140Z",
+            "startsAt": "2026-10-27T07:08:36.140Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T07:08:36.140Z",
+        "objectives": "UI lifecycle v4 — bảo toàn bản cũ",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "state": "SEALED",
+      "contentHash": "d13ae290e66cdbb48ed6c7f3a4ce7d0f0267b30d1c9080a3e88c476d0b627eb5",
+      "createdAt": "2026-10-28T07:10:36.567Z",
+      "createdByUserId": "student",
+      "authorName": "qa-student",
+      "submittedAt": "2026-10-28T07:10:36.711Z",
+      "submittedByUserId": "student",
+      "basedOnVersionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+      "changeSummary": null,
+      "responses": [],
+      "provenance": null
+    },
+    "feedback": [
+      {
+        "targetType": "COMMENT",
+        "targetId": "08eba99b-4080-4198-9816-1ce5ed618c71",
+        "reviewId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+        "sourceVersionId": "11954fe6-e030-4548-a3e6-675aa952e54c",
+        "versionNumber": 2,
+        "roundNumber": 1,
+        "authorUserId": "reviewer",
+        "authorName": "qa-reviewer",
+        "text": "Nhận xét phải giữ sau khi Khoa trả nháp.",
+        "createdAt": "2026-10-28T07:10:31.040Z"
+      }
+    ],
+    "allowedActions": [],
+    "readiness": [
+      "STATE_TRANSITION_INVALID"
+    ],
+    "lifecycle": {
+      "allowedActions": [],
+      "reviewId": null,
+      "reviewRevision": null,
+      "dossierRevision": null,
+      "readiness": [
+        "INPUT_NOT_READY"
+      ]
+    },
+    "phase": {
+      "startsAt": "2026-10-27T07:08:36.140Z",
+      "endsAt": "2026-11-04T07:08:36.140Z",
+      "isLocked": false
+    }
+  },
+  "planId": "ebc801e4-9e6b-4a48-be5d-c9980baf2dba",
+  "finalizationId": "c61cfa5e-5651-4150-988a-513a99527148",
+  "oldReviewId": "a9a72832-170e-49d3-a840-4da20fd1c2fc"
+}

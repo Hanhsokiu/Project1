@@ -89,7 +89,7 @@ function PublishedContent({
     retry: false,
   });
   return (
-    <main className="max-w-5xl mx-auto p-6 space-y-4">
+    <section className="max-w-5xl mx-auto space-y-4">
       <Link to="/">← Về không gian làm việc</Link>
       <PageHeader
         title="Lịch bảo vệ đã công bố"
@@ -127,6 +127,6 @@ function PublishedContent({
           </Button>
         </Card>
       )}
-    </main>
+    </section>
   );
 }

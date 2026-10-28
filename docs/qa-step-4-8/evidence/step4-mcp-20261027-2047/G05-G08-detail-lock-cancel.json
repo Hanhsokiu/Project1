@@ -1,0 +1,72 @@
+{
+  "startedAt": "2026-10-27T13:54:27.269Z",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/review-groups/5cab3d95-87d6-404b-92a9-6b30e53d8b85"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/review-groups/5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+      "body": {
+        "success": true,
+        "data": {
+          "id": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+          "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+          "name": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+          "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+          "departmentName": "Công nghệ phần mềm",
+          "revision": 0,
+          "createdAt": "2026-10-27T02:57:39.000Z",
+          "updatedAt": "2026-10-27T02:57:39.000Z",
+          "activeReviewCount": 1,
+          "canManage": true,
+          "members": [
+            {
+              "lecturerId": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+              "fullName": "Giảng viên T",
+              "lecturerCode": "S3L17930224293233",
+              "role": "MEMBER"
+            },
+            {
+              "lecturerId": "0bf21346-ca5e-441f-b934-e02567d2b288",
+              "fullName": "Giảng viên Z",
+              "lecturerCode": "S3L17930224293232",
+              "role": "MEMBER"
+            }
+          ]
+        },
+        "timestamp": "2026-10-27T13:54:28.797Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "observations": {
+    "detail": {
+      "url": "http://127.0.0.1:5173/topic/review-groups/5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+      "text": "Tìm kiếm\n← Danh sách nhóm\nNhóm duyệt DEMO 4–8 · Công nghệ phần mềm\n\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn · Công nghệ phần mềm · 2 thành viên\n\nChỉnh sửa nhóm\nXóa nhóm\n\nBộ môn\n\nCông nghệ phần mềm\n\nVòng đang hoạt động\n\n1\n\nCập nhật\n\n09:57:39 27/10/2026\n\nThành viên nhóm duyệt\nGIẢNG VIÊN\tMÃ GIẢNG VIÊN\tVAI TRÒ\nGiảng viên T\tS3L17930224293233\tThành viên duyệt\nGiảng viên Z\tS3L17930224293232\tThành viên duyệt"
+    },
+    "archiveOpened": {
+      "text": "Tìm kiếm\n← Danh sách nhóm\nNhóm duyệt DEMO 4–8 · Công nghệ phần mềm\n\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn · Công nghệ phần mềm · 2 thành viên\n\nChỉnh sửa nhóm\nXóa nhóm\nXác nhận xóa nhóm\n\nNhóm chỉ được lưu trữ khi chưa có đề cương liên kết. Lịch sử và thành viên được giữ lại.\n\nLý do\nXác nhận xóa\n\nBộ môn\n\nCông nghệ phần mềm\n\nVòng đang hoạt động\n\n1\n\nCập nhật\n\n09:57:39 27/10/2026\n\nThành viên nhóm duyệt\nGIẢNG VIÊN\tMÃ GIẢNG VIÊN\tVAI TRÒ\nGiảng viên T\tS3L17930224293233\tThành viên duyệt\nGiảng viên Z\tS3L17930224293232\tThành viên duyệt",
+      "dialogs": 0
+    }
+  },
+  "runnerError": {
+    "name": "TimeoutError",
+    "message": "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole('button', { name: 'Hủy', exact: true })\u001b[22m\n"
+  },
+  "finishedAt": "2026-10-27T13:55:01.913Z"
+}

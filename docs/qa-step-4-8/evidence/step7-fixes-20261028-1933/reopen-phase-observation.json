@@ -1,0 +1,10 @@
+{
+  "id": "S7-01",
+  "requirement": "Business contract §3.2 line 98: faculty reopen is a phase exception while term has not ended; must not unlock student edit",
+  "actual": {
+    "status": 200
+  },
+  "termStatus": "IN_PROGRESS",
+  "phase": "PROPOSAL_EDIT locked",
+  "expectedStatus": 200
+}

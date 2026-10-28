@@ -1,0 +1,42 @@
+{
+  "result": "PASS",
+  "workflowResult": "PASS",
+  "startedAt": "2026-10-26T14:49:40.113Z",
+  "finishedAt": "2026-10-26T14:50:32.504Z",
+  "database": "btl_pr2b_audit_20261026144939_2663ec_live_e2e",
+  "postgresMajor": 17,
+  "sharedDatabaseAccess": false,
+  "mockedApi": false,
+  "checks": [
+    {
+      "name": "fresh guarded PG17 seed and canonical active-migration replay",
+      "expected": "As stated in test case",
+      "actual": "Synthetic roster/official assignments/agreement/v1/profile only; no review, finalization, task or submission pre-created",
+      "result": "PASS"
+    },
+    {
+      "name": "all inventoried step 4–8 operations reject anonymous access",
+      "expected": "As stated in test case",
+      "actual": "71 operations returned 401; see endpoint-auth.json",
+      "result": "PASS"
+    },
+    {
+      "name": "live browser full 4→5→6→7→8A→8B→8C workflow",
+      "expected": "As stated in test case",
+      "actual": "15 browser checkpoints with real API; no mocked responses",
+      "result": "PASS"
+    },
+    {
+      "name": "browser-downloaded PDF contains real finalized v2 Vietnamese fields, A4 and no text overflow",
+      "expected": "As stated in test case",
+      "actual": "Parsed actual download with pdfjs; no mock PDF",
+      "result": "PASS"
+    },
+    {
+      "name": "post-flow database assertions preserve v1, distinct exact-version decisions and step 1–3 rows",
+      "expected": "As stated in test case",
+      "actual": "v1/v2, two proposal decisions, two progress decisions, one completed task; no graduation data generated",
+      "result": "PASS"
+    }
+  ]
+}

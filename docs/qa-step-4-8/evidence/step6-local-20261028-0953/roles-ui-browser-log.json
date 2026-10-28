@@ -1,0 +1,864 @@
+[
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T18-faculty-read-only",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "student",
+    "phase": "login-student",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "student",
+    "phase": "login-student",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "user": "student",
+    "phase": "login-student",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "student",
+    "phase": "T17-other-owner-denied",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "user": "student",
+    "phase": "T17-other-owner-denied",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "student",
+    "phase": "T17-other-owner-denied",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "student",
+    "phase": "T17-other-owner-denied",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "user": "student",
+    "phase": "T17-other-owner-denied",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "user": "student",
+    "phase": "T17-other-owner-denied",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "user": "student",
+    "phase": "T17-other-owner-denied",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "user": "outsider",
+    "phase": "login-outsider",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "user": "outsider",
+    "phase": "T17-outsider-no-draft-access",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "user": "outsider",
+    "phase": "T17-outsider-no-draft-access",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "user": "foreign",
+    "phase": "login-foreign",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "user": "foreign",
+    "phase": "login-faculty2",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "user": "foreign",
+    "phase": "login-faculty2",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "user": "faculty2",
+    "phase": "login-faculty2",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/terms?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/semesters",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/training-systems",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/research-areas",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/departments",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/students?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/lecturers?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/terms?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/accounts?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/semesters",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/training-systems",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/research-areas",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/departments",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/students?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/lecturers?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/accounts?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "admin",
+    "phase": "login-admin",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "committee",
+    "phase": "login-committee",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "unprivileged",
+    "phase": "login-unprivileged",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "unprivileged",
+    "phase": "login-unprivileged",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/terms?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "login-unprivileged",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "login-unprivileged",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/semesters",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "login-unprivileged",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/training-systems",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/departments",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/research-areas",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/lecturers?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/terms?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/semesters",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/training-systems",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/departments",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/research-areas",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/lecturers?page=1&pageSize=100&limit=100",
+    "status": 403
+  },
+  {
+    "user": "unprivileged",
+    "phase": "T19-unprivileged-no-bypass",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 403 (Forbidden)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 400 (Bad Request)"
+  },
+  {
+    "user": "faculty",
+    "phase": "T46-404-recovery",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T46-404-recovery",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/proposals/not-a-proposal/editing-context",
+    "status": 404
+  },
+  {
+    "user": "faculty",
+    "phase": "T46-404-recovery",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  },
+  {
+    "user": "faculty",
+    "phase": "T46-404-recovery",
+    "kind": "http-error",
+    "method": "GET",
+    "url": "http://127.0.0.1:53019/api/proposals/not-a-proposal/editing-context",
+    "status": 404
+  },
+  {
+    "user": "faculty",
+    "phase": "T46-404-recovery",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  }
+]

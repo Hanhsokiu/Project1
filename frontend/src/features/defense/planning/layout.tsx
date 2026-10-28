@@ -106,7 +106,7 @@ function PlanningContent({ sessionKey }: { sessionKey: string }) {
   });
   const selected = termId || terms.data?.items[0]?.id || "";
   return (
-    <main className="max-w-7xl mx-auto p-6 space-y-5">
+    <section className="max-w-7xl mx-auto space-y-5">
       <Link to="/">← Về không gian làm việc</Link>
       <PageHeader
         title="Hội đồng · Phản biện · Lịch bảo vệ"
@@ -157,7 +157,7 @@ function PlanningContent({ sessionKey }: { sessionKey: string }) {
           sessionKey={sessionKey}
         />
       )}
-    </main>
+    </section>
   );
 }
 function TermWorkspace({

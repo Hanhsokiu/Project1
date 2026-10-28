@@ -1,0 +1,1388 @@
+[
+  {
+    "id": "STEP4-01",
+    "step": "step4",
+    "name": "active migration chain replays without reset/drop",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-02",
+    "step": "step4",
+    "name": "migration history checksums match applied files",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-03",
+    "step": "step4",
+    "name": "Swagger exposes step4 routes and response DTO",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-04",
+    "step": "step4",
+    "name": "unauthenticated API denied",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-05",
+    "step": "step4",
+    "name": "faculty creates department/term group with valid member",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-06",
+    "step": "step4",
+    "name": "idempotent create replays without duplicate audit",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-07",
+    "step": "step4",
+    "name": "idempotency key payload conflict rejected",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-08",
+    "step": "step4",
+    "name": "cached create response cannot bypass revoked department scope",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-09",
+    "step": "step4",
+    "name": "duplicate array validation",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-10",
+    "step": "step4",
+    "name": "unknown input fields rejected",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-11",
+    "step": "step4",
+    "name": "cross-term inactive missing role and nonexistent members denied",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-12",
+    "step": "step4",
+    "name": "faculty cannot cross department or term grants",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-13",
+    "step": "step4",
+    "name": "lecturer reads only membership and faculty only granted department",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-14",
+    "step": "step4",
+    "name": "ADMIN/student cannot bypass policy even with permissions and forged role claims",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-15",
+    "step": "step4",
+    "name": "lecturer cannot manage groups",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-16",
+    "step": "step4",
+    "name": "cross-round lecturer access denied",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-17",
+    "step": "step4",
+    "name": "pagination and name filter intersect scope",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-18",
+    "step": "step4",
+    "name": "pagination bounds enforced",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-19",
+    "step": "step4",
+    "name": "update CAS and stale revision rejection",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-20",
+    "step": "step4",
+    "name": "add valid roster member including other home department",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-21",
+    "step": "step4",
+    "name": "existing membership duplicate rejected",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-22",
+    "step": "step4",
+    "name": "remove member revokes access and preserves membership history",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-23",
+    "step": "step4",
+    "name": "membership changes recorded append-only",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-24",
+    "step": "step4",
+    "name": "concurrent updates have one CAS winner",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-25",
+    "step": "step4",
+    "name": "audit failure rolls back revision membership and history",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-26",
+    "step": "step4",
+    "name": "unresolved legacy review blocks membership changes",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-27",
+    "step": "step4",
+    "name": "active assigned round blocks membership mutation",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-28",
+    "step": "step4",
+    "name": "assigned group deletion preserves proposal references",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-29",
+    "step": "step4",
+    "name": "soft deletion and retry preserve group member history",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-30",
+    "step": "step4",
+    "name": "closed term remains read-only",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP4-31",
+    "step": "step4",
+    "name": "lecturer options do not expose full roster",
+    "result": "PASS",
+    "evidence": "step4/generated/step4-results.json",
+    "source": "backend/scripts/test-review-groups.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-01",
+    "step": "step5",
+    "name": "active migration chain replays with matching history/checksums",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-02",
+    "step": "step5",
+    "name": "Swagger exposes step 5 assignment/decision endpoints",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-03",
+    "step": "step5",
+    "name": "401, ADMIN deny despite permission and forged claims, cross-term/department isolation",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-04",
+    "step": "step5",
+    "name": "specialty candidates are advisory, scoped and have no assignment side effects",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-05",
+    "step": "step5",
+    "name": "cross-term and wrong-department group assignment rejected",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-06",
+    "step": "step5",
+    "name": "assignment binds submitted version, actor, history, idempotency and duplicate-active guard",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-07",
+    "step": "step5",
+    "name": "only assigned roster members or academic owners/advisors read; faculty cannot review as faculty",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-08",
+    "step": "step5",
+    "name": "owner/current advisor read scoped evidence but cannot comment or decide as reviewers",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-09",
+    "step": "step5",
+    "name": "decision before explicit start is an invalid transition",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-10",
+    "step": "step5",
+    "name": "valid assign → comments by multiple members → explicit start flow",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-11",
+    "step": "step5",
+    "name": "concurrent decisions commit exactly once; APPROVED never finalizes a dossier",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-12",
+    "step": "step5",
+    "name": "decided rounds reject later comments/decisions",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-13",
+    "step": "step5",
+    "name": "revision-required needs comment, preserves canonical result and legacy state, replay emits one outbox event",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-14",
+    "step": "step5",
+    "name": "revoked account cannot replay cached academic response",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-15",
+    "step": "step5",
+    "name": "new submitted version blocks stale decision and never leaks the unassigned content to reviewer",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-16",
+    "step": "step5",
+    "name": "reassignment atomically supersedes prior round with reason and preserves scoped history",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-17",
+    "step": "step5",
+    "name": "missing producer counter fails closed, never guessed/backfilled",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-18",
+    "step": "step5",
+    "name": "locked phase blocks assignment",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-19",
+    "step": "step5",
+    "name": "audit failure rolls back assignment, revisions and idempotency atomically",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-20",
+    "step": "step5",
+    "name": "concurrent assignments create exactly one active round",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-21",
+    "step": "step5",
+    "name": "second term review remains isolated from first-term reviewer",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-22",
+    "step": "step5",
+    "name": "step 5 does not implement/fabricate dossier, guidance or task workflows",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-23",
+    "step": "step5",
+    "name": "phase lock racing with assignment commits first and prevents the blocked assignment",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-24",
+    "step": "step5",
+    "name": "concurrent comments honor review revision and reject stale append",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-25",
+    "step": "step5",
+    "name": "PUBLISHED is not official and obsolete Topic agreement never enables assignment",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-26",
+    "step": "step5",
+    "name": "routing revision change requires explicit faculty reassignment before review can continue",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP5-27",
+    "step": "step5",
+    "name": "malformed legacy review pointing to an unsealed version never exposes draft content",
+    "result": "PASS",
+    "evidence": "step5/generated/step5-results.json",
+    "source": "backend/scripts/test-proposal-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-01",
+    "step": "step6",
+    "name": "active migration replay and all 27 Step 5 real HTTP checks run as the producer prelude",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-02",
+    "step": "step6",
+    "name": "version reads enforce JWT, owner/term scope and no ADMIN wildcard",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-03",
+    "step": "step6",
+    "name": "missing PROPOSAL_EDIT mapping fails closed without creating a version",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-04",
+    "step": "step6",
+    "name": "only SV/current official GVHD edit; PUBLISHED never grants advisor rights",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-05",
+    "step": "step6",
+    "name": "strict DTO and feedback references reject forged actor, duplicate and cross-proposal response",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-06",
+    "step": "step6",
+    "name": "create v2 from returned v1, preserve v1/decision exactly, record editor/time/summary/response",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-07",
+    "step": "step6",
+    "name": "save idempotency replays one snapshot and never duplicates audit",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-08",
+    "step": "step6",
+    "name": "account revocation is checked before returning cached snapshot",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-09",
+    "step": "step6",
+    "name": "reviewer cannot read/compare draft or another proposal; faculty scoped reads remain available",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-10",
+    "step": "step6",
+    "name": "real JSON comparison includes content and revision responses",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-11",
+    "step": "step6",
+    "name": "database rejects rewriting old and new snapshot payloads or response metadata",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-12",
+    "step": "step6",
+    "name": "only student submits current v2, seals immutable snapshot and records RESUBMISSION once",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-13",
+    "step": "step6",
+    "name": "submitted and sealed snapshots cannot be edited or unsealed",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-14",
+    "step": "step6",
+    "name": "Step 5 reviews v2 in a new round while old reviewer comments/decision remain linked to v1",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-15",
+    "step": "step6",
+    "name": "incomplete draft saves successfully but cannot be submitted or partially sealed",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-16",
+    "step": "step6",
+    "name": "current official advisor appends a new snapshot and inherits prior response evidence",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-17",
+    "step": "step6",
+    "name": "stale Topic agreement blocks submission without inventing advisor confirmation",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-18",
+    "step": "step6",
+    "name": "concurrent SV/GVHD edits produce one CAS winner without overwriting the other snapshot",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-19",
+    "step": "step6",
+    "name": "audit failure rolls back snapshot, pointer, counter and revision atomically",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-20",
+    "step": "step6",
+    "name": "concurrent phase closure blocks a waiting save and preserves the last snapshot",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-21",
+    "step": "step6",
+    "name": "advisor handover revokes old advisor edit access and does not auto-confirm Topic for the new advisor",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-22",
+    "step": "step6",
+    "name": "APPROVED proposal is read-only and Step 6 never reopens/finalizes it",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-23",
+    "step": "step6",
+    "name": "finalized dossier blocks direct edits even if Proposal status is inconsistent",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP6-24",
+    "step": "step6",
+    "name": "v1 payload, metadata, reviewer and decision are preserved after every revision cycle",
+    "result": "PASS",
+    "evidence": "step6/generated/step6-results.json",
+    "source": "backend/scripts/test-proposal-versions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-01",
+    "step": "step7",
+    "name": "active migration chain/checksums and 27 Step 5 API producer checks replay successfully",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-02",
+    "step": "step7",
+    "name": "valid Step 6 resubmission and Step 5 APPROVED decision provide exact input to finalization",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-03",
+    "step": "step7",
+    "name": "missing producer class/major blocks finalize and never invents official metadata",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-04",
+    "step": "step7",
+    "name": "faculty/student/advisor scopes, cross-term/department and ADMIN denial do not trust JWT roles",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-05",
+    "step": "step7",
+    "name": "unapproved proposals and approved but incomplete legacy content cannot finalize",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-06",
+    "step": "step7",
+    "name": "faculty preview uses confirmed producer profile; stale/cross-proposal approved version is rejected",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-07",
+    "step": "step7",
+    "name": "audit failure rolls back dossier, finalization, pointers and revisions atomically",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-08",
+    "step": "step7",
+    "name": "routing changed after approval cannot silently finalize under stale review evidence",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-09",
+    "step": "step7",
+    "name": "concurrent finalize commits once; exact approvedVersionId/time stored separately from PDF and receipt",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-10",
+    "step": "step7",
+    "name": "duplicate same-key request replays one finalization; different payload conflicts",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-11",
+    "step": "step7",
+    "name": "DB and API preserve finalized snapshot and the SEALED approved version",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-12",
+    "step": "step7",
+    "name": "student creates private PDF once; PDF generation never claims a signature or physical submission",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-13",
+    "step": "step7",
+    "name": "authenticated PDF download rechecks ownership/current advisor/grants and blocks ID tampering and ADMIN",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-14",
+    "step": "step7",
+    "name": "real PDF text extraction verifies Vietnamese Unicode, all required fields, A4 and page bounds",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-15",
+    "step": "step7",
+    "name": "long content and oversized schedule rows paginate, repeat table header and retain all final rows/signatures",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-16",
+    "step": "step7",
+    "name": "changes to live catalog/profile do not alter official snapshot or stored PDF bytes",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-17",
+    "step": "step7",
+    "name": "receipt requires scoped faculty and open review phase; historical PDF reads remain available when phase locks",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-18",
+    "step": "step7",
+    "name": "physical receipt has server actor/time, unique finalization, immutable evidence and idempotent atomic audit",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP7-19",
+    "step": "step7",
+    "name": "grant revocation blocks cached replay and approved version remains unchanged after finalization/PDF/receipt",
+    "result": "PASS",
+    "evidence": "step7/generated/step7-results.json",
+    "source": "backend/scripts/test-proposal-dossiers.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-01",
+    "step": "step8a",
+    "name": "active migration chain and all Step 7/Step 5 API checks supply a real finalized dossier",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-02",
+    "step": "step8a",
+    "name": "no implicit ADMIN/reviewer/cross-term/department access; missing GUIDANCE phase blocks plan creation",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-03",
+    "step": "step8a",
+    "name": "weekly coverage detects overdue/missing obligations without plan or task; GET never creates data or false completion",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-04",
+    "step": "step8a",
+    "name": "only current official advisor creates a plan for the current finalized dossier, exact revision and finalization ID",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-05",
+    "step": "step8a",
+    "name": "concurrent/idempotent plan creation commits one ACTIVE plan with finalization/assignment revision and audit",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-06",
+    "step": "step8a",
+    "name": "task DTO rejects timezone-less input/forged status; foreign period and exclusive phase deadline are blocked",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-07",
+    "step": "step8a",
+    "name": "concurrent task creation uses plan CAS; DB scope/date constraints reject cross-term and inverted ranges",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-08",
+    "step": "step8a",
+    "name": "owner student starts/appends progress with idempotency; no self-completion or advisor impersonation",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-09",
+    "step": "step8a",
+    "name": "canonical and legacy task read routes both enforce owner/advisor/faculty scope; legacy array envelope remains compatible",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-10",
+    "step": "step8a",
+    "name": "concurrent task amendments preserve history; overdue derives from deadline without replacing workflow; scoped filters work",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-11",
+    "step": "step8a",
+    "name": "overdue alone never blocks progress while GUIDANCE remains open",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-12",
+    "step": "step8a",
+    "name": "editing a task with existing evidence requires explicit acknowledgement and never changes the old submission",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-13",
+    "step": "step8a",
+    "name": "explicit weekly materialization is unique/idempotent, uses configured dates/deliverables and never counts as a report",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-14",
+    "step": "step8a",
+    "name": "cancelling weekly work preserves obligation/history and allows one replacement, without exempting missing report",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-15",
+    "step": "step8a",
+    "name": "concurrent phase lock serializes with progress commit and leaves no late audit/progress write",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-16",
+    "step": "step8a",
+    "name": "invalid/reopened dossier blocks new task mutation even when plan metadata still claims ACTIVE",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-17",
+    "step": "step8a",
+    "name": "handover revokes old advisor, pauses writes and requires new advisor agreement/acknowledgement without losing tasks",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-18",
+    "step": "step8a",
+    "name": "audit failure rolls back task metadata, history and plan revision in the same transaction",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8A-19",
+    "step": "step8a",
+    "name": "cancel guards preserve historical submissions; task/plan history is append-only and technical audit avoids academic text",
+    "result": "PASS",
+    "evidence": "step8a/generated/step8a-results.json",
+    "source": "backend/scripts/test-guidance-tasks.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-01",
+    "step": "step8b",
+    "name": "active migration chain replays with all Step 8A/7/5 real producer checks; only private loopback DB",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-02",
+    "step": "step8b",
+    "name": "unauthorized/non-owner/ADMIN/advisor/faculty upload rejected before staging metadata or IO",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-03",
+    "step": "step8b",
+    "name": "extension, MIME, content, unsafe ZIP paths/filename and oversized multipart rejected without orphan intent",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-04",
+    "step": "step8b",
+    "name": "READY private staging is idempotent, has no public URL/path and does not create a submission",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-05",
+    "step": "step8b",
+    "name": "owner commits report+source atomically with version, actor/time, official advisor/term and policy snapshot; idempotent replay",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-06",
+    "step": "step8b",
+    "name": "student/current advisor/scoped faculty can download attachments; cross-student/term/department/reviewer/old advisor/ADMIN denied",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-07",
+    "step": "step8b",
+    "name": "concurrent resubmission commits one v2; v1 bytes/content/links preserved, old state SUPERSEDED and DB immutability guards hold",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-08",
+    "step": "step8b",
+    "name": "staged/committed assets cannot be replayed onto a different task or student",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-09",
+    "step": "step8b",
+    "name": "deadline passed does not lock submission while phase open; server captures isLate/deadline snapshot",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-10",
+    "step": "step8b",
+    "name": "audit/metadata failure rolls back submission, current pointer, version counter, links and file claims together",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-11",
+    "step": "step8b",
+    "name": "locked GUIDANCE phase rejects both upload and uncommitted READY staging; no partial submission",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-12",
+    "step": "step8b",
+    "name": "real concurrent phase closure serializes against submission commit and rejects upload started before lock",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-13",
+    "step": "step8b",
+    "name": "storage failure leaves no READY metadata/submission and retains recoverable expired intent",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-14",
+    "step": "step8b",
+    "name": "metadata failure after writing bytes rolls back FileAsset and removes private orphan while retaining cleanup intent",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-15",
+    "step": "step8b",
+    "name": "expired unclaimed staging is quarantined/cleaned; committed files survive sweeps and expired references cannot submit",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-16",
+    "step": "step8b",
+    "name": "weekly obligation coverage consumes real submission pointer; no PASS/completion/evaluation is fabricated",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8B-17",
+    "step": "step8b",
+    "name": "explicit disabled policy and invalid/reopened dossier block upload without inventing missing ownership/finalization",
+    "result": "PASS",
+    "evidence": "step8b/generated/step8b-results.json",
+    "source": "backend/scripts/test-guidance-submissions.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-01",
+    "step": "step8c",
+    "name": "complete active migration replay and all 8A→8B producer checks with real HTTP/private files; no shared database",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-02",
+    "step": "step8c",
+    "name": "inbox/options use current advisor roster and term scope; JWT role claims/ADMIN cannot bypass",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-03",
+    "step": "step8c",
+    "name": "8A task→8B PDF/source→8C exact-version review/download; owner/faculty read, no unauthorized reviewer or IDOR",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-04",
+    "step": "step8c",
+    "name": "strict three-way DTO, required failure/revision comment and CAS reject invalid or stale writes",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-05",
+    "step": "step8c",
+    "name": "revision result stores immutable reviewer/version/time/comment; one notification/outbox/audit and idempotent effective decision",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-06",
+    "step": "step8c",
+    "name": "student sees revision requirement and submits v2; v1/comment/files remain and stale v1 review/amend is blocked",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-07",
+    "step": "step8c",
+    "name": "PASS of current v2 atomically completes task; student cannot submit on completed task",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-08",
+    "step": "step8c",
+    "name": "amend PASS→FAIL→REVISION_REQUIRED appends distinct decisions/reasons and recalculates task without overwriting history",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-09",
+    "step": "step8c",
+    "name": "concurrent amendments create one effective record, bounded retry/optimistic conflict and replay no duplicate",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-10",
+    "step": "step8c",
+    "name": "review amendment versus student resubmission serializes on same task and never concludes a superseded version",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-11",
+    "step": "step8c",
+    "name": "audit failure rolls back review, completion, pointers, history, notifications and outbox together",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-12",
+    "step": "step8c",
+    "name": "transactional in-app notices are self-only, generic and idempotently read; legacy notification IDOR closed with array shape preserved",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-13",
+    "step": "step8c",
+    "name": "confirmed meeting create/amend is scoped, versioned and audited; concurrent edits preserve original discussion/conclusion history",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-14",
+    "step": "step8c",
+    "name": "faculty metrics use real canonical task/review data with current advisor/student/department filters; weekly missing exists without manual task",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-15",
+    "step": "step8c",
+    "name": "no completion without effective current PASS; locked phase or reopened dossier blocks review mutation",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-16",
+    "step": "step8c",
+    "name": "real concurrent phase closure serializes with review commit and leaves no late conclusion/notification",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  },
+  {
+    "id": "STEP8C-17",
+    "step": "step8c",
+    "name": "legacy boolean review, graduation score and defense eligibility untouched; technical audit stores IDs/hashes rather than academic text",
+    "result": "PASS",
+    "evidence": "step8c/generated/step8c-results.json",
+    "source": "backend/scripts/test-guidance-reviews.cjs",
+    "limitation": "Scenario group may contain multiple assertions; not a complete business requirement count"
+  }
+]

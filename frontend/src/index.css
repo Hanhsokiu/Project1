@@ -40,8 +40,53 @@
   -webkit-font-smoothing: antialiased;
   font-size: 14px;
   --primary: #315bea;
-  --muted: #7b879b;
+  --muted: #52627a;
   --line: #e8edf5;
+}
+/* Shared workspace text remains readable on the existing light surfaces. */
+.app-shell
+  :is(
+    .brand small,
+    .sidebar-context small,
+    .nav-group-title,
+    .topbar-title,
+    .eyebrow,
+    .person small,
+    .stat-card > small,
+    th
+  ) {
+  color: #52627a;
+}
+.app-shell :is(input, textarea)::placeholder {
+  color: #667085;
+}
+.app-shell .notice-warning {
+  color: #805400;
+}
+.app-shell .notice-danger {
+  color: #9f3232;
+}
+.app-shell .notice-success {
+  color: #25623f;
+}
+.app-shell :is(.badge-APPROVED, .badge-PASS, .badge-SENT, .badge-COMPLETED) {
+  color: #25623f;
+}
+.app-shell :is(.badge-DRAFT, .badge-CLOSED_REGISTRATION, .badge-LOCKED) {
+  color: #52627a;
+}
+.app-shell
+  :is(.badge-REVISION, .badge-PENDING, .badge-FACULTY, .badge-REVIEWER) {
+  color: #805400;
+}
+.app-shell :is(.badge-FAILED, .badge-FAIL, .badge-REJECTED, .badge-CANCELLED) {
+  color: #9f3232;
+}
+.app-shell :is(.badge-DEFENDING, .badge-COMMITTEE, .badge-ADMIN) {
+  color: #6944a8;
+}
+.app-shell .badge-STUDENT {
+  color: #20667a;
 }
 * {
   box-sizing: border-box;
@@ -1242,11 +1287,13 @@ tbody tr:hover {
 }
 @media (max-width: 760px) {
   .sidebar {
+    visibility: hidden;
     transform: translateX(-100%);
     width: 248px;
     transition: transform 0.2s;
   }
   .sidebar.open {
+    visibility: visible;
     transform: translateX(0);
   }
   .sidebar-shade.open {
@@ -1734,7 +1781,7 @@ input[type="radio"] {
 }
 .pagination {
   border-color: #efedf4;
-  color: #76777b;
+  color: var(--muted);
 }
 .modal {
   border-radius: 20px;

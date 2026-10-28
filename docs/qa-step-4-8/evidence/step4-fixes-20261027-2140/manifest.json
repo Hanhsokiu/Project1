@@ -1,0 +1,88 @@
+﻿{
+    "GeneratedAt":  "2026-10-27T21:45:26.8884056+07:00",
+    "BrokenLinks":  [
+
+                    ],
+    "SensitivePatternFileCount":  0,
+    "Source":  [
+                   {
+                       "File":  "frontend/src/features/review-groups/components.tsx",
+                       "SHA256":  "A7BD9FA0C5218B4D9674778603FF2E7ECB781B9E7AF2FCCE4A04D7BFE6F13123"
+                   },
+                   {
+                       "File":  "frontend/src/app/layouts/WorkspaceLayout.tsx",
+                       "SHA256":  "5E9D4C54AE399682F6466F008BA7321D0D008E2710531E134A890B2D5937CF90"
+                   },
+                   {
+                       "File":  "frontend/src/index.css",
+                       "SHA256":  "94EE4E9287F9C8DC91FD7A6959619072006198C6AF58AE6C3A4C741C3000C833"
+                   }
+               ],
+    "Artifacts":  [
+                      {
+                          "File":  "auth-cleanup.json",
+                          "Bytes":  70,
+                          "SHA256":  "385758185E9C444F4421C1C9CDDA764F13F807AD29E6D5AEA077A550868C99F8"
+                      },
+                      {
+                          "File":  "axe-live.json",
+                          "Bytes":  2734,
+                          "SHA256":  "F4753B46815E451325B075006A9E42F742394450DBE4781E3920D4C666375672"
+                      },
+                      {
+                          "File":  "console-errors.log",
+                          "Bytes":  82,
+                          "SHA256":  "137514A62785CE0D9FEB46EE2DC9ECA984EE02E6BDA1DC8EBC5461BBD820D443"
+                      },
+                      {
+                          "File":  "console-warnings.log",
+                          "Bytes":  456,
+                          "SHA256":  "54F8CC98CEFAD26B0CF765B610E20D5279C06E73BF6EC5BDEB839F19EFB30310"
+                      },
+                      {
+                          "File":  "focus-live.json",
+                          "Bytes":  3965,
+                          "SHA256":  "B1947061DA5C1C5CCE78382C7D9D414531F4C33CBF7555F1C691FA156C4FFBBD"
+                      },
+                      {
+                          "File":  "form-mobile-fixed.png",
+                          "Bytes":  57523,
+                          "SHA256":  "795F6D74714A0E9B0F964DE0BC786A2C014CDD68558DDD781908D83CB2123AE4"
+                      },
+                      {
+                          "File":  "network-session.log",
+                          "Bytes":  4391,
+                          "SHA256":  "5020B27EFDBE77A93A4BC9855B050650A251FE259A1776FF7A7EE426F98C29AD"
+                      },
+                      {
+                          "File":  "preservation.json",
+                          "Bytes":  230,
+                          "SHA256":  "1D81C89724822558C6952D6B021D6AEB7BE68456623DFF49DB377FF5EC1F4797"
+                      },
+                      {
+                          "File":  "report.md",
+                          "Bytes":  5499,
+                          "SHA256":  "17C95C3B5D89DF0A013DD4FF567E11442648106303347080F329B0F6E7F6E6CE"
+                      },
+                      {
+                          "File":  "selection-live.json",
+                          "Bytes":  3134,
+                          "SHA256":  "B290EEBE2F7C86A15E93A80A82C92603967B036DFDD2B856D36CC83B6A2A98AC"
+                      },
+                      {
+                          "File":  "summary.json",
+                          "Bytes":  668,
+                          "SHA256":  "E1A49DB5B175CC0108DD26FDB4884368031F076894DD3421703CA03C2A559C49"
+                      },
+                      {
+                          "File":  "U01-fixed-search.png",
+                          "Bytes":  116455,
+                          "SHA256":  "A15235DE54F2CB9C9FF70C35067DD1AFB484848477E5E7654DE871165BAC2B70"
+                      },
+                      {
+                          "File":  "U02-fixed-mobile.png",
+                          "Bytes":  65182,
+                          "SHA256":  "27415AB8D3186A89FEC00936B00498FFB8A2D99EFB81FD2B8636B7AEC59DB5F4"
+                      }
+                  ]
+}

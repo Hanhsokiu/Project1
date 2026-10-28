@@ -1,0 +1,68 @@
+{
+  "startedAt": "2026-10-27T02:57:36.105Z",
+  "origin": "http://127.0.0.1:5173",
+  "api": "http://127.0.0.1:3000/api",
+  "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+  "mockedResponses": false,
+  "checks": [
+    {
+      "name": "Bước 4: tạo nhóm thật với hai thành viên roster qua UI",
+      "actual": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+      "result": "PASS"
+    },
+    {
+      "name": "sv001: lưu kết luận qua UI",
+      "actual": "REVISION_REQUIRED",
+      "result": "PASS"
+    },
+    {
+      "name": "Bước 5: giữ hồ sơ sv002 chờ nhóm duyệt để người dùng thao tác",
+      "actual": "54d650c9-5a7b-4c7a-a2e7-c3a9e30f1d0f",
+      "result": "PASS"
+    },
+    {
+      "name": "sv003: lưu kết luận qua UI",
+      "actual": "APPROVED",
+      "result": "PASS"
+    },
+    {
+      "name": "sv004: lưu kết luận qua UI",
+      "actual": "APPROVED",
+      "result": "PASS"
+    },
+    {
+      "name": "Bước 6: sv001 có dữ liệu và được phép sửa/phản hồi/nộp lại",
+      "actual": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+      "result": "PASS"
+    },
+    {
+      "name": "Bước 7: sv003 đã duyệt, giữ nút chốt cho người dùng tự thử",
+      "actual": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+      "result": "PASS"
+    },
+    {
+      "name": "Bước 8A–8C: 5 nhiệm vụ và 3 bài nộp được tạo qua giao diện thật",
+      "actual": "TODO, SUBMITTED, REVISION_REQUESTED, COMPLETED và quá hạn",
+      "result": "PASS"
+    },
+    {
+      "name": "Bước 8C: lưu nhật ký buổi hướng dẫn qua UI",
+      "actual": "da9cc485-f464-4008-93df-e6628e9055bf",
+      "result": "PASS"
+    },
+    {
+      "name": "Dashboard Khoa có thống kê thật và nghĩa vụ tuần chưa có task",
+      "actual": "5 nhiệm vụ, 1 đạt",
+      "result": "PASS"
+    },
+    {
+      "name": "Danh sách nhóm/hồ sơ/tasks/inbox thật có dữ liệu",
+      "actual": "6 màn",
+      "result": "PASS"
+    }
+  ],
+  "pageErrors": [],
+  "serverErrors": [],
+  "result": "PASS",
+  "finishedAt": "2026-10-27T02:58:25.011Z"
+}

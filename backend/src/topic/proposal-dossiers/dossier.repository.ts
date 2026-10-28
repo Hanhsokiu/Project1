@@ -33,13 +33,19 @@ export class DossierSession extends ProposalVersionSession {
   printStudent(id: string) {
     return this.db.student.findUnique({
       where: { id },
-      include: { trainingSystem: true },
+      include: {
+        trainingSystem: true,
+        user: { select: { email: true, phone: true } },
+      },
     });
   }
   printAdvisor(id: string) {
     return this.db.lecturer.findUnique({
       where: { id },
-      include: { department: true },
+      include: {
+        department: true,
+        user: { select: { email: true, phone: true } },
+      },
     });
   }
   async lockPrintInputs(
@@ -51,6 +57,8 @@ export class DossierSession extends ProposalVersionSession {
       .$queryRaw`SELECT id FROM public."STUDENT" WHERE id=${studentId} FOR SHARE`;
     await this.db
       .$queryRaw`SELECT id FROM public."LECTURER" WHERE id=${advisorId} FOR SHARE`;
+    await this.db
+      .$queryRaw`SELECT id FROM public."USER_ACCOUNT" WHERE id IN (SELECT user_id FROM public."STUDENT" WHERE id=${studentId} UNION SELECT user_id FROM public."LECTURER" WHERE id=${advisorId}) ORDER BY id FOR SHARE`;
     await this.db
       .$queryRaw`SELECT "termStudentId" FROM public."DOSSIER_STUDENT_PROFILE" WHERE "termStudentId"=${termStudentId} FOR SHARE`;
   }

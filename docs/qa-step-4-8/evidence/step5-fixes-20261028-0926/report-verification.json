@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "verifiedAt": "2026-10-28T02:32:37.896Z",
+  "missingLinks": [],
+  "scannedTextArtifacts": 29,
+  "detectedSecretFiles": [],
+  "existingDatabaseTablesUnchanged": 100,
+  "source": [
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.repository.ts",
+      "sha256": "a4a984afe2233b1b766d046b130415c6983b8c93383bfda0b383da18f18bd3f9"
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.service.ts",
+      "sha256": "662c0b07d95df8a4c3cdf0c6dc6d165128989e614c1f2999345d313e7c8fd6b7"
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.spec.ts",
+      "sha256": "bc8c7f03dcd0412c366eed1537fe6e4ac20589e4b5e162e44ff81785831e4b73"
+    },
+    {
+      "file": "backend/scripts/test-proposal-reviews.cjs",
+      "sha256": "d379220fa7bd4bff19f26d4ba2b1153ff284c883af0aa54c5c5d2f22cd29cbf3"
+    },
+    {
+      "file": "frontend/src/features/proposal-reviews/pages.tsx",
+      "sha256": "0af121bb8732e595631d8b28412d888056cf722083504669ebd8e95093874f5f"
+    }
+  ],
+  "scope": "Known local password, JWT pattern and credentialed PostgreSQL URLs; not a general secret scanner."
+}

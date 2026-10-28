@@ -373,25 +373,7 @@ export class ProposalReviewService {
             },
           },
           q.search
-            ? {
-                OR: [
-                  {
-                    topic: {
-                      title: { contains: q.search, mode: "insensitive" },
-                    },
-                  },
-                  {
-                    student: {
-                      studentCode: { contains: q.search, mode: "insensitive" },
-                    },
-                  },
-                  {
-                    student: {
-                      fullName: { contains: q.search, mode: "insensitive" },
-                    },
-                  },
-                ],
-              }
+            ? { id: { in: await s.searchProposalIds(termId, q.search) } }
             : {},
           q.groupId ? { reviews: { some: { reviewGroupId: q.groupId } } } : {},
           q.unassigned === "true"
@@ -951,6 +933,17 @@ export class ProposalReviewService {
           // Preserve the legacy consumer shape; canonical decision stays immutable above.
           await s.mirrorDecision(id, status, decision.comment ?? null, now);
           const { assignment } = await this.v.advisor(s, p);
+          for (const recipient of new Set([
+            p.student.userId,
+            assignment.advisor.userId,
+          ]))
+            await s.notify({
+              userId: recipient,
+              termId: p.topic.termId,
+              title: "Kết quả xét duyệt đề cương",
+              body: "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+              link: `/topic/reviews/${id}`,
+            });
           await s.outbox({
             eventId: randomUUID(),
             aggregateId: p.id,

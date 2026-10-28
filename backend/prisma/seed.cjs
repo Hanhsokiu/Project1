@@ -124,6 +124,7 @@ async function main() {
       "review-group:manage",
       "proposal:read",
       "proposal:assign",
+      "proposal:reopen",
       "proposal:finalize",
       "proposal:export",
       "dossier:receive",

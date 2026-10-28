@@ -1,0 +1,22 @@
+[
+  {
+    "actor": "giaovu",
+    "route": "/topic/review-groups",
+    "text": "Tìm kiếm\nNhóm duyệt đề cương\n\nQuản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.\n\nNhóm duyệt\n0\n\nTheo bộ lọc đang chọn\n\nGiảng viên\n0\n\nThành viên trên trang hiện tại\n\nVòng đang duyệt\n0\n\nTrong các nhóm đang hiển thị\n\nQuyền truy cập\nQuản lý\n\nTrong đợt đồ án đang chọn\n\nDanh sách nhóm duyệt\n\nTổ chức giảng viên theo đợt đồ án và bộ môn\n\nĐợt mẫu kiểm tra giao diện sau merge\nĐợt đồ án\nChọn đợt đồ án\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTất cả trong phạm vi\nCông nghệ phần mềm\nTên nhóm\nChưa có nhóm duyệt\n\nKhông có nhóm trong phạm vi và bộ lọc đã chọn."
+  },
+  {
+    "actor": "giaovu",
+    "route": "/topic/reviews",
+    "text": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nChưa có phase PROPOSAL_REVIEW. Không thể ghi phân công hoặc kết luận khi đầu vào chưa sẵn sàng.\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn."
+  },
+  {
+    "actor": "sv001",
+    "route": "/topic/proposal",
+    "text": "Tìm kiếm\nĐề cương & phiên bản\n\nSV và GVHD hiện hành chỉnh sửa hồ sơ trong quyền của mình. Khoa và reviewer chỉ đọc theo phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nTìm đề cương\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn."
+  },
+  {
+    "actor": "gv001",
+    "route": "/guidance/tasks",
+    "text": "Tìm kiếm\nNhiệm vụ & tiến độ hướng dẫn\n\nXem trong phạm vi được cấp; Khoa tổng hợp theo đợt, GVHD và SV xem hồ sơ của mình.\n\nMở kế hoạch để giao nhiệm vụ →\nĐợt\nChọn đợt\nTuần / mốc\nTất cả mốc\nTrạng thái\nTất cả trạng thái\nChưa bắt đầu\nĐang thực hiện\nĐã nộp\nCần làm lại\nĐã hoàn thành\nĐã hủy\nChỉ nhiệm vụ quá hạn\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn."
+  }
+]

@@ -13,6 +13,13 @@ const post = async (path: string, input: unknown, key: string) =>
     })
   ).data.data;
 export const dossierApi = {
+  preview: async (id: string, versionId: string) =>
+    (
+      await httpClient.get<Blob>(`${root(id)}/preview.pdf`, {
+        params: { versionId },
+        responseType: "blob",
+      })
+    ).data,
   detail: async (id: string) =>
     (await httpClient.get<Envelope<DossierView>>(`${root(id)}/dossier`)).data
       .data,

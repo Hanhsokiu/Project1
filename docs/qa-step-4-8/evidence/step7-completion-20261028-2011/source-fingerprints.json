@@ -1,0 +1,70 @@
+[
+  {
+    "file": "backend/src/topic/proposal-dossiers/dossier-pdf.service.ts",
+    "sha256": "31a39335c864ec0d8c19ebe2d361c6eb3843c0d180122c6137fe605d16367b31"
+  },
+  {
+    "file": "backend/src/topic/proposal-dossiers/dossier.controller.ts",
+    "sha256": "b074a5418c8954e406278c0ab46e65897164ec61ddd74cd7fa57c27585501119"
+  },
+  {
+    "file": "backend/src/topic/proposal-dossiers/dossier.repository.ts",
+    "sha256": "dd47167f6903648e6f4ccc9f14e1f8bbaa92882d57b5b24af288064476e7f9c1"
+  },
+  {
+    "file": "backend/src/topic/proposal-dossiers/dossier.service.ts",
+    "sha256": "d143a3d12bde6dc16bd97c2ce2f099a31362dd5764b6ee965e1117b927bf63f3"
+  },
+  {
+    "file": "backend/src/topic/proposal-dossiers/dossier.validator.ts",
+    "sha256": "4d12ce06e385cd2da0195dfddc69c20ea0112ae3c32f772c1e65afc914035f29"
+  },
+  {
+    "file": "backend/src/topic/proposal-versions/proposal-lifecycle.service.ts",
+    "sha256": "936bfe7d9d6492f62df250dcb9b72c724ba7a48c0140d407659b45578e964f0e"
+  },
+  {
+    "file": "backend/scripts/test-proposal-dossiers.cjs",
+    "sha256": "88c3965272d66445ecf54ab8f228f11754b42928b19b7e579cc946f081bbfe9d"
+  },
+  {
+    "file": "backend/scripts/test-proposal-lifecycle.cjs",
+    "sha256": "290223bca91a4e8f3c8ef86e1a0ef44c9b00e5d1532665b58c4cc8afe77e9880"
+  },
+  {
+    "file": "frontend/src/features/auth/pages/LoginPage.tsx",
+    "sha256": "6bbe20ffddcdd919f1bce823ecb45de49ba707ede223fb51cd63795bdc1442df"
+  },
+  {
+    "file": "frontend/src/features/proposal-dossiers/api.ts",
+    "sha256": "7ca2f861dfb90a64e759e32612f0ac2d7b34c9bd0a3331d32336f2bcfc4882d9"
+  },
+  {
+    "file": "frontend/src/features/proposal-dossiers/components.tsx",
+    "sha256": "7d66bc737a061572cfc07034173d733044fcf5fd8ab1262639fae9169dcbb610"
+  },
+  {
+    "file": "frontend/src/features/proposal-dossiers/pages.tsx",
+    "sha256": "368d9e182bcd53434e1bfbb6cd7da56a5feb136f22de79f4f83b1a7259c2a27d"
+  },
+  {
+    "file": "frontend/src/features/review-groups/workspace.tsx",
+    "sha256": "0dd10f829343d897038b5172bc82759106e3f0ba18b1368138c78f6c88466d54"
+  },
+  {
+    "file": "shared/src/contracts/proposal-dossiers.ts",
+    "sha256": "696a2d73d7686c8c714461a08ebbbab9f15be991dbe36a22d5a4eddc143faf21"
+  },
+  {
+    "file": "backend/src/topic/proposal-dossiers/dossier.spec.ts",
+    "sha256": "928a3f32b35b5baf0081f4f684cd9319c715967fe05a48e9b77675c960d8ac9b"
+  },
+  {
+    "file": "frontend/src/shared/api/http-client.ts",
+    "sha256": "3716f17522cedd1465f5423650e20f7a7efdf0bd95151827640fb4a650f983b5"
+  },
+  {
+    "file": "frontend/src/shared/api/http-client.spec.ts",
+    "sha256": "db28751495c68bd306e76b6d834134196d5c98239bb28ae14a8f2b90c10c9a29"
+  }
+]

@@ -1,7 +1,7 @@
-import { HttpException, Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { randomUUID } from 'crypto';
-import { compareProposalData, RevisionResponseSchema } from '@doan/shared';
+import { HttpException, Injectable } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
+import { randomUUID } from "crypto";
+import { compareProposalData, RevisionResponseSchema } from "@doan/shared";
 import type {
   ProposalVersionSave,
   ProposalVersionSubmit,
@@ -11,22 +11,23 @@ import type {
   ProposalFeedback,
   RevisionResponse,
   VersionPageQuery,
-} from '@doan/shared';
+} from "@doan/shared";
 import {
   ProposalVersionRepository,
   ProposalVersionSession,
   VersionRecord,
-} from './proposal-version.repository';
-import { ProposalVersionValidator } from './proposal-version.validator';
+} from "./proposal-version.repository";
+import { ProposalVersionValidator } from "./proposal-version.validator";
+import { ProposalLifecycleService } from "./proposal-lifecycle.service";
 import {
   ProposalReviewValidator,
   reviewHash,
-} from '../proposal-reviews/proposal-review.validator';
+} from "../proposal-reviews/proposal-review.validator";
 import type {
   ReviewPrincipal,
   ReviewProposal,
-} from '../proposal-reviews/proposal-review.repository';
-import { groupError } from '../review-groups/review-group.errors';
+} from "../proposal-reviews/proposal-review.repository";
+import { groupError } from "../review-groups/review-group.errors";
 const json = (v: unknown) =>
   JSON.parse(JSON.stringify(v)) as Prisma.InputJsonValue;
 @Injectable()
@@ -35,15 +36,16 @@ export class ProposalVersionService {
     private readonly repo: ProposalVersionRepository,
     private readonly validator: ProposalVersionValidator,
     private readonly review: ProposalReviewValidator,
+    private readonly lifecycle?: ProposalLifecycleService,
   ) {}
   private async writer(
     s: ProposalVersionSession,
     u: ReviewPrincipal,
     p: ReviewProposal,
-    action: 'edit' | 'submit' | 'read',
+    action: "edit" | "submit" | "read",
   ) {
     if (
-      this.review.role(u, 'STUDENT', action) &&
+      this.review.role(u, "STUDENT", action) &&
       u.student?.isActive &&
       u.student.id === p.studentId
     ) {
@@ -51,8 +53,8 @@ export class ProposalVersionService {
       return true;
     }
     if (
-      action !== 'submit' &&
-      this.review.role(u, 'LECTURER', action) &&
+      action !== "submit" &&
+      this.review.role(u, "LECTURER", action) &&
       u.lecturer?.isActive
     ) {
       const registration = await s.advisor(p.topic.termId, p.studentId);
@@ -68,11 +70,11 @@ export class ProposalVersionService {
     u: ReviewPrincipal,
     p: ReviewProposal,
   ): Promise<string[] | null> {
-    if (await this.writer(s, u, p, 'read')) return null;
+    if (await this.writer(s, u, p, "read")) return null;
     const department =
       p.topic.researchArea?.pr2bResearchAreaWorkflowResearchAreaId
         ?.departmentId;
-    if (department && this.review.role(u, 'FACULTY', 'read')) {
+    if (department && this.review.role(u, "FACULTY", "read")) {
       const [g] = await s.grants(u.id, p.topic.termId);
       if (
         g &&
@@ -84,7 +86,7 @@ export class ProposalVersionService {
         return null;
     }
     if (
-      this.review.role(u, 'LECTURER', 'read') &&
+      this.review.role(u, "LECTURER", "read") &&
       u.lecturer?.isActive &&
       (await s.roster(p.topic.termId, u.lecturer.id))
     ) {
@@ -101,7 +103,7 @@ export class ProposalVersionService {
         if (ctx.assignment.advisorId !== u.lecturer.id) return ids;
       }
     }
-    groupError(404, 'COMMON_001', 'Không tìm thấy đề cương trong phạm vi.');
+    groupError(404, "COMMON_001", "Không tìm thấy đề cương trong phạm vi.");
   }
   private async load(
     s: ProposalVersionSession,
@@ -110,7 +112,7 @@ export class ProposalVersionService {
   ) {
     const user = this.review.principal(await s.principal(userId)),
       p = await s.proposal(proposalId);
-    if (!p) groupError(404, 'COMMON_001', 'Không tìm thấy đề cương.');
+    if (!p) groupError(404, "COMMON_001", "Không tìm thấy đề cương.");
     return { user, p };
   }
   private view(v: VersionRecord): ProposalVersionView {
@@ -121,8 +123,8 @@ export class ProposalVersionService {
     if (!parsed.success)
       groupError(
         409,
-        'INPUT_NOT_READY',
-        'Metadata phản hồi legacy cần đối soát.',
+        "INPUT_NOT_READY",
+        "Metadata phản hồi legacy cần đối soát.",
       );
     return {
       id: v.id,
@@ -149,15 +151,15 @@ export class ProposalVersionService {
     visibleIds: string[] | null,
   ) {
     if (visibleIds && !visibleIds.includes(id))
-      groupError(404, 'COMMON_001', 'Phiên bản ngoài phạm vi.');
+      groupError(404, "COMMON_001", "Phiên bản ngoài phạm vi.");
     const v = await s.version(id);
     if (!v || v.proposalId !== p.id)
-      groupError(404, 'COMMON_001', 'Không tìm thấy phiên bản.');
+      groupError(404, "COMMON_001", "Không tìm thấy phiên bản.");
     if (
       visibleIds &&
-      v.pr2bProposalVersionWorkflowVersionId?.state !== 'SEALED'
+      v.pr2bProposalVersionWorkflowVersionId?.state !== "SEALED"
     )
-      groupError(404, 'COMMON_001', 'Không tìm thấy phiên bản đã phân.');
+      groupError(404, "COMMON_001", "Không tìm thấy phiên bản đã phân.");
     return v;
   }
   private async feedback(
@@ -172,13 +174,13 @@ export class ProposalVersionService {
       if (
         !w?.versionId ||
         !version ||
-        version.pr2bProposalVersionWorkflowVersionId?.state !== 'SEALED' ||
+        version.pr2bProposalVersionWorkflowVersionId?.state !== "SEALED" ||
         (visibleIds && !visibleIds.includes(version.id))
       )
         continue;
       for (const c of r.pr2bReviewCommentReviewId)
         result.push({
-          targetType: 'COMMENT',
+          targetType: "COMMENT",
           targetId: c.id,
           reviewId: r.id,
           sourceVersionId: version.id,
@@ -190,9 +192,9 @@ export class ProposalVersionService {
           createdAt: c.createdAt.toISOString(),
         });
       const d = r.pr2bProposalReviewDecisionReviewId;
-      if (d?.decision === 'REVISION_REQUIRED')
+      if (d?.decision === "REVISION_REQUIRED")
         result.push({
-          targetType: 'DECISION',
+          targetType: "DECISION",
           targetId: d.id,
           reviewId: r.id,
           sourceVersionId: version.id,
@@ -200,7 +202,7 @@ export class ProposalVersionService {
           roundNumber: w.roundNumber,
           authorUserId: d.decidedByUserId,
           authorName: d.refDecidedByUserId.username,
-          text: d.comment ?? '',
+          text: d.comment ?? "",
           createdAt: d.decidedAt.toISOString(),
         });
     }
@@ -218,8 +220,8 @@ export class ProposalVersionService {
       if (!w)
         groupError(
           409,
-          'INPUT_NOT_READY',
-          'Producer cần khởi tạo ProposalWorkflow, không tự suy dữ liệu legacy.',
+          "INPUT_NOT_READY",
+          "Producer cần khởi tạo ProposalWorkflow, không tự suy dữ liệu legacy.",
         );
       const working =
         w.workingVersionId && (!visible || visible.includes(w.workingVersionId))
@@ -231,36 +233,36 @@ export class ProposalVersionService {
           ? await this.visibleVersion(s, p, w.submittedVersionId, visible)
           : null;
       const readiness: string[] = [],
-        allowedActions: ProposalEditorContext['allowedActions'] = [];
+        allowedActions: ProposalEditorContext["allowedActions"] = [];
       try {
-        if (await this.writer(s, user, p, 'edit')) {
+        if (await this.writer(s, user, p, "edit")) {
           await this.validator.phase(s, p.topic.termId);
           await this.validator.editable(s, p);
           if (!w.nextVersionNumber || !w.nextReviewRound)
             groupError(
               409,
-              'INPUT_NOT_READY',
-              'Thiếu counter phiên bản/vòng từ producer.',
+              "INPUT_NOT_READY",
+              "Thiếu counter phiên bản/vòng từ producer.",
             );
-          allowedActions.push('save');
+          allowedActions.push("save");
           if (
-            p.status === 'DRAFT' &&
-            working?.pr2bProposalVersionWorkflowVersionId?.state === 'DRAFT' &&
-            (await this.writer(s, user, p, 'submit'))
+            p.status === "DRAFT" &&
+            working?.pr2bProposalVersionWorkflowVersionId?.state === "DRAFT" &&
+            (await this.writer(s, user, p, "submit"))
           )
-            allowedActions.push('submit');
+            allowedActions.push("submit");
         }
       } catch (e) {
         if (!(e instanceof HttpException)) throw e;
         const body = e.getResponse() as { error?: { code?: string } };
-        readiness.push(body.error?.code ?? 'INPUT_NOT_READY');
+        readiness.push(body.error?.code ?? "INPUT_NOT_READY");
       }
       const phase = await s.editPhase(p.topic.termId);
       return {
         proposalId: p.id,
         topicId: p.topicId,
         termId: p.topic.termId,
-        termStudentId: p.topic.pr2bTopicWorkflowTopicId?.termStudentId ?? '',
+        termStudentId: p.topic.pr2bTopicWorkflowTopicId?.termStudentId ?? "",
         title: p.topic.title,
         studentName: p.student.fullName,
         status: p.status,
@@ -272,6 +274,7 @@ export class ProposalVersionService {
         feedback: await this.feedback(s, p, visible),
         allowedActions,
         readiness,
+        lifecycle: await this.lifecycle?.context(s, user, p),
         phase: phase
           ? {
               startsAt: phase.refPhaseId.startDate.toISOString(),
@@ -339,7 +342,7 @@ export class ProposalVersionService {
     return this.command(
       userId,
       proposalId,
-      'edit',
+      "edit",
       `/proposals/${proposalId}/versions`,
       input,
       key,
@@ -349,8 +352,8 @@ export class ProposalVersionService {
         if (!w?.nextVersionNumber || w.nextVersionNumber < 1)
           groupError(
             409,
-            'INPUT_NOT_READY',
-            'Thiếu counter nextVersionNumber, không tự backfill.',
+            "INPUT_NOT_READY",
+            "Thiếu counter nextVersionNumber, không tự backfill.",
           );
         this.review.revision(w.revision, input.expectedRevision);
         const working = w.workingVersionId
@@ -368,8 +371,8 @@ export class ProposalVersionService {
         if (w.nextVersionNumber <= (base?.version ?? 0))
           groupError(
             409,
-            'INPUT_NOT_READY',
-            'Counter phiên bản không nhất quán; cần producer đối soát.',
+            "INPUT_NOT_READY",
+            "Counter phiên bản không nhất quán; cần producer đối soát.",
           );
         const rounds = await s.history(p.id);
         this.validator.returned(
@@ -387,7 +390,7 @@ export class ProposalVersionService {
           content: json(input.content),
           pr2bProposalVersionWorkflowVersionId: {
             create: {
-              state: 'DRAFT',
+              state: "DRAFT",
               contentSchemaVersion: 1,
               contentHash: reviewHash(input.content),
               createdByUserId: u.id,
@@ -404,14 +407,14 @@ export class ProposalVersionService {
         if (changed.count !== 1)
           groupError(
             409,
-            'REVISION_CONFLICT',
-            'Đề cương đã được người khác sửa.',
+            "REVISION_CONFLICT",
+            "Đề cương đã được người khác sửa.",
           );
-        await s.status(p.id, 'DRAFT');
+        await s.status(p.id, "DRAFT");
         await s.versionAudit(
           u.id,
           p.id,
-          'VERSION_SAVED',
+          "VERSION_SAVED",
           json({
             workingVersionId: w.workingVersionId,
             status: p.status,
@@ -444,26 +447,26 @@ export class ProposalVersionService {
     return this.command(
       userId,
       proposalId,
-      'submit',
+      "submit",
       `/proposals/${proposalId}/submit`,
       input,
       key,
       async (s, u, p) => {
         await this.validator.editable(s, p);
-        this.review.state(['DRAFT'], p.status);
+        this.review.state(["DRAFT"], p.status);
         const w = p.pr2bProposalWorkflowProposalId;
         if (!w?.nextReviewRound || w.nextReviewRound < 1)
           groupError(
             409,
-            'INPUT_NOT_READY',
-            'Thiếu counter vòng duyệt từ producer.',
+            "INPUT_NOT_READY",
+            "Thiếu counter vòng duyệt từ producer.",
           );
         this.review.revision(w.revision, input.expectedRevision);
         if (w.workingVersionId !== input.versionId)
           groupError(
             409,
-            'STALE_VERSION',
-            'Chỉ được gửi bản làm việc hiện hành đã lưu.',
+            "STALE_VERSION",
+            "Chỉ được gửi bản làm việc hiện hành đã lưu.",
           );
         const version = await this.visibleVersion(s, p, input.versionId, null);
         this.validator.content(version);
@@ -477,8 +480,8 @@ export class ProposalVersionService {
         )
           groupError(
             409,
-            'TOPIC_NOT_AGREED',
-            'GVHD cần xác nhận đề tài đúng revision/phân công hiện hành.',
+            "TOPIC_NOT_AGREED",
+            "GVHD cần xác nhận đề tài đúng revision/phân công hiện hành.",
           );
         this.review.routing(p);
         const now = new Date(),
@@ -486,21 +489,21 @@ export class ProposalVersionService {
         if (sealed.count !== 1)
           groupError(
             409,
-            'STALE_VERSION',
-            'Phiên bản không còn là nháp có thể gửi.',
+            "STALE_VERSION",
+            "Phiên bản không còn là nháp có thể gửi.",
           );
-        const kind = w.submittedVersionId ? 'RESUBMISSION' : 'INITIAL';
+        const kind = w.submittedVersionId ? "RESUBMISSION" : "INITIAL";
         const updated = await s.advance(p.id, w.revision, {
           submittedVersionId: version.id,
           submissionKind: kind,
         });
         if (updated.count !== 1)
-          groupError(409, 'REVISION_CONFLICT', 'Đề cương đã thay đổi.');
-        await s.status(p.id, 'SUBMITTED');
+          groupError(409, "REVISION_CONFLICT", "Đề cương đã thay đổi.");
+        await s.status(p.id, "SUBMITTED");
         await s.versionAudit(
           u.id,
           p.id,
-          'VERSION_SUBMITTED',
+          "VERSION_SUBMITTED",
           json({
             submittedVersionId: w.submittedVersionId,
             revision: w.revision,
@@ -515,7 +518,7 @@ export class ProposalVersionService {
         await s.outbox({
           eventId: randomUUID(),
           aggregateId: p.id,
-          type: 'PROPOSAL_VERSION_SUBMITTED',
+          type: "PROPOSAL_VERSION_SUBMITTED",
           payload: json({
             proposalId: p.id,
             termId: p.topic.termId,
@@ -524,6 +527,13 @@ export class ProposalVersionService {
             studentUserId: u.id,
             advisorUserId: context.assignment.advisor.userId,
           }),
+        });
+        await s.notify({
+          userId: context.assignment.advisor.userId,
+          termId: p.topic.termId,
+          title: "Đề cương được nộp xét duyệt",
+          body: "Sinh viên đã nộp một phiên bản đề cương. Mở hồ sơ để xem nội dung và tiến trình xét duyệt.",
+          link: `/topic/proposal/${p.id}`,
         });
         return {
           ...this.view((await s.version(version.id))!),
@@ -535,7 +545,7 @@ export class ProposalVersionService {
   private async command(
     userId: string,
     proposalId: string,
-    action: 'edit' | 'submit',
+    action: "edit" | "submit",
     route: string,
     input: unknown,
     key: string,
@@ -546,27 +556,27 @@ export class ProposalVersionService {
     ) => Promise<ProposalVersionMutationView>,
   ) {
     if (!key || key.length > 200 || !/^[\w.-]+$/.test(key))
-      groupError(400, 'COMMON_003', 'Thiếu hoặc sai Idempotency-Key.');
+      groupError(400, "COMMON_003", "Thiếu hoặc sai Idempotency-Key.");
     return this.repo.transaction(async (s) => {
       let { user, p } = await this.load(s, userId, proposalId);
       if (!(await this.writer(s, user, p, action)))
         groupError(
           404,
-          'COMMON_001',
-          'Không tìm thấy đề cương có quyền chỉnh sửa/gửi.',
+          "COMMON_001",
+          "Không tìm thấy đề cương có quyền chỉnh sửa/gửi.",
         );
       await s.lock(p.topic.termId, [], p.id);
       ({ user, p } = await this.load(s, userId, proposalId));
       if (!(await this.writer(s, user, p, action)))
-        groupError(404, 'COMMON_001', 'Quyền chỉnh sửa không còn hiệu lực.');
+        groupError(404, "COMMON_001", "Quyền chỉnh sửa không còn hiệu lực.");
       const hash = reviewHash(input),
         old = await s.replay(user.id, route, key);
       if (old) {
         if (old.payloadHash !== hash)
           groupError(
             409,
-            'IDEMPOTENCY_CONFLICT',
-            'Khóa gửi lại có payload khác.',
+            "IDEMPOTENCY_CONFLICT",
+            "Khóa gửi lại có payload khác.",
           );
         return old.result as unknown as ProposalVersionMutationView;
       }

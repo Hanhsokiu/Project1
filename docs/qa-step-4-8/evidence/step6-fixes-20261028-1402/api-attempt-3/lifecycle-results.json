@@ -1,0 +1,104 @@
+{
+  "result": "PASS",
+  "database": "btl_pr2b_step6fix_1793171477664_55373e_api",
+  "postgresVersion": "170011",
+  "checks": [
+    {
+      "name": "fresh migration grants explicit reopen capability only to FACULTY",
+      "result": "PASS"
+    },
+    {
+      "name": "all three lifecycle POST endpoints appear in OpenAPI",
+      "result": "PASS"
+    },
+    {
+      "name": "GET capabilities are scoped and read-only; owner alone may withdraw",
+      "result": "PASS"
+    },
+    {
+      "name": "JWT claims do not bypass owner/role/grant checks; denials have no writes",
+      "result": "PASS"
+    },
+    {
+      "name": "strict schemas reject injection, invalid revisions, unpaired review CAS, reasons and request keys",
+      "result": "PASS"
+    },
+    {
+      "name": "future/expired/locked edit phase hides actions and blocks commands without writes",
+      "result": "PASS"
+    },
+    {
+      "name": "unassigned withdrawal preserves SEALED v1 and requires an appended draft before submit",
+      "result": "PASS"
+    },
+    {
+      "name": "same-key withdrawal replays once; changed payload conflicts without duplicate evidence",
+      "result": "PASS"
+    },
+    {
+      "name": "current permission checked before cached withdrawal result",
+      "result": "PASS"
+    },
+    {
+      "name": "stale proposal/version/review revisions reject withdrawal atomically",
+      "result": "PASS"
+    },
+    {
+      "name": "assigned withdrawal supersedes round, preserves comments and blocks later review start",
+      "result": "PASS"
+    },
+    {
+      "name": "only granted faculty can return IN_REVIEW; nonblank bounded reason is mandatory",
+      "result": "PASS"
+    },
+    {
+      "name": "return-to-draft ends review without inventing a decision; replay does not duplicate evidence",
+      "result": "PASS"
+    },
+    {
+      "name": "approved reopen requires faculty reopen permission/grant and reason",
+      "result": "PASS"
+    },
+    {
+      "name": "reopen remains possible after agreement invalidation; re-submit still requires renewed agreement",
+      "result": "PASS"
+    },
+    {
+      "name": "real approval/finalization/receipt/guidance/task/progress establish downstream evidence",
+      "result": "PASS"
+    },
+    {
+      "name": "dossier CAS is mandatory when reopening an existing dossier",
+      "result": "PASS"
+    },
+    {
+      "name": "audit fault rolls back proposal/review/dossier/finalization/plan/history/outbox atomically",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent reopen has one winner; preserves immutable finalization/receipt/reviews/tasks/progress and pauses plan",
+      "result": "PASS"
+    },
+    {
+      "name": "reopen replay is exactly once; different payload conflicts and revoked academic grant cannot read cache",
+      "result": "PASS"
+    },
+    {
+      "name": "guidance remains readable but paused mutations are blocked after reopen",
+      "result": "PASS"
+    },
+    {
+      "name": "save/re-submit/new approval/re-finalize retains old evidence; only explicit advisor rebase resumes plan",
+      "result": "PASS"
+    },
+    {
+      "name": "withdraw versus reviewer start serializes to one valid transition",
+      "result": "PASS"
+    },
+    {
+      "name": "original SEALED source and superseded review evidence remain unchanged across lifecycle cycles",
+      "result": "PASS"
+    }
+  ],
+  "sharedDatabaseModified": false
+}

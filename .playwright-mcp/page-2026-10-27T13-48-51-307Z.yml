@@ -1,0 +1,46 @@
+- generic [ref=f1e2]:
+  - generic [ref=f1e4]:
+    - generic [ref=f1e5]:
+      - generic [ref=f1e6]:
+        - generic [ref=f1e7]:
+          - generic [ref=f1e8]: UTC
+          - generic [ref=f1e9]:
+            - strong [ref=f1e10]: KHOA CÔNG NGHỆ THÔNG TIN
+            - generic [ref=f1e11]: Trường Đại học Giao thông vận tảiUniversity of Transport and Communications
+        - generic [ref=f1e12]: ● GPMS · HỆ THỐNG QUẢN LÝ ĐỒ ÁN TỐT NGHIỆP
+      - generic [ref=f1e13]:
+        - heading "Quản lý đồ án tốt nghiệp" [level=1] [ref=f1e14]
+        - paragraph [ref=f1e15]: Nền tảng quản lý, hướng dẫn và đăng ký đồ án trực tuyến dành cho sinh viên, giảng viên và Giáo vụ Khoa CNTT – UTC.
+        - generic [ref=f1e16]:
+          - generic [ref=f1e21]:
+            - heading "Kỳ học & đợt đồ án" [level=3] [ref=f1e22]
+            - paragraph [ref=f1e23]: Thiết lập kế hoạch, danh sách sinh viên đủ điều kiện và chỉ tiêu giảng viên theo từng hệ đào tạo.
+          - generic [ref=f1e29]:
+            - heading "Đăng ký nguyện vọng rõ ràng" [level=3] [ref=f1e30]
+            - paragraph [ref=f1e31]: Một hướng đồ án, tối đa ba nguyện vọng GVHD. Theo dõi kết quả phân công sau khi Khoa công bố.
+          - generic [ref=f1e39]:
+            - heading "Kết nối sinh viên & giảng viên" [level=3] [ref=f1e40]
+            - paragraph [ref=f1e41]: Thống nhất đề tài, cập nhật đề cương và xuất biểu mẫu PDF từ cùng một hồ sơ.
+      - generic [ref=f1e42]: © 2026 Khoa Công nghệ Thông tin · Trường Đại học Giao thông vận tảiGPMS Portal · Không gian quản lý đồ án tốt nghiệp
+    - generic [ref=f1e44]:
+      - generic [ref=f1e45]: Cổng xác thực nội bộ UTC
+      - heading "Chào mừng trở lại!" [level=1] [ref=f1e50]
+      - paragraph [ref=f1e51]: Đăng nhập để theo dõi đăng ký đồ án, kết quả phân công và đề cương của bạn.
+      - status [ref=f1e53]:
+        - generic [ref=f1e56]: Tự động phân luồng tài khoảnChức năng hiển thị theo vai trò được cấp cho tài khoản của bạn.
+      - generic [ref=f1e57]:
+        - generic [ref=f1e58]:
+          - generic [ref=f1e59]: Tên đăng nhập / Mã định danh *
+          - textbox "Tên đăng nhập / Mã định danh *" [ref=f1e60]:
+            - /placeholder: "Ví dụ: 221230001 hoặc gv001"
+        - generic [ref=f1e61]:
+          - generic [ref=f1e62]: Mật khẩu *
+          - generic [ref=f1e63]:
+            - textbox "Mật khẩu * Hiện mật khẩu" [ref=f1e80]:
+              - /placeholder: Nhập mật khẩu
+            - button "Hiện mật khẩu" [active] [ref=f1e81] [cursor=pointer]
+        - button "Quên mật khẩu?" [ref=f1e71] [cursor=pointer]
+        - button "Đăng nhập hệ thống" [ref=f1e72] [cursor=pointer]
+      - status [ref=f1e76]:
+        - generic [ref=f1e79]: Tài khoản được cấp lần đầu phải đổi mật khẩu mặc định và cập nhật Email/SĐT trước khi đăng ký.
+  - region "Notifications alt+T"

@@ -47,6 +47,10 @@ export const routeManifest: RouteInfo[] = [
     title: "Lịch bảo vệ đã công bố",
     group: "Bảo vệ đồ án",
     roles: A,
+    menu:
+      import.meta.env.VITE_AUTH_API === "true" &&
+      (import.meta.env.VITE_DEFENSE_LIST_API === "true" ||
+        import.meta.env.VITE_DEFENSE_PLANNING_API === "true"),
   },
   {
     path: "/defense/committees",
@@ -187,7 +191,7 @@ export const routeManifest: RouteInfo[] = [
   },
   {
     path: "/topic/my",
-    title: "Đề tài đồ án",
+    title: "Thống nhất đề tài",
     group: "Đăng ký & đề cương",
     roles: [...G, "STUDENT"],
   },
@@ -196,12 +200,14 @@ export const routeManifest: RouteInfo[] = [
     title: "Soạn đề cương",
     group: "Đăng ký & đề cương",
     roles: ["STUDENT", "LECTURER"],
+    menu: false,
   },
   {
     path: "/topic/overview",
     title: "Hồ sơ đề tài",
     group: "Đăng ký & đề cương",
     roles: A,
+    menu: false,
   },
   {
     path: "/report/export",
@@ -330,6 +336,9 @@ export const routeManifest: RouteInfo[] = [
     title: title as string,
     roles: roles as Role[],
     group: "Xét duyệt & hướng dẫn",
-    menu: !(path as string).includes(":") && !(path as string).endsWith("/new"),
+    menu:
+      !(path as string).includes(":") &&
+      !(path as string).endsWith("/new") &&
+      path !== "/guidance/notifications",
   })),
 ];

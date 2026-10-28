@@ -1,0 +1,15 @@
+{
+  "id": "S7-02",
+  "requirement": "Contract §4.4/§6: superseded finalized snapshots remain readable by historical scope and carry superseded labels",
+  "stage": "REOPENED without current finalization",
+  "finalizationId": "08ed514b-a877-43b7-a1d9-f3624dfa023a",
+  "expectedStatus": 200,
+  "actual": {
+    "status": 409,
+    "error": {
+      "code": "DOSSIER_NOT_FINALIZED",
+      "message": "Hồ sơ chưa có bản chốt hiện hành."
+    }
+  },
+  "storedFileChecksum": "ae86f894145fe529fc0383a0518539a7374d5a0e352bcd204a76efeda9bdc2cb"
+}

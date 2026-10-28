@@ -39,7 +39,9 @@ import {
 import { useWorkspace } from "../../shared/hooks/use-workspace";
 import { routeManifest } from "./route-manifest";
 import { Empty, Notice } from "../../shared/components/kit";
-import { AUTH_API, getApiUser } from "../../shared/api/api-session";
+import { AUTH_API } from "../../shared/api/api-session";
+import { useApiSession } from "../../shared/hooks/use-api-session";
+import AcademicWorkflowLayout from "../layouts/AcademicWorkflowLayout";
 import type { ReactNode } from "react";
 import { defenseConfirmationApiEnabled } from "../../features/guidance/defense-confirmations/config";
 import { finalReportApiEnabled } from "../../features/guidance/final-reports/config";
@@ -94,11 +96,16 @@ const PublishedSchedulePage = lazy(
 
 function WorkflowAccess({ children }: { children: ReactNode }) {
   const location = useLocation();
+  const apiUser = useApiSession();
   if (AUTH_API) {
-    const user = getApiUser();
+    const user = apiUser;
     if (!user)
       return (
-        <Navigate to="/login" state={{ from: location.pathname }} replace />
+        <Navigate
+          to="/login"
+          state={{ from: location.pathname + location.search }}
+          replace
+        />
       );
     if (user.mustChangePassword)
       return <Navigate to="/change-password" replace />;
@@ -294,71 +301,96 @@ const wrap = (el: React.ReactNode) => (
   <Suspense fallback={<Loader />}>{el}</Suspense>
 );
 
+function ScoreEntryRedirect() {
+  const location = useLocation();
+  return (
+    <Navigate
+      to={{ pathname: "/grading/reviewer", search: location.search }}
+      replace
+    />
+  );
+}
+
 export const router = createBrowserRouter([
-  ...(gradingMode() !== "DEMO"
-    ? (
-        [
-          ["/grading/scores", "REVIEWER"],
-          ["/grading/reviewer", "REVIEWER"],
-          ["/grading/committee", "COMMITTEE"],
-          ["/grading/results", "RESULTS"],
-          ["/grading/policy", "POLICY"],
-          ["/report/official", "REPORTS"],
-        ] as const
-      ).map(([path, mode]) => ({
-        path,
-        element: wrap(<GradingWorkflowPage mode={mode} />),
-        errorElement: <RouteError />,
-      }))
-    : []),
   {
-    path: "/defense/published",
-    element: wrap(<PublishedSchedulePage />),
+    element: (
+      <WorkflowAccess>
+        <AcademicWorkflowLayout />
+      </WorkflowAccess>
+    ),
     errorElement: <RouteError />,
+    children: [
+      ...(gradingMode() !== "DEMO"
+        ? (
+            [
+              ["/grading/reviewer", "REVIEWER"],
+              ["/grading/committee", "COMMITTEE"],
+              ["/grading/results", "RESULTS"],
+              ["/grading/policy", "POLICY"],
+              ["/report/official", "REPORTS"],
+            ] as const
+          ).map(([path, mode]) => ({
+            path,
+            element: wrap(<GradingWorkflowPage mode={mode} />),
+            errorElement: <RouteError />,
+          }))
+        : []),
+      {
+        path: "/defense/published",
+        element: wrap(<PublishedSchedulePage />),
+        errorElement: <RouteError />,
+      },
+      ...(defensePlanningMode() !== "DEMO"
+        ? [
+            {
+              path: "/defense",
+              element: wrap(<DefensePlanningLayout />),
+              errorElement: <RouteError />,
+              children: [
+                {
+                  path: "committees",
+                  element: wrap(<CommitteePlanningPage />),
+                },
+                { path: "reviewers", element: wrap(<ReviewerPlanningPage />) },
+                { path: "schedule", element: wrap(<SchedulePlanningPage />) },
+              ],
+            },
+          ]
+        : []),
+      ...(defenseListMode() !== "DEMO"
+        ? [
+            {
+              path: "/defense/eligibility",
+              element: wrap(<DefenseListPage />),
+              errorElement: <RouteError />,
+            },
+          ]
+        : []),
+      // Scoped workflows share the shell without hydrating the catalog/demo roster.
+      ...(finalReportApiEnabled()
+        ? [
+            {
+              path: "/guidance/final-report",
+              element: wrap(<FinalReportUploadPage />),
+              errorElement: <RouteError />,
+            },
+          ]
+        : []),
+      ...(defenseConfirmationApiEnabled()
+        ? [
+            {
+              path: "/guidance/defense-confirm",
+              element: wrap(<DefenseConfirmPage />),
+              errorElement: <RouteError />,
+            },
+          ]
+        : []),
+    ],
   },
-  ...(defensePlanningMode() !== "DEMO"
-    ? [
-        {
-          path: "/defense",
-          element: wrap(<DefensePlanningLayout />),
-          errorElement: <RouteError />,
-          children: [
-            { path: "committees", element: wrap(<CommitteePlanningPage />) },
-            { path: "reviewers", element: wrap(<ReviewerPlanningPage />) },
-            { path: "schedule", element: wrap(<SchedulePlanningPage />) },
-          ],
-        },
-      ]
-    : []),
-  ...(defenseListMode() !== "DEMO"
-    ? [
-        {
-          path: "/defense/eligibility",
-          element: wrap(<DefenseListPage />),
-          errorElement: <RouteError />,
-        },
-      ]
-    : []),
-  // Student real PDF details must not hydrate the demo workspace/roster.
-  ...(finalReportApiEnabled()
-    ? [
-        {
-          path: "/guidance/final-report",
-          element: wrap(<FinalReportUploadPage />),
-          errorElement: <RouteError />,
-        },
-      ]
-    : []),
-  // Real UC17 details authenticate independently of the demo workspace/roster.
-  ...(defenseConfirmationApiEnabled()
-    ? [
-        {
-          path: "/guidance/defense-confirm",
-          element: wrap(<DefenseConfirmPage />),
-          errorElement: <RouteError />,
-        },
-      ]
-    : []),
+  {
+    path: "/grading/scores",
+    element: <ScoreEntryRedirect />,
+  },
   {
     path: "/guidance/review",
     element: (
@@ -496,6 +528,19 @@ export const router = createBrowserRouter([
     errorElement: <RouteError />,
   },
   {
+    path: "/forbidden",
+    element: AUTH_API ? (
+      <AcademicWorkflowLayout>
+        <Forbidden />
+      </AcademicWorkflowLayout>
+    ) : (
+      <WorkspaceLayout>
+        <Forbidden />
+      </WorkspaceLayout>
+    ),
+    errorElement: <RouteError />,
+  },
+  {
     path: "/",
     element: <WorkspaceLayout />,
     errorElement: <RouteError />,
@@ -606,10 +651,6 @@ export const router = createBrowserRouter([
           ...(gradingMode() === "DEMO"
             ? [
                 {
-                  path: "grading/scores",
-                  element: wrap(<DemoScoreEntryPage />),
-                },
-                {
                   path: "grading/reviewer",
                   element: wrap(<DemoScoreEntryPage />),
                 },
@@ -627,7 +668,6 @@ export const router = createBrowserRouter([
           { path: "notifications", element: wrap(<NotificationsPage />) },
         ],
       },
-      { path: "forbidden", element: <Forbidden /> },
       { path: "*", element: <NotFound /> },
     ],
   },

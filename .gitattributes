@@ -2,3 +2,10 @@
 # The already-existing 0_init is intentionally excluded.
 backend/prisma/migrations/20*/migration.sql text eol=lf
 backend/prisma/review/pr2b/*.sql text eol=lf
+
+# Archived PDF extraction output is evidence, including space-only lines.
+# Preserve source artifacts/manifests instead of rewriting their content.
+docs/qa-step-4-8/evidence/**/pdf-*-text.txt whitespace=-blank-at-eol
+docs/qa-step-4-8/evidence/step4-fixes-20261027-2140/report.md whitespace=-blank-at-eof
+docs/qa-step-4-8/evidence/step4-mcp-20261027-2047/report.md whitespace=-blank-at-eof
+docs/qa-step-4-8/evidence/step5-mcp-20261027-2153/plan.md whitespace=-blank-at-eof

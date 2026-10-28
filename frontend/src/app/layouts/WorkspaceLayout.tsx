@@ -1,5 +1,12 @@
 import { AUTH_API } from "../../shared/api/api-session";
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  type ReactNode,
+} from "react";
+import { useApiSession } from "../../shared/hooks/use-api-session";
 import {
   Link,
   matchPath,
@@ -38,11 +45,44 @@ import {
 import { currentUser, resetDemo } from "../../shared/data/store";
 import {
   WorkspaceProvider,
+  WorkspaceSnapshotProvider,
   useWorkspace,
 } from "../../shared/hooks/use-workspace";
 import { authService } from "../../features/auth/services/auth-service";
-export default function WorkspaceLayout() {
+import type { DemoDb } from "../../shared/data/types";
+const navigationGroups = [
+  { title: "Không gian làm việc", icon: Home },
+  { title: "Quản trị hệ thống", icon: ShieldCheck },
+  { title: "Danh mục & kế hoạch", icon: Users },
+  { title: "Đăng ký & đề cương", icon: ClipboardList },
+  { title: "Xét duyệt & hướng dẫn", icon: BookOpen },
+  { title: "Bảo vệ đồ án", icon: GraduationCap },
+  { title: "Điểm và kết quả", icon: FileText },
+  { title: "Báo cáo Bước 1–3", icon: Activity },
+  { title: "Cá nhân", icon: Users },
+];
+export default function WorkspaceLayout({
+  children,
+  data,
+  showTermPicker = true,
+}: {
+  children?: ReactNode;
+  data?: DemoDb;
+  showTermPicker?: boolean;
+}) {
   const location = useLocation();
+  const apiUser = useApiSession();
+  if (AUTH_API && !apiUser)
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+  if (data) {
+    if (apiUser?.mustChangePassword)
+      return <Navigate to="/change-password" replace />;
+    return (
+      <WorkspaceSnapshotProvider db={data}>
+        <Shell showTermPicker={showTermPicker}>{children}</Shell>
+      </WorkspaceSnapshotProvider>
+    );
+  }
   return (
     <DataBoundary>
       {(db) => {
@@ -63,49 +103,81 @@ export default function WorkspaceLayout() {
           return <Navigate to="/profile" replace />;
         return (
           <WorkspaceProvider>
-            <Shell />
+            <Shell showTermPicker={showTermPicker}>{children}</Shell>
           </WorkspaceProvider>
         );
       }}
     </DataBoundary>
   );
 }
-function Shell() {
+function Shell({
+  children,
+  showTermPicker,
+}: {
+  children?: ReactNode;
+  showTermPicker: boolean;
+}) {
   const { db, user, termId, setTermId } = useWorkspace();
   const location = useLocation();
   const navigate = useNavigate();
   const cache = useQueryClient();
   const [mobile, setMobile] = useState(false);
   const [reset, setReset] = useState(false);
-  useEffect(() => setMobile(false), [location.pathname]);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const sidebarRef = useRef<HTMLElement>(null);
+  const closeMobileMenu = useCallback(() => {
+    setMobile(false);
+    menuButtonRef.current?.focus({ preventScroll: true });
+  }, []);
+  useEffect(() => {
+    setMobile(false);
+    const toggle = menuButtonRef.current;
+    if (
+      toggle?.getClientRects().length &&
+      sidebarRef.current?.contains(document.activeElement)
+    )
+      toggle.focus({ preventScroll: true });
+  }, [location.pathname]);
+  useEffect(() => {
+    if (!mobile) return;
+    const close = (event: KeyboardEvent) => {
+      if (event.key === "Escape") closeMobileMenu();
+    };
+    window.addEventListener("keydown", close);
+    return () => window.removeEventListener("keydown", close);
+  }, [mobile, closeMobileMenu]);
   const routes = routeManifest.filter(
     (r) =>
       r.menu !== false && r.roles.some((role) => user.roles.includes(role)),
   );
-  const groups = [...new Set(routes.map((r) => r.group))];
+  const groups = [
+    ...new Set([
+      ...navigationGroups
+        .map((group) => group.title)
+        .filter((title) => routes.some((route) => route.group === title)),
+      ...routes.map((route) => route.group),
+    ]),
+  ];
   const active = routeManifest.find((r) =>
     matchPath({ path: r.path, end: true }, location.pathname),
   );
-  const icons = [
-    Home,
-    ShieldCheck,
-    Users,
-    ClipboardList,
-    BookOpen,
-    GraduationCap,
-    FileText,
-  ];
   const isDemo =
     !AUTH_API &&
     (import.meta.env.DEV || import.meta.env.VITE_DEMO_MODE === "true");
   return (
     <div className="app-shell">
-      <button
-        aria-label="Đóng điều hướng"
-        className={`sidebar-shade ${mobile ? "open" : ""}`}
-        onClick={() => setMobile(false)}
-      />
-      <aside className={`sidebar ${mobile ? "open" : ""}`}>
+      {mobile && (
+        <button
+          aria-label="Đóng điều hướng"
+          className={`sidebar-shade ${mobile ? "open" : ""}`}
+          onClick={closeMobileMenu}
+        />
+      )}
+      <aside
+        ref={sidebarRef}
+        id="workspace-navigation"
+        className={`sidebar ${mobile ? "open" : ""}`}
+      >
         <Link to="/" className="brand">
           <span className="brand-mark">
             <GraduationCap size={26} />
@@ -123,8 +195,10 @@ function Shell() {
           </div>
         </div>
         <nav className="sidebar-nav" aria-label="Điều hướng chính">
-          {groups.map((group, i) => {
-            const Icon = icons[i % icons.length];
+          {groups.map((group) => {
+            const Icon =
+              navigationGroups.find((item) => item.title === group)?.icon ??
+              FileText;
             return (
               <div className="nav-group" key={group}>
                 <p className="nav-group-title">{group}</p>
@@ -134,7 +208,10 @@ function Shell() {
                     <NavLink
                       key={r.path}
                       to={r.path}
-                      end
+                      end={r.path === "/"}
+                      onClick={() => {
+                        if (mobile) closeMobileMenu();
+                      }}
                       className={({ isActive }) =>
                         `nav-item ${isActive ? "active" : ""}`
                       }
@@ -175,9 +252,12 @@ function Shell() {
       <div className="app-main">
         <header className="topbar">
           <button
+            ref={menuButtonRef}
             className="icon-btn mobile-menu"
-            aria-label="Mở điều hướng"
-            onClick={() => setMobile(true)}
+            aria-label={mobile ? "Đóng menu" : "Mở điều hướng"}
+            aria-controls="workspace-navigation"
+            aria-expanded={mobile}
+            onClick={() => setMobile((open) => !open)}
           >
             <Menu size={22} />
           </button>
@@ -186,23 +266,39 @@ function Shell() {
             <b>{active?.title || "Trang không tồn tại"}</b>
           </div>
           <div className="topbar-controls">
-            <select
-              className="term-picker"
-              aria-label="Đợt làm việc"
-              value={termId}
-              onChange={(e) => setTermId(e.target.value)}
-            >
-              {db.terms
-                .filter(
-                  (t) =>
-                    !user.studentId || t.studentIds.includes(user.studentId),
-                )
-                .map((t) => (
-                  <option value={t.id} key={t.id}>
-                    {t.code} · {t.program}
-                  </option>
-                ))}
-            </select>
+            {showTermPicker && (
+              <select
+                className="term-picker"
+                aria-label="Đợt làm việc"
+                value={termId}
+                onChange={(e) => {
+                  setTermId(e.target.value);
+                  if (
+                    /^\/(topic\/(?:review|proposal|dossier)|guidance\/(?:plan|tasks|review|progress|meetings))/.test(
+                      location.pathname,
+                    )
+                  )
+                    navigate({
+                      pathname: location.pathname,
+                      search: new URLSearchParams({
+                        termId: e.target.value,
+                      }).toString(),
+                    });
+                }}
+              >
+                {db.terms
+                  .filter(
+                    (t) =>
+                      !user.studentId || t.studentIds.includes(user.studentId),
+                  )
+                  .map((t) => (
+                    <option value={t.id} key={t.id}>
+                      {t.code || t.name}
+                      {t.program ? ` · ${t.program}` : ""}
+                    </option>
+                  ))}
+              </select>
+            )}
             <span className="topbar-divider" />
             <Link
               to="/notifications"
@@ -243,7 +339,7 @@ function Shell() {
               {db.academicAccessWarnings.join(" ")}
             </Notice>
           ) : null}
-          <Outlet />
+          {children ?? <Outlet />}
         </main>
       </div>
       {isDemo && (

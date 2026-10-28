@@ -171,6 +171,28 @@ export class ProposalReviewSession {
       include: proposalInclude,
     });
   }
+  async searchProposalIds(termId: string, search: string) {
+    // Step 4–8 targets PostgreSQL 17 / UTF8. Its builtin Unicode collation
+    // handles Vietnamese casing even when the database was created with C.
+    // Normalize both sides; strpos treats %, _ and backslashes as literal text.
+    // The service intersects these IDs with the academic scope before paging.
+    const rows = await this.tx.$queryRaw<Array<{ id: string }>>`
+      SELECT p.id
+      FROM public."PROPOSAL" p
+      JOIN public."TOPIC" t ON t.id = p.topic_id
+      JOIN public."STUDENT" s ON s.id = p.student_id
+      WHERE t.term_id = ${termId}
+        AND (
+          strpos(lower(normalize(t.title, NFC) COLLATE pg_catalog."pg_c_utf8"),
+                 lower(${search.normalize("NFC")} COLLATE pg_catalog."pg_c_utf8")) > 0
+          OR strpos(lower(normalize(s.full_name, NFC) COLLATE pg_catalog."pg_c_utf8"),
+                    lower(${search.normalize("NFC")} COLLATE pg_catalog."pg_c_utf8")) > 0
+          OR strpos(lower(normalize(s.student_code, NFC) COLLATE pg_catalog."pg_c_utf8"),
+                    lower(${search.normalize("NFC")} COLLATE pg_catalog."pg_c_utf8")) > 0
+        )
+    `;
+    return rows.map((row) => row.id);
+  }
   proposals(where: Prisma.ProposalWhereInput, skip: number, take: number) {
     return this.tx.proposal.findMany({
       where,
@@ -352,6 +374,9 @@ export class ProposalReviewSession {
   }
   outbox(data: Prisma.OutboxEventUncheckedCreateInput) {
     return this.tx.outboxEvent.create({ data });
+  }
+  notify(data: Prisma.NotificationUncheckedCreateInput) {
+    return this.tx.notification.create({ data });
   }
   replay(actorId: string, route: string, key: string) {
     return this.tx.idempotencyRecord.findUnique({

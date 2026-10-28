@@ -1,0 +1,82 @@
+{
+  "workflow": {
+    "consoleErrors": 15,
+    "pageErrors": [],
+    "requestFailed": [],
+    "logoutErrors": [
+      {
+        "phase": "cleanup",
+        "kind": "logout-error",
+        "message": "page.setViewportSize: Protocol error (Emulation.setDeviceMetricsOverride): Target does not support metrics override"
+      }
+    ],
+    "httpByPath": {
+      "403 /api/assignments/term/qa-t2/plan": 2,
+      "403 /api/assignments/term/qa-t1/plan": 2,
+      "400 /api/assignments/term/qa-t1/results": 4,
+      "400 /api/assignments/term/qa-t2/results": 4,
+      "403 /api/registrations/term/qa-t1/me": 2,
+      "409 /api/proposals/p-student/dossier/receipt": 1
+    },
+    "warnings": [
+      "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    ]
+  },
+  "scope-boundaries": {
+    "consoleErrors": 70,
+    "pageErrors": [],
+    "requestFailed": [],
+    "logoutErrors": [],
+    "httpByPath": {
+      "403 /api/assignments/term/qa-t1/plan": 4,
+      "403 /api/assignments/term/qa-t2/plan": 4,
+      "403 /api/registrations/term/qa-t1/me": 4,
+      "400 /api/assignments/term/qa-t2/results": 8,
+      "400 /api/assignments/term/qa-t1/results": 8,
+      "404 /api/proposals/p-student/dossier": 10,
+      "403 /api/registrations/term/qa-t2/me": 2,
+      "403 /api/terms": 4,
+      "403 /api/semesters": 4,
+      "403 /api/training-systems": 4,
+      "403 /api/departments": 4,
+      "403 /api/research-areas": 4,
+      "403 /api/students": 2,
+      "403 /api/lecturers": 4,
+      "403 /api/accounts": 2,
+      "404 /api/proposals/not-a-proposal/dossier": 2
+    },
+    "warnings": [
+      "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    ]
+  },
+  "lifecycle": {
+    "consoleErrors": 14,
+    "pageErrors": [],
+    "requestFailed": [],
+    "logoutErrors": [],
+    "httpByPath": {
+      "403 /api/assignments/term/qa-t2/plan": 2,
+      "403 /api/assignments/term/qa-t1/plan": 2,
+      "403 /api/registrations/term/qa-t1/me": 2,
+      "400 /api/assignments/term/qa-t2/results": 4,
+      "400 /api/assignments/term/qa-t1/results": 4
+    },
+    "warnings": [
+      "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    ]
+  },
+  "supplemental": {
+    "consoleErrors": 6,
+    "pageErrors": [],
+    "requestFailed": [],
+    "logoutErrors": [],
+    "httpByPath": {
+      "403 /api/assignments/term/qa-t2/plan": 2,
+      "403 /api/assignments/term/qa-t1/plan": 2,
+      "403 /api/registrations/term/qa-t1/me": 2
+    },
+    "warnings": [
+      "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+    ]
+  }
+}

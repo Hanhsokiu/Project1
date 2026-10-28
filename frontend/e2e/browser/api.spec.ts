@@ -8,7 +8,170 @@ import {
   detailPath,
   assignedRow,
   gradeContext,
+  fakeActor,
 } from "./fixtures";
+
+test("successful login restores a workflow deep link and its term", async ({
+  page,
+  network,
+}) => {
+  network.mock("POST", "/api/auth/login", {
+    accessToken: "browser-login-token",
+    refreshToken: "browser-refresh-token",
+    user: fakeActor,
+  });
+  network.mock("GET", inboxPath, inbox());
+  await page.goto("/grading/reviewer?termId=browser-term");
+  await page
+    .getByPlaceholder("Ví dụ: 221230001 hoặc gv001")
+    .fill("browser-test");
+  await page.getByPlaceholder("Nhập mật khẩu").fill("test-only");
+  await page.getByRole("button", { name: "Đăng nhập hệ thống" }).click();
+  await expect(page).toHaveURL(/\/grading\/reviewer\?termId=browser-term$/);
+  await expect(
+    page.getByText("Không có hồ sơ được phân công chính thức", { exact: true }),
+  ).toBeVisible();
+  await expect(page.locator(".app-shell")).toHaveCount(1);
+});
+
+test("UC17–25 share one shell and use only their scoped APIs", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page, ["FACULTY", "LECTURER", "STUDENT", "COMMITTEE"]);
+  network.mock("GET", "/api/defense-confirmations/terms", { items: [] });
+  network.mock("GET", "/api/defense-lists/terms", { items: [] });
+  network.mock("GET", "/api/defense-planning/terms", { items: [] });
+  const paths = [
+    "/guidance/defense-confirm",
+    "/guidance/final-report",
+    "/defense/eligibility",
+    "/defense/committees",
+    "/defense/reviewers",
+    "/defense/schedule",
+    "/defense/published",
+    "/grading/reviewer",
+    "/grading/committee",
+    "/grading/results",
+    "/grading/policy",
+    "/report/official",
+  ];
+  await page.goto(paths[0]);
+  for (const path of paths) {
+    const nav = page.getByRole("navigation", { name: "Điều hướng chính" });
+    await expect(nav.locator(`a[href="${path}"]`)).toHaveCount(1);
+    await nav.locator(`a[href="${path}"]`).click();
+    await expect(page).toHaveURL(new RegExp(path + "$"));
+    await expect(page.locator(".app-shell")).toHaveCount(1);
+    await expect(page.getByRole("main")).toHaveCount(1);
+    await expect(page.locator("main h1")).toBeVisible();
+    await expect(page.getByLabel("Tài khoản demo")).toHaveCount(0);
+    await expect(page.getByLabel("Đợt làm việc", { exact: true })).toHaveCount(
+      0,
+    );
+    const links = await nav
+      .locator("a")
+      .evaluateAll((items) => items.map((item) => item.getAttribute("href")));
+    expect(new Set(links).size).toBe(links.length);
+  }
+  expect(
+    network.requests.every((request) =>
+      [
+        "/api/defense-confirmations/terms",
+        "/api/defense-lists/terms",
+        "/api/defense-planning/terms",
+      ].includes(request.path),
+    ),
+  ).toBe(true);
+  expect(
+    await page.evaluate(() => sessionStorage.getItem("utc-thesis-session")),
+  ).toBe(null);
+});
+
+test("workflow role guard rejects faculty-only routes without loading catalogs", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page, ["STUDENT"]);
+  await page.goto("/defense/committees");
+  await expect(page).toHaveURL(/\/forbidden$/);
+  await expect(
+    page.getByRole("heading", { name: "403 · Không đủ quyền" }),
+  ).toBeVisible();
+  await expect(page.locator(".app-shell")).toHaveCount(1);
+  await expect(
+    page
+      .getByRole("navigation", { name: "Điều hướng chính" })
+      .locator('a[href="/defense/committees"]'),
+  ).toHaveCount(0);
+  expect(network.requests).toEqual([]);
+});
+
+test("legacy score URL redirects to the canonical page with its term", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  network.mock("GET", inboxPath, inbox());
+  await page.goto("/grading/scores?termId=browser-term");
+  await expect(page).toHaveURL(/\/grading\/reviewer\?termId=browser-term$/);
+  await expect(
+    page.getByText("Không có hồ sơ được phân công chính thức", { exact: true }),
+  ).toBeVisible();
+});
+
+test("mobile workflow navigation closes on Escape and route change", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page);
+  await page.setViewportSize({ width: 375, height: 812 });
+  await page.goto("/grading/reviewer");
+  await page
+    .getByRole("button", { name: "Mở điều hướng", exact: true })
+    .click();
+  await expect(page.locator("aside.sidebar")).toHaveClass(/open/);
+  await page.keyboard.press("Escape");
+  await expect(page.locator("aside.sidebar")).not.toHaveClass(/open/);
+  await expect(
+    page.getByRole("button", { name: "Mở điều hướng", exact: true }),
+  ).toBeFocused();
+  await page
+    .getByRole("button", { name: "Mở điều hướng", exact: true })
+    .click();
+  await page
+    .getByRole("navigation", { name: "Điều hướng chính" })
+    .locator('a[href="/grading/committee"]')
+    .click();
+  await expect(page).toHaveURL(/\/grading\/committee$/);
+  await expect(page.locator("aside.sidebar")).not.toHaveClass(/open/);
+  expect(
+    await page.evaluate(
+      () => document.documentElement.scrollWidth <= innerWidth,
+    ),
+  ).toBe(true);
+  expect(network.requests).toEqual([]);
+});
+
+test("step 4–8 workflow and grading use the same navigation", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page, ["FACULTY"]);
+  network.mock("GET", "/api/review-group-options/terms", []);
+  network.mock("GET", "/api/notifications/me", []);
+  await page.goto("/topic/review-groups");
+  await expect(page.locator(".app-shell")).toHaveCount(1);
+  await page
+    .getByRole("navigation", { name: "Điều hướng chính" })
+    .locator('a[href="/grading/results"]')
+    .click();
+  await expect(page).toHaveURL(/\/grading\/results$/);
+  await expect(page.locator(".app-shell")).toHaveCount(1);
+  await expect(
+    page.getByText("Chọn đợt để bắt đầu", { exact: true }),
+  ).toBeVisible();
+});
 
 test("API mode hides demo account selectors", async ({ page }) => {
   await page.goto("/login");
@@ -182,7 +345,7 @@ test("API403 explains permission/grant without displaying demo rows", async ({
   );
   expect(network.requests.every((r) => r.method === "GET")).toBe(true);
 });
-test("API401 clears the API session and shows login guidance", async ({
+test("API401 clears the API session and redirects to the shared login", async ({
   page,
   network,
 }) => {
@@ -195,11 +358,14 @@ test("API401 clears the API session and shows login guidance", async ({
     "Expired test-only session",
   );
   await page.goto("/grading/reviewer?termId=browser-term");
+  await expect(page).toHaveURL(/\/login$/);
   await expect(
-    page.getByText("401 — Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại.", {
-      exact: true,
-    }),
+    page.getByRole("heading", { name: "Chào mừng trở lại!" }),
   ).toBeVisible();
+  await expect(page.locator(".app-shell")).toHaveCount(0);
+  expect(
+    network.requests.filter((request) => request.path === inboxPath),
+  ).toHaveLength(1);
   expect(
     await page.evaluate(() => sessionStorage.getItem("utc-api-access")),
   ).toBe(null);
