@@ -2,6 +2,7 @@ import {
   Body,
   Controller,
   Get,
+  Header,
   Param,
   ParseUUIDPipe,
   Patch,
@@ -65,6 +66,17 @@ export class AccountController {
     @CurrentUser() user: CurrentUserPayload,
   ) {
     return ApiResponse.ok(await this.service.toggleLock(id, user.sub));
+  }
+
+  @Post(":id/reveal-password")
+  @RequirePermission("account", "read")
+  @Header("Cache-Control", "no-store")
+  @Header("Pragma", "no-cache")
+  async revealPassword(
+    @Param("id", ParseUUIDPipe) id: string,
+    @CurrentUser() user: CurrentUserPayload,
+  ) {
+    return ApiResponse.ok(await this.service.revealPassword(id, user.sub));
   }
 
   @Post(":id/reset-password")

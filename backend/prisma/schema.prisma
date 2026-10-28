@@ -120,6 +120,7 @@ model UserAccount {
   displayName        String?       @map("display_name")
   phone              String?
   passwordHash       String        @map("password_hash")
+  passwordCiphertext String?       @map("password_ciphertext")
   status             AccountStatus @default(PENDING_ACTIVATION)
   failedLoginCount   Int           @default(0) @map("failed_login_count")
   lastLoginAt        DateTime?     @map("last_login_at") @db.Timestamptz(6)

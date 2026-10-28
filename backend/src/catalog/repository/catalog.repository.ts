@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
+import { sealAccountPassword } from "../../auth/security/password-vault";
 import { PrismaService } from "../../prisma/prisma.service";
 import { AuditService } from "../../common/audit/audit.service";
 import type {
@@ -180,6 +181,7 @@ export class CatalogRepository {
                 displayName: input.fullName!,
                 email: email || null,
                 passwordHash: passwordHash!,
+                passwordCiphertext: sealAccountPassword(input.studentCode!),
                 status: "ACTIVE" as const,
                 mustChangePassword: true,
                 userRoles: { create: { roleId: roleId! } },
@@ -271,6 +273,7 @@ export class CatalogRepository {
                 displayName: input.fullName!,
                 email: email || null,
                 passwordHash: passwordHash!,
+                passwordCiphertext: sealAccountPassword("Default@2026"),
                 status: "ACTIVE" as const,
                 mustChangePassword: true,
                 userRoles: { create: { roleId: roleId! } },

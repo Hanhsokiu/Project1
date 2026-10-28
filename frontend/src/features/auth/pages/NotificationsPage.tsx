@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { Bell, MailCheck, Mail, CalendarDays, MailWarning } from "lucide-react";
+import { Bell, MailCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 import {
   Badge,
   Button,
@@ -14,6 +15,7 @@ import { useAction } from "../../../shared/hooks/use-demo";
 import { notificationService } from "../services/notification-service";
 import { registrationService } from "../../registration/services/registration-service";
 import { STEP3_API } from "../../registration/services/assignment-api";
+import { Mail, CalendarDays, MailWarning } from "lucide-react";
 export default function NotificationsPage() {
   const { db, user, term } = useWorkspace();
   const action = useAction();
@@ -157,6 +159,13 @@ export default function NotificationsPage() {
               title: "Thao tác",
               render: (n) => (
                 <div className="flex gap-2">
+                  {n.userId === user.id &&
+                    n.link?.startsWith("/") &&
+                    !n.link.startsWith("//") && (
+                      <Link className="btn btn-secondary" to={n.link}>
+                        Mở hồ sơ
+                      </Link>
+                    )}
                   {n.userId === user.id && !n.read && (
                     <Button
                       variant="ghost"

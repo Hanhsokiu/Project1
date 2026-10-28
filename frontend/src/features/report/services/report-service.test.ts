@@ -10,6 +10,7 @@ import type { DemoDb, Topic } from "../../../shared/data/types";
 import {
   exportExcel,
   exportPdf,
+  exportTablePdf,
 } from "../../../shared/services/export-service";
 import {
   allowedReportKinds,
@@ -19,6 +20,7 @@ import {
 vi.mock("../../../shared/services/export-service", () => ({
   exportExcel: vi.fn().mockResolvedValue(undefined),
   exportPdf: vi.fn().mockResolvedValue(undefined),
+  exportTablePdf: vi.fn().mockResolvedValue(undefined),
 }));
 function storage() {
   const values = new Map<string, string>();
@@ -117,6 +119,7 @@ beforeEach(() => {
   fixture(db);
   persist(db);
   vi.mocked(exportPdf).mockReset().mockResolvedValue(undefined);
+  vi.mocked(exportTablePdf).mockReset().mockResolvedValue(undefined);
   vi.mocked(exportExcel).mockReset().mockResolvedValue(undefined);
 });
 describe("Bước 1–3 report ownership and filters", () => {
@@ -203,16 +206,48 @@ describe("Bước 1–3 report ownership and filters", () => {
   });
 });
 describe("export job lifecycle and file adapter boundaries", () => {
+  it.each([
+    "STUDENTS",
+    "LECTURERS",
+    "ROSTER",
+    "REGISTRATIONS",
+    "ASSIGNMENTS",
+    "TOPICS",
+  ] as const)("exports %s as table rows with report context", async (kind) => {
+    const user = login("admin");
+    const expected = buildReport(readDb(), user, "dot1", kind);
+    await createReport("dot1", kind, "PDF");
+    expect(exportTablePdf).toHaveBeenCalledWith(
+      expected.title,
+      expected.rows,
+      `${kind.toLowerCase()}-dot1.pdf`,
+      expected.lines.slice(0, 4),
+    );
+    expect(exportPdf).not.toHaveBeenCalled();
+  });
+
+  it("keeps the proposal document and signature fields in its form PDF", async () => {
+    login("admin");
+    await createReport("dot1", "PROPOSAL", "PDF");
+    expect(exportPdf).toHaveBeenCalledWith(
+      "Đề cương đồ án tốt nghiệp",
+      expect.arrayContaining([expect.stringContaining("ĐỀ CƯƠNG")]),
+      "proposal-dot1.pdf",
+    );
+    expect(exportTablePdf).not.toHaveBeenCalled();
+  });
+
   it("persists a pending job before calling the PDF adapter, then completes it with owner and filters", async () => {
     login("khoa");
-    vi.mocked(exportPdf).mockImplementation(async () => {
+    vi.mocked(exportTablePdf).mockImplementation(async () => {
       expect(readDb().exports[0].status).toBe("PENDING");
     });
     await createReport("dot1", "ASSIGNMENTS", "PDF", { directionId: "h1" });
-    expect(exportPdf).toHaveBeenCalledWith(
+    expect(exportTablePdf).toHaveBeenCalledWith(
       "Kết quả phân công GVHD",
       expect.any(Array),
       "assignments-dot1.pdf",
+      expect.arrayContaining([expect.stringContaining("Đợt:")]),
     );
     expect(readDb().exports[0]).toMatchObject({
       status: "COMPLETED",
@@ -251,6 +286,7 @@ describe("export job lifecycle and file adapter boundaries", () => {
     ).rejects.toThrow("Không có dữ liệu");
     expect(readDb().exports).toHaveLength(0);
     expect(exportPdf).not.toHaveBeenCalled();
+    expect(exportTablePdf).not.toHaveBeenCalled();
     await expect(createReport("dot1", "REGISTRATIONS", "PDF")).rejects.toThrow(
       "quyền",
     );
