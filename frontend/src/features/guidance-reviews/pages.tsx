@@ -1,3 +1,10 @@
+import {
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  Pencil,
+  MailCheck,
+} from "lucide-react";
 import React, { useRef, useState, useEffect } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -42,13 +49,23 @@ function Pager({
 }) {
   return (
     <div className="flex flex-wrap items-center gap-4">
-      <button disabled={page <= 1} onClick={() => onChange(page - 1)}>
+      <button
+        disabled={page <= 1}
+        onClick={() => onChange(page - 1)}
+        className="action-with-icon"
+      >
+        <ChevronLeft size={16} aria-hidden="true" />
         Trang trước
       </button>
       <span>
         Trang {page} / {Math.max(1, totalPages)}
       </span>
-      <button disabled={page >= totalPages} onClick={() => onChange(page + 1)}>
+      <button
+        disabled={page >= totalPages}
+        onClick={() => onChange(page + 1)}
+        className="action-with-icon"
+      >
+        <ChevronRight size={16} aria-hidden="true" />
         Trang sau
       </button>
     </div>
@@ -225,8 +242,13 @@ export function ProgressReviewDetailPage() {
       >
         ← Báo cáo và lịch sử nộp
       </Link>
-      <h1>{c?.allowedActions.some((action) => action === "review" || action === "amend")
-        ? "Đánh giá báo cáo sinh viên" : "Kết quả đánh giá báo cáo"}</h1>
+      <h1>
+        {c?.allowedActions.some(
+          (action) => action === "review" || action === "amend",
+        )
+          ? "Đánh giá báo cáo sinh viên"
+          : "Kết quả đánh giá báo cáo"}
+      </h1>
       <GuidanceState loading={query.isLoading} error={issue(query.error)}>
         {c && (
           <>
@@ -263,7 +285,7 @@ export function ProgressReviewDetailPage() {
               {c.submission.files.map((f) => (
                 <button
                   key={f.id}
-                  className="block max-w-full break-all text-left text-blue-700 underline"
+                  className="block max-w-full break-all text-left text-blue-700 underline action-with-icon"
                   onClick={() => {
                     setDownloadError("");
                     void submissionApi
@@ -273,6 +295,7 @@ export function ProgressReviewDetailPage() {
                       );
                   }}
                 >
+                  <Download size={16} aria-hidden="true" />
                   Tải{" "}
                   {f.kind === "REPORT"
                     ? "báo cáo"
@@ -319,9 +342,10 @@ export function ProgressReviewDetailPage() {
             )}
             {c.allowedActions.includes("amend") && !amending && (
               <button
-                className="rounded border px-4 py-2"
+                className="rounded border px-4 py-2 action-with-icon"
                 onClick={() => setAmending(true)}
               >
+                <Pencil size={16} aria-hidden="true" />
                 Sửa đánh giá có lý do
               </button>
             )}
@@ -366,13 +390,14 @@ export function ProgressReviewDetailPage() {
                 </Link>
               )}
               <button
-                className="text-blue-700"
+                className="text-blue-700 action-with-icon"
                 onClick={async () => {
                   await query.refetch();
                   setAmending(false);
                   setEpoch((v) => v + 1);
                 }}
               >
+                <Download size={16} aria-hidden="true" />
                 Tải phiên bản hiện tại
               </button>
             </div>
@@ -611,9 +636,10 @@ export function GuidanceMeetingsPage() {
                 </p>
                 {m.canAmend && (
                   <button
-                    className="text-blue-700"
+                    className="text-blue-700 action-with-icon"
                     onClick={() => setEditing(m)}
                   >
+                    <Pencil size={16} aria-hidden="true" />
                     Sửa nhật ký
                   </button>
                 )}
@@ -636,13 +662,14 @@ export function GuidanceMeetingsPage() {
               onChange={setPage}
             />
             <button
-              className="text-blue-700"
+              className="text-blue-700 action-with-icon"
               onClick={async () => {
                 await query.refetch();
                 setEditing(null);
                 setEpoch((v) => v + 1);
               }}
             >
+              <Download size={16} aria-hidden="true" />
               Tải nhật ký mới nhất
             </button>
           </>
@@ -679,7 +706,7 @@ export function GuidanceNotificationsPage() {
             )}
             {n.status === "UNREAD" && (
               <button
-                className="ml-4 text-blue-700"
+                className="ml-4 text-blue-700 action-with-icon"
                 onClick={async () => {
                   try {
                     await api.read(n.id);
@@ -689,6 +716,7 @@ export function GuidanceNotificationsPage() {
                   }
                 }}
               >
+                <MailCheck size={16} aria-hidden="true" />
                 Đánh dấu đã đọc
               </button>
             )}

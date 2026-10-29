@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
+  GraduationCap,
+  FileCheck2,
+  UserCheck,
   ArrowRight,
   CalendarDays,
   LockKeyhole,
@@ -26,7 +29,7 @@ import { termService, transitions } from "../services/term-service";
 export default function TermDetailPage() {
   const { id } = useParams();
   const { db, setTermId } = useWorkspace();
-  const action = useAction();
+  const action = useAction({ invalidateTerms: true });
   const [confirm, setConfirm] = useState<"lock" | TermStatus | null>(null);
   const t = db.terms.find((t) => t.id === id);
   if (!t)
@@ -106,7 +109,11 @@ export default function TermDetailPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Sinh viên tham gia" value={t.studentIds.length} />
+        <Stat
+          label="Sinh viên tham gia"
+          value={t.studentIds.length}
+          icon={<GraduationCap size={18} aria-hidden="true" />}
+        />
         <Stat
           label="Đăng ký đã nộp"
           value={
@@ -114,10 +121,12 @@ export default function TermDetailPage() {
               (r) => r.termId === t.id && r.status === "SUBMITTED",
             ).length
           }
+          icon={<FileCheck2 size={18} aria-hidden="true" />}
         />
         <Stat
           label="Đã phân GVHD"
           value={db.assignments.filter((r) => r.termId === t.id).length}
+          icon={<UserCheck size={18} aria-hidden="true" />}
         />
         <Stat
           label="Đề cương đã nộp"
@@ -125,6 +134,7 @@ export default function TermDetailPage() {
             db.topics.filter((r) => r.termId === t.id && r.status !== "DRAFT")
               .length
           }
+          icon={<FileCheck2 size={18} aria-hidden="true" />}
         />
       </div>
       {t.locked && (

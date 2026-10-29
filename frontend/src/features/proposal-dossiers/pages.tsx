@@ -1,3 +1,11 @@
+import {
+  ChevronLeft,
+  ChevronRight,
+  Download,
+  LockKeyhole,
+  CheckCheck,
+  RotateCcw,
+} from "lucide-react";
 import { WorkflowHeading } from "../review-groups/workflow-heading";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
@@ -15,6 +23,10 @@ import { DossierSnapshotPreview, DossierStatus } from "./components";
 import { DossierStudentProfile } from "./student-profile";
 import { useApiSession } from "../../shared/hooks/use-api-session";
 import { getErrorMessage } from "../../shared/api/error-message";
+import {
+  preferredWorkflowTerm,
+  useWorkflowTerms,
+} from "../../shared/hooks/use-workflow-terms";
 const issue = (e: unknown) =>
   e ? getErrorMessage(e, "Không thể xử lý hồ sơ. Hãy thử lại.") : undefined;
 function savePdf(blob: Blob, filename: string) {
@@ -45,21 +57,18 @@ export function DossierListPage() {
     search = params.get("search") ?? "";
   const [page, setPage] = useState(1),
     [onlyApproved, setOnlyApproved] = useState(false);
-  const terms = useQuery({
-    queryKey: ["proposal-review-terms"],
-    queryFn: proposalReviewApi.terms,
-  });
+  const terms = useWorkflowTerms();
   useEffect(() => {
-    if (!termId && terms.data?.[0])
+    if (!termId && terms.data?.[0] && !terms.isFetching)
       setParams(
         (previous) => {
           const next = new URLSearchParams(previous);
-          next.set("termId", terms.data![0].id);
+          next.set("termId", preferredWorkflowTerm(terms.data)!.id);
           return next;
         },
         { replace: true },
       );
-  }, [termId, terms.data, setParams]);
+  }, [termId, terms.data, terms.isFetching, setParams]);
   useEffect(() => setPage(1), [search]);
   const list = useQuery({
     queryKey: ["dossier-list", termId, page, onlyApproved, search],
@@ -138,13 +147,20 @@ export function DossierListPage() {
             {list.data.total} hồ sơ · Trang {page}/{list.data.totalPages}
           </span>
           <div className="flex gap-4">
-            <button disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
+            <button
+              disabled={page <= 1}
+              onClick={() => setPage((p) => p - 1)}
+              className="action-with-icon"
+            >
+              <ChevronLeft size={16} aria-hidden="true" />
               Trước
             </button>
             <button
               disabled={page >= list.data.totalPages}
               onClick={() => setPage((p) => p + 1)}
+              className="action-with-icon"
             >
+              <ChevronRight size={16} aria-hidden="true" />
               Sau
             </button>
           </div>
@@ -229,10 +245,11 @@ function DossierActions({
       {d.previewVersionId &&
         !d.readiness.includes("STUDENT_PROFILE_NOT_READY") && (
           <button
-            className="rounded border px-4 py-2"
+            className="rounded border px-4 py-2 action-with-icon"
             disabled={mutation.isPending}
             onClick={() => mutation.mutate("preview")}
           >
+            <Download size={16} aria-hidden="true" />
             Tải PDF xem trước (chưa chốt)
           </button>
         )}
@@ -243,20 +260,22 @@ function DossierActions({
             biến. Chốt không đồng nghĩa hồ sơ đã ký hoặc đã nộp giấy.
           </p>
           <button
-            className="rounded bg-blue-700 px-4 py-2 text-white"
+            className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
             disabled={mutation.isPending}
             onClick={() => mutation.mutate("finalize")}
           >
+            <LockKeyhole size={16} aria-hidden="true" />
             Chốt đề cương chính thức
           </button>
         </div>
       )}
       {d.allowedActions.includes("download") && (
         <button
-          className="rounded border px-4 py-2"
+          className="rounded border px-4 py-2 action-with-icon"
           disabled={mutation.isPending}
           onClick={() => mutation.mutate("download")}
         >
+          <Download size={16} aria-hidden="true" />
           Tải PDF để in và ký
         </button>
       )}
@@ -277,10 +296,11 @@ function DossierActions({
             ký điện tử.
           </p>
           <button
-            className="rounded bg-blue-700 px-4 py-2 text-white"
+            className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
             disabled={mutation.isPending}
             onClick={() => mutation.mutate("receive")}
           >
+            <CheckCheck size={16} aria-hidden="true" />
             Xác nhận đã nhận bản giấy
           </button>
         </div>
@@ -343,10 +363,11 @@ function FinalizationHistory({ d }: { d: DossierView }) {
           )}
           {f.canDownload && (
             <button
-              className="rounded border px-4 py-2"
+              className="rounded border px-4 py-2 action-with-icon"
               disabled={download.isPending}
               onClick={() => download.mutate(f.id)}
             >
+              <Download size={16} aria-hidden="true" />
               Tải PDF bản chốt {f.sequence}
               {f.supersededAt ? " (đã thay thế)" : ""}
             </button>
@@ -429,9 +450,10 @@ export function DossierDetailPage() {
               <FinalizationHistory key={"history-" + proposalId} d={d} />
             )}
             <button
-              className="text-blue-700"
+              className="text-blue-700 action-with-icon"
               onClick={() => void query.refetch()}
             >
+              <RotateCcw size={16} aria-hidden="true" />
               Tải lại trạng thái hồ sơ
             </button>
             <section className="rg-panel p-5">

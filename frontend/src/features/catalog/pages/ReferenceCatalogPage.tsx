@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { Plus, Pencil } from "lucide-react";
+import { X, Save, Plus, Pencil } from "lucide-react";
 import type { CatalogItem } from "../../../shared/data/types";
 import {
   Badge,
@@ -8,7 +8,6 @@ import {
   DataTable,
   Field,
   Modal,
-  Notice,
   PageHeader,
 } from "../../../shared/components/kit";
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
@@ -139,12 +138,6 @@ export default function ReferenceCatalogPage() {
           ]}
         />
       </Card>
-      <div className="mt-5">
-        <Notice>
-          Danh mục đã được tham chiếu được giữ lại để bảo toàn lịch sử. Ngừng sử
-          dụng sẽ ẩn khỏi các lựa chọn mới; hồ sơ đã có vẫn giữ liên kết.
-        </Notice>
-      </div>
       {form && (
         <Modal
           title={`${form.id ? "Cập nhật" : "Thêm"} ${kinds.find((k) => k.kind === form.kind)?.label.toLocaleLowerCase("vi")}`}
@@ -240,9 +233,13 @@ export default function ReferenceCatalogPage() {
                 variant="secondary"
                 onClick={() => setForm(null)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>Lưu danh mục</Button>
+              <Button disabled={action.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu danh mục
+              </Button>
             </div>
           </form>
         </Modal>

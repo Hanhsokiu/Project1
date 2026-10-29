@@ -1,3 +1,4 @@
+import { LockKeyhole, UserCheck, X, Save } from "lucide-react";
 import { useState } from "react";
 import {
   Badge,
@@ -47,6 +48,7 @@ function Content({ db }: { db: DemoDb }) {
                 s.exec(() => publishReviewerAssignments(s.term.id))
               }
             >
+              <LockKeyhole size={16} aria-hidden="true" />
               Chốt và thông báo GVPB
             </Button>
           )
@@ -135,6 +137,7 @@ function Content({ db }: { db: DemoDb }) {
                       setReviewer(r.defense?.reviewerId ?? "");
                     }}
                   >
+                    <UserCheck size={16} aria-hidden="true" />
                     Phân công
                   </Button>
                 ),
@@ -209,9 +212,13 @@ function Content({ db }: { db: DemoDb }) {
                 variant="secondary"
                 onClick={() => setStudent("")}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={s.pending}>Lưu phân công</Button>
+              <Button disabled={s.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu phân công
+              </Button>
             </div>
           </form>
         </Modal>

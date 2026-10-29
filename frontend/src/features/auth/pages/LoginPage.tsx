@@ -3,6 +3,7 @@ import { useState, type FormEvent } from "react";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import {
+  CheckCheck,
   ArrowRight,
   CalendarDays,
   CheckCircle2,
@@ -150,13 +151,6 @@ function LoginForm({ user }: { user?: Account }) {
             Đăng nhập để theo dõi đăng ký đồ án, kết quả phân công và đề cương
             của bạn.
           </p>
-          <div className="mb-6">
-            <Notice>
-              <b>Tự động phân luồng tài khoản</b>
-              <br />
-              Chức năng hiển thị theo vai trò được cấp cho tài khoản của bạn.
-            </Notice>
-          </div>
           {error && (
             <div className="mb-5">
               <Notice tone="danger">{error}</Notice>
@@ -239,6 +233,7 @@ function LoginForm({ user }: { user?: Account }) {
               SV dùng lại mã sinh viên; cán bộ dùng Default@2026.
             </p>
             <Button variant="secondary" onClick={() => setHelp(false)}>
+              <CheckCheck size={16} aria-hidden="true" />
               Đã hiểu
             </Button>
           </div>

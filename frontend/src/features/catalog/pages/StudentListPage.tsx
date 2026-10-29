@@ -1,6 +1,16 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { Plus, Pencil, Upload } from "lucide-react";
+import {
+  GraduationCap,
+  CheckCircle2,
+  CircleAlert,
+  CalendarDays,
+  X,
+  Save,
+  Plus,
+  Pencil,
+  Upload,
+} from "lucide-react";
 import type { Student } from "../../../shared/data/types";
 import {
   Badge,
@@ -83,13 +93,18 @@ export default function StudentListPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Tổng sinh viên" value={db.students.length} />
+        <Stat
+          label="Tổng sinh viên"
+          value={db.students.length}
+          icon={<GraduationCap size={18} aria-hidden="true" />}
+        />
         <Stat
           label="Đủ điều kiện học vụ"
           value={
             db.students.filter((s) => s.eligible && hasEligibleGpa(s.gpa, 0))
               .length
           }
+          icon={<CheckCircle2 size={18} aria-hidden="true" />}
         />
         <Stat
           label="Chưa đủ điều kiện"
@@ -97,11 +112,13 @@ export default function StudentListPage() {
             db.students.filter((s) => !s.eligible || !hasEligibleGpa(s.gpa, 0))
               .length
           }
+          icon={<CircleAlert size={18} aria-hidden="true" />}
         />
         <Stat
           label="Tham gia đợt hiện tại"
           value={term.studentIds.length}
           sub={term.code}
+          icon={<CalendarDays size={18} aria-hidden="true" />}
         />
       </div>
       <Card title="Hồ sơ sinh viên">
@@ -343,9 +360,13 @@ export default function StudentListPage() {
                 variant="secondary"
                 onClick={() => setForm(null)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>Lưu sinh viên</Button>
+              <Button disabled={action.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu sinh viên
+              </Button>
             </div>
           </form>
         </Modal>

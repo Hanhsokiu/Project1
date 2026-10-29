@@ -1,3 +1,4 @@
+import { Save } from "lucide-react";
 import { useState } from "react";
 import {
   Back,
@@ -129,6 +130,7 @@ export default function ManualAdjustPage() {
                   !regs.length
                 }
               >
+                <Save size={16} aria-hidden="true" />
                 Lưu điều chỉnh
               </Button>
             </div>

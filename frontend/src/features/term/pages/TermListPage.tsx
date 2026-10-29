@@ -1,6 +1,16 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Plus, Pencil, ArrowUpRight, CalendarDays } from "lucide-react";
+import {
+  CalendarCheck,
+  Clock,
+  CheckCircle2,
+  X,
+  Save,
+  Plus,
+  Pencil,
+  ArrowUpRight,
+  CalendarDays,
+} from "lucide-react";
 import type { Term } from "../../../shared/data/types";
 import {
   Badge,
@@ -45,7 +55,7 @@ const dateTime = (value: string, end = false) => {
 };
 export default function TermListPage() {
   const { db, setTermId } = useWorkspace();
-  const action = useAction();
+  const action = useAction({ invalidateTerms: true });
   const navigate = useNavigate();
   const [program, setProgram] = useState("");
   const [status, setStatus] = useState("");
@@ -132,14 +142,17 @@ export default function TermListPage() {
           value={
             db.terms.filter((t) => t.status === "OPEN_REGISTRATION").length
           }
+          icon={<CalendarCheck size={18} aria-hidden="true" />}
         />
         <Stat
           label="Đang thực hiện"
           value={db.terms.filter((t) => t.status === "IN_PROGRESS").length}
+          icon={<Clock size={18} aria-hidden="true" />}
         />
         <Stat
           label="Đã hoàn thành"
           value={db.terms.filter((t) => t.status === "COMPLETED").length}
+          icon={<CheckCircle2 size={18} aria-hidden="true" />}
         />
       </div>
       <Card title="Danh sách đợt đồ án">
@@ -375,9 +388,13 @@ export default function TermListPage() {
                 variant="secondary"
                 onClick={() => setForm(null)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>Lưu đợt đồ án</Button>
+              <Button disabled={action.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu đợt đồ án
+              </Button>
             </div>
           </form>
         </Modal>

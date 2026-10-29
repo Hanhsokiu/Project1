@@ -1,4 +1,12 @@
-import { WorkflowHeading } from "../review-groups/workflow-heading";
+import {
+  ChevronLeft,
+  ChevronRight,
+  CheckCheck,
+  RotateCcw,
+  Play,
+  Save,
+} from 'lucide-react';
+import { WorkflowHeading } from '../review-groups/workflow-heading';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Link,
@@ -27,6 +35,10 @@ import { getErrorMessage } from '../../shared/api/error-message';
 import { useWorkspace } from '../../shared/hooks/use-workspace';
 import { canAccessRoute, routeManifest } from '../../app/router/route-manifest';
 import { AUTH_API } from '../../shared/api/api-session';
+import {
+  preferredWorkflowTerm,
+  useWorkflowTerms,
+} from '../../shared/hooks/use-workflow-terms';
 const message = (e: unknown) =>
   e ? getErrorMessage(e, 'Không thể xử lý đề cương. Hãy thử lại.') : undefined;
 function useRequestKey() {
@@ -42,7 +54,9 @@ const date = (v: string) =>
   new Date(v).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
 export function ProposalReviewQueuePage() {
   const { user } = useWorkspace();
-  const groupsRoute = routeManifest.find((route) => route.path === '/topic/review-groups')!;
+  const groupsRoute = routeManifest.find(
+    (route) => route.path === '/topic/review-groups',
+  )!;
   const [params, setParams] = useSearchParams(),
     termId = params.get('termId') ?? '';
   const [page, setPage] = useState(1),
@@ -50,10 +64,7 @@ export function ProposalReviewQueuePage() {
     [departmentId, setDepartment] = useState(''),
     [status, setStatus] = useState(''),
     [unassigned, setUnassigned] = useState(false);
-  const terms = useQuery({
-    queryKey: ['proposal-review-terms'],
-    queryFn: api.terms,
-  });
+  const terms = useWorkflowTerms();
   const requestedSearch = params.get('search');
   useEffect(() => {
     if (requestedSearch !== null) {
@@ -62,16 +73,16 @@ export function ProposalReviewQueuePage() {
     }
   }, [requestedSearch]);
   useEffect(() => {
-    if (!termId && terms.data?.[0])
+    if (!termId && terms.data?.[0] && !terms.isFetching)
       setParams(
         (previous) => {
           const next = new URLSearchParams(previous);
-          next.set('termId', terms.data![0].id);
+          next.set('termId', preferredWorkflowTerm(terms.data)!.id);
           return next;
         },
         { replace: true },
       );
-  }, [termId, terms.data, setParams]);
+  }, [termId, terms.data, terms.isFetching, setParams]);
   const options = useQuery({
     queryKey: ['proposal-review-options', termId],
     queryFn: () => api.options(termId),
@@ -94,12 +105,17 @@ export function ProposalReviewQueuePage() {
     <>
       <div className="mb-6">
         <WorkflowHeading path="/topic/reviews" />
-        {canAccessRoute(groupsRoute, user, AUTH_API) && <Link
-          className="mt-3 inline-block text-sm text-blue-700"
-          to={`/topic/review-groups?termId=${encodeURIComponent(termId)}`}
-        >
-          {user.roles.includes('FACULTY') ? 'Quản lý nhóm duyệt' : 'Nhóm duyệt của tôi'} →
-        </Link>}
+        {canAccessRoute(groupsRoute, user, AUTH_API) && (
+          <Link
+            className="mt-3 inline-block text-sm text-blue-700"
+            to={`/topic/review-groups?termId=${encodeURIComponent(termId)}`}
+          >
+            {user.roles.includes('FACULTY')
+              ? 'Quản lý nhóm duyệt'
+              : 'Nhóm duyệt của tôi'}{' '}
+            →
+          </Link>
+        )}
       </div>
       {options.data?.phase ? (
         <p className="mb-5 rounded border bg-white p-4 text-sm">
@@ -118,7 +134,11 @@ export function ProposalReviewQueuePage() {
       )}
       <section className="rg-panel mb-5">
         <div className="rg-panel-heading">
-          <h2>{user.roles.includes('STUDENT') ? 'Hồ sơ của bạn' : 'Danh sách hồ sơ'}</h2>
+          <h2>
+            {user.roles.includes('STUDENT')
+              ? 'Hồ sơ của bạn'
+              : 'Danh sách hồ sơ'}
+          </h2>
         </div>
         <div className="rg-filters grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <label>
@@ -296,15 +316,17 @@ export function ProposalReviewQueuePage() {
             <button
               disabled={page <= 1}
               onClick={() => setPage((p) => p - 1)}
-              className="rounded border px-3 py-2 disabled:opacity-40"
+              className="rounded border px-3 py-2 disabled:opacity-40 action-with-icon"
             >
+              <ChevronLeft size={16} aria-hidden="true" />
               Trước
             </button>
             <button
               disabled={page >= list.data.totalPages}
               onClick={() => setPage((p) => p + 1)}
-              className="rounded border px-3 py-2 disabled:opacity-40"
+              className="rounded border px-3 py-2 disabled:opacity-40 action-with-icon"
             >
+              <ChevronRight size={16} aria-hidden="true" />
               Sau
             </button>
           </div>
@@ -416,8 +438,9 @@ function AssignmentForm({
       )}
       <button
         disabled={busy || !candidates.some((c) => c.eligibleReviewerCount > 0)}
-        className="rounded bg-blue-600 px-4 py-2 text-sm text-white"
+        className="rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
       >
+        <CheckCheck size={16} aria-hidden="true" />
         {busy
           ? 'Đang xác nhận…'
           : snapshot.reviewId
@@ -492,8 +515,9 @@ export function ProposalReviewAssignmentPage() {
                 {message(mutation.error)}{' '}
                 <button
                   onClick={() => window.location.reload()}
-                  className="underline"
+                  className="underline action-with-icon"
                 >
+                  <RotateCcw size={16} aria-hidden="true" />
                   Tải lại hồ sơ
                 </button>
               </p>
@@ -683,9 +707,10 @@ function ProposalReviewDetail({ id }: { id: string }) {
               >
                 {message(mutation.error)}{' '}
                 <button
-                  className="underline"
+                  className="underline action-with-icon"
                   onClick={() => window.location.reload()}
                 >
+                  <RotateCcw size={16} aria-hidden="true" />
                   Tải lại phiên bản và vòng
                 </button>
               </p>
@@ -700,7 +725,7 @@ function ProposalReviewDetail({ id }: { id: string }) {
             )}
             {r.allowedActions.includes('start') && (
               <button
-                className="rounded bg-blue-600 px-4 py-2 text-white"
+                className="rounded bg-blue-600 px-4 py-2 text-white action-with-icon"
                 disabled={mutation.isPending}
                 onClick={() =>
                   mutation.mutate({
@@ -712,6 +737,7 @@ function ProposalReviewDetail({ id }: { id: string }) {
                   })
                 }
               >
+                <Play size={16} aria-hidden="true" />
                 Bắt đầu duyệt phiên bản {r.versionNumber}
               </button>
             )}
@@ -772,9 +798,10 @@ function ProposalReviewDetail({ id }: { id: string }) {
                   </p>
                 )}
                 <button
-                  className="rounded bg-blue-600 px-4 py-2 text-sm text-white"
+                  className="rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
                   disabled={mutation.isPending}
                 >
+                  <Save size={16} aria-hidden="true" />
                   Lưu nhận xét
                 </button>
               </form>

@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { FileDown, FileSpreadsheet, Loader2 } from "lucide-react";
+import {
+  Eye,
+  RotateCcw,
+  X,
+  Download,
+  FileDown,
+  FileSpreadsheet,
+  Loader2,
+} from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
 import {
   Badge,
@@ -283,6 +291,7 @@ function Content({ db }: { db: DemoDb }) {
               disabled={!report?.rows.length || !!reportError}
               onClick={() => setPreview(true)}
             >
+              <Eye size={16} aria-hidden="true" />
               Xem trước
             </Button>
             <Button
@@ -383,6 +392,7 @@ function Content({ db }: { db: DemoDb }) {
                           )
                         }
                       >
+                        <RotateCcw size={16} aria-hidden="true" />
                         Thử lại
                       </Button>
                     ),
@@ -425,9 +435,11 @@ function Content({ db }: { db: DemoDb }) {
           </div>
           <div className="dialog-actions">
             <Button variant="secondary" onClick={() => setPreview(false)}>
+              <X size={16} aria-hidden="true" />
               Đóng
             </Button>
             <Button disabled={working} onClick={() => execute()}>
+              <Download size={16} aria-hidden="true" />
               Tải {format}
             </Button>
           </div>

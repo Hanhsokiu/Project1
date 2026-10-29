@@ -9,7 +9,6 @@ import {
   Flag,
   GraduationCap,
   LockKeyhole,
-  Mail,
   ShieldCheck,
   Users,
 } from "lucide-react";
@@ -170,51 +169,6 @@ function Milestones({ data }: { data: DashboardData }) {
     </Card>
   );
 }
-function Notifications({ data }: { data: DashboardData }) {
-  return (
-    <Card
-      title="Thông báo mới"
-      action={
-        <Link
-          className="text-xs font-medium text-[#665399]"
-          to="/notifications"
-        >
-          Xem tất cả
-        </Link>
-      }
-    >
-      {data.notifications.length ? (
-        <div className="space-y-3">
-          {data.notifications.slice(0, 4).map((n) => (
-            <Link
-              key={n.id}
-              to="/notifications"
-              className="block rounded-xl bg-[#f3f2f8] p-3 hover:bg-[#edeaf5]"
-            >
-              <div className="flex gap-2 justify-between items-center">
-                <span className="text-xs font-semibold text-[#665399]">
-                  {n.read ? "Đã đọc" : "Chưa đọc"}
-                </span>
-                <Badge value={n.status} />
-              </div>
-              <strong className="text-sm block mt-2">{n.title}</strong>
-              <p className="muted text-xs mt-1 line-clamp-2">{n.content}</p>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <div className="text-center rounded-2xl bg-[#f3f2f8] px-5 py-8">
-          <Mail size={25} className="text-slate-400 mx-auto mb-3" />
-          <strong className="text-sm">Bạn chưa có thông báo mới</strong>
-          <p className="muted text-xs mt-2 leading-5">
-            Thông báo từ Khoa và kết quả phân công GVHD sẽ được cập nhật tại
-            đây.
-          </p>
-        </div>
-      )}
-    </Card>
-  );
-}
 function NextDeadline({ data }: { data: DashboardData }) {
   const today = new Date().toLocaleDateString("en-CA", {
     timeZone: "Asia/Ho_Chi_Minh",
@@ -262,7 +216,6 @@ function Sidebar({ data }: { data: DashboardData }) {
     <aside className="space-y-6">
       <Milestones data={data} />
       <NextDeadline data={data} />
-      <Notifications data={data} />
     </aside>
   );
 }
@@ -328,31 +281,6 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
     },
   ];
   const first = steps.findIndex((s) => !s.done);
-  const priority = [
-    {
-      label: "Sinh viên chưa gửi đăng ký",
-      count: Math.max(0, students.length - submitted),
-      href: "/registration/assignment",
-    },
-    {
-      label: "Sinh viên chưa có GVHD",
-      count: students.filter(
-        (s) => !assignments.some((a) => a.studentId === s.id),
-      ).length,
-      href: "/registration/manual",
-    },
-    {
-      label: "Phân công chưa công bố",
-      count: assignments.filter((a) => !a.published).length,
-      href: "/registration/assignment",
-    },
-    {
-      label: "Thông báo phân công gửi lỗi",
-      count: data.assignmentNotifications.filter((n) => n.status === "FAILED")
-        .length,
-      href: "/registration/assignment",
-    },
-  ];
   return (
     <>
       <DarkHero
@@ -468,22 +396,6 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
               ))}
             </div>
           </Card>
-          <Card title="Việc cần thực hiện">
-            <div className="grid sm:grid-cols-2 gap-3">
-              {priority.map((item) => (
-                <Link
-                  to={item.href}
-                  key={item.label}
-                  className="rounded-xl border border-[#e2e0ec] p-4 flex justify-between items-center gap-3"
-                >
-                  <strong className="text-sm">{item.label}</strong>
-                  <span className="font-semibold text-xl text-[#665399]">
-                    {item.count}
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </Card>
           <div className="grid sm:grid-cols-3 gap-4">
             <QuickLink
               title="Quản lý sinh viên"
@@ -545,7 +457,10 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
   const first = steps.find((s) => !s.done);
   const eligible =
     !!student?.eligible &&
-    hasEligibleGpa(student.gpa, data.term.parameters.passing_gpa_threshold ?? 2);
+    hasEligibleGpa(
+      student.gpa,
+      data.term.parameters.passing_gpa_threshold ?? 2,
+    );
   const title = !data.students.length
     ? "Chưa thuộc danh sách tham gia đợt"
     : !eligible
@@ -941,7 +856,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
   );
 }
 
-function AdminDashboard({ db, data }: { db: DemoDb; data: DashboardData }) {
+function AdminDashboard({ db }: { db: DemoDb }) {
   return (
     <>
       <DarkHero
@@ -987,7 +902,7 @@ function AdminDashboard({ db, data }: { db: DemoDb; data: DashboardData }) {
           icon={<LockKeyhole size={20} />}
         />
       </div>
-      <div className="grid xl:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-6 items-start">
+      <div className="space-y-6">
         <Card title="Hoạt động gần đây">
           <DataTable
             rows={db.audits.slice(0, 20)}
@@ -1019,7 +934,6 @@ function AdminDashboard({ db, data }: { db: DemoDb; data: DashboardData }) {
             ]}
           />
         </Card>
-        <Notifications data={data} />
       </div>
     </>
   );
@@ -1104,7 +1018,7 @@ function DashboardContent({ db }: { db: DemoDb }) {
         </div>
       )}
       {role === "ADMIN" ? (
-        <AdminDashboard db={db} data={data} />
+        <AdminDashboard db={db} />
       ) : role === "FACULTY" ? (
         <FacultyDashboard data={data} />
       ) : role === "STUDENT" ? (

@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import { Check, Circle } from "lucide-react";
+import { Save, Check, Circle } from "lucide-react";
 import {
   Button,
   Card,
@@ -103,6 +103,7 @@ export default function ChangePasswordPage() {
             </ul>
             <div className="form-actions">
               <Button disabled={action.pending}>
+                <Save size={16} aria-hidden="true" />
                 {action.pending ? "Đang cập nhật…" : "Lưu mật khẩu mới"}
               </Button>
             </div>

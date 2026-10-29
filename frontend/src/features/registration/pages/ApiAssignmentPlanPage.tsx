@@ -1,3 +1,15 @@
+import {
+  Pencil,
+  Eye,
+  RotateCcw,
+  LockKeyhole,
+  FileCheck2,
+  UserCheck,
+  UserRoundSearch,
+  FileClock,
+  Send,
+  Save,
+} from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -55,6 +67,7 @@ export default function ApiAssignmentPlanPage() {
         actions={
           <>
             <Link className="btn btn-secondary" to="/registration/manual">
+              <Pencil size={16} aria-hidden="true" />
               Điều chỉnh thủ công
             </Link>
             <Button
@@ -62,6 +75,7 @@ export default function ApiAssignmentPlanPage() {
               disabled={locked || action.pending}
               onClick={() => calculate(false)}
             >
+              <Eye size={16} aria-hidden="true" />
               Xem trước phân bổ bổ sung
             </Button>
             <Button
@@ -69,12 +83,14 @@ export default function ApiAssignmentPlanPage() {
               disabled={locked || action.pending}
               onClick={() => setConfirm("all")}
             >
+              <RotateCcw size={16} aria-hidden="true" />
               Tính lại toàn bộ
             </Button>
             <Button
               disabled={locked || !assignments.length || action.pending}
               onClick={() => setConfirm("publish")}
             >
+              <LockKeyhole size={16} aria-hidden="true" />
               {term.assignmentPublished ? "Đã công bố" : "Chốt & công bố"}
             </Button>
             {ctx?.plan?.status === "PUBLISHED" && (
@@ -82,6 +98,7 @@ export default function ApiAssignmentPlanPage() {
                 disabled={term.locked || action.pending}
                 onClick={() => setConfirm("finalize")}
               >
+                <LockKeyhole size={16} aria-hidden="true" />
                 Chốt phân công chính thức
               </Button>
             )}
@@ -91,25 +108,26 @@ export default function ApiAssignmentPlanPage() {
           </>
         }
       />
-      <Notice tone={term.assignmentPublished ? "success" : "info"}>
-        {term.assignmentPublished
-          ? "Kết quả chính thức được lưu tại máy chủ. Email được gửi qua SMTP sau khi công bố."
-          : "Bản nháp chỉ Giáo vụ xem được. Phân bổ bổ sung giữ các phân công đã lưu, bao gồm điều chỉnh thủ công."}{" "}
-        Khi hết hạn đăng ký và đến giai đoạn phân công, hệ thống tự tạo bản nháp
-        trong vòng 30 giây nếu đã có đăng ký được nộp. Giáo vụ kiểm tra rồi công
-        bố kết quả. GPA giảm dần trong từng vòng; bằng GPA xét thời điểm nộp rồi
-        mã SV. Fallback xét tải/quota rồi mã GV.
-      </Notice>
       <div className="stat-grid mt-5">
-        <Stat label="Đã nộp đăng ký" value={rows.length} />
-        <Stat label="Đã phân công" value={assignments.length} />
+        <Stat
+          label="Đã nộp đăng ký"
+          value={rows.length}
+          icon={<FileCheck2 size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Đã phân công"
+          value={assignments.length}
+          icon={<UserCheck size={18} aria-hidden="true" />}
+        />
         <Stat
           label="Chưa phân"
           value={rows.filter((r) => !r.assignedLecturerId).length}
+          icon={<UserRoundSearch size={18} aria-hidden="true" />}
         />
         <Stat
           label="Chưa nộp đăng ký"
           value={ctx?.missingSubmissions.length ?? 0}
+          icon={<FileClock size={18} aria-hidden="true" />}
         />
       </div>
       <div className="stack">
@@ -217,6 +235,7 @@ export default function ApiAssignmentPlanPage() {
                           .catch(() => {})
                       }
                     >
+                      <Send size={16} aria-hidden="true" />
                       Gửi lại
                     </Button>
                   ) : null,
@@ -268,6 +287,7 @@ export default function ApiAssignmentPlanPage() {
               }
             }}
           >
+            <Save size={16} aria-hidden="true" />
             Lưu phương án nháp
           </Button>
         </Modal>

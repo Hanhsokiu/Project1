@@ -94,17 +94,16 @@ function WorkflowContent({
               name="query"
               disabled={!requestedTerm && !selectedTerm}
               aria-label={label}
-              placeholder={
-                guidanceMode ? "Tìm nhiệm vụ…" : "Tìm đề cương…"
-              }
+              placeholder={guidanceMode ? "Tìm nhiệm vụ…" : "Tìm đề cương…"}
             />
           </div>
           <button
             type="submit"
             disabled={!requestedTerm && !selectedTerm}
-            className="btn btn-secondary"
+            className="btn btn-secondary action-with-icon"
             aria-label={submitLabel}
           >
+            <Search size={16} aria-hidden="true" />
             Tìm kiếm
           </button>
         </form>

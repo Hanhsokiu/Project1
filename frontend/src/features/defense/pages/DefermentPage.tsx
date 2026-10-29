@@ -1,3 +1,4 @@
+import { Save, Eye, X, Send, Plus, Download } from "lucide-react";
 import { useState } from "react";
 import {
   Badge,
@@ -87,6 +88,7 @@ function Content({ db }: { db: DemoDb }) {
                 setCreate(true);
               }}
             >
+              <Save size={16} aria-hidden="true" />
               Tạo đề nghị bảo lưu
             </Button>
           )
@@ -153,6 +155,7 @@ function Content({ db }: { db: DemoDb }) {
               title: "",
               render: (d) => (
                 <Button variant="secondary" onClick={() => open(d)}>
+                  <Eye size={16} aria-hidden="true" />
                   Hồ sơ / Xử lý
                 </Button>
               ),
@@ -216,9 +219,13 @@ function Content({ db }: { db: DemoDb }) {
                 type="button"
                 onClick={() => setCreate(false)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={s.pending}>Gửi đề nghị</Button>
+              <Button disabled={s.pending}>
+                <Send size={16} aria-hidden="true" />
+                Gửi đề nghị
+              </Button>
             </div>
           </form>
         </Modal>
@@ -267,6 +274,7 @@ function Content({ db }: { db: DemoDb }) {
                       )
                     }
                   >
+                    <X size={16} aria-hidden="true" />
                     Không đồng ý
                   </Button>
                   <Button
@@ -276,6 +284,7 @@ function Content({ db }: { db: DemoDb }) {
                       )
                     }
                   >
+                    <Save size={16} aria-hidden="true" />
                     Đồng ý bảo lưu
                   </Button>
                 </div>
@@ -288,6 +297,7 @@ function Content({ db }: { db: DemoDb }) {
                   done(() => submitDefermentApplication(selected.id))
                 }
               >
+                <Send size={16} aria-hidden="true" />
                 Nộp đơn đến Khoa
               </Button>
             )}
@@ -314,6 +324,7 @@ function Content({ db }: { db: DemoDb }) {
                       )
                     }
                   >
+                    <X size={16} aria-hidden="true" />
                     Từ chối
                   </Button>
                   <Button
@@ -324,6 +335,7 @@ function Content({ db }: { db: DemoDb }) {
                       )
                     }
                   >
+                    <Save size={16} aria-hidden="true" />
                     Duyệt bảo lưu
                   </Button>
                 </div>
@@ -362,6 +374,7 @@ function Content({ db }: { db: DemoDb }) {
                     done(() => resumeDeferment(selected.id, target))
                   }
                 >
+                  <Plus size={16} aria-hidden="true" />
                   Tạo hồ sơ tiếp tục
                 </Button>
               </div>
@@ -378,9 +391,11 @@ function Content({ db }: { db: DemoDb }) {
               variant="secondary"
               onClick={() => s.exec(() => pdf(selected))}
             >
+              <Download size={16} aria-hidden="true" />
               Tải đơn PDF
             </Button>
             <Button variant="ghost" onClick={() => setSelected(undefined)}>
+              <X size={16} aria-hidden="true" />
               Đóng
             </Button>
           </div>

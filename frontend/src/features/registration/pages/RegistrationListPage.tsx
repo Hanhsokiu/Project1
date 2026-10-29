@@ -1,4 +1,10 @@
 import {
+  ClipboardList,
+  FileCheck2,
+  FilePenLine,
+  FileClock,
+} from "lucide-react";
+import {
   Badge,
   Card,
   DataTable,
@@ -25,14 +31,17 @@ export default function RegistrationListPage() {
           label="Tổng đăng ký"
           value={rows.length}
           sub={`${term.studentIds.length} sinh viên trong đợt`}
+          icon={<ClipboardList size={18} aria-hidden="true" />}
         />
         <Stat
           label="Đã nộp"
           value={rows.filter((r) => r.status === "SUBMITTED").length}
+          icon={<FileCheck2 size={18} aria-hidden="true" />}
         />
         <Stat
           label="Bản nháp"
           value={rows.filter((r) => r.status === "DRAFT").length}
+          icon={<FilePenLine size={18} aria-hidden="true" />}
         />
         <Stat
           label="Chưa đăng ký"
@@ -41,6 +50,7 @@ export default function RegistrationListPage() {
               (id) => !rows.some((r) => r.studentId === id),
             ).length
           }
+          icon={<FileClock size={18} aria-hidden="true" />}
         />
       </div>
       <Notice>

@@ -1,3 +1,4 @@
+import { Pencil, Trash2, Plus, X, Save } from "lucide-react";
 import { useState } from "react";
 import {
   Badge,
@@ -53,6 +54,7 @@ function Content({ db }: { db: DemoDb }) {
                 })
               }
             >
+              <Plus size={16} aria-hidden="true" />
               Thành lập hội đồng
             </Button>
           )
@@ -79,6 +81,7 @@ function Content({ db }: { db: DemoDb }) {
                     variant="ghost"
                     onClick={() => setDraft(structuredClone(c))}
                   >
+                    <Pencil size={16} aria-hidden="true" />
                     Chỉnh sửa
                   </Button>
                 )
@@ -169,6 +172,7 @@ function Content({ db }: { db: DemoDb }) {
                     })
                   }
                 >
+                  <Trash2 size={16} aria-hidden="true" />
                   Xóa
                 </Button>
               </div>
@@ -187,6 +191,7 @@ function Content({ db }: { db: DemoDb }) {
                 })
               }
             >
+              <Plus size={16} aria-hidden="true" />
               Thêm ủy viên
             </Button>
             <div className="dialog-actions">
@@ -195,9 +200,13 @@ function Content({ db }: { db: DemoDb }) {
                 variant="secondary"
                 onClick={() => setDraft(undefined)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={s.pending}>Lưu hội đồng</Button>
+              <Button disabled={s.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu hội đồng
+              </Button>
             </div>
           </form>
         </Modal>

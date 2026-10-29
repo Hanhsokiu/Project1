@@ -1,3 +1,4 @@
+import { CheckCheck } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 import type { ProposalReviewView, ReviewDecisionInput } from '@doan/shared';
 import { ReviewDecisionSchema } from '@doan/shared';
@@ -252,9 +253,10 @@ export function DecisionForm({
         </p>
       )}
       <button
-        className="rounded bg-blue-600 px-4 py-2 text-sm text-white"
+        className="rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
         disabled={busy}
       >
+        <CheckCheck size={16} aria-hidden="true" />
         Xác nhận kết luận chung
       </button>
     </form>

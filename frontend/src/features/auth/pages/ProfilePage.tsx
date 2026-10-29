@@ -1,3 +1,4 @@
+import { KeyRound, Save, ClipboardPenLine } from "lucide-react";
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -51,6 +52,7 @@ export default function ProfilePage() {
         description="Cập nhật liên hệ để nhận thông báo và sử dụng các chức năng đồ án."
         actions={
           <Link to="/change-password" className="btn btn-secondary">
+            <KeyRound size={16} aria-hidden="true" />
             Đổi mật khẩu
           </Link>
         }
@@ -150,10 +152,12 @@ export default function ProfilePage() {
             )}
             <div className="form-actions">
               <Button disabled={action.pending}>
+                <Save size={16} aria-hidden="true" />
                 {action.pending ? "Đang lưu…" : "Lưu hồ sơ"}
               </Button>
               {saved && user.studentId && user.profileComplete && (
                 <Link to="/registration" className="btn btn-primary">
+                  <ClipboardPenLine size={16} aria-hidden="true" />
                   Đăng ký nguyện vọng
                 </Link>
               )}

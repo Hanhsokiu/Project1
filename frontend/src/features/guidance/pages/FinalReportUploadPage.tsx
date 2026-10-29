@@ -1,5 +1,8 @@
 import { useState } from "react";
 import {
+  Eye,
+  RotateCcw,
+  Send,
   CheckCircle2,
   FileCheck2,
   FileUp,
@@ -89,6 +92,7 @@ function FinalContent({ db }: { db: DemoDb }) {
                       variant="secondary"
                       onClick={() => setPreview(report.file)}
                     >
+                      <Eye size={16} aria-hidden="true" />
                       Xem trước PDF
                     </Button>
                   </div>
@@ -136,6 +140,7 @@ function FinalContent({ db }: { db: DemoDb }) {
                         variant="ghost"
                         onClick={() => setPreview(version)}
                       >
+                        <Eye size={16} aria-hidden="true" />
                         Xem
                       </Button>
                     </div>
@@ -212,6 +217,7 @@ function FinalContent({ db }: { db: DemoDb }) {
                       variant="secondary"
                       onClick={() => setPreview(file)}
                     >
+                      <Eye size={16} aria-hidden="true" />
                       Kiểm tra bản xem trước
                     </Button>
                   </div>
@@ -251,6 +257,7 @@ function FinalContent({ db }: { db: DemoDb }) {
                 variant="secondary"
                 onClick={() => setConfirmUpload(false)}
               >
+                <RotateCcw size={16} aria-hidden="true" />
                 Kiểm tra lại
               </Button>
               <Button
@@ -267,6 +274,7 @@ function FinalContent({ db }: { db: DemoDb }) {
                     .catch(() => {})
                 }
               >
+                <Send size={16} aria-hidden="true" />
                 Xác nhận nộp PDF
               </Button>
             </div>

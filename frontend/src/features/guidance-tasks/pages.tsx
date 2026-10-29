@@ -1,3 +1,13 @@
+import {
+  Plus,
+  Save,
+  CheckCheck,
+  ChevronLeft,
+  ChevronRight,
+  RotateCcw,
+  Play,
+  Pencil,
+} from "lucide-react";
 import { WorkflowHeading } from "../review-groups/workflow-heading";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -32,6 +42,10 @@ import {
   vietnamDate,
 } from "./components";
 import { getErrorMessage } from "../../shared/api/error-message";
+import {
+  preferredWorkflowTerm,
+  useWorkflowTerms,
+} from "../../shared/hooks/use-workflow-terms";
 const issue = (e: unknown) =>
   e ? getErrorMessage(e, "Không thể xử lý kế hoạch/nhiệm vụ.") : undefined;
 const readiness: Record<string, string> = {
@@ -73,21 +87,18 @@ function useRefresh() {
 function useTerm() {
   const [params, setParams] = useSearchParams(),
     termId = params.get("termId") ?? "",
-    terms = useQuery({
-      queryKey: ["proposal-review-terms"],
-      queryFn: proposalReviewApi.terms,
-    });
+    terms = useWorkflowTerms();
   useEffect(() => {
-    if (!termId && terms.data?.[0])
+    if (!termId && terms.data?.[0] && !terms.isFetching)
       setParams(
         (prev) => {
           const n = new URLSearchParams(prev);
-          n.set("termId", terms.data![0].id);
+          n.set("termId", preferredWorkflowTerm(terms.data)!.id);
           return n;
         },
         { replace: true },
       );
-  }, [termId, terms.data, setParams]);
+  }, [termId, terms.data, terms.isFetching, setParams]);
   return { termId, terms, setParams, search: params.get("search") ?? "" };
 }
 function PlanActions({
@@ -159,9 +170,10 @@ function PlanActions({
       {c.canCreate && (
         <button
           disabled={mutation.isPending}
-          className="rounded bg-blue-700 px-4 py-2 text-white"
+          className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
           onClick={() => mutation.mutate("create")}
         >
+          <Plus size={16} aria-hidden="true" />
           Tạo kế hoạch hướng dẫn
         </button>
       )}
@@ -178,9 +190,10 @@ function PlanActions({
           </label>
           <button
             disabled={mutation.isPending || !reason.trim()}
-            className="rounded border px-4 py-2"
+            className="rounded border px-4 py-2 action-with-icon"
             onClick={() => mutation.mutate("update")}
           >
+            <Save size={16} aria-hidden="true" />
             Lưu mô tả kế hoạch
           </button>
         </>
@@ -198,9 +211,10 @@ function PlanActions({
           </label>
           <button
             disabled={mutation.isPending || !ack}
-            className="rounded bg-blue-700 px-4 py-2 text-white"
+            className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
             onClick={() => mutation.mutate("resume")}
           >
+            <CheckCheck size={16} aria-hidden="true" />
             Xác nhận tiếp tục hướng dẫn
           </button>
         </>
@@ -279,13 +293,20 @@ export function GuidancePlanListPage() {
             Trang {page}/{list.data.totalPages}
           </span>
           <div className="flex gap-4">
-            <button disabled={page <= 1} onClick={() => setPage((v) => v - 1)}>
+            <button
+              disabled={page <= 1}
+              onClick={() => setPage((v) => v - 1)}
+              className="action-with-icon"
+            >
+              <ChevronLeft size={16} aria-hidden="true" />
               Trước
             </button>
             <button
               disabled={page >= list.data.totalPages}
               onClick={() => setPage((v) => v + 1)}
+              className="action-with-icon"
             >
+              <ChevronRight size={16} aria-hidden="true" />
               Sau
             </button>
           </div>
@@ -351,7 +372,14 @@ export function GuidancePlanDetailPage() {
               context={c}
               onSaved={() => void refresh()}
             />
-            {c.plan&&<Link className="inline-block mr-4 rounded border px-4 py-2 text-blue-700" to={`/guidance/meetings?planId=${c.plan.id}`}>Nhật ký hướng dẫn</Link>}
+            {c.plan && (
+              <Link
+                className="inline-block mr-4 rounded border px-4 py-2 text-blue-700"
+                to={`/guidance/meetings?planId=${c.plan.id}`}
+              >
+                Nhật ký hướng dẫn
+              </Link>
+            )}
             {c.plan?.allowedActions.includes("create-task") && (
               <Link
                 className="inline-block rounded bg-blue-700 px-4 py-2 text-white"
@@ -378,24 +406,29 @@ export function GuidancePlanDetailPage() {
                 <button
                   disabled={page <= 1}
                   onClick={() => setPage((v) => v - 1)}
+                  className="action-with-icon"
                 >
+                  <ChevronLeft size={16} aria-hidden="true" />
                   Trang nhiệm vụ trước
                 </button>
                 <button
                   disabled={page >= tasks.data.totalPages}
                   onClick={() => setPage((v) => v + 1)}
+                  className="action-with-icon"
                 >
+                  <ChevronRight size={16} aria-hidden="true" />
                   Trang nhiệm vụ sau
                 </button>
               </div>
             )}
             <button
-              className="text-blue-700"
+              className="text-blue-700 action-with-icon"
               onClick={async () => {
                 await refresh();
                 setFormEpoch((v) => v + 1);
               }}
             >
+              <RotateCcw size={16} aria-hidden="true" />
               Tải lại kế hoạch
             </button>
           </div>
@@ -508,8 +541,9 @@ function WeeklyCoverage({
                 <button
                   disabled={ensure.isPending}
                   onClick={() => ensure.mutate(r)}
-                  className="rounded border px-3 py-2"
+                  className="rounded border px-3 py-2 action-with-icon"
                 >
+                  <Plus size={16} aria-hidden="true" />
                   Tạo nhiệm vụ cho {r.periodLabel}
                 </button>
               )}
@@ -527,13 +561,20 @@ function WeeklyCoverage({
       </ReviewState>
       {query.data && query.data.total > 20 && (
         <div className="flex justify-between">
-          <button disabled={page <= 1} onClick={() => setPage((v) => v - 1)}>
+          <button
+            disabled={page <= 1}
+            onClick={() => setPage((v) => v - 1)}
+            className="action-with-icon"
+          >
+            <ChevronLeft size={16} aria-hidden="true" />
             Nghĩa vụ trang trước
           </button>
           <button
             disabled={page >= query.data.totalPages}
             onClick={() => setPage((v) => v + 1)}
+            className="action-with-icon"
           >
+            <ChevronRight size={16} aria-hidden="true" />
             Nghĩa vụ trang sau
           </button>
         </div>
@@ -668,13 +709,20 @@ export function GuidanceTaskListPage() {
       </ReviewState>
       {list.data && list.data.total > 20 && (
         <div className="my-4 flex justify-between">
-          <button disabled={page <= 1} onClick={() => setPage((v) => v - 1)}>
+          <button
+            disabled={page <= 1}
+            onClick={() => setPage((v) => v - 1)}
+            className="action-with-icon"
+          >
+            <ChevronLeft size={16} aria-hidden="true" />
             Trước
           </button>
           <button
             disabled={page >= list.data.totalPages}
             onClick={() => setPage((v) => v + 1)}
+            className="action-with-icon"
           >
+            <ChevronRight size={16} aria-hidden="true" />
             Sau
           </button>
         </div>
@@ -788,8 +836,9 @@ function TaskProgressForm({
       </p>
       <button
         disabled={mutation.isPending}
-        className="rounded bg-blue-700 px-4 py-2 text-white"
+        className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
       >
+        <Play size={16} aria-hidden="true" />
         Bắt đầu / Ghi tiến độ
       </button>
       {mutation.error && (
@@ -856,7 +905,12 @@ export function GuidanceTaskDetailPage() {
         ← Kế hoạch / nhiệm vụ
       </Link>
       <h1 className="my-5">Chi tiết nhiệm vụ</h1>
-      <Link className="inline-block mb-5 text-blue-700 underline" to={`/guidance/tasks/${id}/submissions`}>Báo cáo tuần và source</Link>
+      <Link
+        className="inline-block mb-5 text-blue-700 underline"
+        to={`/guidance/tasks/${id}/submissions`}
+      >
+        Báo cáo tuần và source
+      </Link>
       <ReviewState loading={query.isLoading} error={issue(query.error)}>
         {t && (
           <div className="space-y-5">
@@ -885,9 +939,10 @@ export function GuidanceTaskDetailPage() {
             )}
             {t.allowedActions.includes("update") && (
               <button
-                className="rounded border px-4 py-2"
+                className="rounded border px-4 py-2 action-with-icon"
                 onClick={() => setEditing((v) => !v)}
               >
+                <Pencil size={16} aria-hidden="true" />
                 {editing ? "Đóng chỉnh sửa" : "Chỉnh sửa nhiệm vụ"}
               </button>
             )}
@@ -936,8 +991,9 @@ export function GuidanceTaskDetailPage() {
                     (t.hasSubmissions && !ack)
                   }
                   onClick={() => cancel.mutate()}
-                  className="rounded border border-red-200 px-4 py-2 text-red-700"
+                  className="rounded border border-red-200 px-4 py-2 text-red-700 action-with-icon"
                 >
+                  <CheckCheck size={16} aria-hidden="true" />
                   Xác nhận hủy nhiệm vụ
                 </button>
                 {cancel.error && <p role="alert">{issue(cancel.error)}</p>}
@@ -967,13 +1023,14 @@ export function GuidanceTaskDetailPage() {
               ))}
             </section>
             <button
-              className="text-blue-700"
+              className="text-blue-700 action-with-icon"
               onClick={async () => {
                 await query.refetch();
                 setEditing(false);
                 setProgressEpoch((v) => v + 1);
               }}
             >
+              <RotateCcw size={16} aria-hidden="true" />
               Tải lại nhiệm vụ
             </button>
           </div>

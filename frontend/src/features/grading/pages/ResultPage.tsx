@@ -1,3 +1,11 @@
+import {
+  Download,
+  LockKeyhole,
+  Megaphone,
+  ClipboardCheck,
+  CheckCircle2,
+  Eye,
+} from "lucide-react";
 import { useState } from "react";
 import {
   Badge,
@@ -78,6 +86,7 @@ function Content({ db }: { db: DemoDb }) {
                   )
                 }
               >
+                <Download size={16} aria-hidden="true" />
                 Tải Excel
               </Button>
               <Button
@@ -85,12 +94,14 @@ function Content({ db }: { db: DemoDb }) {
                 disabled={s.term.resultsPublished}
                 onClick={() => setConfirm("lock")}
               >
+                <LockKeyhole size={16} aria-hidden="true" />
                 Chốt bảng điểm
               </Button>
               <Button
                 disabled={s.term.resultsPublished}
                 onClick={() => setConfirm("publish")}
               >
+                <Megaphone size={16} aria-hidden="true" />
                 {s.term.resultsPublished ? "Đã công bố" : "Công bố kết quả"}
               </Button>
             </>
@@ -117,10 +128,12 @@ function Content({ db }: { db: DemoDb }) {
             <Stat
               label="Đủ thành phần điểm"
               value={all.filter((r) => r.complete).length}
+              icon={<ClipboardCheck size={18} aria-hidden="true" />}
             />
             <Stat
               label="Đạt yêu cầu"
               value={all.filter((r) => r.passed).length}
+              icon={<CheckCircle2 size={18} aria-hidden="true" />}
             />
             <Stat
               label="Trạng thái công bố"
@@ -129,6 +142,7 @@ function Content({ db }: { db: DemoDb }) {
                   value={s.term.resultsPublished ? "COMPLETED" : "DRAFT"}
                 />
               }
+              icon={<Megaphone size={18} aria-hidden="true" />}
             />
           </div>
           <Card title="Bảng tổng hợp kết quả">
@@ -210,6 +224,7 @@ function Content({ db }: { db: DemoDb }) {
                   title: "",
                   render: (r) => (
                     <Button variant="ghost" onClick={() => setDetail(r.id)}>
+                      <Eye size={16} aria-hidden="true" />
                       Chi tiết
                     </Button>
                   ),

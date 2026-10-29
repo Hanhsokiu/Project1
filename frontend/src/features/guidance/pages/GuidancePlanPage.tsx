@@ -1,5 +1,8 @@
 import { useState } from "react";
 import {
+  CheckCircle2,
+  X,
+  Save,
   CalendarDays,
   ClipboardList,
   Pencil,
@@ -98,6 +101,7 @@ function PlanContent({ db }: { db: DemoDb }) {
                 tasks.filter((t) => latestSubmission(t)?.status === "PASS")
                   .length
               }
+              icon={<CheckCircle2 size={18} aria-hidden="true" />}
             />
             <Stat
               label="Tiến độ trung bình"
@@ -131,7 +135,10 @@ function PlanContent({ db }: { db: DemoDb }) {
                   description="GVHD bổ sung cách thức làm việc, lịch gặp và yêu cầu báo cáo."
                   action={
                     canEdit ? (
-                      <Button onClick={openEditor}>Lập kế hoạch</Button>
+                      <Button onClick={openEditor}>
+                        <Plus size={16} aria-hidden="true" />
+                        Lập kế hoạch
+                      </Button>
                     ) : undefined
                   }
                 />
@@ -210,6 +217,7 @@ function PlanContent({ db }: { db: DemoDb }) {
                         variant="secondary"
                         onClick={() => setTaskEditor(t)}
                       >
+                        <Pencil size={16} aria-hidden="true" />
                         Sửa / gia hạn
                       </Button>
                     ) : (
@@ -269,9 +277,13 @@ function PlanContent({ db }: { db: DemoDb }) {
                 variant="secondary"
                 onClick={() => setEditing(false)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>Lưu kế hoạch</Button>
+              <Button disabled={action.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu kế hoạch
+              </Button>
             </div>
           </form>
         </Modal>

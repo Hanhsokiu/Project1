@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Bell, MailCheck } from "lucide-react";
+import {
+  Mail,
+  MailWarning,
+  FolderOpen,
+  Send,
+  Bell,
+  MailCheck,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Badge,
@@ -53,7 +60,11 @@ export default function NotificationsPage() {
       />
       <div className="stat-grid">
         <Stat label="Thông báo của bạn" value={mine.length} icon={<Bell />} />
-        <Stat label="Chưa đọc" value={mine.filter((n) => !n.read).length} />
+        <Stat
+          label="Chưa đọc"
+          value={mine.filter((n) => !n.read).length}
+          icon={<Mail size={18} aria-hidden="true" />}
+        />
         <Stat
           label="Thông báo trong đợt"
           value={
@@ -61,6 +72,7 @@ export default function NotificationsPage() {
               ? db.notifications.filter((n) => n.termId === term.id).length
               : mine.filter((n) => n.termId === term.id).length
           }
+          icon={<Bell size={18} aria-hidden="true" />}
         />
         <Stat
           label="Gửi thất bại"
@@ -69,6 +81,7 @@ export default function NotificationsPage() {
               (n) => n.status === "FAILED",
             ).length
           }
+          icon={<MailWarning size={18} aria-hidden="true" />}
         />
       </div>
       {manager && (
@@ -156,6 +169,7 @@ export default function NotificationsPage() {
                     n.link?.startsWith("/") &&
                     !n.link.startsWith("//") && (
                       <Link className="btn btn-secondary" to={n.link}>
+                        <FolderOpen size={16} aria-hidden="true" />
                         Mở hồ sơ
                       </Link>
                     )}
@@ -169,6 +183,7 @@ export default function NotificationsPage() {
                           .catch(() => {})
                       }
                     >
+                      <MailCheck size={16} aria-hidden="true" />
                       Đã đọc
                     </Button>
                   )}
@@ -184,6 +199,7 @@ export default function NotificationsPage() {
                           .catch(() => {})
                       }
                     >
+                      <Send size={16} aria-hidden="true" />
                       Gửi lại
                     </Button>
                   )}

@@ -1,3 +1,4 @@
+import { Trash2, Plus, Save } from "lucide-react";
 import { useState } from "react";
 import {
   Button,
@@ -84,6 +85,7 @@ function Editor({ db, kind }: { db: DemoDb; kind: ScoreKind }) {
                         setCriteria(criteria.filter((_, j) => j !== i))
                       }
                     >
+                      <Trash2 size={16} aria-hidden="true" />
                       Xóa
                     </Button>
                   )}
@@ -117,12 +119,14 @@ function Editor({ db, kind }: { db: DemoDb; kind: ScoreKind }) {
               ])
             }
           >
+            <Plus size={16} aria-hidden="true" />
             Thêm tiêu chí
           </Button>
           <Button
             disabled={s.pending || Math.abs(total - 10) > 0.0001}
             onClick={() => s.exec(() => saveRubric(kind, criteria))}
           >
+            <Save size={16} aria-hidden="true" />
             Lưu Rubric
           </Button>
         </div>

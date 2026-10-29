@@ -1,3 +1,4 @@
+import { Save } from "lucide-react";
 import React, { useState } from "react";
 import {
   ProgressReviewCreateSchema,
@@ -165,8 +166,9 @@ export function ProgressReviewForm({
       </p>
       <button
         disabled={busy}
-        className="rounded bg-blue-700 px-4 py-2 text-white"
+        className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
       >
+        <Save size={16} aria-hidden="true" />
         {busy
           ? "Đang lưu…"
           : amending
@@ -403,8 +405,9 @@ export function GuidanceMeetingForm({
       )}
       <button
         disabled={busy}
-        className="rounded bg-blue-700 px-4 py-2 text-white"
+        className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
       >
+        <Save size={16} aria-hidden="true" />
         {busy
           ? "Đang lưu…"
           : meeting

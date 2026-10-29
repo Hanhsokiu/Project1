@@ -186,6 +186,7 @@ export class TermLifecycleService {
         },
         tx,
       );
+      await this.repository.grantCreatorAcademicAccess(term.id, userId, tx);
       const proposalPhase = term.phases.find((p) => p.code === "PROPOSAL");
       if (proposalPhase)
         await this.repository.linkWorkflowPhase(

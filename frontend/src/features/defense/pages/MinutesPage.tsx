@@ -1,3 +1,4 @@
+import { Eye, Download, Save } from "lucide-react";
 import { useState } from "react";
 import {
   Button,
@@ -98,12 +99,14 @@ function Content({ db }: { db: DemoDb }) {
                       setRevision(d.revision);
                     }}
                   >
+                    <Eye size={16} aria-hidden="true" />
                     Xem / cập nhật
                   </Button>
                   <Button
                     variant="secondary"
                     onClick={() => s.exec(() => pdf(d))}
                   >
+                    <Download size={16} aria-hidden="true" />
                     PDF
                   </Button>
                 </div>
@@ -141,6 +144,7 @@ function Content({ db }: { db: DemoDb }) {
                 s.exec(() => pdf({ ...selected, minutes, revision }))
               }
             >
+              <Download size={16} aria-hidden="true" />
               Xuất PDF xem trước
             </Button>
             {editable(selected) && !s.term.resultsPublished && (
@@ -153,6 +157,7 @@ function Content({ db }: { db: DemoDb }) {
                   })
                 }
               >
+                <Save size={16} aria-hidden="true" />
                 Lưu biên bản
               </Button>
             )}

@@ -1,5 +1,15 @@
 import { useState, type FormEvent } from "react";
-import { Plus, Pencil, KeyRound, LockKeyhole, Unlock } from "lucide-react";
+import {
+  Users,
+  UserCheck,
+  X,
+  Save,
+  Plus,
+  Pencil,
+  KeyRound,
+  LockKeyhole,
+  Unlock,
+} from "lucide-react";
 import {
   Badge,
   Button,
@@ -89,18 +99,25 @@ export default function AccountsPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Tổng tài khoản" value={db.accounts.length} />
+        <Stat
+          label="Tổng tài khoản"
+          value={db.accounts.length}
+          icon={<Users size={18} aria-hidden="true" />}
+        />
         <Stat
           label="Đang hoạt động"
           value={db.accounts.filter((a) => !a.locked).length}
+          icon={<UserCheck size={18} aria-hidden="true" />}
         />
         <Stat
           label="Đã khóa"
           value={db.accounts.filter((a) => a.locked).length}
+          icon={<LockKeyhole size={18} aria-hidden="true" />}
         />
         <Stat
           label="Cần đổi mật khẩu"
           value={db.accounts.filter((a) => a.mustChangePassword).length}
+          icon={<KeyRound size={18} aria-hidden="true" />}
         />
       </div>
       <Card
@@ -372,9 +389,13 @@ export default function AccountsPage() {
                 variant="secondary"
                 onClick={() => setForm(null)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>Lưu tài khoản</Button>
+              <Button disabled={action.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu tài khoản
+              </Button>
             </div>
           </form>
         </Modal>

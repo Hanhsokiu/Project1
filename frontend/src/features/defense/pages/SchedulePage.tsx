@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { CalendarDays } from "lucide-react";
+import {
+  Download,
+  ArrowDownAZ,
+  Megaphone,
+  X,
+  Save,
+  CalendarDays,
+} from "lucide-react";
 import {
   Badge,
   Button,
@@ -67,6 +74,7 @@ function Content({ db }: { db: DemoDb }) {
                 )
               }
             >
+              <Download size={16} aria-hidden="true" />
               Tải Excel
             </Button>
             {s.faculty && (
@@ -75,6 +83,7 @@ function Content({ db }: { db: DemoDb }) {
                   variant="secondary"
                   onClick={() => s.exec(() => sortDefenseOrder(s.term.id))}
                 >
+                  <ArrowDownAZ size={16} aria-hidden="true" />
                   Xếp Tên + Họ đệm
                 </Button>
                 <Button
@@ -88,6 +97,7 @@ function Content({ db }: { db: DemoDb }) {
                     s.exec(() => publishDefenseSchedule(s.term.id))
                   }
                 >
+                  <Megaphone size={16} aria-hidden="true" />
                   Công bố lịch
                 </Button>
               </>
@@ -187,6 +197,7 @@ function Content({ db }: { db: DemoDb }) {
                     variant="ghost"
                     onClick={() => setDraft(structuredClone(d))}
                   >
+                    <CalendarDays size={16} aria-hidden="true" />
                     Xếp lịch
                   </Button>
                 ),
@@ -265,9 +276,11 @@ function Content({ db }: { db: DemoDb }) {
                 variant="secondary"
                 onClick={() => setDraft(undefined)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
               <Button disabled={s.pending || !!conflicts.length}>
+                <Save size={16} aria-hidden="true" />
                 Lưu lịch bảo vệ
               </Button>
             </div>

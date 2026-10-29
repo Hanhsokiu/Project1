@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CalendarDays, Plus } from "lucide-react";
+import { X, Save, Eye, Pencil, Trash2, CalendarDays, Plus } from "lucide-react";
 import {
   Button,
   Card,
@@ -103,9 +103,13 @@ function MeetingEditor({
         </Field>
         <div className="dialog-actions">
           <Button type="button" variant="secondary" onClick={onClose}>
+            <X size={16} aria-hidden="true" />
             Hủy
           </Button>
-          <Button disabled={action.pending}>Lưu nhật ký</Button>
+          <Button disabled={action.pending}>
+            <Save size={16} aria-hidden="true" />
+            Lưu nhật ký
+          </Button>
         </div>
       </form>
     </Modal>
@@ -185,15 +189,18 @@ function MeetingsContent({ db }: { db: DemoDb }) {
                       variant="secondary"
                       onClick={() => setDetailId(m.id)}
                     >
+                      <Eye size={16} aria-hidden="true" />
                       Chi tiết
                     </Button>
                     {canEdit && (
                       <Button variant="ghost" onClick={() => setEditor(m)}>
+                        <Pencil size={16} aria-hidden="true" />
                         Sửa
                       </Button>
                     )}
                     {advisor && !locked && (
                       <Button variant="ghost" onClick={() => setDeleteId(m.id)}>
+                        <Trash2 size={16} aria-hidden="true" />
                         Xóa
                       </Button>
                     )}

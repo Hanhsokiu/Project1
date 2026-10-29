@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { CheckCircle2, ShieldCheck } from "lucide-react";
+import {
+  Save,
+  ClipboardList,
+  Eye,
+  CheckCircle2,
+  ShieldCheck,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Badge,
@@ -38,6 +44,7 @@ function Content({ db }: { db: DemoDb }) {
         description="Đối chiếu hồ sơ học vụ, đề cương, tiến độ và xác nhận cuối cùng của GVHD."
         actions={
           <Link className="btn btn-secondary" to="/defense/deferment">
+            <Save size={16} aria-hidden="true" />
             Hồ sơ bảo lưu
           </Link>
         }
@@ -56,6 +63,7 @@ function Content({ db }: { db: DemoDb }) {
         <Stat
           label="Cần bổ sung"
           value={all.filter((x) => !x.eligible).length}
+          icon={<ClipboardList size={18} aria-hidden="true" />}
         />
       </div>
       <Notice>
@@ -101,6 +109,7 @@ function Content({ db }: { db: DemoDb }) {
               title: "",
               render: (x) => (
                 <Button variant="ghost" onClick={() => setSelected(x.id)}>
+                  <Eye size={16} aria-hidden="true" />
                   Xem điều kiện
                 </Button>
               ),
@@ -127,6 +136,7 @@ function Content({ db }: { db: DemoDb }) {
             className="btn btn-secondary mt-4"
             to="/guidance/defense-confirm"
           >
+            <Eye size={16} aria-hidden="true" />
             Xem xác nhận GVHD
           </Link>
         </Modal>

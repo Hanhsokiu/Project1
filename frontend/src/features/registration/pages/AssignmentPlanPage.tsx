@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { CheckCheck, Play, Send, Users } from "lucide-react";
+import {
+  Pencil,
+  GitBranch,
+  UserRoundSearch,
+  CheckCheck,
+  Play,
+  Send,
+  Users,
+} from "lucide-react";
 import {
   Badge,
   Button,
@@ -57,6 +65,7 @@ function MockAssignmentPlanPage() {
         actions={
           <>
             <Link className="btn btn-secondary" to="/registration/manual">
+              <Pencil size={16} aria-hidden="true" />
               Điều chỉnh thủ công
             </Link>
             <Button
@@ -109,11 +118,13 @@ function MockAssignmentPlanPage() {
           label="Tự phân theo hướng"
           value={assignments.filter((a) => a.preference === 4).length}
           sub={`Điều chỉnh: ${assignments.filter((a) => a.manual).length}`}
+          icon={<GitBranch size={18} aria-hidden="true" />}
         />
         <Stat
           label="Chưa được phân"
           value={unassigned.length}
           sub="Cần xử lý trước khi công bố"
+          icon={<UserRoundSearch size={18} aria-hidden="true" />}
         />
       </div>
       <div className="stack">
@@ -348,6 +359,7 @@ function MockAssignmentPlanPage() {
                           .catch(() => {})
                       }
                     >
+                      <Send size={16} aria-hidden="true" />
                       Gửi lại
                     </Button>
                   ),

@@ -2,6 +2,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { snapshot, currentUser } from "../data/store";
 import { AUTH_API, getAccessToken } from "../api/api-session";
+import { invalidateWorkflowTerms } from "./use-workflow-terms";
 export function useDemo() {
   return useQuery({
     queryKey: ["demo", AUTH_API ? getAccessToken() : "mock"],
@@ -14,13 +15,14 @@ export function useDemo() {
       import.meta.env.VITE_REGISTRATION_API === "true" ? 30000 : false,
   });
 }
-export function useAction() {
+export function useAction(options?: { invalidateTerms?: boolean }) {
   const cache = useQueryClient();
   const action = useMutation({
     mutationFn: async (fn: () => unknown | Promise<unknown>) => await fn(),
     onSuccess: async () => {
       await cache.invalidateQueries({ queryKey: ["demo"] });
       await cache.invalidateQueries({ queryKey: ["registration"] });
+      if (options?.invalidateTerms) await invalidateWorkflowTerms(cache);
       toast.success("Đã lưu thay đổi");
     },
     onError: (error: Error) => toast.error(error.message),

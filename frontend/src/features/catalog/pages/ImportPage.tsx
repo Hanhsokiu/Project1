@@ -1,5 +1,15 @@
 import { useState, type ChangeEvent } from "react";
-import { Upload, Download, FileSpreadsheet, CheckCircle2 } from "lucide-react";
+import {
+  CircleAlert,
+  Pencil,
+  CheckCheck,
+  X,
+  RotateCcw,
+  Upload,
+  Download,
+  FileSpreadsheet,
+  CheckCircle2,
+} from "lucide-react";
 import type { ImportRow } from "../../../shared/data/types";
 import {
   Badge,
@@ -228,12 +238,25 @@ export default function ImportPage() {
       {!!rows.length && (
         <div className="mt-6">
           <div className="stat-grid">
-            <Stat label="Tổng dòng" value={rows.length} />
-            <Stat label="Hợp lệ" value={valid.length} />
-            <Stat label="Có lỗi" value={invalid} />
+            <Stat
+              label="Tổng dòng"
+              value={rows.length}
+              icon={<FileSpreadsheet size={18} aria-hidden="true" />}
+            />
+            <Stat
+              label="Hợp lệ"
+              value={valid.length}
+              icon={<CheckCircle2 size={18} aria-hidden="true" />}
+            />
+            <Stat
+              label="Có lỗi"
+              value={invalid}
+              icon={<CircleAlert size={18} aria-hidden="true" />}
+            />
             <Stat
               label="Sẵn sàng nhập"
               value={validOnly ? valid.length : invalid ? 0 : rows.length}
+              icon={<Upload size={18} aria-hidden="true" />}
             />
           </div>
           <Card title="2. Kiểm tra & xác nhận" description={fileName}>
@@ -268,6 +291,7 @@ export default function ImportPage() {
                       )
                     }
                   >
+                    <Download size={16} aria-hidden="true" />
                     Tải báo cáo lỗi
                   </Button>
                 </>
@@ -324,6 +348,7 @@ export default function ImportPage() {
                       variant="ghost"
                       onClick={() => setEdit({ ...r, values: { ...r.values } })}
                     >
+                      <Pencil size={16} aria-hidden="true" />
                       Sửa dòng
                     </Button>
                   ),
@@ -348,6 +373,7 @@ export default function ImportPage() {
                   }
                   onClick={() => setConfirm(true)}
                 >
+                  <CheckCheck size={16} aria-hidden="true" />
                   Xác nhận nhập {validOnly ? valid.length : rows.length} dòng
                 </Button>
               </div>
@@ -400,9 +426,13 @@ export default function ImportPage() {
                 variant="secondary"
                 onClick={() => setEdit(null)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button>Kiểm tra lại</Button>
+              <Button>
+                <RotateCcw size={16} aria-hidden="true" />
+                Kiểm tra lại
+              </Button>
             </div>
           </form>
         </Modal>

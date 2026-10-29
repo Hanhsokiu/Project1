@@ -5,6 +5,7 @@ import {
   REGISTRATION_API,
 } from "../services/registration-api";
 import {
+  RotateCcw,
   ArrowDown,
   ArrowUp,
   CheckCircle2,
@@ -158,6 +159,7 @@ function RegistrationForm() {
       {action.error && <Notice tone="danger">{action.error.message}</Notice>}
       {context.isError && (
         <Button variant="secondary" onClick={() => context.refetch()}>
+          <RotateCcw size={16} aria-hidden="true" />
           Tải lại đăng ký
         </Button>
       )}

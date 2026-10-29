@@ -1,6 +1,16 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
-import { Plus, Pencil } from "lucide-react";
+import {
+  Upload,
+  Users,
+  Building2,
+  UserCheck,
+  ChartNoAxesColumnIncreasing,
+  X,
+  Save,
+  Plus,
+  Pencil,
+} from "lucide-react";
 import type { Lecturer } from "../../../shared/data/types";
 import {
   Badge,
@@ -51,6 +61,7 @@ export default function LecturerListPage() {
           manager && (
             <>
               <Link className="btn btn-secondary" to="/catalog/import">
+                <Upload size={16} aria-hidden="true" />
                 Import giảng viên
               </Link>
               <Button
@@ -74,12 +85,25 @@ export default function LecturerListPage() {
         }
       />
       <div className="stat-grid">
-        <Stat label="Giảng viên" value={db.lecturers.length} />
-        <Stat label="Bộ môn" value={departments.length} />
-        <Stat label="Tham gia đợt" value={term.lecturers.length} />
+        <Stat
+          label="Giảng viên"
+          value={db.lecturers.length}
+          icon={<Users size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Bộ môn"
+          value={departments.length}
+          icon={<Building2 size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Tham gia đợt"
+          value={term.lecturers.length}
+          icon={<UserCheck size={18} aria-hidden="true" />}
+        />
         <Stat
           label="Tổng quota trong đợt"
           value={term.lecturers.reduce((a, l) => a + l.quota, 0)}
+          icon={<ChartNoAxesColumnIncreasing size={18} aria-hidden="true" />}
         />
       </div>
       <Card title="Danh sách giảng viên">
@@ -294,9 +318,13 @@ export default function LecturerListPage() {
                 variant="secondary"
                 onClick={() => setForm(null)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>Lưu giảng viên</Button>
+              <Button disabled={action.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu giảng viên
+              </Button>
             </div>
           </form>
         </Modal>

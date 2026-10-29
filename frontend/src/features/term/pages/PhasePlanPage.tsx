@@ -1,6 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { ArrowDown, ArrowUp, LockKeyhole, Plus, Trash2 } from "lucide-react";
+import {
+  RotateCcw,
+  Save,
+  ArrowDown,
+  ArrowUp,
+  LockKeyhole,
+  Plus,
+  Trash2,
+} from "lucide-react";
 import type { Phase } from "../../../shared/data/types";
 import { uid } from "../../../shared/data/store";
 import {
@@ -21,7 +29,7 @@ export default function PhasePlanPage() {
   const { id } = useParams();
   const { db } = useWorkspace();
   const t = db.terms.find((t) => t.id === id);
-  const action = useAction();
+  const action = useAction({ invalidateTerms: true });
   const [phases, setPhases] = useState<Phase[]>(() =>
     structuredClone(t?.phases || []),
   );
@@ -254,9 +262,11 @@ export default function PhasePlanPage() {
             disabled={!dirty || disabled}
             onClick={() => setPhases(structuredClone(t.phases))}
           >
+            <RotateCcw size={16} aria-hidden="true" />
             Khôi phục bản đã lưu
           </Button>
           <Button disabled={disabled || action.pending || !dirty}>
+            <Save size={16} aria-hidden="true" />
             Lưu kế hoạch
           </Button>
         </div>

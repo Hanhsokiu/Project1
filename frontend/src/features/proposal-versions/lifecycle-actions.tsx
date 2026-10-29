@@ -1,3 +1,4 @@
+import { RotateCcw, CheckCheck, X, Undo2, Unlock } from 'lucide-react';
 import React, { useRef, useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
@@ -143,7 +144,7 @@ export function ProposalLifecycleActions({
           {allowed.map((value) => (
             <button
               type="button"
-              className="rounded border border-amber-400 px-4 py-2 text-sm"
+              className="rounded border border-amber-400 px-4 py-2 text-sm action-with-icon"
               key={value}
               disabled={mutation.isPending}
               onClick={() => {
@@ -154,6 +155,11 @@ export function ProposalLifecycleActions({
                 mutation.reset();
               }}
             >
+              {value === 'reopen' ? (
+                <Unlock size={16} aria-hidden="true" />
+              ) : (
+                <Undo2 size={16} aria-hidden="true" />
+              )}
               {labels[value]}
             </button>
           ))}
@@ -184,9 +190,10 @@ export function ProposalLifecycleActions({
                 )}{' '}
               <button
                 type="button"
-                className="underline"
+                className="underline action-with-icon"
                 onClick={() => window.location.reload()}
               >
+                <RotateCcw size={16} aria-hidden="true" />
                 Tải lại từ server
               </button>
             </p>
@@ -194,11 +201,12 @@ export function ProposalLifecycleActions({
           <div className="flex flex-wrap gap-3">
             <button
               type="submit"
-              className="rounded bg-amber-700 px-4 py-2 text-sm text-white"
+              className="rounded bg-amber-700 px-4 py-2 text-sm text-white action-with-icon"
               disabled={
                 mutation.isPending || (action !== 'withdraw' && !reason.trim())
               }
             >
+              <CheckCheck size={16} aria-hidden="true" />
               {mutation.isPending
                 ? 'Đang xử lý…'
                 : `Xác nhận ${labels[action].toLocaleLowerCase('vi-VN')}`}
@@ -210,7 +218,9 @@ export function ProposalLifecycleActions({
                 setAction(null);
                 mutation.reset();
               }}
+              className="action-with-icon"
             >
+              <X size={16} aria-hidden="true" />
               Hủy
             </button>
           </div>

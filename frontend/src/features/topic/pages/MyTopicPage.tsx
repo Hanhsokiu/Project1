@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Download, Eye, FilePenLine } from "lucide-react";
+import {
+  Plus,
+  Pencil,
+  CheckCheck,
+  Download,
+  Eye,
+  FilePenLine,
+} from "lucide-react";
 import {
   Badge,
   Button,
@@ -73,6 +80,7 @@ export default function MyTopicPage() {
                     className="btn btn-secondary"
                     to={`/topic/draft?student=${a.studentId}`}
                   >
+                    <Plus size={16} aria-hidden="true" />
                     Tạo đề tài ·{" "}
                     {db.students.find((s) => s.id === a.studentId)?.code}
                   </Link>
@@ -99,6 +107,7 @@ export default function MyTopicPage() {
             action={
               user.studentId && term.assignmentPublished ? (
                 <Link className="btn btn-primary" to="/topic/draft">
+                  <FilePenLine size={16} aria-hidden="true" />
                   Bắt đầu lập đề cương
                 </Link>
               ) : undefined
@@ -176,6 +185,7 @@ export default function MyTopicPage() {
                             : `/topic/draft?student=${t.studentId}`
                         }
                       >
+                        <Pencil size={16} aria-hidden="true" />
                         Chỉnh sửa đề tài
                       </Link>
                     )}
@@ -193,6 +203,7 @@ export default function MyTopicPage() {
                         disabled={term.locked}
                         onClick={() => setAgree(t)}
                       >
+                        <CheckCheck size={16} aria-hidden="true" />
                         Thống nhất đề tài
                       </Button>
                     )}

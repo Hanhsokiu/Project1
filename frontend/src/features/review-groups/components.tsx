@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight, Save, X } from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import type { GroupCreate, GroupOptions, ReviewGroupView } from "@doan/shared";
@@ -275,6 +276,7 @@ export function GroupForm({
                   disabled={currentPage <= 1}
                   onClick={() => onPage(currentPage - 1)}
                 >
+                  <ChevronLeft size={16} aria-hidden="true" />
                   Trước
                 </Button>
                 <span>
@@ -287,6 +289,7 @@ export function GroupForm({
                   disabled={currentPage >= options.lecturers.totalPages}
                   onClick={() => onPage(currentPage + 1)}
                 >
+                  <ChevronRight size={16} aria-hidden="true" />
                   Sau
                 </Button>
               </div>
@@ -299,7 +302,7 @@ export function GroupForm({
                   <button
                     type="button"
                     key={member.lecturerId}
-                    className="rounded-full bg-blue-50 px-3 py-1 text-xs text-blue-800"
+                    className="rounded-full bg-blue-50 px-3 py-1 text-xs text-blue-800 action-with-icon"
                     aria-label={`Bỏ chọn ${member.fullName}`}
                     onClick={() =>
                       setSelected((v) =>
@@ -307,7 +310,8 @@ export function GroupForm({
                       )
                     }
                   >
-                    {member.fullName} ×
+                    {member.fullName}
+                    <X size={12} aria-hidden="true" />
                   </button>
                 ))}
               </div>
@@ -330,6 +334,7 @@ export function GroupForm({
         )}
         <div className="flex flex-wrap gap-3">
           <Button type="submit" disabled={busy}>
+            <Save size={16} aria-hidden="true" />
             {busy ? "Đang lưu…" : initial ? "Lưu thay đổi" : "Tạo nhóm duyệt"}
           </Button>
           <Link

@@ -37,7 +37,7 @@ describe("Dossier academic print profile", () => {
     expect(html).toContain(
       "Tôi đã đối chiếu và xác nhận đúng lớp, ngành đào tạo",
     );
-    expect(html).toMatch(
+    expect(html.replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/g, "")).toMatch(
       /<button[^>]*disabled=""[^>]*>Xác nhận lớp\/ngành cho bản in/,
     );
     expect(html).not.toContain('checked=""');
@@ -69,7 +69,7 @@ describe("Dossier academic print profile", () => {
       },
     });
     expect(html).toContain('value="Công nghệ thông tin"');
-    expect(html).toMatch(
+    expect(html.replace(/<svg\b[^>]*>[\s\S]*?<\/svg>/g, "")).toMatch(
       /<button[^>]*disabled=""[^>]*>Xác nhận lớp\/ngành cho bản in/,
     );
     expect(html).not.toContain('checked=""');

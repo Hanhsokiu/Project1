@@ -1,6 +1,8 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
+  CheckCheck,
+  RotateCcw,
   AlertCircle,
   ArrowLeft,
   ChevronLeft,
@@ -268,9 +270,11 @@ export function Confirm({
       <p className="muted">{description}</p>
       <div className="dialog-actions">
         <Button variant="secondary" onClick={onClose}>
+          <X size={16} aria-hidden="true" />
           Hủy
         </Button>
         <Button disabled={pending} onClick={onConfirm}>
+          <CheckCheck size={16} aria-hidden="true" />
           {pending ? "Đang xử lý…" : "Xác nhận"}
         </Button>
       </div>
@@ -294,6 +298,7 @@ export function DataBoundary({
       <Card>
         <Notice tone="danger">{q.error.message}</Notice>
         <Button className="mt-4" onClick={() => q.refetch()}>
+          <RotateCcw size={16} aria-hidden="true" />
           Thử lại
         </Button>
       </Card>
@@ -434,7 +439,7 @@ export function Stat({
   label: string;
   value: ReactNode;
   sub?: string;
-  icon?: ReactNode;
+  icon: ReactNode;
 }) {
   return (
     <div className="stat-card">

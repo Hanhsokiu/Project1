@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { CheckCircle2, MessageSquare, Send } from "lucide-react";
+import {
+  X,
+  FilePenLine,
+  Eye,
+  CheckCircle2,
+  MessageSquare,
+  Send,
+} from "lucide-react";
 import {
   Button,
   Card,
@@ -96,6 +103,7 @@ function ReviewDialog({
             )}
             <div className="dialog-actions">
               <Button type="button" variant="secondary" onClick={onClose}>
+                <X size={16} aria-hidden="true" />
                 Đóng
               </Button>
               <Button disabled={action.pending}>
@@ -164,6 +172,7 @@ function ReviewContent({ db }: { db: DemoDb }) {
                   ),
                 ).length
               }
+              icon={<FilePenLine size={18} aria-hidden="true" />}
             />
           </div>
           <Card title="Hồ sơ bài nộp">
@@ -244,6 +253,7 @@ function ReviewContent({ db }: { db: DemoDb }) {
                       }
                       onClick={() => setDetailId(t.id)}
                     >
+                      <Eye size={16} aria-hidden="true" />
                       {advisor &&
                       latestSubmission(t)?.status === "SUBMITTED" &&
                       !locked

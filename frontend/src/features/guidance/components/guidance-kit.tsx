@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  CalendarDays,
-  Clock3,
-  Trash2,
-} from "lucide-react";
+import { X, Save, CalendarDays, Clock3, Trash2 } from "lucide-react";
 import {
   Badge,
   Button,
@@ -297,9 +293,11 @@ export function TaskEditor({
         ) : null}
         <div className="dialog-actions">
           <Button type="button" variant="secondary" onClick={onClose}>
+            <X size={16} aria-hidden="true" />
             Hủy
           </Button>
           <Button disabled={action.pending}>
+            <Save size={16} aria-hidden="true" />
             {action.pending ? "Đang lưu…" : "Lưu và thông báo"}
           </Button>
         </div>

@@ -1,3 +1,4 @@
+import { RotateCcw, Save } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
@@ -15,7 +16,7 @@ export default function TermParameterPage() {
   const { id } = useParams();
   const { db } = useWorkspace();
   const t = db.terms.find((t) => t.id === id);
-  const action = useAction();
+  const action = useAction({ invalidateTerms: true });
   const [values, setValues] = useState<Record<string, number>>(() => ({
     ...t?.parameters,
   }));
@@ -52,8 +53,8 @@ export default function TermParameterPage() {
                   termService.saveParameters(t.id, values),
                 );
               } catch {
-      // useAction displays the failure; keep the current form available for correction.
-    }
+                // useAction displays the failure; keep the current form available for correction.
+              }
             }}
           >
             <div className="form-grid">
@@ -112,9 +113,13 @@ export default function TermParameterPage() {
                 disabled={disabled}
                 onClick={() => setValues({ ...t.parameters })}
               >
+                <RotateCcw size={16} aria-hidden="true" />
                 Khôi phục
               </Button>
-              <Button disabled={disabled || action.pending}>Lưu tham số</Button>
+              <Button disabled={disabled || action.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu tham số
+              </Button>
             </div>
           </form>
         </Card>

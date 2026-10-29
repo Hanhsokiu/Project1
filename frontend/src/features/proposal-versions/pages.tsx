@@ -1,4 +1,5 @@
-import { WorkflowHeading } from "../review-groups/workflow-heading";
+import { ChevronLeft, ChevronRight, RotateCcw, Save, Send } from 'lucide-react';
+import { WorkflowHeading } from '../review-groups/workflow-heading';
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -26,6 +27,10 @@ import { proposalVersionApi as api } from './api';
 import { ProposalFields, RevisionFeedback, VersionChanges } from './components';
 import { ProposalLifecycleActions } from './lifecycle-actions';
 import { getErrorMessage } from '../../shared/api/error-message';
+import {
+  preferredWorkflowTerm,
+  useWorkflowTerms,
+} from '../../shared/hooks/use-workflow-terms';
 const errorText = (e: unknown) =>
   e ? getErrorMessage(e, 'Không thể tải/lưu đề cương.') : undefined;
 const readinessText: Record<string, string> = {
@@ -52,14 +57,18 @@ export function ProposalEditorListPage() {
     termId = params.get('termId') ?? '';
   const [page, setPage] = useState(1),
     [search, setSearch] = useState(params.get('search') ?? '');
-  const terms = useQuery({
-    queryKey: ['proposal-review-terms'],
-    queryFn: proposalReviewApi.terms,
-  });
+  const terms = useWorkflowTerms();
   useEffect(() => {
-    if (!termId && terms.data?.[0])
-      setParams({ termId: terms.data[0].id }, { replace: true });
-  }, [termId, terms.data, setParams]);
+    if (!termId && terms.data?.[0] && !terms.isFetching)
+      setParams(
+        (previous) => {
+          const next = new URLSearchParams(previous);
+          next.set('termId', preferredWorkflowTerm(terms.data)!.id);
+          return next;
+        },
+        { replace: true },
+      );
+  }, [termId, terms.data, terms.isFetching, setParams]);
   const requestedSearch = params.get('search');
   useEffect(() => {
     if (requestedSearch !== null) {
@@ -139,13 +148,20 @@ export function ProposalEditorListPage() {
             {list.data.total} hồ sơ · Trang {page}/{list.data.totalPages}
           </p>
           <div className="flex gap-4">
-            <button disabled={page <= 1} onClick={() => setPage((p) => p - 1)}>
+            <button
+              disabled={page <= 1}
+              onClick={() => setPage((p) => p - 1)}
+              className="action-with-icon"
+            >
+              <ChevronLeft size={16} aria-hidden="true" />
               Trước
             </button>
             <button
               disabled={page >= list.data.totalPages}
               onClick={() => setPage((p) => p + 1)}
+              className="action-with-icon"
             >
+              <ChevronRight size={16} aria-hidden="true" />
               Sau
             </button>
           </div>
@@ -275,9 +291,10 @@ function Editor({ context }: { context: ProposalEditorContext }) {
           {validation || errorText(save.error || submit.error)}{' '}
           <button
             type="button"
-            className="underline"
+            className="underline action-with-icon"
             onClick={() => window.location.reload()}
           >
+            <RotateCcw size={16} aria-hidden="true" />
             Tải lại từ server
           </button>
         </p>
@@ -330,19 +347,21 @@ function Editor({ context }: { context: ProposalEditorContext }) {
         <div className="flex flex-wrap gap-3">
           {allowed && (
             <button
-              className="rounded bg-blue-600 px-4 py-2 text-sm text-white"
+              className="rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
               disabled={busy}
               onClick={saveDraft}
             >
+              <Save size={16} aria-hidden="true" />
               {save.isPending ? 'Đang lưu…' : 'Lưu nháp mới'}
             </button>
           )}
           {context.allowedActions.includes('submit') && (
             <button
-              className="rounded border border-blue-300 px-4 py-2 text-sm text-blue-700"
+              className="rounded border border-blue-300 px-4 py-2 text-sm text-blue-700 action-with-icon"
               disabled={busy || dirty || !currentId}
               onClick={send}
             >
+              <Send size={16} aria-hidden="true" />
               {submit.isPending
                 ? 'Đang gửi…'
                 : context.submittedVersionId
@@ -435,13 +454,17 @@ function VersionHistory({ proposalId }: { proposalId: string }) {
                 <button
                   disabled={page <= 1}
                   onClick={() => setPage((p) => p - 1)}
+                  className="action-with-icon"
                 >
+                  <ChevronLeft size={16} aria-hidden="true" />
                   Trước
                 </button>
                 <button
                   disabled={page >= history.data.totalPages}
                   onClick={() => setPage((p) => p + 1)}
+                  className="action-with-icon"
                 >
+                  <ChevronRight size={16} aria-hidden="true" />
                   Sau
                 </button>
               </div>
@@ -541,7 +564,8 @@ function ProposalEditorPageContent({
               <section className="rounded border border-blue-200 bg-blue-50 p-4 text-sm space-y-3">
                 <p>
                   Đề cương đã được duyệt, phiên bản này chỉ xem. Khoa chốt hồ sơ
-                  chính thức trước khi sinh viên tải PDF để in, xin chữ ký và nộp Khoa.
+                  chính thức trước khi sinh viên tải PDF để in, xin chữ ký và
+                  nộp Khoa.
                 </p>
                 <Link
                   className="inline-block font-medium text-blue-700 underline"

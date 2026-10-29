@@ -433,6 +433,15 @@ a:focus-visible {
   border: 1px solid transparent;
   white-space: nowrap;
 }
+.action-with-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+}
+.lucide {
+  flex-shrink: 0;
+}
 .btn-primary {
   background: var(--primary);
   color: #fff;

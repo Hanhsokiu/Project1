@@ -1,3 +1,14 @@
+import {
+  Download,
+  FileUp,
+  RotateCcw,
+  X,
+  FileSpreadsheet,
+  CheckCircle2,
+  CircleAlert,
+  Upload,
+  CheckCheck,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import {
@@ -142,6 +153,7 @@ export default function StudentApiImport({
                 action.run(() => importApi.template("csv")).catch(() => {})
               }
             >
+              <Download size={16} aria-hidden="true" />
               Tải mẫu CSV
             </Button>
             <Button
@@ -151,6 +163,7 @@ export default function StudentApiImport({
                 action.run(() => importApi.template("xlsx")).catch(() => {})
               }
             >
+              <Download size={16} aria-hidden="true" />
               Tải mẫu Excel
             </Button>
           </div>
@@ -182,6 +195,7 @@ export default function StudentApiImport({
               disabled={!selectedFile || !term.id || action.pending}
               onClick={preview}
             >
+              <FileUp size={16} aria-hidden="true" />
               {action.pending ? "Đang xử lý…" : "Kiểm tra tệp"}
             </Button>
           </div>
@@ -229,9 +243,11 @@ export default function StudentApiImport({
               variant="secondary"
               onClick={() => setHistoryRequest((value) => value + 1)}
             >
+              <RotateCcw size={16} aria-hidden="true" />
               Thử tải lại kết quả
             </Button>
             <Button variant="ghost" onClick={() => selectJob()}>
+              <X size={16} aria-hidden="true" />
               Bỏ qua kết quả này
             </Button>
           </div>
@@ -240,9 +256,21 @@ export default function StudentApiImport({
       {job && (
         <div className="mt-6">
           <div className="stat-grid">
-            <Stat label="Tổng dòng" value={job.totalRows} />
-            <Stat label="Hợp lệ" value={job.validRows} />
-            <Stat label="Có lỗi" value={job.invalidRows} />
+            <Stat
+              label="Tổng dòng"
+              value={job.totalRows}
+              icon={<FileSpreadsheet size={18} aria-hidden="true" />}
+            />
+            <Stat
+              label="Hợp lệ"
+              value={job.validRows}
+              icon={<CheckCircle2 size={18} aria-hidden="true" />}
+            />
+            <Stat
+              label="Có lỗi"
+              value={job.invalidRows}
+              icon={<CircleAlert size={18} aria-hidden="true" />}
+            />
             <Stat
               label={completed ? "Đã nhập thành công" : "Sẵn sàng nhập"}
               value={
@@ -253,6 +281,13 @@ export default function StudentApiImport({
                     : job.invalidRows
                       ? 0
                       : job.validRows
+              }
+              icon={
+                completed ? (
+                  <CheckCircle2 size={18} aria-hidden="true" />
+                ) : (
+                  <Upload size={18} aria-hidden="true" />
+                )
               }
             />
           </div>
@@ -310,6 +345,7 @@ export default function StudentApiImport({
                       )
                     }
                   >
+                    <Download size={16} aria-hidden="true" />
                     Tải báo cáo lỗi
                   </Button>
                 </>
@@ -390,6 +426,7 @@ export default function StudentApiImport({
                   }
                   onClick={() => setConfirm(true)}
                 >
+                  <CheckCheck size={16} aria-hidden="true" />
                   Xác nhận nhập
                 </Button>
                 <Button
@@ -402,6 +439,7 @@ export default function StudentApiImport({
                       .catch(() => {})
                   }
                 >
+                  <RotateCcw size={16} aria-hidden="true" />
                   Tải lại kết quả
                 </Button>
               </div>

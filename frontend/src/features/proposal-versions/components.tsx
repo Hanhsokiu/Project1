@@ -1,3 +1,4 @@
+import { Trash2, Plus } from 'lucide-react';
 import React from 'react';
 import type {
   DataChange,
@@ -82,7 +83,7 @@ export function ProposalFields({
               <strong className="text-sm">Mốc {i + 1}</strong>
               <button
                 type="button"
-                className="text-xs text-red-700"
+                className="text-xs text-red-700 action-with-icon"
                 onClick={() =>
                   onChange({
                     ...content,
@@ -90,6 +91,7 @@ export function ProposalFields({
                   })
                 }
               >
+                <Trash2 size={16} aria-hidden="true" />
                 Bỏ mốc {i + 1}
               </button>
             </div>
@@ -142,7 +144,7 @@ export function ProposalFields({
         ))}
         <button
           type="button"
-          className="rounded border px-3 py-2 text-sm"
+          className="rounded border px-3 py-2 text-sm action-with-icon"
           disabled={content.schedule.length >= 100}
           onClick={() =>
             onChange({
@@ -154,6 +156,7 @@ export function ProposalFields({
             })
           }
         >
+          <Plus size={16} aria-hidden="true" />
           Thêm mốc kế hoạch
         </button>
       </section>

@@ -148,6 +148,7 @@ beforeEach(() => {
     semesterByKey: vi.fn().mockResolvedValue(null),
     createSemester: vi.fn().mockResolvedValue(semester),
     create: vi.fn().mockImplementation(async () => term),
+    grantCreatorAcademicAccess: vi.fn().mockResolvedValue(undefined),
     update: vi
       .fn()
       .mockImplementation(
@@ -259,10 +260,24 @@ describe("term creation and lifecycle", () => {
     expect(data.phases.create).toHaveLength(6);
     expect(data.trainingSystem.connect.id).toBe("cq");
     expect(transaction).toBe(tx);
+    expect(repository.grantCreatorAcademicAccess).toHaveBeenCalledWith(
+      term.id,
+      "actor1",
+      tx,
+    );
     expect(audit.log).toHaveBeenCalledWith(
       expect.objectContaining({ userId: "actor1", action: "CREATE_TERM" }),
       tx,
     );
+  });
+  it("fails term creation if the creator's academic scope cannot be saved", async () => {
+    repository.grantCreatorAcademicAccess.mockRejectedValue(
+      new Error("grant failed"),
+    );
+    await expect(service.create(input, "actor1")).rejects.toThrow(
+      "grant failed",
+    );
+    expect(audit.log).not.toHaveBeenCalled();
   });
   it("rejects duplicate codes, invalid semester years and periods outside the semester", async () => {
     repository.findByCode.mockResolvedValue({ id: "other" });

@@ -1,4 +1,4 @@
-import { WorkflowHeading } from "./workflow-heading";
+import { WorkflowHeading } from './workflow-heading';
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Link,
@@ -14,6 +14,9 @@ import {
 } from '@tanstack/react-query';
 import type { GroupCreate } from '@doan/shared';
 import {
+  ChevronLeft,
+  Trash2,
+  CheckCheck,
   ChevronRight,
   ClipboardList,
   Layers,
@@ -25,6 +28,10 @@ import { reviewGroupApi as api } from './api';
 import { GroupState, GroupForm, MemberTable } from './components';
 import { Button } from '../../shared/components/ui/Button';
 import { getErrorMessage } from '../../shared/api/error-message';
+import {
+  preferredWorkflowTerm,
+  useWorkflowTerms,
+} from '../../shared/hooks/use-workflow-terms';
 
 const errorText = (error: unknown) =>
   error
@@ -104,10 +111,7 @@ export function ReviewGroupListPage() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState(params.get('search') ?? '');
   const [departmentId, setDepartment] = useState('');
-  const terms = useQuery({
-    queryKey: ['review-group-terms'],
-    queryFn: api.terms,
-  });
+  const terms = useWorkflowTerms(true);
   const requestedSearch = params.get('search');
   useEffect(() => {
     if (requestedSearch !== null) {
@@ -116,16 +120,16 @@ export function ReviewGroupListPage() {
     }
   }, [requestedSearch]);
   useEffect(() => {
-    if (!termId && terms.data?.[0])
+    if (!termId && terms.data?.[0] && !terms.isFetching)
       setParams(
         (previous) => {
           const next = new URLSearchParams(previous);
-          next.set('termId', terms.data![0].id);
+          next.set('termId', preferredWorkflowTerm(terms.data)!.id);
           return next;
         },
         { replace: true },
       );
-  }, [termId, terms.data, setParams]);
+  }, [termId, terms.data, terms.isFetching, setParams]);
   const options = useQuery({
     queryKey: ['review-group-options', termId],
     queryFn: () => api.options(termId),
@@ -337,6 +341,7 @@ export function ReviewGroupListPage() {
                 disabled={page <= 1}
                 onClick={() => setPage((p) => p - 1)}
               >
+                <ChevronLeft size={16} aria-hidden="true" />
                 Trước
               </Button>
               <Button
@@ -344,6 +349,7 @@ export function ReviewGroupListPage() {
                 disabled={page >= list.data.totalPages}
                 onClick={() => setPage((p) => p + 1)}
               >
+                <ChevronRight size={16} aria-hidden="true" />
                 Sau
               </Button>
             </div>
@@ -361,11 +367,7 @@ export function ReviewGroupEditorPage() {
   const requestKey = useRequestKey();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
-  const terms = useQuery({
-    queryKey: ['review-group-terms'],
-    queryFn: api.terms,
-    enabled: !id,
-  });
+  const terms = useWorkflowTerms(true, !id);
   const group = useQuery({
     queryKey: ['review-group', id],
     queryFn: () => api.detail(id!),
@@ -558,6 +560,7 @@ export function ReviewGroupDetailPage() {
                       setConfirm((v) => !v);
                     }}
                   >
+                    <Trash2 size={16} aria-hidden="true" />
                     Xóa nhóm
                   </Button>
                 </div>
@@ -612,6 +615,7 @@ export function ReviewGroupDetailPage() {
                   variant="danger"
                   disabled={mutation.isPending || !reason.trim()}
                 >
+                  <CheckCheck size={16} aria-hidden="true" />
                   {mutation.isPending ? 'Đang xử lý…' : 'Xác nhận xóa'}
                 </Button>
               </form>

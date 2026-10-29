@@ -1,6 +1,15 @@
 import { useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { Download, Eye, Plus, Save, Send, Trash2 } from "lucide-react";
+import {
+  FilePenLine,
+  ArrowRight,
+  Download,
+  Eye,
+  Plus,
+  Save,
+  Send,
+  Trash2,
+} from "lucide-react";
 import {
   Back,
   Badge,
@@ -115,6 +124,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
             description="Đề cương được tạo sau khi Khoa công bố phân công GVHD."
             action={
               <Link className="btn btn-primary" to="/registration/result">
+                <Eye size={16} aria-hidden="true" />
                 Xem kết quả phân công
               </Link>
             }
@@ -143,6 +153,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
                   className="btn btn-primary"
                   to={`/topic/proposal/${topic.id}`}
                 >
+                  <FilePenLine size={16} aria-hidden="true" />
                   Mở đề cương & phiên bản
                 </Link>
               ) : (
@@ -150,6 +161,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
                   disabled={action.pending}
                   onClick={() => setHandoff(true)}
                 >
+                  <ArrowRight size={16} aria-hidden="true" />
                   Chuyển sang xét duyệt & phiên bản
                 </Button>
               ))}
@@ -439,6 +451,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
                   .catch(() => {})
               }
             >
+              <Download size={16} aria-hidden="true" />
               Tải PDF phiên bản {version.version}
             </Button>
           )}

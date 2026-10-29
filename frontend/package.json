@@ -12,6 +12,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:workflow-terms:browser": "node scripts/test-workflow-term-sync-browser.cjs",
     "test:review-groups:browser": "node scripts/test-review-groups-browser.cjs",
     "preview:review-groups": "node scripts/test-review-groups-browser.cjs --interactive",
     "test:proposal-reviews:browser": "node scripts/test-proposal-reviews-browser.cjs",

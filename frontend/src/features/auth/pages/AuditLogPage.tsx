@@ -1,3 +1,4 @@
+import { FilterX, Eye } from "lucide-react";
 import { useState } from "react";
 import type { Audit } from "../../../shared/data/types";
 import {
@@ -76,6 +77,7 @@ export default function AuditLogPage() {
               setAction("");
             }}
           >
+            <FilterX size={16} aria-hidden="true" />
             Xóa bộ lọc
           </Button>
         </div>
@@ -103,6 +105,7 @@ export default function AuditLogPage() {
                 title: "Chi tiết",
                 render: (r) => (
                   <Button variant="ghost" onClick={() => setDetail(r)}>
+                    <Eye size={16} aria-hidden="true" />
                     Xem bản ghi
                   </Button>
                 ),

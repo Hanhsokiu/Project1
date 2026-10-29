@@ -1,3 +1,12 @@
+import {
+  FileUp,
+  Send,
+  RotateCcw,
+  Download,
+  Eye,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import React, { useRef, useState } from "react";
 import { isAxiosError } from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -264,8 +273,9 @@ function SubmissionForm({
         <button
           disabled={busy || !files.length}
           onClick={() => void upload()}
-          className="rounded border px-4 py-2"
+          className="rounded border px-4 py-2 action-with-icon"
         >
+          <FileUp size={16} aria-hidden="true" />
           {busy ? "Đang xử lý…" : "Tải file lên"}
         </button>
         <button
@@ -275,13 +285,14 @@ function SubmissionForm({
             files.some((f) => !f.uploadId)
           }
           onClick={() => void submit()}
-          className="rounded bg-blue-700 px-4 py-2 text-white"
+          className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
         >
+          <Send size={16} aria-hidden="true" />
           Xác nhận nộp
         </button>
         <button
           disabled={busy}
-          className="text-blue-700"
+          className="text-blue-700 action-with-icon"
           onClick={async () => {
             try {
               const latest = await onReload();
@@ -293,6 +304,7 @@ function SubmissionForm({
             }
           }}
         >
+          <RotateCcw size={16} aria-hidden="true" />
           Tải trạng thái mới
         </button>
       </div>
@@ -361,9 +373,10 @@ export function SubmissionHistoryItem({
       {s.files.map((f) => (
         <button
           key={f.id}
-          className="block max-w-full break-all text-left text-blue-700 underline"
+          className="block max-w-full break-all text-left text-blue-700 underline action-with-icon"
           onClick={() => onDownload(s.id, f.id, f.originalName)}
         >
+          <Download size={16} aria-hidden="true" />
           Tải {labels[f.kind]}: {f.originalName} (
           {(f.sizeBytes / 1024).toFixed(1)} KiB)
         </button>
@@ -371,9 +384,10 @@ export function SubmissionHistoryItem({
       {!s.files.length && <p>Chưa có file private đã đối soát.</p>}
       {onViewReview && (
         <button
-          className="text-blue-700 underline"
+          className="text-blue-700 underline action-with-icon"
           onClick={() => onViewReview(s.id)}
         >
+          <Eye size={16} aria-hidden="true" />
           Xem nhận xét và đánh giá
         </button>
       )}
@@ -495,7 +509,12 @@ export function TaskSubmissionsPage() {
         ))}
       </GuidanceState>
       <div className="flex gap-3 items-center">
-        <button disabled={page <= 1} onClick={() => setPage((v) => v - 1)}>
+        <button
+          disabled={page <= 1}
+          onClick={() => setPage((v) => v - 1)}
+          className="action-with-icon"
+        >
+          <ChevronLeft size={16} aria-hidden="true" />
           Trang trước
         </button>
         <span>
@@ -504,7 +523,9 @@ export function TaskSubmissionsPage() {
         <button
           disabled={page >= (history.data?.totalPages ?? 1)}
           onClick={() => setPage((v) => v + 1)}
+          className="action-with-icon"
         >
+          <ChevronRight size={16} aria-hidden="true" />
           Trang sau
         </button>
       </div>

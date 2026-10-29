@@ -1,3 +1,4 @@
+import { Save } from "lucide-react";
 import React, { useState } from "react";
 export function GuidanceState({
   loading,
@@ -280,7 +281,8 @@ export function GuidanceTaskForm({
             {error}
           </p>
         )}
-        <button className="rounded bg-blue-700 px-4 py-2 text-white">
+        <button className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon">
+          <Save size={16} aria-hidden="true" />
           {busy
             ? "Đang lưu…"
             : task

@@ -1,26 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useApiSession } from "../../shared/hooks/use-api-session";
 import { httpClient } from "../../shared/api/http-client";
-import type { DemoDb, Term } from "../../shared/data/types";
+import type { DemoDb } from "../../shared/data/types";
+import { useWorkflowTerms } from "../../shared/hooks/use-workflow-terms";
 
 // Shell metadata only. Workflow pages continue using their scoped canonical APIs;
 // displaying the shared sidebar must not require catalog/import permissions.
 export function useWorkflowShellData(groups: boolean) {
   const user = useApiSession();
-  const terms = useQuery({
-    queryKey: ["workflow-shell-terms", user?.id, groups],
-    enabled: !!user,
-    queryFn: async () =>
-      (
-        await httpClient.get<{
-          data: Array<{ id: string; name: string; status: Term["status"] }>;
-        }>(
-          groups
-            ? "/review-group-options/terms"
-            : "/proposal-review-options/terms",
-        )
-      ).data.data,
-  });
+  const terms = useWorkflowTerms(groups, !!user);
   const notifications = useQuery({
     queryKey: ["workflow-shell-notifications", user?.id],
     enabled: !!user,

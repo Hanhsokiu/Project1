@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { CheckCircle2, CircleX, FileCheck2, ShieldCheck } from "lucide-react";
+import {
+  Undo2,
+  Eye,
+  X,
+  CheckCircle2,
+  CircleX,
+  FileCheck2,
+  ShieldCheck,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Badge,
@@ -56,6 +64,7 @@ function ConfirmContent({ db }: { db: DemoDb }) {
         actions={
           canEdit && readiness.final?.confirmed ? (
             <Button variant="secondary" onClick={() => open("withdraw")}>
+              <Undo2 size={16} aria-hidden="true" />
               Thu hồi xác nhận
             </Button>
           ) : (
@@ -236,6 +245,7 @@ function ConfirmContent({ db }: { db: DemoDb }) {
                       disabled={s.id === studentId}
                       onClick={() => setStudentId(s.id)}
                     >
+                      <Eye size={16} aria-hidden="true" />
                       {s.id === studentId ? "Đang xem" : "Kiểm tra hồ sơ"}
                     </Button>
                   ),
@@ -298,9 +308,11 @@ function ConfirmContent({ db }: { db: DemoDb }) {
                 variant="secondary"
                 onClick={() => setDialog(null)}
               >
+                <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
               <Button disabled={action.pending}>
+                <Undo2 size={16} aria-hidden="true" />
                 {dialog === "confirm" ? "Xác nhận đồng ý" : "Thu hồi xác nhận"}
               </Button>
             </div>

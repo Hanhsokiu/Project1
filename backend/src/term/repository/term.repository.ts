@@ -125,6 +125,28 @@ export class TermRepository {
   create(data: Prisma.ThesisTermCreateInput, tx: TermTransaction) {
     return tx.thesisTerm.create({ data, include: termInclude });
   }
+  async grantCreatorAcademicAccess(
+    termId: string,
+    userId: string,
+    tx: TermTransaction,
+  ) {
+    const faculty = await tx.userAccount.findFirst({
+      where: {
+        id: userId,
+        status: "ACTIVE",
+        userRoles: { some: { role: { name: "FACULTY" } } },
+      },
+      select: { id: true },
+    });
+    if (!faculty) return;
+    // Creating a term establishes the faculty creator's academic scope only.
+    // Preserve any explicitly restricted grant rather than widening it.
+    await tx.academicTermGrant.upsert({
+      where: { userId_termId: { userId, termId } },
+      create: { userId, termId, allDepartments: true },
+      update: {},
+    });
+  }
   update(id: string, data: Prisma.ThesisTermUpdateInput, tx: TermTransaction) {
     return tx.thesisTerm.update({ where: { id }, data, include: termInclude });
   }

@@ -1,3 +1,13 @@
+import {
+  Upload,
+  GraduationCap,
+  UserCheck,
+  Users,
+  ChartNoAxesColumnIncreasing,
+  CheckCheck,
+  RotateCcw,
+  Save,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { Term } from "../../../shared/data/types";
@@ -20,7 +30,7 @@ export default function TermRosterPage() {
   const { id } = useParams();
   const { db } = useWorkspace();
   const t = db.terms.find((t) => t.id === id);
-  const action = useAction();
+  const action = useAction({ invalidateTerms: true });
   const [tab, setTab] = useState<"students" | "lecturers">("students");
   const [students, setStudents] = useState<string[]>(() => [
     ...(t?.studentIds || []),
@@ -46,7 +56,8 @@ export default function TermRosterPage() {
     JSON.stringify(lecturers) !== JSON.stringify(t.lecturers);
   const compatible = db.students.filter((s) => s.program === t.program);
   const eligible = compatible.filter(
-    (s) => s.eligible && hasEligibleGpa(s.gpa, t.parameters.passing_gpa_threshold),
+    (s) =>
+      s.eligible && hasEligibleGpa(s.gpa, t.parameters.passing_gpa_threshold),
   );
   const studentRows = compatible.filter(
     (s) => !selectedOnly || students.includes(s.id),
@@ -81,17 +92,31 @@ export default function TermRosterPage() {
         description={`${t.code} · Hệ ${t.program} · Quota được tính riêng cho từng GV trong đợt.`}
         actions={
           <Link to="/catalog/import" className="btn btn-secondary">
+            <Upload size={16} aria-hidden="true" />
             Import danh sách
           </Link>
         }
       />
       <div className="stat-grid">
-        <Stat label="SV đã chọn" value={students.length} />
-        <Stat label="SV cùng hệ đủ điều kiện" value={eligible.length} />
-        <Stat label="GV tham gia" value={lecturers.length} />
+        <Stat
+          label="SV đã chọn"
+          value={students.length}
+          icon={<GraduationCap size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="SV cùng hệ đủ điều kiện"
+          value={eligible.length}
+          icon={<UserCheck size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="GV tham gia"
+          value={lecturers.length}
+          icon={<Users size={18} aria-hidden="true" />}
+        />
         <Stat
           label="Tổng chỉ tiêu"
           value={lecturers.reduce((sum, l) => sum + l.quota, 0)}
+          icon={<ChartNoAxesColumnIncreasing size={18} aria-hidden="true" />}
         />
       </div>
       {disabled && (
@@ -134,6 +159,7 @@ export default function TermRosterPage() {
                 ])
               }
             >
+              <CheckCheck size={16} aria-hidden="true" />
               Chọn tất cả đủ điều kiện
             </Button>
           }
@@ -164,7 +190,10 @@ export default function TermRosterPage() {
                       disabled ||
                       (!students.includes(s.id) &&
                         (!s.eligible ||
-                          !hasEligibleGpa(s.gpa, t.parameters.passing_gpa_threshold)))
+                          !hasEligibleGpa(
+                            s.gpa,
+                            t.parameters.passing_gpa_threshold,
+                          )))
                     }
                     onChange={(e) => toggleStudent(s.id, e.target.checked)}
                   />
@@ -183,7 +212,8 @@ export default function TermRosterPage() {
                 render: (s) => (
                   <Badge
                     value={
-                      s.eligible && hasEligibleGpa(s.gpa, t.parameters.passing_gpa_threshold)
+                      s.eligible &&
+                      hasEligibleGpa(s.gpa, t.parameters.passing_gpa_threshold)
                         ? "PASS"
                         : "FAIL"
                     }
@@ -192,9 +222,12 @@ export default function TermRosterPage() {
                       ? "Chưa đạt học vụ"
                       : s.gpa === null
                         ? "Chưa có GPA"
-                      : !hasEligibleGpa(s.gpa, t.parameters.passing_gpa_threshold)
-                        ? "Dưới ngưỡng GPA"
-                        : "Đủ điều kiện"}
+                        : !hasEligibleGpa(
+                              s.gpa,
+                              t.parameters.passing_gpa_threshold,
+                            )
+                          ? "Dưới ngưỡng GPA"
+                          : "Đủ điều kiện"}
                   </Badge>
                 ),
               },
@@ -313,6 +346,7 @@ export default function TermRosterPage() {
             setLecturers(structuredClone(t.lecturers));
           }}
         >
+          <RotateCcw size={16} aria-hidden="true" />
           Khôi phục
         </Button>
         <Button
@@ -323,6 +357,7 @@ export default function TermRosterPage() {
               .catch(() => {})
           }
         >
+          <Save size={16} aria-hidden="true" />
           Lưu danh sách tham gia
         </Button>
       </div>

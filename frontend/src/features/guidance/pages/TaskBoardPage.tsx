@@ -1,5 +1,15 @@
 import { useState } from "react";
-import { AlertTriangle, FileUp, History, Plus, Search } from "lucide-react";
+import {
+  Save,
+  X,
+  Pencil,
+  Trash2,
+  AlertTriangle,
+  FileUp,
+  History,
+  Plus,
+  Search,
+} from "lucide-react";
 import {
   Button,
   Card,
@@ -102,6 +112,7 @@ function TaskSubmit({ task, onClose }: { task: Task; onClose: () => void }) {
               .catch(() => {})
           }
         >
+          <Save size={16} aria-hidden="true" />
           Chỉ lưu tiến độ
         </Button>
         <Field label="Nội dung báo cáo / thay đổi so với lần trước">
@@ -159,6 +170,7 @@ function TaskSubmit({ task, onClose }: { task: Task; onClose: () => void }) {
         </Field>
         <div className="dialog-actions">
           <Button type="button" variant="secondary" onClick={onClose}>
+            <X size={16} aria-hidden="true" />
             Đóng
           </Button>
           <Button disabled={action.pending || reading || progress !== 100}>
@@ -293,6 +305,7 @@ function BoardContent({ db }: { db: DemoDb }) {
                 action={
                   canAssign ? (
                     <Button onClick={() => setEditor("new")}>
+                      <Plus size={16} aria-hidden="true" />
                       Giao nhiệm vụ đầu tiên
                     </Button>
                   ) : undefined
@@ -371,6 +384,7 @@ function BoardContent({ db }: { db: DemoDb }) {
                                 </Button>
                                 {canSubmit && (
                                   <Button onClick={() => setSubmitId(task.id)}>
+                                    <FileUp size={16} aria-hidden="true" />
                                     Cập nhật / nộp
                                   </Button>
                                 )}
@@ -379,6 +393,7 @@ function BoardContent({ db }: { db: DemoDb }) {
                                     variant="ghost"
                                     onClick={() => setEditor(task)}
                                   >
+                                    <Pencil size={16} aria-hidden="true" />
                                     Sửa / gia hạn
                                   </Button>
                                 )}
@@ -389,6 +404,7 @@ function BoardContent({ db }: { db: DemoDb }) {
                                       variant="ghost"
                                       onClick={() => setDeleteId(task.id)}
                                     >
+                                      <Trash2 size={16} aria-hidden="true" />
                                       Xóa
                                     </Button>
                                   )}

@@ -1,3 +1,4 @@
+import { Save, Send, Eye, Pencil } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -167,12 +168,14 @@ function ScoreForm({
               disabled={s.pending}
               onClick={() => save(false)}
             >
+              <Save size={16} aria-hidden="true" />
               Lưu nháp
             </Button>
             <Button
               disabled={s.pending}
               onClick={() => (confirm ? save(true) : setConfirm(true))}
             >
+              <Send size={16} aria-hidden="true" />
               {confirm ? "Xác nhận gửi điểm" : "Gửi phiếu điểm"}
             </Button>
           </div>
@@ -204,6 +207,7 @@ function Content({ db }: { db: DemoDb }) {
         description="Một giảng viên có thể đồng thời hướng dẫn, phản biện và chấm hội đồng ở các hồ sơ khác nhau."
         actions={
           <Link className="btn btn-secondary" to="/grading/rubric">
+            <Eye size={16} aria-hidden="true" />
             Xem Rubric
           </Link>
         }
@@ -270,6 +274,7 @@ function Content({ db }: { db: DemoDb }) {
                 title: "",
                 render: (r) => (
                   <Button variant="secondary" onClick={() => setStudent(r.id)}>
+                    <Pencil size={16} aria-hidden="true" />
                     {r.score?.status === "SUBMITTED" ||
                     r.score?.status === "LOCKED"
                       ? "Xem phiếu"

@@ -1,3 +1,4 @@
+import { Eye } from "lucide-react";
 import { Link } from "react-router-dom";
 import {
   Badge,
@@ -58,6 +59,7 @@ export default function AssignmentResultPage() {
           {!!rows.length && (
             <div className="flex justify-end">
               <Link to="/topic/my" className="btn btn-primary">
+                <Eye size={16} aria-hidden="true" />
                 Xem đề tài & đề cương →
               </Link>
             </div>
