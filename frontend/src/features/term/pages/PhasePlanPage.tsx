@@ -79,7 +79,32 @@ export default function PhasePlanPage() {
         title="Kế hoạch giai đoạn"
         description={`${t.code} · Thiết lập mốc, thời hạn và khóa/mở từng giai đoạn.`}
         actions={
-          !step1Api.term && (
+          step1Api.term ? (
+            <Button
+              variant="secondary"
+              disabled={
+                disabled || phases.some((p) => p.code === "PROPOSAL_REVIEW")
+              }
+              onClick={() => {
+                const proposal =
+                  phases.find((p) => p.code === "PROPOSAL") ?? phases[2];
+                if (!proposal) return;
+                const next = [...phases];
+                next.splice(phases.indexOf(proposal) + 1, 0, {
+                  id: uid("phase"),
+                  code: "PROPOSAL_REVIEW",
+                  name: "Xét duyệt đề cương",
+                  start: proposal.start,
+                  end: proposal.end,
+                  locked: false,
+                });
+                setPhases(next);
+              }}
+            >
+              <Plus size={15} />
+              Thêm xét duyệt đề cương
+            </Button>
+          ) : (
             <Button
               variant="secondary"
               disabled={disabled}
@@ -218,6 +243,8 @@ export default function PhasePlanPage() {
             Thứ tự thời gian phải hợp lý và nằm trong đợt. Khóa giai đoạn chặn
             thao tác ghi tương ứng, kể cả khi chưa hết thời hạn. Khóa/mở sẽ lưu
             toàn bộ kế hoạch đang chỉnh sửa.
+            {step1Api.term &&
+              " Xét duyệt có lịch riêng, có thể cùng thời gian soạn đề cương và phải kết thúc trước giai đoạn hướng dẫn."}
           </Notice>
         </div>
         <div className="form-actions">

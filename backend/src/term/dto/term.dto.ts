@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const phaseCodes = [
+export const basePhaseCodes = [
   "REGISTRATION",
   "ASSIGNMENT",
   "PROPOSAL",
@@ -8,13 +8,20 @@ export const phaseCodes = [
   "FINAL",
   "DEFENSE",
 ] as const;
+export const phaseCodes = [
+  "REGISTRATION",
+  "ASSIGNMENT",
+  "PROPOSAL",
+  "PROPOSAL_REVIEW",
+  "WEEKLY",
+  "FINAL",
+  "DEFENSE",
+] as const;
 export type PhaseCode = (typeof phaseCodes)[number];
-const iso = z
-  .string()
-  .datetime({
-    offset: true,
-    message: "Thời gian phải là ISO8601 kèm múi giờ.",
-  });
+const iso = z.string().datetime({
+  offset: true,
+  message: "Thời gian phải là ISO8601 kèm múi giờ.",
+});
 const id = z.string().trim().min(1).max(100);
 export const termStatuses = [
   "DRAFT",
@@ -105,7 +112,8 @@ export const phasePlanSchema = z
   .object({
     phases: z
       .array(phaseSchema)
-      .length(6, "Kế hoạch phải có đầy đủ sáu giai đoạn."),
+      .min(6, "Kế hoạch phải có đầy đủ sáu giai đoạn chính.")
+      .max(7, "Chỉ được thêm một giai đoạn xét duyệt đề cương."),
   })
   .strict();
 export type PhaseInput = z.infer<typeof phaseSchema>;

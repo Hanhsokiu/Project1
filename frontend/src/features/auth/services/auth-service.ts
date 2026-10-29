@@ -26,6 +26,11 @@ export type SaveAccountInput = Pick<
   id?: string;
   password?: string;
   trainingSystemId?: string;
+  majorName?: string;
+  className?: string;
+  departmentId?: string;
+  researchAreaIds?: string[];
+  maxStudents?: number;
 };
 const mockAuthService = {
   login(username: string, password: string) {
@@ -93,7 +98,12 @@ const mockAuthService = {
     });
     persist(db);
   },
-  updateProfile(name: string, email: string, phone: string) {
+  updateProfile(
+    name: string,
+    email: string,
+    phone: string,
+    majorName?: string,
+  ) {
     return mutate("Cập nhật hồ sơ", undefined, (db, user) => {
       const p = contactSchema.parse({ email, phone });
       assert(name.trim().length >= 3, "Họ tên ít nhất 3 ký tự");
@@ -103,7 +113,12 @@ const mockAuthService = {
       );
       const s = db.students.find((a) => a.id === user.studentId);
       const l = db.lecturers.find((a) => a.id === user.lecturerId);
-      if (s) Object.assign(s, { name, ...p });
+      if (s)
+        Object.assign(s, {
+          name,
+          ...p,
+          ...(majorName !== undefined ? { majorName: majorName.trim() } : {}),
+        });
       if (l) Object.assign(l, { name, ...p });
     });
   },
@@ -176,7 +191,8 @@ const mockAuthService = {
             name: input.name,
             email: input.email,
             phone: input.phone,
-            className: "",
+            className: input.className?.trim() || "",
+            majorName: input.majorName?.trim() || "",
             program: program.name,
             departmentId: "",
             gpa: 0,
@@ -190,7 +206,52 @@ const mockAuthService = {
             email: input.email,
             phone: input.phone,
             program: program.name,
+            ...(input.majorName !== undefined
+              ? { majorName: input.majorName.trim() }
+              : {}),
+            ...(input.className !== undefined
+              ? { className: input.className.trim() }
+              : {}),
           });
+      }
+      if (input.roles.includes("LECTURER")) {
+        assert(
+          input.departmentId &&
+            db.catalogs.some(
+              (c) => c.kind === "department" && c.id === input.departmentId,
+            ),
+          "Chọn bộ môn hợp lệ",
+        );
+        assert(
+          input.researchAreaIds?.length &&
+            new Set(input.researchAreaIds).size ===
+              input.researchAreaIds.length &&
+            input.researchAreaIds.every((id) =>
+              db.catalogs.some((c) => c.kind === "direction" && c.id === id),
+            ),
+          "Chọn hướng chuyên môn hợp lệ",
+        );
+        const account = db.accounts.find((a) => a.username === input.username)!;
+        let lecturer = db.lecturers.find((l) => l.id === account.lecturerId);
+        const fields = {
+          name: input.name,
+          email: input.email,
+          phone: input.phone,
+          departmentId: input.departmentId,
+          directionIds: input.researchAreaIds,
+          quota: input.maxStudents ?? 5,
+        };
+        if (lecturer) Object.assign(lecturer, fields);
+        else {
+          lecturer = {
+            ...fields,
+            id: uid("gv"),
+            code: input.username,
+            isActive: true,
+          };
+          db.lecturers.push(lecturer);
+          account.lecturerId = lecturer.id;
+        }
       }
     });
   },
@@ -255,10 +316,21 @@ export const authService = {
       .post("/auth/change-password", { oldPassword, newPassword })
       .then((r) => setApiUser(r.data.data));
   },
-  updateProfile(name: string, email: string, phone: string) {
-    if (!AUTH_API) return mockAuthService.updateProfile(name, email, phone);
+  updateProfile(
+    name: string,
+    email: string,
+    phone: string,
+    majorName?: string,
+  ) {
+    if (!AUTH_API)
+      return mockAuthService.updateProfile(name, email, phone, majorName);
     return httpClient
-      .patch("/auth/profile", { name, email, phone })
+      .patch("/auth/profile", {
+        name,
+        email,
+        phone,
+        ...(majorName !== undefined ? { majorName: majorName.trim() } : {}),
+      })
       .then((r) => setApiUser(r.data.data));
   },
   saveAccount(input: SaveAccountInput) {
@@ -267,7 +339,24 @@ export const authService = {
       .request<{ data: Account }>({
         method: input.id ? "PATCH" : "POST",
         url: input.id ? `/accounts/${input.id}` : "/accounts",
-        data: input,
+        data: {
+          ...input,
+          majorName: input.roles.includes("STUDENT")
+            ? input.majorName?.trim() || undefined
+            : undefined,
+          className: input.roles.includes("STUDENT")
+            ? input.className?.trim() || undefined
+            : undefined,
+          departmentId: input.roles.includes("LECTURER")
+            ? input.departmentId
+            : undefined,
+          researchAreaIds: input.roles.includes("LECTURER")
+            ? input.researchAreaIds
+            : undefined,
+          maxStudents: input.roles.includes("LECTURER")
+            ? input.maxStudents
+            : undefined,
+        },
       })
       .then((res) => res.data.data);
   },

@@ -168,6 +168,7 @@ export class CatalogRepository {
             studentCode: input.studentCode!,
             fullName: input.fullName!,
             className: input.className!,
+            majorName: input.majorName ?? "",
             cohort: input.cohort || "",
             trainingSystem: { connect: { id: input.trainingSystemId! } },
             gpa: input.gpa!,

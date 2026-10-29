@@ -24,6 +24,8 @@ export interface CatalogItem {
   active: boolean;
 }
 export interface Student {
+  trainingSystemId?: string;
+  majorName?: string;
   id: string;
   code: string;
   name: string;
@@ -55,6 +57,7 @@ export type TermStatus =
   | "COMPLETED"
   | "CANCELLED";
 export interface Phase {
+  code?: import("@doan/shared").PhaseCode;
   id: string;
   name: string;
   start: string;

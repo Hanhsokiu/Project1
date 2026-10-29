@@ -537,6 +537,20 @@ function ProposalEditorPageContent({
               {context.data.studentName} ·{' '}
               {reviewStatusLabel(context.data.status)} · Hồ sơ {proposalId}
             </p>
+            {context.data.status === 'APPROVED' && (
+              <section className="rounded border border-blue-200 bg-blue-50 p-4 text-sm space-y-3">
+                <p>
+                  Đề cương đã được duyệt, phiên bản này chỉ xem. Khoa chốt hồ sơ
+                  chính thức trước khi sinh viên tải PDF để in, xin chữ ký và nộp Khoa.
+                </p>
+                <Link
+                  className="inline-block font-medium text-blue-700 underline"
+                  to={`/topic/dossier/${proposalId}`}
+                >
+                  Mở hồ sơ & bản in
+                </Link>
+              </section>
+            )}
             {context.data.readiness.length > 0 && (
               <p className="rounded border border-amber-200 bg-amber-50 p-4 text-sm">
                 Không thể chỉnh sửa hiện tại:{' '}

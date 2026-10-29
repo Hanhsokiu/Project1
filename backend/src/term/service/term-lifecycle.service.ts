@@ -186,6 +186,14 @@ export class TermLifecycleService {
         },
         tx,
       );
+      const proposalPhase = term.phases.find((p) => p.code === "PROPOSAL");
+      if (proposalPhase)
+        await this.repository.linkWorkflowPhase(
+          term.id,
+          proposalPhase.id,
+          "PROPOSAL_EDIT",
+          tx,
+        );
       const response = await this.response(term, tx);
       await this.audit.log(
         {
@@ -424,8 +432,23 @@ export class TermLifecycleService {
       const term = await this.required(id, tx);
       this.editable(term);
       const before = await this.response(term, tx);
-      validatePhasePlan(phases, term.startDate, term.endDate);
       const existing = phasesFromTerm(term);
+      // Older clients send only the original six phases. Preserve an existing
+      // review window rather than dropping it from validation or the response.
+      const review = existing.find((p) => p.code === "PROPOSAL_REVIEW");
+      if (review && !phases.some((p) => p.code === "PROPOSAL_REVIEW"))
+        phases = [
+          ...phases,
+          {
+            id: review.id,
+            code: "PROPOSAL_REVIEW",
+            name: review.phaseName,
+            start: review.startDate.toISOString(),
+            end: review.endDate.toISOString(),
+            locked: review.isLocked,
+          },
+        ];
+      validatePhasePlan(phases, term.startDate, term.endDate);
       termAssert(
         phases.every(
           (p) =>
@@ -443,8 +466,22 @@ export class TermLifecycleService {
           endDate: new Date(phase.end),
           isLocked: phase.locked,
         };
-        if (old) await this.repository.updatePhase(old.id, data, tx);
-        else await this.repository.createPhase({ termId: id, ...data }, tx);
+        const saved = old
+          ? await this.repository.updatePhase(old.id, data, tx)
+          : await this.repository.createPhase({ termId: id, ...data }, tx);
+        const key =
+          phase.code === "PROPOSAL"
+            ? "PROPOSAL_EDIT"
+            : phase.code === "PROPOSAL_REVIEW"
+              ? "PROPOSAL_REVIEW"
+              : undefined;
+        if (key)
+          await this.repository.linkWorkflowPhase(
+            id,
+            old?.id ?? saved.id,
+            key,
+            tx,
+          );
       }
       const response = await this.response(await this.required(id, tx), tx);
       await this.audit.log(

@@ -1,4 +1,4 @@
-import { phaseCodes, PhaseCode } from "./term.dto";
+import { basePhaseCodes, phaseCodes, PhaseCode } from "./term.dto";
 import { LoadedTerm } from "../repository/term.repository";
 import { defaultTermParameters } from "../validator/term-configuration.validator";
 
@@ -11,17 +11,17 @@ export function parametersFromTerm(term: LoadedTerm): Record<string, number> {
   return values;
 }
 export function phasesFromTerm(term: LoadedTerm) {
-  return [...term.phases]
-    .sort(
-      (a, b) =>
-        a.startDate.getTime() - b.startDate.getTime() ||
-        a.id.localeCompare(b.id),
-    )
-    .map((phase, index) => ({
+  const sorted = [...term.phases].sort(
+    (a, b) =>
+      a.startDate.getTime() - b.startDate.getTime() || a.id.localeCompare(b.id),
+  );
+  const legacy = sorted.filter((phase) => phase.code !== "PROPOSAL_REVIEW");
+  return sorted
+    .map((phase) => ({
       ...phase,
       code: (phaseCodes.includes(phase.code as PhaseCode)
         ? phase.code
-        : phaseCodes[index]) as PhaseCode,
+        : phase.code || basePhaseCodes[legacy.indexOf(phase)]) as PhaseCode,
     }))
     .sort((a, b) => phaseCodes.indexOf(a.code) - phaseCodes.indexOf(b.code));
 }

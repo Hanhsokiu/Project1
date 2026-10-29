@@ -7,6 +7,7 @@ import {
   HttpCode,
   Param,
   Post,
+  Put,
   Query,
   Req,
   Res,
@@ -28,8 +29,13 @@ import {
   DossierPdfGenerateSchema,
   DossierPdfQuerySchema,
   ProposalPreviewPdfQuerySchema,
+  DossierStudentProfileSchema,
 } from "@doan/shared";
-import type { DossierFinalize, DossierReceiptInput } from "@doan/shared";
+import type {
+  DossierFinalize,
+  DossierReceiptInput,
+  DossierStudentProfileInput,
+} from "@doan/shared";
 import { RequirePermission } from "../../common/security/require-permission.decorator";
 import { ReviewGroupPipe } from "../review-groups/review-group.dto";
 import {
@@ -72,6 +78,34 @@ export class DossierController {
   })
   detail(@Req() req: Request, @Param("proposalId") id: string) {
     return this.service.detail(this.user(req), id).then(success);
+  }
+  @Put("dossier/student-profile")
+  @RequirePermission("proposal", "finalize")
+  @ApiOperation({
+    summary:
+      "Khoa xác nhận lớp/ngành phục vụ bản in trong phạm vi đợt và bộ môn; không chốt hoặc ghi nhận bản giấy",
+  })
+  @ApiBody({
+    schema: {
+      type: "object",
+      additionalProperties: false,
+      required: ["className", "majorName", "expectedRevision"],
+      properties: {
+        className: { type: "string", minLength: 1, maxLength: 100 },
+        majorName: { type: "string", minLength: 1, maxLength: 200 },
+        expectedRevision: { type: "integer", minimum: 0, nullable: true },
+      },
+    },
+  })
+  studentProfile(
+    @Req() req: Request,
+    @Param("proposalId") id: string,
+    @Body(new ReviewGroupPipe(DossierStudentProfileSchema))
+    input: DossierStudentProfileInput,
+  ) {
+    return this.service
+      .saveStudentProfile(this.user(req), id, input)
+      .then(success);
   }
   @Get("preview.pdf")
   @Header("Cache-Control", "private, no-store")

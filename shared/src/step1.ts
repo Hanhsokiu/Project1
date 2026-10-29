@@ -4,6 +4,7 @@ export const PhaseCodeSchema = z.enum([
   "REGISTRATION",
   "ASSIGNMENT",
   "PROPOSAL",
+  "PROPOSAL_REVIEW",
   "WEEKLY",
   "FINAL",
   "DEFENSE",
@@ -134,6 +135,7 @@ export interface TermResponse {
   updatedAt: string;
 }
 export interface ImportValues {
+  majorName?: string;
   studentCode: string;
   fullName: string;
   className: string;

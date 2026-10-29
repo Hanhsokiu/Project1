@@ -138,6 +138,23 @@ export class TermRepository {
   createPhase(data: Prisma.TermPhaseUncheckedCreateInput, tx: TermTransaction) {
     return tx.termPhase.create({ data });
   }
+  async linkWorkflowPhase(
+    termId: string,
+    phaseId: string,
+    key: "PROPOSAL_EDIT" | "PROPOSAL_REVIEW",
+    tx: TermTransaction,
+  ) {
+    const link = await tx.termPhaseWorkflow.upsert({
+      where: { phaseId },
+      create: { termId, phaseId, key },
+      update: {},
+    });
+    if (link.termId !== termId || link.key !== key)
+      throw new BusinessException(
+        ErrorCode.VALIDATION_FAILED,
+        "Giai đoạn đã liên kết với workflow khác; cần đối soát trước khi lưu.",
+      );
+  }
   async replaceParameters(
     termId: string,
     parameters: Record<string, number>,

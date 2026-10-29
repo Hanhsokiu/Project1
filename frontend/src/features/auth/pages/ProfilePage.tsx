@@ -19,6 +19,11 @@ export default function ProfilePage() {
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [phone, setPhone] = useState(user.phone);
+  const [majorName, setMajorName] = useState(
+    user.student?.majorName ||
+      db.students.find((s) => s.id === user.studentId)?.majorName ||
+      "",
+  );
   const [saved, setSaved] = useState(false);
   const student = db.students.find((s) => s.id === user.studentId);
   const lecturer = db.lecturers.find((l) => l.id === user.lecturerId);
@@ -26,7 +31,14 @@ export default function ProfilePage() {
     e.preventDefault();
     setSaved(false);
     try {
-      await action.run(() => authService.updateProfile(name, email, phone));
+      await action.run(() =>
+        authService.updateProfile(
+          name,
+          email,
+          phone,
+          user.roles.includes("STUDENT") ? majorName : undefined,
+        ),
+      );
       setSaved(true);
     } catch {
       // useAction displays the failure; keep the current form available for correction.
@@ -61,6 +73,20 @@ export default function ProfilePage() {
               <Field label="Tên đăng nhập">
                 <input value={user.username} disabled />
               </Field>
+              {user.roles.includes("STUDENT") && (
+                <Field label="Ngành học">
+                  <input
+                    required
+                    maxLength={200}
+                    aria-label="Ngành học"
+                    value={majorName}
+                    onChange={(e) => {
+                      setMajorName(e.target.value);
+                      setSaved(false);
+                    }}
+                  />
+                </Field>
+              )}
               <Field label="Email">
                 <input
                   type="email"

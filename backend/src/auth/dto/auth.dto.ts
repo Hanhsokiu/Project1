@@ -17,6 +17,7 @@ export const RefreshSchema = z
 export const ProfileSchema = z
   .object({
     name: z.string().trim().min(3).max(200),
+    majorName: z.string().trim().min(1).max(200).optional(),
     email: z.union([z.string().email(), z.literal(""), z.null()]).optional(),
     phone: z
       .union([z.string().regex(/^(0|\+84)[0-9]{9,10}$/), z.literal("")])

@@ -344,6 +344,7 @@ model Student {
   studentCode      String   @unique @map("student_code")
   fullName         String   @map("full_name")
   className        String   @default("") @map("class_name")
+  majorName        String   @default("") @map("major_name")
   cohort           String   @default("")
   academicEligible Boolean  @default(true) @map("academic_eligible")
   trainingSystemId String   @map("training_system_id")

@@ -7,7 +7,10 @@ import { inFlightRead } from "./in-flight-read";
 @Injectable()
 export class UserAccountRepository {
   private readonly identityReads = new Map<string, Promise<Identity | null>>();
-  private readonly sessionReads = new Map<string, Promise<LoginSession | null>>();
+  private readonly sessionReads = new Map<
+    string,
+    Promise<LoginSession | null>
+  >();
   constructor(private readonly prisma: PrismaService) {}
   // Retain the foundation repository contract for existing consumers.
   create(data: { username: string; email: string; passwordHash: string }) {
@@ -20,16 +23,27 @@ export class UserAccountRepository {
     });
   }
   findById(id: string) {
-    return inFlightRead(this.identityReads, id, () => this.prisma.userAccount.findUnique({
-      where: { id },
-      include: identityInclude,
-    }));
+    return inFlightRead(this.identityReads, id, () =>
+      this.prisma.userAccount.findUnique({
+        where: { id },
+        include: identityInclude,
+      }),
+    );
   }
   findByEmail(email: string) {
     return this.prisma.userAccount.findUnique({ where: { email } });
   }
   trainingSystem(id: string) {
     return this.prisma.trainingSystem.findUnique({ where: { id } });
+  }
+  department(id: string) {
+    return this.prisma.department.findUnique({ where: { id } });
+  }
+  researchAreas(ids: string[]) {
+    return this.prisma.researchArea.findMany({
+      where: { id: { in: ids } },
+      select: { id: true },
+    });
   }
   async failLogin(id: string) {
     const user = await this.prisma.userAccount.update({
@@ -95,7 +109,12 @@ export class UserAccountRepository {
   }
   updateProfile(
     id: string,
-    data: { name: string; email?: string | null; phone?: string },
+    data: {
+      name: string;
+      email?: string | null;
+      phone?: string;
+      majorName?: string;
+    },
   ) {
     return this.prisma.$transaction(async (tx) => {
       await tx.userAccount.update({
@@ -110,6 +129,9 @@ export class UserAccountRepository {
         where: { userId: id },
         data: {
           fullName: data.name,
+          ...(data.majorName !== undefined
+            ? { majorName: data.majorName }
+            : {}),
           ...(data.phone ? { phone: data.phone } : {}),
         },
       });
@@ -175,6 +197,11 @@ export class UserAccountRepository {
     passwordHash: string;
     roles: string[];
     trainingSystemId?: string;
+    majorName?: string;
+    className?: string;
+    departmentId?: string;
+    researchAreaIds?: string[];
+    maxStudents?: number;
     actorId?: string;
   }) {
     return this.prisma.$transaction(async (tx) => {
@@ -196,9 +223,29 @@ export class UserAccountRepository {
                   create: {
                     studentCode: data.username,
                     fullName: data.displayName,
+                    majorName: data.majorName ?? "",
+                    className: data.className ?? "",
                     trainingSystemId: data.trainingSystemId,
                     phone: data.phone || null,
                     academicEligible: false,
+                  },
+                },
+              }
+            : {}),
+          ...(data.departmentId
+            ? {
+                lecturer: {
+                  create: {
+                    lecturerCode: data.username,
+                    fullName: data.displayName,
+                    departmentId: data.departmentId,
+                    phone: data.phone || null,
+                    maxStudents: data.maxStudents ?? 5,
+                    researchAreas: {
+                      create: (data.researchAreaIds ?? []).map(
+                        (researchAreaId) => ({ researchAreaId }),
+                      ),
+                    },
                   },
                 },
               }
@@ -231,6 +278,11 @@ export class UserAccountRepository {
       passwordHash?: string;
       roles?: string[];
       trainingSystemId?: string;
+      majorName?: string;
+      className?: string;
+      departmentId?: string;
+      researchAreaIds?: string[];
+      maxStudents?: number;
       actorId?: string;
     },
   ) {
@@ -266,17 +318,67 @@ export class UserAccountRepository {
             fullName:
               data.displayName ?? existing.displayName ?? existing.username,
             trainingSystemId: data.trainingSystemId,
+            majorName: data.majorName ?? "",
+            className: data.className ?? "",
             phone: data.phone ?? existing.phone,
             academicEligible: false,
           },
-          update: { trainingSystemId: data.trainingSystemId },
+          update: {
+            trainingSystemId: data.trainingSystemId,
+            majorName: data.majorName,
+            className: data.className,
+          },
         });
       }
-      if (data.displayName !== undefined || data.phone !== undefined)
+      if (
+        data.displayName !== undefined ||
+        data.phone !== undefined ||
+        data.majorName !== undefined ||
+        data.className !== undefined
+      )
         await tx.student.updateMany({
           where: { userId: id },
-          data: { fullName: data.displayName, phone: data.phone },
+          data: {
+            fullName: data.displayName,
+            phone: data.phone,
+            majorName: data.majorName,
+            className: data.className,
+          },
         });
+      if (data.departmentId) {
+        const account = await tx.userAccount.findUniqueOrThrow({
+          where: { id },
+        });
+        const lecturer = await tx.lecturer.upsert({
+          where: { userId: id },
+          create: {
+            userId: id,
+            lecturerCode: account.username,
+            fullName:
+              data.displayName ?? account.displayName ?? account.username,
+            departmentId: data.departmentId,
+            maxStudents: data.maxStudents ?? 5,
+            phone: data.phone ?? account.phone,
+          },
+          update: {
+            departmentId: data.departmentId,
+            maxStudents: data.maxStudents,
+            fullName: data.displayName,
+            phone: data.phone,
+          },
+        });
+        if (data.researchAreaIds !== undefined) {
+          await tx.lecturerArea.deleteMany({
+            where: { lecturerId: lecturer.id },
+          });
+          await tx.lecturerArea.createMany({
+            data: data.researchAreaIds.map((researchAreaId) => ({
+              lecturerId: lecturer.id,
+              researchAreaId,
+            })),
+          });
+        }
+      }
       if (data.roles) {
         const roleRecords = await tx.role.findMany({
           where: { name: { in: data.roles } },

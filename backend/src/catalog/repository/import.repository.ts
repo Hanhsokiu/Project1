@@ -59,6 +59,7 @@ export class ImportUnitOfWork {
         data: {
           fullName: v.fullName,
           className: v.className,
+          ...(v.majorName ? {majorName:v.majorName} : {}),
           ...(v.cohort ? { cohort: v.cohort } : {}),
           gpa: v.gpa!,
           academicEligible: v.academicEligible,
@@ -71,6 +72,7 @@ export class ImportUnitOfWork {
           studentCode: v.studentCode,
           fullName: v.fullName,
           className: v.className,
+          majorName: v.majorName ?? "",
           cohort: v.cohort,
           trainingSystem: { connect: { id: trainingSystemId } },
           gpa: v.gpa!,

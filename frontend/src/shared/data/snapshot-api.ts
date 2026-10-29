@@ -44,6 +44,7 @@ export interface LookupDto {
   description?: string;
 }
 interface StudentDto {
+  majorName?: string;
   id: string;
   studentCode: string;
   fullName: string;
@@ -280,6 +281,8 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
       email: s.email || "",
       phone: s.phone || "",
       className: s.className,
+      trainingSystemId: s.trainingSystemId,
+      majorName: s.majorName || "",
       program:
         s.trainingSystem?.name ||
         programs.find((p) => p.id === s.trainingSystemId)?.name ||

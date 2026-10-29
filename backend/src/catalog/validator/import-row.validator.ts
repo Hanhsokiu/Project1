@@ -30,6 +30,9 @@ export class ImportRowValidator {
       studentCode: String(rawCode).trim(),
       fullName: text("fullName", "name", "Họ và tên"),
       className: text("className", "Lớp"),
+      ...(text("majorName", "Ngành học", "Ngành")
+        ? { majorName: text("majorName", "Ngành học", "Ngành") }
+        : {}),
       cohort: text("cohort", "Khóa"),
       trainingSystemCode:
         text("trainingSystemCode", "program", "Hệ đào tạo") || targetCode,
@@ -93,6 +96,8 @@ export class ImportRowValidator {
       if (v.fullName.length < 3)
         error("fullName", "NAME_REQUIRED", "Họ tên ít nhất 3 ký tự");
       if (!v.className) error("className", "CLASS_REQUIRED", "Thiếu lớp");
+      if (v.majorName && v.majorName.length > 200)
+        error("majorName", "MAJOR_INVALID", "Ngành học tối đa 200 ký tự");
       if (v.gpa === null || !Number.isFinite(v.gpa) || v.gpa < 0 || v.gpa > 4)
         error("gpa", "GPA_INVALID", "GPA bắt buộc từ 0 đến 4");
       if (v.gpa !== null && Number.isFinite(v.gpa) && v.gpa < context.threshold)

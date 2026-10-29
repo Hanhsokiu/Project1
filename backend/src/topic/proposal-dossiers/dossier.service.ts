@@ -7,6 +7,7 @@ import type {
   DossierReceiptInput,
   DossierView,
   DossierPrintSnapshot,
+  DossierStudentProfileInput,
 } from "@doan/shared";
 import {
   DossierRepository,
@@ -150,8 +151,29 @@ export class DossierService {
       receipt = f?.pr2bDossierReceiptFinalizationId;
     const readiness: string[] = [],
       actions: DossierView["allowedActions"] = [];
+    const owner = p.topic.pr2bTopicWorkflowTopicId;
+    const validOwnership =
+      !!owner?.termStudentId &&
+      owner.termId === p.topic.termId &&
+      owner.refTermStudentId?.termId === p.topic.termId &&
+      owner.refTermStudentId.studentId === p.studentId;
+    const [profile, student, term, facultyCanFinalize] = await Promise.all([
+      validOwnership ? s.profile(owner.termStudentId!) : Promise.resolve(null),
+      s.printStudent(p.studentId),
+      s.term(p.topic.termId),
+      this.faculty(s, u, p, "finalize"),
+    ]);
+    const profileReady =
+      !!profile?.className.trim() && !!profile.majorName.trim();
+    if (!profileReady) readiness.push("STUDENT_PROFILE_NOT_READY");
+    const dossierEditable =
+      !d ||
+      (!!w &&
+        ["DRAFT", "REOPENED"].includes(w.state ?? "") &&
+        !w.currentFinalizationId &&
+        d.pr2bDossierFinalizationDossierId.every((v) => !!v.supersededAt));
     let previewSnapshot: DossierPrintSnapshot | null = null;
-    if (await this.access(s, u, p, "finalize"))
+    if (facultyCanFinalize)
       try {
         await this.review.phase(s, p.topic.termId);
         this.validator.open(d, w?.revision ?? 0);
@@ -164,10 +186,10 @@ export class DossierService {
         actions.push("finalize");
       } catch (e) {
         if (!(e instanceof HttpException)) throw e;
-        readiness.push(
+        const code =
           (e.getResponse() as { error?: { code?: string } }).error?.code ??
-            "INPUT_NOT_READY",
-        );
+          "INPUT_NOT_READY";
+        if (!readiness.includes(code)) readiness.push(code);
       }
     if (
       f &&
@@ -206,6 +228,22 @@ export class DossierService {
       state: w?.state ?? (d ? null : "DRAFT"),
       revision: w?.revision ?? 0,
       readiness,
+      studentProfile: {
+        className: profile?.className ?? null,
+        majorName: profile?.majorName ?? null,
+        revision: profile?.revision ?? null,
+        suggestedClassName: student?.className.trim() || null,
+        suggestedMajorName: student?.majorName?.trim() || null,
+        canManage:
+          validOwnership &&
+          facultyCanFinalize &&
+          !!student?.isActive &&
+          !!term &&
+          !term.isLocked &&
+          ["CLOSED_REGISTRATION", "IN_PROGRESS"].includes(term.status) &&
+          dossierEditable &&
+          !readiness.includes("TERM_003"),
+      },
       previewSnapshot,
       previewVersionId:
         p.pr2bProposalWorkflowProposalId?.workingVersionId ??
@@ -326,6 +364,71 @@ export class DossierService {
       await this.requireAccess(s, user, p, "read");
       return this.view(s, user, p);
     });
+  }
+  async saveStudentProfile(
+    userId: string,
+    proposalId: string,
+    input: DossierStudentProfileInput,
+  ) {
+    return this.repo.transaction(async (s) => {
+      let { user, p } = await this.load(s, userId, proposalId);
+      await this.requireAccess(s, user, p, "finalize");
+      await s.lock(p.topic.termId, [], p.id);
+      ({ user, p } = await this.load(s, userId, proposalId));
+      await this.requireAccess(s, user, p, "finalize");
+      await this.review.phase(s, p.topic.termId);
+      const term = await s.term(p.topic.termId);
+      if (!term || term.isLocked)
+        groupError(
+          409,
+          "TERM_003",
+          "Đợt đã khóa; không thể xác nhận thông tin bản in.",
+        );
+      const owner = this.review.ownership(p);
+      const student = await s.printStudent(p.studentId);
+      if (!student?.isActive)
+        groupError(
+          409,
+          "STUDENT_PROFILE_NOT_READY",
+          "Sinh viên không hoạt động; cần đối soát hồ sơ.",
+        );
+      const dossier = await s.dossier(p.id);
+      this.validator.open(
+        dossier,
+        dossier?.pr2bDossierWorkflowDossierId?.revision ?? 0,
+      );
+      const previous = await s.profile(owner.termStudentId!);
+      if ((previous?.revision ?? null) !== input.expectedRevision)
+        groupError(
+          409,
+          "REVISION_CONFLICT",
+          "Lớp/ngành đã thay đổi. Hãy tải lại trước khi xác nhận.",
+        );
+      if (
+        previous?.className === input.className &&
+        previous.majorName === input.majorName
+      )
+        return this.view(s, user, p);
+      const updated = await s.writeStudentProfile(owner.termStudentId!, input);
+      if (updated.count !== 1)
+        groupError(
+          409,
+          "REVISION_CONFLICT",
+          "Lớp/ngành đã thay đổi. Hãy tải lại.",
+        );
+      const current = await s.profile(owner.termStudentId!);
+      await s.dossierAudit(
+        user.id,
+        p.id,
+        "STUDENT_PROFILE_CONFIRMED",
+        json({
+          termStudentId: owner.termStudentId,
+          previous,
+          current,
+        }),
+      );
+      return this.view(s, user, p);
+    }, true);
   }
   private async command(
     userId: string,

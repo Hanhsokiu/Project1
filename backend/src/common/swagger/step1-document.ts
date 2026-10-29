@@ -31,6 +31,7 @@ export function describeStep1(document: OpenAPIObject, prefix = "api") {
     ProfileInput: object(
       {
         name: { ...string, minLength: 3 },
+        majorName: { ...string, minLength: 1, maxLength: 200 },
         email: {
           nullable: true,
           oneOf: [
@@ -86,6 +87,7 @@ export function describeStep1(document: OpenAPIObject, prefix = "api") {
             "REGISTRATION",
             "ASSIGNMENT",
             "PROPOSAL",
+            "PROPOSAL_REVIEW",
             "WEEKLY",
             "FINAL",
             "DEFENSE",
@@ -119,6 +121,7 @@ export function describeStep1(document: OpenAPIObject, prefix = "api") {
         studentCode: { ...string, example: "001234567" },
         fullName: string,
         className: string,
+        majorName: { ...string, minLength: 1, maxLength: 200 },
         cohort: string,
         trainingSystemId: uuid,
         gpa: { type: "number", minimum: 0, maximum: 4 },
@@ -283,7 +286,7 @@ export function describeStep1(document: OpenAPIObject, prefix = "api") {
         phases: {
           type: "array",
           minItems: 6,
-          maxItems: 6,
+          maxItems: 7,
           items: ref("TermPhaseInput"),
         },
       },
@@ -353,6 +356,7 @@ export function describeStep1(document: OpenAPIObject, prefix = "api") {
         "REGISTRATION",
         "ASSIGNMENT",
         "PROPOSAL",
+        "PROPOSAL_REVIEW",
         "WEEKLY",
         "FINAL",
         "DEFENSE",

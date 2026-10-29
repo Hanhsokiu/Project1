@@ -47,11 +47,11 @@ export const termApi = {
   },
   savePhases: (id: string, phases: Term["phases"]) =>
     apiData<Term>("PUT", `/terms/${id}/phases`, {
-      phases: phases.map((phase, i) => ({
+      phases: phases.map((phase) => ({
         ...phase,
         id: /^[0-9a-f-]{36}$/i.test(phase.id) ? phase.id : undefined,
         code:
-          (phase as { code?: string }).code ||
+          phase.code ||
           [
             "REGISTRATION",
             "ASSIGNMENT",
@@ -59,7 +59,7 @@ export const termApi = {
             "WEEKLY",
             "FINAL",
             "DEFENSE",
-          ][i],
+          ][phases.filter((p) => p.code !== "PROPOSAL_REVIEW").indexOf(phase)],
         start: vietnamInstant(phase.start),
         end: vietnamInstant(phase.end, true),
       })),

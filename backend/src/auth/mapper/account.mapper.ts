@@ -49,6 +49,7 @@ export function accountDto(user: Identity) {
           code: user.student.studentCode,
           name: user.student.fullName,
           className: user.student.className,
+          majorName: user.student.majorName,
           cohort: user.student.cohort,
           program: user.student.trainingSystem.name,
           trainingSystemId: user.student.trainingSystemId,

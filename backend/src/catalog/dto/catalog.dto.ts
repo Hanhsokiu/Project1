@@ -20,6 +20,7 @@ export const studentSchema = z.object({
   studentCode: z.string().trim().min(3).max(50),
   fullName: z.string().trim().min(3).max(200),
   className: z.string().trim().min(1).max(100),
+  majorName: z.string().trim().min(1).max(200).optional(),
   cohort: z.string().trim().max(50).optional().default(""),
   trainingSystemId: z.string().uuid(),
   gpa,
@@ -68,6 +69,7 @@ export interface CatalogQuery {
   isActive?: boolean;
 }
 export interface ImportValues {
+  majorName?: string;
   studentCode: string;
   fullName: string;
   className: string;

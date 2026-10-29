@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   ConflictException,
   Injectable,
   UnauthorizedException,
@@ -81,8 +82,23 @@ export class AuthService {
   }
   async updateProfile(
     userId: string,
-    input: { name: string; email?: string | null; phone?: string },
+    input: {
+      name: string;
+      email?: string | null;
+      phone?: string;
+      majorName?: string;
+    },
   ) {
+    if (input.majorName !== undefined) {
+      const owner = await this.users.findById(userId);
+      if (
+        !owner?.student ||
+        !owner.userRoles.some((r) => r.role.name === "STUDENT")
+      )
+        throw new BadRequestException(
+          "Chỉ sinh viên được cập nhật ngành học của mình.",
+        );
+    }
     if (input.email) {
       const other = await this.users.findByEmail(input.email);
       if (other && other.id !== userId)

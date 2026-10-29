@@ -1,7 +1,7 @@
 import { HttpStatus } from "@nestjs/common";
 import { BusinessException } from "../../common/exception/business.exception";
 import { ErrorCode } from "../../common/exception/error-code.enum";
-import { PhaseInput, phaseCodes } from "../dto/term.dto";
+import { PhaseInput, basePhaseCodes, phaseCodes } from "../dto/term.dto";
 
 export const defaultTermParameters: Record<string, number> = {
   process_weight: 0.4,
@@ -51,9 +51,11 @@ export function validatePhasePlan(
   end: Date,
 ) {
   termAssert(
-    phases.length === phaseCodes.length &&
-      new Set(phases.map((p) => p.code)).size === phaseCodes.length,
-    "Cần đúng sáu giai đoạn khác nhau theo quy trình.",
+    (phases.length === basePhaseCodes.length ||
+      phases.length === phaseCodes.length) &&
+      new Set(phases.map((p) => p.code)).size === phases.length &&
+      phases.every((p) => phaseCodes.includes(p.code)),
+    "Cần đủ sáu giai đoạn chính, có thể thêm giai đoạn xét duyệt đề cương riêng.",
   );
   const ids = phases.map((p) => p.id).filter(Boolean);
   termAssert(
@@ -61,7 +63,7 @@ export function validatePhasePlan(
     "Mã giai đoạn không được trùng.",
   );
   let previousEnd = start;
-  for (const code of phaseCodes) {
+  for (const code of basePhaseCodes) {
     const phase = phases.find((p) => p.code === code);
     termAssert(phase, `Thiếu giai đoạn ${code}.`);
     const phaseStart = new Date(phase.start),
@@ -77,6 +79,20 @@ export function validatePhasePlan(
       ErrorCode.TERM_PHASE_OVERLAP,
     );
     previousEnd = phaseEnd;
+  }
+  const review = phases.find((p) => p.code === "PROPOSAL_REVIEW");
+  if (review) {
+    const reviewStart = new Date(review.start),
+      reviewEnd = new Date(review.end);
+    validateDateRange(reviewStart, reviewEnd, "Giai đoạn xét duyệt đề cương");
+    const proposal = phases.find((p) => p.code === "PROPOSAL")!;
+    const guidance = phases.find((p) => p.code === "WEEKLY")!;
+    termAssert(
+      reviewStart >= new Date(proposal.start) &&
+        reviewEnd <= new Date(guidance.start),
+      "Xét duyệt phải bắt đầu từ giai đoạn đề cương và kết thúc trước khi hướng dẫn bắt đầu.",
+      ErrorCode.TERM_PHASE_OVERLAP,
+    );
   }
 }
 export function validateParameters(values: Record<string, number>) {
@@ -145,7 +161,7 @@ export function defaultPhasePlan(
         end: new Date(start.getTime() + (end.getTime() - start.getTime()) / 6),
       };
   const remaining = end.getTime() - registration.end.getTime();
-  const phases = phaseCodes.map((code, index) => ({
+  const phases = basePhaseCodes.map((code, index) => ({
     code,
     name: labels[index],
     start: (index === 0

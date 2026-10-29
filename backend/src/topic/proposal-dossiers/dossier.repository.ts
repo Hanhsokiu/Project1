@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { ProposalVersionSession } from "../proposal-versions/proposal-version.repository";
 import { groupError } from "../review-groups/review-group.errors";
+import type { DossierStudentProfileInput } from "@doan/shared";
 const include = {
   pr2bDossierWorkflowDossierId: true,
   pr2bDossierFinalizationDossierId: {
@@ -28,6 +29,29 @@ export class DossierSession extends ProposalVersionSession {
   profile(termStudentId: string) {
     return this.db.dossierStudentProfile.findUnique({
       where: { termStudentId },
+    });
+  }
+  async writeStudentProfile(
+    termStudentId: string,
+    input: DossierStudentProfileInput,
+  ) {
+    if (input.expectedRevision === null) {
+      await this.db.dossierStudentProfile.create({
+        data: {
+          termStudentId,
+          className: input.className,
+          majorName: input.majorName,
+        },
+      });
+      return { count: 1 };
+    }
+    return this.db.dossierStudentProfile.updateMany({
+      where: { termStudentId, revision: input.expectedRevision },
+      data: {
+        className: input.className,
+        majorName: input.majorName,
+        revision: { increment: 1 },
+      },
     });
   }
   printStudent(id: string) {

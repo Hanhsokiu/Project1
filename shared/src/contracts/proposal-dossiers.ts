@@ -29,6 +29,16 @@ export const ProposalPreviewPdfQuerySchema = z
 export const DossierPdfGenerateSchema = z
   .object({ finalizationId: id, expectedRevision: revision })
   .strict();
+export const DossierStudentProfileSchema = z
+  .object({
+    className: z.string().trim().min(1, "Cần xác nhận lớp sinh viên.").max(100),
+    majorName: z.string().trim().min(1, "Cần xác nhận ngành đào tạo.").max(200),
+    expectedRevision: revision.nullable(),
+  })
+  .strict();
+export type DossierStudentProfileInput = z.infer<
+  typeof DossierStudentProfileSchema
+>;
 export type DossierFinalize = z.infer<typeof DossierFinalizeSchema>;
 export type DossierReceiptInput = z.infer<typeof DossierReceiptSchema>;
 export type DossierPrintSnapshot = {
@@ -81,6 +91,14 @@ export type DossierView = {
   state: "DRAFT" | "FINALIZED" | "RECEIVED" | "REOPENED" | null;
   revision: number;
   readiness: string[];
+  studentProfile?: {
+    className: string | null;
+    majorName: string | null;
+    revision: number | null;
+    suggestedClassName: string | null;
+    suggestedMajorName?: string | null;
+    canManage: boolean;
+  };
   previewSnapshot: DossierPrintSnapshot | null;
   previewVersionId: string | null;
   finalizations: DossierHistoricalFinalization[];

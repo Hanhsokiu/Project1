@@ -33,9 +33,20 @@ describe("student account training program", () => {
     const programs = readDb().catalogs.filter(
       (c) => c.kind === "program" && c.active,
     );
-    authService.saveAccount({ ...input, trainingSystemId: programs[0].id });
+    authService.saveAccount({
+      ...input,
+      trainingSystemId: programs[0].id,
+      majorName: "Công nghệ thông tin",
+      className: "CNPM-01",
+    });
     let db = readDb();
     const account = db.accounts.find((a) => a.username === input.username)!;
+    expect(db.students.find((s) => s.id === account.studentId)?.className).toBe(
+      "CNPM-01",
+    );
+    expect(db.students.find((s) => s.id === account.studentId)?.majorName).toBe(
+      "Công nghệ thông tin",
+    );
     expect(db.students.find((s) => s.id === account.studentId)?.program).toBe(
       programs[0].name,
     );
@@ -43,8 +54,12 @@ describe("student account training program", () => {
       ...input,
       id: account.id,
       trainingSystemId: programs[1].id,
+      majorName: "Khoa học máy tính",
     });
     db = readDb();
+    expect(db.students.find((s) => s.id === account.studentId)?.majorName).toBe(
+      "Khoa học máy tính",
+    );
     expect(db.students.filter((s) => s.id === account.studentId)).toHaveLength(
       1,
     );

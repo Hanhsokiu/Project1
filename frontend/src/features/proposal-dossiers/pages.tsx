@@ -12,6 +12,8 @@ import { dossierApi as api } from "./api";
 import { proposalReviewApi } from "../proposal-reviews/api";
 import { ReviewState, reviewStatusLabel } from "../proposal-reviews/components";
 import { DossierSnapshotPreview, DossierStatus } from "./components";
+import { DossierStudentProfile } from "./student-profile";
+import { useApiSession } from "../../shared/hooks/use-api-session";
 import { getErrorMessage } from "../../shared/api/error-message";
 const issue = (e: unknown) =>
   e ? getErrorMessage(e, "Không thể xử lý hồ sơ. Hãy thử lại.") : undefined;
@@ -27,7 +29,7 @@ function savePdf(blob: Blob, filename: string) {
 }
 const readiness: Record<string, string> = {
   STUDENT_PROFILE_NOT_READY:
-    "Bước 1–3 chưa cung cấp lớp/ngành đã xác nhận. Chưa thể chốt hồ sơ.",
+    "Chưa có lớp/ngành đã xác nhận phục vụ bản in. Khoa cần xác nhận thông tin bên dưới trước khi chốt hồ sơ.",
   STATE_TRANSITION_INVALID: "Đề cương chưa ở trạng thái đủ điều kiện chốt.",
   TERM_003: "Giai đoạn chốt/tiếp nhận chưa mở hoặc đã khóa.",
   INPUT_NOT_READY: "Thiếu dữ liệu đã xác nhận từ bước 1–3.",
@@ -119,7 +121,8 @@ export function DossierListPage() {
               <div>
                 <h2 className="font-semibold">{p.title}</h2>
                 <p>
-                  {p.studentName} · {p.studentCode} · {reviewStatusLabel(p.status)}
+                  {p.studentName} · {p.studentCode} ·{" "}
+                  {reviewStatusLabel(p.status)}
                 </p>
               </div>
               <Link className="rg-table-action" to={`/topic/dossier/${p.id}`}>
@@ -223,15 +226,16 @@ function DossierActions({
   });
   return (
     <section className="rg-panel p-5 space-y-4">
-      {d.previewVersionId && (
-        <button
-          className="rounded border px-4 py-2"
-          disabled={mutation.isPending}
-          onClick={() => mutation.mutate("preview")}
-        >
-          Tải PDF xem trước (chưa chốt)
-        </button>
-      )}
+      {d.previewVersionId &&
+        !d.readiness.includes("STUDENT_PROFILE_NOT_READY") && (
+          <button
+            className="rounded border px-4 py-2"
+            disabled={mutation.isPending}
+            onClick={() => mutation.mutate("preview")}
+          >
+            Tải PDF xem trước (chưa chốt)
+          </button>
+        )}
       {d.allowedActions.includes("finalize") && (
         <div>
           <p className="mb-3 text-sm">
@@ -357,6 +361,7 @@ function FinalizationHistory({ d }: { d: DossierView }) {
   );
 }
 export function DossierDetailPage() {
+  const user = useApiSession();
   const { proposalId = "" } = useParams(),
     client = useQueryClient();
   const query = useQuery({
@@ -365,6 +370,13 @@ export function DossierDetailPage() {
   });
   const d = query.data,
     snapshot = d?.currentFinalization?.snapshot ?? d?.previewSnapshot;
+  const onResult = (value: DossierView) => {
+    client.setQueryData(["proposal-dossier", proposalId], value);
+    void client.invalidateQueries({ queryKey: ["dossier-list"] });
+    void client.invalidateQueries({
+      queryKey: ["proposal-editing-context", proposalId],
+    });
+  };
   return (
     <>
       <Link className="text-blue-700" to="/topic/dossier">
@@ -376,6 +388,16 @@ export function DossierDetailPage() {
           <div className="space-y-5">
             <h2>{d.title}</h2>
             <DossierStatus dossier={d} />
+            {d.proposalStatus === "APPROVED" && !d.currentFinalization && (
+              <p
+                role="status"
+                className="rounded border border-blue-200 bg-blue-50 p-4 text-sm"
+              >
+                Đề cương đã được duyệt. Khoa xác nhận lớp/ngành và chốt đúng
+                phiên bản được duyệt; sau đó sinh viên tải PDF để in, xin chữ ký
+                và nộp Khoa.
+              </p>
+            )}
             {d.readiness.map((code) => (
               <p
                 key={code}
@@ -386,15 +408,23 @@ export function DossierDetailPage() {
                   "Hồ sơ cần kiểm tra đầu vào trước khi chốt."}
               </p>
             ))}
+            <DossierStudentProfile dossier={d} onResult={onResult} />
+            {user?.roles.includes("STUDENT") &&
+              !d.studentProfile?.suggestedMajorName &&
+              !d.studentProfile?.majorName && (
+                <p className="rounded border border-blue-200 bg-blue-50 p-4 text-sm">
+                  Hồ sơ cá nhân chưa có ngành học.{" "}
+                  <Link
+                    className="font-medium text-blue-700 underline"
+                    to="/profile"
+                  >
+                    Cập nhật ngành học trong thông tin cá nhân
+                  </Link>
+                  , sau đó Khoa đối chiếu và xác nhận bản in.
+                </p>
+              )}
             {snapshot && <DossierSnapshotPreview snapshot={snapshot} />}
-            <DossierActions
-              key={proposalId}
-              d={d}
-              onResult={(value) => {
-                client.setQueryData(["proposal-dossier", proposalId], value);
-                void client.invalidateQueries({ queryKey: ["dossier-list"] });
-              }}
-            />
+            <DossierActions key={proposalId} d={d} onResult={onResult} />
             {!!d.finalizations?.length && (
               <FinalizationHistory key={"history-" + proposalId} d={d} />
             )}

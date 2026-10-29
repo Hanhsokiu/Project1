@@ -18,6 +18,7 @@ import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import type { Account, Role } from "../../../shared/data/types";
 import { authService, type SaveAccountInput } from "../services/auth-service";
+import { AccountAcademicFields } from "./account-academic-fields";
 const roles: Role[] = ["ADMIN", "FACULTY", "LECTURER", "STUDENT", "COMMITTEE"];
 type AccountForm = SaveAccountInput;
 const blank: AccountForm = {
@@ -48,7 +49,13 @@ export default function AccountsPage() {
     e.preventDefault();
     if (!form) return;
     try {
-      await action.run(() => authService.saveAccount(form));
+      await action.run(() => {
+        if (form.roles.includes("LECTURER") && !form.researchAreaIds?.length)
+          throw new Error(
+            "Chọn ít nhất một hướng chuyên môn có thể hướng dẫn.",
+          );
+        return authService.saveAccount(form);
+      });
       setForm(null);
     } catch {
       // useAction displays the failure; keep the current form available for correction.
@@ -196,6 +203,31 @@ export default function AccountsPage() {
                         phone: a.phone,
                         password: "",
                         roles: [...a.roles],
+                        className:
+                          a.student?.className ||
+                          db.students.find((s) => s.id === a.studentId)
+                            ?.className ||
+                          "",
+                        departmentId:
+                          a.lecturer?.departmentId ||
+                          db.lecturers.find((l) => l.id === a.lecturerId)
+                            ?.departmentId ||
+                          "",
+                        researchAreaIds:
+                          a.lecturer?.directionIds ||
+                          db.lecturers.find((l) => l.id === a.lecturerId)
+                            ?.directionIds ||
+                          [],
+                        maxStudents:
+                          a.lecturer?.quota ??
+                          db.lecturers.find((l) => l.id === a.lecturerId)
+                            ?.quota ??
+                          5,
+                        majorName:
+                          a.student?.majorName ||
+                          db.students.find((s) => s.id === a.studentId)
+                            ?.majorName ||
+                          "",
                         trainingSystemId:
                           a.student?.trainingSystemId ||
                           programs.find(
@@ -242,6 +274,29 @@ export default function AccountsPage() {
           wide
         >
           <form onSubmit={save}>
+            <fieldset className="mb-5 rounded-xl border border-slate-200 p-4">
+              <legend className="px-2 font-semibold">Vai trò được cấp</legend>
+              <div className="flex flex-wrap gap-4">
+                {roles.map((r) => (
+                  <label className="checkbox-row" key={r}>
+                    <input
+                      type="checkbox"
+                      checked={form.roles.includes(r)}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          roles: e.target.checked
+                            ? [...form.roles, r]
+                            : form.roles.filter((x) => x !== r),
+                        })
+                      }
+                    />
+                    {labels[r]}
+                  </label>
+                ))}
+              </div>
+            </fieldset>
+            <h3 className="mb-3 font-semibold">Thông tin chung</h3>
             <div className="form-grid">
               <Field label="Tên đăng nhập">
                 <input
@@ -276,6 +331,10 @@ export default function AccountsPage() {
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 />
               </Field>
+            </div>
+            <AccountAcademicFields form={form} db={db} onChange={setForm} />
+            <fieldset className="mt-5 rounded-xl border border-slate-200 p-4">
+              <legend className="px-2 font-semibold">Mật khẩu</legend>
               <Field
                 label={
                   form.id
@@ -285,62 +344,27 @@ export default function AccountsPage() {
               >
                 <input
                   type="password"
+                  autoComplete="new-password"
+                  value={form.password || ""}
                   placeholder={
                     form.id
                       ? "Giữ nguyên mật khẩu hiện tại"
                       : "Mặc định: Default@2026"
                   }
-                  value={form.password || ""}
                   onChange={(e) =>
                     setForm({ ...form, password: e.target.value })
                   }
                 />
               </Field>
-              <fieldset className="full">
-                <legend className="mb-2 text-sm">Vai trò được cấp</legend>
-                {roles.map((r) => (
-                  <label className="checkbox-row" key={r}>
-                    <input
-                      type="checkbox"
-                      checked={form.roles.includes(r)}
-                      onChange={(e) =>
-                        setForm({
-                          ...form,
-                          roles: e.target.checked
-                            ? [...form.roles, r]
-                            : form.roles.filter((x) => x !== r),
-                        })
-                      }
-                    />
-                    {labels[r]}
-                  </label>
-                ))}
-              </fieldset>
-              {form.roles.includes("STUDENT") && (
-                <Field label="Hệ đào tạo">
-                  <select
-                    required
-                    value={form.trainingSystemId || ""}
-                    onChange={(e) =>
-                      setForm({ ...form, trainingSystemId: e.target.value })
-                    }
-                  >
-                    <option value="">Chọn hệ đào tạo</option>
-                    {programs.map((program) => (
-                      <option key={program.id} value={program.id}>
-                        {program.name}
-                      </option>
-                    ))}
-                  </select>
-                </Field>
-              )}
-            </div>
+            </fieldset>
             <Notice>
               Tài khoản mới có thể tự đặt mật khẩu hoặc để trống để dùng mật
               khẩu mặc định Default@2026. Người dùng sẽ được yêu cầu đổi mật
               khẩu ở lần đăng nhập đầu tiên.
               {form.roles.includes("STUDENT") &&
-                " Hồ sơ sinh viên được tạo cùng hệ đào tạo đã chọn. Bổ sung lớp, GPA và điều kiện học vụ trong Danh sách sinh viên trước khi đưa vào đợt."}
+                " Hồ sơ sinh viên được tạo cùng hệ đào tạo, ngành và lớp đã nhập. Bổ sung GPA và điều kiện học vụ trước khi đưa vào đợt."}
+              {form.roles.includes("LECTURER") &&
+                " Hồ sơ giảng viên, bộ môn và các hướng chuyên môn được lưu cùng tài khoản."}
             </Notice>
             <div className="form-actions">
               <Button

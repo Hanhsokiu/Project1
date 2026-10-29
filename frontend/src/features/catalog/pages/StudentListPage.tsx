@@ -34,7 +34,10 @@ export default function StudentListPage() {
     (s) =>
       (!program || s.program === program) &&
       (!className || s.className === className) &&
-      (!eligible || (eligible === "YES" ? s.eligible && hasEligibleGpa(s.gpa, 0) : !s.eligible || !hasEligibleGpa(s.gpa, 0))) &&
+      (!eligible ||
+        (eligible === "YES"
+          ? s.eligible && hasEligibleGpa(s.gpa, 0)
+          : !s.eligible || !hasEligibleGpa(s.gpa, 0))) &&
       (scope === "all" || term.studentIds.includes(s.id)),
   );
   async function save(e: FormEvent) {
@@ -83,11 +86,17 @@ export default function StudentListPage() {
         <Stat label="Tổng sinh viên" value={db.students.length} />
         <Stat
           label="Đủ điều kiện học vụ"
-          value={db.students.filter((s) => s.eligible && hasEligibleGpa(s.gpa, 0)).length}
+          value={
+            db.students.filter((s) => s.eligible && hasEligibleGpa(s.gpa, 0))
+              .length
+          }
         />
         <Stat
           label="Chưa đủ điều kiện"
-          value={db.students.filter((s) => !s.eligible || !hasEligibleGpa(s.gpa, 0)).length}
+          value={
+            db.students.filter((s) => !s.eligible || !hasEligibleGpa(s.gpa, 0))
+              .length
+          }
         />
         <Stat
           label="Tham gia đợt hiện tại"
@@ -175,8 +184,16 @@ export default function StudentListPage() {
               key: "eligible",
               title: "Học vụ",
               render: (s) => (
-                <Badge value={s.eligible && hasEligibleGpa(s.gpa, 0) ? "PASS" : "FAIL"}>
-                  {s.gpa === null ? "Chưa có GPA" : s.eligible ? "Đủ điều kiện" : "Chưa đủ điều kiện"}
+                <Badge
+                  value={
+                    s.eligible && hasEligibleGpa(s.gpa, 0) ? "PASS" : "FAIL"
+                  }
+                >
+                  {s.gpa === null
+                    ? "Chưa có GPA"
+                    : s.eligible
+                      ? "Đủ điều kiện"
+                      : "Chưa đủ điều kiện"}
                 </Badge>
               ),
             },
@@ -226,6 +243,17 @@ export default function StudentListPage() {
                   }
                 />
               </Field>
+              <Field label="Ngành học">
+                <input
+                  required
+                  maxLength={200}
+                  aria-label="Ngành học"
+                  value={form.majorName || ""}
+                  onChange={(e) =>
+                    setForm({ ...form, majorName: e.target.value })
+                  }
+                />
+              </Field>
               <Field label="Hệ đào tạo">
                 <select
                   required
@@ -268,9 +296,13 @@ export default function StudentListPage() {
                   min={0}
                   max={4}
                   step="0.01"
-                  value={form.gpa ?? ''}
+                  value={form.gpa ?? ""}
                   onChange={(e) =>
-                    setForm({ ...form, gpa: e.target.value === '' ? null : Number(e.target.value) })
+                    setForm({
+                      ...form,
+                      gpa:
+                        e.target.value === "" ? null : Number(e.target.value),
+                    })
                   }
                 />
               </Field>

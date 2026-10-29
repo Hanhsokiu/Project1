@@ -12,6 +12,7 @@ export function studentDto(
     studentCode: s.studentCode,
     fullName: s.fullName,
     className: s.className,
+    majorName: s.majorName,
     cohort: s.cohort,
     gpa: s.gpa === null ? null : Number(s.gpa),
     academicEligible: s.academicEligible,

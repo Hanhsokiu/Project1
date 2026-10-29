@@ -20,6 +20,8 @@ import {
 import { TermTransitionValidator } from "../validator/term-transition.validator";
 import { TermLifecycleService } from "./term-lifecycle.service";
 import { operationWindow } from "./term-window.service";
+import { phasesFromTerm } from "../dto/term.mapper";
+import { phasePlanSchema } from "../dto/term.dto";
 
 const semester: AcademicSemester = {
   id: "semester1",
@@ -156,6 +158,7 @@ beforeEach(() => {
       ),
     updatePhase: vi.fn().mockResolvedValue({}),
     createPhase: vi.fn().mockResolvedValue({}),
+    linkWorkflowPhase: vi.fn().mockResolvedValue(undefined),
     replaceParameters: vi.fn().mockResolvedValue(undefined),
     students: vi
       .fn()
@@ -511,6 +514,134 @@ describe("roster, quotas, parameters and phases", () => {
     expect(repository.updatePhase).toHaveBeenCalledTimes(6);
   });
 });
+describe("proposal review schedule compatibility", () => {
+  function reviewPlan() {
+    const phases = defaultPhasePlan(term.startDate, term.endDate);
+    const proposal = phases.find((p) => p.code === "PROPOSAL")!;
+    return [
+      ...phases,
+      {
+        ...proposal,
+        code: "PROPOSAL_REVIEW" as const,
+        name: "Xét duyệt đề cương",
+      },
+    ];
+  }
+  function addStoredReview() {
+    const proposal = term.phases.find((p) => p.code === "PROPOSAL")!;
+    term.phases.push({
+      ...proposal,
+      id: "review-phase",
+      code: "PROPOSAL_REVIEW",
+    });
+  }
+  it("accepts six legacy phases and a separate review window without changing their dates", () => {
+    const phases = reviewPlan();
+    expect(phasePlanSchema.safeParse({ phases }).success).toBe(true);
+    expect(() =>
+      validatePhasePlan(phases, term.startDate, term.endDate),
+    ).not.toThrow();
+    const invalid = structuredClone(phases);
+    invalid[6].end = invalid[4].end;
+    expect(() =>
+      validatePhasePlan(invalid, term.startDate, term.endDate),
+    ).toThrow();
+    invalid[6] = { ...phases[6], start: phases[1].start };
+    expect(() =>
+      validatePhasePlan(invalid, term.startDate, term.endDate),
+    ).toThrow();
+    expect(() =>
+      validatePhasePlan(
+        [...phases.slice(1), phases[6]],
+        term.startDate,
+        term.endDate,
+      ),
+    ).toThrow();
+  });
+  it("keeps all original phase identities when review overlaps proposal, including legacy null codes", () => {
+    addStoredReview();
+    const original = phasesFromTerm(term).map((p) => ({
+      id: p.id,
+      code: p.code,
+    }));
+    for (const phase of term.phases)
+      if (phase.code !== "PROPOSAL_REVIEW") phase.code = null;
+    expect(
+      phasesFromTerm(term).map((p) => ({ id: p.id, code: p.code })),
+    ).toEqual(original);
+    expect(original.map((p) => p.code)).toEqual([
+      "REGISTRATION",
+      "ASSIGNMENT",
+      "PROPOSAL",
+      "PROPOSAL_REVIEW",
+      "WEEKLY",
+      "FINAL",
+      "DEFENSE",
+    ]);
+  });
+  it("links the new review window and preserves the six existing schedules", async () => {
+    repository.createPhase.mockResolvedValue({ id: "new-review" });
+    const phases = reviewPlan();
+    await service.savePhases(term.id, phases, "actor");
+    expect(repository.updatePhase).toHaveBeenCalledTimes(6);
+    expect(repository.createPhase).toHaveBeenCalledWith(
+      expect.objectContaining({
+        code: "PROPOSAL_REVIEW",
+        startDate: new Date(phases[2].start),
+        endDate: new Date(phases[2].end),
+      }),
+      tx,
+    );
+    expect(repository.linkWorkflowPhase).toHaveBeenCalledWith(
+      term.id,
+      "new-review",
+      "PROPOSAL_REVIEW",
+      tx,
+    );
+    expect(repository.linkWorkflowPhase).toHaveBeenCalledWith(
+      term.id,
+      "p2",
+      "PROPOSAL_EDIT",
+      tx,
+    );
+  });
+  it("preserves an existing review window for old clients and still validates its boundaries", async () => {
+    addStoredReview();
+    const phases = defaultPhasePlan(term.startDate, term.endDate);
+    await service.savePhases(term.id, phases, "actor");
+    expect(repository.updatePhase).toHaveBeenCalledWith(
+      "review-phase",
+      expect.objectContaining({ code: "PROPOSAL_REVIEW" }),
+      tx,
+    );
+    const invalid = structuredClone(phases);
+    invalid[2].start = new Date(
+      new Date(invalid[2].start).getTime() + 1000,
+    ).toISOString();
+    await expect(
+      service.savePhases(term.id, invalid, "actor"),
+    ).rejects.toThrow();
+  });
+  it("checks the review clock and lock independently of the proposal window", () => {
+    addStoredReview();
+    term.status = "IN_PROGRESS";
+    const phase = term.phases.find((p) => p.code === "PROPOSAL_REVIEW")!;
+    expect(
+      operationWindow(term, "PROPOSAL_REVIEW", phase.startDate).canWrite,
+    ).toBe(true);
+    expect(
+      operationWindow(term, "PROPOSAL_REVIEW", phase.endDate).canWrite,
+    ).toBe(false);
+    phase.isLocked = true;
+    expect(
+      operationWindow(term, "PROPOSAL_REVIEW", phase.startDate).canWrite,
+    ).toBe(false);
+    expect(operationWindow(term, "PROPOSAL", phase.startDate).canWrite).toBe(
+      true,
+    );
+  });
+});
+
 describe("shared server-clock operation window", () => {
   it("uses a half-open server-time interval, lifecycle state and both locks", () => {
     term.status = "OPEN_REGISTRATION";

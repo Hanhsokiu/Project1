@@ -2,6 +2,7 @@ import type {
   DossierView,
   DossierFinalize,
   DossierReceiptInput,
+  DossierStudentProfileInput,
 } from "@doan/shared";
 import { httpClient } from "../../shared/api/http-client";
 type Envelope<T> = { success: true; data: T; timestamp: string };
@@ -23,6 +24,13 @@ export const dossierApi = {
   detail: async (id: string) =>
     (await httpClient.get<Envelope<DossierView>>(`${root(id)}/dossier`)).data
       .data,
+  updateStudentProfile: async (id: string, input: DossierStudentProfileInput) =>
+    (
+      await httpClient.put<Envelope<DossierView>>(
+        `${root(id)}/dossier/student-profile`,
+        input,
+      )
+    ).data.data,
   finalize: (id: string, input: DossierFinalize, key: string) =>
     post(`${root(id)}/finalize`, input, key),
   receive: (id: string, input: DossierReceiptInput, key: string) =>

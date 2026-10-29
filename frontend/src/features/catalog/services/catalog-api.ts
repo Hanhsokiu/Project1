@@ -26,6 +26,7 @@ export const catalogApi = {
         studentCode: input.code,
         fullName: input.name,
         className: input.className,
+        majorName: input.majorName?.trim() || undefined,
         trainingSystemId: system.id,
         gpa: input.gpa,
         academicEligible: input.eligible,
