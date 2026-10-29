@@ -1,3 +1,4 @@
+import { WorkflowHeading } from "../review-groups/workflow-heading";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Link,
@@ -228,11 +229,7 @@ export function GuidancePlanListPage() {
   });
   return (
     <>
-      <h1>Kế hoạch hướng dẫn đồ án</h1>
-      <p className="my-4 text-sm text-slate-500">
-        Mỗi sinh viên có kế hoạch riêng theo hồ sơ chốt và GVHD chính thức. Đã
-        duyệt đề cương chưa đồng nghĩa đã đủ điều kiện tạo kế hoạch.
-      </p>
+      <WorkflowHeading path="/guidance/plan" />
       <label>
         Đợt đồ án
         <select
@@ -570,13 +567,9 @@ export function GuidanceTaskListPage() {
   });
   return (
     <>
-      <h1>Nhiệm vụ & tiến độ hướng dẫn</h1>
-      <p className="my-4 text-sm text-slate-500">
-        Xem trong phạm vi được cấp; Khoa tổng hợp theo đợt, GVHD và SV xem hồ sơ
-        của mình.
-      </p>
+      <WorkflowHeading path="/guidance/tasks" />
       <Link to="/guidance/plan" className="text-blue-700">
-        Mở kế hoạch để giao nhiệm vụ →
+        Xem kế hoạch hướng dẫn →
       </Link>
       <section className="rg-panel my-5 grid gap-4 p-5 sm:grid-cols-3">
         <label>

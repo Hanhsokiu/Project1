@@ -1,3 +1,4 @@
+import { WorkflowHeading } from "./workflow-heading";
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Link,
@@ -139,12 +140,7 @@ export function ReviewGroupListPage() {
     <>
       <div className="mb-7 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">
-            Nhóm duyệt đề cương
-          </h1>
-          <p className="mt-2 text-sm text-slate-500">
-            Quản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.
-          </p>
+          <WorkflowHeading path="/topic/review-groups" />
         </div>
         {options.data?.canManage &&
           ['DRAFT', 'CLOSED_REGISTRATION', 'IN_PROGRESS'].includes(

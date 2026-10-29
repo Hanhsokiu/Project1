@@ -1,3 +1,4 @@
+import { WorkflowHeading } from "../review-groups/workflow-heading";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -9,7 +10,7 @@ import {
 import type { DossierView } from "@doan/shared";
 import { dossierApi as api } from "./api";
 import { proposalReviewApi } from "../proposal-reviews/api";
-import { ReviewState } from "../proposal-reviews/components";
+import { ReviewState, reviewStatusLabel } from "../proposal-reviews/components";
 import { DossierSnapshotPreview, DossierStatus } from "./components";
 import { getErrorMessage } from "../../shared/api/error-message";
 const issue = (e: unknown) =>
@@ -71,11 +72,7 @@ export function DossierListPage() {
   });
   return (
     <>
-      <h1>Chốt đề cương & hồ sơ chính thức</h1>
-      <p className="my-4 text-sm text-slate-500">
-        Phân biệt kết luận duyệt, chốt hồ sơ, PDF và tiếp nhận bản giấy. Chỉ
-        Khoa có quyền chốt/tiếp nhận trong phạm vi được cấp.
-      </p>
+      <WorkflowHeading path="/topic/dossier" />
       <section className="rg-panel mb-5 p-5 flex flex-wrap gap-5">
         <label>
           Đợt đồ án
@@ -122,7 +119,7 @@ export function DossierListPage() {
               <div>
                 <h2 className="font-semibold">{p.title}</h2>
                 <p>
-                  {p.studentName} · {p.studentCode} · {p.status}
+                  {p.studentName} · {p.studentCode} · {reviewStatusLabel(p.status)}
                 </p>
               </div>
               <Link className="rg-table-action" to={`/topic/dossier/${p.id}`}>

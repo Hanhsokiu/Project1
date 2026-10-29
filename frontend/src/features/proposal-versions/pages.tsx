@@ -1,3 +1,4 @@
+import { WorkflowHeading } from "../review-groups/workflow-heading";
 import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -73,11 +74,7 @@ export function ProposalEditorListPage() {
   });
   return (
     <>
-      <h1>Đề cương & phiên bản</h1>
-      <p className="my-4 text-sm text-slate-500">
-        SV và GVHD hiện hành chỉnh sửa hồ sơ trong quyền của mình. Khoa và
-        reviewer chỉ đọc theo phạm vi được cấp.
-      </p>
+      <WorkflowHeading path="/topic/proposal" />
       <div className="rg-panel mb-5 grid gap-4 p-5 sm:grid-cols-2">
         <label className="text-sm">
           Đợt đồ án

@@ -5,6 +5,13 @@ Hệ thống quản lý đồ án tốt nghiệp dành cho khoa/bộ môn đại
 
 B?n t?ch h?p b??c 1?3 g?m API auth, danh m?c, k?/??t, import, ??ng k?, ph?n c?ng v? ?? c??ng/PDF. N?n workflow PR2B ???c gi? l?i. Xem [ghi ch? t?ch h?p v? ki?m ch?ng](docs/implementation/cherry-pick-step1-3.md).
 
+## Môi trường nhóm và hướng dẫn người dùng
+
+- [Hướng dẫn kết nối Supabase và tạo database bước 1–8](docs/implementation/supabase-steps1-8-setup.md)
+- [Đề xuất mới: Windows + Supabase DB/Storage + truy cập riêng cho nhóm](docs/implementation/windows-supabase-shared-proposal.md)
+- [Thiết lập một backend, database và kho file chung](docs/implementation/team-shared-environment.md)
+- [Hướng dẫn thao tác và tìm lỗi bước 4–8 theo từng vai trò](docs/implementation/user-guide-steps4-8.md)
+
 ## Stack
 - **Backend**: NestJS + Prisma + PostgreSQL
 - **Frontend**: React + Vite + TypeScript + shadcn/ui + Tailwind

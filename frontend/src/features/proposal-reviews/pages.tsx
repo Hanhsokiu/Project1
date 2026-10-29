@@ -1,3 +1,4 @@
+import { WorkflowHeading } from "../review-groups/workflow-heading";
 import React, { useEffect, useRef, useState } from 'react';
 import {
   Link,
@@ -23,6 +24,9 @@ import {
   reviewStatusLabel,
 } from './components';
 import { getErrorMessage } from '../../shared/api/error-message';
+import { useWorkspace } from '../../shared/hooks/use-workspace';
+import { canAccessRoute, routeManifest } from '../../app/router/route-manifest';
+import { AUTH_API } from '../../shared/api/api-session';
 const message = (e: unknown) =>
   e ? getErrorMessage(e, 'Không thể xử lý đề cương. Hãy thử lại.') : undefined;
 function useRequestKey() {
@@ -37,6 +41,8 @@ function useRequestKey() {
 const date = (v: string) =>
   new Date(v).toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' });
 export function ProposalReviewQueuePage() {
+  const { user } = useWorkspace();
+  const groupsRoute = routeManifest.find((route) => route.path === '/topic/review-groups')!;
   const [params, setParams] = useSearchParams(),
     termId = params.get('termId') ?? '';
   const [page, setPage] = useState(1),
@@ -87,17 +93,13 @@ export function ProposalReviewQueuePage() {
   return (
     <>
       <div className="mb-6">
-        <h1>Phân công & xét duyệt đề cương</h1>
-        <p className="mt-2 text-sm text-slate-500">
-          Khoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân
-          cho nhóm mình.
-        </p>
-        <Link
+        <WorkflowHeading path="/topic/reviews" />
+        {canAccessRoute(groupsRoute, user, AUTH_API) && <Link
           className="mt-3 inline-block text-sm text-blue-700"
           to={`/topic/review-groups?termId=${encodeURIComponent(termId)}`}
         >
-          Quản lý nhóm duyệt →
-        </Link>
+          {user.roles.includes('FACULTY') ? 'Quản lý nhóm duyệt' : 'Nhóm duyệt của tôi'} →
+        </Link>}
       </div>
       {options.data?.phase ? (
         <p className="mb-5 rounded border bg-white p-4 text-sm">
@@ -116,7 +118,7 @@ export function ProposalReviewQueuePage() {
       )}
       <section className="rg-panel mb-5">
         <div className="rg-panel-heading">
-          <h2>Hàng đợi / inbox theo đợt</h2>
+          <h2>{user.roles.includes('STUDENT') ? 'Hồ sơ của bạn' : 'Danh sách hồ sơ'}</h2>
         </div>
         <div className="rg-filters grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           <label>

@@ -37,7 +37,7 @@ import {
   Link,
 } from "react-router-dom";
 import { useWorkspace } from "../../shared/hooks/use-workspace";
-import { routeManifest } from "./route-manifest";
+import { canAccessRoute, routeManifest } from "./route-manifest";
 import { Empty } from "../../shared/components/kit";
 import { AUTH_API } from "../../shared/api/api-session";
 import { useApiSession } from "../../shared/hooks/use-api-session";
@@ -59,7 +59,7 @@ function WorkflowAccess({ children }: { children: ReactNode }) {
         location.pathname,
       ),
     );
-    if (!route || !route.roles.some((role) => user.roles.includes(role)))
+    if (!route || !canAccessRoute(route, user, true))
       return <Navigate to="/forbidden" replace />;
   }
   return <>{children}</>;
@@ -186,7 +186,7 @@ function PermissionGuard() {
           pathname,
         ),
   );
-  return route && !route.roles.some((r) => user.roles.includes(r)) ? (
+  return route && !canAccessRoute(route, user, AUTH_API) ? (
     <Navigate to="/forbidden" replace />
   ) : (
     <Outlet />

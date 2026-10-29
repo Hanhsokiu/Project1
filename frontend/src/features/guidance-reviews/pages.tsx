@@ -221,11 +221,12 @@ export function ProgressReviewDetailPage() {
     <div className="space-y-5 min-w-0">
       <Link
         className="text-blue-700"
-        to={c ? `/guidance/tasks/${c.taskId}/submissions` : "/guidance/review"}
+        to={c ? `/guidance/tasks/${c.taskId}/submissions` : "/guidance/tasks"}
       >
         ← Báo cáo và lịch sử nộp
       </Link>
-      <h1>Nhận xét báo cáo tiến độ</h1>
+      <h1>{c?.allowedActions.some((action) => action === "review" || action === "amend")
+        ? "Đánh giá báo cáo sinh viên" : "Kết quả đánh giá báo cáo"}</h1>
       <GuidanceState loading={query.isLoading} error={issue(query.error)}>
         {c && (
           <>

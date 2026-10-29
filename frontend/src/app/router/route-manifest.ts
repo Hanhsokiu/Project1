@@ -1,10 +1,13 @@
-import type { Role } from "../../shared/data/types";
+import type { Account, Role } from "../../shared/data/types";
 export interface RouteInfo {
   path: string;
   title: string;
   group: string;
   roles: Role[];
   menu?: boolean;
+  permission?: string;
+  menuRoles?: Role[];
+  roleTitles?: Partial<Record<Role, string>>;
 }
 const M: Role[] = ["ADMIN", "FACULTY"];
 const G: Role[] = [...M, "LECTURER"];
@@ -269,10 +272,119 @@ export const routeManifest: RouteInfo[] = [
     path: path as string,
     title: title as string,
     roles: roles as Role[],
-    group: "Xét duyệt & hướng dẫn",
+    group: (path as string).startsWith("/topic/")
+      ? "Đề cương & xét duyệt"
+      : "Hướng dẫn đồ án",
+    permission: workflowPermission(path as string),
+    ...workflowPresentation(path as string),
     menu:
       !(path as string).includes(":") &&
       !(path as string).endsWith("/new") &&
       path !== "/guidance/notifications",
   })),
 ];
+
+function workflowPermission(path: string): string | undefined {
+  if (path.startsWith("/topic/review-groups"))
+    return path.endsWith("/new") || path.endsWith("/edit")
+      ? "review-group:manage"
+      : "review-group:read";
+  if (path.startsWith("/topic/review-assignments")) return "proposal:assign";
+  if (path.startsWith("/topic/")) return "proposal:read";
+  if (path.endsWith("/tasks/new")) return "task:manage";
+  if (path === "/guidance/review") return "task:review";
+  if (path.startsWith("/guidance/review/")) return "submission:read";
+  if (path === "/guidance/progress") return "guidance:monitor";
+  if (path === "/guidance/defense-confirm" || path === "/guidance/final-report")
+    return undefined;
+  if (path.includes("/submissions")) return "submission:read";
+  if (path.startsWith("/guidance/")) return "guidance:read";
+}
+
+function workflowPresentation(path: string): Partial<RouteInfo> {
+  switch (path) {
+    case "/topic/review-groups":
+      return { roleTitles: { LECTURER: "Nhóm duyệt của tôi" } };
+    case "/topic/reviews":
+      return {
+        roleTitles: {
+          FACULTY: "Phân công & xét duyệt",
+          LECTURER: "Đề cương cần xét duyệt",
+          STUDENT: "Kết quả xét duyệt",
+        },
+      };
+    case "/topic/proposal":
+      return {
+        roleTitles: {
+          STUDENT: "Đề cương của tôi",
+          LECTURER: "Đề cương sinh viên",
+          FACULTY: "Tra cứu đề cương",
+        },
+      };
+    case "/topic/dossier":
+      return {
+        roleTitles: {
+          STUDENT: "Hồ sơ & bản in",
+          LECTURER: "Hồ sơ sinh viên",
+          FACULTY: "Chốt hồ sơ & nhận bản giấy",
+        },
+      };
+    case "/guidance/plan":
+      return {
+        roleTitles: {
+          STUDENT: "Kế hoạch của tôi",
+          LECTURER: "Kế hoạch hướng dẫn",
+        },
+        menuRoles: ["LECTURER", "STUDENT"],
+      };
+    case "/guidance/tasks":
+      return {
+        roleTitles: {
+          STUDENT: "Nhiệm vụ & nộp báo cáo",
+          LECTURER: "Nhiệm vụ sinh viên",
+        },
+        menuRoles: ["LECTURER", "STUDENT"],
+      };
+    case "/guidance/meetings":
+      // Open from a plan, which supplies the required planId.
+      return { menuRoles: [] };
+    case "/guidance/defense-confirm":
+    case "/guidance/final-report":
+      // These legacy screens use browser demo storage, not the step 4–8 APIs.
+      return { menuRoles: [] };
+    default:
+      return {};
+  }
+}
+
+// API permissions are authoritative; demo accounts have no permission snapshot.
+export function canAccessRoute(
+  route: RouteInfo,
+  user: Pick<Account, "roles" | "permissions">,
+  api: boolean,
+) {
+  return (
+    route.roles.some((role) => user.roles.includes(role)) &&
+    (!api ||
+      !route.permission ||
+      !!user.permissions?.includes(route.permission))
+  );
+}
+
+export function navigationRoutes(
+  user: Pick<Account, "roles" | "permissions">,
+  api: boolean,
+) {
+  return routeManifest.filter(
+    (route) =>
+      route.menu !== false &&
+      canAccessRoute(route, user, api) &&
+      (!route.menuRoles ||
+        route.menuRoles.some((role) => user.roles.includes(role))),
+  );
+}
+
+export function routeTitle(route: RouteInfo, user: Pick<Account, "roles">) {
+  const role = user.roles.find((role) => route.roleTitles?.[role]);
+  return (role && route.roleTitles?.[role]) || route.title;
+}

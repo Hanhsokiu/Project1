@@ -1,5 +1,10 @@
 import { useEffect } from "react";
-import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
+import {
+  Outlet,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { Search } from "lucide-react";
 import WorkspaceLayout from "../../app/layouts/WorkspaceLayout";
 import { useWorkspace } from "../../shared/hooks/use-workspace";
@@ -34,6 +39,7 @@ function WorkflowContent({
   guidanceMode,
 }: Mode) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [params] = useSearchParams();
   const { db, termId: selectedTerm, setTermId } = useWorkspace();
   const requestedTerm = params.get("termId");
@@ -66,41 +72,43 @@ function WorkflowContent({
       : "Tìm nhóm";
   return (
     <div className="workflow-content">
-      <form
-        className="workflow-toolbar"
-        role="search"
-        onSubmit={(event) => {
-          event.preventDefault();
-          if (!requestedTerm && !selectedTerm) return;
-          const search = String(
-            new FormData(event.currentTarget).get("query") ?? "",
-          ).trim();
-          const query = new URLSearchParams({ search });
-          if (requestedTerm || selectedTerm)
-            query.set("termId", requestedTerm || selectedTerm);
-          navigate(list + "?" + query);
-        }}
-      >
-        <div className="search-input">
-          <Search size={17} aria-hidden="true" />
-          <input
-            name="query"
-            disabled={!requestedTerm && !selectedTerm}
-            aria-label={label}
-            placeholder={
-              guidanceMode ? "Tìm nhiệm vụ…" : "Tìm đề cương, nhóm duyệt…"
-            }
-          />
-        </div>
-        <button
-          type="submit"
-          disabled={!requestedTerm && !selectedTerm}
-          className="btn btn-secondary"
-          aria-label={submitLabel}
+      {pathname === list && (dossierMode || guidanceMode) && (
+        <form
+          className="workflow-toolbar"
+          role="search"
+          onSubmit={(event) => {
+            event.preventDefault();
+            if (!requestedTerm && !selectedTerm) return;
+            const search = String(
+              new FormData(event.currentTarget).get("query") ?? "",
+            ).trim();
+            const query = new URLSearchParams({ search });
+            if (requestedTerm || selectedTerm)
+              query.set("termId", requestedTerm || selectedTerm);
+            navigate(list + "?" + query);
+          }}
         >
-          Tìm kiếm
-        </button>
-      </form>
+          <div className="search-input">
+            <Search size={17} aria-hidden="true" />
+            <input
+              name="query"
+              disabled={!requestedTerm && !selectedTerm}
+              aria-label={label}
+              placeholder={
+                guidanceMode ? "Tìm nhiệm vụ…" : "Tìm đề cương…"
+              }
+            />
+          </div>
+          <button
+            type="submit"
+            disabled={!requestedTerm && !selectedTerm}
+            className="btn btn-secondary"
+            aria-label={submitLabel}
+          >
+            Tìm kiếm
+          </button>
+        </form>
+      )}
       <Outlet />
     </div>
   );

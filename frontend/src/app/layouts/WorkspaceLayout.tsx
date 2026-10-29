@@ -33,8 +33,13 @@ import {
   ShieldCheck,
   Sparkles,
   Users,
+  X,
 } from "lucide-react";
-import { routeManifest } from "../router/route-manifest";
+import {
+  navigationRoutes,
+  routeManifest,
+  routeTitle,
+} from "../router/route-manifest";
 import {
   DataBoundary,
   Person,
@@ -103,6 +108,9 @@ function Shell({ children }: { children?: ReactNode }) {
   const cache = useQueryClient();
   const [mobile, setMobile] = useState(false);
   const [reset, setReset] = useState(false);
+  const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
+    {},
+  );
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const sidebarRef = useRef<HTMLElement>(null);
   const closeMobileMenu = useCallback(() => {
@@ -126,14 +134,14 @@ function Shell({ children }: { children?: ReactNode }) {
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
   }, [mobile, closeMobileMenu]);
-  const routes = routeManifest.filter(
-    (r) =>
-      r.menu !== false && r.roles.some((role) => user.roles.includes(role)),
-  );
+  const routes = navigationRoutes(user, AUTH_API);
   const groups = [...new Set(routes.map((r) => r.group))];
   const active = routeManifest.find((r) =>
     matchPath({ path: r.path, end: true }, location.pathname),
   );
+  const workflowPage =
+    location.pathname.startsWith("/guidance/") ||
+    /^\/topic\/(review|proposal|dossier)/.test(location.pathname);
   const icons = [
     Home,
     ShieldCheck,
@@ -173,33 +181,74 @@ function Shell({ children }: { children?: ReactNode }) {
           <Layers size={18} className="text-blue-500" />
           <div>
             <small>Không gian làm việc</small>
-            <strong>Khoa Công nghệ thông tin</strong>
+            <strong>
+              {user.roles.map((role) => labels[role]).join(" · ")}
+            </strong>
           </div>
+          {mobile && (
+            <button
+              type="button"
+              className="icon-btn sidebar-close"
+              aria-label="Đóng menu điều hướng"
+              onClick={closeMobileMenu}
+            >
+              <X size={18} />
+            </button>
+          )}
         </div>
         <nav className="sidebar-nav" aria-label="Điều hướng chính">
           {groups.map((group, i) => {
             const Icon = icons[i % icons.length];
+            const expanded =
+              expandedGroups[group] ??
+              (!workflowPage ||
+                group === active?.group ||
+                group === "Không gian làm việc");
             return (
               <div className="nav-group" key={group}>
-                <p className="nav-group-title">{group}</p>
-                {routes
-                  .filter((r) => r.group === group)
-                  .map((r) => (
-                    <NavLink
-                      key={r.path}
-                      to={r.path}
-                      end={r.path === "/"}
-                      onClick={() => {
-                        if (mobile) closeMobileMenu();
-                      }}
-                      className={({ isActive }) =>
-                        `nav-item ${isActive ? "active" : ""}`
-                      }
-                    >
-                      <Icon />
-                      <span>{r.title}</span>
-                    </NavLink>
-                  ))}
+                <button
+                  type="button"
+                  className="nav-group-toggle"
+                  aria-expanded={expanded}
+                  aria-controls={`nav-group-${i}`}
+                  onClick={() =>
+                    setExpandedGroups((previous) => ({
+                      ...previous,
+                      [group]: !expanded,
+                    }))
+                  }
+                >
+                  <span>{group}</span>
+                  <ChevronRight
+                    size={14}
+                    className={expanded ? "expanded" : ""}
+                  />
+                </button>
+                <div id={`nav-group-${i}`} hidden={!expanded}>
+                  {routes
+                    .filter((r) => r.group === group)
+                    .map((r) => (
+                      <NavLink
+                        key={r.path}
+                        to={
+                          r.path.startsWith("/topic/") ||
+                          r.path.startsWith("/guidance/")
+                            ? `${r.path}?${new URLSearchParams(termId ? { termId } : {})}`
+                            : r.path
+                        }
+                        end={r.path === "/"}
+                        onClick={() => {
+                          if (mobile) closeMobileMenu();
+                        }}
+                        className={({ isActive }) =>
+                          `nav-item ${isActive ? "active" : ""}`
+                        }
+                      >
+                        <Icon />
+                        <span>{routeTitle(r, user)}</span>
+                      </NavLink>
+                    ))}
+                </div>
               </div>
             );
           })}
@@ -243,7 +292,7 @@ function Shell({ children }: { children?: ReactNode }) {
           </button>
           <div className="topbar-title">
             UTC GPMS Portal <ChevronRight size={13} />
-            <b>{active?.title || "Trang không tồn tại"}</b>
+            <b>{active ? routeTitle(active, user) : "Trang không tồn tại"}</b>
           </div>
           <div className="topbar-controls">
             <select
