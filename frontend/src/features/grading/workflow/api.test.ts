@@ -34,12 +34,53 @@ beforeEach(() => {
 });
 afterEach(() => vi.unstubAllEnvs());
 describe("UC22–25 real adapters without DemoDb", () => {
-  it("defaults to independent demo mode when flag is off; real adapter refuses access", async () => {
+  it("real auth with grading off is disabled; real adapter refuses access", async () => {
     vi.stubEnv("VITE_GRADING_API", "false");
-    expect(gradingMode()).toBe("DEMO");
+    expect(gradingMode()).toBe("DISABLED");
     await expect(api.inbox("term", "REVIEWER")).rejects.toThrow();
     expect(mocks.get).not.toHaveBeenCalled();
   });
+  it.each(["policy", "result"] as const)(
+    "reads %s history with the backend cursor contract",
+    async (kind) => {
+      const page = {
+        items: [
+          {
+            revision: 26,
+            recordedAt: "2026-10-29T00:00:00Z",
+            actorUserId: "actor",
+            integrity: "UNKNOWN",
+          },
+        ],
+        nextRevision: 26,
+      };
+      mocks.get.mockResolvedValue({ data: { data: page } });
+      const result =
+        kind === "policy"
+          ? await api.policyHistory("term", 25)
+          : await api.resultHistory("term", "p/a", 25);
+      expect(result).toBe(page);
+      expect(mocks.get).toHaveBeenCalledWith(
+        `/terms/term/grading/${kind === "policy" ? "policy" : "results/p%2Fa"}/history`,
+        { timeout: 75000, params: { afterRevision: 25, limit: 25 } },
+      );
+    },
+  );
+  it("rejects invalid history cursors and proposal IDs before HTTP", async () => {
+    await expect(api.policyHistory("term", -1)).rejects.toThrow();
+    await expect(api.resultHistory("term", "", 0)).rejects.toThrow();
+    expect(mocks.get).not.toHaveBeenCalled();
+  });
+  it.each([403, 409, 503])(
+    "history %s errors propagate without fabricated rows",
+    async (status) => {
+      mocks.get.mockRejectedValue({ status });
+      await expect(api.policyHistory("term")).rejects.toMatchObject({ status });
+      await expect(api.resultHistory("term", "proposal")).rejects.toMatchObject(
+        { status },
+      );
+    },
+  );
   it("flag on and auth off is CONFIG_ERROR, never demo fallback", async () => {
     vi.stubEnv("VITE_AUTH_API", "false");
     expect(gradingMode()).toBe("CONFIG_ERROR");

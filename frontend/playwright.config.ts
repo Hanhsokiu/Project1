@@ -1,10 +1,13 @@
 import { defineConfig, devices } from "@playwright/test";
 import { resolve } from "node:path";
+const { browserOrigin } = require("./scripts/browser-settings.cjs");
 
 const mode = process.env.GPMS_BROWSER_MODE ?? "api";
-if (mode !== "api" && mode !== "demo")
+// Fresh artifacts also avoid Windows locks/ownership from previous test runs.
+const artifactName = `browser-${mode}-${process.pid}`;
+if (!["api", "demo", "mixed"].includes(mode))
   throw new Error(
-    "GPMS_BROWSER_MODE must be api or demo; live API suites are not selected here.",
+    "GPMS_BROWSER_MODE must be api, demo or mixed; live API suites are not selected here.",
   );
 process.env.PLAYWRIGHT_BROWSERS_PATH = resolve(
   __dirname,
@@ -21,17 +24,17 @@ export default defineConfig({
   timeout: 60_000,
   globalTimeout: 300_000,
   expect: { timeout: 8_000 },
-  outputDir: `test-results/browser-${mode}`,
+  outputDir: `test-results/${artifactName}`,
   reporter: [
     ["list"],
     [
       "html",
-      { open: "never", outputFolder: `playwright-report/browser-${mode}` },
+      { open: "never", outputFolder: `playwright-report/${artifactName}` },
     ],
-    ["json", { outputFile: `test-results/browser-${mode}/results.json` }],
+    ["json", { outputFile: `test-results/${artifactName}/results.json` }],
   ],
   use: {
-    baseURL: "http://127.0.0.1:5173",
+    baseURL: browserOrigin,
     serviceWorkers: "block",
     trace: "retain-on-failure",
     screenshot: "only-on-failure",
@@ -44,7 +47,7 @@ export default defineConfig({
   ],
   webServer: {
     command: "node scripts/start-browser-vite.cjs",
-    url: "http://127.0.0.1:5173",
+    url: browserOrigin,
     // Refuse an unknown server with different flags or API URL.
     reuseExistingServer: false,
     timeout: 60000,

@@ -1,9 +1,10 @@
 const { resolve } = require("node:path");
+const { browserPort } = require("./browser-settings.cjs");
 const mode = process.env.GPMS_BROWSER_MODE;
-if (!["api", "demo"].includes(mode))
+if (!["api", "demo", "mixed"].includes(mode))
   throw new Error("An explicit safe browser mode is required.");
 // Override all existing flags; do not edit or rely on developer .env files.
-const enabled = mode === "api" ? "true" : "false";
+const enabled = mode !== "demo" ? "true" : "false";
 Object.assign(process.env, {
   VITE_API_URL: "/api",
   VITE_AUTH_API: enabled,
@@ -15,15 +16,19 @@ Object.assign(process.env, {
   VITE_FINAL_REPORT_API: enabled,
   VITE_DEFENSE_LIST_API: enabled,
   VITE_DEFENSE_PLANNING_API: enabled,
-  VITE_GRADING_API: enabled,
-  VITE_DEMO_MODE: mode === "demo" ? "true" : "false",
+  VITE_GRADING_API: mode === "mixed" ? "false" : enabled,
+  VITE_DEMO_MODE: mode !== "api" ? "true" : "false",
 });
 (async () => {
   const { createServer } = await import("vite");
   const server = await createServer({
     root: resolve(__dirname, ".."),
     mode: `e2e-${mode}`,
-    server: { host: "127.0.0.1", port: 5173, strictPort: true },
+    cacheDir: resolve(
+      __dirname,
+      `../../.cache/playwright-vite/${browserPort}-${mode}`,
+    ),
+    server: { host: "127.0.0.1", port: browserPort, strictPort: true },
     plugins: [
       {
         name: "browser-tests-never-proxy-to-backend",

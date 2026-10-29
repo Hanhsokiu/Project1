@@ -48,6 +48,7 @@ import { finalReportApiEnabled } from "../../features/guidance/final-reports/con
 import { defenseListMode } from "../../features/defense/defense-lists/api";
 import { defensePlanningMode } from "../../features/defense/planning/api";
 import { gradingMode } from "../../features/grading/workflow/api";
+import { GradingDemoBoundary } from "../../features/grading/workflow/mode-boundary";
 const GradingWorkflowPage = lazy(
   () => import("../../features/grading/workflow/pages"),
 );
@@ -652,14 +653,36 @@ export const router = createBrowserRouter([
             ? [
                 {
                   path: "grading/reviewer",
-                  element: wrap(<DemoScoreEntryPage />),
+                  element: wrap(
+                    <GradingDemoBoundary>
+                      <DemoScoreEntryPage />
+                    </GradingDemoBoundary>,
+                  ),
                 },
                 {
                   path: "grading/committee",
-                  element: wrap(<DemoScoreEntryPage />),
+                  element: wrap(
+                    <GradingDemoBoundary>
+                      <DemoScoreEntryPage />
+                    </GradingDemoBoundary>,
+                  ),
                 },
-                { path: "grading/results", element: wrap(<DemoResultPage />) },
-                { path: "grading/rubric", element: wrap(<DemoRubricPage />) },
+                {
+                  path: "grading/results",
+                  element: wrap(
+                    <GradingDemoBoundary>
+                      <DemoResultPage />
+                    </GradingDemoBoundary>,
+                  ),
+                },
+                {
+                  path: "grading/rubric",
+                  element: wrap(
+                    <GradingDemoBoundary>
+                      <DemoRubricPage />
+                    </GradingDemoBoundary>,
+                  ),
+                },
               ]
             : []),
           { path: "report/export", element: wrap(<ExportCenterPage />) },

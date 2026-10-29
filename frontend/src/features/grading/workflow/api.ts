@@ -17,8 +17,10 @@ import {
 import { httpClient } from "../../../shared/api/http-client";
 import { getAccessToken } from "../../../shared/api/api-session";
 export function gradingMode() {
-  if (import.meta.env.VITE_GRADING_API !== "true") return "DEMO";
-  return import.meta.env.VITE_AUTH_API === "true" ? "API" : "CONFIG_ERROR";
+  if (import.meta.env.VITE_GRADING_API === "true")
+    return import.meta.env.VITE_AUTH_API === "true" ? "API" : "CONFIG_ERROR";
+  if (import.meta.env.VITE_AUTH_API === "true") return "DISABLED";
+  return import.meta.env.VITE_DEMO_MODE === "true" ? "DEMO" : "DISABLED";
 }
 export function gradingRoot(termId: string) {
   if (gradingMode() !== "API")
@@ -92,7 +94,47 @@ export type GradeHistory = {
   }[];
   nextRevision: number | null;
 };
+// Response fields from GradingService.policyHistory/resultHistory.
+// Neither endpoint supplies a reason, display name or explicit action field.
+export type PolicyHistoryRow = {
+  revision: number;
+  recordedAt: string;
+  actorUserId: string;
+  contentHash: string;
+  integrity: "VERIFIED" | "UNKNOWN";
+};
+export type ResultHistoryRow = Omit<PolicyHistoryRow, "contentHash"> & {
+  state: "SEALED" | "PUBLISHED";
+};
+export type HistoryPage<T> = { items: T[]; nextRevision: number | null };
 export const gradingApi = {
+  policyHistory: async (termId: string, afterRevision = 0) =>
+    (
+      await httpClient.get<{ data: HistoryPage<PolicyHistoryRow> }>(
+        `${gradingRoot(termId)}/grading/policy/history`,
+        {
+          ...config,
+          params: gradingHistoryQuerySchema.parse({ afterRevision, limit: 25 }),
+        },
+      )
+    ).data.data,
+  resultHistory: async (
+    termId: string,
+    proposalId: string,
+    afterRevision = 0,
+  ) => {
+    if (!proposalId.trim() || proposalId.length > 36)
+      throw new Error("Hồ sơ không hợp lệ.");
+    return (
+      await httpClient.get<{ data: HistoryPage<ResultHistoryRow> }>(
+        `${gradingRoot(termId)}/grading/results/${encodeURIComponent(proposalId)}/history`,
+        {
+          ...config,
+          params: gradingHistoryQuerySchema.parse({ afterRevision, limit: 25 }),
+        },
+      )
+    ).data.data;
+  },
   summary: async (termId: string) =>
     (
       await httpClient.get<{

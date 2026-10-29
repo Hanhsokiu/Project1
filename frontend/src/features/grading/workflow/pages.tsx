@@ -12,6 +12,8 @@ import type {
 import { gradingPolicySchema } from "@doan/shared";
 import { getAccessToken, getApiUser } from "../../../shared/api/api-session";
 import { routeManifest } from "../../../app/router/route-manifest";
+import { GradingHistory } from "./history";
+import { GradingUnavailable } from "./mode-boundary";
 import {
   Button,
   Card,
@@ -131,9 +133,11 @@ export function PublishedGradeRows({ items }: { items: PublishedGrade[] }) {
 export function ResultPreviewRows({
   items,
   onCommand,
+  termId,
 }: {
   items: AggregateView[];
   onCommand: (r: AggregateView, publish: boolean) => void;
+  termId?: string;
 }) {
   return (
     <>
@@ -159,6 +163,14 @@ export function ResultPreviewRows({
             <Button disabled={!r.canPublish} onClick={() => onCommand(r, true)}>
               Công bố hồ sơ
             </Button>
+            {termId && (
+              <GradingHistory
+                key={`${termId}:${r.proposalId}:${r.revision}`}
+                termId={termId}
+                proposalId={r.proposalId}
+                revision={r.revision}
+              />
+            )}
           </Card>
         ))
       ) : (
@@ -628,6 +640,13 @@ function Policy({ termId }: { termId: string }) {
           refreshed={() => q.refetch()}
         />
       )}
+      {q.data && !q.isError && (
+        <GradingHistory
+          key={`${termId}:${q.data.revision}`}
+          termId={termId}
+          revision={q.data.revision}
+        />
+      )}
     </>
   );
 }
@@ -672,6 +691,7 @@ function Results({ termId }: { termId: string }) {
             phiếu không tự coi là Hội đồng đã xác nhận.
           </Notice>
           <ResultPreviewRows
+            termId={termId}
             items={q.data.faculty.items}
             onCommand={(r, p) => {
               if (!pending) void run(r, p);
@@ -778,13 +798,7 @@ export default function GradingWorkflowPage({ mode }: { mode: Mode }) {
   const location = useLocation(),
     [params] = useSearchParams(),
     user = getApiUser();
-  if (gradingMode() !== "API")
-    return (
-      <Notice tone="danger">
-        API chấm điểm yêu cầu bật VITE_GRADING_API=true cùng VITE_AUTH_API=true.
-        Không fallback sang mock.
-      </Notice>
-    );
+  if (gradingMode() !== "API") return <GradingUnavailable />;
   if (!user || !getAccessToken())
     return (
       <Navigate

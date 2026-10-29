@@ -476,6 +476,151 @@ test("UC17 API inbox can be empty without inserting a demo proposal", async ({
   ).toBeVisible();
 });
 
+test("policy history is lazy, paginated, read-only and hides cached rows after forbidden", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page, ["FACULTY"]);
+  const path = "/api/terms/browser-term/grading/policy";
+  network.mock("GET", path, {
+    termId: "browser-term",
+    configured: false,
+    revision: 0,
+    config: null,
+    expectedContext: "a".repeat(64),
+    needsApproval: [],
+  });
+  const pending = gate();
+  network.handle("GET", `${path}/history`, async (route) => {
+    const after = Number(
+      new URL(route.request().url()).searchParams.get("afterRevision"),
+    );
+    expect(new URL(route.request().url()).searchParams.get("limit")).toBe("25");
+    await pending.promise;
+    await route.fulfill({
+      json: {
+        data: {
+          items: [
+            {
+              revision: after + 1,
+              recordedAt: "2026-10-29T00:00:00.000Z",
+              actorUserId: after ? "second-actor" : "first-actor",
+              contentHash: "b".repeat(64),
+              integrity: "UNKNOWN",
+            },
+          ],
+          nextRevision: after ? null : 25,
+        },
+      },
+    });
+  });
+  await page.goto("/grading/policy?termId=browser-term");
+  const history = page
+    .locator("details")
+    .filter({ has: page.locator("summary", { hasText: "Lịch sử thay đổi" }) });
+  await expect(history).toBeVisible();
+  expect(network.requests.some((r) => r.path.endsWith("/history"))).toBe(false);
+  await history.locator("summary").click();
+  await expect(history.getByRole("status")).toBeVisible();
+  pending.release();
+  await expect(history.getByText(/first-actor/)).toBeVisible();
+  await expect(history.locator("input, textarea, select")).toHaveCount(0);
+  await history.getByRole("button", { name: "Trang lịch sử tiếp" }).click();
+  await expect(history.getByText(/second-actor/)).toBeVisible();
+  await expect(history.getByText(/first-actor/)).toHaveCount(0);
+  network.error(
+    "GET",
+    `${path}/history`,
+    403,
+    "FORBIDDEN",
+    "Permission revoked",
+  );
+  await history.getByRole("button", { name: "Tải lại lịch sử" }).click();
+  await expect(history.getByText(/403/)).toBeVisible();
+  await expect(history.getByText(/second-actor/)).toHaveCount(0);
+  network.mock("GET", `${path}/history`, { items: [], nextRevision: null });
+  await history.getByRole("button", { name: "Tải lại lịch sử" }).click();
+  await expect(
+    history.getByText("Chưa có lịch sử thay đổi", { exact: true }),
+  ).toBeVisible();
+  expect(network.requests.every((r) => r.method === "GET")).toBe(true);
+});
+
+test("faculty result history shows only server metadata without enabling publication", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page, ["FACULTY"]);
+  network.mock("GET", "/api/terms/browser-term/grading/results/preview", {
+    items: [
+      {
+        proposalId: "browser-proposal",
+        studentName: "History Student",
+        title: "History thesis",
+        state: "ABSENT",
+        revision: 0,
+        expectedContext: "a".repeat(64),
+        blockers: ["CALCULATION_POLICY_NEEDS_APPROVAL"],
+        process: null,
+        committee: null,
+        final: null,
+        passed: null,
+        canSeal: false,
+        canPublish: false,
+      },
+    ],
+  });
+  network.mock(
+    "GET",
+    "/api/terms/browser-term/grading/results/browser-proposal/history",
+    {
+      items: [
+        {
+          revision: 1,
+          recordedAt: "2026-10-29T00:00:00.000Z",
+          actorUserId: "history-actor",
+          integrity: "VERIFIED",
+          state: "SEALED",
+        },
+      ],
+      nextRevision: null,
+    },
+  );
+  await page.goto("/grading/results?termId=browser-term");
+  await page.locator("summary", { hasText: "Lịch sử kết quả" }).click();
+  await expect(page.getByText(/history-actor/)).toBeVisible();
+  await expect(page.getByText("Trạng thái: Đã chốt (SEALED)")).toBeVisible();
+  await expect(page.getByRole("button", { name: /Công bố/ })).toBeDisabled();
+  expect(network.requests.every((r) => r.method === "GET")).toBe(true);
+});
+
+test("students never request unpublished result history", async ({
+  page,
+  network,
+}) => {
+  await signInFixture(page, ["STUDENT"]);
+  network.mock("GET", "/api/terms/browser-term/grading/my-results", {
+    items: [
+      {
+        configured: false,
+        state: "NOT_PUBLISHED",
+        proposalId: "mine",
+        revision: 0,
+        publishedAt: null,
+        result: null,
+      },
+    ],
+  });
+  await page.goto("/grading/results?termId=browser-term");
+  await expect(page.getByText(/chưa công bố/)).toBeVisible();
+  await expect(
+    page.locator("summary", { hasText: "Lịch sử kết quả" }),
+  ).toHaveCount(0);
+  expect(network.requests.map((r) => r.path)).toEqual([
+    "/api/terms/browser-term/grading/my-results",
+  ]);
+});
+
 async function prepareDetail(
   page: Parameters<typeof signInFixture>[0],
   network: import("./fixtures").MockNetwork,

@@ -1,6 +1,7 @@
 import { test as base, expect, type Page, type Route } from "@playwright/test";
 
-export const origin = "http://127.0.0.1:5173";
+export const origin: string =
+  require("../../scripts/browser-settings.cjs").browserOrigin;
 type Handler = (route: Route) => Promise<void>;
 export class MockNetwork {
   readonly requests: { method: string; path: string; body: unknown }[] = [];

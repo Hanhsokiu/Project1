@@ -8,7 +8,7 @@ const net = require("node:net");
 const root = path.resolve(__dirname, "..");
 const cache = path.join(root, ".cache", "integration-ui");
 const stateFile = path.join(cache, "config.json");
-const port = 55451;
+const port = Number(process.env.BTL_UI_DB_PORT || 55451);
 fs.mkdirSync(cache, { recursive: true });
 let config;
 if (fs.existsSync(stateFile))

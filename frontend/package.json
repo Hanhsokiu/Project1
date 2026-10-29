@@ -18,7 +18,7 @@
     "test:e2e:ui": "node scripts/test-browser.cjs api --ui",
     "test:e2e:install": "node scripts/install-playwright.cjs",
     "test:e2e:type-check": "tsc --noEmit -p tsconfig.e2e.json",
-    "test:e2e:report": "playwright show-report playwright-report/browser-api --host 127.0.0.1",
+    "test:e2e:report": "node scripts/show-browser-report.cjs",
     "test:review-groups:browser": "node scripts/test-review-groups-browser.cjs",
     "preview:review-groups": "node scripts/test-review-groups-browser.cjs --interactive",
     "test:proposal-reviews:browser": "node scripts/test-proposal-reviews-browser.cjs",

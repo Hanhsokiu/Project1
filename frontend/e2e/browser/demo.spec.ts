@@ -1,5 +1,30 @@
 import { test, expect, signInFixture } from "./fixtures";
 
+test("grading demo pages display an explicit local-data banner", async ({
+  page,
+  network,
+}) => {
+  await page.goto("/login");
+  // Explicitly initialize the complete local demo fixture in this isolated
+  // browser context. This does not invoke a database seed or any API.
+  await page.evaluate(async () => {
+    const source = "/src/shared/data/seed.ts";
+    const { createSeed } = await import(source);
+    localStorage.setItem(
+      "utc-thesis-demo-v1",
+      JSON.stringify(createSeed(true)),
+    );
+    sessionStorage.setItem("utc-thesis-session", "khoa");
+  });
+  await page.goto("/grading/results");
+  await expect(
+    page.getByText("DỮ LIỆU DEMO — KHÔNG LƯU VÀO HỆ THỐNG CHÍNH THỨC", {
+      exact: true,
+    }),
+  ).toBeVisible();
+  expect(network.requests).toEqual([]);
+});
+
 test("authenticated demo user sees404 and a recovery link for unknown routes", async ({
   page,
 }) => {
