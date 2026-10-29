@@ -300,96 +300,105 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
       directionIds: l.researchAreas.map((a) => a.id),
     })),
   };
-  if (REGISTRATION_API) {
-    if (manager)
-      value.registrations = (await registrationApi.list()).items.map(
-        registrationFromApi,
-      );
-    else if (getApiUser()?.studentId && getApiUser()?.profileComplete) {
-      const contexts = await Promise.all(
-        (terms ?? [])
-          .filter((t) => t.studentIds.includes(getApiUser()!.studentId!))
-          .map((t) => registrationApi.current(t.id)),
-      );
-      value.registrations = contexts.flatMap((c) =>
-        c.registration ? [registrationFromApi(c.registration)] : [],
-      );
-    } else value.registrations = [];
-  }
-  if (STEP3_API) {
-    value.assignments = [];
-    value.topics = [];
-    value.notifications = [];
-    value.assignedStudents = [];
-    const actor = getApiUser();
-    if (manager || actor?.studentId || actor?.lecturerId) {
-      const contexts = await Promise.all(
-        (terms ?? []).map(async (t) => {
-          if (!manager && !t.assignmentPublished) return null;
-          const c = await assignmentApi.load(t.id, !!manager);
-          cacheAssignment(t.id, c);
-          const topics = t.assignmentPublished ? await topicApi.list(t.id) : [];
-          const events = manager
-            ? await apiData<
-                {
-                  id: string;
-                  userId: string;
-                  subject: string;
-                  status: DemoDb["notifications"][number]["status"];
-                  attempts: number;
-                  lastError: string | null;
-                }[]
-              >("GET", `/notifications/outbox/term/${t.id}`)
-            : [];
-          return { c, topics, events, termId: t.id };
-        }),
-      );
-      for (const v of contexts) {
-        if (!v) continue;
-        value.assignments.push(...v.c.assignments);
-        value.assignedStudents.push(...v.c.assignments.map((a) => a.student));
-        value.topics.push(...v.topics);
+  const registrationTask = async () => {
+    if (REGISTRATION_API) {
+      if (manager)
+        value.registrations = (await registrationApi.list()).items.map(
+          registrationFromApi,
+        );
+      else if (getApiUser()?.studentId && getApiUser()?.profileComplete) {
+        const contexts = await Promise.all(
+          (terms ?? [])
+            .filter((t) => t.studentIds.includes(getApiUser()!.studentId!))
+            .map((t) => registrationApi.current(t.id)),
+        );
+        value.registrations = contexts.flatMap((c) =>
+          c.registration ? [registrationFromApi(c.registration)] : [],
+        );
+      } else value.registrations = [];
+    }
+  };
+  const workflowTask = async () => {
+    if (STEP3_API) {
+      value.assignments = [];
+      value.topics = [];
+      value.notifications = [];
+      value.assignedStudents = [];
+      const actor = getApiUser();
+      if (manager || actor?.studentId || actor?.lecturerId) {
+        const contextsTask = Promise.all(
+          (terms ?? []).map(async (t) => {
+            if (!manager && !t.assignmentPublished) return null;
+            const [c, topics, events] = await Promise.all([
+              assignmentApi.load(t.id, !!manager),
+              t.assignmentPublished ? topicApi.list(t.id) : Promise.resolve([]),
+              manager
+                ? apiData<
+                    {
+                      id: string;
+                      userId: string;
+                      subject: string;
+                      status: DemoDb["notifications"][number]["status"];
+                      attempts: number;
+                      lastError: string | null;
+                    }[]
+                  >("GET", `/notifications/outbox/term/${t.id}`)
+                : Promise.resolve([]),
+            ]);
+            cacheAssignment(t.id, c);
+            return { c, topics, events, termId: t.id };
+          }),
+        );
+        const ownTask = apiData<
+          {
+            id: string;
+            userId: string;
+            termId: string | null;
+            title: string;
+            body: string;
+            status: "READ" | "UNREAD";
+            link?: string | null;
+          }[]
+        >("GET", "/notifications/me");
+        const [contexts, own] = await Promise.all([contextsTask, ownTask]);
+        for (const v of contexts) {
+          if (!v) continue;
+          value.assignments.push(...v.c.assignments);
+          value.assignedStudents.push(...v.c.assignments.map((a) => a.student));
+          value.topics.push(...v.topics);
+          value.notifications.push(
+            ...v.events.map((n) => ({
+              id: n.id,
+              userId: n.userId,
+              termId: v.termId,
+              title: n.subject,
+              content:
+                n.lastError ?? `SMTP: ${n.status} · ${n.attempts} lần thử`,
+              status: n.status,
+              read: false,
+              attempts: n.attempts,
+              lastError: n.lastError,
+              channel: "EMAIL" as const,
+            })),
+          );
+        }
         value.notifications.push(
-          ...v.events.map((n) => ({
+          ...own.map((n) => ({
             id: n.id,
             userId: n.userId,
-            termId: v.termId,
-            title: n.subject,
-            content: n.lastError ?? `SMTP: ${n.status} · ${n.attempts} lần thử`,
+            termId: n.termId ?? "",
+            title: n.title,
+            content: n.body,
+            link: n.link,
             status: n.status,
-            read: false,
-            attempts: n.attempts,
-            lastError: n.lastError,
-            channel: "EMAIL" as const,
+            read: n.status === "READ",
+            channel: "IN_APP" as const,
           })),
         );
       }
-      const own = await apiData<
-        {
-          id: string;
-          userId: string;
-          termId: string | null;
-          title: string;
-          body: string;
-          status: "READ" | "UNREAD";
-          link?: string | null;
-        }[]
-      >("GET", "/notifications/me");
-      value.notifications.push(
-        ...own.map((n) => ({
-          id: n.id,
-          userId: n.userId,
-          termId: n.termId ?? "",
-          title: n.title,
-          content: n.body,
-          link: n.link,
-          status: n.status,
-          read: n.status === "READ",
-          channel: "IN_APP" as const,
-        })),
-      );
     }
-  }
+  };
+  await Promise.all([registrationTask(), workflowTask()]);
   resources = value;
   return overlay(mock, value);
 }

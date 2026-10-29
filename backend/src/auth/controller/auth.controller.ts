@@ -13,6 +13,7 @@ import {
   RefreshSchema,
   ProfileSchema,
 } from "../dto/auth.dto";
+import type { accountDto } from "../mapper/account.mapper";
 @ApiTags("auth")
 @Controller("auth")
 export class AuthController {
@@ -36,9 +37,13 @@ export class AuthController {
     return ApiResponse.ok(await this.auth.login(body.username, body.password));
   }
   @AllowPasswordChange() @ApiBearerAuth() @Get("me") async me(
-    @CurrentUser() user: { sub: string },
+    @CurrentUser() user: ReturnType<typeof accountDto> & {
+      sub: string; userId: string; sid: string;
+    },
   ) {
-    return ApiResponse.ok(await this.auth.me(user.sub));
+    // JwtAuthGuard has already loaded and validated this identity for this request.
+    const { sub: _sub, userId: _userId, sid: _sid, ...account } = user;
+    return ApiResponse.ok(account);
   }
   @AllowPasswordChange()
   @ApiBearerAuth()

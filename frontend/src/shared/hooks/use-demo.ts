@@ -6,7 +6,9 @@ export function useDemo() {
   return useQuery({
     queryKey: ["demo", AUTH_API ? getAccessToken() : "mock"],
     queryFn: snapshot,
-    staleTime: 0,
+    // Reuse the same account's snapshot across component mounts/navigation.
+    // Mutations still invalidate immediately; the API checks permissions afresh.
+    staleTime: AUTH_API ? 15000 : 0,
     retry: false,
     refetchInterval:
       import.meta.env.VITE_REGISTRATION_API === "true" ? 30000 : false,

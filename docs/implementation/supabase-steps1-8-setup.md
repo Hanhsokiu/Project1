@@ -51,6 +51,19 @@ EMAIL_WORKER_ENABLED=false
 
 DATABASE_URL và DIRECT_URL có thể cùng dùng session pooler trong thiết lập Windows này. DIRECT_URL phải là kết nối phù hợp migration, không dùng transaction pooler 6543 cho bước đó. Với URL đã có query, nối tham số bằng `&`, không thêm dấu `?` thứ hai. Password có `@`, `#`, `:`… phải URL-encode **phần password**, không encode toàn bộ URL.
 
+**Giới hạn kết nối khi nhiều người chạy backend:** PrismaService mặc định thêm `connection_limit=3` cho Supabase session pooler 5432 nếu DATABASE_URL chưa chỉ định tham số này. Ba backend có thể dùng tối đa 9 kết nối, cần dành chỗ cho script và công cụ khác; nhiều tiến trình trùng vẫn có thể làm đầy pool. Có thể đặt rõ `&connection_limit=3` ở cuối DATABASE_URL để các client/script dùng URL đó cũng có giới hạn. Đây là số kết nối database mỗi backend, không phải giới hạn số tài khoản đăng nhập. Khởi động lại từng backend sau khi lấy bản sửa/cập nhật env. Nếu vẫn thấy `EMAXCONNSESSION`, kiểm tra backend cũ hoặc backend của thành viên chưa giới hạn pool; không reset database hoặc ngắt session database của người khác. Xem [Supabase: lỗi Prisma và giới hạn session pool](https://supabase.com/docs/guides/database/prisma/prisma-troubleshooting).
+
+**Khi session pool đã đầy:** ngày 29/10, log ghi rõ `EMAXCONNSESSION ... pool_size: 15`. DATABASE_URL trên máy kiểm thử đã chuyển sang transaction pooler, trong khi DIRECT_URL giữ session pooler cho migration. Với Prisma 5.22 của repo, cấu hình runtime như sau (lấy đúng hostname Dashboard, tự điền mật khẩu cục bộ):
+
+```dotenv
+DATABASE_URL=postgresql://postgres.zlsygwjskvxgtzdjhvzt:MAT_KHAU_DA_URL_ENCODE@HOST_POOLER:6543/postgres?sslmode=require&pgbouncer=true&connection_limit=3
+DIRECT_URL=postgresql://postgres.zlsygwjskvxgtzdjhvzt:MAT_KHAU_DA_URL_ENCODE@HOST_SESSION_POOLER:5432/postgres?sslmode=require
+```
+
+Mỗi thành viên chạy backend riêng cần cập nhật DATABASE_URL của chính họ, giữ nguyên credential, thêm `pgbouncer=true` cho Prisma 5 và restart backend. Không dùng transaction URL này cho migration, không chạy lại migration/seed. Nếu project tùy chỉnh pool mode/hostname, xác nhận transaction URL trong Dashboard trước. Transaction pooler tái sử dụng kết nối theo transaction, không giữ riêng một server connection cho mỗi client như session mode; nó vẫn có giới hạn, không thay thế việc giới hạn pool và tối ưu truy vấn.
+
+Trên máy kiểm thử, transaction URL hiện đặt `connection_limit=5` để phục vụ các request tải trang đồng thời; mẫu 3 ở trên là điểm khởi đầu tiết kiệm kết nối. Đồng thời repository gộp các lần đọc cùng user/session đang chạy, xóa ngay khi truy vấn hoàn tất, không lưu kết quả quyền/trạng thái qua các request sau. Kiểm chứng: build backend và 18 unit test liên quan PASS; trình duyệt tải được dashboard admin, các API dữ liệu trả 200, không có lỗi JavaScript. Lượt kiểm tra vẫn mất khoảng 32 giây do các chuỗi tải dữ liệu, chưa coi là đã tối ưu xong hiệu năng. Bằng chứng local không chứa token: `.cache/shared-dev/pool-fix-verification.json`.
+
 Giữ các cấu hình khác từ backend/.env.example. Hai JWT secret phải khác nhau; có thể sinh từng chuỗi bằng lệnh sau và tự điền cục bộ, không gửi vào chat:
 
 ```powershell

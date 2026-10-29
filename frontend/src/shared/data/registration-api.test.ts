@@ -82,6 +82,29 @@ afterEach(() => {
   vi.unstubAllGlobals();
 });
 describe("API registration ownership", () => {
+  it("loads independent workflow requests before a slow registration request finishes", async () => {
+    const original = f.request.getMockImplementation()!;
+    let release!: () => void;
+    const blocked = new Promise<void>(resolve => { release = resolve; });
+    f.request.mockImplementation(async (config) => {
+      if (config.url.split("?")[0] === "/registrations") await blocked;
+      return original(config);
+    });
+    const { hydrateStep1Snapshot } = await import("./snapshot-api");
+    const loading = hydrateStep1Snapshot(createSeed());
+    try {
+      await vi.waitFor(() => {
+        const routes = f.request.mock.calls.map(([config]) => config.url.split("?")[0]);
+        expect(routes).toContain(`/assignments/term/${termId}/plan`);
+        expect(routes).toContain(`/notifications/outbox/term/${termId}`);
+        expect(routes).toContain("/notifications/me");
+      });
+    } finally {
+      release();
+      await loading;
+    }
+  });
+
   it("rejects mixed registration API with mock catalogs instead of using mock IDs", async () => {
     vi.stubEnv("VITE_CATALOG_API", "false");
     const { hydrateStep1Snapshot } = await import("./snapshot-api");

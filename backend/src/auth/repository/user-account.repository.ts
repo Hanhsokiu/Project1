@@ -1,9 +1,13 @@
 import { ConflictException, Injectable } from "@nestjs/common";
-import type { Prisma } from "@prisma/client";
+import type { LoginSession, Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { identityInclude } from "../mapper/account.mapper";
+import type { Identity } from "../mapper/account.mapper";
+import { inFlightRead } from "./in-flight-read";
 @Injectable()
 export class UserAccountRepository {
+  private readonly identityReads = new Map<string, Promise<Identity | null>>();
+  private readonly sessionReads = new Map<string, Promise<LoginSession | null>>();
   constructor(private readonly prisma: PrismaService) {}
   // Retain the foundation repository contract for existing consumers.
   create(data: { username: string; email: string; passwordHash: string }) {
@@ -16,10 +20,10 @@ export class UserAccountRepository {
     });
   }
   findById(id: string) {
-    return this.prisma.userAccount.findUnique({
+    return inFlightRead(this.identityReads, id, () => this.prisma.userAccount.findUnique({
       where: { id },
       include: identityInclude,
-    });
+    }));
   }
   findByEmail(email: string) {
     return this.prisma.userAccount.findUnique({ where: { email } });
@@ -53,7 +57,9 @@ export class UserAccountRepository {
     return this.prisma.loginSession.create({ data });
   }
   session(id: string) {
-    return this.prisma.loginSession.findUnique({ where: { id } });
+    return inFlightRead(this.sessionReads, id, () =>
+      this.prisma.loginSession.findUnique({ where: { id } }),
+    );
   }
   revokeSession(id: string, userId: string) {
     return this.prisma.loginSession.updateMany({

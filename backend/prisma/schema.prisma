@@ -1,7 +1,7 @@
 // Prisma schema cho Hệ thống Quản lý Đồ án Tốt nghiệp
 generator client {
   provider = "prisma-client-js"
-
+  previewFeatures = ["relationJoins"]
 }
 
 datasource db {
