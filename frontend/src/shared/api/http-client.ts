@@ -1,4 +1,5 @@
 import axios from "axios";
+import { captureApiWrite, publishApiWrite } from "../data/data-changes";
 import {
   clearApiSession,
   getAccessToken,
@@ -13,11 +14,15 @@ export const httpClient = axios.create({
 httpClient.interceptors.request.use((config) => {
   const token = getAccessToken();
   if (token) config.headers.Authorization = `Bearer ${token}`;
+  captureApiWrite(config);
   return config;
 });
 let refreshTask: Promise<string> | undefined;
 httpClient.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    publishApiWrite(response.config);
+    return response;
+  },
   async (error) => {
     const config = error.config;
     const credentialRequest = [

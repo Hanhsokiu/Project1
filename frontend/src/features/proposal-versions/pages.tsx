@@ -274,7 +274,7 @@ function Editor({ context }: { context: ProposalEditorContext }) {
     submit.mutate({ expectedRevision: revision, versionId: currentId });
   }
   return (
-    <div className="space-y-5">
+    <div className="space-y-5" data-refresh-draft data-refresh-unsaved={dirty ? "true" : undefined}>
       {feedback && (
         <p
           role="status"

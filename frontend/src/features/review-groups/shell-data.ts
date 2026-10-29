@@ -26,7 +26,6 @@ export function useWorkflowShellData(groups: boolean) {
           }>;
         }>("/notifications/me")
       ).data.data,
-    refetchInterval: 30000,
   });
   if (!user) return undefined;
   const data: DemoDb = {
