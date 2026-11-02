@@ -174,7 +174,6 @@ function Shell({ children }: { children?: ReactNode }) {
           </span>
           <div>
             <strong>KHOA CNTT – UTC</strong>
-            <small>GPMS Portal</small>
           </div>
         </Link>
         <div className="sidebar-context">
@@ -291,7 +290,6 @@ function Shell({ children }: { children?: ReactNode }) {
             <Menu size={22} />
           </button>
           <div className="topbar-title">
-            UTC GPMS Portal <ChevronRight size={13} />
             <b>{active ? routeTitle(active, user) : "Trang không tồn tại"}</b>
           </div>
           <div className="topbar-controls">

@@ -295,7 +295,7 @@ export function ProposalReviewQueuePage() {
                         )}
                         {p.readiness.length > 0 && (
                           <span className="text-xs text-amber-700">
-                            Thiếu đầu vào bước 1–3
+                            Chưa đủ dữ liệu để xét duyệt
                           </span>
                         )}
                       </div>
@@ -411,7 +411,8 @@ function AssignmentForm({
       </label>
       {!candidates.length && (
         <p className="text-amber-700">
-          Chưa có nhóm phù hợp. Tạo nhóm trong bước 4 hoặc kiểm tra mapping.
+          Chưa có nhóm phù hợp. Tạo nhóm duyệt đề cương hoặc kiểm tra phạm vi phụ
+          trách của nhóm.
         </p>
       )}
       {snapshot.reviewId && (

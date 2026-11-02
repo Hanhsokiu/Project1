@@ -164,7 +164,7 @@ export const topicService = {
   saveGroup(input: Omit<ReviewGroup, "id"> & { id?: string }) {
     assert(
       !STEP3_API,
-      "Nhóm duyệt thuộc UC13, chưa triển khai trong API Bước 3.",
+      "Vui lòng quản lý nhóm duyệt tại mục Nhóm duyệt đề cương.",
     );
     return mutate("Lưu nhóm duyệt đề cương", ["ADMIN", "FACULTY"], (db) => {
       assert(
@@ -191,7 +191,7 @@ export const topicService = {
   assignGroup(topicIds: string[], groupId: string) {
     assert(
       !STEP3_API,
-      "Nhóm duyệt thuộc UC13, chưa triển khai trong API Bước 3.",
+      "Vui lòng quản lý nhóm duyệt tại mục Nhóm duyệt đề cương.",
     );
     return mutate(
       "Phân đề cương cho nhóm duyệt",
@@ -216,7 +216,7 @@ export const topicService = {
   ) {
     assert(
       !STEP3_API,
-      "Xét duyệt thuộc UC13, chưa triển khai trong API Bước 3.",
+      "Vui lòng xét duyệt trong chức năng xét duyệt đề cương.",
     );
     return mutate(
       "Xét duyệt đề cương",
@@ -254,7 +254,7 @@ export const topicService = {
   lock(id: string) {
     assert(
       !STEP3_API,
-      "Chốt hồ sơ thuộc UC13, chưa triển khai trong API Bước 3.",
+      "Vui lòng chốt hồ sơ trong chức năng quản lý hồ sơ đề cương.",
     );
     return mutate("Chốt hồ sơ đề tài", ["ADMIN", "FACULTY"], (db) => {
       const t = db.topics.find((t) => t.id === id);

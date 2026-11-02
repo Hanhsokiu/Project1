@@ -31,53 +31,35 @@ export const mockCatalogService = {
         ),
         "Hệ đào tạo không tồn tại",
       );
+      const old = db.students.find((s) =>
+        input.id ? s.id === input.id : s.code === input.code,
+      );
       assert(
-        !db.students.some((s) => s.code === input.code && s.id !== input.id),
+        old && db.accounts.some((a) => a.studentId === old.id),
+        "Sinh viên không tồn tại. Vui lòng liên hệ Admin tạo tài khoản sinh viên trước.",
+      );
+      assert(
+        !db.students.some((s) => s.code === input.code && s.id !== old.id),
         "Mã sinh viên đã tồn tại",
       );
-      if (input.id) {
-        const old = db.students.find((s) => s.id === input.id);
-        assert(old, "Không tìm thấy sinh viên");
+      assert(
+        !db.terms.some(
+          (t) => t.studentIds.includes(old.id) && t.program !== input.program,
+        ),
+        "Sinh viên đang tham gia đợt khác hệ; cần xử lý danh sách tham gia trước",
+      );
+      Object.assign(old, parsed.data);
+      const a = db.accounts.find((x) => x.studentId === old.id);
+      if (a) {
         assert(
-          !db.terms.some(
-            (t) => t.studentIds.includes(old.id) && t.program !== input.program,
-          ),
-          "Sinh viên đang tham gia đợt khác hệ; cần xử lý danh sách tham gia trước",
+          !db.accounts.some((x) => x.username === input.code && x.id !== a.id),
+          "Tên đăng nhập mới đã tồn tại",
         );
-        Object.assign(old, parsed.data);
-        const a = db.accounts.find((x) => x.studentId === old.id);
-        if (a) {
-          assert(
-            !db.accounts.some(
-              (x) => x.username === input.code && x.id !== a.id,
-            ),
-            "Tên đăng nhập mới đã tồn tại",
-          );
-          Object.assign(a, {
-            username: old.code,
-            name: old.name,
-            email: old.email,
-            phone: old.phone,
-          });
-        }
-      } else {
-        assert(
-          !db.accounts.some((a) => a.username === input.code),
-          "Tên đăng nhập đã tồn tại",
-        );
-        const id = uid("sv");
-        db.students.push({ id, ...parsed.data });
-        db.accounts.push({
-          id,
-          studentId: id,
-          username: input.code,
-          name: input.name,
-          email: input.email,
-          phone: input.phone,
-          roles: ["STUDENT"],
-          password: input.code,
-          mustChangePassword: true,
-          locked: false,
+        Object.assign(a, {
+          username: old.code,
+          name: old.name,
+          email: old.email,
+          phone: old.phone,
         });
       }
     });
@@ -103,41 +85,25 @@ export const mockCatalogService = {
         ),
         "Hướng chuyên môn không hợp lệ",
       );
+      const old = db.lecturers.find((l) =>
+        input.id ? l.id === input.id : l.code === input.code,
+      );
       assert(
-        !db.lecturers.some((s) => s.code === input.code && s.id !== input.id),
+        old && db.accounts.some((a) => a.lecturerId === old.id),
+        "Giảng viên không tồn tại. Vui lòng liên hệ Admin tạo tài khoản giảng viên trước.",
+      );
+      assert(
+        !db.lecturers.some((l) => l.code === input.code && l.id !== old.id),
         "Mã giảng viên đã tồn tại",
       );
-      if (input.id) {
-        const old = db.lecturers.find((s) => s.id === input.id);
-        assert(old, "Không tìm thấy giảng viên");
-        Object.assign(old, parsed.data);
-        const a = db.accounts.find((x) => x.lecturerId === old.id);
-        if (a)
-          Object.assign(a, {
-            name: old.name,
-            email: old.email,
-            phone: old.phone,
-          });
-      } else {
-        assert(
-          !db.accounts.some((a) => a.username === input.code.toLowerCase()),
-          "Tên đăng nhập đã tồn tại",
-        );
-        const id = uid("gv");
-        db.lecturers.push({ id, ...parsed.data });
-        db.accounts.push({
-          id,
-          lecturerId: id,
-          username: input.code.toLowerCase(),
-          name: input.name,
-          email: input.email,
-          phone: input.phone,
-          roles: ["LECTURER"],
-          password: "Default@2026",
-          mustChangePassword: true,
-          locked: false,
+      Object.assign(old, parsed.data);
+      const a = db.accounts.find((x) => x.lecturerId === old.id);
+      if (a)
+        Object.assign(a, {
+          name: old.name,
+          email: old.email,
+          phone: old.phone,
         });
-      }
     });
   },
   saveItem(input: Omit<CatalogItem, "id"> & { id?: string }) {
@@ -181,13 +147,19 @@ export const mockCatalogService = {
     existingCodes: string[],
   ): ImportRow[] {
     const db = readDb();
-    const seen = new Set(existingCodes);
+    const seen = new Set<string>();
     return rows.map((values, i) => {
       const errors: string[] = [];
       if (!values.code || !values.name) errors.push("Thiếu mã hoặc họ tên");
-      if (seen.has(values.code))
-        errors.push("Mã đã tồn tại hoặc trùng trong tệp");
+      if (seen.has(values.code)) errors.push("Mã bị trùng trong tệp");
       seen.add(values.code);
+      const existing = (kind === "student" ? db.students : db.lecturers).find(
+        (record) => record.code === values.code,
+      );
+      if (!existingCodes.includes(values.code) || !existing)
+        errors.push(
+          `${kind === "student" ? "Sinh viên" : "Giảng viên"} không tồn tại. Vui lòng liên hệ Admin tạo tài khoản trước.`,
+        );
       if (values.name?.trim().length < 3) errors.push("Họ tên ít nhất 3 ký tự");
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email || ""))
         errors.push("Email không hợp lệ");
@@ -226,13 +198,6 @@ export const mockCatalogService = {
         )
       )
         errors.push("Mã bộ môn không tồn tại");
-      const username =
-        kind === "student" ? values.code : values.code.toLowerCase();
-      if (
-        db.accounts.some((a) => a.username === username) &&
-        !existingCodes.includes(values.code)
-      )
-        errors.push("Tên đăng nhập đã tồn tại");
       return { row: i + 2, values, errors };
     });
   },
@@ -280,7 +245,6 @@ export const mockCatalogService = {
             "Có sinh viên chưa đạt ngưỡng GPA của đợt",
           );
         }
-        const id = uid(kind === "student" ? "sv" : "gv");
         const departmentId =
           db.catalogs.find(
             (c) => c.kind === "department" && c.code === v.departmentCode,
@@ -297,33 +261,25 @@ export const mockCatalogService = {
             gpa: Number(v.gpa),
             eligible: Number(v.gpa) >= 2,
           });
-          db.students.push({ id, ...student });
-          if (target) target.studentIds.push(id);
-        } else
-          db.lecturers.push({
-            id,
-            ...lecturerSchema.parse({
+          const existing = db.students.find((s) => s.code === v.code)!;
+          Object.assign(existing, student);
+          if (target && !target.studentIds.includes(existing.id))
+            target.studentIds.push(existing.id);
+        } else {
+          const existing = db.lecturers.find((l) => l.code === v.code)!;
+          Object.assign(
+            existing,
+            lecturerSchema.parse({
               code: v.code,
               name: v.name,
               email: v.email,
               phone: v.phone,
               departmentId,
-              directionIds: [direction!.id],
+              directionIds: existing.directionIds,
               quota: Number(v.quota),
             }),
-          });
-        db.accounts.push({
-          id,
-          username: kind === "student" ? v.code : v.code.toLowerCase(),
-          name: v.name,
-          email: v.email,
-          phone: v.phone,
-          roles: [kind === "student" ? "STUDENT" : "LECTURER"],
-          ...(kind === "student" ? { studentId: id } : { lecturerId: id }),
-          password: kind === "student" ? v.code : "Default@2026",
-          locked: false,
-          mustChangePassword: true,
-        });
+          );
+        }
       }
       return `Đã nhập ${rows.length} ${kind === "student" ? "sinh viên" : "giảng viên"}${target ? ` vào ${target.code}` : ""}`;
     });

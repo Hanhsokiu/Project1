@@ -48,7 +48,7 @@ export default function MyTopicPage() {
   return (
     <>
       <PageHeader
-        eyebrow="BƯỚC 03 · ĐỀ TÀI & ĐỀ CƯƠNG"
+        eyebrow="ĐỀ TÀI & ĐỀ CƯƠNG"
         title={user.studentId ? "Đề tài đồ án của tôi" : "Đề tài & đề cương"}
         description="Sau công bố phân công, SV gặp GVHD thống nhất đề tài, lập đề cương và xuất theo biểu mẫu."
         actions={
@@ -91,8 +91,8 @@ export default function MyTopicPage() {
       />
       <div className="mb-6">
         <Notice>
-          GVHD xác nhận thống nhất tên đề tài ở Bước 3. Việc nhóm giảng
-          viên/Khoa duyệt đề cương thuộc quy trình sau đó.
+          GVHD xác nhận tên đề tài đã thống nhất với sinh viên trước khi nhóm
+          giảng viên/Khoa xét duyệt đề cương.
         </Notice>
       </div>
       {!topics.length ? (

@@ -26,6 +26,26 @@ let otherTermId: string;
 let actorId: string;
 const jobIds: string[] = [];
 const codes: string[] = [];
+// Provision fixtures explicitly; catalog import must never create accounts.
+async function provisionStudent(studentCode: string) {
+  return prisma.student.create({
+    data: {
+      studentCode,
+      fullName: "Sinh viên được Admin tạo",
+      className: "CNTT",
+      trainingSystem: { connect: { id: systemId } },
+      gpa: 3.2,
+      user: {
+        create: {
+          username: studentCode,
+          passwordHash: await bcrypt.hash("AdminIssued@2026", 4),
+          status: "ACTIVE" as const,
+          mustChangePassword: true,
+        },
+      },
+    },
+  });
+}
 function file(rows: string[]): ImportFile {
   const buffer = Buffer.from(
     "studentCode,fullName,className,cohort,trainingSystemCode,gpa,email,phone,academicEligible\n" +
@@ -124,6 +144,7 @@ describe("student import against PostgreSQL", () => {
     const a = `${prefix}8`,
       b = `${prefix}9`;
     codes.push(a, b);
+    await provisionStudent(a);
     const buffer = Buffer.from(
       "studentCode,fullName,className,cohort,trainingSystemCode,gpa,email,phone,academicEligible\r\n\r\n" +
         `${a},"Nguyễn Văn\r\nMẫu",CNTT,K64,,3.2,,,true\r\n\r\n${b},Sinh Viên Thiếu GPA,CNTT,K64,,,,,true`,
@@ -176,6 +197,7 @@ describe("student import against PostgreSQL", () => {
     const a = `${prefix}1`,
       b = `${prefix}2`;
     codes.push(a, b);
+    await provisionStudent(a);
     const job = await preview(
       file([
         `${a},Nguyễn Văn Hợp Lệ,CNTT,K64,,3.3,,,true`,
@@ -192,7 +214,7 @@ describe("student import against PostgreSQL", () => {
     await expect(service.confirm(job.id, "STRICT", actorId)).rejects.toThrow();
     expect(
       await prisma.student.count({ where: { studentCode: { in: [a, b] } } }),
-    ).toBe(0);
+    ).toBe(1);
     const result = await service.confirm(job.id, "VALID_ONLY", actorId);
     expect(result.status).toBe("PARTIAL");
     expect(result.successRows).toBe(1);
@@ -203,11 +225,14 @@ describe("student import against PostgreSQL", () => {
     });
     expect(user.email).toBeNull();
     expect(user.mustChangePassword).toBe(true);
-    expect(await bcrypt.compare(a, user.passwordHash)).toBe(true);
+    expect(await bcrypt.compare("AdminIssued@2026", user.passwordHash)).toBe(
+      true,
+    );
   }, 30000);
   it("keeps changed passwords and nonblank contact values when reusing an existing student", async () => {
     const code = `${prefix}3`;
     codes.push(code);
+    await provisionStudent(code);
     const first = await preview(
       file([
         `${code},Sinh Viên Tài Khoản Cũ,CNTT,K64,,3.5,old.${tag}@example.com,0912345678,true`,
@@ -242,6 +267,7 @@ describe("student import against PostgreSQL", () => {
   it("treats reimport and repeated confirmation as idempotent without duplicate roster or notifications", async () => {
     const code = `${prefix}4`;
     codes.push(code);
+    await provisionStudent(code);
     const source = file([`${code},Sinh Viên Nhập Lại,CNTT,K64,,3.1,,,true`]);
     const job = await preview(source);
     await Promise.all([
@@ -274,6 +300,7 @@ describe("student import against PostgreSQL", () => {
   it("revalidates the target lock at confirmation and leaves the job and roster unchanged", async () => {
     const code = `${prefix}5`;
     codes.push(code);
+    const existing = await provisionStudent(code);
     const job = await preview(
       file([`${code},Sinh Viên Đợt Khóa,CNTT,K64,,3.0,,,true`]),
     );
@@ -286,8 +313,13 @@ describe("student import against PostgreSQL", () => {
         "chưa khóa",
       );
       expect(await prisma.student.count({ where: { studentCode: code } })).toBe(
-        0,
+        1,
       );
+      expect(
+        await prisma.termStudent.count({
+          where: { termId, studentId: existing.id },
+        }),
+      ).toBe(0);
       expect((await service.detail(job.id)).confirmedAt).toBeNull();
     } finally {
       await prisma.thesisTerm.update({

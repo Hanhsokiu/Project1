@@ -442,7 +442,10 @@ async function main() {
     await expect(
       page
         .getByRole("status")
-        .filter({ hasText: "Bước 1–3 chưa cung cấp lớp/ngành" }),
+        .filter({
+          hasText:
+            "Chưa có lớp/ngành đã xác nhận phục vụ bản in.",
+        }),
     ).toBeVisible();
     await expect(
       page.getByRole("button", {

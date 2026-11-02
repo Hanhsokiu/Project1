@@ -142,6 +142,7 @@ export function defaultPhasePlan(
   registrationStart?: string,
   registrationEnd?: string,
 ): PhaseInput[] {
+  validateDateRange(start, end, "Đợt đồ án");
   termAssert(
     !!registrationStart === !!registrationEnd,
     "Cần nhập cả thời điểm mở và hạn đăng ký.",
@@ -154,24 +155,42 @@ export function defaultPhasePlan(
     "Nộp đồ án final",
     "Tổ chức bảo vệ",
   ];
-  const registration = registrationStart
-    ? { start: new Date(registrationStart), end: new Date(registrationEnd!) }
-    : {
-        start,
-        end: new Date(start.getTime() + (end.getTime() - start.getTime()) / 6),
-      };
-  const remaining = end.getTime() - registration.end.getTime();
+  const threeDays = 3 * 24 * 60 * 60 * 1000;
+  const registrationStartAt = registrationStart
+    ? new Date(registrationStart)
+    : start;
+  const registrationEndDate = registrationEnd
+    ? new Date(registrationEnd)
+    : new Date(start.getTime() + threeDays);
+  validateDateRange(
+    registrationStartAt,
+    registrationEndDate,
+    "Đăng ký nguyện vọng",
+  );
+  termAssert(
+    registrationStartAt >= start && registrationEndDate <= end,
+    "Khoảng đăng ký phải nằm trong thời gian của đợt.",
+  );
+  const registrationEndAt = registrationEndDate.getTime();
+  const assignmentEndAt = registrationEndAt + threeDays;
+  termAssert(
+    end.getTime() > assignmentEndAt,
+    "Sau khi đóng đăng ký, đợt phải còn hơn 3 ngày để phân công GVHD và chia thời gian cho các giai đoạn còn lại.",
+  );
+  const remaining = end.getTime() - assignmentEndAt;
+  const boundaries = [
+    registrationStartAt.getTime(),
+    registrationEndAt,
+    ...Array.from(
+      { length: 5 },
+      (_, index) => assignmentEndAt + Math.floor((remaining * index) / 4),
+    ),
+  ];
   const phases = basePhaseCodes.map((code, index) => ({
     code,
     name: labels[index],
-    start: (index === 0
-      ? registration.start
-      : new Date(registration.end.getTime() + (remaining * (index - 1)) / 5)
-    ).toISOString(),
-    end: (index === 0
-      ? registration.end
-      : new Date(registration.end.getTime() + (remaining * index) / 5)
-    ).toISOString(),
+    start: new Date(boundaries[index]).toISOString(),
+    end: new Date(boundaries[index + 1]).toISOString(),
     locked: false,
   }));
   validatePhasePlan(phases, start, end);

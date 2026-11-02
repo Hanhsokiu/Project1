@@ -6,7 +6,6 @@ import {
   UnprocessableEntityException,
 } from "@nestjs/common";
 import { createHash } from "crypto";
-import * as bcrypt from "bcryptjs";
 import type { ImportJob } from "@prisma/client";
 import { ImportRepository } from "../repository/import.repository";
 import { ImportFileParser } from "./import-file.parser";
@@ -119,15 +118,6 @@ export class ImportService {
     const originalRows = current.rows as unknown as StudentImportRow[];
     if (!Array.isArray(originalRows))
       throw new UnprocessableEntityException("Dữ liệu xem trước không hợp lệ");
-    // Password hashing happens before the database transaction. Existing users never receive a new hash.
-    const hashes = new Map<string, string>();
-    for (const row of originalRows.filter(
-      (r) => r.action === "CREATE" && !r.errors.length,
-    ))
-      hashes.set(
-        row.values.studentCode,
-        await bcrypt.hash(row.values.studentCode, 10),
-      );
     const result = await this.repo.serializable(async (tx) => {
       const job = await tx.job(id);
       if (!job) throw new NotFoundException("Không tìm thấy công việc import");
@@ -140,8 +130,6 @@ export class ImportService {
         originalRows.flatMap((r) => (r.values.email ? [r.values.email] : [])),
       );
       ImportConfirmationValidator.term(context.term);
-      if (!context.role)
-        throw new UnprocessableEntityException("Chưa cấu hình vai trò STUDENT");
       const rows = ImportRowValidator.validate(
         originalRows,
         validationContext(context),
@@ -153,16 +141,10 @@ export class ImportService {
           row.status = "SKIPPED";
           continue;
         }
-        if (row.action === "CREATE" && !hashes.has(row.values.studentCode))
-          throw new ConflictException(
-            "Hồ sơ SV đã thay đổi; vui lòng tạo lại bản xem trước",
-          );
         row.studentId = await tx.apply(
           row,
           job.termId,
           context.term!.trainingSystemId!,
-          context.role.id,
-          hashes.get(row.values.studentCode),
         );
         row.status = "IMPORTED";
       }

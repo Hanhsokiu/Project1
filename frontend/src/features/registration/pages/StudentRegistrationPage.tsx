@@ -134,7 +134,7 @@ function RegistrationForm() {
   return (
     <>
       <PageHeader
-        eyebrow="BƯỚC 02 · ĐĂNG KÝ NGUYỆN VỌNG"
+        eyebrow="ĐĂNG KÝ NGUYỆN VỌNG"
         title="Đăng ký hướng đồ án & GVHD"
         description="Chọn một hướng phù hợp và sắp xếp tối đa 3 giảng viên theo thứ tự ưu tiên."
         actions={existing && <Badge value={existing.status} />}

@@ -8,15 +8,15 @@ import {
   CircleAlert,
   Upload,
   CheckCheck,
+  ArrowLeft,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   Button,
   Card,
   Confirm,
   DataTable,
-  Field,
   Notice,
   PageHeader,
   Stat,
@@ -26,6 +26,11 @@ import { useAction } from "../../../shared/hooks/use-demo";
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { downloadCsv } from "../services/import-file";
 import { importApi, type ImportJobDto } from "../services/import-api";
+import {
+  ImportRules,
+  ImportSourceCard,
+  ImportSteps,
+} from "../components/ImportSetup";
 
 export default function StudentApiImport({
   onLecturer,
@@ -117,80 +122,52 @@ export default function StudentApiImport({
     }
   }
   return (
-    <>
+    <div className="import-page">
       <PageHeader
         title="Import dữ liệu"
-        description="Tải mẫu, gửi tệp để kiểm tra từng dòng và xác nhận ghi dữ liệu."
+        description="Cập nhật danh sách từ tệp Excel hoặc CSV. Kiểm tra dữ liệu trước khi xác nhận nhập."
+        actions={
+          <Link className="btn btn-secondary" to="/catalog/students">
+            <ArrowLeft size={16} aria-hidden="true" />
+            Danh sách sinh viên
+          </Link>
+        }
       />
-      <div className="section-grid">
-        <Card title="1. Chọn nguồn dữ liệu">
-          <div className="form-grid">
-            <Field label="Loại danh sách">
-              <select
-                value="student"
-                onChange={(e) => {
-                  if (e.target.value === "lecturer") onLecturer();
-                }}
-              >
-                <option value="student">Sinh viên</option>
-                <option value="lecturer">Giảng viên</option>
-              </select>
-            </Field>
-            <Field label="Đợt đang chọn">
-              <input
-                disabled
-                value={
-                  term.id ? `${term.code} · ${term.program}` : "Chưa chọn đợt"
-                }
-              />
-            </Field>
-          </div>
-          <div className="flex flex-wrap gap-3 mt-5">
-            <Button
-              variant="secondary"
-              disabled={action.pending}
-              onClick={() =>
-                action.run(() => importApi.template("csv")).catch(() => {})
-              }
-            >
-              <Download size={16} aria-hidden="true" />
-              Tải mẫu CSV
-            </Button>
-            <Button
-              variant="secondary"
-              disabled={action.pending}
-              onClick={() =>
-                action.run(() => importApi.template("xlsx")).catch(() => {})
-              }
-            >
-              <Download size={16} aria-hidden="true" />
-              Tải mẫu Excel
-            </Button>
-          </div>
-          <Field
-            label="Chọn tệp CSV hoặc XLSX"
-            hint="Tệp được kiểm tra trên hệ thống trước khi ghi dữ liệu."
-          >
-            <input
-              type="file"
-              accept=".csv,.xlsx"
-              disabled={!term.id || action.pending}
-              onChange={(e) => {
-                setSelectedFile(e.target.files?.[0] || null);
-                setJob(null);
-                setHistoryError("");
-                selectJob();
-              }}
-            />
-          </Field>
-          <div className="mt-4">
-            <Notice tone={term.id ? "info" : "warning"}>
-              {term.id
-                ? `Nhập sinh viên đủ điều kiện vào đợt ${term.code}. Hệ đào tạo và điều kiện học vụ được kiểm tra theo đợt.`
-                : "Tạo hoặc chọn một đợt trước khi tải và nhập danh sách sinh viên."}
-            </Notice>
-          </div>
-          <div className="mt-4">
+      <ImportSteps stage={completed ? 3 : job || historyLoading ? 2 : 1} />
+      <div className="import-workspace">
+        <ImportSourceCard
+          kind="student"
+          onKindChange={(value) => {
+            if (value === "lecturer") onLecturer();
+          }}
+          term={term}
+          file={selectedFile}
+          onFileChange={(file) => {
+            setSelectedFile(file);
+            setJob(null);
+            setHistoryError("");
+            setValidOnly(false);
+            setErrorOnly(false);
+            selectJob();
+          }}
+          disabled={action.pending}
+          requireTerm
+          onTemplate={(format) => {
+            action.run(() => importApi.template(format)).catch(() => {});
+          }}
+        >
+          {!term.id && (
+            <div className="mt-4">
+              <Notice tone="warning">
+                Tạo hoặc chọn một đợt trước khi tải và nhập danh sách sinh viên.
+              </Notice>
+            </div>
+          )}
+          <div className="import-source-footer">
+            <p>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              Chỉ lưu dữ liệu sau khi bạn xác nhận
+            </p>
             <Button
               disabled={!selectedFile || !term.id || action.pending}
               onClick={preview}
@@ -204,31 +181,8 @@ export default function StudentApiImport({
               <Notice tone="danger">{action.error.message}</Notice>
             </div>
           )}
-        </Card>
-        <Card title="Quy tắc nhập sinh viên">
-          <div className="space-y-4 text-sm">
-            <p>
-              Dùng cột trong file mẫu. Mã sinh viên giữ nguyên số 0 đầu; GPA từ
-              0 đến 4.
-            </p>
-            <p>
-              Email và điện thoại có thể để trống. Sinh viên bổ sung thông tin
-              khi đăng nhập.
-            </p>
-            <p>
-              Sinh viên đã tồn tại được cập nhật theo kết quả xem trước; tài
-              khoản cũ giữ nguyên mật khẩu.
-            </p>
-            <p>
-              Khi nhập vào đợt, sinh viên phải đúng hệ và đủ điều kiện học vụ.
-              Dòng không đạt được báo lý do cụ thể.
-            </p>
-            <Notice>
-              Muốn sửa dữ liệu, cập nhật tệp và kiểm tra lại trước khi xác nhận.
-              Kết quả kiểm tra được lưu thành một công việc import.
-            </Notice>
-          </div>
-        </Card>
+        </ImportSourceCard>
+        <ImportRules kind="student" contactsOptional />
       </div>
       {historyLoading && (
         <div className="mt-6">
@@ -295,13 +249,13 @@ export default function StudentApiImport({
             <div className="mb-5">
               <Notice tone="success">
                 Đã nhập {job.successRows} dòng; bỏ qua {job.skippedRows} dòng.
-                Tài khoản sinh viên mới bắt buộc đổi mật khẩu lần đầu.
+                Không tạo tài khoản mới hoặc đặt lại mật khẩu.
               </Notice>
             </div>
           )}
           <Card
-            title="2. Kết quả kiểm tra"
-            description={`${job.fileName} · ${job.id}`}
+            title="Kết quả kiểm tra"
+            description={job.fileName}
             action={
               <Badge value={completed ? "COMPLETED" : "PENDING"}>
                 {job.status === "DONE"
@@ -456,6 +410,6 @@ export default function StudentApiImport({
           onConfirm={commit}
         />
       )}
-    </>
+    </div>
   );
 }

@@ -11,7 +11,15 @@ import { ImportFileParser } from "../service/import-file.parser";
 const context: ImportValidationContext = {
   trainingSystem: { id: "sys1", code: "CQ", name: "Chính quy" },
   threshold: 2,
-  students: [],
+  students: [
+    {
+      id: "existing-student",
+      studentCode: "001234567",
+      trainingSystemId: "sys1",
+      userId: "existing-account",
+      inTerm: false,
+    },
+  ],
   accounts: [],
 };
 const raw = {
@@ -53,6 +61,37 @@ describe("CatalogInputValidator", () => {
   });
 });
 describe("ImportRowValidator", () => {
+  it("rejects an unknown student instead of planning account creation", () => {
+    const result = ImportRowValidator.validate([normalized()], {
+      ...context,
+      students: [],
+    })[0];
+    expect(result).toMatchObject({ action: "ERROR", status: "ERROR" });
+    expect(result.errors).toContainEqual(
+      expect.objectContaining({
+        code: "STUDENT_NOT_FOUND",
+        message: expect.stringContaining("Sinh viên không tồn tại"),
+      }),
+    );
+    expect(result.studentId).toBeUndefined();
+  });
+  it("accepts an existing student and clears stale identifiers from an old preview", () => {
+    const result = ImportRowValidator.validate(
+      [
+        {
+          ...normalized(),
+          action: "CREATE",
+          studentId: "untrusted-stale-id",
+        },
+      ],
+      context,
+    )[0];
+    expect(result).toMatchObject({
+      action: "UPDATE",
+      studentId: "existing-student",
+      errors: [],
+    });
+  });
   it("preserves leading zeros and missing contacts without inventing GPA", () => {
     const row = normalized();
     expect(row.values).toMatchObject({

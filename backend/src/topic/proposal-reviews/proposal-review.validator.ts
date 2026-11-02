@@ -65,7 +65,7 @@ export class ProposalReviewValidator {
       groupError(
         409,
         'INPUT_NOT_READY',
-        'Chưa có ownership TermStudent hợp lệ từ bước 1–3.',
+        'Chưa xác nhận sinh viên tham gia đúng đợt đồ án của đề tài.',
       );
     return owner;
   }

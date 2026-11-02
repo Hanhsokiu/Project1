@@ -23,7 +23,7 @@ export default function AssignmentResultPage() {
   return (
     <>
       <PageHeader
-        eyebrow="BƯỚC 03 · KẾT QUẢ PHÂN CÔNG"
+        eyebrow="KẾT QUẢ PHÂN CÔNG"
         title={
           user.studentId
             ? "Giảng viên hướng dẫn của tôi"

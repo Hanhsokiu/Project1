@@ -1,0 +1,71 @@
+.catalog-directory .page-heading > :first-child {
+  min-width: 0;
+}
+
+.catalog-directory .page-heading .actions {
+  flex-shrink: 0;
+}
+
+.catalog-directory .table-toolbar {
+  align-items: center;
+  gap: 16px;
+}
+
+.catalog-filters {
+  display: grid;
+  gap: 14px;
+  order: 3;
+  width: 100%;
+  min-width: 0;
+}
+
+.catalog-filters-students {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.catalog-filters-lecturers {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.catalog-directory .catalog-filters select {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 1100px) {
+  .catalog-directory .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .catalog-filters-students {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .catalog-directory .page-heading .actions {
+    width: 100%;
+  }
+
+  .catalog-directory .page-heading .actions .btn {
+    flex: 1;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .catalog-filters-students,
+  .catalog-filters-lecturers {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .catalog-filters-lecturers > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .catalog-directory .card-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}

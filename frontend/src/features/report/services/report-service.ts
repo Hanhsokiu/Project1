@@ -51,7 +51,7 @@ export function allowedReportKinds(user: Account): ReportKind[] {
   return [];
 }
 
-/** Read adapter for auth/Bước 1–3. Every export rechecks ownership and publication. */
+/** Read adapter for registration and proposal reports. Every export rechecks ownership and publication. */
 export function buildReport(
   db: DemoDb,
   user: Account,
@@ -308,7 +308,7 @@ export function buildReport(
             ? term.assignmentPublished
               ? "KẾT QUẢ PHÂN CÔNG ĐÃ CÔNG BỐ"
               : "PHƯƠNG ÁN NHÁP · CHƯA CÔNG BỐ"
-            : "Dữ liệu demo phục vụ Bước 1–3",
+            : "Dữ liệu đăng ký và hồ sơ đồ án",
           ...rows.flatMap((row, index) => [
             `BẢN GHI ${index + 1}`,
             ...Object.entries(row)
@@ -339,7 +339,7 @@ export async function createReport(
     "EXPORT_EMPTY",
   );
   const job = mutate(
-    "Tạo công việc xuất dữ liệu Bước 1–3",
+    "Tạo yêu cầu xuất dữ liệu đồ án",
     ["ADMIN", "FACULTY", "LECTURER", "STUDENT"],
     (draft) => {
       const item: ExportJob = {
@@ -386,7 +386,7 @@ export async function createReport(
         report.rows,
         `${kind.toLowerCase()}-${termId}.xlsx`,
       );
-    mutate("Hoàn tất xuất dữ liệu Bước 1–3", undefined, (draft) => {
+    mutate("Hoàn tất xuất dữ liệu đồ án", undefined, (draft) => {
       const item = draft.exports.find((e) => e.id === job.id);
       if (item) {
         item.status = "COMPLETED";
@@ -394,7 +394,7 @@ export async function createReport(
       }
     });
   } catch (error) {
-    mutate("Xuất dữ liệu Bước 1–3 thất bại", undefined, (draft) => {
+    mutate("Xuất dữ liệu đồ án thất bại", undefined, (draft) => {
       const item = draft.exports.find((e) => e.id === job.id);
       if (item) {
         item.status = "FAILED";

@@ -3,7 +3,6 @@ import {
   Injectable,
   UnprocessableEntityException,
 } from "@nestjs/common";
-import * as bcrypt from "bcryptjs";
 import { CatalogRepository } from "../repository/catalog.repository";
 import { CatalogInputValidator } from "../validator/catalog.validator";
 import { lecturerDto, pageDto } from "../mapper/catalog.mapper";
@@ -28,8 +27,13 @@ export class LecturerService {
     const input = id
       ? CatalogInputValidator.parse(lecturerPatchSchema, raw)
       : CatalogInputValidator.parse(lecturerSchema, raw);
-    const old = id ? await this.repo.lecturer(id) : null;
-    if (id) CatalogInputValidator.exists(old, "Không tìm thấy giảng viên");
+    const old = id
+      ? await this.repo.lecturer(id)
+      : await this.repo.lecturerByCode(input.lecturerCode!);
+    CatalogInputValidator.exists(
+      old,
+      "Giảng viên không tồn tại. Vui lòng liên hệ Admin tạo tài khoản giảng viên trước.",
+    );
     const [department, title, areas, emailOwner] =
       await this.repo.lecturerReferences(input);
     if (input.departmentId)
@@ -48,19 +52,8 @@ export class LecturerService {
       throw new ConflictException(
         "GV đang có phân công; không được ngưng hoạt động trước khi xử lý phân công",
       );
-    const role = !id ? await this.repo.role("LECTURER") : null;
-    if (!id && !role)
-      throw new UnprocessableEntityException("Chưa cấu hình vai trò LECTURER");
     try {
-      return lecturerDto(
-        await this.repo.saveLecturer(
-          id,
-          input,
-          actorId,
-          !id ? await bcrypt.hash("Default@2026", 10) : undefined,
-          role?.id,
-        ),
-      );
+      return lecturerDto(await this.repo.saveLecturer(old.id, input, actorId));
     } catch (error) {
       CatalogInputValidator.duplicate(error);
     }

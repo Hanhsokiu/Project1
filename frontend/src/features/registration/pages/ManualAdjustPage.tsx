@@ -51,7 +51,7 @@ export default function ManualAdjustPage() {
     <>
       <Back to="/registration/assignment" />
       <PageHeader
-        eyebrow="BƯỚC 03 · ĐIỀU CHỈNH"
+        eyebrow="ĐIỀU CHỈNH PHÂN CÔNG"
         title="Điều chỉnh phân công GVHD"
         description="Xử lý sinh viên chưa được phân công hoặc điều chỉnh giảng viên kèm lý do."
       />

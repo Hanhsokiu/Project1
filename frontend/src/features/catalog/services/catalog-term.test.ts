@@ -67,47 +67,104 @@ describe("CSV and import contracts", () => {
       readImportFile({ name: "fake.xls", size: 10 } as File, "student"),
     ).rejects.toThrow("CSV");
   });
-  it("validates each row and detects existing and repeated codes without resetting accounts", () => {
-    const valid = catalogService.validateImport([row()], "student", []);
+  it("rejects unknown students and updates existing records without creating or resetting accounts", () => {
+    const unknown = catalogService.validateImport([row()], "student", []);
+    expect(unknown[0].errors.join(" ")).toContain("Sinh viên không tồn tại");
+    expect(() => catalogService.importRows(unknown, "student")).toThrow();
+    const before = readDb();
+    const code = before.students[0].code;
+    const valid = catalogService.validateImport([row(code)], "student", [code]);
     expect(valid[0].errors).toHaveLength(0);
     const invalid = catalogService.validateImport(
-      [row(), { ...row(), gpa: "", phone: "bad" }],
+      [row(code), { ...row(code), gpa: "", phone: "bad" }],
       "student",
-      [],
+      [code],
     );
     expect(invalid[1].errors.join(" ")).toMatch(/trùng/);
     expect(invalid[1].errors.join(" ")).toMatch(/GPA/);
     catalogService.importRows(valid, "student");
-    const account = readDb().accounts.find((a) => a.username === "001234567")!;
-    expect(account.mustChangePassword).toBe(true);
-    expect(() => catalogService.importRows(valid, "student")).toThrow(
-      "thay đổi",
-    );
-    expect(
-      readDb().accounts.filter((a) => a.username === account.username),
-    ).toHaveLength(1);
+    expect(readDb().accounts).toEqual(before.accounts);
+    catalogService.importRows(valid, "student");
+    expect(readDb().accounts).toEqual(before.accounts);
+    expect(readDb().students).toHaveLength(before.students.length);
   });
   it("imports records and roster together, rolling back all rows when a program is mismatched", () => {
     const id = newTerm();
     const start = readDb().students.length;
-    const valid = catalogService.validateImport([row()], "student", []);
+    const codes = readDb().students.map((s) => s.code);
+    const valid = catalogService.validateImport(
+      [row(codes[0])],
+      "student",
+      codes,
+    );
     catalogService.importRows(valid, "student", id);
     let db = readDb();
-    expect(db.students.length).toBe(start + 1);
+    expect(db.students.length).toBe(start);
     expect(db.terms.find((t) => t.id === id)!.studentIds).toContain(
-      db.students.find((s) => s.code === "001234567")!.id,
+      db.students.find((s) => s.code === codes[0])!.id,
     );
     const next = catalogService.validateImport(
-      [row("001234568"), { ...row("001234569"), program: "Liên thông" }],
+      [row(codes[1]), { ...row(codes[2]), program: "Liên thông" }],
       "student",
-      [],
+      codes,
     );
+    const beforeFailure = readDb();
     expect(() => catalogService.importRows(next, "student", id)).toThrow(
       "khớp đợt",
     );
     db = readDb();
-    expect(db.students.some((s) => s.code === "001234568")).toBe(false);
-    expect(db.accounts.some((a) => a.username === "001234568")).toBe(false);
+    expect(db.students).toEqual(beforeFailure.students);
+    expect(db.accounts).toEqual(beforeFailure.accounts);
+    expect(db.terms).toEqual(beforeFailure.terms);
+  });
+  it("rejects adding students and lecturers whose profiles do not exist, including for Admin", () => {
+    for (const actor of ["khoa", "admin"]) {
+      sessionStorage.setItem(SESSION_KEY, actor);
+      const before = readDb();
+      expect(() =>
+        catalogService.saveStudent({
+          ...before.students[0],
+          id: undefined,
+          code: "UNKNOWN_STUDENT",
+        }),
+      ).toThrow("Sinh viên không tồn tại");
+      expect(() =>
+        catalogService.saveLecturer({
+          ...before.lecturers[0],
+          id: undefined,
+          code: "UNKNOWN_LECTURER",
+        }),
+      ).toThrow("Giảng viên không tồn tại");
+      expect(readDb().accounts).toEqual(before.accounts);
+      expect(readDb().students).toEqual(before.students);
+      expect(readDb().lecturers).toEqual(before.lecturers);
+    }
+  });
+  it("updates an existing person by code and refuses unknown lecturers in import", () => {
+    const before = readDb();
+    catalogService.saveStudent({
+      ...before.students[0],
+      id: undefined,
+      name: "Sinh viên cập nhật",
+    });
+    catalogService.saveLecturer({
+      ...before.lecturers[0],
+      id: undefined,
+      name: "Giảng viên cập nhật",
+    });
+    const after = readDb();
+    expect(after.accounts).toHaveLength(before.accounts.length);
+    expect(after.accounts.map((a) => a.password)).toEqual(
+      before.accounts.map((a) => a.password),
+    );
+    expect(after.students[0].name).toBe("Sinh viên cập nhật");
+    expect(after.lecturers[0].name).toBe("Giảng viên cập nhật");
+    const rows = catalogService.validateImport(
+      [{ ...row("UNKNOWN_GV"), quota: "3" }],
+      "lecturer",
+      [],
+    );
+    expect(rows[0].errors.join(" ")).toContain("Giảng viên không tồn tại");
   });
 });
 describe("term readiness and roster rules", () => {

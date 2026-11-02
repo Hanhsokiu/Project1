@@ -59,7 +59,7 @@ function MockAssignmentPlanPage() {
   return (
     <>
       <PageHeader
-        eyebrow="BƯỚC 03 · PHÂN CÔNG GVHD"
+        eyebrow="PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN"
         title="Phương án phân công"
         description={`${term.name} · Ưu tiên theo NV1 → NV2 → NV3 → tự phân theo hướng.`}
         actions={

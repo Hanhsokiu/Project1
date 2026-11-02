@@ -1,14 +1,14 @@
 import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import {
-  Upload,
   Users,
+  Upload,
   Building2,
   UserCheck,
   ChartNoAxesColumnIncreasing,
   X,
   Save,
-  Plus,
+  RotateCcw,
   Pencil,
 } from "lucide-react";
 import type { Lecturer } from "../../../shared/data/types";
@@ -27,21 +27,33 @@ import {
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import { catalogService } from "../services/catalog-service";
-type LecturerForm = Omit<Lecturer, "id"> & { id?: string };
+import "./catalog-directory.css";
+type LecturerForm = Lecturer;
 export default function LecturerListPage() {
   const { db, user, term } = useWorkspace();
   const action = useAction();
   const manager = user.roles.some((r) => r === "ADMIN" || r === "FACULTY");
+  const hasTerm = db.terms.some((t) => t.id === term.id);
   const [department, setDepartment] = useState("");
   const [direction, setDirection] = useState("");
+  const [scope, setScope] = useState("all");
+  const [tableVersion, setTableVersion] = useState(0);
   const [form, setForm] = useState<LecturerForm | null>(null);
   const departments = db.catalogs.filter((c) => c.kind === "department");
   const directions = db.catalogs.filter((c) => c.kind === "direction");
   const rows = db.lecturers.filter(
     (l) =>
       (!department || l.departmentId === department) &&
-      (!direction || l.directionIds.includes(direction)),
+      (!direction || l.directionIds.includes(direction)) &&
+      (scope === "all" ||
+        term.lecturers.some((entry) => entry.lecturerId === l.id)),
   );
+  function resetFilters() {
+    setDepartment("");
+    setDirection("");
+    setScope("all");
+    setTableVersion((version) => version + 1);
+  }
   async function save(e: FormEvent) {
     e.preventDefault();
     if (!form) return;
@@ -53,33 +65,29 @@ export default function LecturerListPage() {
     }
   }
   return (
-    <>
+    <div className="catalog-directory">
       <PageHeader
         title="Đội ngũ giảng viên"
-        description="Chuyên môn, liên hệ và năng lực hướng dẫn. Quota thực tế được cấu hình riêng theo đợt."
+        description="Tra cứu chuyên môn, thông tin liên hệ và số lượng sinh viên mỗi giảng viên có thể hướng dẫn."
         actions={
           manager && (
             <>
-              <Link className="btn btn-secondary" to="/catalog/import">
+              <Link
+                className="btn btn-secondary"
+                to="/catalog/import?type=lecturer"
+              >
                 <Upload size={16} aria-hidden="true" />
                 Import giảng viên
               </Link>
-              <Button
-                onClick={() =>
-                  setForm({
-                    code: "",
-                    name: "",
-                    email: "",
-                    phone: "",
-                    departmentId: departments[0]?.id || "",
-                    directionIds: [],
-                    quota: 3,
-                  })
-                }
-              >
-                <Plus size={15} />
-                Thêm giảng viên
-              </Button>
+              {hasTerm && (
+                <Link
+                  className="btn btn-primary"
+                  to={`/terms/${term.id}/roster?tab=lecturers`}
+                >
+                  <Users size={16} aria-hidden="true" />
+                  Danh sách tham gia đợt
+                </Link>
+              )}
             </>
           )
         }
@@ -101,42 +109,73 @@ export default function LecturerListPage() {
           icon={<UserCheck size={18} aria-hidden="true" />}
         />
         <Stat
-          label="Tổng quota trong đợt"
+          label="Tổng chỉ tiêu hướng dẫn"
           value={term.lecturers.reduce((a, l) => a + l.quota, 0)}
+          sub={term.code}
           icon={<ChartNoAxesColumnIncreasing size={18} aria-hidden="true" />}
         />
       </div>
-      <Card title="Danh sách giảng viên">
+      <Card
+        title="Hồ sơ giảng viên"
+        description={
+          hasTerm
+            ? `Đợt đang chọn: ${term.name}. Chỉ tiêu hướng dẫn được thiết lập riêng cho từng đợt.`
+            : "Tìm giảng viên theo mã, họ tên hoặc thông tin liên hệ."
+        }
+        action={
+          <Button variant="ghost" onClick={resetFilters}>
+            <RotateCcw size={15} aria-hidden="true" />
+            Đặt lại bộ lọc
+          </Button>
+        }
+      >
         <DataTable
+          key={tableVersion}
           rows={rows}
           searchText={(l) => `${l.code} ${l.name} ${l.email}`}
           filters={
-            <>
-              <select
-                aria-label="Lọc bộ môn"
-                value={department}
-                onChange={(e) => setDepartment(e.target.value)}
-              >
-                <option value="">Mọi bộ môn</option>
-                {departments.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.name}
-                  </option>
-                ))}
-              </select>
-              <select
-                aria-label="Lọc hướng chuyên môn"
-                value={direction}
-                onChange={(e) => setDirection(e.target.value)}
-              >
-                <option value="">Mọi hướng chuyên môn</option>
-                {directions.map((d) => (
-                  <option key={d.id} value={d.id}>
-                    {d.name}
-                  </option>
-                ))}
-              </select>
-            </>
+            <div className="catalog-filters catalog-filters-lecturers">
+              <Field label="Phạm vi danh sách">
+                <select
+                  aria-label="Phạm vi giảng viên"
+                  value={scope}
+                  onChange={(e) => setScope(e.target.value)}
+                >
+                  <option value="all">Toàn danh mục</option>
+                  {hasTerm && (
+                    <option value="term">Tham gia đợt đang chọn</option>
+                  )}
+                </select>
+              </Field>
+              <Field label="Bộ môn">
+                <select
+                  aria-label="Lọc bộ môn"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                >
+                  <option value="">Mọi bộ môn</option>
+                  {departments.map((d) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Hướng chuyên môn">
+                <select
+                  aria-label="Lọc hướng chuyên môn"
+                  value={direction}
+                  onChange={(e) => setDirection(e.target.value)}
+                >
+                  <option value="">Mọi hướng chuyên môn</option>
+                  {directions.map((d) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            </div>
           }
           columns={[
             {
@@ -165,7 +204,7 @@ export default function LecturerListPage() {
             },
             {
               key: "quota",
-              title: "Tải đợt / quota",
+              title: "Hướng dẫn trong đợt",
               render: (l) => {
                 const quota = term.lecturers.find(
                   (x) => x.lecturerId === l.id,
@@ -175,11 +214,15 @@ export default function LecturerListPage() {
                 ).length;
                 return (
                   <div>
-                    <strong>
-                      {count} / {quota ?? "—"}
-                    </strong>
+                    {quota === undefined ? (
+                      <span className="muted">Chưa tham gia đợt</span>
+                    ) : (
+                      <strong>
+                        {count} / {quota} sinh viên
+                      </strong>
+                    )}
                     <small className="block muted mt-1">
-                      Mặc định {l.quota} SV
+                      Giới hạn mặc định: {l.quota} SV
                     </small>
                   </div>
                 );
@@ -190,8 +233,10 @@ export default function LecturerListPage() {
               title: "Liên hệ",
               render: (l) => (
                 <div>
-                  {l.email}
-                  <small className="block muted mt-1">{l.phone}</small>
+                  {l.email || "Chưa có email"}
+                  <small className="block muted mt-1">
+                    {l.phone || "Chưa có số điện thoại"}
+                  </small>
                 </div>
               ),
             },
@@ -207,7 +252,7 @@ export default function LecturerListPage() {
                           setForm({ ...l, directionIds: [...l.directionIds] })
                         }
                       >
-                        <Pencil size={14} />
+                        <Pencil size={14} aria-hidden="true" />
                         Cập nhật
                       </Button>
                     ),
@@ -218,11 +263,7 @@ export default function LecturerListPage() {
         />
       </Card>
       {form && (
-        <Modal
-          title={form.id ? "Cập nhật giảng viên" : "Thêm giảng viên"}
-          onClose={() => setForm(null)}
-          wide
-        >
+        <Modal title="Cập nhật giảng viên" onClose={() => setForm(null)} wide>
           <form onSubmit={save}>
             <div className="form-grid">
               <Field label="Mã giảng viên">
@@ -256,7 +297,10 @@ export default function LecturerListPage() {
                   ))}
                 </select>
               </Field>
-              <Field label="Quota mặc định">
+              <Field
+                label="Giới hạn hướng dẫn mặc định"
+                hint="Số sinh viên tối đa khi thiết lập một đợt mới."
+              >
                 <input
                   required
                   type="number"
@@ -308,9 +352,9 @@ export default function LecturerListPage() {
               </fieldset>
             </div>
             <Notice>
-              Quota ở đây là mặc định khi thêm GV vào đợt. Thay quota một đợt
-              tại danh sách tham gia; hệ thống kiểm tra tải phân công trước khi
-              lưu.
+              Chỉ tiêu của đợt hiện tại được quản lý tại Danh sách tham gia đợt.
+              Thay đổi giới hạn mặc định ở đây không thay đổi chỉ tiêu đã thiết
+              lập trong các đợt.
             </Notice>
             <div className="form-actions">
               <Button
@@ -329,6 +373,6 @@ export default function LecturerListPage() {
           </form>
         </Modal>
       )}
-    </>
+    </div>
   );
 }

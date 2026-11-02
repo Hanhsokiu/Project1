@@ -137,7 +137,7 @@ function LoginForm({ user }: { user?: Account }) {
         <footer className="institutional-footer">
           © 2026 Khoa Công nghệ Thông tin · Trường Đại học Giao thông vận tải
           <br />
-          <small>GPMS Portal · Không gian quản lý đồ án tốt nghiệp</small>
+          <small>Không gian quản lý đồ án tốt nghiệp</small>
         </footer>
       </section>
       <section className="login-form-wrap">
@@ -206,7 +206,7 @@ function LoginForm({ user }: { user?: Account }) {
           </div>
           {isDemo && (
             <div className="login-demo">
-              <p>KHÔNG GIAN DEMO · BƯỚC 1–3</p>
+              <p>KHÔNG GIAN TRẢI NGHIỆM HỆ THỐNG</p>
               <div className="grid grid-cols-1 gap-2">
                 {[["admin", "Quản trị viên"]].map(([id, label]) => (
                   <Button variant="secondary" key={id} onClick={() => demo(id)}>

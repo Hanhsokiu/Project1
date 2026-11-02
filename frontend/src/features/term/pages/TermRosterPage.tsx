@@ -9,7 +9,7 @@ import {
   Save,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import type { Term } from "../../../shared/data/types";
 import {
   Back,
@@ -31,7 +31,20 @@ export default function TermRosterPage() {
   const { db } = useWorkspace();
   const t = db.terms.find((t) => t.id === id);
   const action = useAction({ invalidateTerms: true });
-  const [tab, setTab] = useState<"students" | "lecturers">("students");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tab =
+    searchParams.get("tab") === "lecturers" ? "lecturers" : "students";
+  function setTab(value: "students" | "lecturers") {
+    setSearchParams(
+      (previous) => {
+        const next = new URLSearchParams(previous);
+        if (value === "lecturers") next.set("tab", value);
+        else next.delete("tab");
+        return next;
+      },
+      { replace: true },
+    );
+  }
   const [students, setStudents] = useState<string[]>(() => [
     ...(t?.studentIds || []),
   ]);

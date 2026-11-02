@@ -136,7 +136,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
     <>
       <Back to="/topic/my" />
       <PageHeader
-        eyebrow="BƯỚC 03 · LẬP ĐỀ CƯƠNG"
+        eyebrow="LẬP ĐỀ CƯƠNG ĐỒ ÁN"
         title="Đề cương đồ án tốt nghiệp"
         description="Một sinh viên · Một đề tài · Phiên bản đề cương theo từng đợt."
         actions={
@@ -460,7 +460,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
       {handoff && topic && (
         <Confirm
           title="Chuyển sang quản lý phiên bản?"
-          description="Cần chốt phân công chính thức trước. Hệ thống giữ nguyên các phiên bản bước 3 và tạo bản nháp mới. Bạn cần bổ sung nội dung, thời gian và mốc thực hiện trước khi nộp xét duyệt."
+          description="Cần chốt phân công chính thức trước. Hệ thống giữ nguyên các phiên bản đề cương đã lưu và tạo bản nháp mới. Bạn cần bổ sung nội dung, thời gian và mốc thực hiện trước khi nộp xét duyệt."
           pending={action.pending}
           onClose={() => setHandoff(false)}
           onConfirm={async () => {

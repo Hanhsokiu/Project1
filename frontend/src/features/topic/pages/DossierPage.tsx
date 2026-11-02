@@ -33,7 +33,7 @@ export default function DossierPage() {
   return (
     <>
       <PageHeader
-        eyebrow="BƯỚC 03 · HỒ SƠ ĐỀ TÀI"
+        eyebrow="HỒ SƠ ĐỀ TÀI"
         title="Hồ sơ & biểu mẫu đề cương"
         description="Bản đề cương dùng để in, xin chữ ký và bàn giao quy trình xét duyệt tiếp theo."
         actions={

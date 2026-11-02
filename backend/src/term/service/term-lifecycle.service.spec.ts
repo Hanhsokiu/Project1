@@ -128,7 +128,7 @@ let term: LoadedTerm,
 const tx = { transaction: "test" };
 beforeEach(() => {
   vi.useFakeTimers();
-  vi.setSystemTime(new Date("2026-10-10T03:00:00Z"));
+  vi.setSystemTime(new Date("2026-10-02T03:00:00Z"));
   term = loaded();
   state = {
     assignmentPublished: false,
@@ -258,6 +258,16 @@ describe("term creation and lifecycle", () => {
     const [data, transaction] = repository.create.mock.calls[0];
     expect(data.code).toBe("DATN-2026-1");
     expect(data.phases.create).toHaveLength(6);
+    expect(data.phases.create[0]).toMatchObject({
+      code: "REGISTRATION",
+      startDate: new Date(input.startDate),
+      endDate: new Date("2026-10-04T00:00:00+07:00"),
+    });
+    expect(data.phases.create[1]).toMatchObject({
+      code: "ASSIGNMENT",
+      startDate: new Date("2026-10-04T00:00:00+07:00"),
+      endDate: new Date("2026-10-07T00:00:00+07:00"),
+    });
     expect(data.trainingSystem.connect.id).toBe("cq");
     expect(transaction).toBe(tx);
     expect(repository.grantCreatorAcademicAccess).toHaveBeenCalledWith(
@@ -277,6 +287,45 @@ describe("term creation and lifecycle", () => {
     await expect(service.create(input, "actor1")).rejects.toThrow(
       "grant failed",
     );
+    expect(audit.log).not.toHaveBeenCalled();
+  });
+  it("persists custom registration times from the creation form and assigns the next three days to advisors", async () => {
+    const registrationStart = "2026-10-02T08:30:00+07:00";
+    const registrationEnd = "2026-10-09T17:15:00+07:00";
+    await service.create(
+      { ...input, registrationStart, registrationEnd },
+      "actor",
+    );
+    const [data] = repository.create.mock.calls[0];
+    expect(data.phases.create[0]).toMatchObject({
+      startDate: new Date(registrationStart),
+      endDate: new Date(registrationEnd),
+    });
+    expect(data.phases.create[1]).toMatchObject({
+      startDate: new Date(registrationEnd),
+      endDate: new Date("2026-10-12T17:15:00+07:00"),
+    });
+    expect(data.phases.create[5].endDate).toEqual(new Date(input.endDate));
+  });
+  it("rejects a term of six days before writing a term or its phases", async () => {
+    await expect(
+      service.create(
+        {
+          ...input,
+          endDate: "2026-10-07T00:00:00+07:00",
+        },
+        "actor",
+      ),
+    ).rejects.toMatchObject({
+      response: {
+        error: {
+          message: expect.stringContaining(
+            "Sau khi đóng đăng ký, đợt phải còn hơn 3 ngày",
+          ),
+        },
+      },
+    });
+    expect(repository.create).not.toHaveBeenCalled();
     expect(audit.log).not.toHaveBeenCalled();
   });
   it("rejects duplicate codes, invalid semester years and periods outside the semester", async () => {

@@ -61,7 +61,7 @@ export default function ApiAssignmentPlanPage() {
   return (
     <>
       <PageHeader
-        eyebrow="BƯỚC 03 · PHÂN CÔNG GVHD"
+        eyebrow="PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN"
         title="Phương án phân công"
         description={`${term.name} · NV1 toàn đợt → NV2 → NV3 → theo hướng.`}
         actions={

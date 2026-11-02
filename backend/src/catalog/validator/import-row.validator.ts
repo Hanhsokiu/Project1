@@ -78,7 +78,8 @@ export class ImportRowValidator {
         values: { ...original.values },
         errors: [],
         status: "VALID",
-        action: "CREATE",
+        action: "UPDATE",
+        studentId: undefined,
       };
       const v = row.values;
       const error = (field: string, code: string, message: string) =>
@@ -150,7 +151,12 @@ export class ImportRowValidator {
             "STUDENT_PROGRAM_CONFLICT",
             "SV hiện có thuộc hệ khác; cần xử lý hồ sơ trước khi nhập",
           );
-      }
+      } else
+        error(
+          "studentCode",
+          "STUDENT_NOT_FOUND",
+          "Sinh viên không tồn tại. Vui lòng liên hệ Admin tạo tài khoản sinh viên trước.",
+        );
       const usernameOwner = context.accounts.find(
         (a) => a.username === v.studentCode,
       );

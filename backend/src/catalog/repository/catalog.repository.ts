@@ -2,6 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { AuditService } from "../../common/audit/audit.service";
+import { CatalogInputValidator } from "../validator/catalog.validator";
 import type {
   CatalogQuery,
   LecturerInput,
@@ -61,6 +62,12 @@ export class CatalogRepository {
       include: studentInclude,
     });
   }
+  studentByCode(studentCode: string) {
+    return this.prisma.student.findUnique({
+      where: { studentCode },
+      include: studentInclude,
+    });
+  }
   async lecturers(q: CatalogQuery) {
     const where: Prisma.LecturerWhereInput = {
       ...(q.search
@@ -92,6 +99,12 @@ export class CatalogRepository {
   lecturer(id: string) {
     return this.prisma.lecturer.findUnique({
       where: { id },
+      include: lecturerInclude,
+    });
+  }
+  lecturerByCode(lecturerCode: string) {
+    return this.prisma.lecturer.findUnique({
+      where: { lecturerCode },
       include: lecturerInclude,
     });
   }
@@ -127,72 +140,32 @@ export class CatalogRepository {
         : null,
     ]);
   }
-  role(name: string) {
-    return this.prisma.role.findUnique({ where: { name } });
-  }
-  saveStudent(
-    id: string | undefined,
-    input: Partial<StudentInput>,
-    actorId: string,
-    passwordHash?: string,
-    roleId?: string,
-  ) {
+  saveStudent(id: string, input: Partial<StudentInput>, actorId: string) {
     return this.prisma.$transaction(async (tx) => {
-      const old = id
-        ? await tx.student.findUnique({
-            where: { id },
-            include: { user: { select: { email: true } } },
-          })
-        : null;
+      const old = await tx.student.findUnique({
+        where: { id },
+        include: { user: { select: { email: true } } },
+      });
+      CatalogInputValidator.exists(old, "Sinh viên không tồn tại.");
       const { email, phone, ...fields } = input;
-      let saved: Prisma.StudentGetPayload<{ include: typeof studentInclude }>;
-      if (id) {
-        if (!old) throw new Error("STUDENT_NOT_FOUND");
-        const effectiveEmail = email?.trim() || undefined;
-        await tx.userAccount.update({
-          where: { id: old.userId },
-          data: {
-            ...(input.studentCode ? { username: input.studentCode } : {}),
-            ...(input.fullName ? { displayName: input.fullName } : {}),
-            ...(effectiveEmail ? { email: effectiveEmail } : {}),
-          },
-        });
-        saved = await tx.student.update({
-          where: { id },
-          data: { ...fields, ...(phone ? { phone } : {}) },
-          include: studentInclude,
-        });
-      } else
-        saved = await tx.student.create({
-          data: {
-            studentCode: input.studentCode!,
-            fullName: input.fullName!,
-            className: input.className!,
-            majorName: input.majorName ?? "",
-            cohort: input.cohort || "",
-            trainingSystem: { connect: { id: input.trainingSystemId! } },
-            gpa: input.gpa!,
-            academicEligible: input.academicEligible ?? true,
-            isActive: input.isActive ?? true,
-            phone: phone || null,
-            user: {
-              create: {
-                username: input.studentCode!,
-                displayName: input.fullName!,
-                email: email || null,
-                passwordHash: passwordHash!,
-                status: "ACTIVE" as const,
-                mustChangePassword: true,
-                userRoles: { create: { roleId: roleId! } },
-              },
-            },
-          },
-          include: studentInclude,
-        });
+      const effectiveEmail = email?.trim() || undefined;
+      await tx.userAccount.update({
+        where: { id: old.userId },
+        data: {
+          ...(input.studentCode ? { username: input.studentCode } : {}),
+          ...(input.fullName ? { displayName: input.fullName } : {}),
+          ...(effectiveEmail ? { email: effectiveEmail } : {}),
+        },
+      });
+      const saved = await tx.student.update({
+        where: { id },
+        data: { ...fields, ...(phone ? { phone } : {}) },
+        include: studentInclude,
+      });
       await this.audit.log(
         {
           userId: actorId,
-          action: id ? "STUDENT_UPDATED" : "STUDENT_CREATED",
+          action: "STUDENT_UPDATED",
           resource: "student",
           resourceId: saved.id,
           oldValue: old
@@ -215,75 +188,36 @@ export class CatalogRepository {
       return saved;
     });
   }
-  saveLecturer(
-    id: string | undefined,
-    input: Partial<LecturerInput>,
-    actorId: string,
-    passwordHash?: string,
-    roleId?: string,
-  ) {
+  saveLecturer(id: string, input: Partial<LecturerInput>, actorId: string) {
     return this.prisma.$transaction(async (tx) => {
-      const old = id ? await tx.lecturer.findUnique({ where: { id } }) : null;
+      const old = await tx.lecturer.findUnique({ where: { id } });
+      CatalogInputValidator.exists(old, "Giảng viên không tồn tại.");
       const { email, researchAreaIds, phone, ...fields } = input;
-      let saved: Prisma.LecturerGetPayload<{ include: typeof lecturerInclude }>;
-      if (id) {
-        if (!old) throw new Error("LECTURER_NOT_FOUND");
-        await tx.userAccount.update({
-          where: { id: old.userId },
-          data: {
-            ...(input.fullName ? { displayName: input.fullName } : {}),
-            ...(email ? { email } : {}),
-          },
+      await tx.userAccount.update({
+        where: { id: old.userId },
+        data: {
+          ...(input.fullName ? { displayName: input.fullName } : {}),
+          ...(email ? { email } : {}),
+        },
+      });
+      if (researchAreaIds) {
+        await tx.lecturerArea.deleteMany({ where: { lecturerId: id } });
+        await tx.lecturerArea.createMany({
+          data: researchAreaIds.map((researchAreaId) => ({
+            lecturerId: id,
+            researchAreaId,
+          })),
         });
-        if (researchAreaIds) {
-          await tx.lecturerArea.deleteMany({ where: { lecturerId: id } });
-          await tx.lecturerArea.createMany({
-            data: researchAreaIds.map((researchAreaId) => ({
-              lecturerId: id,
-              researchAreaId,
-            })),
-          });
-        }
-        saved = await tx.lecturer.update({
-          where: { id },
-          data: { ...fields, ...(phone ? { phone } : {}) },
-          include: lecturerInclude,
-        });
-      } else
-        saved = await tx.lecturer.create({
-          data: {
-            lecturerCode: input.lecturerCode!,
-            fullName: input.fullName!,
-            department: { connect: { id: input.departmentId! } },
-            ...(input.titleId
-              ? { title: { connect: { id: input.titleId } } }
-              : {}),
-            maxStudents: input.maxStudents ?? 5,
-            isActive: input.isActive ?? true,
-            phone: phone || null,
-            researchAreas: {
-              create: (researchAreaIds || []).map((researchAreaId) => ({
-                researchAreaId,
-              })),
-            },
-            user: {
-              create: {
-                username: input.lecturerCode!.toLowerCase(),
-                displayName: input.fullName!,
-                email: email || null,
-                passwordHash: passwordHash!,
-                status: "ACTIVE" as const,
-                mustChangePassword: true,
-                userRoles: { create: { roleId: roleId! } },
-              },
-            },
-          },
-          include: lecturerInclude,
-        });
+      }
+      const saved = await tx.lecturer.update({
+        where: { id },
+        data: { ...fields, ...(phone ? { phone } : {}) },
+        include: lecturerInclude,
+      });
       await this.audit.log(
         {
           userId: actorId,
-          action: id ? "LECTURER_UPDATED" : "LECTURER_CREATED",
+          action: "LECTURER_UPDATED",
           resource: "lecturer",
           resourceId: saved.id,
           newValue: {

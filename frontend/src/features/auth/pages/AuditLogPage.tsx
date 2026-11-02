@@ -11,6 +11,7 @@ import {
   PageHeader,
 } from "../../../shared/components/kit";
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
+import { auditActionLabel } from "../../../shared/utils/audit-action-label";
 const time = (at: string) =>
   new Date(at).toLocaleString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" });
 export default function AuditLogPage() {
@@ -20,7 +21,11 @@ export default function AuditLogPage() {
   const [actor, setActor] = useState("");
   const [action, setAction] = useState("");
   const [detail, setDetail] = useState<Audit | null>(null);
-  const rows = db.audits.filter(
+  const audits = db.audits.map((entry) => ({
+    ...entry,
+    action: auditActionLabel(entry.action),
+  }));
+  const rows = audits.filter(
     (r) =>
       (!from || r.at >= from) &&
       (!to || r.at <= `${to}T23:59:59+07:00`) &&
@@ -53,7 +58,7 @@ export default function AuditLogPage() {
           <Field label="Người thao tác">
             <select value={actor} onChange={(e) => setActor(e.target.value)}>
               <option value="">Tất cả người dùng</option>
-              {[...new Set(db.audits.map((r) => r.actor))].map((x) => (
+              {[...new Set(audits.map((r) => r.actor))].map((x) => (
                 <option key={x}>{x}</option>
               ))}
             </select>
@@ -61,7 +66,7 @@ export default function AuditLogPage() {
           <Field label="Loại thao tác">
             <select value={action} onChange={(e) => setAction(e.target.value)}>
               <option value="">Tất cả thao tác</option>
-              {[...new Set(db.audits.map((r) => r.action))].map((x) => (
+              {[...new Set(audits.map((r) => r.action))].map((x) => (
                 <option key={x}>{x}</option>
               ))}
             </select>

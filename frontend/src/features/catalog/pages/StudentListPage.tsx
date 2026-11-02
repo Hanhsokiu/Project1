@@ -7,7 +7,8 @@ import {
   CalendarDays,
   X,
   Save,
-  Plus,
+  RotateCcw,
+  Users,
   Pencil,
   Upload,
 } from "lucide-react";
@@ -29,15 +30,19 @@ import { useAction } from "../../../shared/hooks/use-demo";
 import { step1Api } from "../../../shared/data/snapshot-api";
 import { catalogService } from "../services/catalog-service";
 import { formatGpa, hasEligibleGpa } from "../../../shared/utils/gpa";
-type StudentForm = Omit<Student, "id"> & { id?: string };
+import "./catalog-directory.css";
+type StudentForm = Student;
 export default function StudentListPage() {
-  const { db, term } = useWorkspace();
+  const { db, user, term } = useWorkspace();
   const action = useAction();
+  const manager = user.roles.some((r) => r === "ADMIN" || r === "FACULTY");
+  const hasTerm = db.terms.some((t) => t.id === term.id);
   const [program, setProgram] = useState("");
   const [className, setClassName] = useState("");
   const [eligible, setEligible] = useState("");
   const [scope, setScope] = useState("all");
   const [form, setForm] = useState<StudentForm | null>(null);
+  const [tableVersion, setTableVersion] = useState(0);
   const programs = db.catalogs.filter((c) => c.kind === "program");
   const departments = db.catalogs.filter((c) => c.kind === "department");
   const rows = db.students.filter(
@@ -50,6 +55,13 @@ export default function StudentListPage() {
           : !s.eligible || !hasEligibleGpa(s.gpa, 0))) &&
       (scope === "all" || term.studentIds.includes(s.id)),
   );
+  function resetFilters() {
+    setProgram("");
+    setClassName("");
+    setEligible("");
+    setScope("all");
+    setTableVersion((version) => version + 1);
+  }
   async function save(e: FormEvent) {
     e.preventDefault();
     if (!form) return;
@@ -61,35 +73,28 @@ export default function StudentListPage() {
     }
   }
   return (
-    <>
+    <div className="catalog-directory">
       <PageHeader
         title="Danh sách sinh viên"
-        description="Dữ liệu học vụ và thông tin liên hệ dùng chung trong từng hồ sơ đồ án cá nhân."
+        description="Tra cứu và cập nhật thông tin học vụ, điều kiện tham gia đồ án và liên hệ của sinh viên."
         actions={
-          <>
-            <Link className="btn btn-secondary" to="/catalog/import">
-              <Upload size={15} />
-              Import
-            </Link>
-            <Button
-              onClick={() =>
-                setForm({
-                  code: "",
-                  name: "",
-                  email: "",
-                  phone: "",
-                  className: "",
-                  program: programs.find((c) => c.active)?.name || "Chính quy",
-                  departmentId: departments[0]?.id || "",
-                  gpa: 3,
-                  eligible: true,
-                })
-              }
-            >
-              <Plus size={15} />
-              Thêm sinh viên
-            </Button>
-          </>
+          manager && (
+            <>
+              <Link className="btn btn-secondary" to="/catalog/import">
+                <Upload size={16} aria-hidden="true" />
+                Import sinh viên
+              </Link>
+              {hasTerm && (
+                <Link
+                  className="btn btn-primary"
+                  to={`/terms/${term.id}/roster`}
+                >
+                  <Users size={16} aria-hidden="true" />
+                  Danh sách tham gia đợt
+                </Link>
+              )}
+            </>
+          )
         }
       />
       <div className="stat-grid">
@@ -121,50 +126,77 @@ export default function StudentListPage() {
           icon={<CalendarDays size={18} aria-hidden="true" />}
         />
       </div>
-      <Card title="Hồ sơ sinh viên">
+      <Card
+        title="Hồ sơ sinh viên"
+        description={
+          hasTerm
+            ? `Đợt đang chọn: ${term.name}. Lọc phạm vi để xem sinh viên tham gia đợt này.`
+            : "Tìm sinh viên theo mã, họ tên hoặc thông tin liên hệ."
+        }
+        action={
+          <Button variant="ghost" onClick={resetFilters}>
+            <RotateCcw size={15} aria-hidden="true" />
+            Đặt lại bộ lọc
+          </Button>
+        }
+      >
         <DataTable
+          key={tableVersion}
           rows={rows}
           searchText={(s) => `${s.code} ${s.name} ${s.email} ${s.className}`}
           filters={
-            <>
-              <select
-                aria-label="Phạm vi sinh viên"
-                value={scope}
-                onChange={(e) => setScope(e.target.value)}
-              >
-                <option value="all">Toàn danh mục</option>
-                <option value="term">Thuộc {term.code}</option>
-              </select>
-              <select
-                aria-label="Lọc hệ đào tạo"
-                value={program}
-                onChange={(e) => setProgram(e.target.value)}
-              >
-                <option value="">Mọi hệ đào tạo</option>
-                {programs.map((p) => (
-                  <option key={p.id}>{p.name}</option>
-                ))}
-              </select>
-              <select
-                aria-label="Lọc lớp"
-                value={className}
-                onChange={(e) => setClassName(e.target.value)}
-              >
-                <option value="">Mọi lớp</option>
-                {[...new Set(db.students.map((s) => s.className))].map((c) => (
-                  <option key={c}>{c}</option>
-                ))}
-              </select>
-              <select
-                aria-label="Lọc điều kiện"
-                value={eligible}
-                onChange={(e) => setEligible(e.target.value)}
-              >
-                <option value="">Mọi điều kiện</option>
-                <option value="YES">Đủ điều kiện</option>
-                <option value="NO">Chưa đủ điều kiện</option>
-              </select>
-            </>
+            <div className="catalog-filters catalog-filters-students">
+              <Field label="Phạm vi danh sách">
+                <select
+                  aria-label="Phạm vi sinh viên"
+                  value={scope}
+                  onChange={(e) => setScope(e.target.value)}
+                >
+                  <option value="all">Toàn danh mục</option>
+                  {hasTerm && (
+                    <option value="term">Tham gia đợt đang chọn</option>
+                  )}
+                </select>
+              </Field>
+              <Field label="Hệ đào tạo">
+                <select
+                  aria-label="Lọc hệ đào tạo"
+                  value={program}
+                  onChange={(e) => setProgram(e.target.value)}
+                >
+                  <option value="">Mọi hệ đào tạo</option>
+                  {programs.map((p) => (
+                    <option key={p.id}>{p.name}</option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Lớp">
+                <select
+                  aria-label="Lọc lớp"
+                  value={className}
+                  onChange={(e) => setClassName(e.target.value)}
+                >
+                  <option value="">Mọi lớp</option>
+                  {[...new Set(db.students.map((s) => s.className))]
+                    .filter(Boolean)
+                    .sort((a, b) => a.localeCompare(b, "vi"))
+                    .map((c) => (
+                      <option key={c}>{c}</option>
+                    ))}
+                </select>
+              </Field>
+              <Field label="Điều kiện học vụ">
+                <select
+                  aria-label="Lọc điều kiện"
+                  value={eligible}
+                  onChange={(e) => setEligible(e.target.value)}
+                >
+                  <option value="">Mọi điều kiện</option>
+                  <option value="YES">Đủ điều kiện</option>
+                  <option value="NO">Chưa đủ điều kiện</option>
+                </select>
+              </Field>
+            </div>
           }
           columns={[
             {
@@ -192,8 +224,10 @@ export default function StudentListPage() {
               title: "Liên hệ",
               render: (s) => (
                 <div>
-                  {s.email}
-                  <small className="block muted mt-1">{s.phone}</small>
+                  {s.email || "Chưa có email"}
+                  <small className="block muted mt-1">
+                    {s.phone || "Chưa có số điện thoại"}
+                  </small>
                 </div>
               ),
             },
@@ -214,25 +248,25 @@ export default function StudentListPage() {
                 </Badge>
               ),
             },
-            {
-              key: "edit",
-              title: "Thao tác",
-              render: (s) => (
-                <Button variant="ghost" onClick={() => setForm({ ...s })}>
-                  <Pencil size={14} />
-                  Cập nhật
-                </Button>
-              ),
-            },
+            ...(manager
+              ? [
+                  {
+                    key: "edit",
+                    title: "Thao tác",
+                    render: (s: Student) => (
+                      <Button variant="ghost" onClick={() => setForm({ ...s })}>
+                        <Pencil size={14} aria-hidden="true" />
+                        Cập nhật
+                      </Button>
+                    ),
+                  },
+                ]
+              : []),
           ]}
         />
       </Card>
       {form && (
-        <Modal
-          title={form.id ? "Cập nhật sinh viên" : "Thêm sinh viên"}
-          onClose={() => setForm(null)}
-          wide
-        >
+        <Modal title="Cập nhật sinh viên" onClose={() => setForm(null)} wide>
           <form onSubmit={save}>
             <div className="form-grid">
               <Field label="Mã sinh viên" hint="Lưu dạng chuỗi, giữ số 0 đầu.">
@@ -350,9 +384,8 @@ export default function StudentListPage() {
               </label>
             </div>
             <Notice>
-              {form.id
-                ? "Đổi thông tin sẽ đồng bộ tài khoản liên kết. Danh sách tham gia đợt được quản lý riêng."
-                : "Tạo tài khoản username và mật khẩu mặc định bằng mã SV; sinh viên phải đổi mật khẩu khi đăng nhập lần đầu."}
+              Thông tin liên hệ được đồng bộ với tài khoản liên kết. Chọn sinh
+              viên tham gia đồ án tại mục Danh sách tham gia đợt.
             </Notice>
             <div className="form-actions">
               <Button
@@ -371,6 +404,6 @@ export default function StudentListPage() {
           </form>
         </Modal>
       )}
-    </>
+    </div>
   );
 }

@@ -146,7 +146,7 @@ function Content({ db }: { db: DemoDb }) {
   if (!kinds.length)
     return (
       <>
-        <PageHeader title="Xuất dữ liệu Bước 1–3" />
+        <PageHeader title="Xuất dữ liệu và biểu mẫu" />
         <Card>
           <Empty
             title="Chưa có biểu mẫu dành cho vai trò này"
@@ -159,7 +159,7 @@ function Content({ db }: { db: DemoDb }) {
     <>
       <PageHeader
         title="Xuất dữ liệu và biểu mẫu"
-        description="Danh sách, đăng ký, phân công, đề tài và đề cương trong Bước 1–3. Chọn đợt trên thanh điều hướng trước khi xuất."
+        description="Xuất danh sách sinh viên, giảng viên, đăng ký, phân công, đề tài và đề cương. Chọn đợt trên thanh điều hướng trước khi xuất."
       />
       <div className="grid gap-5 xl:grid-cols-[360px_1fr]">
         <Card title="Thiết lập xuất tệp" description={term.name}>

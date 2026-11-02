@@ -149,7 +149,7 @@ export const routeManifest: RouteInfo[] = [
   {
     path: "/report/export",
     title: "Biểu mẫu & xuất dữ liệu",
-    group: "Báo cáo Bước 1–3",
+    group: "Báo cáo & biểu mẫu",
     roles: A,
   },
   {

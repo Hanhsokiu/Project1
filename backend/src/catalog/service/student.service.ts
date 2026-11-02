@@ -1,9 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  UnprocessableEntityException,
-} from "@nestjs/common";
-import * as bcrypt from "bcryptjs";
+import { ConflictException, Injectable } from "@nestjs/common";
 import { CatalogRepository } from "../repository/catalog.repository";
 import { CatalogInputValidator } from "../validator/catalog.validator";
 import { studentDto, pageDto } from "../mapper/catalog.mapper";
@@ -28,8 +23,13 @@ export class StudentService {
     const input = id
       ? CatalogInputValidator.parse(studentPatchSchema, raw)
       : CatalogInputValidator.parse(studentSchema, raw);
-    const old = id ? await this.repo.student(id) : null;
-    if (id) CatalogInputValidator.exists(old, "Không tìm thấy sinh viên");
+    const old = id
+      ? await this.repo.student(id)
+      : await this.repo.studentByCode(input.studentCode!);
+    CatalogInputValidator.exists(
+      old,
+      "Sinh viên không tồn tại. Vui lòng liên hệ Admin tạo tài khoản sinh viên trước.",
+    );
     const [system, emailOwner] = await this.repo.studentReferences(input);
     if (input.trainingSystemId)
       CatalogInputValidator.exists(system, "Hệ đào tạo không tồn tại");
@@ -46,19 +46,8 @@ export class StudentService {
           "SV đang thuộc đợt khác hệ; cần xử lý danh sách tham gia trước",
         );
     }
-    const role = !id ? await this.repo.role("STUDENT") : null;
-    if (!id && !role)
-      throw new UnprocessableEntityException("Chưa cấu hình vai trò STUDENT");
     try {
-      return studentDto(
-        await this.repo.saveStudent(
-          id,
-          input,
-          actorId,
-          !id ? await bcrypt.hash(input.studentCode!, 10) : undefined,
-          role?.id,
-        ),
-      );
+      return studentDto(await this.repo.saveStudent(old.id, input, actorId));
     } catch (error) {
       CatalogInputValidator.duplicate(error);
     }

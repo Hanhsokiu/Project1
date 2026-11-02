@@ -8,6 +8,7 @@ import * as bcrypt from "bcryptjs";
 import { z } from "zod";
 import { UserAccountRepository } from "../repository/user-account.repository";
 import { accountDto } from "../mapper/account.mapper";
+import { AccountProvisioningValidator } from "../validator/account-provisioning.validator";
 
 export interface SaveAccountInput {
   username: string;
@@ -129,6 +130,10 @@ export class AccountService {
   }
 
   async create(data: SaveAccountInput, actorId: string) {
+    const actor = await this.users.findById(actorId);
+    AccountProvisioningValidator.admin(
+      actor?.userRoles.map((r) => r.role.name) ?? [],
+    );
     if (!data.username || data.username.trim().length < 3) {
       throw new BadRequestException("Tên đăng nhập ít nhất 3 ký tự");
     }

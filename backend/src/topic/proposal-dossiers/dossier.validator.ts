@@ -152,7 +152,7 @@ export class DossierValidator {
       groupError(
         409,
         "STUDENT_PROFILE_NOT_READY",
-        "Bước 1–3 chưa cung cấp lớp/ngành đã xác nhận cho sinh viên trong đợt.",
+        "Thông tin lớp/ngành của sinh viên trong đợt chưa được xác nhận.",
       );
     if (
       !student?.isActive ||

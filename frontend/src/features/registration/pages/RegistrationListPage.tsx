@@ -22,7 +22,7 @@ export default function RegistrationListPage() {
   return (
     <>
       <PageHeader
-        eyebrow="BƯỚC 02 · GIÁO VỤ"
+        eyebrow="QUẢN LÝ ĐĂNG KÝ"
         title="Danh sách đăng ký"
         description={`${term.name} · ${term.program}`}
       />

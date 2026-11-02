@@ -53,6 +53,15 @@ const dateTime = (value: string, end = false) => {
         .slice(0, 16)
     : value.slice(0, 16);
 };
+function registrationWindow(start: string) {
+  if (!start) return { registrationStart: "", registrationEnd: "" };
+  const close = new Date(`${start}T00:00:00Z`);
+  close.setUTCDate(close.getUTCDate() + 3);
+  return {
+    registrationStart: `${start}T00:00`,
+    registrationEnd: close.toISOString().slice(0, 16),
+  };
+}
 export default function TermListPage() {
   const { db, setTermId } = useWorkspace();
   const action = useAction({ invalidateTerms: true });
@@ -78,9 +87,6 @@ export default function TermListPage() {
     const endDate = new Date(`${today}T12:00:00+07:00`);
     endDate.setDate(endDate.getDate() + 120);
     const end = endDate.toISOString().slice(0, 10);
-    const closeDate = new Date(today + "T12:00:00+07:00");
-    closeDate.setDate(closeDate.getDate() + 14);
-    const close = closeDate.toISOString().slice(0, 10);
     setForm({
       name: "",
       code: "",
@@ -88,8 +94,7 @@ export default function TermListPage() {
       program: programs[0]?.name || "Chính quy",
       start: today,
       end,
-      registrationStart: `${today}T08:00`,
-      registrationEnd: `${close}T17:00`,
+      ...registrationWindow(today),
     });
   }
   function edit(t: Term) {
@@ -341,7 +346,19 @@ export default function TermListPage() {
                   required
                   type="date"
                   value={form.start}
-                  onChange={(e) => setForm({ ...form, start: e.target.value })}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      start: e.target.value,
+                      ...(!form.id &&
+                      form.registrationStart ===
+                        registrationWindow(form.start).registrationStart &&
+                      form.registrationEnd ===
+                        registrationWindow(form.start).registrationEnd
+                        ? registrationWindow(e.target.value)
+                        : {}),
+                    })
+                  }
                 />
               </Field>
               <Field label="Ngày kết thúc">
@@ -357,6 +374,8 @@ export default function TermListPage() {
                 <input
                   required
                   type="datetime-local"
+                  min={form.start ? `${form.start}T00:00` : undefined}
+                  max={form.end ? `${form.end}T23:59` : undefined}
                   value={form.registrationStart}
                   onChange={(e) =>
                     setForm({ ...form, registrationStart: e.target.value })
@@ -368,6 +387,7 @@ export default function TermListPage() {
                   required
                   type="datetime-local"
                   min={form.registrationStart}
+                  max={form.end ? `${form.end}T23:59` : undefined}
                   value={form.registrationEnd}
                   onChange={(e) =>
                     setForm({ ...form, registrationEnd: e.target.value })
@@ -377,6 +397,8 @@ export default function TermListPage() {
             </div>
             <div className="mt-5">
               <Notice>
+                {!form.id &&
+                  "Mặc định đăng ký nguyện vọng 3 ngày từ ngày bắt đầu đợt. Bạn có thể sửa thời gian mở/đóng đăng ký tại đây. Phân công GVHD kéo dài 3 ngày từ lúc đóng đăng ký; thời gian còn lại chia đều cho 4 giai đoạn sau. Sau khi đóng đăng ký, đợt phải còn hơn 3 ngày. "}
                 Đợt mới ở trạng thái Nháp. Tiếp tục cấu hình giai đoạn, SV đủ
                 điều kiện và GV/quota trước khi mở đăng ký. Thêm kỳ học ở Danh
                 mục đào tạo nếu chưa có.

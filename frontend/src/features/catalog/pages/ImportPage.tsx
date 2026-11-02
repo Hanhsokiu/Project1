@@ -1,4 +1,5 @@
-import { useState, type ChangeEvent } from "react";
+import { useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
 import {
   CircleAlert,
   Pencil,
@@ -9,6 +10,7 @@ import {
   Download,
   FileSpreadsheet,
   CheckCircle2,
+  ArrowLeft,
 } from "lucide-react";
 import type { ImportRow } from "../../../shared/data/types";
 import {
@@ -30,12 +32,31 @@ import { downloadCsv, readImportFile } from "../services/import-file";
 import { step1Api } from "../../../shared/data/snapshot-api";
 import StudentApiImport from "./StudentApiImport";
 import { exportExcel } from "../../../shared/services/export-service";
+import {
+  ImportRules,
+  ImportSourceCard,
+  ImportSteps,
+} from "../components/ImportSetup";
 export default function ImportPage() {
   const { db, term } = useWorkspace();
   const action = useAction();
-  const [kind, setKind] = useState<"student" | "lecturer">("student");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const kind = searchParams.get("type") === "lecturer" ? "lecturer" : "student";
+  function setKind(value: "student" | "lecturer") {
+    setSearchParams(
+      (previous) => {
+        const next = new URLSearchParams(previous);
+        next.delete("job");
+        if (value === "lecturer") next.set("type", value);
+        else next.delete("type");
+        return next;
+      },
+      { replace: true },
+    );
+  }
   const [rows, setRows] = useState<ImportRow[]>([]);
-  const [fileName, setFileName] = useState("");
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const fileName = selectedFile?.name || "";
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [validOnly, setValidOnly] = useState(false);
@@ -75,21 +96,19 @@ export default function ImportPage() {
       (kind === "student" ? db.students : db.lecturers).map((x) => x.code),
     );
   }
-  async function upload(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    setLoading(true);
+  async function upload(file: File | null) {
+    setSelectedFile(file);
     setError("");
     setResult("");
     setRows([]);
-    setFileName(file.name);
+    if (!file) return;
+    setLoading(true);
     try {
       setRows(validate(await readImportFile(file, kind)));
     } catch (e) {
       setError(e instanceof Error ? e.message : "Không đọc được tệp.");
     } finally {
       setLoading(false);
-      event.target.value = "";
     }
   }
   async function commit() {
@@ -111,10 +130,19 @@ export default function ImportPage() {
   if (step1Api.imports && kind === "student")
     return <StudentApiImport onLecturer={() => setKind("lecturer")} />;
   return (
-    <>
+    <div className="import-page">
       <PageHeader
         title="Import dữ liệu"
-        description="Tải mẫu, kiểm tra từng dòng rồi xác nhận nhập. Mã SV/GV được giữ ở dạng chuỗi."
+        description="Cập nhật danh sách từ tệp Excel hoặc CSV. Kiểm tra dữ liệu trước khi xác nhận nhập."
+        actions={
+          <Link
+            className="btn btn-secondary"
+            to={kind === "student" ? "/catalog/students" : "/catalog/lecturers"}
+          >
+            <ArrowLeft size={16} aria-hidden="true" />
+            Danh sách {kind === "student" ? "sinh viên" : "giảng viên"}
+          </Link>
+        }
       />
       {step1Api.imports && kind === "lecturer" && (
         <div className="mb-5">
@@ -124,68 +152,35 @@ export default function ImportPage() {
           </Notice>
         </div>
       )}
-      <div className="section-grid">
-        <Card title="1. Chọn nguồn dữ liệu">
-          <div className="form-grid">
-            <Field label="Loại danh sách">
-              <select
-                value={kind}
-                onChange={(e) => {
-                  setKind(e.target.value as "student" | "lecturer");
-                  setRows([]);
-                  setFileName("");
-                  setError("");
-                  setResult("");
-                  setAddToTerm(false);
-                }}
-              >
-                <option value="student">Sinh viên</option>
-                <option value="lecturer">Giảng viên</option>
-              </select>
-            </Field>
-            <Field label="Đợt đang chọn">
-              <input value={`${term.code} · ${term.program}`} disabled />
-            </Field>
-          </div>
-          <div className="flex flex-wrap gap-3 mt-5">
-            <Button
-              variant="secondary"
-              onClick={() => downloadCsv(sample, `mau-${kind}.csv`)}
-            >
-              <Download size={15} />
-              Mẫu CSV
-            </Button>
-            <Button
-              variant="secondary"
-              disabled={action.pending}
-              onClick={() =>
-                action
-                  .run(() =>
-                    exportExcel(`Mẫu ${kind}`, sample, `mau-${kind}.xlsx`),
-                  )
-                  .catch(() => {})
-              }
-            >
-              <FileSpreadsheet size={15} />
-              Mẫu Excel
-            </Button>
-          </div>
-          <label className="flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed border-slate-200 bg-slate-50 p-8 cursor-pointer mt-6">
-            <Upload size={27} className="text-slate-400" />
-            <strong className="text-sm">
-              {loading ? "Đang đọc tệp…" : "Chọn tệp CSV hoặc XLSX"}
-            </strong>
-            <small className="muted">
-              Tối đa 4 MB · {fileName || "Chưa chọn tệp"}
-            </small>
-            <input
-              type="file"
-              accept=".csv,.xlsx"
-              disabled={loading || action.pending}
-              className="max-w-full text-sm"
-              onChange={upload}
-            />
-          </label>
+      <ImportSteps stage={result ? 3 : rows.length ? 2 : 1} />
+      <div className="import-workspace">
+        <ImportSourceCard
+          kind={kind}
+          onKindChange={(value) => {
+            setKind(value);
+            setRows([]);
+            setSelectedFile(null);
+            setError("");
+            setResult("");
+            setAddToTerm(false);
+            setValidOnly(false);
+            setErrorOnly(false);
+          }}
+          term={term}
+          file={selectedFile}
+          onFileChange={upload}
+          disabled={loading || action.pending}
+          maxSizeMb={4}
+          onTemplate={(format) => {
+            if (format === "csv") downloadCsv(sample, `mau-${kind}.csv`);
+            else
+              action
+                .run(() =>
+                  exportExcel(`Mẫu ${kind}`, sample, `mau-${kind}.xlsx`),
+                )
+                .catch(() => {});
+          }}
+        >
           {kind === "student" && (
             <label className="checkbox-row mt-4">
               <input
@@ -205,35 +200,20 @@ export default function ImportPage() {
             <div className="mt-5">
               <Notice tone="success">
                 <CheckCircle2 className="inline mr-2" size={15} />
-                {result}. Tài khoản mới bắt buộc đổi mật khẩu lần đầu.
+                {result}. Tài khoản và mật khẩu hiện có được giữ nguyên.
               </Notice>
             </div>
           )}
-        </Card>
-        <div className="stack">
-          <Card title="Quy tắc kiểm tra">
-            <ul className="space-y-3 text-sm muted">
-              <li>Đúng tên cột của file mẫu; các mã giữ số 0 đầu.</li>
-              <li>Email/SĐT hợp lệ, mã không trùng trong tệp hoặc danh mục.</li>
-              <li>
-                SV có lớp/hệ đào tạo và GPA từ 0 đến 4; điều kiện học vụ demo
-                dựa trên GPA ≥ 2.
-              </li>
-              <li>
-                Quota GV là số nguyên không âm; chuyên môn được cập nhật trong
-                danh mục sau import.
-              </li>
-              <li>
-                Khi thêm SV vào đợt, hệ phải khớp và GPA phải đạt ngưỡng của
-                đợt.
-              </li>
-            </ul>
-          </Card>
-          <Notice>
-            Import lại sẽ báo các mã đã tồn tại. Không ghi đè liên hệ hoặc đặt
-            lại mật khẩu của tài khoản cũ.
-          </Notice>
-        </div>
+          <div className="import-source-footer">
+            <p>
+              <CheckCircle2 size={15} aria-hidden="true" />
+              {loading
+                ? "Đang kiểm tra nội dung tệp…"
+                : "Tệp được kiểm tra tự động sau khi chọn"}
+            </p>
+          </div>
+        </ImportSourceCard>
+        <ImportRules kind={kind} />
       </div>
       {!!rows.length && (
         <div className="mt-6">
@@ -259,7 +239,7 @@ export default function ImportPage() {
               icon={<Upload size={18} aria-hidden="true" />}
             />
           </div>
-          <Card title="2. Kiểm tra & xác nhận" description={fileName}>
+          <Card title="Kết quả kiểm tra" description={fileName}>
             <DataTable
               rows={errorOnly ? rows.filter((r) => r.errors.length) : rows}
               searchText={(r) =>
@@ -437,6 +417,6 @@ export default function ImportPage() {
           </form>
         </Modal>
       )}
-    </>
+    </div>
   );
 }

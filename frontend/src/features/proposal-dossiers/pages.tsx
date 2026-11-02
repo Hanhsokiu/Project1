@@ -44,7 +44,8 @@ const readiness: Record<string, string> = {
     "Chưa có lớp/ngành đã xác nhận phục vụ bản in. Khoa cần xác nhận thông tin bên dưới trước khi chốt hồ sơ.",
   STATE_TRANSITION_INVALID: "Đề cương chưa ở trạng thái đủ điều kiện chốt.",
   TERM_003: "Giai đoạn chốt/tiếp nhận chưa mở hoặc đã khóa.",
-  INPUT_NOT_READY: "Thiếu dữ liệu đã xác nhận từ bước 1–3.",
+  INPUT_NOT_READY:
+    "Thông tin sinh viên, phân công hướng dẫn hoặc đề cương chưa đầy đủ hoặc chưa được xác nhận.",
   APPROVAL_NOT_READY: "Chưa có kết luận duyệt hợp lệ cho phiên bản hiện hành.",
   ROUTING_MISMATCH:
     "Routing đã đổi sau vòng duyệt. Khoa cần đối soát trước khi chốt.",

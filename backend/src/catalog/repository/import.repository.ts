@@ -3,6 +3,7 @@ import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { AuditService } from "../../common/audit/audit.service";
 import type { ConfirmMode, StudentImportRow } from "../dto/catalog.dto";
+import { CatalogInputValidator } from "../validator/catalog.validator";
 const json = (value: unknown) =>
   JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
 export class ImportUnitOfWork {
@@ -14,7 +15,7 @@ export class ImportUnitOfWork {
     return this.db.importJob.findUnique({ where: { id } });
   }
   async context(termId: string, codes: string[], emails: string[]) {
-    const [term, students, accounts, role] = await Promise.all([
+    const [term, students, accounts] = await Promise.all([
       this.db.thesisTerm.findUnique({
         where: { id: termId },
         include: { trainingSystem: true, parameters: true },
@@ -30,68 +31,39 @@ export class ImportUnitOfWork {
         where: { OR: [{ username: { in: codes } }, { email: { in: emails } }] },
         select: { id: true, username: true, email: true },
       }),
-      this.db.role.findUnique({ where: { name: "STUDENT" } }),
     ]);
-    return { term, students, accounts, role };
+    return { term, students, accounts };
   }
-  async apply(
-    row: StudentImportRow,
-    termId: string,
-    trainingSystemId: string,
-    roleId: string,
-    passwordHash?: string,
-  ) {
+  async apply(row: StudentImportRow, termId: string, trainingSystemId: string) {
     const v = row.values;
-    let student;
-    if (row.studentId) {
-      const existing = await this.db.student.findUniqueOrThrow({
-        where: { id: row.studentId },
-      });
-      await this.db.userAccount.update({
-        where: { id: existing.userId },
-        data: {
-          displayName: v.fullName,
-          ...(v.email ? { email: v.email } : {}),
-        },
-      });
-      student = await this.db.student.update({
-        where: { id: existing.id },
-        data: {
-          fullName: v.fullName,
-          className: v.className,
-          ...(v.majorName ? {majorName:v.majorName} : {}),
-          ...(v.cohort ? { cohort: v.cohort } : {}),
-          gpa: v.gpa!,
-          academicEligible: v.academicEligible,
-          ...(v.phone ? { phone: v.phone } : {}),
-        },
-      });
-    } else
-      student = await this.db.student.create({
-        data: {
-          studentCode: v.studentCode,
-          fullName: v.fullName,
-          className: v.className,
-          majorName: v.majorName ?? "",
-          cohort: v.cohort,
-          trainingSystem: { connect: { id: trainingSystemId } },
-          gpa: v.gpa!,
-          academicEligible: v.academicEligible,
-          isActive: true,
-          phone: v.phone,
-          user: {
-            create: {
-              username: v.studentCode,
-              displayName: v.fullName,
-              email: v.email,
-              passwordHash: passwordHash!,
-              status: "ACTIVE" as const,
-              mustChangePassword: true,
-              userRoles: { create: { roleId } },
-            },
-          },
-        },
-      });
+    CatalogInputValidator.exists(row.studentId, "Sinh viên không tồn tại.");
+    const existing = await this.db.student.findUnique({
+      where: {
+        id: row.studentId,
+        studentCode: v.studentCode,
+        trainingSystemId,
+      },
+    });
+    CatalogInputValidator.exists(existing, "Sinh viên không tồn tại.");
+    await this.db.userAccount.update({
+      where: { id: existing.userId },
+      data: {
+        displayName: v.fullName,
+        ...(v.email ? { email: v.email } : {}),
+      },
+    });
+    const student = await this.db.student.update({
+      where: { id: existing.id },
+      data: {
+        fullName: v.fullName,
+        className: v.className,
+        ...(v.majorName ? { majorName: v.majorName } : {}),
+        ...(v.cohort ? { cohort: v.cohort } : {}),
+        gpa: v.gpa!,
+        academicEligible: v.academicEligible,
+        ...(v.phone ? { phone: v.phone } : {}),
+      },
+    });
     await this.db.termStudent.create({
       data: { termId, studentId: student.id },
     });

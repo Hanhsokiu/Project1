@@ -28,6 +28,7 @@ import {
 import type { DemoDb, Role } from "../../../shared/data/types";
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { hasEligibleGpa } from "../../../shared/utils/gpa";
+import { auditActionLabel } from "../../../shared/utils/audit-action-label";
 import {
   dashboardData,
   type DashboardData,
@@ -361,7 +362,7 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
           </section>
           <Card
             title="Quy trình điều hành đợt"
-            description="Bước 1–3 · Mỗi sinh viên thực hiện một đề tài độc lập"
+            description="Quản lý đăng ký, phân công hướng dẫn và hồ sơ đề tài của từng sinh viên"
           >
             <div className="space-y-3">
               {steps.map((step, i) => (
@@ -621,7 +622,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
           </div>
           <Card
             title="Lộ trình đăng ký và hồ sơ đề tài"
-            description="Các mốc trong Bước 1–3 · Hồ sơ cá nhân trong đợt hiện tại"
+            description="Theo dõi đăng ký, phân công hướng dẫn và đề cương trong đợt hiện tại"
           >
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
               {steps.map((step, i) => (
@@ -905,7 +906,10 @@ function AdminDashboard({ db }: { db: DemoDb }) {
       <div className="space-y-6">
         <Card title="Hoạt động gần đây">
           <DataTable
-            rows={db.audits.slice(0, 20)}
+            rows={db.audits.slice(0, 20).map((entry) => ({
+              ...entry,
+              action: auditActionLabel(entry.action),
+            }))}
             searchText={(a) => `${a.actor} ${a.action} ${a.detail}`}
             columns={[
               {
