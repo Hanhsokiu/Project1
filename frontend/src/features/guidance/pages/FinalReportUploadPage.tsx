@@ -222,7 +222,7 @@ function FinalContent({ db }: { db: DemoDb }) {
                     </Button>
                   </div>
                 )}
-                <Button disabled={!file || reading || action.pending}>
+                <Button disabled={!file || reading || action.pending} loading={action.pending}>
                   <FileUp size={16} />
                   {report ? "Nộp phiên bản mới" : "Nộp báo cáo hoàn chỉnh"}
                 </Button>
@@ -272,7 +272,7 @@ function FinalContent({ db }: { db: DemoDb }) {
                       setConfirmUpload(false);
                     })
                     .catch(() => {})
-                }
+                } loading={action.pending}
               >
                 <Send size={16} aria-hidden="true" />
                 Xác nhận nộp PDF

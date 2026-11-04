@@ -166,14 +166,14 @@ function ScoreForm({
             <Button
               variant="secondary"
               disabled={s.pending}
-              onClick={() => save(false)}
+              onClick={() => save(false)} loading={s.pending}
             >
               <Save size={16} aria-hidden="true" />
               Lưu nháp
             </Button>
             <Button
               disabled={s.pending}
-              onClick={() => (confirm ? save(true) : setConfirm(true))}
+              onClick={() => (confirm ? save(true) : setConfirm(true))} loading={s.pending}
             >
               <Send size={16} aria-hidden="true" />
               {confirm ? "Xác nhận gửi điểm" : "Gửi phiếu điểm"}

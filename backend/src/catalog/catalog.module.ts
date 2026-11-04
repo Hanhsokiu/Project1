@@ -10,15 +10,19 @@ import { ImportRepository } from "./repository/import.repository";
 import { ReferenceService } from "./service/reference.service";
 import { ReferenceController } from "./controller/reference.controller";
 import { ImportController } from "./controller/import.controller";
+import { LecturerImportController } from "./controller/lecturer-import.controller";
+import { LecturerImportService } from "./service/lecturer-import.service";
 
 @Module({
   controllers: [
+    LecturerImportController,
     StudentController,
     LecturerController,
     ReferenceController,
     ImportController,
   ],
   providers: [
+    LecturerImportService,
     StudentService,
     LecturerService,
     ImportService,

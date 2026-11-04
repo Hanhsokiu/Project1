@@ -95,7 +95,7 @@ function Content({ db }: { db: DemoDb }) {
                   }
                   onClick={() =>
                     s.exec(() => publishDefenseSchedule(s.term.id))
-                  }
+                  } loading={s.pending}
                 >
                   <Megaphone size={16} aria-hidden="true" />
                   Công bố lịch
@@ -279,7 +279,7 @@ function Content({ db }: { db: DemoDb }) {
                 <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={s.pending || !!conflicts.length}>
+              <Button disabled={s.pending || !!conflicts.length} loading={s.pending}>
                 <Save size={16} aria-hidden="true" />
                 Lưu lịch bảo vệ
               </Button>

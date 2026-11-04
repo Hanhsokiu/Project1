@@ -368,7 +368,7 @@ export default function TermRosterPage() {
             action
               .run(() => termService.saveRoster(t.id, students, lecturers))
               .catch(() => {})
-          }
+          } loading={action.pending}
         >
           <Save size={16} aria-hidden="true" />
           Lưu danh sách tham gia

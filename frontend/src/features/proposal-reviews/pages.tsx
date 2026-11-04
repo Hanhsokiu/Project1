@@ -1,3 +1,4 @@
+import { FilterBar } from "../../shared/components/filter-bar";
 import {
   ChevronLeft,
   ChevronRight,
@@ -140,7 +141,7 @@ export function ProposalReviewQueuePage() {
               : 'Danh sách hồ sơ'}
           </h2>
         </div>
-        <div className="rg-filters grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <FilterBar>
           <label>
             Đợt đồ án
             <select
@@ -217,7 +218,7 @@ export function ProposalReviewQueuePage() {
               placeholder="Tên đề tài, sinh viên, mã SV…"
             />
           </label>
-        </div>
+        </FilterBar>
         {options.data?.canAssign && (
           <label className="flex items-center gap-2 px-5 py-3 text-sm">
             <input
@@ -239,7 +240,7 @@ export function ProposalReviewQueuePage() {
       >
         <section className="rg-panel">
           <div className="rg-table-scroll">
-            <table className="w-full text-left">
+            <table className="w-full text-left responsive-table">
               <thead>
                 <tr>
                   <th className="p-4">Đề cương / sinh viên</th>
@@ -252,30 +253,30 @@ export function ProposalReviewQueuePage() {
               <tbody>
                 {list.data?.data.map((p) => (
                   <tr className="border-t" key={p.id}>
-                    <td className="p-4">
+                    <td className="p-4" data-label="Đề cương / sinh viên">
                       <strong className="block min-w-[180px]">{p.title}</strong>
                       <span className="mt-1 block text-slate-500">
                         {p.studentName} · {p.studentCode}
                       </span>
                     </td>
-                    <td className="p-4">
+                    <td className="p-4" data-label="Bộ môn">
                       {p.departmentName ?? 'Chưa có routing'}
                       <small className="block text-slate-500">
                         {p.researchAreaName}
                       </small>
                     </td>
-                    <td className="p-4">
+                    <td className="p-4" data-label="Phiên bản">
                       {p.versionNumber
                         ? `v${p.versionNumber}`
                         : 'Chưa sẵn sàng'}
                     </td>
-                    <td className="p-4">
+                    <td className="p-4" data-label="Trạng thái / nhóm">
                       {reviewStatusLabel(p.status)}
                       <small className="block text-slate-500">
                         {p.groupName ?? 'Chưa phân nhóm'}
                       </small>
                     </td>
-                    <td className="p-4">
+                    <td className="p-4" data-label="Thao tác">
                       <div className="flex flex-col items-start gap-2">
                         {p.canAssign && (
                           <Link
@@ -316,7 +317,7 @@ export function ProposalReviewQueuePage() {
             <button
               disabled={page <= 1}
               onClick={() => setPage((p) => p - 1)}
-              className="rounded border px-3 py-2 disabled:opacity-40 action-with-icon"
+              className="btn btn-secondary rounded border px-3 py-2 disabled:opacity-40 action-with-icon"
             >
               <ChevronLeft size={16} aria-hidden="true" />
               Trước
@@ -324,7 +325,7 @@ export function ProposalReviewQueuePage() {
             <button
               disabled={page >= list.data.totalPages}
               onClick={() => setPage((p) => p + 1)}
-              className="rounded border px-3 py-2 disabled:opacity-40 action-with-icon"
+              className="btn btn-secondary rounded border px-3 py-2 disabled:opacity-40 action-with-icon"
             >
               <ChevronRight size={16} aria-hidden="true" />
               Sau
@@ -439,7 +440,7 @@ function AssignmentForm({
       )}
       <button
         disabled={busy || !candidates.some((c) => c.eligibleReviewerCount > 0)}
-        className="rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
+        className="btn btn-primary rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
       >
         <CheckCheck size={16} aria-hidden="true" />
         {busy
@@ -516,7 +517,7 @@ export function ProposalReviewAssignmentPage() {
                 {message(mutation.error)}{' '}
                 <button
                   onClick={() => window.location.reload()}
-                  className="underline action-with-icon"
+                  className="btn btn-secondary underline action-with-icon"
                 >
                   <RotateCcw size={16} aria-hidden="true" />
                   Tải lại hồ sơ
@@ -708,7 +709,7 @@ function ProposalReviewDetail({ id }: { id: string }) {
               >
                 {message(mutation.error)}{' '}
                 <button
-                  className="underline action-with-icon"
+                  className="btn btn-secondary underline action-with-icon"
                   onClick={() => window.location.reload()}
                 >
                   <RotateCcw size={16} aria-hidden="true" />
@@ -726,7 +727,7 @@ function ProposalReviewDetail({ id }: { id: string }) {
             )}
             {r.allowedActions.includes('start') && (
               <button
-                className="rounded bg-blue-600 px-4 py-2 text-white action-with-icon"
+                className="btn btn-primary rounded bg-blue-600 px-4 py-2 text-white action-with-icon"
                 disabled={mutation.isPending}
                 onClick={() =>
                   mutation.mutate({
@@ -799,7 +800,7 @@ function ProposalReviewDetail({ id }: { id: string }) {
                   </p>
                 )}
                 <button
-                  className="rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
+                  className="btn btn-primary rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
                   disabled={mutation.isPending}
                 >
                   <Save size={16} aria-hidden="true" />

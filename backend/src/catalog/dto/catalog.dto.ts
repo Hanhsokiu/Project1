@@ -101,6 +101,24 @@ export interface ImportFile {
   size: number;
   buffer: Buffer;
 }
+export interface LecturerImportValues {
+  lecturerCode: string;
+  fullName: string;
+  departmentCode: string;
+  researchAreas: string[];
+  maxStudents: number | null;
+  email: string | null;
+  phone: string | null;
+}
+export interface LecturerImportRow {
+  rowNumber: number;
+  values: LecturerImportValues;
+  action: StudentImportRow["action"];
+  status: StudentImportRow["status"];
+  errors: ImportRowError[];
+  lecturerId?: string;
+  numericCode?: boolean;
+}
 export type ConfirmMode = "STRICT" | "VALID_ONLY";
 export type ReferenceKind =
   "departments" | "training-systems" | "research-areas";

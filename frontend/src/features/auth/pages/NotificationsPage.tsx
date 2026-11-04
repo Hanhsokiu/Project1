@@ -16,6 +16,7 @@ import {
   Notice,
   PageHeader,
   Stat,
+  ActionMenu,
 } from "../../../shared/components/kit";
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
@@ -51,7 +52,7 @@ export default function NotificationsPage() {
             disabled={action.pending || !mine.some((n) => !n.read)}
             onClick={() =>
               action.run(() => notificationService.readAll()).catch(() => {})
-            }
+            } loading={action.pending}
           >
             <MailCheck size={16} />
             Đánh dấu đã đọc tất cả
@@ -113,6 +114,8 @@ export default function NotificationsPage() {
       >
         <DataTable
           rows={rows}
+          filterCount={filter ? 1 : 0}
+          selectionActions={tab === "inbox" ? (selected) => <Button variant="secondary" loading={action.pending} disabled={!selected.some(n => !n.read)} onClick={() => action.run(() => Promise.all(selected.filter(n => !n.read && n.userId === user.id).map(n => notificationService.read(n.id)))).catch(() => {})}><MailCheck size={16} />Đánh dấu {selected.filter(n => !n.read).length} thông báo đã đọc</Button> : undefined}
           searchText={(n) =>
             `${n.title} ${n.content} ${db.accounts.find((a) => a.id === n.userId)?.name}`
           }
@@ -133,6 +136,7 @@ export default function NotificationsPage() {
             {
               key: "title",
               title: "Thông báo",
+              sortValue: (n) => n.title,
               render: (n) => (
                 <div>
                   <strong>{n.title}</strong>
@@ -164,7 +168,7 @@ export default function NotificationsPage() {
               key: "actions",
               title: "Thao tác",
               render: (n) => (
-                <div className="flex gap-2">
+                <ActionMenu label={`Thao tác thông báo ${n.title}`}>
                   {n.userId === user.id &&
                     n.link?.startsWith("/") &&
                     !n.link.startsWith("//") && (
@@ -181,7 +185,7 @@ export default function NotificationsPage() {
                         action
                           .run(() => notificationService.read(n.id))
                           .catch(() => {})
-                      }
+                      } loading={action.pending}
                     >
                       <MailCheck size={16} aria-hidden="true" />
                       Đã đọc
@@ -197,13 +201,13 @@ export default function NotificationsPage() {
                             registrationService.retryNotification(n.id),
                           )
                           .catch(() => {})
-                      }
+                      } loading={action.pending}
                     >
                       <Send size={16} aria-hidden="true" />
                       Gửi lại
                     </Button>
                   )}
-                </div>
+                </ActionMenu>
               ),
             },
           ]}

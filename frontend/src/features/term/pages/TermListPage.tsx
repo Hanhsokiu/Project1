@@ -163,6 +163,8 @@ export default function TermListPage() {
       <Card title="Danh sách đợt đồ án">
         <DataTable
           rows={rows}
+          label="Danh sách đợt đồ án"
+          filterCount={[program, status, semester].filter(Boolean).length}
           searchText={(t) => `${t.code} ${t.name} ${t.semester}`}
           filters={
             <>
@@ -214,6 +216,7 @@ export default function TermListPage() {
             {
               key: "name",
               title: "Đợt đồ án",
+              sortValue: (t) => t.name,
               render: (t) => (
                 <Link to={`/terms/${t.id}`} onClick={() => setTermId(t.id)}>
                   <strong>{t.name}</strong>
@@ -234,6 +237,7 @@ export default function TermListPage() {
             {
               key: "time",
               title: "Thời gian",
+              sortValue: (t) => t.start,
               render: (t) => (
                 <div>
                   {date(t.start)} – {date(t.end)}
@@ -278,7 +282,7 @@ export default function TermListPage() {
                     aria-label={`Mở đợt ${t.code}`}
                     className="btn btn-ghost"
                     to={`/terms/${t.id}`}
-                    onClick={() => setTermId(t.id)}
+                    onClick={() => setTermId(t.id)} title={`Mở đợt ${t.code}`}
                   >
                     <ArrowUpRight size={16} />
                   </Link>
@@ -413,7 +417,7 @@ export default function TermListPage() {
                 <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>
+              <Button disabled={action.pending} loading={action.pending}>
                 <Save size={16} aria-hidden="true" />
                 Lưu đợt đồ án
               </Button>

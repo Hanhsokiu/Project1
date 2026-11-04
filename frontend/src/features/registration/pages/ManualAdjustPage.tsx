@@ -128,7 +128,7 @@ export default function ManualAdjustPage() {
                   term.locked ||
                   term.assignmentPublished ||
                   !regs.length
-                }
+                } loading={action.pending}
               >
                 <Save size={16} aria-hidden="true" />
                 Lưu điều chỉnh

@@ -73,7 +73,7 @@ function MockAssignmentPlanPage() {
               onClick={() => setConfirm("trial")}
               disabled={
                 term.assignmentPublished || term.locked || action.pending
-              }
+              } loading={action.pending}
             >
               <Play size={15} />
               Chạy thử phương án
@@ -85,7 +85,7 @@ function MockAssignmentPlanPage() {
                 term.locked ||
                 !assignments.length ||
                 action.pending
-              }
+              } loading={action.pending}
             >
               <Send size={15} />
               {term.assignmentPublished ? "Đã công bố" : "Chốt & công bố"}
@@ -357,7 +357,7 @@ function MockAssignmentPlanPage() {
                             registrationService.retryNotification(n.id),
                           )
                           .catch(() => {})
-                      }
+                      } loading={action.pending}
                     >
                       <Send size={16} aria-hidden="true" />
                       Gửi lại

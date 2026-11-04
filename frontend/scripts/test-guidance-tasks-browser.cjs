@@ -1,3 +1,4 @@
+const { installWorkflowSession, openFilter } = require("./workflow-browser-session.cjs");
 "use strict";
 // Isolated Edge demo: mocked API only, never backend/database.
 const { spawn } = require("node:child_process"),
@@ -60,9 +61,7 @@ async function main() {
       }),
       pageErrors = [];
     page.on("pageerror", (e) => pageErrors.push(e.message));
-    await page.addInitScript(() =>
-      localStorage.setItem("accessToken", "demo-guidance-token"),
-    );
+    await installWorkflowSession(page);
     let actor = process.argv.includes("--student")
         ? "student"
         : process.argv.includes("--faculty")
@@ -269,6 +268,7 @@ async function main() {
                   },
             ),
           });
+      if (p === "/notifications/me") return send([]);
       if (deny) return send("Không tìm thấy nhiệm vụ trong phạm vi.", 404);
       if (method === "GET" && p === "/proposal-review-options/terms")
         return send([
@@ -602,6 +602,7 @@ async function main() {
     );
     tasks.get("task1").dueDate = iso(now - 1000);
     await page.goto(origin + "/guidance/tasks?termId=t1");
+    await openFilter(page, "Lọc trạng thái nhiệm vụ");
     await page
       .getByLabel("Lọc trạng thái nhiệm vụ")
       .selectOption("IN_PROGRESS");
@@ -617,6 +618,7 @@ async function main() {
         exact: true,
       }),
     ).toBeVisible();
+    await openFilter(page, "Lọc mốc nhiệm vụ");
     await page.getByLabel("Lọc mốc nhiệm vụ").selectOption("w1");
     await expect(
       page.getByRole("heading", {
@@ -624,6 +626,7 @@ async function main() {
         exact: true,
       }),
     ).toBeVisible();
+    await openFilter(page, "Lọc mốc nhiệm vụ");
     await page.getByLabel("Lọc mốc nhiệm vụ").selectOption("");
     await expect(
       page.getByRole("heading", {
@@ -631,6 +634,7 @@ async function main() {
         exact: true,
       }),
     ).toBeVisible();
+    await openFilter(page, "Lọc trạng thái nhiệm vụ");
     await page.getByLabel("Lọc trạng thái nhiệm vụ").selectOption("COMPLETED");
     await expect(
       page.getByRole("heading", {
@@ -743,7 +747,7 @@ async function main() {
       "scope failures hide academic content and navigation causes no unhandled page errors",
     );
     fs.writeFileSync(
-      path.join(root, "../backend/prisma/review/step8a-browser-results.json"),
+      path.join(root, "../.cache/ui-modern-20261104/step8a-browser-results.json"),
       JSON.stringify(
         {
           result: "PASS",

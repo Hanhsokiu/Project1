@@ -124,7 +124,7 @@ function Editor({ db, kind }: { db: DemoDb; kind: ScoreKind }) {
           </Button>
           <Button
             disabled={s.pending || Math.abs(total - 10) > 0.0001}
-            onClick={() => s.exec(() => saveRubric(kind, criteria))}
+            onClick={() => s.exec(() => saveRubric(kind, criteria))} loading={s.pending}
           >
             <Save size={16} aria-hidden="true" />
             Lưu Rubric

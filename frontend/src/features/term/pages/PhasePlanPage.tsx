@@ -210,7 +210,7 @@ export default function PhasePlanPage() {
                     disabled={disabled || action.pending}
                     onClick={() =>
                       setConfirm({ id: phase.id, locked: !phase.locked })
-                    }
+                    } loading={action.pending}
                   >
                     <LockKeyhole size={15} />
                     {phase.locked ? "Mở lại giai đoạn" : "Khóa giai đoạn"}
@@ -265,7 +265,7 @@ export default function PhasePlanPage() {
             <RotateCcw size={16} aria-hidden="true" />
             Khôi phục bản đã lưu
           </Button>
-          <Button disabled={disabled || action.pending || !dirty}>
+          <Button disabled={disabled || action.pending || !dirty} loading={action.pending}>
             <Save size={16} aria-hidden="true" />
             Lưu kế hoạch
           </Button>

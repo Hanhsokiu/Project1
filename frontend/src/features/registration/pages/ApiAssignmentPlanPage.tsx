@@ -73,7 +73,7 @@ export default function ApiAssignmentPlanPage() {
             <Button
               variant="secondary"
               disabled={locked || action.pending}
-              onClick={() => calculate(false)}
+              onClick={() => calculate(false)} loading={action.pending}
             >
               <Eye size={16} aria-hidden="true" />
               Xem trước phân bổ bổ sung
@@ -81,14 +81,14 @@ export default function ApiAssignmentPlanPage() {
             <Button
               variant="secondary"
               disabled={locked || action.pending}
-              onClick={() => setConfirm("all")}
+              onClick={() => setConfirm("all")} loading={action.pending}
             >
               <RotateCcw size={16} aria-hidden="true" />
               Tính lại toàn bộ
             </Button>
             <Button
               disabled={locked || !assignments.length || action.pending}
-              onClick={() => setConfirm("publish")}
+              onClick={() => setConfirm("publish")} loading={action.pending}
             >
               <LockKeyhole size={16} aria-hidden="true" />
               {term.assignmentPublished ? "Đã công bố" : "Chốt & công bố"}
@@ -96,7 +96,7 @@ export default function ApiAssignmentPlanPage() {
             {ctx?.plan?.status === "PUBLISHED" && (
               <Button
                 disabled={term.locked || action.pending}
-                onClick={() => setConfirm("finalize")}
+                onClick={() => setConfirm("finalize")} loading={action.pending}
               >
                 <LockKeyhole size={16} aria-hidden="true" />
                 Chốt phân công chính thức
@@ -233,7 +233,7 @@ export default function ApiAssignmentPlanPage() {
                         action
                           .run(() => assignmentApi.retry(n.id))
                           .catch(() => {})
-                      }
+                      } loading={action.pending}
                     >
                       <Send size={16} aria-hidden="true" />
                       Gửi lại
@@ -285,7 +285,7 @@ export default function ApiAssignmentPlanPage() {
               } catch {
                 setPreview(null);
               }
-            }}
+            }} loading={action.pending}
           >
             <Save size={16} aria-hidden="true" />
             Lưu phương án nháp

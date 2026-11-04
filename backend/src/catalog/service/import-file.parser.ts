@@ -58,7 +58,10 @@ export class ImportFileParser {
     return csvRecords(text).map((record) => record.values as string[]);
   }
 
-  static async parse(file: ImportFile): Promise<ParsedImportRecord[]> {
+  static async parse(
+    file: ImportFile,
+    kind: "student" | "lecturer" = "student",
+  ): Promise<ParsedImportRecord[]> {
     if (!file || !file.buffer?.length)
       throw new BadRequestException("Chưa tải tệp dữ liệu");
     if (file.size > 5 * 1024 * 1024)
@@ -103,7 +106,18 @@ export class ImportFileParser {
       throw new BadRequestException("Tên cột bị trùng");
     const present = (aliases: string[]) =>
       aliases.some((key) => headers.includes(key));
-    if (
+    if (kind === "lecturer") {
+      if (
+        !present(["lecturerCode", "code", "Mã GV"]) ||
+        !present(["fullName", "name", "Họ và tên"]) ||
+        !present(["departmentCode", "Bộ môn"]) ||
+        !present(["researchAreas", "Hướng chuyên môn"]) ||
+        !present(["maxStudents", "quota", "Chỉ tiêu"])
+      )
+        throw new BadRequestException(
+          "Thiếu cột bắt buộc: lecturerCode, fullName, departmentCode, researchAreas, maxStudents",
+        );
+    } else if (
       !present(["studentCode", "code", "Mã SV", "MSSV"]) ||
       !present(["fullName", "name", "Họ và tên"]) ||
       !present(["className", "Lớp"]) ||
@@ -113,14 +127,12 @@ export class ImportFileParser {
         "Thiếu cột bắt buộc: studentCode, fullName, className, gpa",
       );
     // The parser owns this reserved metadata field, even if a file supplies the same column.
-    return records
-      .slice(1)
-      .map((record) => ({
-        ...Object.fromEntries(
-          headers.map((key, i) => [key, record.values[i] ?? ""]),
-        ),
-        __sourceRow: record.sourceRow,
-      }));
+    return records.slice(1).map((record) => ({
+      ...Object.fromEntries(
+        headers.map((key, i) => [key, record.values[i] ?? ""]),
+      ),
+      __sourceRow: record.sourceRow,
+    }));
   }
 
   static async template(format: "csv" | "xlsx") {
@@ -140,7 +152,7 @@ export class ImportFileParser {
       return Buffer.from(
         "\uFEFF" +
           headers.join(",") +
-          "\r\n001234567,Nguyễn Văn Mẫu,CNTT K64,K64,,3.20,,,true\r\n",
+          "\r\n001234567,Nguyễn Văn Mẫu,CNTT K64,Công nghệ thông tin,K64,,3.20,,,true\r\n",
         "utf8",
       );
     const book = new ExcelJS.Workbook();

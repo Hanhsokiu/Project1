@@ -296,7 +296,7 @@ export function TaskEditor({
             <X size={16} aria-hidden="true" />
             Hủy
           </Button>
-          <Button disabled={action.pending}>
+          <Button disabled={action.pending} loading={action.pending}>
             <Save size={16} aria-hidden="true" />
             {action.pending ? "Đang lưu…" : "Lưu và thông báo"}
           </Button>

@@ -273,7 +273,7 @@ function SubmissionForm({
         <button
           disabled={busy || !files.length}
           onClick={() => void upload()}
-          className="rounded border px-4 py-2 action-with-icon"
+          className="btn btn-secondary rounded border px-4 py-2 action-with-icon"
         >
           <FileUp size={16} aria-hidden="true" />
           {busy ? "Đang xử lý…" : "Tải file lên"}
@@ -285,14 +285,14 @@ function SubmissionForm({
             files.some((f) => !f.uploadId)
           }
           onClick={() => void submit()}
-          className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
+          className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
         >
           <Send size={16} aria-hidden="true" />
           Xác nhận nộp
         </button>
         <button
           disabled={busy}
-          className="text-blue-700 action-with-icon"
+          className="btn btn-secondary text-blue-700 action-with-icon"
           onClick={async () => {
             try {
               const latest = await onReload();
@@ -373,7 +373,7 @@ export function SubmissionHistoryItem({
       {s.files.map((f) => (
         <button
           key={f.id}
-          className="block max-w-full break-all text-left text-blue-700 underline action-with-icon"
+          className="btn btn-secondary block max-w-full break-all text-left text-blue-700 underline action-with-icon"
           onClick={() => onDownload(s.id, f.id, f.originalName)}
         >
           <Download size={16} aria-hidden="true" />
@@ -384,7 +384,7 @@ export function SubmissionHistoryItem({
       {!s.files.length && <p>Chưa có file private đã đối soát.</p>}
       {onViewReview && (
         <button
-          className="text-blue-700 underline action-with-icon"
+          className="btn btn-secondary text-blue-700 underline action-with-icon"
           onClick={() => onViewReview(s.id)}
         >
           <Eye size={16} aria-hidden="true" />
@@ -512,7 +512,7 @@ export function TaskSubmissionsPage() {
         <button
           disabled={page <= 1}
           onClick={() => setPage((v) => v - 1)}
-          className="action-with-icon"
+          className="btn btn-secondary action-with-icon"
         >
           <ChevronLeft size={16} aria-hidden="true" />
           Trang trước
@@ -523,7 +523,7 @@ export function TaskSubmissionsPage() {
         <button
           disabled={page >= (history.data?.totalPages ?? 1)}
           onClick={() => setPage((v) => v + 1)}
-          className="action-with-icon"
+          className="btn btn-secondary action-with-icon"
         >
           <ChevronRight size={16} aria-hidden="true" />
           Trang sau

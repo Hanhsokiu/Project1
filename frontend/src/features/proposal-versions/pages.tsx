@@ -1,3 +1,4 @@
+import { FilterBar } from "../../shared/components/filter-bar";
 import { ChevronLeft, ChevronRight, RotateCcw, Save, Send } from 'lucide-react';
 import { WorkflowHeading } from '../review-groups/workflow-heading';
 import React, { useEffect, useRef, useState } from 'react';
@@ -84,7 +85,7 @@ export function ProposalEditorListPage() {
   return (
     <>
       <WorkflowHeading path="/topic/proposal" />
-      <div className="rg-panel mb-5 grid gap-4 p-5 sm:grid-cols-2">
+      <FilterBar>
         <label className="text-sm">
           Đợt đồ án
           <select
@@ -116,7 +117,7 @@ export function ProposalEditorListPage() {
             }}
           />
         </label>
-      </div>
+      </FilterBar>
       <ReviewState
         loading={terms.isLoading || (!!termId && list.isLoading)}
         error={errorText(terms.error || list.error)}
@@ -151,7 +152,7 @@ export function ProposalEditorListPage() {
             <button
               disabled={page <= 1}
               onClick={() => setPage((p) => p - 1)}
-              className="action-with-icon"
+              className="btn btn-secondary action-with-icon"
             >
               <ChevronLeft size={16} aria-hidden="true" />
               Trước
@@ -159,7 +160,7 @@ export function ProposalEditorListPage() {
             <button
               disabled={page >= list.data.totalPages}
               onClick={() => setPage((p) => p + 1)}
-              className="action-with-icon"
+              className="btn btn-secondary action-with-icon"
             >
               <ChevronRight size={16} aria-hidden="true" />
               Sau
@@ -291,7 +292,7 @@ function Editor({ context }: { context: ProposalEditorContext }) {
           {validation || errorText(save.error || submit.error)}{' '}
           <button
             type="button"
-            className="underline action-with-icon"
+            className="btn btn-secondary underline action-with-icon"
             onClick={() => window.location.reload()}
           >
             <RotateCcw size={16} aria-hidden="true" />
@@ -347,7 +348,7 @@ function Editor({ context }: { context: ProposalEditorContext }) {
         <div className="flex flex-wrap gap-3">
           {allowed && (
             <button
-              className="rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
+              className="btn btn-primary rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
               disabled={busy}
               onClick={saveDraft}
             >
@@ -357,7 +358,7 @@ function Editor({ context }: { context: ProposalEditorContext }) {
           )}
           {context.allowedActions.includes('submit') && (
             <button
-              className="rounded border border-blue-300 px-4 py-2 text-sm text-blue-700 action-with-icon"
+              className="btn btn-secondary rounded border border-blue-300 px-4 py-2 text-sm text-blue-700 action-with-icon"
               disabled={busy || dirty || !currentId}
               onClick={send}
             >
@@ -454,7 +455,7 @@ function VersionHistory({ proposalId }: { proposalId: string }) {
                 <button
                   disabled={page <= 1}
                   onClick={() => setPage((p) => p - 1)}
-                  className="action-with-icon"
+                  className="btn btn-secondary action-with-icon"
                 >
                   <ChevronLeft size={16} aria-hidden="true" />
                   Trước
@@ -462,7 +463,7 @@ function VersionHistory({ proposalId }: { proposalId: string }) {
                 <button
                   disabled={page >= history.data.totalPages}
                   onClick={() => setPage((p) => p + 1)}
-                  className="action-with-icon"
+                  className="btn btn-secondary action-with-icon"
                 >
                   <ChevronRight size={16} aria-hidden="true" />
                   Sau

@@ -56,7 +56,7 @@ export function MemberTable({
     );
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-left text-sm">
+      <table className="w-full text-left text-sm responsive-table">
         <thead className="bg-slate-50 text-xs uppercase text-slate-500">
           <tr>
             <th className="p-4">Giảng viên</th>
@@ -67,11 +67,11 @@ export function MemberTable({
         <tbody>
           {members.map((m) => (
             <tr key={m.lecturerId} className="border-t border-slate-100">
-              <td className="p-4 font-medium">{m.fullName}</td>
-              <td className="p-4 tabular-nums text-slate-500">
+              <td className="p-4 font-medium" data-label="Giảng viên">{m.fullName}</td>
+              <td className="p-4 tabular-nums text-slate-500" data-label="Mã giảng viên">
                 {m.lecturerCode}
               </td>
-              <td className="p-4">
+              <td className="p-4" data-label="Vai trò">
                 <span className="rounded-full bg-blue-50 px-2 py-1 text-xs text-blue-800">
                   Thành viên duyệt
                 </span>
@@ -302,13 +302,13 @@ export function GroupForm({
                   <button
                     type="button"
                     key={member.lecturerId}
-                    className="rounded-full bg-blue-50 px-3 py-1 text-xs text-blue-800 action-with-icon"
+                    className="btn btn-primary rounded-full bg-blue-50 px-3 py-1 text-xs text-blue-800 action-with-icon"
                     aria-label={`Bỏ chọn ${member.fullName}`}
                     onClick={() =>
                       setSelected((v) =>
                         v.filter((m) => m.lecturerId !== member.lecturerId),
                       )
-                    }
+                    } title={`Bỏ chọn ${member.fullName}`}
                   >
                     {member.fullName}
                     <X size={12} aria-hidden="true" />
@@ -332,13 +332,9 @@ export function GroupForm({
             />
           </label>
         )}
-        <div className="flex flex-wrap gap-3">
-          <Button type="submit" disabled={busy}>
-            <Save size={16} aria-hidden="true" />
-            {busy ? "Đang lưu…" : initial ? "Lưu thay đổi" : "Tạo nhóm duyệt"}
-          </Button>
+        <div className="form-actions">
           <Link
-            className="rounded border bg-white px-4 py-2 text-sm"
+            className="btn btn-secondary"
             to={
               initial
                 ? `/topic/review-groups/${initial.id}`
@@ -347,6 +343,10 @@ export function GroupForm({
           >
             Hủy
           </Link>
+          <Button type="submit" disabled={busy} loading={busy}>
+            <Save size={16} aria-hidden="true" />
+            {busy ? "Đang lưu…" : initial ? "Lưu thay đổi" : "Tạo nhóm duyệt"}
+          </Button>
         </div>
       </fieldset>
     </form>

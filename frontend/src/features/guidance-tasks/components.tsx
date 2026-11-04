@@ -281,7 +281,7 @@ export function GuidanceTaskForm({
             {error}
           </p>
         )}
-        <button className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon">
+        <button className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon">
           <Save size={16} aria-hidden="true" />
           {busy
             ? "Đang lưu…"

@@ -51,11 +51,7 @@ function RouteButton({
     <Link
       to={to}
       onClick={onClick}
-      className={
-        light
-          ? "inline-flex items-center justify-center gap-2 rounded-2xl bg-white text-[#1e2024] font-semibold px-5 py-3 hover:bg-[#edeaf5] transition-colors"
-          : `btn ${secondary ? "btn-secondary" : "btn-primary"}`
-      }
+      className={`btn ${secondary ? "btn-secondary" : "btn-primary"}`}
     >
       {children}
       <ArrowRight size={16} />
@@ -76,22 +72,17 @@ function DarkHero({
   actions?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden rounded-[24px] bg-[#1e2024] text-white p-6 sm:p-8 mb-6 border border-[#121316]">
-      <GraduationCap
-        aria-hidden
-        className="absolute -right-12 -bottom-16 w-72 h-72 opacity-[0.035] pointer-events-none"
-        strokeWidth={1}
-      />
-      <div className="relative space-y-6">
+    <section className="dashboard-overview">
+      <div className="space-y-5">
         <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
           <div className="max-w-3xl">
-            <p className="text-[11px] tracking-[.08em] font-semibold uppercase text-[#cfbcff] mb-3">
+            <p className="eyebrow">
               {label}
             </p>
-            <h2 className="text-2xl sm:text-[30px] leading-tight font-semibold tracking-tight text-white">
+            <h2 className="dashboard-overview-title">
               {title}
             </h2>
-            <p className="mt-3 text-sm leading-6 text-[#c6c6cb] max-w-2xl">
+            <p className="mt-2 text-xs leading-6 text-slate-500 max-w-2xl">
               {description}
             </p>
           </div>
@@ -114,13 +105,13 @@ function DarkMetric({
   sub?: string;
 }) {
   return (
-    <div className="rounded-2xl bg-white/[.055] border border-white/[.04] px-5 py-4">
-      <p className="text-xs text-[#c6c6cb]">{label}</p>
+    <div className="dashboard-metric">
+      <p className="text-xs text-slate-500">{label}</p>
       <div className="flex items-baseline gap-2 mt-3">
-        <strong className="text-3xl font-semibold tracking-tight text-white">
+        <strong className="text-3xl font-semibold tracking-tight text-slate-800">
           {value}
         </strong>
-        {sub && <small className="text-[#c6c6cb]">{sub}</small>}
+        {sub && <small className="text-slate-500">{sub}</small>}
       </div>
     </div>
   );
@@ -144,7 +135,7 @@ function Milestones({ data }: { data: DashboardData }) {
             return (
               <div key={phase.id} className="flex gap-3 items-start">
                 <span
-                  className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-xs font-semibold ${state === "IN_PROGRESS" ? "bg-[#eae6f8] text-[#523f84]" : "bg-[#f3f2f8] text-slate-500"}`}
+                  className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-xs font-semibold ${state === "IN_PROGRESS" ? "bg-[#eef2ff] text-[#4338ca]" : "bg-[#f8fafc] text-slate-500"}`}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -184,11 +175,11 @@ function NextDeadline({ data }: { data: DashboardData }) {
           {upcoming.map((phase) => (
             <div
               key={phase.id}
-              className="flex gap-3 p-3 rounded-xl bg-[#f3f2f8]"
+              className="flex gap-3 p-3 rounded-xl bg-[#f8fafc]"
             >
               <CalendarDays
                 size={19}
-                className="text-[#665399] shrink-0 mt-1"
+                className="text-[#4f46e5] shrink-0 mt-1"
               />
               <div>
                 <strong className="text-sm">{phase.name}</strong>
@@ -200,7 +191,7 @@ function NextDeadline({ data }: { data: DashboardData }) {
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl bg-[#f3f2f8] text-center p-7">
+        <div className="rounded-2xl bg-[#f8fafc] text-center p-7">
           <CalendarDays size={27} className="mx-auto text-slate-400 mb-3" />
           <strong className="text-sm">Chưa có mốc sắp tới</strong>
           <p className="muted text-xs leading-5 mt-2">
@@ -234,9 +225,9 @@ function QuickLink({
   return (
     <Link
       to={to}
-      className="block rounded-[20px] border border-[#e2e0ec] bg-white p-5 hover:bg-[#f3f2f8] transition-colors"
+      className="block rounded-[20px] border border-[#e2e8f0] bg-white p-5 hover:bg-[#f8fafc] transition-colors"
     >
-      <span className="w-9 h-9 rounded-xl bg-[#eae6f8] text-[#665399] inline-flex items-center justify-center">
+      <span className="w-9 h-9 rounded-xl bg-[#eef2ff] text-[#4f46e5] inline-flex items-center justify-center">
         {icon}
       </span>
       <h3 className="font-semibold text-sm mt-4 flex justify-between gap-2">
@@ -312,10 +303,10 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
       </DarkHero>
       <div className="grid xl:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-6 items-start">
         <div className="space-y-6">
-          <section className="rounded-[20px] bg-[#f3f0fa] border border-[#e2e0ec] p-6">
+          <section className="rounded-[20px] bg-[#f3f0fa] border border-[#e2e8f0] p-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-xl bg-[#665399] text-white flex items-center justify-center">
+                <span className="w-10 h-10 rounded-xl bg-[#4f46e5] text-white flex items-center justify-center">
                   <Flag size={20} />
                 </span>
                 <div>
@@ -369,11 +360,11 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
                 <Link
                   to={step.to}
                   key={step.title}
-                  className={`flex items-start justify-between gap-3 rounded-2xl p-4 transition-colors ${i === first ? "bg-[#eae6f8]" : "bg-[#f3f2f8] hover:bg-[#edeaf5]"}`}
+                  className={`flex items-start justify-between gap-3 rounded-2xl p-4 transition-colors ${i === first ? "bg-[#eef2ff]" : "bg-[#f8fafc] hover:bg-[#eef2ff]"}`}
                 >
                   <div className="flex items-start gap-3 min-w-0">
                     <span
-                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs ${step.done ? "bg-[#665399] text-white" : "bg-white text-[#665399]"}`}
+                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs ${step.done ? "bg-[#4f46e5] text-white" : "bg-white text-[#4f46e5]"}`}
                     >
                       {step.done ? <Check size={15} /> : i + 1}
                     </span>
@@ -508,7 +499,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
               key={step.title}
               className="rounded-xl bg-white/[.05] px-3 py-3"
             >
-              <p className="text-[10px] uppercase text-[#cfbcff] font-semibold">
+              <p className="text-[10px] uppercase text-[#c7d2fe] font-semibold">
                 Mốc {i + 1}
               </p>
               <p className="text-xs font-medium mt-2">{step.title}</p>
@@ -521,10 +512,10 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
       </DarkHero>
       <div className="grid xl:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-6 items-start">
         <div className="space-y-6">
-          <section className="rounded-[24px] border border-[#e2e0ec] bg-[#f3f0fa] p-6">
+          <section className="rounded-[24px] border border-[#e2e8f0] bg-[#f3f0fa] p-6">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <span className="w-9 h-9 rounded-xl bg-[#665399] text-white flex items-center justify-center mb-3">
+                <span className="w-9 h-9 rounded-xl bg-[#4f46e5] text-white flex items-center justify-center mb-3">
                   <GraduationCap size={20} />
                 </span>
                 <p className="eyebrow">BƯỚC TIẾP THEO</p>
@@ -539,7 +530,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                       : "Theo dõi kết quả đăng ký, liên hệ GVHD sau khi Khoa công bố và trao đổi để thống nhất một đề tài cá nhân."}
                 </p>
               </div>
-              <RouteButton to={target}>Mở hồ sơ</RouteButton>
+              <RouteButton to={target} secondary>Mở hồ sơ</RouteButton>
             </div>
             <div className="grid sm:grid-cols-3 gap-3 mt-5">
               <div className="bg-white rounded-xl p-3 text-xs">
@@ -566,7 +557,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                 <div className="space-y-3">
                   <Person name={lecturer.name} sub={lecturer.code} />
                   <a
-                    className="text-xs text-[#665399] break-all block"
+                    className="text-xs text-[#4f46e5] break-all block"
                     href={`mailto:${lecturer.email}`}
                   >
                     {lecturer.email}
@@ -595,7 +586,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                     {topic.title}
                   </p>
                   <Link
-                    className="text-xs text-[#665399] block mt-3"
+                    className="text-xs text-[#4f46e5] block mt-3"
                     to="/topic/my"
                   >
                     Chi tiết đề tài →
@@ -615,7 +606,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
               <div className="my-4">
                 <Badge value={submittedProposal ? "SUBMITTED" : "DRAFT"} />
               </div>
-              <Link to="/topic/draft" className="text-xs text-[#665399]">
+              <Link to="/topic/draft" className="text-xs text-[#4f46e5]">
                 Soạn đề cương / xuất PDF →
               </Link>
             </Card>
@@ -629,9 +620,9 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                 <Link
                   key={step.title}
                   to={step.to}
-                  className={`p-4 rounded-2xl text-center border ${step.done ? "border-[#cfbcff] bg-[#f3f0fa]" : "border-[#e2e0ec] bg-[#f9f9fa]"}`}
+                  className={`p-4 rounded-2xl text-center border ${step.done ? "border-[#c7d2fe] bg-[#f3f0fa]" : "border-[#e2e8f0] bg-[#f8fafc]"}`}
                 >
-                  <span className="flex w-10 h-10 rounded-xl bg-white mx-auto items-center justify-center text-[#665399]">
+                  <span className="flex w-10 h-10 rounded-xl bg-white mx-auto items-center justify-center text-[#4f46e5]">
                     {step.done ? (
                       <CheckCircle2 size={21} />
                     ) : (
@@ -664,6 +655,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
     <>
       <DarkHero
         label={`TỔNG QUAN HƯỚNG DẪN ĐỒ ÁN · ${data.term.code}`}
+        actions={<RouteButton to="/topic/my">Xem đề tài sinh viên</RouteButton>}
         title={
           data.students.length
             ? "Đồng hành cùng sinh viên xây dựng đề tài"
@@ -688,7 +680,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
           <span>
             Chỉ tiêu trong đợt: {data.students.length}/{data.quota} sinh viên
           </span>
-          <span className="text-[#cfbcff]">
+          <span className="text-[#c7d2fe]">
             {data.term.assignmentPublished
               ? "Khoa đã công bố kết quả phân công"
               : "Chờ Khoa chốt và công bố phân công"}
@@ -717,7 +709,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                   title: "Liên hệ",
                   render: (s) => (
                     <div className="text-xs space-y-1">
-                      <a className="text-[#665399]" href={`mailto:${s.email}`}>
+                      <a className="text-[#4f46e5]" href={`mailto:${s.email}`}>
                         {s.email}
                       </a>
                       <p>{s.phone}</p>
@@ -764,7 +756,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
             />
           </Card>
           <Card title="Thông tin chuyên môn và hướng nghiên cứu">
-            <div className="rounded-2xl bg-[#f3f2f8] p-4 grid sm:grid-cols-2 gap-4">
+            <div className="rounded-2xl bg-[#f8fafc] p-4 grid sm:grid-cols-2 gap-4">
               <div>
                 <p className="eyebrow">GIẢNG VIÊN HƯỚNG DẪN</p>
                 <strong className="block mt-2">
@@ -813,7 +805,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                         to="/topic/my"
                         onClick={() => setStudentId(topic.studentId)}
                         key={topic.id}
-                        className="block rounded-xl bg-[#f3f2f8] p-3"
+                        className="block rounded-xl bg-[#f8fafc] p-3"
                       >
                         <strong className="text-sm">
                           {
@@ -834,13 +826,13 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
             </Card>
             <Card title="Hồ sơ đề cương">
               <div className="space-y-3">
-                <div className="flex justify-between rounded-xl bg-[#f3f2f8] p-3 text-sm">
+                <div className="flex justify-between rounded-xl bg-[#f8fafc] p-3 text-sm">
                   <span>Đã có phiên bản nộp</span>
-                  <strong className="text-[#665399]">{submitted}</strong>
+                  <strong className="text-[#4f46e5]">{submitted}</strong>
                 </div>
-                <div className="flex justify-between rounded-xl bg-[#f3f2f8] p-3 text-sm">
+                <div className="flex justify-between rounded-xl bg-[#f8fafc] p-3 text-sm">
                   <span>Chưa nộp phiên bản</span>
-                  <strong className="text-[#665399]">
+                  <strong className="text-[#4f46e5]">
                     {Math.max(0, data.students.length - submitted)}
                   </strong>
                 </div>
@@ -943,9 +935,28 @@ function AdminDashboard({ db }: { db: DemoDb }) {
   );
 }
 
+function CommitteeDashboard({ db, withHeader = true }: { db: DemoDb; withHeader?: boolean }) {
+  const { user, termId } = useWorkspace();
+  const committees = db.committees.filter(c => c.termId === termId && c.members.some(member => member.lecturerId === user.lecturerId));
+  const sessions = db.defenses.filter(d => d.termId === termId && d.schedulePublished !== false && committees.some(c => c.id === d.committeeId));
+  const notifications = db.notifications.filter(n => n.userId === user.id);
+  return <>
+    {withHeader && <PageHeader title="Không gian hội đồng" description="Theo dõi lịch bảo vệ đã công bố và thông báo dành cho bạn." actions={<Link className="btn btn-primary" to="/notifications">Xem thông báo<ArrowRight size={16} /></Link>} />}
+    <div className="grid gap-5 lg:grid-cols-3">
+      <div className="lg:col-span-2"><Card title="Lịch bảo vệ của bạn" description="Chỉ hiển thị lịch đã công bố trong các hội đồng bạn tham gia.">
+        {sessions.length ? <DataTable rows={sessions} label="Lịch bảo vệ của hội đồng" searchText={d => `${d.date} ${d.room} ${db.students.find(s => s.id === d.studentId)?.name || ""}`} columns={[
+          { key: "time", title: "Thời gian", sortValue: d => `${d.date} ${d.start}`, render: d => <><strong>{date(d.date)}</strong><p>{d.start} – {d.end}</p></> },
+          { key: "student", title: "Sinh viên", render: d => db.students.find(s => s.id === d.studentId)?.name || "Hồ sơ theo phân công" },
+          { key: "committee", title: "Hội đồng / Phòng", render: d => <><strong>{committees.find(c => c.id === d.committeeId)?.name}</strong><p>{d.room || "Chưa có phòng"}</p></> },
+        ]} /> : <Empty title="Chưa có lịch bảo vệ được công bố" description="Lịch và hồ sơ sẽ xuất hiện khi Khoa công bố phân công hội đồng. Bạn có thể kiểm tra thông báo để theo dõi cập nhật." />}
+      </Card></div>
+      <Card title="Thông báo mới">{notifications.length ? <div className="space-y-4">{notifications.slice(0, 5).map(n => <Link className="block border-b border-slate-100 pb-4 last:border-0" to="/notifications" key={n.id}><strong className="text-xs">{n.title}</strong><p className="muted text-xs mt-2 line-clamp-3">{n.content}</p></Link>)}</div> : <Empty title="Chưa có thông báo" description="Các cập nhật dành cho hội đồng sẽ xuất hiện tại đây." />}</Card>
+    </div>
+  </>;
+}
 function DashboardContent({ db }: { db: DemoDb }) {
   const { user, termId } = useWorkspace();
-  const availableRoles = user.roles.filter((r) => r !== "COMMITTEE");
+  const availableRoles = user.roles;
   const [selectedRole, setSelectedRole] = useState<Role>(
     availableRoles[0] || user.roles[0],
   );
@@ -953,12 +964,7 @@ function DashboardContent({ db }: { db: DemoDb }) {
     ? selectedRole
     : availableRoles[0];
   if (!role)
-    return (
-      <Notice>
-        Chưa có không gian làm việc cho tài khoản này trong giai đoạn đăng ký và
-        phân công. Liên hệ quản trị viên để kiểm tra vai trò.
-      </Notice>
-    );
+    return <CommitteeDashboard db={db} />;
   if (!db.terms.length)
     return (
       <>
@@ -1003,17 +1009,19 @@ function DashboardContent({ db }: { db: DemoDb }) {
               ? `${lecturer?.code || user.username} · ${db.catalogs.find((c) => c.id === lecturer?.departmentId)?.name || "Khoa Công nghệ Thông tin"}`
               : "Tổng quan công tác quản lý đợt, đăng ký và hồ sơ đề tài"
         }
-        actions={<Badge value={data.term.status} />}
+        actions={role === "COMMITTEE" ? <Link className="btn btn-primary" to="/notifications">Xem thông báo<ArrowRight size={16} /></Link> : <Badge value={data.term.status} />}
       />
       {availableRoles.length > 1 && (
         <div
-          className="flex flex-wrap gap-2 mb-6"
+          className="role-switcher flex flex-wrap gap-2 mb-6"
+          role="group"
           aria-label="Không gian vai trò"
         >
           {availableRoles.map((item) => (
             <Button
               key={item}
-              variant={role === item ? "primary" : "secondary"}
+              variant="ghost"
+              aria-pressed={role === item}
               onClick={() => setSelectedRole(item)}
             >
               {labels[item]}
@@ -1027,6 +1035,8 @@ function DashboardContent({ db }: { db: DemoDb }) {
         <FacultyDashboard data={data} />
       ) : role === "STUDENT" ? (
         <StudentDashboard db={db} data={data} />
+      ) : role === "COMMITTEE" ? (
+        <CommitteeDashboard db={db} withHeader={false} />
       ) : (
         <LecturerDashboard db={db} data={data} />
       )}

@@ -127,8 +127,8 @@ export default function ImportPage() {
       setConfirm(false);
     }
   }
-  if (step1Api.imports && kind === "student")
-    return <StudentApiImport onLecturer={() => setKind("lecturer")} />;
+  if (step1Api.imports)
+    return <StudentApiImport key={kind} kind={kind} onKindChange={setKind} />;
   return (
     <div className="import-page">
       <PageHeader
@@ -351,7 +351,7 @@ export default function ImportPage() {
                     !valid.length ||
                     (!validOnly && invalid > 0)
                   }
-                  onClick={() => setConfirm(true)}
+                  onClick={() => setConfirm(true)} loading={action.pending}
                 >
                   <CheckCheck size={16} aria-hidden="true" />
                   Xác nhận nhập {validOnly ? valid.length : rows.length} dòng

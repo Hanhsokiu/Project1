@@ -1,3 +1,4 @@
+const { installWorkflowSession, openFilter } = require("./workflow-browser-session.cjs");
 'use strict';
 // Actual Edge UI with mock API, no backend or database access.
 const { spawn } = require('node:child_process'),
@@ -54,9 +55,7 @@ async function main() {
     const page = await browser.newPage({
       viewport: { width: 1280, height: 900 },
     });
-    await page.addInitScript(() =>
-      localStorage.setItem('accessToken', 'mock-token'),
-    );
+    await installWorkflowSession(page);
     let faculty = true,
       assigned = false,
       state = 'ASSIGNED',
@@ -160,6 +159,7 @@ async function main() {
                   },
             ),
           });
+      if (p === "/notifications/me") return send([]);
       if (deny) return send('Không tìm thấy hồ sơ trong phạm vi.', 404);
       if (p === '/proposal-review-options/terms')
         return send([
@@ -353,7 +353,7 @@ async function main() {
     pass('approval follows the same single-decision UI flow');
     await page.setViewportSize({ width: 375, height: 812 });
     await expect
-      .poll(async () => (await page.locator('.rg-sidebar').boundingBox()).x)
+      .poll(async () => (await page.locator('.sidebar').boundingBox()).x)
       .toBeLessThanOrEqual(-259);
     assert(
       await page.evaluate(
@@ -371,7 +371,7 @@ async function main() {
     );
     pass('out-of-scope error renders without proposal content');
     fs.writeFileSync(
-      path.resolve(root, '../backend/prisma/review/step5-browser-results.json'),
+      path.resolve(root, '../.cache/ui-modern-20261104/step5-browser-results.json'),
       JSON.stringify(
         {
           result: 'PASS',

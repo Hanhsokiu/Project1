@@ -38,12 +38,15 @@ function validationContext(context: ImportContext): ImportValidationContext {
     accounts: context.accounts,
   };
 }
-function jobDto(job: ImportJob) {
-  const rows = (Array.isArray(job.rows)
-    ? job.rows
-    : []) as unknown as StudentImportRow[];
+export function jobDto<
+  Row extends
+    StudentImportRow | import("../dto/catalog.dto").LecturerImportRow =
+    StudentImportRow,
+>(job: ImportJob) {
+  const rows = (Array.isArray(job.rows) ? job.rows : []) as unknown as Row[];
   return {
     id: job.id,
+    type: job.type,
     termId: job.termId,
     fileName: job.fileName,
     status: job.status,

@@ -52,7 +52,7 @@ export default function DossierPage() {
                     ),
                   )
                   .catch(() => {})
-              }
+              } loading={action.pending}
             >
               <Download size={16} />
               Tải PDF

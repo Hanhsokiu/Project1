@@ -1,5 +1,5 @@
 .import-page {
-  --import-accent: #665399;
+  --import-accent: #4f46e5;
   --import-soft: #f5f2fb;
 }
 
@@ -236,7 +236,7 @@
   border-radius: 16px;
   background: #fff;
   color: var(--import-accent);
-  box-shadow: 0 4px 12px #66539908;
+  box-shadow: 0 4px 12px #4f46e508;
 }
 
 .import-dropzone strong {

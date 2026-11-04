@@ -116,7 +116,7 @@ export default function TermParameterPage() {
                 <RotateCcw size={16} aria-hidden="true" />
                 Khôi phục
               </Button>
-              <Button disabled={disabled || action.pending}>
+              <Button disabled={disabled || action.pending} loading={action.pending}>
                 <Save size={16} aria-hidden="true" />
                 Lưu tham số
               </Button>

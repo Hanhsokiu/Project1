@@ -102,7 +102,7 @@ export default function ChangePasswordPage() {
               ))}
             </ul>
             <div className="form-actions">
-              <Button disabled={action.pending}>
+              <Button disabled={action.pending} loading={action.pending}>
                 <Save size={16} aria-hidden="true" />
                 {action.pending ? "Đang cập nhật…" : "Lưu mật khẩu mới"}
               </Button>

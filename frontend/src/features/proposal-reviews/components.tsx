@@ -253,7 +253,7 @@ export function DecisionForm({
         </p>
       )}
       <button
-        className="rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
+        className="btn btn-primary rounded bg-blue-600 px-4 py-2 text-sm text-white action-with-icon"
         disabled={busy}
       >
         <CheckCheck size={16} aria-hidden="true" />

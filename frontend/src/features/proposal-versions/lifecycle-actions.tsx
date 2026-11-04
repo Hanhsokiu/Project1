@@ -144,7 +144,7 @@ export function ProposalLifecycleActions({
           {allowed.map((value) => (
             <button
               type="button"
-              className="rounded border border-amber-400 px-4 py-2 text-sm action-with-icon"
+              className="btn btn-secondary rounded border border-amber-400 px-4 py-2 text-sm action-with-icon"
               key={value}
               disabled={mutation.isPending}
               onClick={() => {
@@ -190,7 +190,7 @@ export function ProposalLifecycleActions({
                 )}{' '}
               <button
                 type="button"
-                className="underline action-with-icon"
+                className="btn btn-secondary underline action-with-icon"
                 onClick={() => window.location.reload()}
               >
                 <RotateCcw size={16} aria-hidden="true" />
@@ -198,10 +198,22 @@ export function ProposalLifecycleActions({
               </button>
             </p>
           )}
-          <div className="flex flex-wrap gap-3">
+          <div className="form-actions">
+            <button
+              type="button"
+              disabled={mutation.isPending}
+              onClick={() => {
+                setAction(null);
+                mutation.reset();
+              }}
+              className="btn btn-secondary action-with-icon"
+            >
+              <X size={16} aria-hidden="true" />
+              Hủy
+            </button>
             <button
               type="submit"
-              className="rounded bg-amber-700 px-4 py-2 text-sm text-white action-with-icon"
+              className="btn btn-danger rounded bg-amber-700 px-4 py-2 text-sm text-white action-with-icon"
               disabled={
                 mutation.isPending || (action !== 'withdraw' && !reason.trim())
               }
@@ -210,18 +222,6 @@ export function ProposalLifecycleActions({
               {mutation.isPending
                 ? 'Đang xử lý…'
                 : `Xác nhận ${labels[action].toLocaleLowerCase('vi-VN')}`}
-            </button>
-            <button
-              type="button"
-              disabled={mutation.isPending}
-              onClick={() => {
-                setAction(null);
-                mutation.reset();
-              }}
-              className="action-with-icon"
-            >
-              <X size={16} aria-hidden="true" />
-              Hủy
             </button>
           </div>
         </form>

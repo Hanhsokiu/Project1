@@ -9,6 +9,7 @@ import {
   Pencil,
 } from "lucide-react";
 import { WorkflowHeading } from "../review-groups/workflow-heading";
+import { FilterBar } from "../../shared/components/filter-bar";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Link,
@@ -170,7 +171,7 @@ function PlanActions({
       {c.canCreate && (
         <button
           disabled={mutation.isPending}
-          className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
+          className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
           onClick={() => mutation.mutate("create")}
         >
           <Plus size={16} aria-hidden="true" />
@@ -190,7 +191,7 @@ function PlanActions({
           </label>
           <button
             disabled={mutation.isPending || !reason.trim()}
-            className="rounded border px-4 py-2 action-with-icon"
+            className="btn btn-secondary rounded border px-4 py-2 action-with-icon"
             onClick={() => mutation.mutate("update")}
           >
             <Save size={16} aria-hidden="true" />
@@ -211,7 +212,7 @@ function PlanActions({
           </label>
           <button
             disabled={mutation.isPending || !ack}
-            className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
+            className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
             onClick={() => mutation.mutate("resume")}
           >
             <CheckCheck size={16} aria-hidden="true" />
@@ -296,7 +297,7 @@ export function GuidancePlanListPage() {
             <button
               disabled={page <= 1}
               onClick={() => setPage((v) => v - 1)}
-              className="action-with-icon"
+              className="btn btn-secondary action-with-icon"
             >
               <ChevronLeft size={16} aria-hidden="true" />
               Trước
@@ -304,7 +305,7 @@ export function GuidancePlanListPage() {
             <button
               disabled={page >= list.data.totalPages}
               onClick={() => setPage((v) => v + 1)}
-              className="action-with-icon"
+              className="btn btn-secondary action-with-icon"
             >
               <ChevronRight size={16} aria-hidden="true" />
               Sau
@@ -406,7 +407,7 @@ export function GuidancePlanDetailPage() {
                 <button
                   disabled={page <= 1}
                   onClick={() => setPage((v) => v - 1)}
-                  className="action-with-icon"
+                  className="btn btn-secondary action-with-icon"
                 >
                   <ChevronLeft size={16} aria-hidden="true" />
                   Trang nhiệm vụ trước
@@ -414,7 +415,7 @@ export function GuidancePlanDetailPage() {
                 <button
                   disabled={page >= tasks.data.totalPages}
                   onClick={() => setPage((v) => v + 1)}
-                  className="action-with-icon"
+                  className="btn btn-secondary action-with-icon"
                 >
                   <ChevronRight size={16} aria-hidden="true" />
                   Trang nhiệm vụ sau
@@ -422,7 +423,7 @@ export function GuidancePlanDetailPage() {
               </div>
             )}
             <button
-              className="text-blue-700 action-with-icon"
+              className="btn btn-secondary text-blue-700 action-with-icon"
               onClick={async () => {
                 await refresh();
                 setFormEpoch((v) => v + 1);
@@ -541,7 +542,7 @@ function WeeklyCoverage({
                 <button
                   disabled={ensure.isPending}
                   onClick={() => ensure.mutate(r)}
-                  className="rounded border px-3 py-2 action-with-icon"
+                  className="btn btn-secondary rounded border px-3 py-2 action-with-icon"
                 >
                   <Plus size={16} aria-hidden="true" />
                   Tạo nhiệm vụ cho {r.periodLabel}
@@ -564,7 +565,7 @@ function WeeklyCoverage({
           <button
             disabled={page <= 1}
             onClick={() => setPage((v) => v - 1)}
-            className="action-with-icon"
+            className="btn btn-secondary action-with-icon"
           >
             <ChevronLeft size={16} aria-hidden="true" />
             Nghĩa vụ trang trước
@@ -572,7 +573,7 @@ function WeeklyCoverage({
           <button
             disabled={page >= query.data.totalPages}
             onClick={() => setPage((v) => v + 1)}
-            className="action-with-icon"
+            className="btn btn-secondary action-with-icon"
           >
             <ChevronRight size={16} aria-hidden="true" />
             Nghĩa vụ trang sau
@@ -612,7 +613,7 @@ export function GuidanceTaskListPage() {
       <Link to="/guidance/plan" className="text-blue-700">
         Xem kế hoạch hướng dẫn →
       </Link>
-      <section className="rg-panel my-5 grid gap-4 p-5 sm:grid-cols-3">
+      <FilterBar searchControl={{ value: search, label: "Tìm kiếm nhiệm vụ", onSearch: value => setParams(previous => { const next = new URLSearchParams(previous); next.set("search", value); return next; }) }}>
         <label>
           Đợt
           <select
@@ -689,7 +690,7 @@ export function GuidanceTaskListPage() {
           />
           Chỉ nhiệm vụ quá hạn
         </label>
-      </section>
+      </FilterBar>
       {list.data && (
         <p className="my-4 text-sm">
           {list.data.total} nhiệm vụ · {list.data.overdueTotal} quá hạn trong bộ
@@ -712,7 +713,7 @@ export function GuidanceTaskListPage() {
           <button
             disabled={page <= 1}
             onClick={() => setPage((v) => v - 1)}
-            className="action-with-icon"
+            className="btn btn-secondary action-with-icon"
           >
             <ChevronLeft size={16} aria-hidden="true" />
             Trước
@@ -720,7 +721,7 @@ export function GuidanceTaskListPage() {
           <button
             disabled={page >= list.data.totalPages}
             onClick={() => setPage((v) => v + 1)}
-            className="action-with-icon"
+            className="btn btn-secondary action-with-icon"
           >
             <ChevronRight size={16} aria-hidden="true" />
             Sau
@@ -836,7 +837,7 @@ function TaskProgressForm({
       </p>
       <button
         disabled={mutation.isPending}
-        className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
+        className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
       >
         <Play size={16} aria-hidden="true" />
         Bắt đầu / Ghi tiến độ
@@ -939,7 +940,7 @@ export function GuidanceTaskDetailPage() {
             )}
             {t.allowedActions.includes("update") && (
               <button
-                className="rounded border px-4 py-2 action-with-icon"
+                className="btn btn-secondary rounded border px-4 py-2 action-with-icon"
                 onClick={() => setEditing((v) => !v)}
               >
                 <Pencil size={16} aria-hidden="true" />
@@ -991,7 +992,7 @@ export function GuidanceTaskDetailPage() {
                     (t.hasSubmissions && !ack)
                   }
                   onClick={() => cancel.mutate()}
-                  className="rounded border border-red-200 px-4 py-2 text-red-700 action-with-icon"
+                  className="btn btn-secondary rounded border border-red-200 px-4 py-2 text-red-700 action-with-icon"
                 >
                   <CheckCheck size={16} aria-hidden="true" />
                   Xác nhận hủy nhiệm vụ
@@ -1023,7 +1024,7 @@ export function GuidanceTaskDetailPage() {
               ))}
             </section>
             <button
-              className="text-blue-700 action-with-icon"
+              className="btn btn-secondary text-blue-700 action-with-icon"
               onClick={async () => {
                 await query.refetch();
                 setEditing(false);

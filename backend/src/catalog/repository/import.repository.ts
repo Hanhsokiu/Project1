@@ -1,8 +1,13 @@
 import { ConflictException, Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
+import * as bcrypt from "bcryptjs";
 import { PrismaService } from "../../prisma/prisma.service";
 import { AuditService } from "../../common/audit/audit.service";
-import type { ConfirmMode, StudentImportRow } from "../dto/catalog.dto";
+import type {
+  ConfirmMode,
+  StudentImportRow,
+  LecturerImportRow,
+} from "../dto/catalog.dto";
 import { CatalogInputValidator } from "../validator/catalog.validator";
 const json = (value: unknown) =>
   JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
@@ -36,6 +41,34 @@ export class ImportUnitOfWork {
   }
   async apply(row: StudentImportRow, termId: string, trainingSystemId: string) {
     const v = row.values;
+    if (row.action === "CREATE") {
+      const student = await this.db.student.create({
+        data: {
+          studentCode: v.studentCode,
+          fullName: v.fullName,
+          className: v.className,
+          majorName: v.majorName || "",
+          cohort: v.cohort,
+          trainingSystem: { connect: { id: trainingSystemId } },
+          gpa: v.gpa!,
+          academicEligible: v.academicEligible,
+          phone: v.phone,
+          user: {
+            create: {
+              username: v.studentCode,
+              passwordHash: await bcrypt.hash(v.studentCode, 12),
+              displayName: v.fullName,
+              email: v.email,
+              status: "ACTIVE" as const,
+              mustChangePassword: true,
+              userRoles: { create: { role: { connect: { name: "STUDENT" } } } },
+            },
+          },
+          termStudents: { create: { termId } },
+        },
+      });
+      return student.id;
+    }
     CatalogInputValidator.exists(row.studentId, "Sinh viên không tồn tại.");
     const existing = await this.db.student.findUnique({
       where: {
@@ -69,9 +102,89 @@ export class ImportUnitOfWork {
     });
     return student.id;
   }
+  async lecturerContext(codes: string[], emails: string[]) {
+    const [lecturers, accounts, departments, areas] = await Promise.all([
+      this.db.lecturer.findMany({ where: { lecturerCode: { in: codes } } }),
+      this.db.userAccount.findMany({
+        where: { OR: [{ username: { in: codes } }, { email: { in: emails } }] },
+        select: { id: true, username: true, email: true },
+      }),
+      this.db.department.findMany(),
+      this.db.researchArea.findMany({ where: { isActive: true } }),
+    ]);
+    return { lecturers, accounts, departments, areas };
+  }
+  async applyLecturer(
+    row: LecturerImportRow,
+    context: Awaited<ReturnType<ImportUnitOfWork["lecturerContext"]>>,
+  ) {
+    const v = row.values;
+    const department = context.departments.find(
+      (d) => d.code === v.departmentCode,
+    )!;
+    const areaIds = v.researchAreas.map(
+      (name) => context.areas.find((a) => a.name === name)!.id,
+    );
+    const fields = {
+      fullName: v.fullName,
+      departmentId: department.id,
+      maxStudents: v.maxStudents!,
+      ...(v.phone ? { phone: v.phone } : {}),
+    };
+    if (row.action === "CREATE") {
+      return (
+        await this.db.lecturer.create({
+          data: {
+            fullName: fields.fullName,
+            maxStudents: fields.maxStudents,
+            ...(v.phone ? { phone: v.phone } : {}),
+            department: { connect: { id: department.id } },
+            lecturerCode: v.lecturerCode,
+            user: {
+              create: {
+                username: v.lecturerCode,
+                passwordHash: await bcrypt.hash(v.lecturerCode, 12),
+                displayName: v.fullName,
+                email: v.email,
+                status: "ACTIVE" as const,
+                mustChangePassword: true,
+                userRoles: {
+                  create: { role: { connect: { name: "LECTURER" } } },
+                },
+              },
+            },
+            researchAreas: {
+              create: areaIds.map((researchAreaId) => ({ researchAreaId })),
+            },
+          },
+        })
+      ).id;
+    }
+    const existing = context.lecturers.find((l) => l.id === row.lecturerId)!;
+    await this.db.userAccount.update({
+      where: { id: existing.userId },
+      data: {
+        displayName: v.fullName,
+        ...(v.email ? { email: v.email } : {}),
+      },
+    });
+    await this.db.lecturerArea.deleteMany({
+      where: { lecturerId: existing.id },
+    });
+    await this.db.lecturer.update({
+      where: { id: existing.id },
+      data: {
+        ...fields,
+        researchAreas: {
+          create: areaIds.map((researchAreaId) => ({ researchAreaId })),
+        },
+      },
+    });
+    return existing.id;
+  }
   async finish(
     id: string,
-    rows: StudentImportRow[],
+    rows: (StudentImportRow | LecturerImportRow)[],
     mode: ConfirmMode,
     actorId: string,
   ) {
@@ -98,7 +211,7 @@ export class ImportUnitOfWork {
     await this.audit.log(
       {
         userId: actorId,
-        action: "STUDENT_IMPORT_CONFIRMED",
+        action: `${job.type}_IMPORT_CONFIRMED`,
         resource: "import",
         resourceId: id,
         newValue: {
@@ -130,17 +243,21 @@ export class ImportRepository {
   context(termId: string, codes: string[], emails: string[]) {
     return this.unit().context(termId, codes, emails);
   }
+  lecturerContext(codes: string[], emails: string[]) {
+    return this.unit().lecturerContext(codes, emails);
+  }
   createPreview(input: {
-    termId: string;
+    termId?: string;
+    type?: "STUDENT" | "LECTURER";
     createdBy: string;
     fileName: string;
     fileHash: string;
-    rows: StudentImportRow[];
+    rows: (StudentImportRow | LecturerImportRow)[];
   }) {
     return this.prisma.$transaction(async (tx) => {
       const job = await tx.importJob.create({
         data: {
-          type: "STUDENT",
+          type: input.type || "STUDENT",
           termId: input.termId,
           createdBy: input.createdBy,
           fileName: input.fileName,
@@ -160,7 +277,7 @@ export class ImportRepository {
       await this.audit.log(
         {
           userId: input.createdBy,
-          action: "STUDENT_IMPORT_PREVIEWED",
+          action: `${job.type}_IMPORT_PREVIEWED`,
           resource: "import",
           resourceId: job.id,
           newValue: {

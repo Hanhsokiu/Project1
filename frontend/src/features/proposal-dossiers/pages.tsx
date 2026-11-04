@@ -7,6 +7,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { WorkflowHeading } from "../review-groups/workflow-heading";
+import { FilterBar } from "../../shared/components/filter-bar";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -85,7 +86,7 @@ export function DossierListPage() {
   return (
     <>
       <WorkflowHeading path="/topic/dossier" />
-      <section className="rg-panel mb-5 p-5 flex flex-wrap gap-5">
+      <FilterBar searchControl={{ value: search, label: "Tìm kiếm đề cương", onSearch: value => setParams(previous => { const next = new URLSearchParams(previous); next.set("search", value); return next; }) }}>
         <label>
           Đợt đồ án
           <select
@@ -116,7 +117,7 @@ export function DossierListPage() {
           />
           Chỉ đề cương đã được duyệt
         </label>
-      </section>
+      </FilterBar>
       <ReviewState
         loading={terms.isLoading || (!!termId && list.isLoading)}
         error={issue(terms.error || list.error)}
@@ -151,7 +152,7 @@ export function DossierListPage() {
             <button
               disabled={page <= 1}
               onClick={() => setPage((p) => p - 1)}
-              className="action-with-icon"
+              className="btn btn-secondary action-with-icon"
             >
               <ChevronLeft size={16} aria-hidden="true" />
               Trước
@@ -159,7 +160,7 @@ export function DossierListPage() {
             <button
               disabled={page >= list.data.totalPages}
               onClick={() => setPage((p) => p + 1)}
-              className="action-with-icon"
+              className="btn btn-secondary action-with-icon"
             >
               <ChevronRight size={16} aria-hidden="true" />
               Sau
@@ -246,7 +247,7 @@ function DossierActions({
       {d.previewVersionId &&
         !d.readiness.includes("STUDENT_PROFILE_NOT_READY") && (
           <button
-            className="rounded border px-4 py-2 action-with-icon"
+            className="btn btn-secondary rounded border px-4 py-2 action-with-icon"
             disabled={mutation.isPending}
             onClick={() => mutation.mutate("preview")}
           >
@@ -261,7 +262,7 @@ function DossierActions({
             biến. Chốt không đồng nghĩa hồ sơ đã ký hoặc đã nộp giấy.
           </p>
           <button
-            className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
+            className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
             disabled={mutation.isPending}
             onClick={() => mutation.mutate("finalize")}
           >
@@ -272,7 +273,7 @@ function DossierActions({
       )}
       {d.allowedActions.includes("download") && (
         <button
-          className="rounded border px-4 py-2 action-with-icon"
+          className="btn btn-secondary rounded border px-4 py-2 action-with-icon"
           disabled={mutation.isPending}
           onClick={() => mutation.mutate("download")}
         >
@@ -297,7 +298,7 @@ function DossierActions({
             ký điện tử.
           </p>
           <button
-            className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
+            className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
             disabled={mutation.isPending}
             onClick={() => mutation.mutate("receive")}
           >
@@ -364,7 +365,7 @@ function FinalizationHistory({ d }: { d: DossierView }) {
           )}
           {f.canDownload && (
             <button
-              className="rounded border px-4 py-2 action-with-icon"
+              className="btn btn-secondary rounded border px-4 py-2 action-with-icon"
               disabled={download.isPending}
               onClick={() => download.mutate(f.id)}
             >
@@ -451,7 +452,7 @@ export function DossierDetailPage() {
               <FinalizationHistory key={"history-" + proposalId} d={d} />
             )}
             <button
-              className="text-blue-700 action-with-icon"
+              className="btn btn-secondary text-blue-700 action-with-icon"
               onClick={() => void query.refetch()}
             >
               <RotateCcw size={16} aria-hidden="true" />

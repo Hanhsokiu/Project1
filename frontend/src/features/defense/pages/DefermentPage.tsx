@@ -222,7 +222,7 @@ function Content({ db }: { db: DemoDb }) {
                 <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={s.pending}>
+              <Button disabled={s.pending} loading={s.pending}>
                 <Send size={16} aria-hidden="true" />
                 Gửi đề nghị
               </Button>
@@ -322,7 +322,7 @@ function Content({ db }: { db: DemoDb }) {
                       done(() =>
                         decideDeferment(selected.id, "REJECTED", decision),
                       )
-                    }
+                    } loading={s.pending}
                   >
                     <X size={16} aria-hidden="true" />
                     Từ chối
@@ -333,7 +333,7 @@ function Content({ db }: { db: DemoDb }) {
                       done(() =>
                         decideDeferment(selected.id, "APPROVED", decision),
                       )
-                    }
+                    } loading={s.pending}
                   >
                     <Save size={16} aria-hidden="true" />
                     Duyệt bảo lưu
@@ -372,7 +372,7 @@ function Content({ db }: { db: DemoDb }) {
                   disabled={!target || s.pending}
                   onClick={() =>
                     done(() => resumeDeferment(selected.id, target))
-                  }
+                  } loading={s.pending}
                 >
                   <Plus size={16} aria-hidden="true" />
                   Tạo hồ sơ tiếp tục

@@ -256,7 +256,7 @@ function RegistrationForm() {
                           className="icon-btn"
                           aria-label={`Nâng NV${i + 1}`}
                           disabled={i === 0}
-                          onClick={() => move(i, -1)}
+                          onClick={() => move(i, -1)} title={`Nâng NV${i + 1}`}
                         >
                           <ArrowUp size={16} />
                         </button>
@@ -264,7 +264,7 @@ function RegistrationForm() {
                           className="icon-btn"
                           aria-label={`Hạ NV${i + 1}`}
                           disabled={i === prefs.length - 1}
-                          onClick={() => move(i, 1)}
+                          onClick={() => move(i, 1)} title={`Hạ NV${i + 1}`}
                         >
                           <ArrowDown size={16} />
                         </button>
@@ -273,7 +273,7 @@ function RegistrationForm() {
                           aria-label={`Xóa NV${i + 1}`}
                           onClick={() =>
                             setPrefs(prefs.filter((x) => x !== id))
-                          }
+                          } title={`Xóa NV${i + 1}`}
                         >
                           <X size={16} />
                         </button>
@@ -330,14 +330,14 @@ function RegistrationForm() {
               <Button
                 variant="secondary"
                 disabled={!!reason || action.pending}
-                onClick={() => save(false)}
+                onClick={() => save(false)} loading={action.pending}
               >
                 <Save size={15} />
                 Lưu nháp
               </Button>
               <Button
                 disabled={!!reason || action.pending}
-                onClick={() => setConfirm(true)}
+                onClick={() => setConfirm(true)} loading={action.pending}
               >
                 <Send size={15} />
                 Nộp đăng ký

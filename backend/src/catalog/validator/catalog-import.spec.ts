@@ -61,19 +61,26 @@ describe("CatalogInputValidator", () => {
   });
 });
 describe("ImportRowValidator", () => {
-  it("rejects an unknown student instead of planning account creation", () => {
+  it("plans account creation for an unknown student", () => {
     const result = ImportRowValidator.validate([normalized()], {
       ...context,
       students: [],
     })[0];
-    expect(result).toMatchObject({ action: "ERROR", status: "ERROR" });
-    expect(result.errors).toContainEqual(
-      expect.objectContaining({
-        code: "STUDENT_NOT_FOUND",
-        message: expect.stringContaining("Sinh viên không tồn tại"),
-      }),
-    );
+    expect(result).toMatchObject({
+      action: "CREATE",
+      status: "VALID",
+      errors: [],
+    });
     expect(result.studentId).toBeUndefined();
+  });
+  it("rejects creation when the code already belongs to another account", () => {
+    const result = ImportRowValidator.validate([normalized()], {
+      ...context,
+      students: [],
+      accounts: [{ id: "other", username: raw.studentCode, email: null }],
+    })[0];
+    expect(result.action).toBe("ERROR");
+    expect(result.errors.some((e) => e.code === "ACCOUNT_CONFLICT")).toBe(true);
   });
   it("accepts an existing student and clears stale identifiers from an old preview", () => {
     const result = ImportRowValidator.validate(

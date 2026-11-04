@@ -6,6 +6,7 @@ import { PrismaService } from "../../prisma/prisma.service";
 import { AuditService } from "../../common/audit/audit.service";
 import { ImportRepository } from "../repository/import.repository";
 import { ImportService } from "./import.service";
+import { LecturerImportService } from "./lecturer-import.service";
 import type { ImportFile } from "../dto/catalog.dto";
 const envLine = readFileSync(".env", "utf8")
   .split(/\r?\n/)
@@ -18,6 +19,9 @@ const prisma = new PrismaService();
 const service = new ImportService(
   new ImportRepository(prisma, new AuditService(prisma)),
 );
+const lecturerService = new LecturerImportService(
+  new ImportRepository(prisma, new AuditService(prisma)),
+);
 const tag = randomUUID().replace(/-/g, "").slice(0, 12);
 const prefix = `00${tag}`;
 let systemId: string;
@@ -26,7 +30,8 @@ let otherTermId: string;
 let actorId: string;
 const jobIds: string[] = [];
 const codes: string[] = [];
-// Provision fixtures explicitly; catalog import must never create accounts.
+const lecturerCodes: string[] = [];
+// Existing-account fixtures verify that reimport preserves a changed password.
 async function provisionStudent(studentCode: string) {
   return prisma.student.create({
     data: {
@@ -111,6 +116,10 @@ afterAll(async () => {
     where: { studentCode: { in: codes } },
     select: { id: true, userId: true },
   });
+  const lecturers = await prisma.lecturer.findMany({
+    where: { lecturerCode: { in: lecturerCodes } },
+    select: { id: true, userId: true },
+  });
   await prisma.auditLog.deleteMany({
     where: {
       OR: [
@@ -126,8 +135,11 @@ afterAll(async () => {
   await prisma.student.deleteMany({
     where: { id: { in: students.map((s) => s.id) } },
   });
+  await prisma.lecturer.deleteMany({
+    where: { id: { in: lecturers.map((l) => l.id) } },
+  });
   await prisma.userAccount.deleteMany({
-    where: { id: { in: students.map((s) => s.userId) } },
+    where: { id: { in: [...students, ...lecturers].map((s) => s.userId) } },
   });
   await prisma.termParameter.deleteMany({
     where: { termId: { in: [termId, otherTermId].filter(Boolean) } },
@@ -140,6 +152,27 @@ afterAll(async () => {
   await prisma.$disconnect();
 }, 30000);
 describe("student import against PostgreSQL", () => {
+  it("creates an active student account and role only on confirmation with the code as password", async () => {
+    const code = `${prefix}new`;
+    codes.push(code);
+    const job = await preview(
+      file([`${code},Sinh Viên Mới,CNTT,K64,,3.2,,,true`]),
+    );
+    expect(job.rows[0].action).toBe("CREATE");
+    expect(await prisma.userAccount.count({ where: { username: code } })).toBe(
+      0,
+    );
+    await service.confirm(job.id, "STRICT", actorId);
+    const user = await prisma.userAccount.findUniqueOrThrow({
+      where: { username: code },
+      include: { userRoles: { include: { role: true } }, student: true },
+    });
+    expect(await bcrypt.compare(code, user.passwordHash)).toBe(true);
+    expect(user.status).toBe("ACTIVE");
+    expect(user.mustChangePassword).toBe(true);
+    expect(user.userRoles.map((r) => r.role.name)).toEqual(["STUDENT"]);
+    expect(user.student?.studentCode).toBe(code);
+  });
   it("persists physical CSV row numbers in preview, validation errors and the confirmed job report", async () => {
     const a = `${prefix}8`,
       b = `${prefix}9`;
@@ -328,4 +361,78 @@ describe("student import against PostgreSQL", () => {
       });
     }
   }, 30000);
+});
+describe("lecturer import against PostgreSQL", () => {
+  async function source(code: string, extra = "") {
+    const department = await prisma.department.findFirstOrThrow();
+    const area = await prisma.researchArea.findFirstOrThrow({
+      where: { isActive: true },
+    });
+    const buffer = Buffer.from(
+      `lecturerCode,fullName,departmentCode,researchAreas,maxStudents,email,phone\n${code},Giảng Viên Mẫu,${department.code},${area.name},5,,${extra}`,
+    );
+    return {
+      originalname: "lecturers.csv",
+      mimetype: "text/csv",
+      buffer,
+      size: buffer.length,
+    };
+  }
+  it("creates a lecturer account with code credentials, preserves a changed password and confirms idempotently", async () => {
+    const code = `GV_${tag}`;
+    lecturerCodes.push(code);
+    const input = await source(code);
+    const job = await lecturerService.preview(input, actorId);
+    jobIds.push(job.id);
+    expect(job.validRows).toBe(1);
+    expect(await prisma.userAccount.count({ where: { username: code } })).toBe(
+      0,
+    );
+    await lecturerService.confirm(job.id, "STRICT", actorId);
+    const user = await prisma.userAccount.findUniqueOrThrow({
+      where: { username: code },
+      include: {
+        userRoles: { include: { role: true } },
+        lecturer: { include: { researchAreas: true } },
+      },
+    });
+    expect(await bcrypt.compare(code, user.passwordHash)).toBe(true);
+    expect(user.mustChangePassword).toBe(true);
+    expect(user.userRoles.map((r) => r.role.name)).toEqual(["LECTURER"]);
+    expect(user.lecturer?.researchAreas).toHaveLength(1);
+    const changedHash = await bcrypt.hash("ChangedPassword@2026", 4);
+    await prisma.userAccount.update({
+      where: { id: user.id },
+      data: { passwordHash: changedHash, mustChangePassword: false },
+    });
+    const next = await lecturerService.preview(input, actorId);
+    jobIds.push(next.id);
+    expect(next.rows[0].action).toBe("UPDATE");
+    await lecturerService.confirm(next.id, "STRICT", actorId);
+    await lecturerService.confirm(next.id, "STRICT", actorId);
+    const saved = await prisma.userAccount.findUniqueOrThrow({
+      where: { id: user.id },
+    });
+    expect(saved.passwordHash).toBe(changedHash);
+    expect(saved.mustChangePassword).toBe(false);
+    expect(await prisma.lecturer.count({ where: { lecturerCode: code } })).toBe(
+      1,
+    );
+  });
+  it("rejects an invalid lecturer without creating an account", async () => {
+    const code = `BAD_${tag}`;
+    lecturerCodes.push(code);
+    const job = await lecturerService.preview(
+      await source(code, "invalid-phone"),
+      actorId,
+    );
+    jobIds.push(job.id);
+    expect(job.invalidRows).toBe(1);
+    await expect(
+      lecturerService.confirm(job.id, "STRICT", actorId),
+    ).rejects.toThrow();
+    expect(await prisma.userAccount.count({ where: { username: code } })).toBe(
+      0,
+    );
+  });
 });

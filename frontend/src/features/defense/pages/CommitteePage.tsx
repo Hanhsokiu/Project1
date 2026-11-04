@@ -203,7 +203,7 @@ function Content({ db }: { db: DemoDb }) {
                 <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={s.pending}>
+              <Button disabled={s.pending} loading={s.pending}>
                 <Save size={16} aria-hidden="true" />
                 Lưu hội đồng
               </Button>

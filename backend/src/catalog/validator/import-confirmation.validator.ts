@@ -27,7 +27,7 @@ export class ImportConfirmationValidator {
         "Chỉ nhập SV vào đợt Nháp/Mở đăng ký và chưa khóa",
       );
   }
-  static rows(rows: StudentImportRow[], mode: ConfirmMode) {
+  static rows(rows: Pick<StudentImportRow, "errors">[], mode: ConfirmMode) {
     if (mode === "STRICT" && rows.some((r) => r.errors.length))
       throw new UnprocessableEntityException({
         success: false,

@@ -1,3 +1,4 @@
+const { installWorkflowSession, openFilter } = require("./workflow-browser-session.cjs");
 "use strict";
 // Mock-only interactive Step 7 preview and browser regression. No backend/DB.
 const { spawn } = require("node:child_process"),
@@ -64,9 +65,7 @@ async function main() {
       }),
       errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    await page.addInitScript(() =>
-      localStorage.setItem("accessToken", "mock-demo-token"),
-    );
+    await installWorkflowSession(page);
     let actor = process.argv.includes("--student") ? "student" : "faculty",
       state = actor === "student" ? "FINALIZED" : "DRAFT",
       revision = actor === "student" ? 1 : 0,
@@ -205,6 +204,7 @@ async function main() {
                   },
             ),
           });
+      if (p === "/notifications/me") return send([]);
       if (deny) return send("Không tìm thấy hồ sơ trong phạm vi.", 404);
       if (method === "GET" && p === "/proposal-review-options/terms")
         return send([
@@ -322,6 +322,7 @@ async function main() {
       return;
     }
     await page.goto(origin + "/topic/dossier");
+    await openFilter(page, "Chỉ đề cương đã được duyệt");
     await page
       .getByRole("checkbox", { name: "Chỉ đề cương đã được duyệt" })
       .check();
@@ -473,7 +474,7 @@ async function main() {
       "scope error hides dossier content/download actions and causes no unhandled page errors",
     );
     fs.writeFileSync(
-      path.join(root, "../backend/prisma/review/step7-browser-results.json"),
+      path.join(root, "../.cache/ui-modern-20261104/step7-browser-results.json"),
       JSON.stringify(
         {
           result: "PASS",

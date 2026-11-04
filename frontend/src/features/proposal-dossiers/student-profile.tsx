@@ -139,7 +139,7 @@ export function DossierStudentProfile({
           </label>
           <button
             type="submit"
-            className="rounded bg-blue-700 px-4 py-2 text-white disabled:opacity-50 action-with-icon"
+            className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white disabled:opacity-50 action-with-icon"
             disabled={
               mutation.isPending ||
               !confirmed ||

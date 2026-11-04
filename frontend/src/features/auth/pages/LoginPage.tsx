@@ -180,7 +180,7 @@ function LoginForm({ user }: { user?: Account }) {
                   type="button"
                   className="icon-btn"
                   aria-label={visible ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
-                  onClick={() => setVisible(!visible)}
+                  onClick={() => setVisible(!visible)} title={visible ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                 >
                   {visible ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>

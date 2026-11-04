@@ -155,7 +155,7 @@ function Content({ db }: { db: DemoDb }) {
                     saveMinutes(selected.id, minutes, revision);
                     setSelected(undefined);
                   })
-                }
+                } loading={s.pending}
               >
                 <Save size={16} aria-hidden="true" />
                 Lưu biên bản

@@ -33,10 +33,14 @@ import {
 } from "../components/ImportSetup";
 
 export default function StudentApiImport({
-  onLecturer,
+  kind,
+  onKindChange,
 }: {
-  onLecturer: () => void;
+  kind: "student" | "lecturer";
+  onKindChange: (kind: "student" | "lecturer") => void;
 }) {
+  const student = kind === "student";
+  const label = student ? "sinh viên" : "giảng viên";
   const { term } = useWorkspace();
   const action = useAction();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -73,10 +77,10 @@ export default function StudentApiImport({
     setHistoryError("");
     setHistoryLoading(true);
     importApi
-      .get(jobId)
+      .get(jobId, kind)
       .then((next) => {
         if (!active) return;
-        if (next.termId !== term.id) {
+        if (student && next.termId !== term.id) {
           setHistoryError(
             "Kết quả import thuộc đợt khác. Hãy chọn đúng đợt hoặc tải tệp mới.",
           );
@@ -95,12 +99,12 @@ export default function StudentApiImport({
     return () => {
       active = false;
     };
-  }, [jobId, term.id, historyRequest]);
+  }, [jobId, term.id, historyRequest, kind, student]);
   async function preview() {
-    if (!selectedFile || !term.id) return;
+    if (!selectedFile || (student && !term.id)) return;
     try {
       const next = await action.run(() =>
-        importApi.preview(selectedFile, term.id),
+        importApi.preview(selectedFile, term.id, kind),
       );
       setJob(next as ImportJobDto);
       setHistoryError("");
@@ -113,7 +117,7 @@ export default function StudentApiImport({
     if (!job) return;
     try {
       const next = await action.run(() =>
-        importApi.confirm(job.id, validOnly ? "VALID_ONLY" : "STRICT"),
+        importApi.confirm(job.id, validOnly ? "VALID_ONLY" : "STRICT", kind),
       );
       setJob(next as ImportJobDto);
       setConfirm(false);
@@ -127,19 +131,20 @@ export default function StudentApiImport({
         title="Import dữ liệu"
         description="Cập nhật danh sách từ tệp Excel hoặc CSV. Kiểm tra dữ liệu trước khi xác nhận nhập."
         actions={
-          <Link className="btn btn-secondary" to="/catalog/students">
+          <Link
+            className="btn btn-secondary"
+            to={student ? "/catalog/students" : "/catalog/lecturers"}
+          >
             <ArrowLeft size={16} aria-hidden="true" />
-            Danh sách sinh viên
+            Danh sách {label}
           </Link>
         }
       />
       <ImportSteps stage={completed ? 3 : job || historyLoading ? 2 : 1} />
       <div className="import-workspace">
         <ImportSourceCard
-          kind="student"
-          onKindChange={(value) => {
-            if (value === "lecturer") onLecturer();
-          }}
+          kind={kind}
+          onKindChange={onKindChange}
           term={term}
           file={selectedFile}
           onFileChange={(file) => {
@@ -151,12 +156,12 @@ export default function StudentApiImport({
             selectJob();
           }}
           disabled={action.pending}
-          requireTerm
+          requireTerm={student}
           onTemplate={(format) => {
-            action.run(() => importApi.template(format)).catch(() => {});
+            action.run(() => importApi.template(format, kind)).catch(() => {});
           }}
         >
-          {!term.id && (
+          {student && !term.id && (
             <div className="mt-4">
               <Notice tone="warning">
                 Tạo hoặc chọn một đợt trước khi tải và nhập danh sách sinh viên.
@@ -169,8 +174,10 @@ export default function StudentApiImport({
               Chỉ lưu dữ liệu sau khi bạn xác nhận
             </p>
             <Button
-              disabled={!selectedFile || !term.id || action.pending}
-              onClick={preview}
+              disabled={
+                !selectedFile || (student && !term.id) || action.pending
+              }
+              onClick={preview} loading={action.pending}
             >
               <FileUp size={16} aria-hidden="true" />
               {action.pending ? "Đang xử lý…" : "Kiểm tra tệp"}
@@ -182,7 +189,7 @@ export default function StudentApiImport({
             </div>
           )}
         </ImportSourceCard>
-        <ImportRules kind="student" contactsOptional />
+        <ImportRules kind={kind} contactsOptional />
       </div>
       {historyLoading && (
         <div className="mt-6">
@@ -249,7 +256,8 @@ export default function StudentApiImport({
             <div className="mb-5">
               <Notice tone="success">
                 Đã nhập {job.successRows} dòng; bỏ qua {job.skippedRows} dòng.
-                Không tạo tài khoản mới hoặc đặt lại mật khẩu.
+                Tài khoản mới có tên đăng nhập và mật khẩu ban đầu bằng mã{" "}
+                {label}. Người dùng đổi mật khẩu ở lần đăng nhập đầu tiên.
               </Notice>
             </div>
           )}
@@ -271,7 +279,7 @@ export default function StudentApiImport({
                 errorOnly ? job.rows.filter((r) => r.errors.length) : job.rows
               }
               searchText={(r) =>
-                `${r.rowNumber} ${r.values.studentCode} ${r.values.fullName} ${r.errors.map((e) => e.message).join(" ")}`
+                `${r.rowNumber} ${r.values.studentCode || r.values.lecturerCode} ${r.values.fullName} ${r.errors.map((e) => e.message).join(" ")}`
               }
               filters={
                 <>
@@ -295,7 +303,7 @@ export default function StudentApiImport({
                             ...r.values,
                             errors: r.errors.map((e) => e.message).join("; "),
                           })),
-                        "loi-import-sinh-vien.csv",
+                        `loi-import-${kind}.csv`,
                       )
                     }
                   >
@@ -308,23 +316,26 @@ export default function StudentApiImport({
                 { key: "row", title: "Dòng", render: (r) => r.rowNumber },
                 {
                   key: "student",
-                  title: "Sinh viên",
+                  title: student ? "Sinh viên" : "Giảng viên",
                   render: (r) => (
                     <div>
-                      <strong>{r.values.studentCode}</strong>
+                      <strong>
+                        {r.values.studentCode || r.values.lecturerCode}
+                      </strong>
                       <p>{r.values.fullName}</p>
                     </div>
                   ),
                 },
                 {
                   key: "program",
-                  title: "Lớp / hệ / GPA",
+                  title: student ? "Lớp / hệ / GPA" : "Bộ môn / Chỉ tiêu",
                   render: (r) => (
                     <div>
-                      {r.values.className}
+                      {student ? r.values.className : r.values.departmentCode}
                       <p>
-                        {r.values.trainingSystemCode || "Theo đợt"} ·{" "}
-                        {r.values.gpa ?? "—"}
+                        {student
+                          ? `${r.values.trainingSystemCode || "Theo đợt"} · ${r.values.gpa ?? "—"}`
+                          : `Chỉ tiêu: ${r.values.maxStudents ?? "—"} · ${r.values.researchAreas?.join("; ") || ""}`}
                       </p>
                     </div>
                   ),
@@ -378,7 +389,7 @@ export default function StudentApiImport({
                     !job.validRows ||
                     (!validOnly && job.invalidRows > 0)
                   }
-                  onClick={() => setConfirm(true)}
+                  onClick={() => setConfirm(true)} loading={action.pending}
                 >
                   <CheckCheck size={16} aria-hidden="true" />
                   Xác nhận nhập
@@ -388,10 +399,10 @@ export default function StudentApiImport({
                   disabled={action.pending}
                   onClick={() =>
                     action
-                      .run(() => importApi.get(job.id))
+                      .run(() => importApi.get(job.id, kind))
                       .then((next) => setJob(next as ImportJobDto))
                       .catch(() => {})
-                  }
+                  } loading={action.pending}
                 >
                   <RotateCcw size={16} aria-hidden="true" />
                   Tải lại kết quả
@@ -403,7 +414,7 @@ export default function StudentApiImport({
       )}
       {confirm && (
         <Confirm
-          title="Xác nhận nhập sinh viên?"
+          title={`Xác nhận nhập ${label}?`}
           description={`Ghi ${validOnly ? job?.validRows : job?.totalRows} dòng theo kết quả kiểm tra. ${validOnly ? "Các dòng lỗi được bỏ qua." : "Toàn bộ tệp phải hợp lệ."}`}
           pending={action.pending}
           onClose={() => setConfirm(false)}

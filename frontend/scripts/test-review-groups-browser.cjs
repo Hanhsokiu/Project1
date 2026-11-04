@@ -1,3 +1,4 @@
+const { installWorkflowSession, openFilter } = require("./workflow-browser-session.cjs");
 'use strict';
 // Browser UI smoke with fully mocked API. Never starts/connects a backend/DB.
 const { spawn } = require('node:child_process'),
@@ -61,9 +62,7 @@ async function main() {
     const page = await browser.newPage({
       viewport: { width: 1280, height: 900 },
     });
-    await page.addInitScript(() =>
-      localStorage.setItem('accessToken', 'mock-browser-token'),
-    );
+    await installWorkflowSession(page);
     let group = null,
       canManage = true,
       conflict = false,
@@ -106,6 +105,7 @@ async function main() {
                 },
           ),
         });
+      if (p === "/notifications/me") return send([]);
       const view = (value = group) => ({ ...value, canManage });
       if (deny) return send('Không tìm thấy nhóm trong phạm vi.', 404);
       if (p === '/review-group-options/terms')
@@ -256,7 +256,7 @@ async function main() {
       });
       await page.setViewportSize({ width: 375, height: 812 });
       await expect
-        .poll(async () => (await page.locator('.rg-sidebar').boundingBox()).x)
+        .poll(async () => (await page.locator('.sidebar').boundingBox()).x)
         .toBeLessThanOrEqual(-259);
       await page.screenshot({
         path: path.join(directory, 'step4-mobile.png'),
@@ -394,7 +394,7 @@ async function main() {
     );
     pass('scope error renders without exposing group data');
     fs.writeFileSync(
-      path.join(root, '../backend/prisma/review/step4-browser-results.json'),
+      path.join(root, '../.cache/ui-modern-20261104/step4-browser-results.json'),
       JSON.stringify(
         {
           result: 'PASS',
@@ -409,6 +409,12 @@ async function main() {
       ) + '\n',
     );
     console.log(checks.length + ' browser smoke checks passed');
+  } catch (error) {
+    if (browser) for (const context of browser.contexts()) for (const page of context.pages()) {
+      await page.screenshot({ path: path.join(root, '../.cache/ui-modern-20261104/ui-diagnostic-review-groups.png'), fullPage: true }).catch(() => {});
+      console.error((await page.locator('body').innerText()).slice(0, 2200));
+    }
+    throw error;
   } finally {
     if (browser) await browser.close();
     vite.kill();

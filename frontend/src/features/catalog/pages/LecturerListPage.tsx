@@ -10,6 +10,7 @@ import {
   Save,
   RotateCcw,
   Pencil,
+  Download,
 } from "lucide-react";
 import type { Lecturer } from "../../../shared/data/types";
 import {
@@ -28,6 +29,7 @@ import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import { catalogService } from "../services/catalog-service";
 import "./catalog-directory.css";
+import { exportExcel } from "../../../shared/services/export-service";
 type LecturerForm = Lecturer;
 export default function LecturerListPage() {
   const { db, user, term } = useWorkspace();
@@ -132,6 +134,9 @@ export default function LecturerListPage() {
         <DataTable
           key={tableVersion}
           rows={rows}
+          label="Danh sách giảng viên"
+          filterCount={[department, direction, scope === "all" ? "" : scope].filter(Boolean).length}
+          selectionActions={(selected) => <Button variant="secondary" loading={action.pending} onClick={() => action.run(() => exportExcel("Giảng viên đã chọn", selected.map(l => ({ "Mã giảng viên": l.code, "Họ tên": l.name, "Bộ môn": db.catalogs.find(c => c.id === l.departmentId)?.name || "", "Chỉ tiêu mặc định": l.quota, Email: l.email, "Số điện thoại": l.phone })))).catch(() => {})}><Download size={16} />Xuất {selected.length} giảng viên</Button>}
           searchText={(l) => `${l.code} ${l.name} ${l.email}`}
           filters={
             <div className="catalog-filters catalog-filters-lecturers">
@@ -181,6 +186,7 @@ export default function LecturerListPage() {
             {
               key: "name",
               title: "Giảng viên",
+              sortValue: (l) => l.name,
               render: (l) => <Person name={l.name} sub={l.code} />,
             },
             {
@@ -365,7 +371,7 @@ export default function LecturerListPage() {
                 <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>
+              <Button disabled={action.pending} loading={action.pending}>
                 <Save size={16} aria-hidden="true" />
                 Lưu giảng viên
               </Button>

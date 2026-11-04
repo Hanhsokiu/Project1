@@ -110,7 +110,7 @@ function TaskSubmit({ task, onClose }: { task: Task; onClose: () => void }) {
               .run(() => guidanceService.updateProgress(task.id, progress))
               .then(onClose)
               .catch(() => {})
-          }
+          } loading={action.pending}
         >
           <Save size={16} aria-hidden="true" />
           Chỉ lưu tiến độ
@@ -173,7 +173,7 @@ function TaskSubmit({ task, onClose }: { task: Task; onClose: () => void }) {
             <X size={16} aria-hidden="true" />
             Đóng
           </Button>
-          <Button disabled={action.pending || reading || progress !== 100}>
+          <Button disabled={action.pending || reading || progress !== 100} loading={action.pending}>
             <FileUp size={16} />
             {action.pending ? "Đang nộp…" : "Nộp báo cáo và mã nguồn"}
           </Button>

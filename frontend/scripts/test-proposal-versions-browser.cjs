@@ -1,3 +1,4 @@
+const { installWorkflowSession, openFilter } = require("./workflow-browser-session.cjs");
 "use strict";
 // Mock-only Edge preview and browser tests. No backend/DB connection.
 const { spawn } = require("node:child_process"),
@@ -61,9 +62,7 @@ async function main() {
     const pageErrors = [];
     page.on("pageerror", (error) => pageErrors.push(error.message));
     const unsupported = "API này không nằm trong bản demo bước 6.";
-    await page.addInitScript(() =>
-      localStorage.setItem("accessToken", "mock-preview-token"),
-    );
+    await installWorkflowSession(page);
     let actor = process.argv.includes("--advisor") ? "advisor" : "student",
       status = "REVISION_REQUESTED",
       revision = 3,
@@ -180,6 +179,7 @@ async function main() {
                   },
             ),
           });
+      if (p === "/notifications/me") return send([]);
       if (deny) return send("Không tìm thấy đề cương trong phạm vi.", 404);
       if (method === "GET" && p === "/proposal-review-options/terms")
         return send([
@@ -368,14 +368,14 @@ async function main() {
     }
     await page.goto(origin + "/topic/proposal");
     await page
-      .getByRole("link", { name: "Phân công & xét duyệt", exact: true })
+      .locator('.sidebar a[href^="/topic/reviews"]')
       .click();
     await expect(page.getByRole("alert").first()).toContainText(unsupported);
     await expect(
       page.getByRole("heading", { name: "Unexpected Application Error!" }),
     ).toHaveCount(0);
     await page
-      .getByRole("link", { name: "Đề cương & phiên bản", exact: true })
+      .locator('.sidebar a[href^="/topic/proposal"]')
       .click();
     await expect(
       page.getByRole("link", { name: "Mở đề cương & lịch sử" }),
@@ -385,11 +385,11 @@ async function main() {
       "review queue navigation handles unsupported demo options without a render crash and can return to editor list",
     );
     await page
-      .getByRole("link", { name: "Nhóm duyệt đề cương", exact: true })
+      .locator('.sidebar a[href^="/topic/review-groups"]')
       .click();
     await expect(page.getByRole("alert").first()).toContainText(unsupported);
     await page
-      .getByRole("link", { name: "Đề cương & phiên bản", exact: true })
+      .locator('.sidebar a[href^="/topic/proposal"]')
       .click();
     await expect(
       page.getByRole("link", { name: "Mở đề cương & lịch sử" }),
@@ -575,7 +575,7 @@ async function main() {
     pass("advisor can save but cannot submit as student");
     await page.setViewportSize({ width: 375, height: 812 });
     await expect
-      .poll(async () => (await page.locator(".rg-sidebar").boundingBox()).x)
+      .poll(async () => (await page.locator(".sidebar").boundingBox()).x)
       .toBeLessThanOrEqual(-259);
     assert(
       await page.evaluate(
@@ -596,7 +596,7 @@ async function main() {
       "Browser must not have unhandled application errors",
     );
     fs.writeFileSync(
-      path.resolve(root, "../backend/prisma/review/step6-browser-results.json"),
+      path.resolve(root, "../.cache/ui-modern-20261104/step6-browser-results.json"),
       JSON.stringify(
         {
           result: "PASS",
@@ -609,6 +609,12 @@ async function main() {
       ) + "\n",
     );
     console.log(`${checks.length} Step 6 browser checks passed`);
+  } catch (error) {
+    if (browser) for (const context of browser.contexts()) for (const page of context.pages()) {
+      await page.screenshot({ path: path.join(root, '../.cache/ui-modern-20261104/ui-diagnostic-proposal-versions.png'), fullPage: true }).catch(() => {});
+      console.error((await page.locator('body').innerText()).slice(0, 2200));
+    }
+    throw error;
   } finally {
     if (browser) await browser.close();
     vite.kill();

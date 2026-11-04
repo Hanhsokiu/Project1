@@ -240,7 +240,7 @@ export default function MyTopicPage() {
                     ),
                   )
                   .catch(() => {})
-              }
+              } loading={action.pending}
             >
               <Download size={15} />
               Tải PDF

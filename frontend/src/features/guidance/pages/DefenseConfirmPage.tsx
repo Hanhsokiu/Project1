@@ -311,7 +311,7 @@ function ConfirmContent({ db }: { db: DemoDb }) {
                 <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>
+              <Button disabled={action.pending} loading={action.pending}>
                 <Undo2 size={16} aria-hidden="true" />
                 {dialog === "confirm" ? "Xác nhận đồng ý" : "Thu hồi xác nhận"}
               </Button>

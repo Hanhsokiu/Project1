@@ -159,7 +159,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
               ) : (
                 <Button
                   disabled={action.pending}
-                  onClick={() => setHandoff(true)}
+                  onClick={() => setHandoff(true)} loading={action.pending}
                 >
                   <ArrowRight size={16} aria-hidden="true" />
                   Chuyển sang xét duyệt & phiên bản
@@ -291,7 +291,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
                         ...form,
                         plan: form.plan.filter((_, n) => n !== i),
                       })
-                    }
+                    } title={`Xóa mốc ${i + 1}`}
                   >
                     <Trash2 size={16} />
                   </button>
@@ -302,7 +302,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
               <Button
                 variant="secondary"
                 disabled={readonly || action.pending}
-                onClick={() => save(false)}
+                onClick={() => save(false)} loading={action.pending}
               >
                 <Save size={15} />
                 Lưu nháp
@@ -314,7 +314,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
                   !topic?.advisorAgreed ||
                   !user.studentId
                 }
-                onClick={() => setConfirm(true)}
+                onClick={() => setConfirm(true)} loading={action.pending}
               >
                 <Send size={15} />
                 Nộp đề cương
@@ -377,7 +377,7 @@ function ProposalEditor({ studentId }: { studentId: string }) {
                       ),
                     )
                     .catch(() => {})
-                }
+                } loading={action.pending}
               >
                 <Download size={15} />
                 Tải biểu mẫu PDF

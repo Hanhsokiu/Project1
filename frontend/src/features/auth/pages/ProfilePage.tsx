@@ -151,7 +151,7 @@ export default function ProfilePage() {
               </div>
             )}
             <div className="form-actions">
-              <Button disabled={action.pending}>
+              <Button disabled={action.pending} loading={action.pending}>
                 <Save size={16} aria-hidden="true" />
                 {action.pending ? "Đang lưu…" : "Lưu hồ sơ"}
               </Button>

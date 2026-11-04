@@ -34,6 +34,15 @@ import {
   Sparkles,
   Users,
   X,
+  PanelLeftClose,
+  PanelLeftOpen,
+  CalendarDays,
+  ListChecks,
+  FolderKanban,
+  MessageSquareText,
+  UserRound,
+  Upload,
+  FileClock,
 } from "lucide-react";
 import {
   navigationRoutes,
@@ -107,6 +116,10 @@ function Shell({ children }: { children?: ReactNode }) {
   const navigate = useNavigate();
   const cache = useQueryClient();
   const [mobile, setMobile] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    try { return localStorage.getItem("utc-sidebar-collapsed") === "true"; }
+    catch { return false; }
+  });
   const [reset, setReset] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
     {},
@@ -118,6 +131,9 @@ function Shell({ children }: { children?: ReactNode }) {
     menuButtonRef.current?.focus({ preventScroll: true });
   }, []);
   useEffect(() => {
+    try { localStorage.setItem("utc-sidebar-collapsed", String(collapsed)); } catch { /* Browser storage may be unavailable. */ }
+  }, [collapsed]);
+  useEffect(() => {
     setMobile(false);
     const toggle = menuButtonRef.current;
     if (
@@ -128,11 +144,20 @@ function Shell({ children }: { children?: ReactNode }) {
   }, [location.pathname]);
   useEffect(() => {
     if (!mobile) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    sidebarRef.current?.querySelector<HTMLElement>("a,button")?.focus();
     const close = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeMobileMenu();
+      if (event.key === "Tab") {
+        const items = Array.from(sidebarRef.current?.querySelectorAll<HTMLElement>('a[href],button:not(:disabled)') || []).filter(item => item.getClientRects().length);
+        const first = items[0], last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      }
     };
     window.addEventListener("keydown", close);
-    return () => window.removeEventListener("keydown", close);
+    return () => { window.removeEventListener("keydown", close); document.body.style.overflow = previousOverflow; };
   }, [mobile, closeMobileMenu]);
   const routes = navigationRoutes(user, AUTH_API);
   const groups = [...new Set(routes.map((r) => r.group))];
@@ -142,38 +167,51 @@ function Shell({ children }: { children?: ReactNode }) {
   const workflowPage =
     location.pathname.startsWith("/guidance/") ||
     /^\/topic\/(review|proposal|dossier)/.test(location.pathname);
-  const icons = [
-    Home,
-    ShieldCheck,
-    Users,
-    ClipboardList,
-    BookOpen,
-    GraduationCap,
-    FileText,
-  ];
+  const navigationIcon = (path: string) => {
+    if (path === "/") return Home;
+    if (path.includes("notifications")) return Bell;
+    if (path.includes("accounts")) return Users;
+    if (path.includes("roles")) return ShieldCheck;
+    if (path.includes("audit")) return FileClock;
+    if (path.includes("students")) return GraduationCap;
+    if (path.includes("lecturers")) return UserRound;
+    if (path.includes("import")) return Upload;
+    if (path.includes("reference")) return Layers;
+    if (path.startsWith("/terms")) return CalendarDays;
+    if (path.includes("review-group")) return Users;
+    if (path.includes("review")) return MessageSquareText;
+    if (path.includes("tasks")) return ListChecks;
+    if (path.includes("plan") || path.includes("assignment")) return FolderKanban;
+    if (path.includes("registration")) return ClipboardList;
+    if (path.includes("topic")) return BookOpen;
+    return FileText;
+  };
   const isDemo =
     !AUTH_API &&
     (import.meta.env.DEV || import.meta.env.VITE_DEMO_MODE === "true");
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${collapsed ? "sidebar-collapsed" : ""}`}>
+      <a className="skip-link" href="#workspace-main">Đi đến nội dung chính</a>
       {mobile && (
         <button
           aria-label="Đóng điều hướng"
           className={`sidebar-shade ${mobile ? "open" : ""}`}
-          onClick={closeMobileMenu}
+          onClick={closeMobileMenu} title="Đóng điều hướng"
         />
       )}
       <aside
         ref={sidebarRef}
         id="workspace-navigation"
         className={`sidebar ${mobile ? "open" : ""}`}
+        aria-label="Thanh điều hướng"
       >
-        <Link to="/" className="brand">
+        <Link to="/" className="brand" aria-label="KHOA CNTT – UTC Quản lý đồ án tốt nghiệp — Tổng quan" title="Tổng quan hệ thống">
           <span className="brand-mark">
-            <GraduationCap size={26} />
+            <GraduationCap size={22} />
           </span>
           <div>
             <strong>KHOA CNTT – UTC</strong>
+            <small>Quản lý đồ án tốt nghiệp</small>
           </div>
         </Link>
         <div className="sidebar-context">
@@ -189,7 +227,7 @@ function Shell({ children }: { children?: ReactNode }) {
               type="button"
               className="icon-btn sidebar-close"
               aria-label="Đóng menu điều hướng"
-              onClick={closeMobileMenu}
+              onClick={closeMobileMenu} title="Đóng menu điều hướng"
             >
               <X size={18} />
             </button>
@@ -197,12 +235,11 @@ function Shell({ children }: { children?: ReactNode }) {
         </div>
         <nav className="sidebar-nav" aria-label="Điều hướng chính">
           {groups.map((group, i) => {
-            const Icon = icons[i % icons.length];
             const expanded =
-              expandedGroups[group] ??
+              collapsed || (expandedGroups[group] ??
               (!workflowPage ||
                 group === active?.group ||
-                group === "Không gian làm việc");
+                group === "Không gian làm việc"));
             return (
               <div className="nav-group" key={group}>
                 <button
@@ -226,7 +263,9 @@ function Shell({ children }: { children?: ReactNode }) {
                 <div id={`nav-group-${i}`} hidden={!expanded}>
                   {routes
                     .filter((r) => r.group === group)
-                    .map((r) => (
+                    .map((r) => {
+                      const Icon = navigationIcon(r.path);
+                      return (
                       <NavLink
                         key={r.path}
                         to={
@@ -236,6 +275,8 @@ function Shell({ children }: { children?: ReactNode }) {
                             : r.path
                         }
                         end={r.path === "/"}
+                        title={routeTitle(r, user)}
+                        aria-label={routeTitle(r, user)}
                         onClick={() => {
                           if (mobile) closeMobileMenu();
                         }}
@@ -246,14 +287,14 @@ function Shell({ children }: { children?: ReactNode }) {
                         <Icon />
                         <span>{routeTitle(r, user)}</span>
                       </NavLink>
-                    ))}
+                    ); })}
                 </div>
               </div>
             );
           })}
         </nav>
         <div className="sidebar-footer flex items-center justify-between">
-          <Link to="/profile">
+          <Link to="/profile" aria-label={`${user.name} ${user.roles.map(r => labels[r]).join(" · ")} — Thông tin cá nhân`} title="Thông tin cá nhân">
             <Person
               name={user.name}
               sub={user.roles.map((r) => labels[r]).join(" · ")}
@@ -276,6 +317,9 @@ function Shell({ children }: { children?: ReactNode }) {
             <LogOut size={17} />
           </button>
         </div>
+        <button type="button" className="sidebar-collapse" aria-label={collapsed ? "Mở rộng thanh điều hướng" : "Thu gọn thanh điều hướng"} title={collapsed ? "Mở rộng thanh điều hướng" : "Thu gọn thanh điều hướng"} aria-expanded={!collapsed} onClick={() => setCollapsed(value => !value)}>
+          {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}<span>Thu gọn thanh điều hướng</span>
+        </button>
       </aside>
       <div className="app-main">
         <header className="topbar">
@@ -285,13 +329,16 @@ function Shell({ children }: { children?: ReactNode }) {
             aria-label={mobile ? "Đóng menu" : "Mở điều hướng"}
             aria-controls="workspace-navigation"
             aria-expanded={mobile}
-            onClick={() => setMobile((open) => !open)}
+            onClick={() => setMobile((open) => !open)} title={mobile ? "Đóng menu" : "Mở điều hướng"}
           >
             <Menu size={22} />
           </button>
-          <div className="topbar-title">
-            <b>{active ? routeTitle(active, user) : "Trang không tồn tại"}</b>
-          </div>
+          <nav className="breadcrumbs" aria-label="Đường dẫn trang">
+            <Link to="/" title="Tổng quan" aria-label="Tổng quan"><Home size={16} /></Link>
+            <ChevronRight size={13} aria-hidden="true" />
+            {active?.path !== "/" && <><span className="breadcrumb-group">{active?.group}</span><ChevronRight className="breadcrumb-group" size={13} aria-hidden="true" /></>}
+            <span aria-current="page">{active ? routeTitle(active, user) : "Trang không tồn tại"}</span>
+          </nav>
           <div className="topbar-controls">
             <select
               className="term-picker"
@@ -328,6 +375,7 @@ function Shell({ children }: { children?: ReactNode }) {
             <Link
               to="/notifications"
               aria-label="Thông báo"
+              title="Thông báo"
               className="icon-btn"
             >
               <Bell size={19} />
@@ -337,7 +385,8 @@ function Shell({ children }: { children?: ReactNode }) {
             </Link>
             <Link
               to="/profile"
-              aria-label="Thông tin cá nhân"
+              aria-label={`${user.name} ${user.roles.map(r => labels[r]).join(" · ")} — Thông tin cá nhân`}
+              title="Thông tin cá nhân"
               className="hidden lg:flex"
             >
               <Person
@@ -348,7 +397,7 @@ function Shell({ children }: { children?: ReactNode }) {
             <Link
               to="/profile"
               aria-label="Mở hồ sơ"
-              className="avatar lg:hidden"
+              className="avatar lg:hidden" title="Mở hồ sơ"
             >
               {user.name
                 .split(" ")
@@ -358,12 +407,12 @@ function Shell({ children }: { children?: ReactNode }) {
             </Link>
           </div>
         </header>
-        <main className="page-content" key={`${termId}-${user.id}`}>
+        <main id="workspace-main" tabIndex={-1} className="page-content" key={`${termId}-${user.id}`}>
           {children ?? <Outlet />}
         </main>
       </div>
       {isDemo && (
-        <div className="demo-control">
+        <div className="demo-control" role="region" aria-label="Điều khiển dữ liệu demo">
           <span>
             <Sparkles size={13} /> DEMO
           </span>

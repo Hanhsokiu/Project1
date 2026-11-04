@@ -1,3 +1,4 @@
+const { installWorkflowSession, openFilter } = require("./workflow-browser-session.cjs");
 "use strict";
 // Stateful Edge demo/test for Step 8C with 8B resubmission. Mock API only.
 const { spawn } = require("node:child_process"),
@@ -63,9 +64,7 @@ async function main() {
       errors = [],
       requests = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    await page.addInitScript(() =>
-      localStorage.setItem("accessToken", "demo-guidance-review-token"),
-    );
+    await installWorkflowSession(page);
     let actor = process.argv.includes("--student")
         ? "student"
         : process.argv.includes("--faculty")
@@ -306,6 +305,7 @@ async function main() {
                 },
           ),
         });
+      if (p === "/notifications/me") return send([]);
       requests.push({
         method,
         path: p,
@@ -788,6 +788,7 @@ async function main() {
     await expect(
       page.getByText("Nghĩa vụ báo cáo tuần (kể cả chưa có task)"),
     ).toBeVisible();
+    await openFilter(page, "Lọc GVHD");
     await page.getByLabel("Lọc GVHD", { exact: true }).selectOption("other");
     await expect(page.locator('[data-metric="Tổng nhiệm vụ"]')).toHaveText("1");
     await expect(page.locator('[data-metric="Cần sửa"]')).toHaveText("0");
@@ -858,7 +859,7 @@ async function main() {
     await go("/guidance/review/" + currentId);
     await expect(
       page.getByRole("heading", {
-        name: "Nhận xét báo cáo tiến độ",
+        name: "Đánh giá báo cáo sinh viên",
         exact: true,
       }),
     ).toBeVisible();
@@ -894,7 +895,7 @@ async function main() {
       "scope errors hide content with no unhandled page errors or missing mutation idempotency keys",
     );
     fs.writeFileSync(
-      path.join(root, "../backend/prisma/review/step8c-browser-results.json"),
+      path.join(root, "../.cache/ui-modern-20261104/step8c-browser-results.json"),
       JSON.stringify(
         {
           result: "PASS",

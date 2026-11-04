@@ -83,7 +83,7 @@ export function ProposalFields({
               <strong className="text-sm">Mốc {i + 1}</strong>
               <button
                 type="button"
-                className="text-xs text-red-700 action-with-icon"
+                className="btn btn-secondary text-xs text-red-700 action-with-icon"
                 onClick={() =>
                   onChange({
                     ...content,
@@ -144,7 +144,7 @@ export function ProposalFields({
         ))}
         <button
           type="button"
-          className="rounded border px-3 py-2 text-sm action-with-icon"
+          className="btn btn-secondary rounded border px-3 py-2 text-sm action-with-icon"
           disabled={content.schedule.length >= 100}
           onClick={() =>
             onChange({
@@ -252,7 +252,7 @@ export function VersionChanges({ changes }: { changes: DataChange[] }) {
         </p>
       ) : (
         <div className="relative overflow-x-auto">
-          <table className="w-full text-left">
+          <table className="w-full text-left responsive-table">
             <thead>
               <tr>
                 <th className="p-3">Trường dữ liệu</th>
@@ -263,11 +263,11 @@ export function VersionChanges({ changes }: { changes: DataChange[] }) {
             <tbody>
               {changes.map((c) => (
                 <tr key={c.path} className="border-t">
-                  <td className="p-3 font-mono">{c.path}</td>
-                  <td className="max-w-xs whitespace-pre-wrap break-words p-3">
+                  <td className="p-3 font-mono" data-label="Trường dữ liệu">{c.path}</td>
+                  <td className="max-w-xs whitespace-pre-wrap break-words p-3" data-label="Bản trước">
                     {c.beforeExists ? display(c.before) : '(chưa có)'}
                   </td>
-                  <td className="max-w-xs whitespace-pre-wrap break-words p-3">
+                  <td className="max-w-xs whitespace-pre-wrap break-words p-3" data-label="Bản sau">
                     {c.afterExists ? display(c.after) : '(đã bỏ)'}
                   </td>
                 </tr>

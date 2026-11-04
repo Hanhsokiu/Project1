@@ -147,7 +147,7 @@ function FilePicker({
             onClick={() => {
               setError("");
               onChange(null);
-            }}
+            }} title="Bỏ tệp đã chọn"
           >
             <X size={18} aria-hidden="true" />
           </button>
@@ -264,8 +264,8 @@ export function ImportRules({
       description: `Giữ nguyên tên cột và định dạng mã ${student ? "sinh viên" : "giảng viên"} dưới dạng văn bản.`,
     },
     {
-      title: "Hồ sơ đã có trong hệ thống",
-      description: `${student ? "Sinh viên" : "Giảng viên"} phải được Admin tạo trước. Import không cấp tài khoản mới.`,
+      title: "Tự động cấp tài khoản",
+      description: `Mã ${student ? "sinh viên" : "giảng viên"} mới được dùng làm tên đăng nhập và mật khẩu ban đầu. Người dùng đổi mật khẩu khi đăng nhập lần đầu.`,
     },
     student
       ? {
@@ -276,7 +276,7 @@ export function ImportRules({
       : {
           title: "Thông tin hướng dẫn hợp lệ",
           description:
-            "Email, số điện thoại đúng định dạng. Chỉ tiêu hướng dẫn là số nguyên từ 0 đến 100.",
+            "Điền đúng mã bộ môn và hướng chuyên môn hiện có. Chỉ tiêu hướng dẫn là số nguyên từ 0 đến 100.",
         },
   ];
   return (
@@ -305,7 +305,7 @@ export function ImportRules({
         <Info size={18} aria-hidden="true" />
         <p>
           {contactsOptional
-            ? "Email và số điện thoại có thể để trống. Sinh viên có thể bổ sung khi đăng nhập."
+            ? "Email và số điện thoại có thể để trống. Người dùng có thể bổ sung khi đăng nhập."
             : "Không lặp mã giữa các dòng. Kiểm tra lại thông tin liên hệ trước khi tải lên."}
         </p>
       </div>

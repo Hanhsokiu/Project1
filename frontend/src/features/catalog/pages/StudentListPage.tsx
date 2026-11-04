@@ -11,6 +11,7 @@ import {
   Users,
   Pencil,
   Upload,
+  Download,
 } from "lucide-react";
 import type { Student } from "../../../shared/data/types";
 import {
@@ -31,6 +32,7 @@ import { step1Api } from "../../../shared/data/snapshot-api";
 import { catalogService } from "../services/catalog-service";
 import { formatGpa, hasEligibleGpa } from "../../../shared/utils/gpa";
 import "./catalog-directory.css";
+import { exportExcel } from "../../../shared/services/export-service";
 type StudentForm = Student;
 export default function StudentListPage() {
   const { db, user, term } = useWorkspace();
@@ -143,6 +145,9 @@ export default function StudentListPage() {
         <DataTable
           key={tableVersion}
           rows={rows}
+          label="Danh sách sinh viên"
+          filterCount={[program, className, eligible, scope === "all" ? "" : scope].filter(Boolean).length}
+          selectionActions={(selected) => <Button variant="secondary" loading={action.pending} onClick={() => action.run(() => exportExcel("Sinh viên đã chọn", selected.map(s => ({ "Mã sinh viên": s.code, "Họ tên": s.name, Lớp: s.className, "Hệ đào tạo": s.program, GPA: s.gpa ?? "", Email: s.email, "Số điện thoại": s.phone })))).catch(() => {})}><Download size={16} />Xuất {selected.length} sinh viên</Button>}
           searchText={(s) => `${s.code} ${s.name} ${s.email} ${s.className}`}
           filters={
             <div className="catalog-filters catalog-filters-students">
@@ -202,6 +207,7 @@ export default function StudentListPage() {
             {
               key: "name",
               title: "Sinh viên",
+              sortValue: (s) => s.name,
               render: (s) => <Person name={s.name} sub={s.code} />,
             },
             {
@@ -217,6 +223,7 @@ export default function StudentListPage() {
             {
               key: "gpa",
               title: "GPA / 4",
+              sortValue: (s) => s.gpa,
               render: (s) => <strong>{formatGpa(s.gpa)}</strong>,
             },
             {
@@ -396,7 +403,7 @@ export default function StudentListPage() {
                 <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>
+              <Button disabled={action.pending} loading={action.pending}>
                 <Save size={16} aria-hidden="true" />
                 Lưu sinh viên
               </Button>

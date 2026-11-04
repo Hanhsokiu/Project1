@@ -1,3 +1,4 @@
+const { installWorkflowSession, openFilter } = require("./workflow-browser-session.cjs");
 "use strict";
 // Edge mock-only preview/tests. No request can reach backend or Supabase.
 const { spawn } = require("node:child_process"),
@@ -63,9 +64,7 @@ async function main() {
       errors = [],
       requests = [];
     page.on("pageerror", (e) => errors.push(e.message));
-    await page.addInitScript(() =>
-      localStorage.setItem("accessToken", "demo-submission-token"),
-    );
+    await installWorkflowSession(page);
     let actor = process.argv.includes("--faculty")
         ? "faculty"
         : process.argv.includes("--advisor")
@@ -156,6 +155,7 @@ async function main() {
                   },
             ),
           });
+      if (p === "/notifications/me") return send([]);
       requests.push({
         method,
         path: p,
@@ -472,7 +472,7 @@ async function main() {
       "scope error hides academic data with no unhandled page error or missing idempotency key",
     );
     fs.writeFileSync(
-      path.join(root, "../backend/prisma/review/step8b-browser-results.json"),
+      path.join(root, "../.cache/ui-modern-20261104/step8b-browser-results.json"),
       JSON.stringify(
         {
           result: "PASS",

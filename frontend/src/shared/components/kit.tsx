@@ -1,20 +1,20 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useEffect, useId, useRef, type ReactNode } from "react";
 import { Link } from "react-router-dom";
 import {
   CheckCheck,
   RotateCcw,
   AlertCircle,
   ArrowLeft,
-  ChevronLeft,
-  ChevronRight,
   Download,
   FileSearch,
   Loader2,
-  Search,
   X,
 } from "lucide-react";
 import { useDemo } from "../hooks/use-demo";
 import type { DemoDb, StoredFile } from "../data/types";
+import { PageActions } from "./action-menu";
+export { ActionMenu, PageActions } from "./action-menu";
+export { DataTable } from "./data-table";
 export const labels: Record<string, string> = {
   DRAFT: "Bản nháp",
   OPEN_REGISTRATION: "Mở đăng ký",
@@ -62,7 +62,7 @@ export function Badge({
   );
 }
 export function PageHeader({
-  eyebrow = "QUẢN LÝ ĐỒ ÁN",
+  eyebrow,
   title,
   description,
   actions,
@@ -75,11 +75,11 @@ export function PageHeader({
   return (
     <div className="page-heading">
       <div>
-        <p className="eyebrow">{eyebrow}</p>
+        {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
         {description && <p className="muted mt-2">{description}</p>}
       </div>
-      {actions && <div className="actions">{actions}</div>}
+      {actions && <PageActions>{actions}</PageActions>}
     </div>
   );
 }
@@ -115,12 +115,16 @@ export function Button({
   children,
   variant = "primary",
   className = "",
+  loading = false,
+  disabled,
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "danger" | "ghost";
+  loading?: boolean;
 }) {
   return (
-    <button className={`btn btn-${variant} ${className}`} {...props}>
+    <button className={`btn btn-${variant} ${className}`} title={props.title || props["aria-label"]} disabled={disabled || loading} aria-busy={loading || undefined} {...props}>
+      {loading && <Loader2 size={16} className="animate-spin" aria-hidden="true" />}
       {children}
     </button>
   );
@@ -200,9 +204,9 @@ export function Modal({
     const handler = (e: KeyboardEvent) => {
       if (e.key === "Escape") closeRef.current();
       if (e.key === "Tab") {
-        const nodes = ref.current?.querySelectorAll<HTMLElement>(
+        const nodes = Array.from(ref.current?.querySelectorAll<HTMLElement>(
           "button,input,select,textarea,a[href]",
-        );
+        ) || []).filter(node => !node.matches(":disabled") && node.getClientRects().length > 0 && node.tabIndex >= 0);
         if (!nodes?.length) return;
         const first = nodes[0],
           last = nodes[nodes.length - 1];
@@ -216,9 +220,8 @@ export function Modal({
       }
     };
     document.addEventListener("keydown", handler);
-    ref.current
-      ?.querySelector<HTMLElement>("input,select,textarea,button")
-      ?.focus();
+    Array.from(ref.current?.querySelectorAll<HTMLElement>("input,select,textarea,button,a[href]") || [])
+      .find(node => !node.matches(":disabled") && node.getClientRects().length > 0)?.focus();
     const old = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
@@ -243,7 +246,7 @@ export function Modal({
       >
         <div className="modal-heading">
           <h2 id={titleId}>{title}</h2>
-          <button className="icon-btn" aria-label="Đóng" onClick={onClose}>
+          <button className="icon-btn" aria-label="Đóng" onClick={onClose} title="Đóng">
             <X size={20} />
           </button>
         </div>
@@ -305,118 +308,10 @@ export function DataBoundary({
     );
   return <>{children(q.data)}</>;
 }
-export function DataTable<T>({
-  rows,
-  columns,
-  searchText,
-  filters,
-  emptyTitle,
-  pageSize = 8,
-}: {
-  rows: T[];
-  columns: { key: string; title: string; render: (row: T) => ReactNode }[];
-  searchText?: (row: T) => string;
-  filters?: ReactNode;
-  emptyTitle?: string;
-  pageSize?: number;
-}) {
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const filtered = searchText
-    ? rows.filter((r) =>
-        searchText(r)
-          .toLocaleLowerCase("vi")
-          .includes(search.toLocaleLowerCase("vi")),
-      )
-    : rows;
-  const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
-  const actual = Math.min(page, pages);
-  return (
-    <div>
-      {(searchText || filters) && (
-        <div className="table-toolbar">
-          {searchText && (
-            <div className="search-input">
-              <Search size={17} />
-              <input
-                aria-label="Tìm kiếm"
-                placeholder="Tìm kiếm mã, tên…"
-                value={search}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  setPage(1);
-                }}
-              />
-            </div>
-          )}
-          {filters}
-          <span className="muted text-sm ml-auto">
-            {filtered.length} bản ghi
-          </span>
-        </div>
-      )}
-      {!filtered.length ? (
-        <Empty title={emptyTitle} />
-      ) : (
-        <>
-          <div className="table-scroll">
-            <table>
-              <thead>
-                <tr>
-                  {columns.map((c) => (
-                    <th key={c.key}>{c.title}</th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {filtered
-                  .slice((actual - 1) * pageSize, actual * pageSize)
-                  .map((r, i) => (
-                    <tr key={(r as { id?: string }).id || i}>
-                      {columns.map((c) => (
-                        <td key={c.key}>{c.render(r)}</td>
-                      ))}
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="pagination">
-            <span>
-              Hiển thị {(actual - 1) * pageSize + 1}–
-              {Math.min(actual * pageSize, filtered.length)} / {filtered.length}
-            </span>
-            <div className="flex items-center gap-2">
-              <button
-                className="icon-btn"
-                aria-label="Trang trước"
-                disabled={actual === 1}
-                onClick={() => setPage(actual - 1)}
-              >
-                <ChevronLeft size={17} />
-              </button>
-              <span>
-                Trang {actual} / {pages}
-              </span>
-              <button
-                className="icon-btn"
-                aria-label="Trang sau"
-                disabled={actual === pages}
-                onClick={() => setPage(actual + 1)}
-              >
-                <ChevronRight size={17} />
-              </button>
-            </div>
-          </div>
-        </>
-      )}
-    </div>
-  );
-}
 export function Person({ name, sub }: { name: string; sub?: string }) {
   return (
     <div className="person">
-      <span className="avatar">
+      <span className="avatar" aria-hidden="true">
         {name
           .split(" ")
           .slice(-2)

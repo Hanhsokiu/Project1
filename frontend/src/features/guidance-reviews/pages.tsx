@@ -1,3 +1,4 @@
+import { FilterBar } from "../../shared/components/filter-bar";
 import {
   ChevronLeft,
   ChevronRight,
@@ -52,7 +53,7 @@ function Pager({
       <button
         disabled={page <= 1}
         onClick={() => onChange(page - 1)}
-        className="action-with-icon"
+        className="btn btn-secondary action-with-icon"
       >
         <ChevronLeft size={16} aria-hidden="true" />
         Trang trước
@@ -63,7 +64,7 @@ function Pager({
       <button
         disabled={page >= totalPages}
         onClick={() => onChange(page + 1)}
-        className="action-with-icon"
+        className="btn btn-secondary action-with-icon"
       >
         <ChevronRight size={16} aria-hidden="true" />
         Trang sau
@@ -128,7 +129,7 @@ export function ProgressReviewInboxPage() {
       )}
       {termId && options.data?.canReview && (
         <>
-          <div className="flex flex-wrap gap-3">
+          <FilterBar>
             <label>
               Trạng thái xét
               <select
@@ -173,7 +174,7 @@ export function ProgressReviewInboxPage() {
               placeholder="Tìm SV / nhiệm vụ"
               className="rounded border p-2"
             />
-          </div>
+          </FilterBar>
           <GuidanceState loading={query.isLoading} error={issue(query.error)}>
             {query.data && <ProgressTaskTable rows={query.data.data} />}
           </GuidanceState>
@@ -285,7 +286,7 @@ export function ProgressReviewDetailPage() {
               {c.submission.files.map((f) => (
                 <button
                   key={f.id}
-                  className="block max-w-full break-all text-left text-blue-700 underline action-with-icon"
+                  className="btn btn-secondary block max-w-full break-all text-left text-blue-700 underline action-with-icon"
                   onClick={() => {
                     setDownloadError("");
                     void submissionApi
@@ -342,7 +343,7 @@ export function ProgressReviewDetailPage() {
             )}
             {c.allowedActions.includes("amend") && !amending && (
               <button
-                className="rounded border px-4 py-2 action-with-icon"
+                className="btn btn-secondary rounded border px-4 py-2 action-with-icon"
                 onClick={() => setAmending(true)}
               >
                 <Pencil size={16} aria-hidden="true" />
@@ -390,7 +391,7 @@ export function ProgressReviewDetailPage() {
                 </Link>
               )}
               <button
-                className="text-blue-700 action-with-icon"
+                className="btn btn-secondary text-blue-700 action-with-icon"
                 onClick={async () => {
                   await query.refetch();
                   setAmending(false);
@@ -440,7 +441,7 @@ export function GuidanceProgressDashboardPage() {
       )}
       {termId && options.data?.canMonitor && (
         <>
-          <div className="flex flex-wrap gap-3">
+          <FilterBar>
             <label>
               GVHD
               <select
@@ -479,7 +480,7 @@ export function GuidanceProgressDashboardPage() {
                 ))}
               </select>
             </label>
-          </div>
+          </FilterBar>
           <GuidanceState loading={query.isLoading} error={issue(query.error)}>
             {d && (
               <>
@@ -636,7 +637,7 @@ export function GuidanceMeetingsPage() {
                 </p>
                 {m.canAmend && (
                   <button
-                    className="text-blue-700 action-with-icon"
+                    className="btn btn-secondary text-blue-700 action-with-icon"
                     onClick={() => setEditing(m)}
                   >
                     <Pencil size={16} aria-hidden="true" />
@@ -662,7 +663,7 @@ export function GuidanceMeetingsPage() {
               onChange={setPage}
             />
             <button
-              className="text-blue-700 action-with-icon"
+              className="btn btn-secondary text-blue-700 action-with-icon"
               onClick={async () => {
                 await query.refetch();
                 setEditing(null);
@@ -706,7 +707,7 @@ export function GuidanceNotificationsPage() {
             )}
             {n.status === "UNREAD" && (
               <button
-                className="ml-4 text-blue-700 action-with-icon"
+                className="btn btn-secondary ml-4 text-blue-700 action-with-icon"
                 onClick={async () => {
                   try {
                     await api.read(n.id);

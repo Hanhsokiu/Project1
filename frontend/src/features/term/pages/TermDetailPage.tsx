@@ -100,7 +100,7 @@ export default function TermDetailPage() {
               disabled={
                 action.pending || ["COMPLETED", "CANCELLED"].includes(t.status)
               }
-              onClick={() => setConfirm("lock")}
+              onClick={() => setConfirm("lock")} loading={action.pending}
             >
               <LockKeyhole size={15} />
               {t.locked ? "Mở khóa đợt" : "Khóa đợt"}
@@ -232,7 +232,7 @@ export default function TermDetailPage() {
                     key={s}
                     variant={s === "CANCELLED" ? "danger" : "secondary"}
                     disabled={t.locked || action.pending}
-                    onClick={() => setConfirm(s)}
+                    onClick={() => setConfirm(s)} loading={action.pending}
                   >
                     {labels[s]}
                   </Button>

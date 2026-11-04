@@ -9,6 +9,7 @@ import {
   KeyRound,
   LockKeyhole,
   Unlock,
+  Download,
 } from "lucide-react";
 import {
   Badge,
@@ -23,12 +24,14 @@ import {
   Person,
   Stat,
   labels,
+  ActionMenu,
 } from "../../../shared/components/kit";
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import type { Account, Role } from "../../../shared/data/types";
 import { authService, type SaveAccountInput } from "../services/auth-service";
 import { AccountAcademicFields } from "./account-academic-fields";
+import { exportExcel } from "../../../shared/services/export-service";
 const roles: Role[] = ["ADMIN", "FACULTY", "LECTURER", "STUDENT", "COMMITTEE"];
 type AccountForm = SaveAccountInput;
 const blank: AccountForm = {
@@ -126,6 +129,9 @@ export default function AccountsPage() {
       >
         <DataTable
           rows={rows}
+          label="Danh sách tài khoản"
+          filterCount={[role, state].filter(Boolean).length}
+          selectionActions={(selected) => <Button variant="secondary" loading={action.pending} onClick={() => action.run(() => exportExcel("Tài khoản đã chọn", selected.map(a => ({ "Tên đăng nhập": a.username, "Họ tên": a.name, Email: a.email, "Số điện thoại": a.phone, "Vai trò": a.roles.map(r => labels[r]).join(", "), "Trạng thái": a.locked ? "Đã khóa" : "Hoạt động" })))).catch(() => {})}><Download size={16} />Xuất {selected.length} tài khoản</Button>}
           searchText={(a) => `${a.name} ${a.username} ${a.email}`}
           filters={
             <>
@@ -156,6 +162,7 @@ export default function AccountsPage() {
             {
               key: "person",
               title: "Người dùng",
+              sortValue: (a) => a.name,
               render: (a) => <Person name={a.name} sub={a.username} />,
             },
             {
@@ -259,6 +266,7 @@ export default function AccountsPage() {
                   >
                     <Pencil size={15} />
                   </Button>
+                  <ActionMenu label={`Thao tác cho ${a.username}`}>
                   <Button
                     variant="ghost"
                     aria-label={`Đặt lại mật khẩu ${a.username}`}
@@ -278,6 +286,7 @@ export default function AccountsPage() {
                       <LockKeyhole size={15} />
                     )}
                   </Button>
+                  </ActionMenu>
                 </div>
               ),
             },
@@ -392,7 +401,7 @@ export default function AccountsPage() {
                 <X size={16} aria-hidden="true" />
                 Hủy
               </Button>
-              <Button disabled={action.pending}>
+              <Button disabled={action.pending} loading={action.pending}>
                 <Save size={16} aria-hidden="true" />
                 Lưu tài khoản
               </Button>

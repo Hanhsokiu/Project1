@@ -1,4 +1,5 @@
 'use strict';
+const { openFilter } = require('./workflow-browser-session.cjs');
 // Runs the actual UI against in-memory API fixtures; never connects to a database.
 const { chromium, expect } = require('@playwright/test');
 const assert = require('node:assert/strict');
@@ -198,6 +199,7 @@ async function main() {
     await expect(page.getByLabel('Đợt đồ án', { exact: true })).toHaveValue(
       'old',
     );
+    await openFilter(page, 'Đợt đồ án');
     await page.getByLabel('Đợt đồ án', { exact: true }).selectOption('new');
     await expect(page.getByLabel('Đợt làm việc')).toHaveValue('new');
     console.log('PASS Header and page term selectors stay synchronized');

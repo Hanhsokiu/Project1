@@ -1,3 +1,4 @@
+import { FilterBar } from "../../shared/components/filter-bar";
 import { WorkflowHeading } from './workflow-heading';
 import React, { useEffect, useRef, useState } from 'react';
 import {
@@ -153,7 +154,7 @@ export function ReviewGroupListPage() {
             <Link
               aria-label="+ Tạo nhóm"
               className="rounded bg-blue-600 px-4 py-2 text-sm font-medium text-white"
-              to={`/topic/review-groups/new?termId=${encodeURIComponent(termId)}`}
+              to={`/topic/review-groups/new?termId=${encodeURIComponent(termId)}`} title="+ Tạo nhóm"
             >
               <span className="flex items-center gap-2">
                 <Plus size={16} />
@@ -197,7 +198,7 @@ export function ReviewGroupListPage() {
             {options.data?.term.name ?? 'Chọn đợt đồ án'}
           </span>
         </div>
-        <div className="rg-filters mb-5 grid gap-4 rounded-lg border bg-white p-4 sm:grid-cols-3">
+        <FilterBar>
           <label className="text-sm font-medium">
             Đợt đồ án
             <select
@@ -250,14 +251,14 @@ export function ReviewGroupListPage() {
               }}
             />
           </label>
-        </div>
+        </FilterBar>
         <GroupState
           loading={terms.isLoading || (!!termId && list.isLoading)}
           error={errorText(terms.error || options.error || list.error)}
           empty={!termId || !list.data?.data.length}
         >
           <div className="rg-table-scroll">
-            <table className="w-full text-left text-sm">
+            <table className="w-full text-left text-sm responsive-table">
               <thead className="bg-slate-50 text-xs uppercase text-slate-500">
                 <tr>
                   <th className="p-4">Nhóm duyệt</th>
@@ -272,7 +273,7 @@ export function ReviewGroupListPage() {
               <tbody>
                 {list.data?.data.map((g) => (
                   <tr className="border-t hover:bg-slate-50" key={g.id}>
-                    <td className="p-4 font-medium">
+                    <td className="p-4 font-medium" data-label="Nhóm duyệt">
                       <div className="rg-group-cell">
                         <span className="rg-group-mark">
                           <Users size={18} />
@@ -288,8 +289,8 @@ export function ReviewGroupListPage() {
                         </div>
                       </div>
                     </td>
-                    <td className="p-4 text-slate-500">{g.departmentName}</td>
-                    <td className="p-4 tabular-nums">
+                    <td className="p-4 text-slate-500" data-label="Bộ môn">{g.departmentName}</td>
+                    <td className="p-4 tabular-nums" data-label="Thành viên">
                       <span className="rg-member-count">
                         <span className="rg-avatar-stack" aria-hidden="true">
                           {g.members.slice(0, 3).map((m) => (
@@ -306,7 +307,7 @@ export function ReviewGroupListPage() {
                         <span>{g.members.length} giảng viên</span>
                       </span>
                     </td>
-                    <td className="p-4 tabular-nums">
+                    <td className="p-4 tabular-nums" data-label="Vòng đang hoạt động">
                       <span
                         className={`rg-round-badge ${g.activeReviewCount ? 'rg-round-badge-active' : ''}`}
                       >
@@ -316,7 +317,7 @@ export function ReviewGroupListPage() {
                           : 'Chưa có vòng đang duyệt'}
                       </span>
                     </td>
-                    <td className="p-4">
+                    <td className="p-4" data-label="Chi tiết">
                       <Link
                         className="rg-table-action"
                         to={`/topic/review-groups/${g.id}`}
@@ -613,7 +614,7 @@ export function ReviewGroupDetailPage() {
                 <Button
                   type="submit"
                   variant="danger"
-                  disabled={mutation.isPending || !reason.trim()}
+                  disabled={mutation.isPending || !reason.trim()} loading={mutation.isPending}
                 >
                   <CheckCheck size={16} aria-hidden="true" />
                   {mutation.isPending ? 'Đang xử lý…' : 'Xác nhận xóa'}

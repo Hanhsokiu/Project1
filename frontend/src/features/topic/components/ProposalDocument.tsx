@@ -83,7 +83,7 @@ export function ProposalDocument({
       <h3>7. Kết quả dự kiến</h3>
       <p>{topic.expected}</p>
       <h3>8. Kế hoạch thực hiện</h3>
-      <table>
+      <table className="responsive-table">
         <thead>
           <tr>
             <th>STT</th>
@@ -95,10 +95,10 @@ export function ProposalDocument({
         <tbody>
           {topic.plan.map((p, i) => (
             <tr key={i}>
-              <td>{i + 1}</td>
-              <td>{p.content}</td>
-              <td>Tuần {p.week}</td>
-              <td></td>
+              <td data-label="STT">{i + 1}</td>
+              <td data-label="Công việc">{p.content}</td>
+              <td data-label="Thời gian">Tuần {p.week}</td>
+              <td data-label="Ghi chú"></td>
             </tr>
           ))}
         </tbody>

@@ -166,7 +166,7 @@ export function ProgressReviewForm({
       </p>
       <button
         disabled={busy}
-        className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
+        className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
       >
         <Save size={16} aria-hidden="true" />
         {busy
@@ -219,7 +219,7 @@ export function ProgressReviewHistory({
 export function ProgressTaskTable({ rows }: { rows: GuidanceMonitorRow[] }) {
   return (
     <div className="rg-panel overflow-x-auto">
-      <table className="w-full min-w-[700px] text-sm">
+      <table className="w-full min-w-[700px] text-sm responsive-table">
         <thead>
           <tr className="border-b text-left">
             <th className="p-3">Sinh viên / nhiệm vụ</th>
@@ -231,7 +231,7 @@ export function ProgressTaskTable({ rows }: { rows: GuidanceMonitorRow[] }) {
         <tbody>
           {rows.map((r) => (
             <tr key={r.taskId} className="border-b">
-              <td className="p-3">
+              <td className="p-3" data-label="Sinh viên / nhiệm vụ">
                 <p>
                   {r.studentName} · {r.studentCode}
                 </p>
@@ -242,17 +242,17 @@ export function ProgressTaskTable({ rows }: { rows: GuidanceMonitorRow[] }) {
                   {r.title}
                 </Link>
               </td>
-              <td className="p-3">
+              <td className="p-3" data-label="GVHD / mốc">
                 {r.advisorName ?? "Chưa xác định phân công chính thức"}
                 <p>{r.periodLabel ?? "Chưa cấu hình"}</p>
               </td>
-              <td className="p-3">
+              <td className="p-3" data-label="Trạng thái">
                 {r.legacyUnknown
                   ? "Dữ liệu cũ cần đối soát"
                   : guidanceStatusLabel(r.status ?? "")}
                 <p>{r.isOverdue ? "Quá hạn" : ""}</p>
               </td>
-              <td className="p-3">
+              <td className="p-3" data-label="Bài nộp">
                 {r.submissionId ? (
                   <>
                     <Link
@@ -405,7 +405,7 @@ export function GuidanceMeetingForm({
       )}
       <button
         disabled={busy}
-        className="rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
+        className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
       >
         <Save size={16} aria-hidden="true" />
         {busy

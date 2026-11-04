@@ -106,7 +106,7 @@ function ReviewDialog({
                 <X size={16} aria-hidden="true" />
                 Đóng
               </Button>
-              <Button disabled={action.pending}>
+              <Button disabled={action.pending} loading={action.pending}>
                 <Send size={16} />
                 Gửi đánh giá
               </Button>
