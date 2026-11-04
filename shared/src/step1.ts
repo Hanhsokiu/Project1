@@ -108,6 +108,8 @@ export interface OperationWindowResponse {
   reason: string | null;
 }
 export interface TermResponse {
+  quotaPolicy?: import("./quota").QuotaPolicy | null;
+  quotaReady?: boolean;
   id: string;
   code: string;
   name: string;

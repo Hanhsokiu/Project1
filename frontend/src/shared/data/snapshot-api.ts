@@ -58,6 +58,8 @@ interface StudentDto {
   phone?: string | null;
 }
 interface LecturerDto {
+  academicDegree?: Lecturer["academicDegree"];
+  academicRank?: Lecturer["academicRank"];
   isActive: boolean;
   id: string;
   lecturerCode: string;
@@ -300,6 +302,8 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
       phone: l.phone || "",
       departmentId: l.departmentId,
       quota: l.maxStudents,
+      academicDegree: l.academicDegree,
+      academicRank: l.academicRank,
       directionIds: l.researchAreas.map((a) => a.id),
     })),
   };

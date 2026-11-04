@@ -9,6 +9,8 @@ import { Prisma } from "@prisma/client";
 import { TermWindowService } from "../../term/service/term-window.service";
 import { LoadedTerm } from "../../term/repository/term.repository";
 import { phasesFromTerm } from "../../term/dto/term.mapper";
+import { QuotaValidator } from "../../term/validator/quota.validator";
+import { quotaReady } from "@doan/shared";
 import {
   AssignmentRepository,
   WorkflowTx,
@@ -45,6 +47,13 @@ export class AssignmentPlanService {
       this.repo.plans(termId, tx),
     ]);
     const official = plans.find((p) => p.status !== "DRAFT");
+    if (write)
+      QuotaValidator.ready(
+        term,
+        registrations
+          .filter((r) => r.status === "SUBMITTED")
+          .map((r) => r.studentId),
+      );
     if (write && official)
       throw new ConflictException(
         "Phân công đã công bố, không thay đổi phương án.",
@@ -269,6 +278,15 @@ export class AssignmentPlanService {
       }
       // Close expired registration even when a draft was saved before reopening.
       if (plans.length) return;
+      if (
+        !quotaReady(
+          term.quotaPolicy,
+          term.termStudents.map((s) => s.studentId),
+          term.termLecturers,
+          term.registrations?.map((r) => r.studentId),
+        )
+      )
+        return;
       const assignment = phases.find((p) => p.code === "ASSIGNMENT");
       if (
         !assignment ||
@@ -581,6 +599,12 @@ export class AssignmentPlanService {
   publish(termId: string, revision: number, userId: string) {
     return this.repo.transaction(async (tx) => {
       const c = await this.load(termId, tx);
+      QuotaValidator.ready(
+        c.term,
+        c.registrations
+          .filter((r) => r.status === "SUBMITTED")
+          .map((r) => r.studentId),
+      );
       V.require(c.plan, "Chưa lưu phương án nháp.");
       // Idempotent response on retries; no additional event or notification is created.
       if (c.plan.status !== "DRAFT")

@@ -185,9 +185,9 @@ export const mockCatalogService = {
         !values.quota?.trim() ||
         !Number.isInteger(Number(values.quota)) ||
         Number(values.quota) < 0 ||
-        Number(values.quota) > 100
+        Number(values.quota) > 500
       )
-        errors.push("Quota phải là số nguyên từ 0 đến 100");
+        errors.push("Quota phải là số nguyên từ 0 đến 500");
       if (
         values.departmentCode &&
         !db.catalogs.some(

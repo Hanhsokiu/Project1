@@ -6,10 +6,12 @@ import { TermTransitionValidator } from "./validator/term-transition.validator";
 import { AcademicSemesterController } from "./controller/academic-semester.controller";
 import { TermRepository } from "./repository/term.repository";
 import { TermWindowService } from "./service/term-window.service";
+import { QuotaService } from "./service/quota.service";
 
 @Module({
   controllers: [ThesisTermController, AcademicSemesterController],
   providers: [
+    QuotaService,
     TermRepository,
     TermLifecycleService,
     TermParameterService,

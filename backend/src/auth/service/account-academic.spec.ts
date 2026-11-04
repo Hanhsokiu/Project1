@@ -26,6 +26,29 @@ function setup() {
   };
 }
 describe("account academic profile validation", () => {
+  it("validates separate credentials and preserves them on unrelated updates", async () => {
+    const { validate } = setup();
+    const current = {
+      departmentId,
+      maxStudents: 500,
+      academicDegree: "DOCTOR",
+      academicRank: "ASSOCIATE_PROFESSOR",
+      researchAreas: [{ researchAreaId: areaId }],
+    };
+    await expect(
+      validate(["LECTURER"], {}, current as never),
+    ).resolves.toMatchObject({
+      academicDegree: "DOCTOR",
+      academicRank: "ASSOCIATE_PROFESSOR",
+      maxStudents: 500,
+    });
+    await expect(
+      validate(["LECTURER"], { academicDegree: "invalid" }, current as never),
+    ).rejects.toThrow("Học hàm/học vị");
+    await expect(
+      validate(["LECTURER"], { maxStudents: 501 }, current as never),
+    ).rejects.toThrow("0 đến 500");
+  });
   it("requires lecturer department and real nonduplicate specialties before any writes", async () => {
     const { validate, users } = setup();
     await expect(validate(["LECTURER"], {})).rejects.toThrow("bộ môn");
@@ -54,6 +77,8 @@ describe("account academic profile validation", () => {
     ).resolves.toEqual({
       departmentId,
       maxStudents: 7,
+      academicDegree: null,
+      academicRank: "NONE",
       researchAreaIds: [areaId],
     });
     await expect(

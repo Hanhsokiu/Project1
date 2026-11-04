@@ -347,7 +347,9 @@ export const mockTermService = {
       for (const studentId of studentIds) {
         const s = db.students.find((s) => s.id === studentId);
         assert(
-          s && s.eligible && hasEligibleGpa(s.gpa, t.parameters.passing_gpa_threshold),
+          s &&
+            s.eligible &&
+            hasEligibleGpa(s.gpa, t.parameters.passing_gpa_threshold),
           "Chỉ thêm sinh viên đủ điều kiện học vụ và GPA",
         );
         assert(
@@ -361,9 +363,9 @@ export const mockTermService = {
       );
       assert(
         lecturers.every(
-          (l) => Number.isInteger(l.quota) && l.quota >= 0 && l.quota <= 100,
+          (l) => Number.isInteger(l.quota) && l.quota >= 0 && l.quota <= 500,
         ),
-        "Quota phải là số nguyên từ 0 đến 100",
+        "Quota phải là số nguyên từ 0 đến 500",
       );
       const assigned = db.assignments.filter((a) => a.termId === id);
       if (t.assignmentPublished)

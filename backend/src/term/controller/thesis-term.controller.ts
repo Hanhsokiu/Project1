@@ -39,6 +39,13 @@ import type {
   TermQueryDto,
 } from "../dto/term.dto";
 import { TermStatus } from "@prisma/client";
+import {
+  QuotaApproveSchema,
+  QuotaPreviewSchema,
+  type QuotaApproveInput,
+  type QuotaPreviewInput,
+} from "@doan/shared";
+import { QuotaService } from "../service/quota.service";
 
 @ApiTags("term")
 @ApiBearerAuth()
@@ -47,6 +54,7 @@ export class ThesisTermController {
   constructor(
     private readonly service: TermLifecycleService,
     private readonly windows: TermWindowService,
+    private readonly quotas: QuotaService,
   ) {}
   @Get()
   @RequirePermission("term", "read")
@@ -169,6 +177,28 @@ export class ThesisTermController {
   ) {
     return ApiResponse.ok(
       await this.service.saveRoster(id, input, user.userId),
+    );
+  }
+
+  @Post(":id/quotas/preview")
+  @RequirePermission("term", "roster")
+  async previewQuotas(
+    @Param("id") id: string,
+    @Body(new ZodValidationPipe(QuotaPreviewSchema)) input: QuotaPreviewInput,
+    @CurrentUser() user: CurrentUserPayload,
+  ) {
+    return ApiResponse.ok(await this.quotas.preview(id, input, user.userId));
+  }
+  @Post(":id/quotas/approve")
+  @RequirePermission("term", "roster")
+  async approveQuotas(
+    @Param("id") id: string,
+    @Body(new ZodValidationPipe(QuotaApproveSchema)) input: QuotaApproveInput,
+    @CurrentUser() user: CurrentUserPayload,
+  ) {
+    return ApiResponse.ok(
+      await this.quotas.approve(id, input, user.userId),
+      "Đã chốt chỉ tiêu hướng dẫn của đợt.",
     );
   }
 }

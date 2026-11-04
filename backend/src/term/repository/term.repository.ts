@@ -10,6 +10,10 @@ export const termInclude = Prisma.validator<Prisma.ThesisTermInclude>()({
   parameters: true,
   semesterRecord: true,
   trainingSystem: true,
+  registrations: {
+    where: { status: "SUBMITTED" },
+    select: { studentId: true },
+  },
   termLecturers: {
     include: { lecturer: { include: { researchAreas: true } } },
   },
@@ -203,6 +207,47 @@ export class TermRepository {
       where: { termId },
       select: { studentId: true, status: true },
     });
+  }
+  async quotaContext(termId: string, tx: TermTransaction) {
+    const [term, registrations, draft, official] = await Promise.all([
+      this.findById(termId, tx),
+      tx.registration.findMany({
+        where: { termId },
+        select: { studentId: true, directionId: true, status: true },
+      }),
+      tx.assignmentPlan.findFirst({
+        where: { termId, status: "DRAFT" },
+        orderBy: { createdAt: "desc" },
+        include: {
+          advisorAssignments: {
+            select: {
+              advisorId: true,
+              registration: { select: { studentId: true } },
+            },
+          },
+        },
+      }),
+      tx.assignmentPlan.count({
+        where: { termId, status: { in: ["PUBLISHED", "FINALIZED"] } },
+      }),
+    ]);
+    return {
+      term,
+      registrations,
+      assignments: draft?.advisorAssignments ?? [],
+      official,
+    };
+  }
+  async saveQuotas(
+    termId: string,
+    members: { lecturerId: string; quota: number }[],
+    tx: TermTransaction,
+  ) {
+    for (const member of members)
+      await tx.termLecturer.update({
+        where: { termId_lecturerId: { termId, lecturerId: member.lecturerId } },
+        data: { quota: member.quota },
+      });
   }
   async publicationState(termId: string, tx?: TermTransaction) {
     const client = tx ?? this.prisma;

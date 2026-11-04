@@ -1,4 +1,9 @@
 import { z } from "zod";
+import {
+  AcademicDegreeSchema,
+  AcademicRankSchema,
+  MAX_QUOTA,
+} from "@doan/shared";
 export const passwordSchema = z
   .string()
   .min(8, "Mật khẩu ít nhất 8 ký tự")
@@ -18,15 +23,23 @@ export const studentSchema = contactSchema.extend({
   className: z.string().min(1),
   program: z.string().min(1),
   departmentId: z.string().min(1),
-  gpa: z.preprocess(value => value === null || typeof value === 'string' && !value.trim() ? undefined : value, z.coerce.number().min(0).max(4)),
+  gpa: z.preprocess(
+    (value) =>
+      value === null || (typeof value === "string" && !value.trim())
+        ? undefined
+        : value,
+    z.coerce.number().min(0).max(4),
+  ),
   eligible: z.boolean(),
 });
 export const lecturerSchema = contactSchema.extend({
+  academicDegree: AcademicDegreeSchema.nullable().optional(),
+  academicRank: AcademicRankSchema.optional(),
   code: z.string().min(2),
   name: z.string().trim().min(3),
   departmentId: z.string().min(1),
   directionIds: z.array(z.string()).min(1, "Chọn ít nhất một hướng chuyên môn"),
-  quota: z.coerce.number().int().min(0).max(100),
+  quota: z.coerce.number().int().min(0).max(MAX_QUOTA),
 });
 export const proposalSchema = z.object({
   title: z.string().trim().min(10, "Tên đề tài ít nhất 10 ký tự"),

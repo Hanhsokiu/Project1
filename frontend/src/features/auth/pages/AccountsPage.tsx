@@ -242,6 +242,14 @@ export default function AccountsPage() {
                           db.lecturers.find((l) => l.id === a.lecturerId)
                             ?.directionIds ||
                           [],
+                        academicDegree:
+                          a.lecturer?.academicDegree ??
+                          db.lecturers.find((l) => l.id === a.lecturerId)
+                            ?.academicDegree,
+                        academicRank:
+                          a.lecturer?.academicRank ??
+                          db.lecturers.find((l) => l.id === a.lecturerId)
+                            ?.academicRank,
                         maxStudents:
                           a.lecturer?.quota ??
                           db.lecturers.find((l) => l.id === a.lecturerId)

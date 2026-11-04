@@ -38,6 +38,8 @@ export interface Student {
   eligible: boolean;
 }
 export interface Lecturer {
+  academicDegree?: "MASTER" | "DOCTOR" | null;
+  academicRank?: "NONE" | "ASSOCIATE_PROFESSOR" | "PROFESSOR";
   isActive?: boolean;
   id: string;
   code: string;
@@ -65,6 +67,8 @@ export interface Phase {
   locked: boolean;
 }
 export interface Term {
+  quotaPolicy?: import("@doan/shared").QuotaPolicy | null;
+  quotaReady?: boolean;
   id: string;
   code: string;
   name: string;

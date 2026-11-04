@@ -47,6 +47,7 @@ export default function ApiAssignmentPlanPage() {
   );
   const locked =
     term.locked ||
+    term.quotaReady === false ||
     term.assignmentPublished ||
     term.status !== "CLOSED_REGISTRATION";
   async function calculate(full: boolean) {
@@ -108,6 +109,20 @@ export default function ApiAssignmentPlanPage() {
           </>
         }
       />
+      {term.quotaReady === false && (
+        <div className="mb-5">
+          <Notice tone="warning">
+            Chỉ tiêu hướng dẫn chưa được chốt hoặc đã thay đổi.{" "}
+            <Link
+              className="underline"
+              to={`/terms/${termId}/roster?tab=lecturers`}
+            >
+              Tính và chốt chỉ tiêu
+            </Link>{" "}
+            trước khi phân công.
+          </Notice>
+        </div>
+      )}
       <div className="stat-grid mt-5">
         <Stat
           label="Đã nộp đăng ký"

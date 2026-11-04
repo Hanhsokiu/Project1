@@ -315,6 +315,8 @@ model Lecturer {
   fullName     String   @map("full_name")
   departmentId String   @map("department_id")
   titleId      String?  @map("title_id")
+  academicDegree String? @map("academic_degree")
+  academicRank String @default("NONE") @map("academic_rank")
   phone        String?
   isActive     Boolean  @default(true) @map("is_active")
   maxStudents  Int      @default(5) @map("max_students")
@@ -436,6 +438,7 @@ model AcademicSemester {
 }
 
 model ThesisTerm {
+  quotaPolicy Json? @map("quota_policy")
   id               String     @id @default(uuid())
   code             String     @unique
   name             String

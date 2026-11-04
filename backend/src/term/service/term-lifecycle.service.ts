@@ -31,6 +31,7 @@ import {
   validatePhasePlan,
 } from "../validator/term-configuration.validator";
 import { TermTransitionValidator } from "../validator/term-transition.validator";
+import { initialQuotaPolicy, quotaRosterKey } from "@doan/shared";
 
 @Injectable()
 export class TermLifecycleService {
@@ -163,6 +164,7 @@ export class TermLifecycleService {
         {
           code,
           name: input.name,
+          quotaPolicy: JSON.parse(JSON.stringify(initialQuotaPolicy())),
           academicYear: semester.academicYear,
           semester: semester.semester,
           startDate: start,
@@ -579,6 +581,26 @@ export class TermLifecycleService {
         "Giảng viên tham gia phải hoạt động và có hướng chuyên môn.",
       );
       const state = await this.repository.publicationState(id, tx);
+      if (term.quotaPolicy) {
+        const sameRoster =
+          quotaRosterKey(
+            term.termStudents.map((s) => s.studentId),
+            term.termLecturers,
+          ) === quotaRosterKey(input.studentIds, input.lecturers);
+        termAssert(
+          !state.assignmentPublished || sameRoster,
+          "Không thay đổi danh sách hoặc chỉ tiêu đã chốt sau khi công bố phân công.",
+        );
+        termAssert(
+          input.lecturers.every((l) => {
+            const old = term.termLecturers.find(
+              (m) => m.lecturerId === l.lecturerId,
+            );
+            return !old || old.quota === l.quota;
+          }),
+          "Chỉ tiêu theo hệ số phải được điều chỉnh và chốt trong mục Chỉ tiêu hướng dẫn.",
+        );
+      }
       for (const assignment of state.officialAssignments) {
         termAssert(
           input.studentIds.includes(assignment.registration.studentId),
