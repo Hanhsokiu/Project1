@@ -37,6 +37,8 @@ export function lecturerDto(
     departmentId: l.departmentId,
     department: l.department,
     titleId: l.titleId,
+    academicDegree: l.academicDegree,
+    academicRank: l.academicRank,
     title: l.title,
     email: l.user.email,
     phone: l.phone,

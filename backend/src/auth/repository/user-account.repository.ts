@@ -202,6 +202,8 @@ export class UserAccountRepository {
     departmentId?: string;
     researchAreaIds?: string[];
     maxStudents?: number;
+    academicDegree?: string | null;
+    academicRank?: string;
     actorId?: string;
   }) {
     return this.prisma.$transaction(async (tx) => {
@@ -241,6 +243,8 @@ export class UserAccountRepository {
                     departmentId: data.departmentId,
                     phone: data.phone || null,
                     maxStudents: data.maxStudents ?? 5,
+                    academicDegree: data.academicDegree ?? null,
+                    academicRank: data.academicRank ?? "NONE",
                     researchAreas: {
                       create: (data.researchAreaIds ?? []).map(
                         (researchAreaId) => ({ researchAreaId }),
@@ -283,6 +287,8 @@ export class UserAccountRepository {
       departmentId?: string;
       researchAreaIds?: string[];
       maxStudents?: number;
+      academicDegree?: string | null;
+      academicRank?: string;
       actorId?: string;
     },
   ) {
@@ -358,11 +364,15 @@ export class UserAccountRepository {
               data.displayName ?? account.displayName ?? account.username,
             departmentId: data.departmentId,
             maxStudents: data.maxStudents ?? 5,
+            academicDegree: data.academicDegree ?? null,
+            academicRank: data.academicRank ?? "NONE",
             phone: data.phone ?? account.phone,
           },
           update: {
             departmentId: data.departmentId,
             maxStudents: data.maxStudents,
+            academicDegree: data.academicDegree,
+            academicRank: data.academicRank,
             fullName: data.displayName,
             phone: data.phone,
           },

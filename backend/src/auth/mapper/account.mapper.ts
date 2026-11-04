@@ -69,6 +69,8 @@ export function accountDto(user: Identity) {
             (a) => a.researchAreaId,
           ),
           quota: user.lecturer.maxStudents,
+          academicDegree: user.lecturer.academicDegree,
+          academicRank: user.lecturer.academicRank,
           email: user.email || "",
           phone: user.lecturer.phone || "",
         }

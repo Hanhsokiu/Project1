@@ -45,12 +45,18 @@ describe("role-specific account form", () => {
           departmentId: "dep",
           researchAreaIds: ["area"],
           maxStudents: 7,
+          academicDegree: "DOCTOR",
+          academicRank: "ASSOCIATE_PROFESSOR",
         }}
         db={db}
         onChange={() => {}}
       />,
     );
     expect(html).toContain('aria-label="Bộ môn"');
+    expect(html).toContain('aria-label="Học vị"');
+    expect(html).toContain('aria-label="Học hàm"');
+    expect(html).toMatch(/value="DOCTOR" selected=""/);
+    expect(html).toMatch(/value="ASSOCIATE_PROFESSOR" selected=""/);
     expect(html).toContain('value="7"');
     expect(html).toContain("Hướng chuyên môn có thể hướng dẫn");
     expect(html).toContain('checked=""');

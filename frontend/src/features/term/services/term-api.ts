@@ -70,5 +70,12 @@ export const termApi = {
     id: string,
     studentIds: string[],
     lecturers: Term["lecturers"],
-  ) => apiData<Term>("PUT", `/terms/${id}/roster`, { studentIds, lecturers }),
+  ) =>
+    apiData<Term>("PUT", `/terms/${id}/roster`, {
+      studentIds,
+      lecturers: lecturers.map(({ lecturerId, quota }) => ({
+        lecturerId,
+        quota,
+      })),
+    }),
 };

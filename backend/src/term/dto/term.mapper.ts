@@ -1,6 +1,7 @@
 import { basePhaseCodes, phaseCodes, PhaseCode } from "./term.dto";
 import { LoadedTerm } from "../repository/term.repository";
 import { defaultTermParameters } from "../validator/term-configuration.validator";
+import { quotaReady, readQuotaPolicy } from "@doan/shared";
 
 export function parametersFromTerm(term: LoadedTerm): Record<string, number> {
   const values = { ...defaultTermParameters };
@@ -45,6 +46,13 @@ export function toTermResponse(term: LoadedTerm, state: PublicationState) {
   const registration = phases.find((p) => p.code === "REGISTRATION");
   return {
     id: term.id,
+    quotaPolicy: readQuotaPolicy(term.quotaPolicy),
+    quotaReady: quotaReady(
+      term.quotaPolicy,
+      term.termStudents.map((s) => s.studentId),
+      term.termLecturers,
+      term.registrations?.map((r) => r.studentId),
+    ),
     code: term.code,
     name: term.name,
     semesterId: term.semesterId,

@@ -27,6 +27,11 @@ import {
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import { catalogService } from "../services/catalog-service";
+import {
+  academicDegreeLabels,
+  academicRankLabels,
+  MAX_QUOTA,
+} from "@doan/shared";
 import "./catalog-directory.css";
 type LecturerForm = Lecturer;
 export default function LecturerListPage() {
@@ -190,6 +195,20 @@ export default function LecturerListPage() {
                 db.catalogs.find((c) => c.id === l.departmentId)?.name || "—",
             },
             {
+              key: "academic",
+              title: "Học vị / học hàm",
+              render: (l) => (
+                <div>
+                  {l.academicDegree
+                    ? academicDegreeLabels[l.academicDegree]
+                    : "Chưa cập nhật"}
+                  <small className="block muted">
+                    {academicRankLabels[l.academicRank ?? "NONE"]}
+                  </small>
+                </div>
+              ),
+            },
+            {
               key: "areas",
               title: "Hướng chuyên môn",
               render: (l) => (
@@ -274,13 +293,51 @@ export default function LecturerListPage() {
                   onChange={(e) => setForm({ ...form, code: e.target.value })}
                 />
               </Field>
-              <Field label="Họ tên, học vị/chức danh">
+              <Field label="Họ tên">
                 <input
                   required
                   minLength={3}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                 />
+              </Field>
+              <Field label="Học vị">
+                <select
+                  value={form.academicDegree ?? ""}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      academicDegree: (e.target.value ||
+                        null) as Lecturer["academicDegree"],
+                    })
+                  }
+                >
+                  <option value="">Chưa cập nhật</option>
+                  {Object.entries(academicDegreeLabels).map(
+                    ([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ),
+                  )}
+                </select>
+              </Field>
+              <Field label="Học hàm">
+                <select
+                  value={form.academicRank ?? "NONE"}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      academicRank: e.target.value as Lecturer["academicRank"],
+                    })
+                  }
+                >
+                  {Object.entries(academicRankLabels).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
               </Field>
               <Field label="Bộ môn">
                 <select
@@ -305,7 +362,7 @@ export default function LecturerListPage() {
                   required
                   type="number"
                   min={0}
-                  max={100}
+                  max={MAX_QUOTA}
                   step={1}
                   value={form.quota}
                   onChange={(e) =>

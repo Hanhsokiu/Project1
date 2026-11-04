@@ -1,14 +1,24 @@
 import type { OpenAPIObject } from "@nestjs/swagger";
-import type { OperationObject, ReferenceObject, SchemaObject } from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
+import type {
+  OperationObject,
+  ReferenceObject,
+  SchemaObject,
+} from "@nestjs/swagger/dist/interfaces/open-api-spec.interface";
 import { describeStep1Responses } from "./step1-responses";
 import { describeStep2 } from "./step2-document";
+import { describeQuotas } from "./quota-document";
 const string = { type: "string" as const };
 const date = { type: "string" as const, format: "date-time" };
 const uuid = { type: "string" as const, format: "uuid" };
 const object = (
   properties: Record<string, SchemaObject | ReferenceObject>,
   required: string[] = [],
-): SchemaObject => ({ type: "object", additionalProperties: false, properties, required });
+): SchemaObject => ({
+  type: "object",
+  additionalProperties: false,
+  properties,
+  required,
+});
 /** Zod validates requests at runtime; describe those same request shapes for Swagger consumers. */
 export function describeStep1(document: OpenAPIObject, prefix = "api") {
   const schemas: Record<string, SchemaObject> = {
@@ -198,7 +208,10 @@ export function describeStep1(document: OpenAPIObject, prefix = "api") {
   document.components.schemas = { ...document.components.schemas, ...schemas };
   const ref = (name: string) => ({ $ref: "#/components/schemas/" + name });
   const operation = (path: string, method: string) =>
-    (document.paths[`/${prefix}${path}`] as Record<string, OperationObject> | undefined)?.[method];
+    (
+      document.paths[`/${prefix}${path}`] as
+        Record<string, OperationObject> | undefined
+    )?.[method];
   const body = (
     path: string,
     method: string,
@@ -228,7 +241,9 @@ export function describeStep1(document: OpenAPIObject, prefix = "api") {
     const op = operation(path, "get");
     if (op)
       op.parameters = [
-        ...(op.parameters || []).filter((p) => !("in" in p) || p.in !== "query"),
+        ...(op.parameters || []).filter(
+          (p) => !("in" in p) || p.in !== "query",
+        ),
         ...fields.map((f) => ({
           name: f.name,
           in: "query" as const,
@@ -420,5 +435,8 @@ export function describeStep1(document: OpenAPIObject, prefix = "api") {
       },
     };
   }
-  return describeStep2(describeStep1Responses(document, prefix), prefix);
+  return describeQuotas(
+    describeStep2(describeStep1Responses(document, prefix), prefix),
+    prefix,
+  );
 }

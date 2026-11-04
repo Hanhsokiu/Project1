@@ -31,6 +31,8 @@ export type SaveAccountInput = Pick<
   departmentId?: string;
   researchAreaIds?: string[];
   maxStudents?: number;
+  academicDegree?: import("../../../shared/data/types").Lecturer["academicDegree"];
+  academicRank?: import("../../../shared/data/types").Lecturer["academicRank"];
 };
 const mockAuthService = {
   login(username: string, password: string) {
@@ -240,6 +242,8 @@ const mockAuthService = {
           departmentId: input.departmentId,
           directionIds: input.researchAreaIds,
           quota: input.maxStudents ?? 5,
+          academicDegree: input.academicDegree,
+          academicRank: input.academicRank,
         };
         if (lecturer) Object.assign(lecturer, fields);
         else {
@@ -346,6 +350,12 @@ export const authService = {
             : undefined,
           className: input.roles.includes("STUDENT")
             ? input.className?.trim() || undefined
+            : undefined,
+          academicDegree: input.roles.includes("LECTURER")
+            ? input.academicDegree
+            : undefined,
+          academicRank: input.roles.includes("LECTURER")
+            ? input.academicRank
             : undefined,
           departmentId: input.roles.includes("LECTURER")
             ? input.departmentId

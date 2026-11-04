@@ -32,6 +32,7 @@
     "db:test:active-chain": "node scripts/replay-active-chain.cjs",
     "test:smoke:local": "node scripts/smoke-local.cjs",
     "test:local-tools": "node --test scripts/team-local.check.cjs",
+    "test:quota:api": "node scripts/test-quota-policy.cjs",
     "test:review-groups:api": "node scripts/test-review-groups.cjs",
     "test:review-groups:upgrade": "node scripts/test-review-group-upgrade.cjs",
     "test:proposal-reviews:api": "node scripts/test-proposal-reviews.cjs",

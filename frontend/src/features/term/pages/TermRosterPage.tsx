@@ -26,6 +26,7 @@ import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import { termService } from "../services/term-service";
 import { formatGpa, hasEligibleGpa } from "../../../shared/utils/gpa";
+import { QuotaPanel } from "../components/QuotaPanel";
 export default function TermRosterPage() {
   const { id } = useParams();
   const { db } = useWorkspace();
@@ -159,6 +160,11 @@ export default function TermRosterPage() {
           Giảng viên & quota
         </button>
       </div>
+      {tab === "lecturers" && (
+        <div className="mb-5">
+          <QuotaPanel term={t} rosterDirty={dirty} />
+        </div>
+      )}
       {tab === "students" ? (
         <Card
           title="Sinh viên cùng hệ đào tạo"
@@ -318,10 +324,12 @@ export default function TermRosterPage() {
                     aria-label={`Quota ${l.code}`}
                     type="number"
                     min={0}
-                    max={100}
+                    max={500}
                     step={1}
                     disabled={
-                      disabled || !lecturers.some((x) => x.lecturerId === l.id)
+                      disabled ||
+                      !!t.quotaPolicy ||
+                      !lecturers.some((x) => x.lecturerId === l.id)
                     }
                     value={
                       lecturers.find((x) => x.lecturerId === l.id)?.quota ??

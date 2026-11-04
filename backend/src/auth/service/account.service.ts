@@ -6,6 +6,11 @@ import {
 } from "@nestjs/common";
 import * as bcrypt from "bcryptjs";
 import { z } from "zod";
+import {
+  AcademicDegreeSchema,
+  AcademicRankSchema,
+  MAX_QUOTA,
+} from "@doan/shared";
 import { UserAccountRepository } from "../repository/user-account.repository";
 import { accountDto } from "../mapper/account.mapper";
 import { AccountProvisioningValidator } from "../validator/account-provisioning.validator";
@@ -23,6 +28,8 @@ export interface SaveAccountInput {
   departmentId?: string;
   researchAreaIds?: string[];
   maxStudents?: number;
+  academicDegree?: "MASTER" | "DOCTOR" | null;
+  academicRank?: "NONE" | "ASSOCIATE_PROFESSOR" | "PROFESSOR";
 }
 
 @Injectable()
@@ -45,6 +52,8 @@ export class AccountService {
     current?: {
       departmentId: string;
       maxStudents: number;
+      academicDegree?: string | null;
+      academicRank?: string;
       researchAreas: { researchAreaId: string }[];
     } | null,
   ) {
@@ -52,7 +61,9 @@ export class AccountService {
       if (
         data.departmentId !== undefined ||
         data.researchAreaIds !== undefined ||
-        data.maxStudents !== undefined
+        data.maxStudents !== undefined ||
+        data.academicDegree !== undefined ||
+        data.academicRank !== undefined
       )
         throw new BadRequestException(
           "Thông tin hướng dẫn chỉ dành cho tài khoản giảng viên.",
@@ -82,11 +93,31 @@ export class AccountService {
       );
     if ((await this.users.researchAreas(ids)).length !== ids.length)
       throw new BadRequestException("Hướng chuyên môn không tồn tại.");
-    if (!Number.isInteger(maxStudents) || maxStudents < 0 || maxStudents > 100)
+    if (
+      !Number.isInteger(maxStudents) ||
+      maxStudents < 0 ||
+      maxStudents > MAX_QUOTA
+    )
       throw new BadRequestException(
-        "Số sinh viên hướng dẫn tối đa phải là số nguyên từ 0 đến 100.",
+        "Số sinh viên hướng dẫn tối đa phải là số nguyên từ 0 đến 500.",
       );
-    return { departmentId, researchAreaIds: ids, maxStudents };
+    const academicDegree =
+      data.academicDegree !== undefined
+        ? data.academicDegree
+        : (current?.academicDegree ?? null);
+    const academicRank = data.academicRank ?? current?.academicRank ?? "NONE";
+    if (
+      !AcademicDegreeSchema.nullable().safeParse(academicDegree).success ||
+      !AcademicRankSchema.safeParse(academicRank).success
+    )
+      throw new BadRequestException("Học hàm/học vị không hợp lệ.");
+    return {
+      departmentId,
+      researchAreaIds: ids,
+      maxStudents,
+      academicDegree,
+      academicRank,
+    };
   }
   private studentMajor(roles: string[], value: unknown) {
     if (value === undefined) return undefined;

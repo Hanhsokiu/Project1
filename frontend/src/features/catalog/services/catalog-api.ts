@@ -46,6 +46,8 @@ export const catalogApi = {
         email: input.email || null,
         phone: input.phone || null,
         maxStudents: input.quota,
+        academicDegree: input.academicDegree ?? null,
+        academicRank: input.academicRank ?? "NONE",
         researchAreaIds: input.directionIds,
       },
     );

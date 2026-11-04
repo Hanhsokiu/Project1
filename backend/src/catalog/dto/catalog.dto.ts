@@ -1,4 +1,9 @@
 import { z } from "zod";
+import {
+  AcademicDegreeSchema,
+  AcademicRankSchema,
+  MAX_QUOTA,
+} from "@doan/shared";
 const contactEmail = z.preprocess(
   (v) => (v === "" ? undefined : v),
   z.string().trim().email("Email không hợp lệ").nullable().optional(),
@@ -35,9 +40,11 @@ export const lecturerSchema = z.object({
   fullName: z.string().trim().min(3).max(200),
   departmentId: z.string().uuid(),
   titleId: z.string().uuid().nullable().optional(),
+  academicDegree: AcademicDegreeSchema.nullable().optional(),
+  academicRank: AcademicRankSchema.optional(),
   email: contactEmail,
   phone,
-  maxStudents: z.coerce.number().int().min(0).max(100).default(5),
+  maxStudents: z.coerce.number().int().min(0).max(MAX_QUOTA).default(5),
   researchAreaIds: z
     .array(z.string().uuid())
     .min(1)

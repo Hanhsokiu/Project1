@@ -1,3 +1,8 @@
+import {
+  academicDegreeLabels,
+  academicRankLabels,
+  MAX_QUOTA,
+} from "@doan/shared";
 import { Field } from "../../../shared/components/kit";
 import type { DemoDb } from "../../../shared/data/types";
 import type { SaveAccountInput } from "../services/auth-service";
@@ -99,6 +104,45 @@ export function AccountAcademicFields({
         <fieldset className="mt-5 rounded-xl border border-slate-200 p-4">
           <legend className="px-2 font-semibold">Hồ sơ giảng viên</legend>
           <div className="form-grid">
+            <Field label="Học vị">
+              <select
+                aria-label="Học vị"
+                value={form.academicDegree ?? ""}
+                onChange={(e) =>
+                  onChange({
+                    ...form,
+                    academicDegree: (e.target.value ||
+                      null) as SaveAccountInput["academicDegree"],
+                  })
+                }
+              >
+                <option value="">Chưa cập nhật</option>
+                {Object.entries(academicDegreeLabels).map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </Field>
+            <Field label="Học hàm">
+              <select
+                aria-label="Học hàm"
+                value={form.academicRank ?? "NONE"}
+                onChange={(e) =>
+                  onChange({
+                    ...form,
+                    academicRank: e.target
+                      .value as SaveAccountInput["academicRank"],
+                  })
+                }
+              >
+                {Object.entries(academicRankLabels).map(([value, label]) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </Field>
             <Field label="Bộ môn">
               <select
                 required
@@ -121,7 +165,7 @@ export function AccountAcademicFields({
                 required
                 type="number"
                 min={0}
-                max={100}
+                max={MAX_QUOTA}
                 step={1}
                 aria-label="Số sinh viên hướng dẫn tối đa"
                 value={form.maxStudents ?? 5}
