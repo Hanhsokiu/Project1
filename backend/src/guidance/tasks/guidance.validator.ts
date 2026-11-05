@@ -37,7 +37,7 @@ export class GuidanceValidator {
     const term = await s.term(termId),
       mapping = await s.guidancePhase(termId),
       now = new Date();
-    if (!term || term.status !== "IN_PROGRESS")
+    if (!term || term.isLocked || term.status !== "IN_PROGRESS")
       groupError(409, "TERM_003", "Đợt không ở giai đoạn hướng dẫn.");
     if (!mapping || mapping.refPhaseId.termId !== termId)
       groupError(409, "INPUT_NOT_READY", "Chưa cấu hình phase GUIDANCE.");
@@ -180,13 +180,18 @@ export class GuidanceValidator {
         "Thời gian nhiệm vụ phải nằm trong phase GUIDANCE [start,end).",
       );
   }
-  period(period: { termId: string } | null, termId: string) {
+  period(
+    period: { termId: string; state?: string | null } | null,
+    termId: string,
+  ) {
     if (!period || period.termId !== termId)
       groupError(
         409,
         "PERIOD_INVALID",
         "Mốc kế hoạch không thuộc đợt của hồ sơ.",
       );
+    if (period.state && period.state !== "OPEN")
+      groupError(409, "WEEK_CLOSED", "Tuần chưa công bố hoặc đã khóa.");
     return period;
   }
   editable(t: GuidanceTaskRecord, acknowledge?: boolean) {
@@ -242,6 +247,7 @@ export class GuidanceValidator {
   obligation(o: ObligationRecord, termStudentId: string, termId: string) {
     const p = o.refPeriodId,
       c = WeeklyObligationConfigSchema.safeParse(o.configSnapshot);
+    this.period(p, termId);
     if (
       o.termStudentId !== termStudentId ||
       p.termId !== termId ||

@@ -61,11 +61,7 @@ export class SubmissionValidator {
         "INPUT_NOT_READY",
         "Nhiệm vụ legacy/chưa cấu hình đầy đủ.",
       );
-    if (
-      !["TODO", "IN_PROGRESS", "SUBMITTED", "REVISION_REQUESTED"].includes(
-        w.state,
-      )
-    )
+    if (!["TODO", "IN_PROGRESS", "REVISION_REQUESTED"].includes(w.state))
       groupError(
         409,
         "STATE_TRANSITION_INVALID",
@@ -91,7 +87,10 @@ export class SubmissionValidator {
       ext = name.split(".").pop()!.toLowerCase();
     if (!file.buffer || !file.buffer.length || file.size !== file.buffer.length)
       invalid();
-    if (file.size > p.maxFileBytes)
+    if (
+      file.size >
+      Math.min(p.maxFileBytes, p.roles[kind].maxBytes ?? p.maxFileBytes)
+    )
       groupError(413, "FILE_TOO_LARGE", "File vượt dung lượng cấu hình.");
     if (!(p.roles[kind].extensions as string[]).includes(ext)) invalid();
     const allowed: Record<string, string[]> = {

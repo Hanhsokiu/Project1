@@ -1,11 +1,5 @@
 import { useEffect } from "react";
-import {
-  Outlet,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
-import { Search } from "lucide-react";
+import { Outlet, useSearchParams } from "react-router-dom";
 import WorkspaceLayout from "../../app/layouts/WorkspaceLayout";
 import { useWorkspace } from "../../shared/hooks/use-workspace";
 import "./workspace.css";
@@ -27,19 +21,12 @@ export function ReviewGroupLayout(props: Mode) {
   );
   return (
     <WorkspaceLayout data={data}>
-      <WorkflowContent {...props} />
+      <WorkflowContent />
     </WorkspaceLayout>
   );
 }
 
-function WorkflowContent({
-  reviewMode,
-  versionMode,
-  dossierMode,
-  guidanceMode,
-}: Mode) {
-  const navigate = useNavigate();
-  const { pathname } = useLocation();
+function WorkflowContent() {
   const [params] = useSearchParams();
   const { db, termId: selectedTerm, setTermId } = useWorkspace();
   const requestedTerm = params.get("termId");
@@ -51,5 +38,9 @@ function WorkflowContent({
     )
       setTermId(requestedTerm);
   }, [requestedTerm, selectedTerm, db.terms, setTermId]);
-  return <div className="workflow-content"><Outlet /></div>;
+  return (
+    <div className="workflow-content">
+      <Outlet />
+    </div>
+  );
 }

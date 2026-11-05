@@ -9,6 +9,35 @@ import type {
 import { groupError } from "../../topic/review-groups/review-group.errors";
 @Injectable()
 export class ProgressReviewValidator {
+  deadline(
+    decision: string,
+    due: string | undefined,
+    phaseEnd: Date,
+    now = new Date(),
+  ) {
+    if (decision !== "REVISION_REQUIRED") {
+      if (due)
+        groupError(
+          400,
+          "REVISION_DEADLINE_INVALID",
+          "Chỉ Cần sửa mới có hạn sửa.",
+        );
+      return null;
+    }
+    const date = due ? new Date(due) : null;
+    if (
+      !date ||
+      !Number.isFinite(date.getTime()) ||
+      date <= now ||
+      date >= phaseEnd
+    )
+      groupError(
+        400,
+        "REVISION_DEADLINE_INVALID",
+        "Hạn sửa phải ở tương lai và trước khi giai đoạn hướng dẫn kết thúc.",
+      );
+    return date;
+  }
   comment(decision: ProgressReviewResult, comment?: string) {
     if (decision !== "PASS" && !comment?.trim())
       groupError(

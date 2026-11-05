@@ -114,6 +114,7 @@ enum ImportJobStatus {
 // ============================================
 
 model UserAccount {
+  weeklyReopens GuidanceReopen[]
   id                 String        @id @default(uuid())
   username           String        @unique
   email              String?       @unique
@@ -133,6 +134,8 @@ model UserAccount {
   notifications Notification[]
   student       Student?
   lecturer      Lecturer?
+  weeklyPeriodsCreated GuidancePeriod[] @relation("WeeklyPeriodCreator")
+  weeklyPeriodsUpdated GuidancePeriod[] @relation("WeeklyPeriodUpdater")
 
   @@map("USER_ACCOUNT")
   pr2bAcademicTermGrantUserId AcademicTermGrant[] @relation("AcademicTermGrant_userId")
@@ -839,6 +842,7 @@ model Task {
 }
 
 model TaskSubmission {
+  weeklyReopens GuidanceReopen[]
   id        String   @id @default(uuid())
   taskId    String   @map("task_id")
   content   String?
@@ -1602,6 +1606,17 @@ model PlanHistory {
 }
 
 model GuidancePeriod {
+  @@index([termId, state, reportDueAt])
+  description String @default("")
+  expectedDeliverables String @default("Báo cáo tiến độ và mã nguồn")
+  state String? @db.VarChar(16)
+  publishedAt DateTime? @db.Timestamptz(6)
+  createdByUserId String?
+  updatedByUserId String?
+  createdBy UserAccount? @relation("WeeklyPeriodCreator", fields: [createdByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  updatedBy UserAccount? @relation("WeeklyPeriodUpdater", fields: [updatedByUserId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  stateReason String?
+  allowLate Boolean @default(true)
   id String @id @default(uuid()) @db.VarChar(36)
   createdAt DateTime @default(now()) @db.Timestamptz(6)
   updatedAt DateTime @default(now()) @updatedAt @db.Timestamptz(6)
@@ -1660,6 +1675,10 @@ model WeeklyReportObligation {
 }
 
 model TaskWorkflow {
+  draftReport Json?
+  draftRevision Int @default(0)
+  completionCriteria String @default("")
+  priority Int @default(2)
   @@index([planId, state, periodId])
   startsAt DateTime? @db.Timestamptz(6)
   expectedDeliverables String?
@@ -1715,6 +1734,8 @@ model TaskHistory {
 }
 
 model SubmissionWorkflow {
+  reportContent Json?
+  changeExplanation String?
   contextSnapshot Json?
   filePolicySnapshot Json?
   id String @id @default(uuid()) @db.VarChar(36)
@@ -1739,6 +1760,7 @@ model SubmissionWorkflow {
 }
 
 model ProgressReview {
+  revisionDueAt DateTime? @db.Timestamptz(6)
   @@index([reviewerUserId, recordedAt])
   id String @id @default(uuid()) @db.VarChar(36)
   createdAt DateTime @default(now()) @db.Timestamptz(6)
@@ -1761,6 +1783,18 @@ model ProgressReview {
   @@unique([id, submissionId])
   @@index([submissionId, recordedAt])
   @@map("PROGRESS_REVIEW")
+}
+
+model GuidanceReopen {
+  id String @id @default(uuid()) @db.VarChar(36)
+  submissionId String @unique
+  submission TaskSubmission @relation(fields: [submissionId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  actorId String
+  actor UserAccount @relation(fields: [actorId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  reason String
+  revisionDueAt DateTime @db.Timestamptz(6)
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  @@map("GUIDANCE_REOPEN")
 }
 
 model FileAsset {

@@ -81,6 +81,7 @@ function useRefresh() {
         "guidance-tasks",
         "guidance-plan-tasks",
         "weekly-coverage",
+        "weekly-summary",
         "guidance-task",
       ].map((k) => client.invalidateQueries({ queryKey: [k] })),
     );
@@ -613,7 +614,18 @@ export function GuidanceTaskListPage() {
       <Link to="/guidance/plan" className="text-blue-700">
         Xem kế hoạch hướng dẫn →
       </Link>
-      <FilterBar searchControl={{ value: search, label: "Tìm kiếm nhiệm vụ", onSearch: value => setParams(previous => { const next = new URLSearchParams(previous); next.set("search", value); return next; }) }}>
+      <FilterBar
+        searchControl={{
+          value: search,
+          label: "Tìm kiếm nhiệm vụ",
+          onSearch: (value) =>
+            setParams((previous) => {
+              const next = new URLSearchParams(previous);
+              next.set("search", value);
+              return next;
+            }),
+        }}
+      >
         <label>
           Đợt
           <select
@@ -928,6 +940,15 @@ export function GuidanceTaskDetailPage() {
                 Hạn: {vietnamDate(t.dueDate)} (UTC+7)
               </p>
               <p className="whitespace-pre-wrap break-words">{t.description}</p>
+              <p>
+                Tiêu chí hoàn thành:{" "}
+                {t.completionCriteria || "Theo sản phẩm dự kiến"} · Ưu tiên:{" "}
+                {t.priority === 1
+                  ? "Cao"
+                  : t.priority === 3
+                    ? "Thấp"
+                    : "Bình thường"}
+              </p>
               <h3 className="font-semibold">Sản phẩm dự kiến</h3>
               <p className="whitespace-pre-wrap break-words">
                 {t.expectedDeliverables ?? "Chưa đối soát yêu cầu"}

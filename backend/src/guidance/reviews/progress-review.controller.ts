@@ -24,6 +24,7 @@ import {
   GuidanceMeetingCreateSchema,
   GuidanceMeetingAmendSchema,
   TaskSubmissionQuerySchema,
+  WeeklyReopenSchema,
 } from "@doan/shared";
 import type {
   ProgressReviewCreate,
@@ -31,6 +32,7 @@ import type {
   GuidanceMonitorQuery,
   GuidanceMeetingCreate,
   GuidanceMeetingAmend,
+  WeeklyReopen,
 } from "@doan/shared";
 import { RequirePermission } from "../../common/security/require-permission.decorator";
 import { ReviewGroupPipe } from "../../topic/review-groups/review-group.dto";
@@ -71,6 +73,16 @@ const meetingProperties = {
 @UseFilters(ReviewGroupExceptionFilter)
 @Controller()
 export class ProgressReviewController {
+  @Post("task-submissions/:id/reopen")
+  @RequirePermission("task", "review")
+  reopen(
+    @Req() r: Request,
+    @Param("id") id: string,
+    @Body(new ReviewGroupPipe(WeeklyReopenSchema)) body: WeeklyReopen,
+    @Headers("idempotency-key") key: string,
+  ) {
+    return this.service.reopen(this.user(r), id, body, key).then(success);
+  }
   @Get("guidance-review-options/terms")
   @RequirePermission("guidance", "read")
   options(@Req() r: Request) {

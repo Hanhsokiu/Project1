@@ -9,6 +9,7 @@ export const PROPOSAL_VERSION_JSON_LIMIT = 32 * 1024 * 1024;
 export function configureBodyParsers(app: INestApplication, prefix = "api") {
   const routePrefix = "/" + prefix.replace(/^\/+|\/+$/g, "");
   const proposalJson = json({ limit: PROPOSAL_VERSION_JSON_LIMIT });
+  const weeklyJson = json({ limit: 512 * 1024 });
   app.use((request: Request, response: Response, next: NextFunction) => {
     const path = request.path;
     if (
@@ -19,6 +20,13 @@ export function configureBodyParsers(app: INestApplication, prefix = "api") {
       )
     )
       return proposalJson(request, response, next);
+    if (
+      ["POST", "PUT"].includes(request.method) &&
+      new RegExp(
+        "^" + routePrefix + "/tasks/[^/]+/(submissions|draft)/?$",
+      ).test(path)
+    )
+      return weeklyJson(request, response, next);
     next();
   });
   app.use(json({ limit: 100 * 1024 }));

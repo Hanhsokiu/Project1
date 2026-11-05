@@ -19,7 +19,6 @@ import {
   DataBoundary,
   DataTable,
   Empty,
-  Notice,
   PageHeader,
   Person,
   date,
@@ -37,7 +36,6 @@ import {
 function RouteButton({
   to,
   children,
-  light = false,
   secondary = false,
   onClick,
 }: {
@@ -76,12 +74,8 @@ function DarkHero({
       <div className="space-y-5">
         <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-6">
           <div className="max-w-3xl">
-            <p className="eyebrow">
-              {label}
-            </p>
-            <h2 className="dashboard-overview-title">
-              {title}
-            </h2>
+            <p className="eyebrow">{label}</p>
+            <h2 className="dashboard-overview-title">{title}</h2>
             <p className="mt-2 text-xs leading-6 text-slate-500 max-w-2xl">
               {description}
             </p>
@@ -530,7 +524,9 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                       : "Theo dõi kết quả đăng ký, liên hệ GVHD sau khi Khoa công bố và trao đổi để thống nhất một đề tài cá nhân."}
                 </p>
               </div>
-              <RouteButton to={target} secondary>Mở hồ sơ</RouteButton>
+              <RouteButton to={target} secondary>
+                Mở hồ sơ
+              </RouteButton>
             </div>
             <div className="grid sm:grid-cols-3 gap-3 mt-5">
               <div className="bg-white rounded-xl p-3 text-xs">
@@ -935,24 +931,120 @@ function AdminDashboard({ db }: { db: DemoDb }) {
   );
 }
 
-function CommitteeDashboard({ db, withHeader = true }: { db: DemoDb; withHeader?: boolean }) {
+function CommitteeDashboard({
+  db,
+  withHeader = true,
+}: {
+  db: DemoDb;
+  withHeader?: boolean;
+}) {
   const { user, termId } = useWorkspace();
-  const committees = db.committees.filter(c => c.termId === termId && c.members.some(member => member.lecturerId === user.lecturerId));
-  const sessions = db.defenses.filter(d => d.termId === termId && d.schedulePublished !== false && committees.some(c => c.id === d.committeeId));
-  const notifications = db.notifications.filter(n => n.userId === user.id);
-  return <>
-    {withHeader && <PageHeader title="Không gian hội đồng" description="Theo dõi lịch bảo vệ đã công bố và thông báo dành cho bạn." actions={<Link className="btn btn-primary" to="/notifications">Xem thông báo<ArrowRight size={16} /></Link>} />}
-    <div className="grid gap-5 lg:grid-cols-3">
-      <div className="lg:col-span-2"><Card title="Lịch bảo vệ của bạn" description="Chỉ hiển thị lịch đã công bố trong các hội đồng bạn tham gia.">
-        {sessions.length ? <DataTable rows={sessions} label="Lịch bảo vệ của hội đồng" searchText={d => `${d.date} ${d.room} ${db.students.find(s => s.id === d.studentId)?.name || ""}`} columns={[
-          { key: "time", title: "Thời gian", sortValue: d => `${d.date} ${d.start}`, render: d => <><strong>{date(d.date)}</strong><p>{d.start} – {d.end}</p></> },
-          { key: "student", title: "Sinh viên", render: d => db.students.find(s => s.id === d.studentId)?.name || "Hồ sơ theo phân công" },
-          { key: "committee", title: "Hội đồng / Phòng", render: d => <><strong>{committees.find(c => c.id === d.committeeId)?.name}</strong><p>{d.room || "Chưa có phòng"}</p></> },
-        ]} /> : <Empty title="Chưa có lịch bảo vệ được công bố" description="Lịch và hồ sơ sẽ xuất hiện khi Khoa công bố phân công hội đồng. Bạn có thể kiểm tra thông báo để theo dõi cập nhật." />}
-      </Card></div>
-      <Card title="Thông báo mới">{notifications.length ? <div className="space-y-4">{notifications.slice(0, 5).map(n => <Link className="block border-b border-slate-100 pb-4 last:border-0" to="/notifications" key={n.id}><strong className="text-xs">{n.title}</strong><p className="muted text-xs mt-2 line-clamp-3">{n.content}</p></Link>)}</div> : <Empty title="Chưa có thông báo" description="Các cập nhật dành cho hội đồng sẽ xuất hiện tại đây." />}</Card>
-    </div>
-  </>;
+  const committees = db.committees.filter(
+    (c) =>
+      c.termId === termId &&
+      c.members.some((member) => member.lecturerId === user.lecturerId),
+  );
+  const sessions = db.defenses.filter(
+    (d) =>
+      d.termId === termId &&
+      d.schedulePublished !== false &&
+      committees.some((c) => c.id === d.committeeId),
+  );
+  const notifications = db.notifications.filter((n) => n.userId === user.id);
+  return (
+    <>
+      {withHeader && (
+        <PageHeader
+          title="Không gian hội đồng"
+          description="Theo dõi lịch bảo vệ đã công bố và thông báo dành cho bạn."
+          actions={
+            <Link className="btn btn-primary" to="/notifications">
+              Xem thông báo
+              <ArrowRight size={16} />
+            </Link>
+          }
+        />
+      )}
+      <div className="grid gap-5 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <Card
+            title="Lịch bảo vệ của bạn"
+            description="Chỉ hiển thị lịch đã công bố trong các hội đồng bạn tham gia."
+          >
+            {sessions.length ? (
+              <DataTable
+                rows={sessions}
+                label="Lịch bảo vệ của hội đồng"
+                searchText={(d) =>
+                  `${d.date} ${d.room} ${db.students.find((s) => s.id === d.studentId)?.name || ""}`
+                }
+                columns={[
+                  {
+                    key: "time",
+                    title: "Thời gian",
+                    sortValue: (d) => `${d.date} ${d.start}`,
+                    render: (d) => (
+                      <>
+                        <strong>{date(d.date)}</strong>
+                        <p>
+                          {d.start} – {d.end}
+                        </p>
+                      </>
+                    ),
+                  },
+                  {
+                    key: "student",
+                    title: "Sinh viên",
+                    render: (d) =>
+                      db.students.find((s) => s.id === d.studentId)?.name ||
+                      "Hồ sơ theo phân công",
+                  },
+                  {
+                    key: "committee",
+                    title: "Hội đồng / Phòng",
+                    render: (d) => (
+                      <>
+                        <strong>
+                          {committees.find((c) => c.id === d.committeeId)?.name}
+                        </strong>
+                        <p>{d.room || "Chưa có phòng"}</p>
+                      </>
+                    ),
+                  },
+                ]}
+              />
+            ) : (
+              <Empty
+                title="Chưa có lịch bảo vệ được công bố"
+                description="Lịch và hồ sơ sẽ xuất hiện khi Khoa công bố phân công hội đồng. Bạn có thể kiểm tra thông báo để theo dõi cập nhật."
+              />
+            )}
+          </Card>
+        </div>
+        <Card title="Thông báo mới">
+          {notifications.length ? (
+            <div className="space-y-4">
+              {notifications.slice(0, 5).map((n) => (
+                <Link
+                  className="block border-b border-slate-100 pb-4 last:border-0"
+                  to="/notifications"
+                  key={n.id}
+                >
+                  <strong className="text-xs">{n.title}</strong>
+                  <p className="muted text-xs mt-2 line-clamp-3">{n.content}</p>
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <Empty
+              title="Chưa có thông báo"
+              description="Các cập nhật dành cho hội đồng sẽ xuất hiện tại đây."
+            />
+          )}
+        </Card>
+      </div>
+    </>
+  );
 }
 function DashboardContent({ db }: { db: DemoDb }) {
   const { user, termId } = useWorkspace();
@@ -963,8 +1055,7 @@ function DashboardContent({ db }: { db: DemoDb }) {
   const role = availableRoles.some((item) => item === selectedRole)
     ? selectedRole
     : availableRoles[0];
-  if (!role)
-    return <CommitteeDashboard db={db} />;
+  if (!role) return <CommitteeDashboard db={db} />;
   if (!db.terms.length)
     return (
       <>
@@ -1009,7 +1100,16 @@ function DashboardContent({ db }: { db: DemoDb }) {
               ? `${lecturer?.code || user.username} · ${db.catalogs.find((c) => c.id === lecturer?.departmentId)?.name || "Khoa Công nghệ Thông tin"}`
               : "Tổng quan công tác quản lý đợt, đăng ký và hồ sơ đề tài"
         }
-        actions={role === "COMMITTEE" ? <Link className="btn btn-primary" to="/notifications">Xem thông báo<ArrowRight size={16} /></Link> : <Badge value={data.term.status} />}
+        actions={
+          role === "COMMITTEE" ? (
+            <Link className="btn btn-primary" to="/notifications">
+              Xem thông báo
+              <ArrowRight size={16} />
+            </Link>
+          ) : (
+            <Badge value={data.term.status} />
+          )
+        }
       />
       {availableRoles.length > 1 && (
         <div

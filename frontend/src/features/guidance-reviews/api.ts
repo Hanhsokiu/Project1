@@ -13,6 +13,7 @@ import type {
   GuidanceMeetingView,
   GuidanceNotificationView,
   GroupPage,
+  WeeklyReopen,
 } from "@doan/shared";
 type Envelope<T> = { success: true; data: T };
 const get = async <T>(url: string, params?: object) =>
@@ -32,6 +33,13 @@ const write = async <T>(
     })
   ).data.data;
 export const progressApi = {
+  reopen: (id: string, input: WeeklyReopen, key: string) =>
+    write(
+      "POST",
+      `/task-submissions/${encodeURIComponent(id)}/reopen`,
+      input,
+      key,
+    ),
   options: () =>
     get<{
       terms: Array<{ id: string; name: string; status: string }>;

@@ -12,6 +12,7 @@ import type {
   GuidanceMeetingCreate,
   GuidanceMeetingAmend,
   GuidanceMeetingView,
+  WeeklyReopen,
 } from "@doan/shared";
 import { GuidanceService } from "../tasks/guidance.service";
 import { GuidanceValidator } from "../tasks/guidance.validator";
@@ -73,6 +74,7 @@ export class ProgressReviewService {
   ) {}
   view(r: ProgressReviewRecord): ProgressReviewView {
     return {
+      revisionDueAt: r.revisionDueAt?.toISOString() ?? null,
       id: r.id,
       submissionId: r.submissionId,
       decision: r.decision,
@@ -106,19 +108,33 @@ export class ProgressReviewService {
           ) ?? null;
       const allowedActions: ProgressReviewContext["allowedActions"] = [],
         readiness: string[] = [];
+      let canReview = false;
       try {
         await this.guidance.reviewAccess(s, userId, sub.taskId);
         await this.gv.active(s, a.p, a.plan);
+        this.gv.period(
+          await s.period(a.t.pr2bTaskWorkflowTaskId!.periodId!),
+          a.p.topic.termId,
+        );
         this.v.current(a.t, sub, effective ?? undefined);
-        allowedActions.push(effective ? "amend" : "review");
+        canReview = true;
+        if (!effective) allowedActions.push("review");
+        else if (effective.decision === "REVISION_REQUIRED")
+          allowedActions.push("amend");
       } catch (e) {
         if (!(e instanceof HttpException)) throw e;
         if (code(e) !== "COMMON_001") readiness.push(code(e));
       }
       return {
+        canReopen:
+          effective?.decision === "FAIL" &&
+          canReview &&
+          !(await s.reopenDecision(sub.id)) &&
+          a.u.lecturer?.userId === userId,
         submission: this.submissions.view(sub),
         taskId: a.t.id,
         taskTitle: a.t.title,
+        topicTitle: a.p.topic.title,
         proposalId: a.p.id,
         termId: a.p.topic.termId,
         studentName: a.p.student.fullName,
@@ -171,6 +187,22 @@ export class ProgressReviewService {
       }
       const active = await this.gv.active(s, a.p, a.plan),
         old = reviewId ? await s.progressReview(reviewId) : null;
+      this.gv.period(
+        await s.period(a.t.pr2bTaskWorkflowTaskId!.periodId!),
+        a.p.topic.termId,
+      );
+      const phase = await this.gv.phase(s, a.p.topic.termId);
+      const revisionDueAt = this.v.deadline(
+        input.decision,
+        input.revisionDueAt,
+        phase.endDate,
+      );
+      if (old && old.decision !== "REVISION_REQUIRED")
+        groupError(
+          409,
+          "REVIEW_FINAL",
+          "Kết quả Đạt/Không đạt đã chốt. Không đạt chỉ được mở lại bằng thao tác riêng.",
+        );
       if (reviewId && !old)
         groupError(404, "COMMON_001", "Không tìm thấy đánh giá.");
       const { tw, sw } = this.v.current(a.t, sub, old ?? undefined),
@@ -226,6 +258,7 @@ export class ProgressReviewService {
           assignmentRevision: active.official.revision,
           reviewerUserId: userId,
           recordedAt: now,
+          revisionDueAt,
           supersedesReviewId: old?.id,
           amendmentReason: old ? (input as ProgressReviewAmend).reason : null,
         });
@@ -263,7 +296,7 @@ export class ProgressReviewService {
         }),
       );
       const notificationId = randomUUID();
-      await s.notify({
+      await s.queueNote({
         id: notificationId,
         userId: a.p.student.userId,
         termId: a.p.topic.termId,
@@ -286,6 +319,93 @@ export class ProgressReviewService {
       const result = this.view(r);
       await s.guidanceRemember(userId, "POST", route, key, hash, json(result));
       return result;
+    }, true);
+  }
+  async reopen(
+    userId: string,
+    submissionId: string,
+    input: WeeklyReopen,
+    key: string,
+  ) {
+    this.submissions.key(key);
+    return this.repo.transaction(async (s) => {
+      const sub = await this.sub(s, submissionId);
+      let a = await this.guidance.reviewAccess(s, userId, sub.taskId);
+      await s.lock(a.p.topic.termId, [], a.p.id);
+      await s.lockAggregate(
+        a.plan.id,
+        a.t.pr2bTaskWorkflowTaskId?.obligationId ?? undefined,
+        a.t.id,
+      );
+      a = await this.guidance.reviewAccess(s, userId, sub.taskId);
+      const route = `/task-submissions/${submissionId}/reopen`,
+        hash = reviewHash(input);
+      const replay = await s.guidanceReplay(userId, "POST", route, key);
+      if (replay) {
+        if (replay.payloadHash !== hash)
+          groupError(
+            409,
+            "IDEMPOTENCY_CONFLICT",
+            "Khóa đã dùng với nội dung khác.",
+          );
+        return replay.result;
+      }
+      await this.gv.active(s, a.p, a.plan);
+      const tw = a.t.pr2bTaskWorkflowTaskId!;
+      this.gv.period(await s.period(tw.periodId!), a.p.topic.termId);
+      this.review.revision(tw.revision, input.expectedTaskRevision);
+      const current = await this.sub(s, submissionId);
+      const rid = current.pr2bSubmissionWorkflowSubmissionId?.effectiveReviewId;
+      const decision = rid ? await s.progressReview(rid) : null;
+      if (
+        tw.currentSubmissionId !== submissionId ||
+        decision?.decision !== "FAIL" ||
+        decision.state !== "RECORDED" ||
+        (await s.reopenDecision(submissionId))
+      )
+        groupError(
+          409,
+          "REOPEN_NOT_ALLOWED",
+          "Chỉ mở lại kết quả Không đạt hiện hành một lần.",
+        );
+      const phase = await this.gv.phase(s, a.p.topic.termId);
+      const due = this.v.deadline(
+        "REVISION_REQUIRED",
+        input.revisionDueAt,
+        phase.endDate,
+      )!;
+      const result = await s.addReopen({
+        submissionId,
+        actorId: userId,
+        reason: input.reason,
+        revisionDueAt: due,
+      });
+      await s.advanceTask(a.t.id, tw.revision);
+      await s.taskHistory({
+        taskId: a.t.id,
+        actorId: userId,
+        reason: input.reason,
+        snapshot: json({
+          action: "FAILED_REPORT_REOPENED",
+          submissionId,
+          revisionDueAt: due,
+        }),
+      });
+      await s.guidanceAudit(
+        userId,
+        a.t.id,
+        "FAILED_REPORT_REOPENED",
+        json({ submissionId, reason: input.reason, revisionDueAt: due }),
+      );
+      await s.queueNote({
+        userId: a.p.student.userId,
+        termId: a.p.topic.termId,
+        title: "Báo cáo được mở lại",
+        body: "GVHD đã mở lại báo cáo Không đạt. Xem thời hạn và nộp phiên bản mới.",
+        link: `/guidance/tasks/${a.t.id}/submissions`,
+      });
+      await s.guidanceRemember(userId, "POST", route, key, hash, json(result));
+      return json(result);
     }, true);
   }
   async amend(

@@ -37,12 +37,19 @@ export class AuthController {
     return ApiResponse.ok(await this.auth.login(body.username, body.password));
   }
   @AllowPasswordChange() @ApiBearerAuth() @Get("me") async me(
-    @CurrentUser() user: ReturnType<typeof accountDto> & {
-      sub: string; userId: string; sid: string;
+    @CurrentUser()
+    user: ReturnType<typeof accountDto> & {
+      sub: string;
+      userId: string;
+      sid: string;
     },
   ) {
     // JwtAuthGuard has already loaded and validated this identity for this request.
-    const { sub: _sub, userId: _userId, sid: _sid, ...account } = user;
+    const account = Object.fromEntries(
+      Object.entries(user).filter(
+        ([key]) => !["sub", "userId", "sid"].includes(key),
+      ),
+    );
     return ApiResponse.ok(account);
   }
   @AllowPasswordChange()

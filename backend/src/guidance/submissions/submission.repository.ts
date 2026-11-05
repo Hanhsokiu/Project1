@@ -11,6 +11,26 @@ export type SubmissionRecord = Prisma.TaskSubmissionGetPayload<{
   include: typeof include;
 }>;
 export class SubmissionSession extends GuidanceSession {
+  draft(taskId: string, report: Prisma.InputJsonValue, revision: number) {
+    return this.submissionDb.taskWorkflow.updateMany({
+      where: { taskId, draftRevision: revision },
+      data: { draftReport: report, draftRevision: { increment: 1 } },
+    });
+  }
+  clearDraft(taskId: string) {
+    return this.submissionDb.taskWorkflow.update({
+      where: { taskId },
+      data: { draftReport: Prisma.DbNull, draftRevision: { increment: 1 } },
+    });
+  }
+  effectiveReview(id: string) {
+    return this.submissionDb.progressReview.findUnique({ where: { id } });
+  }
+  reopenDecision(submissionId: string) {
+    return this.submissionDb.guidanceReopen.findUnique({
+      where: { submissionId },
+    });
+  }
   constructor(private readonly submissionDb: Prisma.TransactionClient) {
     super(submissionDb);
   }

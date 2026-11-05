@@ -1,0 +1,84 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "checks": [
+    {
+      "name": "active migration chain and all Step 7/Step 5 API checks supply a real finalized dossier",
+      "result": "PASS"
+    },
+    {
+      "name": "no implicit ADMIN/reviewer/cross-term/department access; missing GUIDANCE phase blocks plan creation",
+      "result": "PASS"
+    },
+    {
+      "name": "weekly coverage detects overdue/missing obligations without plan or task; GET never creates data or false completion",
+      "result": "PASS"
+    },
+    {
+      "name": "only current official advisor creates a plan for the current finalized dossier, exact revision and finalization ID",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent/idempotent plan creation commits one ACTIVE plan with finalization/assignment revision and audit",
+      "result": "PASS"
+    },
+    {
+      "name": "task DTO rejects timezone-less input/forged status; foreign period and exclusive phase deadline are blocked",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent task creation uses plan CAS; DB scope/date constraints reject cross-term and inverted ranges",
+      "result": "PASS"
+    },
+    {
+      "name": "owner student starts/appends progress with idempotency; no self-completion or advisor impersonation",
+      "result": "PASS"
+    },
+    {
+      "name": "canonical and legacy task read routes both enforce owner/advisor/faculty scope; legacy array envelope remains compatible",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent task amendments preserve history; overdue derives from deadline without replacing workflow; scoped filters work",
+      "result": "PASS"
+    },
+    {
+      "name": "overdue alone never blocks progress while GUIDANCE remains open",
+      "result": "PASS"
+    },
+    {
+      "name": "editing a task with existing evidence requires explicit acknowledgement and never changes the old submission",
+      "result": "PASS"
+    },
+    {
+      "name": "explicit weekly materialization is unique/idempotent, uses configured dates/deliverables and never counts as a report",
+      "result": "PASS"
+    },
+    {
+      "name": "cancelling weekly work preserves obligation/history and allows one replacement, without exempting missing report",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent phase lock serializes with progress commit and leaves no late audit/progress write",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid/reopened dossier blocks new task mutation even when plan metadata still claims ACTIVE",
+      "result": "PASS"
+    },
+    {
+      "name": "handover revokes old advisor, pauses writes and requires new advisor agreement/acknowledgement without losing tasks",
+      "result": "PASS"
+    },
+    {
+      "name": "audit failure rolls back task metadata, history and plan revision in the same transaction",
+      "result": "PASS"
+    },
+    {
+      "name": "cancel guards preserve historical submissions; task/plan history is append-only and technical audit avoids academic text",
+      "result": "PASS"
+    }
+  ],
+  "sharedDatabaseDDL": false,
+  "step7Prelude": true
+}

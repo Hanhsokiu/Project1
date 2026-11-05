@@ -1,4 +1,5 @@
 import { TaskSubmissionsPage } from "../../features/task-submissions/pages";
+import { WeeklyPlansPage } from "../../features/weekly-plans/pages";
 import {
   DossierListPage,
   DossierDetailPage,
@@ -247,6 +248,15 @@ const wrap = (el: React.ReactNode) => (
 );
 
 export const router = createBrowserRouter([
+  {
+    path: "/guidance/weeks",
+    element: (
+      <WorkflowAccess>
+        <ReviewGroupLayout guidanceMode />
+      </WorkflowAccess>
+    ),
+    children: [{ index: true, element: <WeeklyPlansPage /> }],
+  },
   {
     path: "/guidance/review",
     element: (

@@ -109,6 +109,8 @@ export function GuidanceTaskForm({
   const [title, setTitle] = useState(task?.title ?? ""),
     [description, setDescription] = useState(task?.description ?? ""),
     [expected, setExpected] = useState(task?.expectedDeliverables ?? ""),
+    [criteria, setCriteria] = useState(task?.completionCriteria ?? ""),
+    [priority, setPriority] = useState(task?.priority ?? 2),
     [periodId, setPeriod] = useState(task?.periodId ?? ""),
     [start, setStart] = useState(
       task?.startDate ? toVietnamInput(task.startDate) : "",
@@ -126,6 +128,8 @@ export function GuidanceTaskForm({
         const values = initial.task
           ? {
               expectedRevision: initial.task.revision,
+              completionCriteria: criteria,
+              priority,
               title,
               description,
               ...(!weekly
@@ -140,6 +144,8 @@ export function GuidanceTaskForm({
             }
           : {
               expectedPlanRevision: initial.planRevision,
+              completionCriteria: criteria,
+              priority,
               title,
               description,
               expectedDeliverables: expected,
@@ -170,6 +176,29 @@ export function GuidanceTaskForm({
         yêu cầu; màn hình này chưa nhận upload hoặc chấm kết quả.
       </p>
       <fieldset disabled={busy} className="space-y-4">
+        <label className="block">
+          Tiêu chí hoàn thành
+          <textarea
+            aria-label="Tiêu chí hoàn thành"
+            className="w-full rounded border p-2"
+            maxLength={5000}
+            value={criteria}
+            onChange={(e) => setCriteria(e.target.value)}
+          />
+        </label>
+        <label className="block">
+          Ưu tiên
+          <select
+            aria-label="Ưu tiên"
+            className="rounded border p-2"
+            value={priority}
+            onChange={(e) => setPriority(Number(e.target.value))}
+          >
+            <option value={1}>Cao</option>
+            <option value={2}>Bình thường</option>
+            <option value={3}>Thấp</option>
+          </select>
+        </label>
         <label className="block">
           Tên nhiệm vụ
           <input

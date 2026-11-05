@@ -241,6 +241,11 @@ export const routeManifest: RouteInfo[] = [
       "Nộp báo cáo",
       ["FACULTY", "LECTURER", "STUDENT"],
     ],
+    [
+      "/guidance/weeks",
+      "Kế hoạch và báo cáo tuần",
+      ["FACULTY", "LECTURER", "STUDENT"],
+    ],
     ["/guidance/review", "Nhận xét báo cáo", ["LECTURER"]],
     [
       "/guidance/review/:submissionId",

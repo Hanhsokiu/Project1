@@ -31,6 +31,8 @@ export const GuidanceTaskCreateSchema = z
     title: z.string().trim().min(1).max(255),
     description: z.string().trim().max(20000).optional(),
     expectedDeliverables: z.string().trim().min(1).max(20000),
+    completionCriteria: z.string().trim().max(5000).optional(),
+    priority: z.number().int().min(1).max(3).optional(),
     periodId: id,
     startDate: date,
     dueDate: date,
@@ -46,6 +48,8 @@ export const GuidanceTaskUpdateSchema = z
     title: z.string().trim().min(1).max(255).optional(),
     description: z.string().trim().max(20000).optional(),
     expectedDeliverables: z.string().trim().min(1).max(20000).optional(),
+    completionCriteria: z.string().trim().max(5000).optional(),
+    priority: z.number().int().min(1).max(3).optional(),
     startDate: date.optional(),
     dueDate: date.optional(),
     reason: z.string().trim().min(1).max(2000),
@@ -56,6 +60,8 @@ export const GuidanceTaskUpdateSchema = z
     (v) =>
       [
         "title",
+        "completionCriteria",
+        "priority",
         "description",
         "expectedDeliverables",
         "startDate",
@@ -168,6 +174,10 @@ export type GuidanceContext = {
   readiness: string[];
 };
 export type GuidanceTaskView = {
+  termName?: string;
+  advisorName?: string | null;
+  completionCriteria?: string;
+  priority?: number;
   id: string;
   planId: string;
   proposalId: string;

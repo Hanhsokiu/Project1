@@ -1,5 +1,5 @@
 "use strict";
-const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
+const { prepareFixtureSessions } = require("./integration/auth-fixture.cjs");
 const fs = require("node:fs"),
   path = require("node:path"),
   os = require("node:os"),
@@ -48,10 +48,20 @@ async function main() {
       0,
       "8B producer prelude: " + prelude.stdout + " " + prelude.stderr,
     );
-    const applied = await db.$queryRaw`SELECT migration_name FROM public."_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name`;
-    const expected = fs.readdirSync(path.join(backend, 'prisma/migrations'))
-      .filter(name => fs.existsSync(path.join(backend, 'prisma/migrations', name, 'migration.sql'))).sort();
-    assert.deepEqual(applied.map(row => row.migration_name), expected);
+    const applied =
+      await db.$queryRaw`SELECT migration_name FROM public."_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name`;
+    const expected = fs
+      .readdirSync(path.join(backend, "prisma/migrations"))
+      .filter((name) =>
+        fs.existsSync(
+          path.join(backend, "prisma/migrations", name, "migration.sql"),
+        ),
+      )
+      .sort();
+    assert.deepEqual(
+      applied.map((row) => row.migration_name),
+      expected,
+    );
     pass(
       "complete active migration replay and all 8A→8B producer checks with real HTTP/private files; no shared database",
     );
@@ -92,7 +102,9 @@ async function main() {
           ? {
               Authorization:
                 "Bearer " +
-                jwt.sign({ sub: actor, sid: actor,
+                jwt.sign({
+                  sub: actor,
+                  sid: actor,
                   roles: ["ADMIN", "FACULTY", "LECTURER"],
                 }),
             }
@@ -216,6 +228,7 @@ async function main() {
             expectedTaskRevision: c.taskRevision,
             uploadIds: await files(t.id),
             content,
+            changeExplanation: "Updated report following review",
           },
           201,
         )
@@ -230,6 +243,9 @@ async function main() {
       expectedSubmissionRevision: c.submission.revision,
       decision,
       comment,
+      ...(decision === "REVISION_REQUIRED"
+        ? { revisionDueAt: new Date(Date.now() + 3600000).toISOString() }
+        : {}),
     });
     const amendInput = (
       c,
@@ -261,8 +277,8 @@ async function main() {
     pass(
       "inbox/options use current advisor roster and term scope; JWT role claims/ADMIN cannot bypass",
     );
-    const t = await task(),
-      sub1 = await submit(t),
+    let t = await task();
+    const sub1 = await submit(t),
       beforeSub = await db.taskSubmission.findUnique({
         where: { id: sub1.id },
       });
@@ -338,6 +354,11 @@ async function main() {
     pass(
       "strict three-way DTO, required failure/revision comment and CAS reject invalid or stale writes",
     );
+    const notificationWorker = app.get(
+      require("../dist/guidance/weekly/weekly-notification.worker")
+        .WeeklyNotificationWorker,
+    );
+    await notificationWorker.deliver();
     const key = crypto.randomUUID(),
       input = reviewInput(c),
       notifsBefore = await db.notification.count({ where: { userId: "s2" } }),
@@ -379,6 +400,7 @@ async function main() {
       key,
     );
     await req("b", "POST", `/task-submissions/${sub1.id}/reviews`, input, 409);
+    await notificationWorker.deliver();
     assert.equal(
       await db.notification.count({ where: { userId: "s2" } }),
       notifsBefore + 1,
@@ -412,7 +434,7 @@ async function main() {
     pass(
       "revision result stores immutable reviewer/version/time/comment; one notification/outbox/audit and idempotent effective decision",
     );
-    const sub2 = await submit(t, "Bản v2 phản hồi yêu cầu sửa");
+    let sub2 = await submit(t, "Bản v2 phản hồi yêu cầu sửa");
     assert.equal(sub2.versionNumber, 2);
     assert.deepEqual(
       await db.taskSubmission.findUnique({ where: { id: sub1.id } }),
@@ -458,31 +480,31 @@ async function main() {
     const passRecord = await db.progressReview.findUnique({
       where: { id: recorded.id },
     });
+    await req(
+      "b",
+      "POST",
+      `/task-reviews/${recorded.id}/amendments`,
+      amendInput(c, "FAIL"),
+      409,
+    );
+    assert.deepEqual(
+      await db.progressReview.findUnique({ where: { id: passRecord.id } }),
+      passRecord,
+    );
+    pass("final PASS rejects ordinary amendment and retains original result");
+    // A separate nonfinal report exercises correction and submission races.
+    t = await task();
+    sub2 = await submit(t);
+    c = await ctx(sub2.id);
     recorded = (
       await req(
         "b",
         "POST",
-        `/task-reviews/${recorded.id}/amendments`,
-        amendInput(c, "FAIL"),
+        `/task-submissions/${sub2.id}/reviews`,
+        reviewInput(c),
         201,
       )
     ).data;
-    assert.equal(recorded.decision, "FAIL");
-    assert.equal(recorded.supersedesReviewId, passRecord.id);
-    assert.equal(
-      (await db.progressReview.findUnique({ where: { id: passRecord.id } }))
-        .state,
-      "SUPERSEDED",
-    );
-    assert.equal(
-      (await db.progressReview.findUnique({ where: { id: passRecord.id } }))
-        .comment,
-      passRecord.comment,
-    );
-    assert.equal(
-      (await db.taskWorkflow.findUnique({ where: { taskId: t.id } })).state,
-      "REVISION_REQUESTED",
-    );
     c = await ctx(sub2.id);
     recorded = (
       await req(
@@ -494,9 +516,8 @@ async function main() {
       )
     ).data;
     c = await ctx(sub2.id);
-    assert(c.history.some((r) => r.decision === "FAIL"));
     assert(c.history.some((r) => r.decision === "REVISION_REQUIRED"));
-    assert(c.history.some((r) => r.decision === "PASS"));
+    assert.equal(c.history.length, 2);
     await assert.rejects(
       db.progressReview.update({
         where: { id: recorded.id },
@@ -507,11 +528,11 @@ async function main() {
       db.progressReview.delete({ where: { id: recorded.id } }),
     );
     pass(
-      "amend PASS→FAIL→REVISION_REQUIRED appends distinct decisions/reasons and recalculates task without overwriting history",
+      "nonfinal revision corrections append distinct decisions/reasons without overwriting history",
     );
     c = await ctx(sub2.id);
     const raceInputs = [
-        amendInput(c, "FAIL", "Race A"),
+        amendInput(c, "REVISION_REQUIRED", "Race A"),
         amendInput(c, "REVISION_REQUIRED", "Race B"),
       ],
       raceKeys = [crypto.randomUUID(), crypto.randomUUID()],
@@ -557,6 +578,7 @@ async function main() {
         expectedTaskRevision: c.taskRevision,
         uploadIds: staged,
         content: "v3 concurrent",
+        changeExplanation: "Concurrent revised content",
       },
       amend = amendInput(c, "PASS", "Đối soát đồng thời"),
       dual = await Promise.all([
@@ -631,6 +653,7 @@ async function main() {
     pass(
       "audit failure rolls back review, completion, pointers, history, notifications and outbox together",
     );
+    await notificationWorker.deliver();
     const notif = (await req("s2", "GET", "/me/notifications")).data.data[0];
     assert(notif);
     assert(!notif.body.includes(input.comment));

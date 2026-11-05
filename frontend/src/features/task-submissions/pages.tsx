@@ -7,11 +7,15 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { isAxiosError } from "axios";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useBlocker } from "react-router-dom";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { TaskSubmissionCreateSchema } from "@doan/shared";
+import {
+  TaskSubmissionCreateSchema,
+  WeeklyReportSubmitSchema,
+} from "@doan/shared";
+import { emptyReport, reportLabels, ReportContent } from "./report-fields";
 import type {
   SubmissionFileKind,
   SubmissionUploadPolicy,
@@ -41,6 +45,15 @@ const readinessLabel: Record<string, string> = {
   TOPIC_NOT_AGREED: "GVHD hiện hành cần xác nhận lại đề tài.",
   STATE_TRANSITION_INVALID: "Trạng thái hồ sơ/nhiệm vụ không cho phép nộp.",
   REPORTING_SCOPE_NOT_CONFIGURED: "Chưa cấu hình đầy đủ nghĩa vụ báo cáo tuần.",
+  WEEK_CLOSED: "Tuần chưa công bố hoặc đã khóa.",
+  WEEK_NOT_STARTED: "Chưa đến ngày bắt đầu tuần.",
+  REVIEW_PENDING: "Bản hiện tại đang chờ GVHD đánh giá.",
+  REPORT_FAILED:
+    "Không đạt: GVHD cần mở lại báo cáo trước khi bạn nộp phiên bản mới.",
+  REPORT_PASSED: "Báo cáo đã đạt và được chốt.",
+  DEADLINE_PASSED: "Đã hết hạn nộp hoặc hạn sửa báo cáo.",
+  REVISION_DEADLINE_REQUIRED:
+    "GVHD cần xác định hạn sửa trước khi bạn nộp lại.",
 };
 export function validateSubmissionSelection(
   files: Array<{
@@ -60,7 +73,11 @@ export function validateSubmissionSelection(
       const ext = file.name.split(".").pop()?.toLowerCase() ?? "";
       if (!(p.roles[kind].extensions as string[]).includes(ext))
         return `Định dạng ${labels[kind]} không hợp lệ.`;
-      if (!file.size || file.size > p.maxFileBytes)
+      if (
+        !file.size ||
+        file.size >
+          Math.min(p.maxFileBytes, p.roles[kind].maxBytes ?? p.maxFileBytes)
+      )
         return "File rỗng hoặc vượt dung lượng cấu hình.";
       if (
         Array.from(file.name).some((c) => c.charCodeAt(0) < 32) ||
@@ -93,7 +110,7 @@ function SubmissionForm({
   onReload: () => Promise<TaskSubmissionContext>;
 }) {
   const [files, setFiles] = useState<Selected[]>([]),
-    [content, setContent] = useState(""),
+    [content, setContent] = useState(context.draft?.content ?? ""),
     [busy, setBusy] = useState(false),
     [error, setError] = useState(""),
     [success, setSuccess] = useState(""),
@@ -101,6 +118,75 @@ function SubmissionForm({
     [selectionEpoch, setSelectionEpoch] = useState(0),
     keys = useRef(new Map<string, string>()),
     p = context.policy!;
+  const [report, setReport] = useState({
+    ...emptyReport,
+    ...context.draft?.report,
+  });
+  const [changeExplanation, setExplanation] = useState(
+    context.draft?.changeExplanation ?? "",
+  );
+  const [draftRevision, setDraftRevision] = useState(
+    context.draftRevision ?? 0,
+  );
+  const [dirty, setDirty] = useState(false);
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+  const reportValidation = WeeklyReportSubmitSchema.safeParse(report);
+  const fieldErrors = reportValidation.success
+    ? {}
+    : Object.fromEntries(
+        reportValidation.error.issues.map((i) => [
+          String(i.path[0]),
+          i.message,
+        ]),
+      );
+  const blocker = useBlocker(
+    ({ currentLocation, nextLocation }) =>
+      dirty && currentLocation.pathname !== nextLocation.pathname,
+  );
+  useEffect(() => {
+    if (blocker.state === "blocked") {
+      if (window.confirm("Nội dung chưa lưu. Bạn muốn rời trang?"))
+        blocker.proceed();
+      else blocker.reset();
+    }
+  }, [blocker]);
+  useEffect(() => {
+    const warn = (e: BeforeUnloadEvent) => {
+      if (dirty) {
+        e.preventDefault();
+        e.returnValue = "";
+      }
+    };
+    window.addEventListener("beforeunload", warn);
+    return () => window.removeEventListener("beforeunload", warn);
+  }, [dirty]);
+  async function saveDraft() {
+    setBusy(true);
+    setError("");
+    setSuccess("");
+    try {
+      const body = {
+          expectedDraftRevision: draftRevision,
+          report,
+          changeExplanation,
+          content,
+        },
+        hash = JSON.stringify(body);
+      if (!keys.current.has(hash)) keys.current.set(hash, crypto.randomUUID());
+      const result = await api.draft(
+        context.taskId,
+        body,
+        keys.current.get(hash)!,
+      );
+      setDraftRevision(result.draftRevision);
+      setDirty(false);
+      setSuccess("Đã lưu bản nháp. Bản nháp chưa được tính là đã nộp.");
+    } catch (e) {
+      setError(issue(e));
+    } finally {
+      setBusy(false);
+    }
+  }
   const update = (key: string, changes: Partial<Selected>) =>
     setFiles((items) =>
       items.map((f) => (f.key === key ? { ...f, ...changes } : f)),
@@ -166,6 +252,12 @@ function SubmissionForm({
     }
   }
   async function submit() {
+    if (
+      !window.confirm(
+        "Xác nhận nộp chính thức? Nội dung và hai file sẽ được lưu thành phiên bản không thể chỉnh sửa.",
+      )
+    )
+      return;
     setBusy(true);
     setError("");
     setSuccess("");
@@ -174,12 +266,15 @@ function SubmissionForm({
         expectedTaskRevision: revision,
         uploadIds: files.map((f) => f.uploadId),
         content,
+        report,
+        changeExplanation,
       });
       if (files.some((f) => Date.parse(f.expiresAt!) <= Date.now()))
         throw Error("File staging đã hết hạn; chọn và tải lại file.");
       const hash = JSON.stringify(input);
       if (!keys.current.has(hash)) keys.current.set(hash, crypto.randomUUID());
       await api.submit(context.taskId, input, keys.current.get(hash)!);
+      setDirty(false);
       setFiles([]);
       setSelectionEpoch((v) => v + 1);
       setContent("");
@@ -206,9 +301,67 @@ function SubmissionForm({
         {p.stagingTtlHours} giờ. File đã nộp được giữ lịch sử.
       </p>
       <p className="text-sm">
-        Hạn: {vietnamDate(context.dueDate)} (UTC+7). Nộp muộn vẫn được nhận khi
-        phase hướng dẫn còn mở và được ghi nhận là trễ.
+        Hạn: {vietnamDate(context.effectiveDeadline ?? context.dueDate)}{" "}
+        (Asia/Ho_Chi_Minh, UTC+7).{" "}
+        {context.allowLate === false
+          ? "Không nhận bài sau hạn này."
+          : "Nộp muộn được ghi nhận khi giai đoạn hướng dẫn còn mở."}
       </p>
+      <p className="text-amber-800 text-sm">
+        Không đưa mật khẩu, API key, file .env chứa bí mật hoặc dữ liệu cá nhân
+        không cần thiết vào ZIP. Hệ thống không thực thi mã nguồn.
+      </p>
+      <div className="grid gap-3 md:grid-cols-2">
+        {Object.entries(reportLabels).map(([key, label]) => (
+          <label key={key} className="block">
+            {label}
+            {["assignedWork", "completedWork", "results", "nextWork"].includes(
+              key,
+            )
+              ? " *"
+              : ""}
+            <textarea
+              aria-label={label}
+              className="mt-1 w-full rounded border p-2"
+              maxLength={5000}
+              disabled={busy}
+              aria-invalid={touched[key] && !!fieldErrors[key]}
+              aria-describedby={
+                touched[key] && fieldErrors[key]
+                  ? `report-error-${key}`
+                  : undefined
+              }
+              onBlur={() => setTouched((v) => ({ ...v, [key]: true }))}
+              value={report[key as keyof typeof report]}
+              onChange={(e) => {
+                setReport((v) => ({ ...v, [key]: e.target.value }));
+                setDirty(true);
+              }}
+            />
+            {touched[key] && fieldErrors[key] && (
+              <span id={`report-error-${key}`} className="text-sm text-red-700">
+                {fieldErrors[key]}
+              </span>
+            )}
+          </label>
+        ))}
+      </div>
+      {context.requiresChangeExplanation && (
+        <label className="block">
+          Giải trình thay đổi *
+          <textarea
+            aria-label="Giải trình thay đổi"
+            className="w-full rounded border p-2"
+            disabled={busy}
+            maxLength={5000}
+            value={changeExplanation}
+            onChange={(e) => {
+              setExplanation(e.target.value);
+              setDirty(true);
+            }}
+          />
+        </label>
+      )}
       {kinds.map((kind) => (
         <label key={kind} className="block rounded border border-dashed p-4">
           {labels[kind]}
@@ -266,10 +419,20 @@ function SubmissionForm({
           value={content}
           maxLength={20000}
           disabled={busy}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={(e) => {
+            setContent(e.target.value);
+            setDirty(true);
+          }}
         />
       </label>
       <div className="flex flex-wrap gap-3">
+        <button
+          disabled={busy}
+          onClick={() => void saveDraft()}
+          className="btn btn-secondary"
+        >
+          Lưu nháp
+        </button>
         <button
           disabled={busy || !files.length}
           onClick={() => void upload()}
@@ -281,6 +444,9 @@ function SubmissionForm({
         <button
           disabled={
             busy ||
+            (context.isWeekly &&
+              !WeeklyReportSubmitSchema.safeParse(report).success) ||
+            (context.requiresChangeExplanation && !changeExplanation.trim()) ||
             !!validateSubmissionSelection(files, p) ||
             files.some((f) => !f.uploadId)
           }
@@ -370,6 +536,12 @@ export function SubmissionHistoryItem({
       {s.content && (
         <p className="whitespace-pre-wrap break-words">{s.content}</p>
       )}
+      <ReportContent value={s.report} />
+      {s.changeExplanation && (
+        <p className="whitespace-pre-wrap">
+          Giải trình thay đổi: {s.changeExplanation}
+        </p>
+      )}
       {s.files.map((f) => (
         <button
           key={f.id}
@@ -423,6 +595,7 @@ export function TaskSubmissionsPage() {
         "guidance-tasks",
         "guidance-plan-tasks",
         "weekly-coverage",
+        "weekly-summary",
       ].map((k) => client.invalidateQueries({ queryKey: [k] })),
     );
   }
@@ -444,6 +617,13 @@ export function TaskSubmissionsPage() {
             {task.data.studentName} · {task.data.studentCode}
           </p>
           <p className="break-words">{task.data.topicTitle}</p>
+          <p>
+            GVHD: {task.data.advisorName ?? "Chưa xác định"} · Đợt:{" "}
+            {task.data.termName}
+          </p>
+          {task.data.startDate && (
+            <p>Bắt đầu: {vietnamDate(task.data.startDate)} (UTC+7)</p>
+          )}
           <p>
             Mốc: {task.data.periodLabel ?? "Chưa cấu hình"} · Hạn hiện tại:{" "}
             {vietnamDate(task.data.dueDate)} (UTC+7)

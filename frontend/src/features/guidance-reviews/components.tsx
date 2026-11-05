@@ -86,6 +86,11 @@ export function ProgressReviewForm({
     ),
     [comment, setComment] = useState(context.effectiveReview?.comment ?? ""),
     [reason, setReason] = useState(""),
+    [revisionDueAt, setRevisionDueAt] = useState(
+      context.effectiveReview?.revisionDueAt
+        ? toVietnamInput(context.effectiveReview.revisionDueAt)
+        : "",
+    ),
     [error, setError] = useState("");
   return (
     <form
@@ -99,7 +104,17 @@ export function ProgressReviewForm({
             expectedSubmissionRevision: submissionRevision,
             decision,
             comment,
+            revisionDueAt:
+              decision === "REVISION_REQUIRED" && revisionDueAt
+                ? fromVietnamInput(revisionDueAt)
+                : undefined,
           };
+          if (decision === "REVISION_REQUIRED" && !revisionDueAt)
+            throw Error("Thiếu hạn sửa");
+          if (
+            !window.confirm("Xác nhận kết quả đánh giá cho đúng phiên bản này?")
+          )
+            return;
           onSave(
             amending
               ? ProgressReviewAmendSchema.parse({
@@ -159,13 +174,33 @@ export function ProgressReviewForm({
           />
         </label>
       )}
+      {decision === "REVISION_REQUIRED" && (
+        <label className="block">
+          Hạn sửa (Asia/Ho_Chi_Minh)
+          <input
+            aria-label="Hạn sửa"
+            type="datetime-local"
+            required
+            value={revisionDueAt}
+            disabled={busy}
+            className="block mt-2 rounded border p-2"
+            onChange={(e) => setRevisionDueAt(e.target.value)}
+          />
+        </label>
+      )}
       <p className="text-sm text-slate-500">
         Đang xét đúng lần nộp {context.submission.versionNumber}. Đạt hoàn thành
-        nhiệm vụ; Không đạt/Cần sửa yêu cầu SV nộp lại. Kết quả này không tính
-        điểm tốt nghiệp hoặc điều kiện bảo vệ.
+        nhiệm vụ; Cần sửa cho phép nộp lại trước hạn sửa. Không đạt phải được mở
+        lại bằng thao tác riêng. Kết quả này không tính điểm tốt nghiệp hoặc
+        điều kiện bảo vệ.
       </p>
       <button
-        disabled={busy}
+        disabled={
+          busy ||
+          (decision !== "PASS" && !comment.trim()) ||
+          (decision === "REVISION_REQUIRED" && !revisionDueAt) ||
+          (amending && !reason.trim())
+        }
         className="btn btn-primary rounded bg-blue-700 px-4 py-2 text-white action-with-icon"
       >
         <Save size={16} aria-hidden="true" />
@@ -210,6 +245,9 @@ export function ProgressReviewHistory({
             <p className="whitespace-pre-wrap break-words">
               Lý do sửa: {r.amendmentReason}
             </p>
+          )}
+          {r.revisionDueAt && (
+            <p>Hạn sửa: {vietnamDate(r.revisionDueAt)} (UTC+7)</p>
           )}
         </article>
       ))}

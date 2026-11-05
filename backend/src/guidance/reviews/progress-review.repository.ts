@@ -21,6 +21,9 @@ export type MeetingRecord = Prisma.GuidanceMeetingGetPayload<{
   include: typeof meetingInclude;
 }>;
 export class ProgressSession extends SubmissionSession {
+  addReopen(data: Prisma.GuidanceReopenUncheckedCreateInput) {
+    return this.progressDb.guidanceReopen.create({ data });
+  }
   constructor(private readonly progressDb: Prisma.TransactionClient) {
     super(progressDb);
   }

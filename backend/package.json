@@ -43,6 +43,7 @@
     "test:proposal-dossiers:api": "node scripts/test-proposal-dossiers.cjs",
     "test:proposal-dossiers:upgrade": "node scripts/test-proposal-dossier-upgrade.cjs",
     "test:guidance-tasks:api": "node scripts/test-guidance-tasks.cjs",
+    "test:weekly:api": "node scripts/test-weekly-progress.cjs",
     "test:guidance-tasks:upgrade": "node scripts/test-guidance-task-upgrade.cjs",
     "test:guidance-submissions:api": "node scripts/test-guidance-submissions.cjs",
     "test:guidance-submissions:upgrade": "node scripts/test-guidance-submission-upgrade.cjs",

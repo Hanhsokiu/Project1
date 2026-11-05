@@ -14,6 +14,7 @@ const reviewFields = {
   expectedSubmissionRevision: revision,
   decision: ProgressDecisionSchema,
   comment: z.string().trim().max(20000).optional(),
+  revisionDueAt: z.string().datetime({ offset: true }).optional(),
 };
 const comment = (v: { decision: string; comment?: string }) =>
   v.decision === "PASS" || !!v.comment?.trim();
@@ -88,6 +89,7 @@ export type GuidanceMonitorQuery = z.infer<typeof GuidanceMonitorQuerySchema>;
 export type GuidanceMeetingCreate = z.infer<typeof GuidanceMeetingCreateSchema>;
 export type GuidanceMeetingAmend = z.infer<typeof GuidanceMeetingAmendSchema>;
 export type ProgressReviewView = {
+  revisionDueAt?: string | null;
   id: string;
   submissionId: string;
   decision: z.infer<typeof ProgressDecisionSchema>;
@@ -102,6 +104,8 @@ export type ProgressReviewView = {
   amendmentReason: string | null;
 };
 export type ProgressReviewContext = {
+  topicTitle?: string;
+  canReopen?: boolean;
   submission: TaskSubmissionView;
   taskId: string;
   taskTitle: string;

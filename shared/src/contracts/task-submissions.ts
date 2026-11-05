@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { WeeklyReportContentSchema } from "./weekly-progress";
+import type { WeeklyReportContent } from "./weekly-progress";
 import type { GroupPage } from "./review-groups";
 export const SubmissionFileKindSchema = z.enum([
   "REPORT",
@@ -32,18 +34,36 @@ export const SubmissionUploadPolicySchema = z
           .object({
             extensions: z.array(z.literal("pdf")).min(1),
             maxFiles: z.literal(1),
+            maxBytes: z
+              .number()
+              .int()
+              .positive()
+              .max(100 * 1024 * 1024)
+              .optional(),
           })
           .strict(),
         SOURCE: z
           .object({
             extensions: z.array(z.literal("zip")).min(1),
             maxFiles: z.literal(1),
+            maxBytes: z
+              .number()
+              .int()
+              .positive()
+              .max(100 * 1024 * 1024)
+              .optional(),
           })
           .strict(),
         EVIDENCE: z
           .object({
             extensions: z.array(z.enum(["pdf", "png", "jpg", "jpeg"])),
             maxFiles: z.number().int().min(0).max(10),
+            maxBytes: z
+              .number()
+              .int()
+              .positive()
+              .max(100 * 1024 * 1024)
+              .optional(),
           })
           .strict(),
       })
@@ -63,6 +83,8 @@ export const TaskSubmissionCreateSchema = z
       .max(12)
       .refine((v) => new Set(v).size === v.length, "Duplicate upload"),
     content: z.string().trim().max(20000).optional(),
+    report: WeeklyReportContentSchema.optional(),
+    changeExplanation: z.string().trim().max(5000).optional(),
   })
   .strict();
 export const TaskSubmissionQuerySchema = z
@@ -102,11 +124,23 @@ export type TaskSubmissionView = {
   content: string | null;
   files: SubmissionFileView[];
   contextSnapshot: unknown;
+  report?: WeeklyReportContent | null;
+  changeExplanation?: string | null;
 };
 export type TaskSubmissionPage = GroupPage<TaskSubmissionView> & {
   currentSubmissionId: string | null;
 };
 export type TaskSubmissionContext = {
+  isWeekly?: boolean;
+  draft?: {
+    report: Partial<WeeklyReportContent>;
+    changeExplanation?: string;
+    content?: string;
+  } | null;
+  draftRevision?: number;
+  requiresChangeExplanation?: boolean;
+  effectiveDeadline?: string;
+  allowLate?: boolean;
   taskId: string;
   taskRevision: number;
   canSubmit: boolean;

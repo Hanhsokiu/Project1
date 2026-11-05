@@ -1,4 +1,8 @@
 import { Module } from "@nestjs/common";
+import { WeeklyController } from "./weekly/weekly.controller";
+import { WeeklyService } from "./weekly/weekly.service";
+import { WeeklyRepository } from "./weekly/weekly.repository";
+import { WeeklyNotificationWorker } from "./weekly/weekly-notification.worker";
 import { ProgressReviewController } from "./reviews/progress-review.controller";
 import { ProgressReviewService } from "./reviews/progress-review.service";
 import { ProgressRepository } from "./reviews/progress-review.repository";
@@ -20,12 +24,16 @@ import { ProposalReviewValidator } from "../topic/proposal-reviews/proposal-revi
 
 @Module({
   controllers: [
+    WeeklyController,
     TaskController,
     GuidanceController,
     SubmissionController,
     ProgressReviewController,
   ],
   providers: [
+    WeeklyService,
+    WeeklyRepository,
+    WeeklyNotificationWorker,
     ProgressReviewService,
     ProgressRepository,
     ProgressReviewValidator,

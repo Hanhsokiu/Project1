@@ -9,6 +9,7 @@ import {
   NestInterceptor,
   Param,
   Post,
+  Put,
   Query,
   Req,
   Res,
@@ -32,8 +33,9 @@ import {
   SubmissionFileKindSchema,
   TaskSubmissionCreateSchema,
   TaskSubmissionQuerySchema,
+  WeeklyReportDraftSchema,
 } from "@doan/shared";
-import type { TaskSubmissionCreate } from "@doan/shared";
+import type { TaskSubmissionCreate, WeeklyReportDraft } from "@doan/shared";
 import { RequirePermission } from "../../common/security/require-permission.decorator";
 import { ReviewGroupPipe } from "../../topic/review-groups/review-group.dto";
 import {
@@ -70,7 +72,7 @@ export class SubmissionUploadInterceptor implements NestInterceptor {
         fileSize: p.maxFileBytes,
         files: 1,
         fields: 1,
-          parts: 3,
+        parts: 3,
         fieldSize: 100,
       },
     }))();
@@ -110,6 +112,16 @@ export class SubmissionUploadInterceptor implements NestInterceptor {
 @Controller()
 export class SubmissionController {
   constructor(private readonly service: SubmissionService) {}
+  @Put("tasks/:taskId/draft")
+  @RequirePermission("submission", "create")
+  draft(
+    @Req() r: Request,
+    @Param("taskId") id: string,
+    @Body(new ReviewGroupPipe(WeeklyReportDraftSchema)) body: WeeklyReportDraft,
+    @Headers("idempotency-key") key: string,
+  ) {
+    return this.service.saveDraft(identity(r), id, body, key).then(success);
+  }
   @Get("tasks/:taskId/submission-context")
   @RequirePermission("submission", "read")
   context(@Req() r: Request, @Param("taskId") id: string) {

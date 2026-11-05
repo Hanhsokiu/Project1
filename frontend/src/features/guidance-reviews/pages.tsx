@@ -19,6 +19,8 @@ import type {
 } from "@doan/shared";
 import { progressApi as api } from "./api";
 import { submissionApi } from "../task-submissions/api";
+import { ReportContent } from "../task-submissions/report-fields";
+import { ReopenReportForm } from "./reopen-form";
 import { GuidanceState, vietnamDate } from "../guidance-tasks/components";
 import { getErrorMessage } from "../../shared/api/error-message";
 import {
@@ -231,6 +233,7 @@ export function ProgressReviewDetailPage() {
           "task-submissions",
           "weekly-coverage",
           "guidance-notifications",
+          "weekly-summary",
         ].map((k) => client.invalidateQueries({ queryKey: [k] })),
       );
     },
@@ -262,6 +265,13 @@ export function ProgressReviewDetailPage() {
                 {c.studentName} · {c.studentCode} ·{" "}
                 {c.periodLabel ?? "Chưa cấu hình mốc"}
               </p>
+              <p>{c.topicTitle}</p>
+              <Link
+                className="text-blue-700 underline"
+                to={`/guidance/plan/${c.proposalId}`}
+              >
+                Kế hoạch / giao nhiệm vụ tiếp theo
+              </Link>
               <p>
                 Nộp lúc{" "}
                 {c.submission.submittedAt
@@ -277,6 +287,10 @@ export function ProgressReviewDetailPage() {
               <p className="whitespace-pre-wrap break-words">
                 {c.submission.content}
               </p>
+              <ReportContent value={c.submission.report} />
+              {c.submission.changeExplanation && (
+                <p>Giải trình thay đổi: {c.submission.changeExplanation}</p>
+              )}
               {c.currentSubmissionId !== c.submission.id && (
                 <p role="status" className="text-amber-800">
                   Đây là bản nộp cũ. Không thể đánh giá hoặc sửa đánh giá trên
@@ -320,6 +334,11 @@ export function ProgressReviewDetailPage() {
                 className="rounded border border-amber-200 bg-amber-50 p-4 whitespace-pre-wrap break-words"
               >
                 Yêu cầu chỉnh sửa: {c.effectiveReview.comment}
+                {c.effectiveReview.revisionDueAt && (
+                  <span className="block">
+                    Hạn sửa: {vietnamDate(c.effectiveReview.revisionDueAt)}
+                  </span>
+                )}
               </p>
             )}
             {c.effectiveReview?.decision === "FAIL" && (
@@ -327,9 +346,21 @@ export function ProgressReviewDetailPage() {
                 role="status"
                 className="rounded border border-red-200 bg-red-50 p-4 whitespace-pre-wrap break-words"
               >
-                Báo cáo không đạt; cần làm và nộp lại:{" "}
+                Báo cáo không đạt; chỉ được nộp lại sau khi GVHD mở lại:{" "}
                 {c.effectiveReview.comment}
               </p>
+            )}
+            {c.canReopen && (
+              <ReopenReportForm
+                submissionId={submissionId}
+                taskRevision={c.taskRevision}
+                onSaved={async () => {
+                  await query.refetch();
+                  await client.invalidateQueries({
+                    queryKey: ["task-submission-context"],
+                  });
+                }}
+              />
             )}
             {(c.allowedActions.includes("review") ||
               (amending && c.allowedActions.includes("amend"))) && (

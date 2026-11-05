@@ -26,6 +26,8 @@ import {
 } from "./submission.repository";
 import { SubmissionValidator, digest } from "./submission.validator";
 import { readSubmissionPolicy } from "./submission-policy";
+import { WeeklyReportSubmitSchema } from "@doan/shared";
+import type { WeeklyReportDraft } from "@doan/shared";
 const json = (v: unknown) =>
   JSON.parse(JSON.stringify(v)) as Prisma.InputJsonValue;
 type Access = Awaited<ReturnType<GuidanceService["submissionAccess"]>>;
@@ -77,7 +79,52 @@ export class SubmissionService {
         "INPUT_NOT_READY",
         "Bài nộp legacy cần đối soát trước khi mở chuỗi phiên bản mới.",
       );
-    this.gv.period(await s.period(w.periodId!), a.p.topic.termId);
+    const period = await s.period(w.periodId!);
+    this.gv.period(period, a.p.topic.termId);
+    const now = new Date();
+    if (now < w.startsAt!)
+      groupError(409, "WEEK_NOT_STARTED", "Chưa đến ngày bắt đầu.");
+    let deadline = a.t.deadline;
+    let allowLate = period?.allowLate ?? true;
+    if (w.currentSubmissionId) {
+      const previous = await s.submission(w.currentSubmissionId);
+      const rid =
+        previous?.pr2bSubmissionWorkflowSubmissionId?.effectiveReviewId;
+      const decision = rid ? await s.effectiveReview(rid) : null;
+      if (!decision || decision.state !== "RECORDED")
+        groupError(409, "REVIEW_PENDING", "Bản hiện tại đang chờ đánh giá.");
+      if (decision.decision === "PASS")
+        groupError(
+          409,
+          "REPORT_PASSED",
+          "Báo cáo đã đạt, không thể thay bản nộp.",
+        );
+      const reopened =
+        decision.decision === "FAIL"
+          ? await s.reopenDecision(w.currentSubmissionId)
+          : null;
+      if (decision.decision === "FAIL" && !reopened)
+        groupError(
+          409,
+          "REPORT_FAILED",
+          "Không đạt: cần GVHD mở lại với lý do và thời hạn.",
+        );
+      const due = reopened?.revisionDueAt ?? decision.revisionDueAt;
+      if (!due)
+        groupError(
+          409,
+          "REVISION_DEADLINE_REQUIRED",
+          "GVHD cần xác định hạn sửa trước khi nộp lại.",
+        );
+      deadline = due;
+      allowLate = false;
+    }
+    if (!allowLate && now > deadline)
+      groupError(
+        409,
+        "DEADLINE_PASSED",
+        "Đã hết hạn nộp báo cáo hoặc hạn sửa.",
+      );
     this.gv.dates(
       w.startsAt!,
       a.t.deadline,
@@ -97,7 +144,7 @@ export class SubmissionService {
         a.p.topic.termId,
       );
     }
-    return { active, w };
+    return { active, w, deadline, allowLate };
   }
   async preflight(userId: string, taskId: string) {
     return this.repo.transaction(async (s) => {
@@ -120,6 +167,7 @@ export class SubmissionService {
         readiness: string[] = [];
       let canSubmit = false,
         policy: ReturnType<typeof this.policy> | null = null;
+      let ready: Awaited<ReturnType<SubmissionService["ready"]>> | null = null;
       try {
         policy = this.policy();
       } catch (e) {
@@ -128,7 +176,7 @@ export class SubmissionService {
       }
       try {
         await this.guidance.submissionAccess(s, userId, taskId, "create");
-        await this.ready(s, a);
+        ready = await this.ready(s, a);
         canSubmit = !!policy;
       } catch (e) {
         if (!(e instanceof HttpException)) throw e;
@@ -138,6 +186,17 @@ export class SubmissionService {
         );
       }
       return {
+        isWeekly: a.t.pr2bTaskWorkflowTaskId?.kind === "WEEKLY_REPORT",
+        draft:
+          a.u.student?.id === a.p.studentId
+            ? (a.t.pr2bTaskWorkflowTaskId
+                ?.draftReport as TaskSubmissionContext["draft"])
+            : null,
+        draftRevision: a.t.pr2bTaskWorkflowTaskId?.draftRevision ?? 0,
+        requiresChangeExplanation:
+          !!a.t.pr2bTaskWorkflowTaskId?.currentSubmissionId,
+        effectiveDeadline: ready?.deadline.toISOString(),
+        allowLate: ready?.allowLate,
         taskId,
         taskRevision: a.t.pr2bTaskWorkflowTaskId?.revision ?? 0,
         canSubmit,
@@ -278,6 +337,8 @@ export class SubmissionService {
   view(s: SubmissionRecord): TaskSubmissionView {
     const w = s.pr2bSubmissionWorkflowSubmissionId;
     return {
+      report: w?.reportContent as TaskSubmissionView["report"],
+      changeExplanation: w?.changeExplanation ?? null,
       id: s.id,
       taskId: s.taskId,
       versionNumber: w?.versionNumber ?? null,
@@ -349,8 +410,23 @@ export class SubmissionService {
           );
         return replay.result as unknown as TaskSubmissionView;
       }
-      const { active, w } = await this.ready(s, a),
+      const { active, w, deadline, allowLate } = await this.ready(s, a),
         policy = this.policy();
+      if (
+        w.kind === "WEEKLY_REPORT" &&
+        !WeeklyReportSubmitSchema.safeParse(input.report).success
+      )
+        groupError(
+          400,
+          "REPORT_CONTENT_REQUIRED",
+          "Điền đầy đủ công việc, kết quả, kế hoạch tiếp theo và lý do việc chưa hoàn thành.",
+        );
+      if (w.currentSubmissionId && !input.changeExplanation?.trim())
+        groupError(
+          400,
+          "CHANGE_EXPLANATION_REQUIRED",
+          "Nhập giải trình các thay đổi của lần nộp lại.",
+        );
       this.review.revision(w.revision, input.expectedTaskRevision);
       const uploads = [];
       for (const id of [...input.uploadIds].sort()) {
@@ -420,6 +496,12 @@ export class SubmissionService {
       await this.ready(s, a);
       const submittedAt = new Date(),
         number = w.nextSubmissionNumber!;
+      if (!allowLate && submittedAt > deadline)
+        groupError(
+          409,
+          "DEADLINE_PASSED",
+          "Đã hết hạn trong lúc xử lý bài nộp.",
+        );
       if (uploads.some((u) => u.expiresAt <= submittedAt))
         groupError(
           409,
@@ -455,8 +537,10 @@ export class SubmissionService {
             versionNumber: number,
             state: "SUBMITTED",
             submittedAt,
-            deadlineSnapshot: a.t.deadline,
-            isLate: this.v.late(submittedAt, a.t.deadline),
+            deadlineSnapshot: deadline,
+            isLate: this.v.late(submittedAt, deadline),
+            reportContent: input.report ? json(input.report) : undefined,
+            changeExplanation: input.changeExplanation,
             submittedByUserId: userId,
             contextSnapshot: json(snapshot),
             filePolicySnapshot: json(policy),
@@ -464,6 +548,7 @@ export class SubmissionService {
         },
       });
       if (w.currentSubmissionId) await s.supersede(w.currentSubmissionId);
+      await s.clearDraft(taskId);
       for (const u of uploads) {
         await s.linkAsset(sub.id, u.assetId!);
         await s.updateUpload(u.id, {
@@ -486,7 +571,7 @@ export class SubmissionService {
           versionNumber: number,
           fromState: w.state,
           toState: "SUBMITTED",
-          isLate: this.v.late(submittedAt, a.t.deadline),
+          isLate: this.v.late(submittedAt, deadline),
         }),
       });
       await s.guidanceAudit(
@@ -500,7 +585,7 @@ export class SubmissionService {
         }),
       );
       const official = await this.review.advisor(s, a.p);
-      await s.notify({
+      await s.queueNote({
         userId: official.assignment.advisor.userId,
         termId: a.p.topic.termId,
         title: "Bài nộp hướng dẫn mới",
@@ -511,6 +596,51 @@ export class SubmissionService {
       await this.gv.phase(s, a.p.topic.termId);
       await s.guidanceRemember(userId, "POST", route, key, hash, json(result));
       return result;
+    }, true);
+  }
+  async saveDraft(
+    userId: string,
+    taskId: string,
+    input: WeeklyReportDraft,
+    key: string,
+  ) {
+    this.key(key);
+    return this.repo.transaction(async (s) => {
+      const a = await this.locked(s, userId, taskId);
+      const route = `/tasks/${taskId}/draft`,
+        hash = reviewHash(input);
+      const replay = await s.guidanceReplay(userId, "PUT", route, key);
+      if (replay) {
+        if (replay.payloadHash !== hash)
+          groupError(
+            409,
+            "IDEMPOTENCY_CONFLICT",
+            "Khóa đã dùng với nội dung khác.",
+          );
+        return replay.result;
+      }
+      const { w } = await this.ready(s, a);
+      this.review.revision(w.draftRevision, input.expectedDraftRevision);
+      const result = await s.draft(
+        taskId,
+        json({
+          report: input.report,
+          changeExplanation: input.changeExplanation,
+          content: input.content,
+        }),
+        w.draftRevision,
+      );
+      if (result.count !== 1)
+        groupError(409, "REVISION_CONFLICT", "Bản nháp đã thay đổi.");
+      await s.guidanceAudit(
+        userId,
+        taskId,
+        "REPORT_DRAFT_SAVED",
+        json({ revision: w.draftRevision + 1 }),
+      );
+      const view = { draftRevision: w.draftRevision + 1 };
+      await s.guidanceRemember(userId, "PUT", route, key, hash, json(view));
+      return view;
     }, true);
   }
   async download(userId: string, submissionId: string, fileId: string) {

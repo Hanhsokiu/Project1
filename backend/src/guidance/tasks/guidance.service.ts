@@ -368,17 +368,19 @@ export class GuidanceService {
               isLocked: phase.refPhaseId.isLocked,
             }
           : null,
-        periods: periods.map((p) => ({
-          id: p.id,
-          termId: p.termId,
-          ordinal: p.ordinal,
-          label: p.label,
-          type: p.type,
-          startsAt: p.startsAt.toISOString(),
-          endsAt: p.endsAt.toISOString(),
-          reportDueAt: p.reportDueAt?.toISOString() ?? null,
-          revision: p.revision,
-        })),
+        periods: periods
+          .filter((p) => p.state !== "DRAFT")
+          .map((p) => ({
+            id: p.id,
+            termId: p.termId,
+            ordinal: p.ordinal,
+            label: p.label,
+            type: p.type,
+            startsAt: p.startsAt.toISOString(),
+            endsAt: p.endsAt.toISOString(),
+            reportDueAt: p.reportDueAt?.toISOString() ?? null,
+            revision: p.revision,
+          })),
       };
     });
   }
@@ -391,17 +393,19 @@ export class GuidanceService {
     return this.repo.transaction(async (s) => {
       const u = this.review.principal(await s.principal(userId));
       await this.scopedWhere(s, u, termId);
-      return (await s.periods(termId)).map((p) => ({
-        id: p.id,
-        termId: p.termId,
-        ordinal: p.ordinal,
-        label: p.label,
-        type: p.type,
-        startsAt: p.startsAt.toISOString(),
-        endsAt: p.endsAt.toISOString(),
-        reportDueAt: p.reportDueAt?.toISOString() ?? null,
-        revision: p.revision,
-      }));
+      return (await s.periods(termId))
+        .filter((p) => p.state !== "DRAFT")
+        .map((p) => ({
+          id: p.id,
+          termId: p.termId,
+          ordinal: p.ordinal,
+          label: p.label,
+          type: p.type,
+          startsAt: p.startsAt.toISOString(),
+          endsAt: p.endsAt.toISOString(),
+          reportDueAt: p.reportDueAt?.toISOString() ?? null,
+          revision: p.revision,
+        }));
     });
   }
   private async command<T>(
@@ -628,10 +632,18 @@ export class GuidanceService {
     a: Aggregate,
     t: GuidanceTaskRecord,
   ): Promise<GuidanceTaskView> {
+    let advisorName: string | null = null;
+    try {
+      advisorName = (await this.review.advisor(s, a.p)).assignment.advisor
+        .fullName;
+    } catch (e) {
+      if (!(e instanceof HttpException)) throw e;
+    }
     const w = t.pr2bTaskWorkflowTaskId,
       allowedActions: GuidanceTaskView["allowedActions"] = [];
     try {
       await this.v.active(s, a.p, t.guidancePlan);
+      this.v.period(w?.refPeriodId ?? null, a.p.topic.termId);
       const ready =
         w?.startsAt &&
         w.expectedDeliverables !== null &&
@@ -643,8 +655,11 @@ export class GuidanceService {
         (await this.can(s, u, a.p, "task", "manage")) &&
         w?.state &&
         !["COMPLETED", "CANCELLED"].includes(w.state)
-      )
-        allowedActions.push("update", "cancel");
+      ) {
+        allowedActions.push("update");
+        if (w.kind !== "WEEKLY_REPORT" || !t.submissions.length)
+          allowedActions.push("cancel");
+      }
       if (
         ready &&
         (await this.can(s, u, a.p, "task", "progress")) &&
@@ -657,6 +672,8 @@ export class GuidanceService {
     }
     return {
       id: t.id,
+      advisorName,
+      termName: (await s.term(a.p.topic.termId))?.name,
       planId: t.guidancePlanId,
       proposalId: a.p.id,
       termId: a.p.topic.termId,
@@ -671,6 +688,8 @@ export class GuidanceService {
       title: t.title,
       description: t.description,
       expectedDeliverables: w?.expectedDeliverables ?? null,
+      completionCriteria: w?.completionCriteria ?? "",
+      priority: w?.priority ?? 2,
       startDate: w?.startsAt?.toISOString() ?? null,
       dueDate: t.deadline.toISOString(),
       status: w?.state ?? null,
@@ -832,6 +851,8 @@ export class GuidanceService {
               state: "TODO",
               startsAt: new Date(input.startDate),
               expectedDeliverables: input.expectedDeliverables,
+              completionCriteria: input.completionCriteria,
+              priority: input.priority,
               createdByUserId: u.id,
               assignedAdvisorId: active.official.assignment.advisorId,
               nextSubmissionNumber: 1,
@@ -856,7 +877,7 @@ export class GuidanceService {
           "TASK_CREATED",
           true,
         );
-        await s.notify({
+        await s.queueNote({
           userId: a.p.student.userId,
           termId: a.p.topic.termId,
           title: "Nhiệm vụ hướng dẫn mới",
@@ -886,6 +907,7 @@ export class GuidanceService {
         await this.v.active(s, a.p, a.plan!);
         const t = a.task!,
           w = this.v.editable(t, input.acknowledgeExistingSubmissions);
+        this.v.period(await s.period(w.periodId!), a.p.topic.termId);
         this.review.revision(w.revision, input.expectedRevision);
         if (
           w.kind === "WEEKLY_REPORT" &&
@@ -909,6 +931,8 @@ export class GuidanceService {
         await s.advanceTask(id, w.revision, {
           startsAt: start,
           expectedDeliverables: input.expectedDeliverables,
+          completionCriteria: input.completionCriteria,
+          priority: input.priority,
         });
         await this.evidence(
           s,
@@ -922,6 +946,8 @@ export class GuidanceService {
               startDate: w.startsAt,
               dueDate: t.deadline,
               expectedDeliverables: w.expectedDeliverables,
+              completionCriteria: w.completionCriteria,
+              priority: w.priority,
             },
             changedFields: Object.keys(input).filter(
               (k) =>
@@ -961,6 +987,7 @@ export class GuidanceService {
         await this.v.active(s, a.p, a.plan!);
         const t = a.task!,
           w = this.v.progress(t);
+        this.v.period(await s.period(w.periodId!), a.p.topic.termId);
         this.review.revision(w.revision, input.expectedRevision);
         await s.progress({ taskId: id, actorId: u.id, note: input.note });
         await s.advanceTask(id, w.revision, {
@@ -1001,6 +1028,13 @@ export class GuidanceService {
         await this.v.active(s, a.p, a.plan!);
         const t = a.task!,
           w = this.v.editable(t, input.acknowledgeExistingSubmissions);
+        this.v.period(w.refPeriodId, a.p.topic.termId);
+        if (w.kind === "WEEKLY_REPORT" && t.submissions.length)
+          groupError(
+            409,
+            "WEEKLY_REPORT_HAS_SUBMISSIONS",
+            "Báo cáo tuần đã nộp phải giữ nguyên chuỗi phiên bản và đánh giá.",
+          );
         this.review.revision(w.revision, input.expectedRevision);
         await s.advanceTask(id, w.revision, {
           state: "CANCELLED",
@@ -1123,7 +1157,7 @@ export class GuidanceService {
           "WEEKLY_TASK_MATERIALIZED",
           true,
         );
-        await s.notify({
+        await s.queueNote({
           userId: a.p.student.userId,
           termId: a.p.topic.termId,
           title: "Nhiệm vụ báo cáo tuần",

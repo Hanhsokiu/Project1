@@ -1,5 +1,5 @@
 "use strict";
-const { prepareFixtureSessions } = require('./integration/auth-fixture.cjs');
+const { prepareFixtureSessions } = require("./integration/auth-fixture.cjs");
 // Real HTTP + private filesystem + PostgreSQL. Only a new isolated loopback DB.
 const fs = require("node:fs"),
   path = require("node:path"),
@@ -80,6 +80,19 @@ async function main() {
     const permissions = await db.permission.findMany({
       where: { resource: "submission" },
     });
+    const reviewPermission = await db.permission.findUnique({
+      where: { resource_action: { resource: "task", action: "review" } },
+    });
+    await db.rolePermission.upsert({
+      where: {
+        roleId_permissionId: {
+          roleId: "LECTURER",
+          permissionId: reviewPermission.id,
+        },
+      },
+      create: { roleId: "LECTURER", permissionId: reviewPermission.id },
+      update: {},
+    });
     for (const roleId of ["FACULTY", "LECTURER", "STUDENT", "ADMIN"])
       for (const p of permissions)
         if (roleId === "ADMIN" || roleId === "STUDENT" || p.action !== "create")
@@ -121,7 +134,11 @@ async function main() {
         ? {
             Authorization:
               "Bearer " +
-              jwt.sign({ sub: actor, sid: actor, roles: ["ADMIN", "FACULTY", "LECTURER"] }),
+              jwt.sign({
+                sub: actor,
+                sid: actor,
+                roles: ["ADMIN", "FACULTY", "LECTURER"],
+              }),
           }
         : {};
     async function req(
@@ -406,6 +423,31 @@ async function main() {
     pass(
       "student/current advisor/scoped faculty can download attachments; cross-student/term/department/reviewer/old advisor/ADMIN denied",
     );
+    await upload(
+      "s2",
+      t.id,
+      "REPORT",
+      pdf,
+      "pending.pdf",
+      "application/pdf",
+      409,
+    );
+    const reviewContext = (
+      await req("b", "GET", `/task-submissions/${sub.id}/review-context`)
+    ).data;
+    await req(
+      "b",
+      "POST",
+      `/task-submissions/${sub.id}/reviews`,
+      {
+        expectedTaskRevision: reviewContext.taskRevision,
+        expectedSubmissionRevision: reviewContext.submission.revision,
+        decision: "REVISION_REQUIRED",
+        comment: "Permit a revised upload",
+        revisionDueAt: new Date(Date.now() + 3600000).toISOString(),
+      },
+      201,
+    );
     const before = await db.taskSubmission.findUnique({
         where: { id: sub.id },
         include: { pr2bSubmissionAssetSubmissionId: true },
@@ -419,6 +461,7 @@ async function main() {
         expectedTaskRevision: c.taskRevision,
         uploadIds: [r2.id, source2.id],
         content: "Bản nộp lại",
+        changeExplanation: "Updated source and report after review",
       };
     const race = await Promise.all([
       req("s2", "POST", `/tasks/${t.id}/submissions`, in2, [201, 409]),
@@ -734,7 +777,21 @@ async function main() {
       "s2",
       "POST",
       `/tasks/${remaining.currentTaskId}/submissions`,
-      { expectedTaskRevision: wc.taskRevision, uploadIds: weeklyFiles },
+      {
+        expectedTaskRevision: wc.taskRevision,
+        uploadIds: weeklyFiles,
+        report: {
+          assignedWork: "Task",
+          completedWork: "Done",
+          results: "Verified",
+          nextWork: "Next",
+          unfinishedWork: "",
+          unfinishedReason: "",
+          difficulties: "",
+          solutions: "",
+          notes: "",
+        },
+      },
       201,
     );
     const covered = (
@@ -749,7 +806,12 @@ async function main() {
       ).state,
       "SUBMITTED",
     );
-    assert.equal(await db.progressReview.count(), 0);
+    assert.equal(
+      await db.progressReview.count({
+        where: { refSubmissionId: { taskId: remaining.currentTaskId } },
+      }),
+      0,
+    );
     pass(
       "weekly obligation coverage consumes real submission pointer; no PASS/completion/evaluation is fabricated",
     );

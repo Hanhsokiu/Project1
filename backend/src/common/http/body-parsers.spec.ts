@@ -17,6 +17,14 @@ import { ProposalVersionSaveSchema, emptyProposalContent } from "@doan/shared";
 
 @Controller()
 class TransportController {
+  @Post("tasks/:id/submissions")
+  submission(@Body() input: { value: string }) {
+    return { length: input.value.length };
+  }
+  @Put("tasks/:id/draft")
+  draft(@Body() input: { value: string }) {
+    return { length: input.value.length };
+  }
   @Post("proposals/:id/versions")
   save(@Body() input: { value: string }) {
     return { length: input.value.length };
@@ -60,6 +68,19 @@ describe("bounded proposal JSON transport with production filters", () => {
     const response = await request("/proposals/p/versions", "đ".repeat(60000));
     expect(response.status).toBe(201);
     expect(await response.json()).toEqual({ length: 60000 });
+  });
+  it("accepts bounded UTF-8 weekly reports and rejects oversized drafts", async () => {
+    for (const [path, method, status] of [
+      ["/tasks/t/submissions", "POST", 201],
+      ["/tasks/t/draft", "PUT", 200],
+    ] as const) {
+      const response = await request(path, "đ".repeat(70000), method);
+      expect(response.status).toBe(status);
+      expect(await response.json()).toEqual({ length: 70000 });
+      expect((await request(path, "x".repeat(530000), method)).status).toBe(
+        413,
+      );
+    }
   });
   it("keeps the small JSON budget on other routes and methods", async () => {
     for (const [path, method] of [

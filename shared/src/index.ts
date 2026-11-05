@@ -58,3 +58,4 @@ export * from "./contracts/proposal-dossiers";
 export * from "./contracts/guidance-tasks";
 export * from "./contracts/task-submissions";
 export * from "./contracts/guidance-reviews";
+export * from "./contracts/weekly-progress";

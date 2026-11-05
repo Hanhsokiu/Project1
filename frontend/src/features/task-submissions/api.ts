@@ -6,9 +6,18 @@ import type {
   TaskSubmissionCreate,
   TaskSubmissionPage,
   TaskSubmissionView,
+  WeeklyReportDraft,
 } from "@doan/shared";
 type Envelope<T> = { success: true; data: T };
 export const submissionApi = {
+  draft: async (taskId: string, input: WeeklyReportDraft, key: string) =>
+    (
+      await httpClient.put<Envelope<{ draftRevision: number }>>(
+        `/tasks/${encodeURIComponent(taskId)}/draft`,
+        input,
+        { headers: { "Idempotency-Key": key } },
+      )
+    ).data.data,
   context: async (taskId: string) =>
     (
       await httpClient.get<Envelope<TaskSubmissionContext>>(

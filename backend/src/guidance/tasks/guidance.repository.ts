@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { randomUUID } from "crypto";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { DossierSession } from "../../topic/proposal-dossiers/dossier.repository";
@@ -45,6 +46,19 @@ export type ObligationRecord = Prisma.WeeklyReportObligationGetPayload<{
   include: typeof obligationInclude;
 }>;
 export class GuidanceSession extends DossierSession {
+  queueNote(data: Prisma.NotificationUncheckedCreateInput) {
+    const id = data.id ?? randomUUID();
+    return this.guidanceDb.outboxEvent.create({
+      data: {
+        eventId: `guidance-note:${id}`,
+        type: "GUIDANCE_NOTIFICATION",
+        aggregateId: String(data.termId ?? id),
+        payload: JSON.parse(
+          JSON.stringify({ ...data, id }),
+        ) as Prisma.InputJsonValue,
+      },
+    });
+  }
   constructor(private readonly guidanceDb: Prisma.TransactionClient) {
     super(guidanceDb);
   }
