@@ -179,15 +179,18 @@ Hướng dẫn dành cho repository hiện tại, nhánh `fix/integration-ui`. C
    | Framework Preset | Vite |
    | Root Directory | `frontend` |
    | Node.js Version | `22.x` |
-   | Install Command | `pnpm install --frozen-lockfile` |
-   | Build Command | `pnpm --filter @doan/shared build && pnpm --filter @doan/frontend build` |
+   | Install Command | `corepack pnpm install --frozen-lockfile` |
+   | Build Command | `corepack pnpm --filter @doan/shared build && corepack pnpm --filter @doan/frontend build` |
    | Output Directory | `dist` |
 
    Bật Include source files outside of the Root Directory in the Build Step trong cấu hình Root Directory để build đọc được `shared` và workspace gốc. Xem [Vercel monorepo](https://vercel.com/docs/monorepos/monorepo-faq). Output Directory là `dist` vì Root Directory đã là `frontend`.
 
+   `package.json` ở gốc ghim `packageManager` thành `pnpm@9.15.9`. `frontend/vercel.json` đã chứa các lệnh install/build và thư mục output tương ứng; cần commit và push cả hai file. Nếu Dashboard có Install Command cũ, đổi sang lệnh Corepack trong bảng. Không dùng Override chỉ ghi `pnpm install --frozen-lockfile`: Vercel có thể chọn pnpm 6 và báo `ERR_PNPM_UNSUPPORTED_ENGINE`. Xem [Vercel Package Managers](https://vercel.com/docs/package-managers).
+
    Thêm Environment Variables cho Production, với giá trị Render thật:
 
    ```dotenv
+   ENABLE_EXPERIMENTAL_COREPACK=1
    VITE_API_URL=https://gpms-api.onrender.com/api
    VITE_AUTH_API=true
    VITE_TERM_API=true
@@ -286,6 +289,7 @@ Hướng dẫn dành cho repository hiện tại, nhánh `fix/integration-ui`. C
     | Hiện tượng | Cần kiểm tra |
     | --- | --- |
     | Vercel báo không tìm thấy `@doan/shared` | Root `frontend`, tùy chọn đọc source ngoài root, workspace và Build Command |
+    | Vercel báo pnpm expected >=9, got 6.35.1 | Push `package.json` và `frontend/vercel.json` mới; bật `ENABLE_EXPERIMENTAL_COREPACK=1` cho Production, dùng Install Command Corepack, rồi deploy từ commit mới |
     | Refresh trang con bị 404 | `frontend/vercel.json` có ở commit và deployment hiện tại không |
     | Request gọi localhost | `VITE_API_URL` ở đúng môi trường Production và đã redeploy chưa |
     | CORS | `FRONTEND_URL` có đúng origin của tab đang mở, không có dấu `/` cuối; Render đã redeploy chưa |
