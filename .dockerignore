@@ -8,3 +8,11 @@
 !**/.env.*.example
 **/uploads
 *.log
+**/.cache
+**/.tmp
+**/playwright-report
+**/test-results*
+**/.agents
+**/.codex
+**/.aws
+**/.ssh

@@ -57,13 +57,16 @@ Hướng dẫn dành cho repository hiện tại, nhánh `fix/integration-ui`. C
 
    Giữ các dòng loại trừ `.env`, `node_modules`, `dist` và `uploads` sẵn có. `.cache` chứa thông tin truy cập bộ dữ liệu mẫu, không được đưa vào Docker image. Không bỏ loại trừ `uploads` để chuyển tài liệu; việc chuyển tệp thực hiện riêng ở bước 7.
 
-   Backend có sẵn `backend/Dockerfile`, trong đó cài Chromium cho chức năng xuất PDF. Để dùng Node 22, đổi dòng đầu thành `FROM node:22-alpine`, và dòng cài gói hệ thống thành:
+   Backend có sẵn `backend/Dockerfile`, dùng `node:22-bookworm-slim` và cài OpenSSL/Chromium cho Prisma và chức năng xuất PDF. Giữ image Debian Bookworm này: Prisma 5.22 có lỗi nhận diện OpenSSL trên Alpine mới, có thể chọn nhầm engine yêu cầu `libssl.so.1.1`. Các dòng đầu Dockerfile là:
 
    ```dockerfile
-   RUN apk add --no-cache openssl chromium font-noto
+   FROM node:22-bookworm-slim
+   RUN apt-get update \
+       && apt-get install -y --no-install-recommends ca-certificates openssl chromium fonts-noto \
+       && rm -rf /var/lib/apt/lists/*
    ```
 
-   Giữ nguyên các dòng còn lại, bao gồm `WORKDIR /workspace/backend`, bước `prisma generate`, `PDF_CHROME_PATH` và `CMD`. Render sẽ build Docker image; không cần Docker trên máy cá nhân để triển khai từ GitHub. Cấu hình Docker này vẫn cần được xác nhận bằng build log và kiểm tra PDF sau lần triển khai đầu.
+   Giữ nguyên các dòng còn lại, bao gồm `WORKDIR /workspace/backend`, bước `prisma generate`, kiểm tra `check-prisma-engine.cjs` và `CMD`. Đường dẫn Chromium của image này là `/usr/bin/chromium`, đã đặt trong `PDF_CHROME_PATH`. Render sẽ build Docker image; không cần Docker trên máy cá nhân để triển khai từ GitHub. Cấu hình Docker này vẫn cần được xác nhận bằng build log và kiểm tra PDF sau lần triển khai đầu.
 
    Chạy kiểm tra build, từng lệnh một; chỉ chuyển tiếp khi lệnh trước thành công:
 
@@ -292,6 +295,7 @@ Hướng dẫn dành cho repository hiện tại, nhánh `fix/integration-ui`. C
     | Có dữ liệu nhưng không tải được tệp cũ | Bước chuyển uploads, đúng storage key và đường dẫn `/var/data/uploads` |
     | Upload xong mất sau redeploy | Có disk thật sự gắn tại `/var/data`, storage path nằm trong disk |
     | PDF lỗi thiếu trình duyệt | Runtime Docker, đúng Dockerfile và `PDF_CHROME_PATH` trong Linux |
+    | Prisma thiếu `libssl.so.1.1` hoặc engine `linux-musl` | Push Dockerfile Debian Bookworm và script kiểm tra engine; Render → Manual Deploy → Clear build cache & deploy; kiểm tra commit đã cập nhật và không còn biến ép đường dẫn engine Alpine |
     | Không nhận email | Email worker đang chủ động tắt; cần SMTP thật trước khi bật |
     | Render Free phản hồi chậm lần đầu | Service có thể đang khởi động lại sau khi ngủ; frontend có timeout 20 giây |
 
