@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { WorkflowHeading } from "../review-groups/workflow-heading";
 import { FilterBar } from "../../shared/components/filter-bar";
+import { termLabel } from "../../shared/data/term-selection";
+import { useRecordTerm } from "../../shared/hooks/use-record-term";
 import React, { useEffect, useRef, useState } from "react";
 import {
   Link,
@@ -89,7 +91,7 @@ function useRefresh() {
 function useTerm() {
   const [params, setParams] = useSearchParams(),
     termId = params.get("termId") ?? "",
-    terms = useWorkflowTerms();
+    terms = useWorkflowTerms("guidance");
   useEffect(() => {
     if (!termId && terms.data?.[0] && !terms.isFetching)
       setParams(
@@ -260,7 +262,7 @@ export function GuidancePlanListPage() {
           <option value="">Chọn đợt</option>
           {terms.data?.map((t) => (
             <option key={t.id} value={t.id}>
-              {t.name}
+              {termLabel(t)}
             </option>
           ))}
         </select>
@@ -327,6 +329,7 @@ export function GuidancePlanDetailPage() {
       queryFn: () => api.context(proposalId),
     }),
     c = context.data;
+  useRecordTerm(c?.termId);
   const tasks = useQuery({
     queryKey: ["guidance-plan-tasks", c?.plan?.id, page],
     queryFn: () => api.planTasks(c!.plan!.id, { page, limit: 20 }),
@@ -641,7 +644,7 @@ export function GuidanceTaskListPage() {
             <option value="">Chọn đợt</option>
             {terms.data?.map((t) => (
               <option key={t.id} value={t.id}>
-                {t.name}
+                {termLabel(t)}
               </option>
             ))}
           </select>
@@ -761,6 +764,7 @@ export function GuidanceTaskCreatePage() {
       queryKey: ["guidance-context", proposalId],
       queryFn: () => api.context(proposalId),
     });
+  useRecordTerm(context.data?.termId);
   const create = useMutation({
     mutationFn: (input: GuidanceTaskCreate | GuidanceTaskUpdate) =>
       api.createTask(context.data!.plan!.id, input, key("create", input)),
@@ -880,6 +884,7 @@ export function GuidanceTaskDetailPage() {
       queryFn: () => api.task(id),
     }),
     t = query.data;
+  useRecordTerm(t?.termId);
   const context = useQuery({
     queryKey: ["guidance-context", t?.proposalId],
     queryFn: () => api.context(t!.proposalId),

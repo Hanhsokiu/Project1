@@ -1,7 +1,7 @@
 import { apiData } from "../../../shared/api/api-data";
-import { getAccessToken } from "../../../shared/api/api-session";
+import { AUTH_API, getAccessToken } from "../../../shared/api/api-session";
 import type { Assignment, Student } from "../../../shared/data/types";
-export const STEP3_API = import.meta.env.VITE_REGISTRATION_API === "true";
+export const STEP3_API = AUTH_API || import.meta.env.VITE_REGISTRATION_API === "true";
 export interface AssignmentContext {
   plan: {
     id: string;

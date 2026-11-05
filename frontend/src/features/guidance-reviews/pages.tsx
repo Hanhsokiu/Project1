@@ -1,4 +1,7 @@
 import { FilterBar } from "../../shared/components/filter-bar";
+import { termLabel } from "../../shared/data/term-selection";
+import { useRecordTerm } from "../../shared/hooks/use-record-term";
+import { useApiSession } from "../../shared/hooks/use-api-session";
 import {
   ChevronLeft,
   ChevronRight,
@@ -75,10 +78,11 @@ function Pager({
   );
 }
 function useTerm() {
+  const user = useApiSession();
   const [params, setParams] = useSearchParams(),
     termId = params.get("termId") ?? "",
     options = useQuery({
-      queryKey: ["progress-options"],
+      queryKey: ["progress-options", user?.id],
       queryFn: api.options,
     });
   const select = (
@@ -93,7 +97,7 @@ function useTerm() {
         <option value="">Chọn đợt</option>
         {options.data?.terms.map((t) => (
           <option key={t.id} value={t.id}>
-            {t.name}
+            {termLabel(t)}
           </option>
         ))}
       </select>
@@ -208,6 +212,7 @@ export function ProgressReviewDetailPage() {
       refetchOnWindowFocus: false,
     }),
     c = query.data;
+  useRecordTerm(c?.termId);
   const save = useMutation({
     mutationFn: (input: ProgressReviewCreate | ProgressReviewAmend) =>
       amending

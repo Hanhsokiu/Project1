@@ -269,6 +269,12 @@ describe("term creation and lifecycle", () => {
       endDate: new Date("2026-10-07T00:00:00+07:00"),
     });
     expect(data.trainingSystem.connect.id).toBe("cq");
+    expect(repository.linkWorkflowPhase).toHaveBeenCalledWith(
+      term.id,
+      term.phases.find((p) => p.code === "WEEKLY")!.id,
+      "GUIDANCE",
+      tx,
+    );
     expect(transaction).toBe(tx);
     expect(repository.grantCreatorAcademicAccess).toHaveBeenCalledWith(
       term.id,

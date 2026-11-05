@@ -3,6 +3,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import { AuthController } from "./controller/auth.controller";
 import { AccountController } from "./controller/account.controller";
+import { AuditLogController } from "./controller/audit-log.controller";
 import { AuthService } from "./service/auth.service";
 import { AccountService } from "./service/account.service";
 import { RbacService } from "./service/rbac.service";
@@ -19,7 +20,7 @@ import { UserAccountRepository } from "./repository/user-account.repository";
       inject: [ConfigService],
     }),
   ],
-  controllers: [AuthController, AccountController],
+  controllers: [AuthController, AccountController, AuditLogController],
   providers: [AuthService, AccountService, RbacService, UserAccountRepository],
   exports: [AuthService, RbacService, JwtModule, UserAccountRepository],
 })

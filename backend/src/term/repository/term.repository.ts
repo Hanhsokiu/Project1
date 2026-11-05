@@ -167,7 +167,7 @@ export class TermRepository {
   async linkWorkflowPhase(
     termId: string,
     phaseId: string,
-    key: "PROPOSAL_EDIT" | "PROPOSAL_REVIEW",
+    key: "PROPOSAL_EDIT" | "PROPOSAL_REVIEW" | "GUIDANCE",
     tx: TermTransaction,
   ) {
     const link = await tx.termPhaseWorkflow.upsert({

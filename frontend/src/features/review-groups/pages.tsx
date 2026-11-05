@@ -1,4 +1,6 @@
 import { FilterBar } from "../../shared/components/filter-bar";
+import { termLabel } from "../../shared/data/term-selection";
+import { useRecordTerm } from "../../shared/hooks/use-record-term";
 import { WorkflowHeading } from './workflow-heading';
 import React, { useEffect, useRef, useState } from 'react';
 import {
@@ -214,7 +216,7 @@ export function ReviewGroupListPage() {
               <option value="">Chọn đợt đồ án</option>
               {terms.data?.map((t) => (
                 <option key={t.id} value={t.id}>
-                  {t.name}
+                  {termLabel(t)}
                 </option>
               ))}
             </select>
@@ -375,6 +377,7 @@ export function ReviewGroupEditorPage() {
     enabled: !!id,
   });
   const termId = group.data?.termId ?? params.get('termId') ?? '';
+  useRecordTerm(group.data?.termId);
   const options = useQuery({
     queryKey: ['review-group-options', termId, page, search],
     queryFn: () => api.options(termId, page, search),
@@ -441,7 +444,7 @@ export function ReviewGroupEditorPage() {
             <option value="">Chọn đợt đồ án</option>
             {terms.data?.map((term) => (
               <option key={term.id} value={term.id}>
-                {term.name}
+                {termLabel(term)}
               </option>
             ))}
           </select>
@@ -505,6 +508,7 @@ export function ReviewGroupDetailPage() {
     queryKey: ['review-group', id],
     queryFn: () => api.detail(id!),
   });
+  useRecordTerm(group.data?.termId);
   const mutation = useMutation({
     mutationFn: (key: string) =>
       api.archive(

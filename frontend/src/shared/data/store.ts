@@ -7,6 +7,7 @@ import {
 import { httpClient } from "../api/http-client";
 import { hydrateStep1Snapshot, mergeStep1Snapshot } from "./snapshot-api";
 import { createSeed, DEMO_VERSION } from "./seed";
+import { emptyDb } from "./empty-db";
 import type { Account, DemoDb, Role } from "./types";
 export const DATA_KEY = "utc-thesis-demo-v1";
 export const SESSION_KEY = "utc-thesis-session";
@@ -22,7 +23,7 @@ export class ServiceError extends Error {
   }
 }
 export function readDb(): DemoDb {
-  if (!memory) {
+  if (!AUTH_API && !memory) {
     try {
       const raw = localStorage.getItem(DATA_KEY);
       const saved = raw ? JSON.parse(raw) : null;
@@ -31,7 +32,9 @@ export function readDb(): DemoDb {
       memory = createSeed();
     }
   }
-  const db = mergeStep1Snapshot(structuredClone(memory!));
+  const db = mergeStep1Snapshot(
+    AUTH_API ? emptyDb() : structuredClone(memory!),
+  );
   const actual = AUTH_API ? getApiUser() : undefined;
   if (actual) {
     db.accounts = db.accounts.filter((a) => a.id !== actual.id).concat(actual);
@@ -49,6 +52,11 @@ export function readDb(): DemoDb {
   return db;
 }
 export function persist(db: DemoDb) {
+  if (AUTH_API)
+    throw new ServiceError(
+      "API_REQUIRED",
+      "Thao tác này phải được lưu trên máy chủ.",
+    );
   const stored = structuredClone(db);
   if (import.meta.env.VITE_REGISTRATION_API === "true") {
     stored.registrations = [];
@@ -97,6 +105,11 @@ export function mutate<T>(
   roles: Role[] | undefined,
   operation: (db: DemoDb, user: Account) => T,
 ): T {
+  if (AUTH_API)
+    throw new ServiceError(
+      "API_REQUIRED",
+      "Chức năng này chưa kết nối dữ liệu máy chủ.",
+    );
   const db = readDb();
   const user = requireUser(db, roles);
   const value = operation(db, user);
@@ -152,6 +165,16 @@ export function getWorkspaceSelection(): {
     return {};
   }
 }
+const selectionListeners = new Set<() => void>();
+export function subscribeWorkspaceSelection(listener: () => void) {
+  selectionListeners.add(listener);
+  return () => {
+    selectionListeners.delete(listener);
+  };
+}
+export function workspaceSelectionSnapshot() {
+  return JSON.stringify(getWorkspaceSelection());
+}
 export function setWorkspaceSelection(value: {
   termId?: string;
   studentId?: string;
@@ -160,6 +183,7 @@ export function setWorkspaceSelection(value: {
     "utc-workspace",
     JSON.stringify({ ...getWorkspaceSelection(), ...value }),
   );
+  selectionListeners.forEach((listener) => listener());
 }
 export function assert(
   condition: unknown,

@@ -14,6 +14,7 @@
     "test:e2e": "playwright test",
     "test:ui:browser": "node scripts/test-ui-redesign-browser.cjs",
     "test:workflow-terms:browser": "node scripts/test-workflow-term-sync-browser.cjs",
+    "test:data-consistency:browser": "node scripts/test-data-consistency-browser.cjs",
     "test:review-groups:browser": "node scripts/test-review-groups-browser.cjs",
     "preview:review-groups": "node scripts/test-review-groups-browser.cjs --interactive",
     "test:proposal-reviews:browser": "node scripts/test-proposal-reviews-browser.cjs",

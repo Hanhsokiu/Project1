@@ -34,6 +34,7 @@ export const routeManifest: RouteInfo[] = [
   },
   {
     path: "/admin/audit-logs",
+    permission: "audit:read",
     title: "Nhật ký hoạt động",
     group: "Quản trị hệ thống",
     roles: M,
@@ -368,6 +369,7 @@ export function canAccessRoute(
   user: Pick<Account, "roles" | "permissions">,
   api: boolean,
 ) {
+  if (api && ["/guidance/defense-confirm", "/guidance/final-report"].includes(route.path)) return false;
   return (
     route.roles.some((role) => user.roles.includes(role)) &&
     (!api ||

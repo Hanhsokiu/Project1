@@ -140,7 +140,7 @@ export class WeeklyService {
       for (const t of await s.terms({})) {
         try {
           const scope = await this.scope(s, userId, t.id);
-          terms.push({ id: t.id, name: t.name, canManage: scope.canManage });
+          terms.push({ ...t, canManage: scope.canManage });
         } catch (e) {
           if (
             !(e instanceof HttpException) ||
@@ -386,6 +386,21 @@ export class WeeklyService {
     return this.repo.transaction(async (s) => {
       const scope = await this.scope(s, userId, termId),
         rows: WeeklyStudentRow[] = [];
+      // A student appears once per published week. Resolve these read-only
+      // contexts once inside this transaction, rather than repeating the same
+      // queries for every week and exhausting the shared database pool.
+      const advisors = new Map<
+        string,
+        Awaited<ReturnType<ProposalReviewValidator["advisor"]>> | null
+      >();
+      const obligations = new Map<
+        string,
+        Awaited<ReturnType<WeeklySession["obligations"]>>
+      >();
+      const plans = new Map<
+        string,
+        Awaited<ReturnType<WeeklySession["planFor"]>>
+      >();
       for (const pair of await s.coveragePairs(termId)) {
         const period = pair.refPeriodId,
           ts = pair.refTermStudentId;
@@ -395,18 +410,27 @@ export class WeeklyService {
           (q.periodId && period.id !== q.periodId)
         )
           continue;
+        if (
+          scope.student &&
+          !scope.grant &&
+          !scope.lecturer &&
+          scope.student.id !== ts.id
+        )
+          continue;
         const topic = ts.pr2bTopicWorkflowTermStudentId?.refTopicId;
         const p = topic?.proposals.find((p) => p.studentId === ts.studentId);
         const dept =
           p?.topic.researchArea?.pr2bResearchAreaWorkflowResearchAreaId
             ?.departmentId;
-        let official = null;
-        if (p)
+        if (p && !advisors.has(p.id)) {
+          advisors.set(p.id, null);
           try {
-            official = await this.review.advisor(s, p);
+            advisors.set(p.id, await this.review.advisor(s, p));
           } catch (e) {
             if (!(e instanceof HttpException)) throw e;
           }
+        }
+        const official = p ? (advisors.get(p.id) ?? null) : null;
         const faculty =
           scope.grant &&
           (scope.grant.allDepartments ||
@@ -441,9 +465,9 @@ export class WeeklyService {
             .includes(q.advisorSearch.toLocaleLowerCase())
         )
           continue;
-        const o = (await s.obligations(ts.id)).find(
-          (o) => o.periodId === period.id,
-        );
+        if (!obligations.has(ts.id))
+          obligations.set(ts.id, await s.obligations(ts.id));
+        const o = obligations.get(ts.id)!.find((o) => o.periodId === period.id);
         const tw = o?.refCurrentTaskId?.pr2bTaskWorkflowTaskId;
         const sw =
           tw?.refCurrentSubmissionId?.pr2bSubmissionWorkflowSubmissionId;
@@ -455,7 +479,8 @@ export class WeeklyService {
           valid && sw?.refEffectiveReviewId?.state === "RECORDED"
             ? sw.refEffectiveReviewId
             : null;
-        const plan = p ? await s.planFor(p.id) : null;
+        if (p && !plans.has(p.id)) plans.set(p.id, await s.planFor(p.id));
+        const plan = p ? (plans.get(p.id) ?? null) : null;
         const status = !valid
           ? "NOT_SUBMITTED"
           : (decision?.decision ?? "PENDING");

@@ -105,12 +105,12 @@ describe("API registration ownership", () => {
     }
   });
 
-  it("rejects mixed registration API with mock catalogs instead of using mock IDs", async () => {
+  it("loads server catalogs even if the older catalog flag is disabled under API authentication", async () => {
     vi.stubEnv("VITE_CATALOG_API", "false");
     const { hydrateStep1Snapshot } = await import("./snapshot-api");
-    await expect(hydrateStep1Snapshot(createSeed())).rejects.toThrow(
-      "VITE_CATALOG_API",
-    );
+    const value = await hydrateStep1Snapshot(createSeed());
+    expect(value.catalogs.filter((c) => c.kind !== "semester")).toEqual([]);
+    expect(f.request.mock.calls.some(([config]) => config.url.startsWith("/research-areas"))).toBe(true);
   });
   it("replaces local registrations with DB records and isolates account tokens", async () => {
     const { hydrateStep1Snapshot, mergeStep1Snapshot } =

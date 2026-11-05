@@ -197,6 +197,14 @@ export class TermLifecycleService {
           "PROPOSAL_EDIT",
           tx,
         );
+      const guidancePhase = term.phases.find((p) => p.code === "WEEKLY");
+      if (guidancePhase)
+        await this.repository.linkWorkflowPhase(
+          term.id,
+          guidancePhase.id,
+          "GUIDANCE",
+          tx,
+        );
       const response = await this.response(term, tx);
       await this.audit.log(
         {
@@ -477,7 +485,9 @@ export class TermLifecycleService {
             ? "PROPOSAL_EDIT"
             : phase.code === "PROPOSAL_REVIEW"
               ? "PROPOSAL_REVIEW"
-              : undefined;
+              : phase.code === "WEEKLY"
+                ? "GUIDANCE"
+                : undefined;
         if (key)
           await this.repository.linkWorkflowPhase(
             id,

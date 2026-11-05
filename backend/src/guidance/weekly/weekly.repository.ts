@@ -21,6 +21,7 @@ export class WeeklyRepository {
           (tx) => work(new WeeklySession(tx)),
           {
             isolationLevel: mutation ? "Serializable" : "RepeatableRead",
+            maxWait: 10000,
             timeout: 30000,
           },
         );

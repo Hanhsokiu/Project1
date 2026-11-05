@@ -1,4 +1,6 @@
 import { FilterBar } from "../../shared/components/filter-bar";
+import { termLabel } from "../../shared/data/term-selection";
+import { useRecordTerm } from "../../shared/hooks/use-record-term";
 import {
   ChevronLeft,
   ChevronRight,
@@ -157,7 +159,7 @@ export function ProposalReviewQueuePage() {
               <option value="">Chọn đợt</option>
               {terms.data?.map((t) => (
                 <option key={t.id} value={t.id}>
-                  {t.name}
+                  {termLabel(t)}
                 </option>
               ))}
             </select>
@@ -461,6 +463,7 @@ export function ProposalReviewAssignmentPage() {
     queryKey: ['review-proposal', proposalId],
     queryFn: () => api.proposal(proposalId),
   });
+  useRecordTerm(proposal.data?.termId);
   const candidates = useQuery({
     queryKey: ['review-candidates', proposalId],
     queryFn: () => api.candidates(proposalId),
@@ -589,6 +592,7 @@ function ProposalReviewDetail({ id }: { id: string }) {
     queryKey: ['proposal-review', id],
     queryFn: () => api.detail(id),
   });
+  useRecordTerm(review.data?.termId);
   const history = useQuery({
     queryKey: ['review-history', review.data?.proposalId],
     queryFn: () => api.history(review.data!.proposalId),

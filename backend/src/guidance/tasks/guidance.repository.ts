@@ -62,11 +62,26 @@ export class GuidanceSession extends DossierSession {
   constructor(private readonly guidanceDb: Prisma.TransactionClient) {
     super(guidanceDb);
   }
-  guidancePhase(termId: string) {
-    return this.guidanceDb.termPhaseWorkflow.findUnique({
+  async guidancePhase(termId: string) {
+    const link = await this.guidanceDb.termPhaseWorkflow.findUnique({
       where: { termId_key: { termId, key: "GUIDANCE" } },
       include: { refPhaseId: true },
     });
+    if (link) return link;
+    // Existing terms already have a canonical WEEKLY phase. Read its current
+    // dates/lock directly when the older producer omitted the workflow link.
+    const phase = await this.guidanceDb.termPhase.findFirst({
+      where: { termId, code: "WEEKLY" },
+      orderBy: { id: "asc" },
+    });
+    return phase
+      ? {
+          termId,
+          phaseId: phase.id,
+          key: "GUIDANCE" as const,
+          refPhaseId: phase,
+        }
+      : null;
   }
   plan(id: string) {
     return this.guidanceDb.guidancePlan.findUnique({
@@ -282,6 +297,7 @@ export class GuidanceRepository {
           (tx) => work(new GuidanceSession(tx)),
           {
             isolationLevel: mutation ? "Serializable" : "RepeatableRead",
+            maxWait: 10000,
             timeout: 30000,
           },
         );

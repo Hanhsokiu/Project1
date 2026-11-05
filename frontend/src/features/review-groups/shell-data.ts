@@ -6,7 +6,7 @@ import { useWorkflowTerms } from "../../shared/hooks/use-workflow-terms";
 
 // Shell metadata only. Workflow pages continue using their scoped canonical APIs;
 // displaying the shared sidebar must not require catalog/import permissions.
-export function useWorkflowShellData(groups: boolean) {
+export function useWorkflowShellData(groups: boolean | "guidance") {
   const user = useApiSession();
   const terms = useWorkflowTerms(groups, !!user);
   const notifications = useQuery({
@@ -51,9 +51,9 @@ export function useWorkflowShellData(groups: boolean) {
     rubrics: { advisor: [], reviewer: [], committee: [] },
     terms: (terms.data ?? []).map((term) => ({
       ...term,
-      code: "",
+      code: term.code ?? "",
       semester: "",
-      program: "",
+      program: term.program ?? term.trainingSystem?.name ?? "",
       start: "",
       end: "",
       registrationStart: "",
@@ -74,5 +74,5 @@ export function useWorkflowShellData(groups: boolean) {
       channel: "IN_APP",
     })),
   };
-  return data;
+  return { data, selectionReady: !terms.isFetching, error: terms.error };
 }

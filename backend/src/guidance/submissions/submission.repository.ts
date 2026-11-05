@@ -163,6 +163,7 @@ export class SubmissionRepository {
           (tx) => work(new SubmissionSession(tx)),
           {
             isolationLevel: mutation ? "Serializable" : "RepeatableRead",
+            maxWait: 10000,
             timeout: 30000,
           },
         );

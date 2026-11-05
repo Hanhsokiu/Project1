@@ -1,7 +1,5 @@
-import { useEffect } from "react";
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import WorkspaceLayout from "../../app/layouts/WorkspaceLayout";
-import { useWorkspace } from "../../shared/hooks/use-workspace";
 import "./workspace.css";
 import { useWorkflowShellData } from "./shell-data";
 
@@ -13,34 +11,24 @@ type Mode = {
 };
 
 export function ReviewGroupLayout(props: Mode) {
-  const data = useWorkflowShellData(
-    !props.reviewMode &&
-      !props.versionMode &&
-      !props.dossierMode &&
-      !props.guidanceMode,
+  const shell = useWorkflowShellData(
+    props.guidanceMode
+      ? "guidance"
+      : !props.reviewMode &&
+          !props.versionMode &&
+          !props.dossierMode &&
+          !props.guidanceMode,
   );
   return (
-    <WorkspaceLayout data={data}>
-      <WorkflowContent />
+    <WorkspaceLayout data={shell?.data} selectionReady={shell?.selectionReady}>
+      {shell?.error && (
+        <p role="alert">
+          Không tải được danh sách đợt trong phạm vi tài khoản.
+        </p>
+      )}
+      <div className="workflow-content">
+        <Outlet />
+      </div>
     </WorkspaceLayout>
-  );
-}
-
-function WorkflowContent() {
-  const [params] = useSearchParams();
-  const { db, termId: selectedTerm, setTermId } = useWorkspace();
-  const requestedTerm = params.get("termId");
-  useEffect(() => {
-    if (
-      requestedTerm &&
-      requestedTerm !== selectedTerm &&
-      db.terms.some((term) => term.id === requestedTerm)
-    )
-      setTermId(requestedTerm);
-  }, [requestedTerm, selectedTerm, db.terms, setTermId]);
-  return (
-    <div className="workflow-content">
-      <Outlet />
-    </div>
   );
 }

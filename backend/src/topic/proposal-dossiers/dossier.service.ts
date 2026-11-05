@@ -217,6 +217,7 @@ export class DossierService {
     }
     return {
       proposalId: p.id,
+      termId: p.topic.termId,
       title: p.topic.title,
       proposalStatus: p.status,
       proposalRevision: p.pr2bProposalWorkflowProposalId?.revision ?? 0,

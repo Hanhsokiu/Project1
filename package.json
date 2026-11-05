@@ -22,7 +22,12 @@
     "ui:stop": "node scripts/integration-ui.cjs stop",
     "ui:sample": "node scripts/seed-integration-ui.cjs",
     "ui:workflow": "node scripts/seed-integration-workflow.cjs",
-    "ui:check-workflow": "node frontend/scripts/check-local-workflow.cjs"
+    "ui:check-workflow": "node frontend/scripts/check-local-workflow.cjs",
+    "sample:plan": "node scripts/sample-data-steps1-8.cjs --plan",
+    "sample:create": "node scripts/sample-data-steps1-8.cjs --apply",
+    "sample:verify": "node scripts/sample-data-steps1-8.cjs --verify",
+    "sample:browser": "node scripts/sample-data-steps1-8.cjs --browser",
+    "sample:test": "node --test scripts/sample-data/definition.test.cjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.14.0",

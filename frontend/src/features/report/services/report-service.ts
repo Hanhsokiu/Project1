@@ -14,6 +14,7 @@ import {
 } from "../../../shared/services/export-service";
 import { proposalLines } from "../../topic/components/ProposalDocument";
 import { STEP3_API } from "../../registration/services/assignment-api";
+import { AUTH_API } from "../../../shared/api/api-session";
 import { hasEligibleGpa } from "../../../shared/utils/gpa";
 
 export type ReportKind =
@@ -338,7 +339,7 @@ export async function createReport(
     "Không có dữ liệu phù hợp để xuất.",
     "EXPORT_EMPTY",
   );
-  const job = mutate(
+  const job = AUTH_API ? undefined : mutate(
     "Tạo yêu cầu xuất dữ liệu đồ án",
     ["ADMIN", "FACULTY", "LECTURER", "STUDENT"],
     (draft) => {
@@ -386,7 +387,7 @@ export async function createReport(
         report.rows,
         `${kind.toLowerCase()}-${termId}.xlsx`,
       );
-    mutate("Hoàn tất xuất dữ liệu đồ án", undefined, (draft) => {
+    if (job) mutate("Hoàn tất xuất dữ liệu đồ án", undefined, (draft) => {
       const item = draft.exports.find((e) => e.id === job.id);
       if (item) {
         item.status = "COMPLETED";
@@ -394,7 +395,7 @@ export async function createReport(
       }
     });
   } catch (error) {
-    mutate("Xuất dữ liệu đồ án thất bại", undefined, (draft) => {
+    if (job) mutate("Xuất dữ liệu đồ án thất bại", undefined, (draft) => {
       const item = draft.exports.find((e) => e.id === job.id);
       if (item) {
         item.status = "FAILED";
@@ -404,5 +405,5 @@ export async function createReport(
     });
     throw error;
   }
-  return job.id;
+  return job?.id;
 }

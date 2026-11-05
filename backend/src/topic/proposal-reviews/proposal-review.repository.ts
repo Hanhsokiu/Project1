@@ -94,7 +94,13 @@ export class ProposalReviewSession {
   terms(where: Prisma.ThesisTermWhereInput) {
     return this.tx.thesisTerm.findMany({
       where,
-      select: { id: true, name: true, status: true },
+      select: {
+        id: true,
+        code: true,
+        name: true,
+        status: true,
+        trainingSystem: { select: { name: true } },
+      },
       orderBy: [{ startDate: "desc" }, { id: "asc" }],
     });
   }

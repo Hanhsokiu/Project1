@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AUTH_API } from "../../../shared/api/api-session";
 import {
   Eye,
   RotateCcw,
@@ -338,7 +339,7 @@ function Content({ db }: { db: DemoDb }) {
               </Notice>
             )}
           </Card>
-          <Card title="Lịch sử công việc xuất">
+          {!AUTH_API && <Card title="Lịch sử công việc xuất">
             <DataTable
               rows={jobs}
               columns={[
@@ -399,7 +400,7 @@ function Content({ db }: { db: DemoDb }) {
                 },
               ]}
             />
-          </Card>
+          </Card>}
         </div>
       </div>
       {preview && report && (

@@ -1,3 +1,4 @@
+import { useRecordTerm } from "../../shared/hooks/use-record-term";
 import {
   FileUp,
   Send,
@@ -584,6 +585,7 @@ export function TaskSubmissionsPage() {
     queryKey: ["guidance-task", id],
     queryFn: () => guidanceApi.task(id),
   });
+  useRecordTerm(task.data?.termId);
   async function refresh() {
     await Promise.all(
       [

@@ -1,10 +1,11 @@
 import { httpClient } from "../../shared/api/http-client";
 import type { WeeklyPlanView, WeeklySummary, WeeklyQuery } from "@doan/shared";
+import type { WorkflowTerm } from "../../shared/hooks/use-workflow-terms";
 const read = async <T>(url: string, params?: object) =>
   (await httpClient.get<{ data: T }>(url, { params })).data.data;
 export const weeklyApi = {
   options: () =>
-    read<Array<{ id: string; name: string; canManage: boolean }>>(
+    read<Array<WorkflowTerm & { canManage: boolean }>>(
       "/weekly-plans/options",
     ),
   plans: (term: string) =>

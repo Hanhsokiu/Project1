@@ -63,12 +63,15 @@ import {
 } from "../../shared/hooks/use-workspace";
 import { authService } from "../../features/auth/services/auth-service";
 import type { DemoDb } from "../../shared/data/types";
+import { termLabel } from "../../shared/data/term-selection";
 export default function WorkspaceLayout({
   children,
   data,
+  selectionReady = true,
 }: {
   children?: ReactNode;
   data?: DemoDb;
+  selectionReady?: boolean;
 }) {
   const location = useLocation();
   const apiUser = useApiSession();
@@ -78,7 +81,7 @@ export default function WorkspaceLayout({
     if (apiUser?.mustChangePassword)
       return <Navigate to="/change-password" replace />;
     return (
-      <WorkspaceSnapshotProvider db={data}>
+      <WorkspaceSnapshotProvider db={data} selectionReady={selectionReady}>
         <Shell>{children}</Shell>
       </WorkspaceSnapshotProvider>
     );
@@ -344,21 +347,9 @@ function Shell({ children }: { children?: ReactNode }) {
               className="term-picker"
               aria-label="Đợt làm việc"
               value={termId}
-              onChange={(e) => {
-                setTermId(e.target.value);
-                if (
-                  /^\/(topic\/(?:review|proposal|dossier)|guidance\/(?:plan|tasks|review|progress|meetings))/.test(
-                    location.pathname,
-                  )
-                )
-                  navigate({
-                    pathname: location.pathname,
-                    search: new URLSearchParams({
-                      termId: e.target.value,
-                    }).toString(),
-                  });
-              }}
+              onChange={(e) => setTermId(e.target.value)}
             >
+              {!termId && <option value="">Chọn đợt trong phạm vi được phép</option>}
               {db.terms
                 .filter(
                   (t) =>
@@ -366,8 +357,7 @@ function Shell({ children }: { children?: ReactNode }) {
                 )
                 .map((t) => (
                   <option value={t.id} key={t.id}>
-                    {t.code || t.name}
-                    {t.program ? ` · ${t.program}` : ""}
+                    {termLabel(t)}
                   </option>
                 ))}
             </select>

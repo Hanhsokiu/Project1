@@ -1,4 +1,5 @@
 import { httpClient } from "../../shared/api/http-client";
+import type { WorkflowTerm } from "../../shared/hooks/use-workflow-terms";
 import type {
   ProgressReviewContext,
   ProgressReviewView,
@@ -42,7 +43,7 @@ export const progressApi = {
     ),
   options: () =>
     get<{
-      terms: Array<{ id: string; name: string; status: string }>;
+      terms: WorkflowTerm[];
       canReview: boolean;
       canMonitor: boolean;
     }>("/guidance-review-options/terms"),

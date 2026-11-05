@@ -158,6 +158,7 @@ export class ProgressRepository {
           (tx) => work(new ProgressSession(tx)),
           {
             isolationLevel: mutation ? "Serializable" : "RepeatableRead",
+            maxWait: 10000,
             timeout: 30000,
           },
         );

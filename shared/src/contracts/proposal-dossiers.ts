@@ -82,6 +82,7 @@ export type DossierHistoricalFinalization = {
   receipt: DossierView["receipt"];
 };
 export type DossierView = {
+  termId?: string;
   proposalId: string;
   title: string;
   proposalStatus: string;

@@ -1,3 +1,5 @@
+import { termLabel } from "../../shared/data/term-selection";
+import { useRecordTerm } from "../../shared/hooks/use-record-term";
 import {
   ChevronLeft,
   ChevronRight,
@@ -101,7 +103,7 @@ export function DossierListPage() {
             <option value="">Chọn đợt</option>
             {terms.data?.map((t) => (
               <option key={t.id} value={t.id}>
-                {t.name}
+                {termLabel(t)}
               </option>
             ))}
           </select>
@@ -393,6 +395,7 @@ export function DossierDetailPage() {
   });
   const d = query.data,
     snapshot = d?.currentFinalization?.snapshot ?? d?.previewSnapshot;
+  useRecordTerm(d?.termId);
   const onResult = (value: DossierView) => {
     client.setQueryData(["proposal-dossier", proposalId], value);
     void client.invalidateQueries({ queryKey: ["dossier-list"] });

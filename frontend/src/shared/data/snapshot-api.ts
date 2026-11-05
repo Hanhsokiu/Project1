@@ -1,6 +1,6 @@
 import { apiData } from "../api/api-data";
 export { apiData } from "../api/api-data";
-import { getAccessToken, getApiUser } from "../api/api-session";
+import { AUTH_API, getAccessToken, getApiUser } from "../api/api-session";
 import {
   assignmentApi,
   cacheAssignment,
@@ -23,9 +23,9 @@ import {
 } from "../../features/registration/services/registration-api";
 
 export const step1Api = {
-  term: import.meta.env.VITE_TERM_API === "true",
-  catalog: import.meta.env.VITE_CATALOG_API === "true",
-  imports: import.meta.env.VITE_IMPORT_API === "true",
+  term: AUTH_API || import.meta.env.VITE_TERM_API === "true",
+  catalog: AUTH_API || import.meta.env.VITE_CATALOG_API === "true",
+  imports: AUTH_API || import.meta.env.VITE_IMPORT_API === "true",
 };
 export interface SemesterDto {
   id: string;
@@ -80,6 +80,7 @@ interface ApiPage<T> {
   totalPages?: number;
 }
 interface Step1Resources {
+  audits?: DemoDb["audits"];
   assignments?: DemoDb["assignments"];
   topics?: DemoDb["topics"];
   notifications?: DemoDb["notifications"];
@@ -118,7 +119,7 @@ export async function apiAll<T>(url: string): Promise<T[]> {
   }
 }
 export function getStep1Resources() {
-  return resources;
+  return resources?.token === getAccessToken() ? resources : undefined;
 }
 export function semesterItem(item: SemesterDto): CatalogItem {
   return {
@@ -140,6 +141,7 @@ function lookupItem(item: LookupDto, kind: CatalogItem["kind"]): CatalogItem {
 }
 function overlay(mock: DemoDb, api: Step1Resources): DemoDb {
   const result = structuredClone(mock);
+  if (api.audits) result.audits = api.audits;
   if (REGISTRATION_API)
     result.registrations = structuredClone(api.registrations ?? []);
   if (STEP3_API) {
@@ -226,7 +228,7 @@ export function mergeStep1Snapshot(mock: DemoDb): DemoDb {
     ? overlay(mock, resources)
     : mock;
 }
-/** API-owned lists are authoritative; later-step artifacts remain in the existing mock store. No silent API→mock fallback. */
+/** Server data is authoritative. The API snapshot contains no browser demo artifacts. */
 export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
   const token = getAccessToken();
   if (!token) return mock;
@@ -405,7 +407,12 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
       }
     }
   };
-  await Promise.all([registrationTask(), workflowTask()]);
+  const auditTask = async () => {
+    if (getApiUser()?.permissions?.includes("audit:read"))
+      value.audits = await apiAll<DemoDb["audits"][number]>("/audit-logs");
+  };
+  await Promise.all([registrationTask(), workflowTask(), auditTask()]);
+  if (getAccessToken() !== token) throw new Error("Phiên đăng nhập đã thay đổi. Vui lòng tải lại dữ liệu.");
   resources = value;
   return overlay(mock, value);
 }

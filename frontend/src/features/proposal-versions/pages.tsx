@@ -1,4 +1,6 @@
 import { FilterBar } from "../../shared/components/filter-bar";
+import { termLabel } from "../../shared/data/term-selection";
+import { useRecordTerm } from "../../shared/hooks/use-record-term";
 import { ChevronLeft, ChevronRight, RotateCcw, Save, Send } from 'lucide-react';
 import { WorkflowHeading } from '../review-groups/workflow-heading';
 import React, { useEffect, useRef, useState } from 'react';
@@ -100,7 +102,7 @@ export function ProposalEditorListPage() {
             <option value="">Chọn đợt</option>
             {terms.data?.map((t) => (
               <option key={t.id} value={t.id}>
-                {t.name}
+                {termLabel(t)}
               </option>
             ))}
           </select>
@@ -534,6 +536,7 @@ function ProposalEditorPageContent({
     staleTime: 0,
     refetchOnWindowFocus: false,
   });
+  useRecordTerm(context.data?.termId);
   const historical = useQuery({
     queryKey: ['proposal-version', proposalId, versionId],
     queryFn: () => api.detail(proposalId, versionId!),

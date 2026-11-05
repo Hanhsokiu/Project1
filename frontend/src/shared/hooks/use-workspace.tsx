@@ -1,9 +1,19 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useSyncExternalStore,
+  type ReactNode,
+} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   currentUser,
   getWorkspaceSelection,
   setWorkspaceSelection,
+  subscribeWorkspaceSelection,
+  workspaceSelectionSnapshot,
 } from "../data/store";
+import { selectedTerm, termDestination } from "../data/term-selection";
 import { useDemo } from "./use-demo";
 import type { Account, DemoDb, Term } from "../data/types";
 interface Workspace {
@@ -36,44 +46,81 @@ const emptyTerm: Term = {
 };
 const Context = createContext<Workspace | null>(null);
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
-  const { data: db } = useDemo();
+  const { data: db, isFetching } = useDemo();
   return db ? (
-    <WorkspaceSnapshotProvider db={db}>{children}</WorkspaceSnapshotProvider>
+    <WorkspaceSnapshotProvider db={db} selectionReady={!isFetching}>
+      {children}
+    </WorkspaceSnapshotProvider>
   ) : null;
 }
 export function WorkspaceSnapshotProvider({
   children,
   db,
+  selectionReady = true,
 }: {
   children: ReactNode;
   db: DemoDb;
+  selectionReady?: boolean;
 }) {
-  const [termId, setTerm] = useState(
-    () => getWorkspaceSelection().termId || "dot1",
+  useSyncExternalStore(
+    subscribeWorkspaceSelection,
+    workspaceSelectionSnapshot,
+    () => "{}",
   );
-  const [studentId, setStudent] = useState(
-    () => getWorkspaceSelection().studentId || "sv1",
-  );
+  const saved = getWorkspaceSelection();
+  const location = useLocation(),
+    navigate = useNavigate();
+  const requested = new URLSearchParams(location.search).get("termId");
+  const detailId = /^\/terms\/([^/]+)/.exec(location.pathname)?.[1];
   const user = currentUser(db);
-  if (!user) return null;
-  const visibleTerms = user.studentId
+  const visibleTerms = user?.studentId
     ? db.terms.filter((t) => t.studentIds.includes(user.studentId!))
     : db.terms;
   const term =
-    visibleTerms.find((t) => t.id === termId) || visibleTerms[0] || emptyTerm;
+    selectedTerm(visibleTerms, detailId || requested, saved.termId) ||
+    emptyTerm;
+  useEffect(() => {
+    if (selectionReady && term.id && term.id !== saved.termId)
+      setWorkspaceSelection({ termId: term.id });
+  }, [term.id, saved.termId, selectionReady]);
+  // All workflow list pages consume this same termId in the URL.
+  useEffect(() => {
+    if (
+      selectionReady &&
+      !requested &&
+      term.id &&
+      /^\/(topic\/(review-groups|reviews|proposal|dossier)|guidance\/)/.test(
+        location.pathname,
+      )
+    ) {
+      const params = new URLSearchParams(location.search);
+      params.set("termId", term.id);
+      navigate(
+        { pathname: location.pathname, search: params.toString() },
+        { replace: true },
+      );
+    }
+  }, [
+    requested,
+    term.id,
+    location.pathname,
+    location.search,
+    navigate,
+    selectionReady,
+  ]);
+  if (!user) return null;
   const value: Workspace = {
     db,
     user,
     termId: term.id,
     term,
-    studentId: user.studentId || studentId,
+    studentId: user.studentId || saved.studentId || "",
     setStudentId: (id) => {
-      setStudent(id);
       setWorkspaceSelection({ studentId: id });
     },
     setTermId: (id) => {
-      setTerm(id);
       setWorkspaceSelection({ termId: id });
+      navigate(termDestination(location.pathname, location.search, id));
     },
   };
   return <Context.Provider value={value}>{children}</Context.Provider>;

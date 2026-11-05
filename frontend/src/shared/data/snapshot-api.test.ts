@@ -11,6 +11,7 @@ vi.mock("../api/http-client", () => ({
   httpClient: { request: fixture.request },
 }));
 vi.mock("../api/api-session", () => ({
+  AUTH_API: false,
   getAccessToken: () => fixture.token,
   getApiUser: () => ({
     id: "actual-user",

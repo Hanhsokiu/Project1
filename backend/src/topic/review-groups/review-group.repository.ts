@@ -1,7 +1,7 @@
-import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
-import { PrismaService } from '../../prisma/prisma.service';
-import { groupError } from './review-group.errors';
+import { Injectable } from "@nestjs/common";
+import { Prisma } from "@prisma/client";
+import { PrismaService } from "../../prisma/prisma.service";
+import { groupError } from "./review-group.errors";
 
 const groupInclude = {
   members: true,
@@ -56,8 +56,14 @@ export class ReviewGroupSession {
   terms(where: Prisma.ThesisTermWhereInput) {
     return this.tx.thesisTerm.findMany({
       where,
-      orderBy: [{ startDate: 'desc' }, { id: 'asc' }],
-      select: { id: true, name: true, status: true },
+      orderBy: [{ startDate: "desc" }, { id: "asc" }],
+      select: {
+        id: true,
+        code: true,
+        name: true,
+        status: true,
+        trainingSystem: { select: { name: true } },
+      },
     });
   }
   roster(termId: string, lecturerId: string) {
@@ -77,7 +83,7 @@ export class ReviewGroupSession {
       include: groupInclude,
       skip,
       take,
-      orderBy: [{ createdAt: 'desc' }, { id: 'asc' }],
+      orderBy: [{ createdAt: "desc" }, { id: "asc" }],
     });
   }
   count(where: Prisma.ReviewGroupWhereInput) {
@@ -91,7 +97,7 @@ export class ReviewGroupSession {
           is: { archivedAt: null, departmentId: { not: null } },
         },
       },
-      distinct: ['termId'],
+      distinct: ["termId"],
       select: { termId: true },
     });
   }
@@ -99,7 +105,7 @@ export class ReviewGroupSession {
     return this.tx.department.findMany({
       where,
       select: { id: true, name: true },
-      orderBy: [{ name: 'asc' }, { id: 'asc' }],
+      orderBy: [{ name: "asc" }, { id: "asc" }],
     });
   }
   lecturers(where: Prisma.LecturerWhereInput, skip?: number, take?: number) {
@@ -110,7 +116,7 @@ export class ReviewGroupSession {
       include: {
         user: { include: { userRoles: { include: { role: true } } } },
       },
-      orderBy: [{ fullName: 'asc' }, { id: 'asc' }],
+      orderBy: [{ fullName: "asc" }, { id: "asc" }],
     });
   }
   lecturerCount(where: Prisma.LecturerWhereInput) {
@@ -175,7 +181,7 @@ export class ReviewGroupSession {
       data: {
         userId,
         resourceId,
-        resource: 'review-group',
+        resource: "review-group",
         action,
         oldValue,
         newValue,
@@ -203,7 +209,7 @@ export class ReviewGroupSession {
         key,
         payloadHash,
         result,
-        expiresAt: new Date('9999-12-31T00:00:00Z'),
+        expiresAt: new Date("9999-12-31T00:00:00Z"),
       },
     });
   }
@@ -220,22 +226,22 @@ export class ReviewGroupRepository {
         return await this.prisma.$transaction(
           (tx) => work(new ReviewGroupSession(tx)),
           {
-            isolationLevel: mutation ? 'Serializable' : 'RepeatableRead',
+            isolationLevel: mutation ? "Serializable" : "RepeatableRead",
             timeout: 15000,
           },
         );
       } catch (e) {
         if (
           e instanceof Prisma.PrismaClientKnownRequestError &&
-          (['P2034', 'P2002'].includes(e.code) ||
-            (e.code === 'P2010' &&
-              ['40001', '40P01'].includes(String(e.meta?.code))))
+          (["P2034", "P2002"].includes(e.code) ||
+            (e.code === "P2010" &&
+              ["40001", "40P01"].includes(String(e.meta?.code))))
         ) {
           if (attempt < 2) continue;
           groupError(
             409,
-            'REVISION_CONFLICT',
-            'Dữ liệu đã thay đổi. Hãy tải lại trước khi chỉnh sửa.',
+            "REVISION_CONFLICT",
+            "Dữ liệu đã thay đổi. Hãy tải lại trước khi chỉnh sửa.",
           );
         }
         throw e;

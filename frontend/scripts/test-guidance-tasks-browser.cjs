@@ -270,7 +270,7 @@ async function main() {
           });
       if (p === "/notifications/me") return send([]);
       if (deny) return send("Không tìm thấy nhiệm vụ trong phạm vi.", 404);
-      if (method === "GET" && p === "/proposal-review-options/terms")
+      if (method === "GET" && ["/proposal-review-options/terms", "/weekly-plans/options"].includes(p))
         return send([
           { id: "t1", name: "Đợt demo 2026", status: "IN_PROGRESS" },
         ]);
@@ -736,7 +736,7 @@ async function main() {
     pass("mobile task detail and history have no horizontal page overflow");
     deny = true;
     await page.goto(origin + "/guidance/tasks/foreign");
-    await expect(page.getByRole("alert")).toContainText(
+    await expect(page.getByRole("alert").filter({ hasText: "Không tìm thấy nhiệm vụ" })).toContainText(
       "Không tìm thấy nhiệm vụ",
     );
     await expect(
@@ -746,6 +746,7 @@ async function main() {
     pass(
       "scope failures hide academic content and navigation causes no unhandled page errors",
     );
+    fs.mkdirSync(path.resolve(root, "../.cache/ui-modern-20261104"), { recursive: true });
     fs.writeFileSync(
       path.join(root, "../.cache/ui-modern-20261104/step8a-browser-results.json"),
       JSON.stringify(

@@ -64,6 +64,7 @@ async function main() {
       errors = [],
       requests = [];
     page.on("pageerror", (e) => errors.push(e.message));
+    page.on("dialog", (dialog) => dialog.accept());
     await installWorkflowSession(page);
     let actor = process.argv.includes("--student")
         ? "student"
@@ -317,7 +318,7 @@ async function main() {
             : undefined,
       });
       if (deny) return send("Không tìm thấy hồ sơ trong phạm vi.", 404);
-      if (p === "/proposal-review-options/terms")
+      if (["/proposal-review-options/terms", "/weekly-plans/options"].includes(p))
         return send([
           { id: "t1", name: "Đợt hướng dẫn DEMO", status: "IN_PROGRESS" },
         ]);
@@ -643,14 +644,13 @@ async function main() {
       .click();
     assert.equal((await download).suggestedFilename(), "report.pdf");
     pass("advisor inbox opens exact submission version and secure download");
-    await page
-      .getByRole("button", { name: "Ghi nhận đánh giá", exact: true })
-      .click();
+    await expect(page.getByRole("button", { name: "Ghi nhận đánh giá", exact: true })).toBeDisabled();
     assert.equal(reviews.size, 0);
     await page
       .getByLabel("Nhận xét đánh giá")
       .fill("Cần bổ sung kiểm thử tích hợp");
     conflict = true;
+    await page.getByLabel("Hạn sửa", { exact: true }).fill(new Date(now + 7 * 3600000 + 86400000).toISOString().slice(0, 16));
     await page
       .getByRole("button", { name: "Ghi nhận đánh giá", exact: true })
       .click();
@@ -664,6 +664,7 @@ async function main() {
     await page
       .getByLabel("Nhận xét đánh giá")
       .fill("Cần bổ sung kiểm thử tích hợp");
+    await page.getByLabel("Hạn sửa", { exact: true }).fill(new Date(now + 7 * 3600000 + 86400000).toISOString().slice(0, 16));
     await page
       .getByRole("button", { name: "Ghi nhận đánh giá", exact: true })
       .click();
@@ -743,9 +744,7 @@ async function main() {
     await page.getByRole("button", { name: "Sửa đánh giá có lý do" }).click();
     await page.getByLabel("Kết quả đánh giá").selectOption("FAIL");
     await page.getByLabel("Nhận xét đánh giá").fill("Kết quả chưa đầy đủ");
-    await page
-      .getByRole("button", { name: "Lưu sửa đánh giá", exact: true })
-      .click();
+    await expect(page.getByRole("button", { name: "Lưu sửa đánh giá", exact: true })).toBeDisabled();
     assert.equal(effective(currentId).decision, "PASS");
     await page.getByLabel("Lý do sửa đánh giá").fill("Đối soát lại chứng cứ");
     await page
@@ -753,13 +752,14 @@ async function main() {
       .click();
     await expect(
       page.getByText(
-        "Báo cáo không đạt; cần làm và nộp lại: Kết quả chưa đầy đủ",
+        "Báo cáo không đạt; chỉ được nộp lại sau khi GVHD mở lại: Kết quả chưa đầy đủ",
         { exact: true },
       ),
     ).toBeVisible();
     assert.equal(taskState, "REVISION_REQUESTED");
     await page.getByRole("button", { name: "Sửa đánh giá có lý do" }).click();
     await page.getByLabel("Kết quả đánh giá").selectOption("REVISION_REQUIRED");
+    await page.getByLabel("Hạn sửa", { exact: true }).fill(new Date(now + 7 * 3600000 + 86400000).toISOString().slice(0, 16));
     await page.getByLabel("Nhận xét đánh giá").fill("Chỉnh cách trình bày");
     await page
       .getByLabel("Lý do sửa đánh giá")
@@ -878,7 +878,7 @@ async function main() {
     );
     deny = true;
     await page.reload();
-    await expect(page.getByRole("alert").first()).toContainText(
+    await expect(page.getByRole("alert").filter({ hasText: "Không tìm thấy hồ sơ" })).toContainText(
       "Không tìm thấy hồ sơ",
     );
     assert.deepEqual(errors, []);
@@ -894,6 +894,7 @@ async function main() {
     pass(
       "scope errors hide content with no unhandled page errors or missing mutation idempotency keys",
     );
+    fs.mkdirSync(path.resolve(root, "../.cache/ui-modern-20261104"), { recursive: true });
     fs.writeFileSync(
       path.join(root, "../.cache/ui-modern-20261104/step8c-browser-results.json"),
       JSON.stringify(

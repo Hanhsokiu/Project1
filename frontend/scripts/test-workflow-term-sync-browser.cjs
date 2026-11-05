@@ -44,10 +44,13 @@ async function main() {
         'proposal:assign',
         'review-group:read',
         'review-group:manage',
+        'guidance:read',
+        'guidance:monitor',
       ],
       locked: false,
       mustChangePassword: false,
     };
+    let actor = user;
     await page.addInitScript((user) => {
       if (!sessionStorage.getItem('utc-api-user')) {
         sessionStorage.setItem('utc-api-user', JSON.stringify(user));
@@ -91,7 +94,7 @@ async function main() {
           contentType: 'application/json',
           body: JSON.stringify({ success: true, data }),
         });
-      if (p === '/auth/me') return send(user);
+      if (p === '/auth/me') return send(actor);
       if (p === '/terms' && request.method() === 'POST') {
         creates++;
         const body = request.postDataJSON();
@@ -111,6 +114,17 @@ async function main() {
       if (p === '/training-systems')
         return send([{ id: 'program', name: 'Chính quy', code: 'CQ' }]);
       if (p === '/notifications/me') return send([]);
+      if (['/students', '/lecturers', '/registrations'].includes(p))
+        return send({ items: [], total: 0 });
+      if (['/departments', '/research-areas'].includes(p) || p.startsWith('/notifications/outbox/term/')) return send([]);
+      if (/^\/assignments\/term\/[^/]+\/(plan|results)$/.test(p)) return send({ plan: null, assignments: [] });
+      if (p === '/weekly-plans/options') return send(rows.map((r) => ({ ...r, canManage: true })));
+      if (p === '/tasks/direct') return send({ id: 'direct', termId: 'new', planId: 'plan', proposalId: 'proposal', title: 'Nhiệm vụ thuộc đợt mới', status: 'TODO', dueDate: '2027-03-01T00:00:00Z', allowedActions: [], progress: [], history: [], isOverdue: false, hasSubmissions: false });
+      const weekly = /^\/terms\/([^/]+)\/(weekly-plans|weekly-progress)$/.exec(p);
+      if (weekly) {
+        listRequests.push({ termId: weekly[1], kind: weekly[2] });
+        return send(weekly[2] === 'weekly-plans' ? [] : { data: [], total: 0, page: 1, totalPages: 0, metrics: { NOT_SUBMITTED: 0, PENDING: 0, PASS: 0, FAIL: 0, REVISION_REQUIRED: 0, LATE: 0 } });
+      }
       if (
         [
           '/proposal-review-options/terms',
@@ -120,7 +134,7 @@ async function main() {
         if (delayTermResponse)
           await new Promise((resolve) => setTimeout(resolve, 250));
         // Keep the old term first so a default-to-first regression is observable.
-        return send(rows.map(({ id, name, status }) => ({ id, name, status })));
+        return send(rows.map(({ id, name, status, code, program }) => ({ id, name, status, code, trainingSystem: { name: program } })));
       }
       const options =
         /^\/terms\/([^/]+)\/(proposal-review-options|review-group-options)$/.exec(
@@ -135,7 +149,9 @@ async function main() {
           canManage: true,
           lecturers: { data: [], total: 0, page: 1, limit: 20, totalPages: 0 },
         });
-      const list = /^\/terms\/([^/]+)\/(proposals|review-groups)$/.exec(p);
+      if (/^\/terms\/[^/]+\/guidance-periods$/.test(p)) return send([]);
+      if (/^\/terms\/[^/]+\/weekly-report-coverage$/.test(p)) return send({ coverageState: 'READY', data: [], total: 0, page: 1, totalPages: 0 });
+      const list = /^\/terms\/([^/]+)\/(proposals|review-groups|guidance-tasks)$/.exec(p);
       if (list) {
         listRequests.push({ termId: list[1], kind: list[2] });
         return send({ data: [], total: 0, page: 1, limit: 20, totalPages: 0 });
@@ -185,7 +201,7 @@ async function main() {
       await expect(page.getByLabel(label, { exact: true })).toHaveValue('new');
       await expect(
         page.getByLabel(label, { exact: true }).locator('option[value="new"]'),
-      ).toHaveText('Đợt Khoa vừa tạo');
+      ).toHaveText('DATN-NEW · Đợt Khoa vừa tạo · Chính quy');
       await expect(page.getByLabel('Đợt làm việc')).toHaveValue('new');
     };
     await selectWorkflow('Phân công & xét duyệt', 'Đợt xét duyệt');
@@ -203,6 +219,21 @@ async function main() {
     await page.getByLabel('Đợt đồ án', { exact: true }).selectOption('new');
     await expect(page.getByLabel('Đợt làm việc')).toHaveValue('new');
     console.log('PASS Header and page term selectors stay synchronized');
+    await page.goto(origin + '/guidance/weeks?termId=new');
+    await expect(page.getByLabel('Đợt làm việc')).toHaveValue('new');
+    await expect(page.getByLabel('Đợt đồ án', { exact: true })).toHaveValue('new');
+    const headerLabel = await page.getByLabel('Đợt làm việc').locator('option:checked').textContent();
+    await expect(page.getByLabel('Đợt đồ án', { exact: true }).locator('option:checked')).toHaveText(headerLabel);
+    await page.getByLabel('Đợt làm việc').selectOption('old');
+    await expect(page.getByLabel('Đợt đồ án', { exact: true })).toHaveValue('old');
+    await page.getByLabel('Đợt đồ án', { exact: true }).selectOption('new');
+    await expect(page.getByLabel('Đợt làm việc')).toHaveValue('new');
+    await page.reload();
+    await expect(page.getByLabel('Đợt làm việc')).toHaveValue('new');
+    await expect(page.getByLabel('Đợt đồ án', { exact: true })).toHaveValue('new');
+    assert(listRequests.some((r) => r.kind === 'weekly-progress' && r.termId === 'old'));
+    assert(listRequests.some((r) => r.kind === 'weekly-progress' && r.termId === 'new'));
+    console.log('PASS Weekly header, page, API requests and reload share the selected term');
     // Re-enter with no term URL and a stale cache; wait for the fresh scope list.
     delayTermResponse = true;
     await openTerms();
@@ -216,6 +247,31 @@ async function main() {
     await expect(page.getByLabel('Đợt đề cương')).toHaveValue('later');
     await expect(page.getByLabel('Đợt làm việc')).toHaveValue('later');
     await expect(page).toHaveURL(/search=giu-bo-loc/);
+    // Compare the same term identity in the ordinary dashboard and workflow shell.
+    await page.goto(origin + '/?termId=new');
+    await expect(page.getByLabel('Đợt làm việc').locator('option:checked')).toHaveText('DATN-NEW · Đợt Khoa vừa tạo · Chính quy');
+    actor = { ...user, id: 'lecturer', roles: ['LECTURER'], lecturerId: 'lecturer-profile', permissions: ['proposal:read', 'guidance:read', 'task:review', 'submission:read'] };
+    await page.evaluate(async (actor) => {
+      const { setApiUser, setTokens } = await import('/src/shared/api/api-session.ts');
+      setTokens('lecturer-token');
+      setApiUser(actor);
+    }, actor);
+    await page.goto(origin + '/guidance/weeks?termId=new');
+    await expect(page.getByLabel('Đợt làm việc')).toHaveValue('new');
+    await expect(page.getByLabel('Đợt làm việc').locator('option:checked')).toHaveText('DATN-NEW · Đợt Khoa vừa tạo · Chính quy');
+    await expect(page.getByLabel('Đợt đồ án', { exact: true })).toHaveValue('new');
+    console.log('PASS Dashboard and lecturer workflow use the same term identity after account switch');
+    await page.evaluate(async () => {
+      const { setWorkspaceSelection } = await import('/src/shared/data/store.ts');
+      setWorkspaceSelection({ termId: 'old' });
+    });
+    await page.goto(origin + '/guidance/tasks/direct');
+    await expect(page.getByRole('heading', { name: 'Nhiệm vụ thuộc đợt mới' })).toBeVisible();
+    await expect(page.getByLabel('Đợt làm việc')).toHaveValue('new');
+    await expect(page).toHaveURL(/termId=new/);
+    await page.getByLabel('Đợt làm việc').selectOption('old');
+    await expect(page).toHaveURL(/\/guidance\/tasks\?termId=old/);
+    console.log('PASS Direct task link restores its actual term; switching term leaves the old task detail');
     assert(
       listRequests.some(
         (request) => request.termId === 'new' && request.kind === 'proposals',

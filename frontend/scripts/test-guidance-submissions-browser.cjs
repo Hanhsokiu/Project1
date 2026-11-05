@@ -64,6 +64,7 @@ async function main() {
       errors = [],
       requests = [];
     page.on("pageerror", (e) => errors.push(e.message));
+    page.on("dialog", (dialog) => dialog.accept());
     await installWorkflowSession(page);
     let actor = process.argv.includes("--faculty")
         ? "faculty"
@@ -163,7 +164,7 @@ async function main() {
         contentType: r.headers()["content-type"],
       });
       if (deny) return send("Không tìm thấy báo cáo trong phạm vi.", 404);
-      if (p === "/proposal-review-options/terms")
+      if (["/proposal-review-options/terms", "/weekly-plans/options"].includes(p))
         return send([
           { id: "t1", name: "Đợt đồ án DEMO", status: "IN_PROGRESS" },
         ]);
@@ -463,7 +464,7 @@ async function main() {
     pass("mobile upload controls and history fit 375px viewport");
     deny = true;
     await page.reload();
-    await expect(page.getByRole("alert").first()).toContainText(
+    await expect(page.getByRole("alert").filter({ hasText: "Không tìm thấy báo cáo" }).first()).toContainText(
       "Không tìm thấy báo cáo",
     );
     assert.deepEqual(errors, []);
@@ -471,6 +472,7 @@ async function main() {
     pass(
       "scope error hides academic data with no unhandled page error or missing idempotency key",
     );
+    fs.mkdirSync(path.resolve(root, "../.cache/ui-modern-20261104"), { recursive: true });
     fs.writeFileSync(
       path.join(root, "../.cache/ui-modern-20261104/step8b-browser-results.json"),
       JSON.stringify(

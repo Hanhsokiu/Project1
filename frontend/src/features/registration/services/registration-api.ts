@@ -5,9 +5,10 @@ import type {
 import { RegistrationWriteSchema } from "@doan/shared/step2";
 import { apiData } from "../../../shared/api/api-data";
 import type { Registration } from "../../../shared/data/types";
+import { AUTH_API } from "../../../shared/api/api-session";
 
 export const REGISTRATION_API =
-  import.meta.env.VITE_REGISTRATION_API === "true";
+  AUTH_API || import.meta.env.VITE_REGISTRATION_API === "true";
 export interface RegistrationContext {
   registration: RegistrationResponse | null;
   window: {

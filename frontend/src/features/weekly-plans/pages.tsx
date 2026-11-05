@@ -14,6 +14,8 @@ import {
   toVietnamInput,
 } from "../guidance-tasks/components";
 import { getErrorMessage } from "../../shared/api/error-message";
+import { useWorkflowTerms } from "../../shared/hooks/use-workflow-terms";
+import { termLabel } from "../../shared/data/term-selection";
 
 const statusLabels = {
   NOT_SUBMITTED: "Chưa nộp",
@@ -180,10 +182,7 @@ export function WeeklyPlansPage() {
     [advisorSearch, setAdvisorSearch] = useState(""),
     [late, setLate] = useState(false);
   const [historyId, setHistoryId] = useState("");
-  const options = useQuery({
-    queryKey: ["weekly-options"],
-    queryFn: api.options,
-  });
+  const options = useWorkflowTerms("guidance");
   const plans = useQuery({
     queryKey: ["weekly-plans", term],
     queryFn: () => api.plans(term),
@@ -295,7 +294,7 @@ export function WeeklyPlansPage() {
           <option value="">Chọn đợt</option>
           {options.data?.map((o) => (
             <option key={o.id} value={o.id}>
-              {o.name}
+              {termLabel(o)}
             </option>
           ))}
         </select>
