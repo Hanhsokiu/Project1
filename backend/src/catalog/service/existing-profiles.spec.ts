@@ -146,13 +146,11 @@ describe("confirmation revalidates legacy import previews", () => {
         accounts: [],
       }),
       apply: vi.fn().mockResolvedValue("actual-profile"),
-      finish: vi
-        .fn()
-        .mockImplementation(async (_id, rows) => ({
-          ...job,
-          rows,
-          status: "DONE",
-        })),
+      finish: vi.fn().mockImplementation(async (_id, rows) => ({
+        ...job,
+        rows,
+        status: "DONE",
+      })),
     };
     const service = new ImportService({
       job: unit.job,
@@ -162,9 +160,59 @@ describe("confirmation revalidates legacy import previews", () => {
     return { service, unit };
   }
   it.each(["STRICT", "VALID_ONLY"] as const)(
-    "rejects a legacy CREATE preview for a missing student in %s mode",
+    "revalidates a legacy CREATE preview for a new student in %s mode",
     async (mode) => {
       const { service, unit } = setup(false);
+      unit.apply.mockImplementation(async (row) => {
+        expect(row.action).toBe("CREATE");
+        expect(row.studentId).toBeUndefined();
+        return "actual-profile";
+      });
+      await expect(
+        service.confirm("job", mode, "faculty"),
+      ).resolves.toMatchObject({
+        status: "DONE",
+      });
+      expect(unit.apply).toHaveBeenCalledTimes(1);
+      expect(unit.apply).toHaveBeenCalledWith(
+        expect.objectContaining({
+          action: "CREATE",
+          errors: [],
+          values: expect.objectContaining({
+            studentCode: studentInput.studentCode,
+          }),
+        }),
+        "term",
+        systemId,
+      );
+      expect(unit.finish).toHaveBeenCalledWith(
+        "job",
+        [
+          expect.objectContaining({
+            status: "IMPORTED",
+            studentId: "actual-profile",
+          }),
+        ],
+        mode,
+        "faculty",
+      );
+    },
+  );
+  it.each(["STRICT", "VALID_ONLY"] as const)(
+    "rejects a legacy CREATE preview when its code now belongs to another account in %s mode",
+    async (mode) => {
+      const { service, unit } = setup(false);
+      const context = await unit.context();
+      unit.context.mockResolvedValue({
+        ...context,
+        accounts: [
+          {
+            id: "other-account",
+            username: studentInput.studentCode,
+            email: null,
+          },
+        ],
+      } as never);
       await expect(service.confirm("job", mode, "faculty")).rejects.toThrow();
       expect(unit.apply).not.toHaveBeenCalled();
       expect(unit.finish).not.toHaveBeenCalled();
