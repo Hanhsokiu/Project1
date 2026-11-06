@@ -1,0 +1,118 @@
+{
+  "result": "PASS",
+  "checks": [
+    {
+      "name": "Original producer core unchanged",
+      "result": "PASS",
+      "detail": {
+        "hash": "059be13228fb738a44ec66bc967cf36159d4e1656e35ff9d9eb1a566e1b567ad",
+        "models": [
+          "student",
+          "termStudent",
+          "termLecturer",
+          "registration",
+          "advisorAssignment",
+          "assignmentPlan",
+          "topic"
+        ]
+      }
+    },
+    {
+      "name": "Exactly four rounds, no duplicate active round",
+      "result": "PASS",
+      "detail": {
+        "rounds": 4,
+        "active": [
+          "d26b45ff-41f3-4a75-b897-1a313e39cdfe"
+        ]
+      }
+    },
+    {
+      "name": "Superseded history retains version and original comment",
+      "result": "PASS",
+      "detail": {
+        "oldReviewId": "e1ec9801-9374-4357-a1a1-be95ce115f3f",
+        "versionId": "v1-student",
+        "comments": 1
+      }
+    },
+    {
+      "name": "Exactly one canonical decision per decided round",
+      "result": "PASS",
+      "detail": [
+        {
+          "reviewId": "2e363cc4-dedf-4cc7-9c28-0a2474fffe45",
+          "decision": "REVISION_REQUIRED",
+          "actor": "outsider"
+        },
+        {
+          "reviewId": "27a5b94d-73b3-436c-ae04-ec4c3f1e5f01",
+          "decision": "APPROVED",
+          "actor": "reviewer"
+        }
+      ]
+    },
+    {
+      "name": "Append-only comments and replay did not duplicate",
+      "result": "PASS",
+      "detail": {
+        "comments": 5,
+        "thirdRound": 2
+      }
+    },
+    {
+      "name": "Notifications go exactly to owner and official advisor",
+      "result": "PASS",
+      "detail": [
+        {
+          "recipient": "student",
+          "link": "/topic/reviews/2e363cc4-dedf-4cc7-9c28-0a2474fffe45"
+        },
+        {
+          "recipient": "advisor",
+          "link": "/topic/reviews/2e363cc4-dedf-4cc7-9c28-0a2474fffe45"
+        },
+        {
+          "recipient": "student2",
+          "link": "/topic/reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01"
+        },
+        {
+          "recipient": "advisor",
+          "link": "/topic/reviews/27a5b94d-73b3-436c-ae04-ec4c3f1e5f01"
+        }
+      ]
+    },
+    {
+      "name": "One pending outbox event per decision; email not asserted",
+      "result": "PASS",
+      "detail": {
+        "events": 2,
+        "state": "PENDING",
+        "emailWorker": false,
+        "smtpDelivery": "NOT TESTED"
+      }
+    },
+    {
+      "name": "Audit matches accepted commands, no rejected command persisted",
+      "result": "PASS",
+      "detail": {
+        "ASSIGN": 4,
+        "START": 4,
+        "COMMENT": 5,
+        "DECISION": 2
+      }
+    },
+    {
+      "name": "No STEP6-8 workflows created by STEP5",
+      "result": "PASS",
+      "detail": {
+        "thesisDossier": 0,
+        "dossierFinalization": 0,
+        "guidancePlan": 0,
+        "task": 0,
+        "progressReview": 0,
+        "finalResult": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-28T02:31:43.687Z",
+  "services": [
+    {
+      "url": "http://127.0.0.1:50185",
+      "reachable": false
+    },
+    {
+      "url": "http://127.0.0.1:60959/api/health",
+      "reachable": false
+    }
+  ],
+  "privateDatabaseRetained": true,
+  "existingDatabaseUntouched": true,
+  "postgresCluster": "left running; no cluster shutdown"
+}

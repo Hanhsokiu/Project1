@@ -1,0 +1,11 @@
+{
+  "finishedAt": "2026-10-28T13:13:41.246Z",
+  "method": "local Playwright + real Edge",
+  "frontend": "http://127.0.0.1:50187",
+  "database": "btl_pr2b_step7fix_1793191452227_7d5922_live",
+  "passed": 3,
+  "failed": 0,
+  "consoleErrors": 2,
+  "pageErrors": 0,
+  "failedRequests": 0
+}

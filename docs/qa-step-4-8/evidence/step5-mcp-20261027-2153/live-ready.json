@@ -1,0 +1,11 @@
+{
+  "database": "btl_pr2b_step5_1793113507174_4ffad7_live",
+  "frontend": "http://127.0.0.1:50185",
+  "apiOrigin": "http://127.0.0.1:53029",
+  "api": "http://127.0.0.1:53029/api",
+  "syntheticOnly": true,
+  "coreHashBefore": "7237a48d163f32cb360a9b171c15a2697330589fdc2ac6ac8892718f1e390bf0",
+  "mockedApi": false,
+  "emailWorkerEnabled": false,
+  "startedAt": "2026-10-27T15:05:13.210Z"
+}

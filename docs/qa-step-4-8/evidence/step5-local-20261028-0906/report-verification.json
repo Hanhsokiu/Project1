@@ -1,0 +1,13 @@
+{
+  "result": "PASS",
+  "plannedGroups": 52,
+  "groupResults": {
+    "PASS": 48,
+    "FAIL": 2,
+    "BLOCKED": 2
+  },
+  "missingEvidenceLinks": [],
+  "scannedTextArtifacts": 54,
+  "detectedSecretFiles": [],
+  "limitations": "Checks exact known local password, JWT format and credentialed PostgreSQL URLs; not a general secret detector."
+}

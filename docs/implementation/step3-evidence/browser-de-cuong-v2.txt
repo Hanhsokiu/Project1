@@ -1,0 +1,33 @@
+
+
+BẢN NHÁP — CHỜ DUYỆT · Phiên bản 2 · 2026-10-25T16:11:35.914Z
+Mã phiên bản: 7a8c303c-15e8-4561-9ae8-1350adb3d957
+TRƯỜNG ĐẠI HỌC GTVT
+KHOA CÔNG NGHỆ THÔNG TIN
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+Độc lập - Tự do - Hạnh phúc
+Hà Nội, ngày ...... tháng ...... năm ........
+ĐỀ CƯƠNG ĐỒ ÁN TỐT NGHIỆP CỬ NHÂN
+Họ và tên sinh viên: Sinh viên A      Mã SV: S3S17929446248010
+Lớp: Kiểm thử tiếng Việt   Khóa: K63   Hệ: Chính quy
+Số điện thoại: 0912345678   Email: s3_s1792944624801_0@example.test
+Ngành: Công nghệ thông tin
+Giảng viên hướng dẫn: Giảng viên Y
+Đơn vị công tác: Trường Đại học Giao thông vận tải
+Số điện thoại: 0912345678   Email: s3_l1792944624801_1@example.test
+Tên đề tài: Ứng dụng quản lý đồ án tiếng Việt qua API
+1. Nội dung, phạm vi của đề tài
+Mục tiêu: Quản lý đăng ký, phân công và đề cương có lịch sử
+Nội dung, phạm vi: Một sinh viên một đề tài, lưu dữ liệu thật trong PostgreSQL
+2. Công nghệ, công cụ và ngôn ngữ lập trình
+React, NestJS, Prisma, PostgreSQL
+3. Các kết quả chính dự kiến đạt được
+Đăng ký và đề cương được lưu, xuất PDF tiếng Việt
+4. Kế hoạch thực hiện đề tài
+
+STTNội dung công việcThời gian dự kiếnGhi chú
+1
+Phân tích, triển khai và kiểm thử xuyên
+suốt
+1–3
+Trưởng KhoaTrưởng Bộ mônGiảng viên hướng dẫnSinh viên thực hiện

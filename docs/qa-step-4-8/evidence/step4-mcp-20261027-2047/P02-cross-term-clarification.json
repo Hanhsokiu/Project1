@@ -1,0 +1,17 @@
+{
+  "startedAt": "2026-10-27T14:01:04.227Z",
+  "requests": [],
+  "responses": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "observations": {
+    "crossTermRead": {
+      "status": 200,
+      "total": 0,
+      "returnedCount": 0,
+      "foreignGroupContentsRecorded": false,
+      "assessment": "200 với danh sách rỗng không chứng minh leak; request trước gắn unexpectedDataReturned theo giả định harness, không phải bug đã xác nhận."
+    }
+  },
+  "finishedAt": "2026-10-27T14:01:04.264Z"
+}

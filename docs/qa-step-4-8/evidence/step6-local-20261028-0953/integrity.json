@@ -1,0 +1,260 @@
+{
+  "result": "PASS",
+  "versions": 55,
+  "sealed": 26,
+  "draft": 27,
+  "legacyWithoutMetadata": 2,
+  "originalSourceUnchanged": true,
+  "allInitialSealedHashesValid": true,
+  "versionNumbersContiguous": true,
+  "pointersAndCountersValid": true,
+  "workflow": [
+    {
+      "proposalId": "p-student3",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-student3",
+      "submittedVersionId": "v1-student3",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-03",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-03",
+      "submittedVersionId": "v1-page-03",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-04",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-04",
+      "submittedVersionId": "v1-page-04",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-05",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-05",
+      "submittedVersionId": "v1-page-05",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-06",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-06",
+      "submittedVersionId": "v1-page-06",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-07",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-07",
+      "submittedVersionId": "v1-page-07",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-08",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-08",
+      "submittedVersionId": "v1-page-08",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-09",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-09",
+      "submittedVersionId": "v1-page-09",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-10",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-10",
+      "submittedVersionId": "v1-page-10",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-11",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-11",
+      "submittedVersionId": "v1-page-11",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-12",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-12",
+      "submittedVersionId": "v1-page-12",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-13",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-13",
+      "submittedVersionId": "v1-page-13",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-14",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-14",
+      "submittedVersionId": "v1-page-14",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-15",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-15",
+      "submittedVersionId": "v1-page-15",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-16",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-16",
+      "submittedVersionId": "v1-page-16",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-17",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-17",
+      "submittedVersionId": "v1-page-17",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-18",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-18",
+      "submittedVersionId": "v1-page-18",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-19",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-19",
+      "submittedVersionId": "v1-page-19",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-20",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-20",
+      "submittedVersionId": "v1-page-20",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-student2",
+      "count": 29,
+      "nextVersionNumber": 30,
+      "workingVersionId": "14143778-8457-4e17-9a06-ac1778060ddd",
+      "submittedVersionId": "14143778-8457-4e17-9a06-ac1778060ddd",
+      "submissionKind": "RESUBMISSION"
+    },
+    {
+      "proposalId": "p-page-01",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-01",
+      "submittedVersionId": "v1-page-01",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-page-02",
+      "count": 1,
+      "nextVersionNumber": 2,
+      "workingVersionId": "v1-page-02",
+      "submittedVersionId": "v1-page-02",
+      "submissionKind": "INITIAL"
+    },
+    {
+      "proposalId": "p-student",
+      "count": 2,
+      "nextVersionNumber": 3,
+      "workingVersionId": "642c76d2-a799-46f7-b055-8d18141f6313",
+      "submittedVersionId": "642c76d2-a799-46f7-b055-8d18141f6313",
+      "submissionKind": "RESUBMISSION"
+    },
+    {
+      "proposalId": "p-page-21",
+      "count": 3,
+      "nextVersionNumber": 4,
+      "workingVersionId": "qa-step6-legacy-3",
+      "submittedVersionId": "v1-page-21",
+      "submissionKind": "INITIAL"
+    }
+  ],
+  "saveAudits": 29,
+  "submitAudits": 2,
+  "events": [
+    {
+      "eventId": "3c92eab7-7859-4fc5-8096-1fe35bf43223",
+      "type": "PROPOSAL_VERSION_SUBMITTED",
+      "aggregateId": "p-student",
+      "state": "PENDING",
+      "payload": {
+        "termId": "qa-t1",
+        "versionId": "642c76d2-a799-46f7-b055-8d18141f6313",
+        "proposalId": "p-student",
+        "advisorUserId": "advisor",
+        "studentUserId": "student",
+        "submissionKind": "RESUBMISSION"
+      }
+    },
+    {
+      "eventId": "2d8538b7-5b21-478b-8f9c-c42c2cbea746",
+      "type": "PROPOSAL_VERSION_SUBMITTED",
+      "aggregateId": "p-student2",
+      "state": "PENDING",
+      "payload": {
+        "termId": "qa-t1",
+        "versionId": "14143778-8457-4e17-9a06-ac1778060ddd",
+        "proposalId": "p-student2",
+        "advisorUserId": "advisor",
+        "studentUserId": "student2",
+        "submissionKind": "RESUBMISSION"
+      }
+    }
+  ],
+  "notifications": [
+    {
+      "id": "fd8e41f9-8105-4014-a046-cc0eae6a08e2",
+      "userId": "advisor",
+      "termId": "qa-t1",
+      "link": "/topic/proposal/p-student"
+    },
+    {
+      "id": "922fdbe8-4f52-4807-bb99-a05c9bc13a30",
+      "userId": "advisor",
+      "termId": "qa-t1",
+      "link": "/topic/proposal/p-student2"
+    }
+  ],
+  "downstream": {
+    "thesisDossier": 0,
+    "dossierFinalization": 0,
+    "guidancePlan": 0,
+    "task": 0,
+    "progressReview": 0,
+    "finalResult": 0
+  },
+  "emailDelivery": "NOT RUN; worker disabled"
+}

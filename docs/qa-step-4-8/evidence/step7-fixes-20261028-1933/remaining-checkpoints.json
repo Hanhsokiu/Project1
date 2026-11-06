@@ -1,0 +1,112 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T12:50:40.283Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50186/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T03-code-search-through-real-UI",
+    "result": "FAIL",
+    "at": "2026-10-28T12:50:45.702Z",
+    "error": "Error: expect(locator).toBeVisible() failed\n\nLocator: getByText('1 hồ sơ · Trang 1/1', { exact: true })\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n  - Expect \"toBeVisible\" getByText('1 hồ sơ · Trang 1/1', { exact: true }) with timeout 5000ms\n  - waiting for getByText('1 hồ sơ · Trang 1/1', { exact: true })\n\n    at captureRawStack (D:\\Project1\\BTL\\node_modules\\.pnpm\\playwright-core@1.64.1\\node_modules\\playwright-core\\lib\\coreBundle.js:9282:17)\n    at callMatcherAsStep (D:\\Project1\\BTL\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\matchers\\expect.js:13316:57)\n    at Object.toBeVisible (D:\\Project1\\BTL\\node_modules\\.pnpm\\playwright@1.64.1\\node_modules\\playwright\\lib\\matchers\\expect.js:13308:23)\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-fixes-20261028-1933\\harness\\remaining.cjs:8:292\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-fixes-20261028-1933\\harness\\browser-common.cjs:20:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-fixes-20261028-1933\\harness\\remaining.cjs:8:2"
+  },
+  {
+    "id": "T05-committee-role-alone-no-academic-scope",
+    "result": "PASS",
+    "at": "2026-10-28T12:50:46.481Z",
+    "detail": {
+      "rows": [
+        {
+          "route": "/proposals/p-student/dossier",
+          "status": 404
+        },
+        {
+          "route": "/proposals/p-student/dossier.pdf",
+          "status": 403
+        },
+        {
+          "route": "/proposals/p-student/preview.pdf?versionId=v1-student",
+          "status": 404
+        }
+      ]
+    }
+  },
+  {
+    "id": "T08-T09-producer-ownership-assignment-and-unapproved-states",
+    "result": "PASS",
+    "at": "2026-10-28T12:50:47.115Z",
+    "detail": {
+      "rows": [
+        {
+          "name": "missing ownership",
+          "status": 409,
+          "code": "INPUT_NOT_READY"
+        },
+        {
+          "name": "missing official assignment",
+          "status": 409,
+          "code": "INPUT_NOT_READY"
+        },
+        {
+          "name": "SUBMITTED",
+          "status": 409,
+          "code": "STATE_TRANSITION_INVALID"
+        },
+        {
+          "name": "UNDER_REVIEW",
+          "status": 409,
+          "code": "STATE_TRANSITION_INVALID"
+        },
+        {
+          "name": "REVISION_REQUESTED",
+          "status": 409,
+          "code": "STATE_TRANSITION_INVALID"
+        }
+      ],
+      "fixtureOnly": true,
+      "restored": true,
+      "noPartialWrites": true
+    }
+  },
+  {
+    "id": "T43-legacy-null-print-snapshot-fails-closed",
+    "result": "PASS",
+    "at": "2026-10-28T12:50:47.185Z",
+    "detail": {
+      "explicitLegacyFixture": true,
+      "finalizationId": "3c9650f3-dd89-46fd-b784-e80e74d13744",
+      "currentFinalization": null,
+      "download": 409,
+      "noBackfill": true
+    }
+  },
+  {
+    "id": "T35-T42-stale-finalize-PDF-receipt-and-SPA-keys",
+    "result": "PASS",
+    "at": "2026-10-28T12:50:50.111Z",
+    "detail": {
+      "staleFinalizeBlocked": true,
+      "stalePdfBlockedAndRecovered": true,
+      "staleReceiptNotePreserved": true,
+      "externalReceiptConflictPreservedNote": true,
+      "SPAnoteAndKeyIsolated": true,
+      "writeScope": "private synthetic database only"
+    }
+  },
+  {
+    "id": "S7-02-historical-UI-download-and-snapshot",
+    "result": "PASS",
+    "at": "2026-10-28T12:50:50.709Z",
+    "detail": {
+      "supersededLabel": true,
+      "oldSnapshotVisible": true,
+      "oldPdfBytesExact": true
+    }
+  }
+]

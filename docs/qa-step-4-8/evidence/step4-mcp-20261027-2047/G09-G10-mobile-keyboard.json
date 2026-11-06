@@ -1,0 +1,61 @@
+{
+  "startedAt": "2026-10-27T13:57:54.128Z",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "observations": {
+    "listLayout": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "bodyWidth": 375,
+      "mainWidth": 375.20001220703125
+    },
+    "menuOpened": null,
+    "menuAfterEscape": {
+      "buttonVisible": true,
+      "expanded": "false"
+    },
+    "mobileBackwardFocus": {
+      "tag": "BUTTON",
+      "text": "",
+      "aria": "Đăng xuất",
+      "rect": {
+        "x": -51.79999923706055,
+        "y": 793.5,
+        "width": 33,
+        "height": 33
+      },
+      "sidebarInert": false
+    },
+    "detailLayout": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "bodyWidth": 375,
+      "mainWidth": 375.20001220703125
+    },
+    "formLayout": {
+      "viewport": 390,
+      "documentWidth": 375,
+      "bodyWidth": 375,
+      "mainWidth": 375.20001220703125
+    },
+    "axeMobileForm": {
+      "violations": [],
+      "incomplete": [],
+      "passes": 24
+    }
+  },
+  "finishedAt": "2026-10-27T13:58:06.725Z"
+}

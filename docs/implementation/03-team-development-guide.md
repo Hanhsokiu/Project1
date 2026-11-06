@@ -102,3 +102,92 @@ Nền tảng local sẵn sàng để code. Supabase chung **chưa có migration 
 Trước deploy: read-only catalog/data/history mới nhất, xác nhận baseline rỗng cho bridge, backup/recovery và backend DB role; thống nhất quyền Data API (SQL thu hồi PUBLIC/anon/authenticated/service_role trên allowlist bảng ứng dụng), lịch triển khai và approval riêng. Nếu có client nhóm dùng Data API trực tiếp, dừng phần thu hồi quyền để thống nhất, không sửa API âm thầm.
 
 Vẫn còn drift legacy native type/nullability/default/FK/onDelete và SQL-only constraints đã nêu trong PR2B. Không chạy residual-drift.DO-NOT-APPLY.sql, không tự reconcile bằng Prisma diff. Giữ baseline compatibility là chủ ý của expand; mọi thay đổi contract/nullability/onDelete cần PR phối hợp. Replay/deploy thành công không có nghĩa zero drift hay production-ready.
+
+## 7. Bàn giao đầu vào in hồ sơ bước 7
+
+Bước 7 đã có route `/topic/dossier` và API dossier/finalize/pdf/receipt; chi tiết ở [báo cáo bước 7](07-step7-implementation-report.md). Migration additive mới `202610220003_dossier_finalization` chưa triển khai lên Supabase chung. Không đổi cardinality/field/unique legacy.
+
+Theo quyết định người dùng, **người 1 cung cấp lớp/ngành thật; thiếu thì chặn chốt**, người 2 không thêm form nhập thay. Contract producer mới: `DossierStudentProfile` (`DOSSIER_STUDENT_PROFILE`) có termStudentId PK/FK, className, majorName và revision. Producer phải xác nhận dữ liệu, ghi audit, tăng revision và dùng chung term lock khi sửa. Bước 7 chỉ đọc; không tạo profile/seed/backfill chính thức. Khi producer chọn nguồn dữ liệu khác cần thống nhất adapter rõ ràng trước sửa contract, không đoán mapping.
+
+Người 3 đọc mốc chốt từ DossierWorkflow.currentFinalizationId → DossierFinalization.versionId/finalizedAt và printSnapshot/hash. DTO gọi versionId là approvedVersionId. Receipt là chứng cứ nhận giấy riêng; không suy từ Proposal.APPROVED, legacy ThesisDossier.status hoặc tải PDF. PDF private lưu qua FileAsset + DossierPdfContent; chỉ dùng secure endpoint có JWT/scope, không dùng Supabase Data API/public bucket URL để bỏ qua quyền.
+
+```powershell
+# Xem thử bước 7 bằng Edge + dữ liệu/PDF mẫu; không Docker/backend/DB
+pnpm --filter @doan/frontend preview:proposal-dossiers
+pnpm --filter @doan/frontend preview:proposal-dossiers --student
+```
+
+Hai command API/upgrade `test:proposal-dossiers:api` và `test:proposal-dossiers:upgrade` ở backend chỉ chạy trên database test mới riêng có PR2B_TEST_URL theo guard hiện hữu. `test:proposal-dossiers:browser` ở frontend dùng API giả lập. Bước 8/reopen chưa được triển khai trong bước 7; không tự mở khóa Proposal/Dossier bằng SQL.
+
+## 8. Bàn giao bước 8A — kế hoạch và nhiệm vụ
+
+Bước 8A hiện có `/guidance/plan`, `/guidance/tasks`, API kế hoạch/task/tiến độ và coverage nghĩa vụ tuần. Xem [báo cáo 8A](08a-guidance-task-implementation-report.md). Migration `202610220004_guidance_task_management` thêm bốn field nullable vào TaskWorkflow cùng index/owner/date guards; chưa deploy Supabase. Legacy TaskStatus và API array `/tasks/plan/:planId` giữ shape, nhưng đường legacy đã được bổ sung permission/scope để chặn đọc submissions của SV khác.
+
+Người 1 cung cấp phase GUIDANCE trong term IN_PROGRESS, GuidancePeriod, PeriodRequiredStudent và WeeklyReportObligation/configSnapshot đúng `WeeklyObligationConfigSchema` trong shared. Schema snapshot có schemaVersion, termId/periodId/termStudentId, periodRevision, startsAt/reportDueAt, expectedDeliverables; configRevision khớp period revision. Không tự đặt lịch/đối tượng áp dụng, không lấy task tồn tại làm bằng chứng đã có báo cáo tuần. Producer khóa phase/handover dùng cùng lock order; bàn giao hoặc mở lại phải pause plan, giữ mọi bài và task. GVHD hiện hành resume bằng acknowledgeRebase sau khi agreement/bản chốt đã hợp lệ.
+
+SV chỉ start/append note, không tự COMPLETED. Quá hạn là derived flag. Khoa đọc tổng hợp theo grant; reviewer membership/ADMIN không tự có quyền guidance. Consumer bước 9–10 dùng TaskWorkflow.state hoặc DTO canonical, không dựa raw Task.status/TaskReview.isPassed. Upload/policy file đã triển khai ở 8B; đánh giá từng báo cáo, nhật ký và dashboard ở 8C bên dưới.
+
+```powershell
+pnpm --filter @doan/frontend preview:guidance-tasks
+pnpm --filter @doan/frontend preview:guidance-tasks --student
+pnpm --filter @doan/frontend preview:guidance-tasks --faculty
+```
+
+Các demo mở Edge port 50177, API mock và dữ liệu bộ nhớ, không backend/DB/Docker. Backend có `test:guidance-tasks:api` / `test:guidance-tasks:upgrade` cho DB test mới riêng; frontend có `test:guidance-tasks:browser`. Không dùng database nhóm để chạy các fixture.
+
+## 9. Bàn giao bước 8B — báo cáo tuần và source
+
+Chi tiết tại [báo cáo 8B](08b-weekly-submissions-implementation-report.md). Route `/guidance/tasks/:id/submissions`, link **Báo cáo tuần và source** trong chi tiết nhiệm vụ. Chỉ SV owner nộp; GVHD hiện hành/Khoa có scope được xem và tải. File qua staging private → xác nhận nộp atomic, giữ các version cũ và audit; không auto-complete hoặc đánh giá.
+
+Policy người dùng đã duyệt: 1 PDF báo cáo + 1 ZIP source, tối đa 3 minh chứng PDF/PNG/JPEG, 20 MiB/file, 50 MiB/bài; ZIP tối đa 1.000 entries/200 MiB giải nén, không mã hóa/path nguy hiểm; staging 24 giờ, bài đã nộp không tự xóa. `GUIDANCE_UPLOAD_ENABLED` mặc định true; JSON override `GUIDANCE_UPLOAD_POLICY_JSON` phải qua shared schema và phê duyệt, restart backend sau sửa env. Không ghi credentials vào frontend.
+
+Migration additive `202610220005_guidance_submissions` thêm intent staging và snapshot nullable, chưa deploy Supabase. Storage dùng FileStorageService hiện có với thư mục private trên volume uploads; không mount thư mục đó public. Backup cả DB và volume. Consumer dùng SubmissionWorkflow/currentSubmissionId + SubmissionAsset + secure download, không lấy raw SubmissionFile.filePath làm URL và không suy completion từ SUBMITTED.
+
+```powershell
+# Demo 8B không cần Docker/DB; port 50178, chỉ Edge được mở có API mock
+pnpm --filter @doan/frontend preview:guidance-submissions
+pnpm --filter @doan/frontend preview:guidance-submissions --advisor
+pnpm --filter @doan/frontend preview:guidance-submissions --faculty
+# Kiểm thử browser mock
+pnpm --filter @doan/frontend test:guidance-submissions:browser
+```
+
+Backend `test:guidance-submissions:api` và `test:guidance-submissions:upgrade` chỉ dùng database mới riêng PG17 loopback `btl_pr2b_*` với PR2B_TEST_URL đã guard. Không dùng DB nhóm. Nộp muộn vẫn nhận khi phase mở; khóa/handover phải phối hợp lock order từ 8A, không coi lúc bắt đầu upload là đã nộp. 8B không chấm bài; phần đánh giá PASS/FAIL/REVISION_REQUIRED được bàn giao tại 8C dưới đây.
+
+## 10. Bàn giao bước 8C — đánh giá báo cáo và theo dõi
+
+Chi tiết ở [báo cáo 8C](08c-progress-review-implementation-report.md). GVHD có `/guidance/review` để lọc bài đã nộp/chờ đánh giá, mở đúng submission version, tải file private và ghi một kết quả hiệu lực. FAIL và REVISION_REQUIRED giữ dữ liệu riêng dù đều yêu cầu nộp lại; nhận xét bắt buộc cho hai mức này. PASS hoàn thành task, không tính điểm/điều kiện bảo vệ. Sửa đánh giá phải có lý do/revision và tạo bản mới; khi có v2 không được amend v1.
+
+SV mở **Báo cáo tuần và source → Xem nhận xét và đánh giá** hoặc thông báo cá nhân. Khoa dùng `/guidance/progress` theo grant đợt/bộ môn, lọc GVHD/SV; task stats tách khỏi nghĩa vụ tuần chưa có task. Dữ liệu legacy/chưa cấu hình được cảnh báo, không đếm giả thành đã hoàn thành hoặc không thiếu báo cáo.
+
+Nhật ký đã có `/guidance/meetings?planId=...`, link từ kế hoạch 8A; create/amend theo contract đã duyệt, giữ before/after/actor/reason. `/guidance/notifications` chỉ đọc thông báo của principal và mark-read; đường legacy `/notifications/user/:userId` đã có owner guard, giữ shape array. Review và thông báo/outbox/audit commit cùng transaction; chưa có worker email hoặc ngưỡng cảnh báo chậm tự động.
+
+Migration `202610230001_guidance_reviews` chỉ thêm ba index, quyền task:review/guidance:monitor và deferred review guards trên model đã có, chưa deploy Supabase. Không gán academic bypass cho ADMIN. Người 1 giữ contract official assignment/roster/agreement/phase/grant/period và lock protocol; người 3 dùng current canonical PASS/task state làm dữ liệu tham khảo, không tự suy đủ bảo vệ/điểm tốt nghiệp. FR25 criteria/điểm giai đoạn vẫn là phạm vi riêng cần cấu hình đã duyệt.
+
+```powershell
+# Edge demo 8C port 50179, API mock; không Docker/backend/database
+pnpm --filter @doan/frontend preview:guidance-reviews
+pnpm --filter @doan/frontend preview:guidance-reviews --student
+pnpm --filter @doan/frontend preview:guidance-reviews --faculty
+pnpm --filter @doan/frontend test:guidance-reviews:browser
+# API/upgrade chỉ DB test mới riêng PR2B_TEST_URL theo guard PG17 loopback
+pnpm --filter @doan/backend test:guidance-reviews:api
+pnpm --filter @doan/backend test:guidance-reviews:upgrade
+```
+
+Không dùng Supabase nhóm để chạy fixture. Kết quả thực tế và các giới hạn kiểm thử được ghi riêng trong báo cáo; Supabase deploy vẫn là thao tác phê duyệt riêng, không đi kèm command demo hay chạy dev.
+
+## 11. Kiểm thử tích hợp toàn bộ bước 4–8
+
+Xem [báo cáo integration](05-integration-test-report.md) và evidence đi kèm. Đã có E2E thật Edge → Vite → Nest → PostgreSQL/private storage, từ đăng nhập và tạo nhóm tới sửa v2/chốt/PDF/giao việc/nộp lại/Đạt/dashboard. Seed tổng hợp tự chạy trên DB test mới; không dùng DB nhóm hoặc reset dữ liệu cũ.
+
+```powershell
+pnpm verify
+# PR2B_TEST_URL: DB test riêng PG17, host 127.0.0.1, tên btl_pr2b_*, coordinator rỗng
+pnpm --filter @doan/backend test:integration:steps4-8:suite
+pnpm --filter @doan/backend test:integration:steps4-8:browser
+# E2E cần PR2B_TEST_URL là một DB test RỖNG mới, runner tự replay + seed
+pnpm --filter @doan/backend test:integration:steps4-8:e2e
+```
+
+**Chưa kết luận sẵn sàng merge toàn hệ thống:** core 4–8 đã PASS nhưng probe bảo mật phát hiện legacy `/topics/term/:termId` và `/registrations/term/:termId` vẫn trả dữ liệu cho account không role/SV khác đợt. E2E command hiện exit 1 để giữ blocker này hiển thị. Cần phối hợp người 1 chốt/sửa contract đọc legacy rồi chạy lại; không bỏ negative probes hoặc coi demo mock là kiểm thử backend thật.

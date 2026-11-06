@@ -1,0 +1,108 @@
+{
+  "startedAt": "2026-10-27T14:40:28.614Z",
+  "checks": [
+    {
+      "name": "Tên và accessible name khi chọn thành viên",
+      "status": "PASS",
+      "actual": "Giảng viên T ×"
+    },
+    {
+      "name": "U01: Giữ tên T khi tìm Z",
+      "status": "PASS",
+      "actual": "Giảng viên T ×"
+    },
+    {
+      "name": "Chọn thêm Z sau tìm kiếm, giữ T",
+      "status": "PASS",
+      "actual": "Giảng viên T ×\nGiảng viên Z ×"
+    },
+    {
+      "name": "Bỏ Z không làm mất T",
+      "status": "PASS",
+      "actual": "Giảng viên T ×"
+    },
+    {
+      "name": "Giữ tên khi kết quả tìm kiếm rỗng",
+      "status": "PASS",
+      "actual": "Giảng viên T ×"
+    },
+    {
+      "name": "Bỏ thành viên bằng bàn phím dù ngoài kết quả",
+      "status": "PASS",
+      "actual": {
+        "chips": 0
+      }
+    },
+    {
+      "name": "Checkbox đồng bộ sau bỏ chip",
+      "status": "PASS",
+      "actual": {
+        "checked": false
+      }
+    },
+    {
+      "name": "Đổi đợt xóa lựa chọn và khóa form đợt OPEN_REGISTRATION",
+      "status": "PASS",
+      "actual": {
+        "chips": 0,
+        "name": ""
+      }
+    },
+    {
+      "name": "Quay lại demo không giữ selection đợt khác",
+      "status": "PASS",
+      "actual": {
+        "checked": false,
+        "chips": 0
+      }
+    },
+    {
+      "name": "Hủy form không gửi mutation nghiệp vụ",
+      "status": "PASS",
+      "actual": []
+    }
+  ],
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search="
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=Gi%E1%BA%A3ng+vi%C3%AAn+Z"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=QA_NONE_STEP4_FIX"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-group-options?page=1&limit=20&search="
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search="
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=Gi%E1%BA%A3ng+vi%C3%AAn+Z"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-group-options?page=1&limit=20&search=QA_NONE_STEP4_FIX"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-group-options?page=1&limit=20&search="
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "finishedAt": "2026-10-27T14:40:39.890Z"
+}

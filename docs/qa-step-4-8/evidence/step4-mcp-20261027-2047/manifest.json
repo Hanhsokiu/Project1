@@ -1,0 +1,366 @@
+﻿{
+    "GeneratedAt":  "2026-10-27T21:13:38.3306896+07:00",
+    "CaseCount":  41,
+    "Counts":  [
+                   {
+                       "Name":  "PASS",
+                       "Count":  24
+                   },
+                   {
+                       "Name":  "BLOCKED",
+                       "Count":  5
+                   },
+                   {
+                       "Name":  "FAIL",
+                       "Count":  3
+                   },
+                   {
+                       "Name":  "NOT RUN",
+                       "Count":  9
+                   }
+               ],
+    "BrokenReportLinks":  [
+
+                          ],
+    "MissingCaseEvidence":  [
+
+                            ],
+    "SensitivePatternFileCount":  0,
+    "Files":  [
+                  {
+                      "File":  "A01-anonymous.png",
+                      "Bytes":  215478,
+                      "SHA256":  "7E42AE0EA3CA21D697A0E53A0F702B61306DC56CC0903C2A62A8C094E64CFE20"
+                  },
+                  {
+                      "File":  "A03-anonymous.png",
+                      "Bytes":  215478,
+                      "SHA256":  "7E42AE0EA3CA21D697A0E53A0F702B61306DC56CC0903C2A62A8C094E64CFE20"
+                  },
+                  {
+                      "File":  "A04-anonymous.png",
+                      "Bytes":  215478,
+                      "SHA256":  "7E42AE0EA3CA21D697A0E53A0F702B61306DC56CC0903C2A62A8C094E64CFE20"
+                  },
+                  {
+                      "File":  "anonymous-final-snapshot.yml",
+                      "Bytes":  3212,
+                      "SHA256":  "309254DDAC26090F61CFC60424A9B6FB8936BFD2CD79E99E9F4331BF20B2137B"
+                  },
+                  {
+                      "File":  "anonymous-mcp-result.json",
+                      "Bytes":  47015,
+                      "SHA256":  "D5D663B1D38C9904FF919DB2D6E618D69782CFF9E64FE38BE522050F9F3104E2"
+                  },
+                  {
+                      "File":  "anonymous-results.json",
+                      "Bytes":  92011,
+                      "SHA256":  "9AB385F34DFA706F444DEA8E5229DD919DD0C438711FD1EFF9493B9011C34CEA"
+                  },
+                  {
+                      "File":  "auth-cleanup.json",
+                      "Bytes":  782,
+                      "SHA256":  "321301D7B252907A097E18DE27F88938EB1446D69468705FC2DBAA869B5E53A5"
+                  },
+                  {
+                      "File":  "authorization.md",
+                      "Bytes":  431,
+                      "SHA256":  "CB717742BBB76F6A05ED84DC1E8D7903E469F8644CF9EF22A2792F8361383AE6"
+                  },
+                  {
+                      "File":  "browser-network-last-navigation.log",
+                      "Bytes":  25808,
+                      "SHA256":  "EA10FAFD8F170424CEA7BEE96B46276678AD7459B1DF5B0465546304FCB4351C"
+                  },
+                  {
+                      "File":  "BUG01-reproduction.json",
+                      "Bytes":  3976,
+                      "SHA256":  "9535BDB5B0264A16A41F5332DEF24AF60432632C12F00E14D212326049D3B04B"
+                  },
+                  {
+                      "File":  "BUG01-selected-member-after.png",
+                      "Bytes":  118171,
+                      "SHA256":  "5FD5172E50A1530960DE004148DD497B357C78F4D4A7E219171AFB68C4B49592"
+                  },
+                  {
+                      "File":  "BUG01-selected-member-before.png",
+                      "Bytes":  128785,
+                      "SHA256":  "3E821B246F97841578DF27A52084571FAA40EC1A668A1C89B1C480A873F65775"
+                  },
+                  {
+                      "File":  "BUG02-mobile-offscreen-focus.json",
+                      "Bytes":  713,
+                      "SHA256":  "E59F4E27FD71219ADE7DF4DCFBD3717B8B4B02486B15ADB7C7D0D826B5C310C7"
+                  },
+                  {
+                      "File":  "BUG02-mobile-offscreen-focus.png",
+                      "Bytes":  63518,
+                      "SHA256":  "2AEDF60FCBB743E1C9387D550A26F56571332D28981588F81101535AD54A4883"
+                  },
+                  {
+                      "File":  "console-after-admin.log",
+                      "Bytes":  703,
+                      "SHA256":  "05F9C27A7CA592A8DE7110C821A8B604154FD884131F51D5C5713EA4C62E2B4B"
+                  },
+                  {
+                      "File":  "console-after-gv003.log",
+                      "Bytes":  742,
+                      "SHA256":  "C7D3E56C9C422F679DF0A0CBD0C7E0F823B44B42B68E16B39AB851C580C4538D"
+                  },
+                  {
+                      "File":  "console-after-gv004.log",
+                      "Bytes":  406,
+                      "SHA256":  "FAA3E4C754291C08FC2B76B62E1636F1372A13CE9EF9F8CFE0508F10AD6FD950"
+                  },
+                  {
+                      "File":  "console-error.log",
+                      "Bytes":  82,
+                      "SHA256":  "137514A62785CE0D9FEB46EE2DC9ECA984EE02E6BDA1DC8EBC5461BBD820D443"
+                  },
+                  {
+                      "File":  "console-error-after-faculty.log",
+                      "Bytes":  406,
+                      "SHA256":  "FAA3E4C754291C08FC2B76B62E1636F1372A13CE9EF9F8CFE0508F10AD6FD950"
+                  },
+                  {
+                      "File":  "console-errors-before-role-switch.log",
+                      "Bytes":  406,
+                      "SHA256":  "FAA3E4C754291C08FC2B76B62E1636F1372A13CE9EF9F8CFE0508F10AD6FD950"
+                  },
+                  {
+                      "File":  "console-errors-final.log",
+                      "Bytes":  1654,
+                      "SHA256":  "A4008C97CC5FB1849AE9087DF3F25E632C403FCFE8F052D7CD6B133D8BC73D00"
+                  },
+                  {
+                      "File":  "console-warning.log",
+                      "Bytes":  1944,
+                      "SHA256":  "E6A45CE355184E0C891016A26FBBFDD0C3BB84462373D95BF3B3DA004B6055CE"
+                  },
+                  {
+                      "File":  "console-warnings-final.log",
+                      "Bytes":  7981,
+                      "SHA256":  "660CB34860C93B6ADFA4935D18E7E3DEEECD47327D25057C01F3FADA1573A233"
+                  },
+                  {
+                      "File":  "E01-login.png",
+                      "Bytes":  160865,
+                      "SHA256":  "70C4FF5D19D199B788012B08A95D2914F71A763879D0115461749E774EBDF3AE"
+                  },
+                  {
+                      "File":  "E01-toggle-shown.txt",
+                      "Bytes":  109,
+                      "SHA256":  "8EA020DC39AB0D0593FAD9BBF4C19B8995B3B7F7812F8737C3E3C73ED79C571E"
+                  },
+                  {
+                      "File":  "final-faculty-list.png",
+                      "Bytes":  141866,
+                      "SHA256":  "88AA267A7E4FB791DCFB274355BC5A4B6BE61FA68D787E81D8C2E1399917B8CE"
+                  },
+                  {
+                      "File":  "final-verification.json",
+                      "Bytes":  30863,
+                      "SHA256":  "3F44AB8E7E3DF6A91CEB4619AFA75C91806911496C4539B72F867D031A08922E"
+                  },
+                  {
+                      "File":  "G01-faculty-list.png",
+                      "Bytes":  147336,
+                      "SHA256":  "C1A1C2887A5AB293723ABE0BC6817DA9B26BB1B0A97162ED708ED08EC597DCAE"
+                  },
+                  {
+                      "File":  "G01-G02-faculty-list.json",
+                      "Bytes":  34335,
+                      "SHA256":  "73A74B731F858398AF50F6B1697ED4B00711043D4B85CE3424B15ED916BF71F2"
+                  },
+                  {
+                      "File":  "G03-G04-filters-terms.json",
+                      "Bytes":  10447,
+                      "SHA256":  "3D35148376C226F8AB88EDA3CC22311B11572349A763C500DED5288893D5B0C3"
+                  },
+                  {
+                      "File":  "G03-old-term.png",
+                      "Bytes":  113245,
+                      "SHA256":  "3CCF37C56D856B27129DCF31EBA4C53171664A3E4A1539CF42A3B823FD6A1087"
+                  },
+                  {
+                      "File":  "G04-empty-search.png",
+                      "Bytes":  118088,
+                      "SHA256":  "9378719308BB5391AE420E853F9F976BA1B5FC478D34F402E2AA41380311D039"
+                  },
+                  {
+                      "File":  "G05-detail.png",
+                      "Bytes":  111255,
+                      "SHA256":  "9E095D88A6F133473E396104CA23F10F4A1584C595A2A99E40B1948098ABB348"
+                  },
+                  {
+                      "File":  "G05-G08-detail-lock-cancel.json",
+                      "Bytes":  3460,
+                      "SHA256":  "2FAE71FB36E244755F4839F9E5155AE3E520ECC03E795BA5F64E6234A4A559B6"
+                  },
+                  {
+                      "File":  "G05-G08-detail-lock-cancel-retry.json",
+                      "Bytes":  26949,
+                      "SHA256":  "6ADD29AC49DC82AD2A8179AF3EF31E0FE84B5A542EB5D5CA6E71EFFAECFA288C"
+                  },
+                  {
+                      "File":  "G05-locked-member-edit.png",
+                      "Bytes":  108297,
+                      "SHA256":  "C132DCF417E9AB5EFF48545AB49DAF073C08B1C703B8478999CD7DAAE7AC336B"
+                  },
+                  {
+                      "File":  "G06-G08-create-candidate-reset-cancel.json",
+                      "Bytes":  10586,
+                      "SHA256":  "8F4AC245DD8F5E4A8CF046637F0E291657A0AA29658E344600718A02512C569B"
+                  },
+                  {
+                      "File":  "G06-selected-member-search.png",
+                      "Bytes":  119122,
+                      "SHA256":  "D52E69EB8EDACFADB67D4BF38F20FAE1DD9F0FC4F9A36B7146D9766D64A2A973"
+                  },
+                  {
+                      "File":  "G07-old-term-form-readonly.png",
+                      "Bytes":  132564,
+                      "SHA256":  "3D883E1BFF50B51DD34F772A021A16C4C213685CEF975885C4E6373A558A9213"
+                  },
+                  {
+                      "File":  "G09-accessibility-desktop.json",
+                      "Bytes":  811,
+                      "SHA256":  "E324D9ED73C7A7DF8420928ED910AD97AC217C78D8828557032732D0C489D36C"
+                  },
+                  {
+                      "File":  "G09-create-form-desktop.png",
+                      "Bytes":  127439,
+                      "SHA256":  "695B251646602F6A85E993ABE296F7893E31B8575CBB2F24974B84965100357B"
+                  },
+                  {
+                      "File":  "G09-G10-mobile-keyboard.json",
+                      "Bytes":  1294,
+                      "SHA256":  "7765EC10C64476846A9C849FF948BEDD8AB31A66B333DFDA2D5809D0E5D660F8"
+                  },
+                  {
+                      "File":  "G10-detail-mobile.png",
+                      "Bytes":  51098,
+                      "SHA256":  "0A809AB942DC3D4E1DC9C85AE44B776D5894B45F5E2BA993E5107BA71191E5F6"
+                  },
+                  {
+                      "File":  "G10-form-mobile.png",
+                      "Bytes":  66820,
+                      "SHA256":  "8B9A3B03C59D1296DE3C48BC57F62E92E4C63C48B3A73E36EE2D9B85A6AC00FD"
+                  },
+                  {
+                      "File":  "G10-list-mobile.png",
+                      "Bytes":  66361,
+                      "SHA256":  "94457815E8B3A962400206013F3FCAAA9710031FA83A1B809854016C71387409"
+                  },
+                  {
+                      "File":  "network-after-faculty.log",
+                      "Bytes":  6159,
+                      "SHA256":  "C61FCAA3207432FB7A5C88699140A31F7D52F70C0171697E166641B62501885D"
+                  },
+                  {
+                      "File":  "network-before-role-switch.log",
+                      "Bytes":  6489,
+                      "SHA256":  "A559EF246059DF9250515AD1FE0E3EEB9C3BDC51035804D592CA66D2C34BD01E"
+                  },
+                  {
+                      "File":  "network-final.log",
+                      "Bytes":  138978,
+                      "SHA256":  "6A454F4644876CE94F0025AF4417F9ED27A1BF6382060DE8D7A0F44139A01839"
+                  },
+                  {
+                      "File":  "P01-lecturer-edit-forbidden.png",
+                      "Bytes":  79641,
+                      "SHA256":  "721D8D388EFB07FB3B2496017194B0CBF0C5F49490D94D191FA5AD6985F6C643"
+                  },
+                  {
+                      "File":  "P01-lecturer-member-list.png",
+                      "Bytes":  145269,
+                      "SHA256":  "1CF0827DDACB42E20AA16215981C9812E7FDD274BDB33A19F25BAEA924ADB6B9"
+                  },
+                  {
+                      "File":  "P01-P02-gv003-scope.json",
+                      "Bytes":  53408,
+                      "SHA256":  "6426E0875200603249D4005594AA5943EE080B04359769BC97A64D5A27621CC7"
+                  },
+                  {
+                      "File":  "P01-P02-lecturer-member-scope.json",
+                      "Bytes":  55998,
+                      "SHA256":  "4C625C7D32D6AAED7FDA0172EBCBD09708CBE45BEAD6719C9A88528ECA1D2697"
+                  },
+                  {
+                      "File":  "P02-cross-term-clarification.json",
+                      "Bytes":  521,
+                      "SHA256":  "22519B298FB5CA2A82A7E2BC11834504C836916B7B99D7AC8367D72017BE942D"
+                  },
+                  {
+                      "File":  "P02-gv002-no-membership.json",
+                      "Bytes":  28624,
+                      "SHA256":  "6BDC9C2EDC9ABEB685B244C555FCF9D33F0C7AC323C2D42DA6D2179097D4723C"
+                  },
+                  {
+                      "File":  "P02-lecturer-no-membership-empty.png",
+                      "Bytes":  117407,
+                      "SHA256":  "E6E754952DD2C17F7BCC003E310BDB66E98B00722895D1C1C03B2ACF4B5FFAF8"
+                  },
+                  {
+                      "File":  "P02-lecturer-nonmember-denied.png",
+                      "Bytes":  80220,
+                      "SHA256":  "D99593CA3469C05DEDFB8A9DAB59435ADEF8BBC2F7A246FD941CC368295F0ECD"
+                  },
+                  {
+                      "File":  "P03-student-deny.json",
+                      "Bytes":  57288,
+                      "SHA256":  "018DB684F75C8DAFADF729B9968B4832C58760C3D0296C8901191727EF9154C8"
+                  },
+                  {
+                      "File":  "P03-student-forbidden.png",
+                      "Bytes":  78636,
+                      "SHA256":  "ABBBF0DD20694CADC0A0C855E1606427EC64163DB52E674C8BAA0EFD0A67ED28"
+                  },
+                  {
+                      "File":  "P04-admin-deny.json",
+                      "Bytes":  37128,
+                      "SHA256":  "60C485C749FF46D698A492C831178B9038A9F0A76ED3BD93F02202BAEF01EB06"
+                  },
+                  {
+                      "File":  "P04-admin-forbidden.png",
+                      "Bytes":  75779,
+                      "SHA256":  "2646D716030D329C7AA220216095701F4F04485B98DAEF2473D79DF8E7874FC3"
+                  },
+                  {
+                      "File":  "plan.md",
+                      "Bytes":  6141,
+                      "SHA256":  "07A4527ADEDEA7B7DC1202C8F9649CA0E59BFB64AC89281F3BFBBC720D3B8B5B"
+                  },
+                  {
+                      "File":  "R01-R05-read-boundaries.json",
+                      "Bytes":  44258,
+                      "SHA256":  "9177FFBDE20AD06FF1725E50BE2235B08DA853CFCF68BD665C874D349C09F077"
+                  },
+                  {
+                      "File":  "R04-search-error.png",
+                      "Bytes":  115294,
+                      "SHA256":  "D379313F24AFFAB356B801DC9571C0F13678F856AFA79D0A22709F5921533B22"
+                  },
+                  {
+                      "File":  "report.md",
+                      "Bytes":  29118,
+                      "SHA256":  "BFD9F582699D22CFB95671943E6297E44FD51C4A46CC7EFE31F44DAB3DE8F347"
+                  },
+                  {
+                      "File":  "supplemental-plan.md",
+                      "Bytes":  1852,
+                      "SHA256":  "6D2B43C9A0A69BD64F63B6E6183E7161BF33C837EA1F5A95E4B2BE130D253C10"
+                  },
+                  {
+                      "File":  "telemetry-summary.json",
+                      "Bytes":  8511,
+                      "SHA256":  "7206DD3C2802010EFC569B264EB2C91A73476E469AE2422F4834200FD961ACC6"
+                  },
+                  {
+                      "File":  "test-cases.json",
+                      "Bytes":  17445,
+                      "SHA256":  "3C6FB09D095FB337C1FA5F6EECD0A32D4A6A2983219EB1E220CAE1302872288D"
+                  }
+              ]
+}

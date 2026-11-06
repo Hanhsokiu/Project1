@@ -1,0 +1,198 @@
+import { HttpStatus } from "@nestjs/common";
+import { BusinessException } from "../../common/exception/business.exception";
+import { ErrorCode } from "../../common/exception/error-code.enum";
+import { PhaseInput, basePhaseCodes, phaseCodes } from "../dto/term.dto";
+
+export const defaultTermParameters: Record<string, number> = {
+  process_weight: 0.4,
+  committee_weight: 0.6,
+  advisor_weight_in_process: 0.5,
+  reviewer_weight_in_process: 0.5,
+  min_pass_score: 5,
+  passing_gpa_threshold: 2,
+  max_preferences: 3,
+  min_weekly_pass_rate: 0.8,
+};
+
+export function hasPassingGpa(value: unknown, minimum: number): boolean {
+  if (value === null || value === undefined || value === "") return false;
+  const score = Number(value);
+  return Number.isFinite(score) && score >= 0 && score <= 4 && score >= minimum;
+}
+export function termAssert(
+  condition: unknown,
+  message: string,
+  code = ErrorCode.VALIDATION_FAILED,
+  status = HttpStatus.UNPROCESSABLE_ENTITY,
+): asserts condition {
+  if (!condition) throw new BusinessException(code, message, status);
+}
+export function validateDateRange(start: Date, end: Date, label: string) {
+  termAssert(
+    Number.isFinite(start.getTime()) &&
+      Number.isFinite(end.getTime()) &&
+      start < end,
+    `${label}: thời điểm kết thúc phải sau bắt đầu.`,
+  );
+}
+export function validateAcademicYear(value: string) {
+  const [start, end] = value.split("-").map(Number);
+  termAssert(
+    Number.isInteger(start) &&
+      end === start + 1 &&
+      start >= 2000 &&
+      end <= 2201,
+    "Năm học phải gồm hai năm liên tiếp trong khoảng 2000–2201.",
+  );
+}
+export function validatePhasePlan(
+  phases: PhaseInput[],
+  start: Date,
+  end: Date,
+) {
+  termAssert(
+    (phases.length === basePhaseCodes.length ||
+      phases.length === phaseCodes.length) &&
+      new Set(phases.map((p) => p.code)).size === phases.length &&
+      phases.every((p) => phaseCodes.includes(p.code)),
+    "Cần đủ sáu giai đoạn chính, có thể thêm giai đoạn xét duyệt đề cương riêng.",
+  );
+  const ids = phases.map((p) => p.id).filter(Boolean);
+  termAssert(
+    new Set(ids).size === ids.length,
+    "Mã giai đoạn không được trùng.",
+  );
+  let previousEnd = start;
+  for (const code of basePhaseCodes) {
+    const phase = phases.find((p) => p.code === code);
+    termAssert(phase, `Thiếu giai đoạn ${code}.`);
+    const phaseStart = new Date(phase.start),
+      phaseEnd = new Date(phase.end);
+    validateDateRange(phaseStart, phaseEnd, `Giai đoạn ${phase.name}`);
+    termAssert(
+      phaseStart >= start && phaseEnd <= end,
+      "Giai đoạn phải nằm trong thời gian của đợt.",
+    );
+    termAssert(
+      phaseStart >= previousEnd,
+      "Các giai đoạn phải đúng thứ tự, không chồng lấn thời gian.",
+      ErrorCode.TERM_PHASE_OVERLAP,
+    );
+    previousEnd = phaseEnd;
+  }
+  const review = phases.find((p) => p.code === "PROPOSAL_REVIEW");
+  if (review) {
+    const reviewStart = new Date(review.start),
+      reviewEnd = new Date(review.end);
+    validateDateRange(reviewStart, reviewEnd, "Giai đoạn xét duyệt đề cương");
+    const proposal = phases.find((p) => p.code === "PROPOSAL")!;
+    const guidance = phases.find((p) => p.code === "WEEKLY")!;
+    termAssert(
+      reviewStart >= new Date(proposal.start) &&
+        reviewEnd <= new Date(guidance.start),
+      "Xét duyệt phải bắt đầu từ giai đoạn đề cương và kết thúc trước khi hướng dẫn bắt đầu.",
+      ErrorCode.TERM_PHASE_OVERLAP,
+    );
+  }
+}
+export function validateParameters(values: Record<string, number>) {
+  termAssert(
+    Object.values(values).every(Number.isFinite),
+    "Tham số phải là số hữu hạn.",
+  );
+  for (const key of [
+    "process_weight",
+    "committee_weight",
+    "advisor_weight_in_process",
+    "reviewer_weight_in_process",
+    "min_weekly_pass_rate",
+  ])
+    termAssert(
+      values[key] >= 0 && values[key] <= 1,
+      `${key} phải trong khoảng 0–1.`,
+    );
+  termAssert(
+    Math.abs(values.process_weight + values.committee_weight - 1) < 0.000001,
+    "Tổng trọng số QT và HĐ phải bằng 1.",
+  );
+  termAssert(
+    Math.abs(
+      values.advisor_weight_in_process + values.reviewer_weight_in_process - 1,
+    ) < 0.000001,
+    "Tổng trọng số GVHD và GVPB phải bằng 1.",
+  );
+  termAssert(
+    values.min_pass_score >= 0 && values.min_pass_score <= 10,
+    "Ngưỡng đạt phải trong thang 10.",
+  );
+  termAssert(
+    values.passing_gpa_threshold >= 0 && values.passing_gpa_threshold <= 4,
+    "Ngưỡng GPA phải trong thang 4.",
+  );
+  termAssert(
+    Number.isInteger(values.max_preferences) &&
+      values.max_preferences >= 1 &&
+      values.max_preferences <= 3,
+    "Số nguyện vọng phải là số nguyên từ 1 đến 3.",
+  );
+}
+export function defaultPhasePlan(
+  start: Date,
+  end: Date,
+  registrationStart?: string,
+  registrationEnd?: string,
+): PhaseInput[] {
+  validateDateRange(start, end, "Đợt đồ án");
+  termAssert(
+    !!registrationStart === !!registrationEnd,
+    "Cần nhập cả thời điểm mở và hạn đăng ký.",
+  );
+  const labels = [
+    "Đăng ký nguyện vọng",
+    "Phân công GVHD",
+    "Đề tài và đề cương",
+    "Hướng dẫn và báo cáo tuần",
+    "Nộp đồ án final",
+    "Tổ chức bảo vệ",
+  ];
+  const threeDays = 3 * 24 * 60 * 60 * 1000;
+  const registrationStartAt = registrationStart
+    ? new Date(registrationStart)
+    : start;
+  const registrationEndDate = registrationEnd
+    ? new Date(registrationEnd)
+    : new Date(start.getTime() + threeDays);
+  validateDateRange(
+    registrationStartAt,
+    registrationEndDate,
+    "Đăng ký nguyện vọng",
+  );
+  termAssert(
+    registrationStartAt >= start && registrationEndDate <= end,
+    "Khoảng đăng ký phải nằm trong thời gian của đợt.",
+  );
+  const registrationEndAt = registrationEndDate.getTime();
+  const assignmentEndAt = registrationEndAt + threeDays;
+  termAssert(
+    end.getTime() > assignmentEndAt,
+    "Sau khi đóng đăng ký, đợt phải còn hơn 3 ngày để phân công GVHD và chia thời gian cho các giai đoạn còn lại.",
+  );
+  const remaining = end.getTime() - assignmentEndAt;
+  const boundaries = [
+    registrationStartAt.getTime(),
+    registrationEndAt,
+    ...Array.from(
+      { length: 5 },
+      (_, index) => assignmentEndAt + Math.floor((remaining * index) / 4),
+    ),
+  ];
+  const phases = basePhaseCodes.map((code, index) => ({
+    code,
+    name: labels[index],
+    start: new Date(boundaries[index]).toISOString(),
+    end: new Date(boundaries[index + 1]).toISOString(),
+    locked: false,
+  }));
+  validatePhasePlan(phases, start, end);
+  return phases;
+}

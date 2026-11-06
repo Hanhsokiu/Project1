@@ -1,0 +1,11 @@
+{
+  "id": "S7-02",
+  "requirement": "Contract §4.4/§6: superseded finalized snapshots remain readable by historical scope and carry superseded labels",
+  "stage": "REOPENED without current finalization",
+  "finalizationId": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+  "expectedStatus": 200,
+  "actual": {
+    "status": 200
+  },
+  "storedFileChecksum": "7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462"
+}

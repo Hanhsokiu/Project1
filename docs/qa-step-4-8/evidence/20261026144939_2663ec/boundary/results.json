@@ -1,0 +1,148 @@
+{
+  "database": "btl_pr2b_audit_boundary_7d363958820f",
+  "startedAt": "2026-10-26T17:28:54.479Z",
+  "syntheticFixtureOnly": true,
+  "productionBootstrapParity": "AppModule, ValidationPipe, GlobalExceptionHandler, default JSON body parser; binds ephemeral loopback port",
+  "cases": [
+    {
+      "name": "valid-small-save",
+      "route": "/proposals/p-student/versions",
+      "actualStatus": 201,
+      "expectedStatus": 201,
+      "elapsedMs": 219.11,
+      "body": {
+        "success": true,
+        "data": {
+          "id": "75726c74-5920-4c2b-88fd-4712bd101b8f",
+          "proposalId": "p-student",
+          "versionNumber": 2,
+          "content": {
+            "scope": "Phạm vi hệ thống quản lý đồ án",
+            "tools": "NestJS, Prisma, React và PostgreSQL",
+            "endsAt": "2026-11-02T17:28:54.768Z",
+            "schedule": [
+              {
+                "label": "Phân tích và kiểm thử",
+                "endsAt": "2026-11-02T17:28:54.768Z",
+                "startsAt": "2026-10-25T17:28:54.768Z",
+                "deliverables": "Báo cáo PDF và source ZIP"
+              }
+            ],
+            "startsAt": "2026-10-25T17:28:54.768Z",
+            "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+            "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+            "schemaVersion": 1,
+            "expectedResults": "Phần mềm và báo cáo tiến độ"
+          },
+          "state": "DRAFT",
+          "contentHash": "cf07586b08db13789887a144e226e14df84bb45888e59d884ac81e2018d34ad1",
+          "createdAt": "2026-10-26T17:29:00.375Z",
+          "createdByUserId": "student",
+          "authorName": "qa-student",
+          "submittedAt": null,
+          "submittedByUserId": null,
+          "basedOnVersionId": null,
+          "changeSummary": null,
+          "responses": [],
+          "provenance": null,
+          "proposalRevision": 1
+        },
+        "timestamp": "2026-10-26T17:29:00.400Z"
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "schema-valid-utf8-save",
+      "route": "/proposals/p-student/versions",
+      "actualStatus": 500,
+      "expectedStatus": 201,
+      "elapsedMs": 10.35,
+      "body": {
+        "success": false,
+        "data": null,
+        "error": {
+          "code": "INTERNAL_ERROR",
+          "message": "Không thể xử lý yêu cầu. Vui lòng thử lại."
+        },
+        "message": "Không thể xử lý yêu cầu. Vui lòng thử lại.",
+        "timestamp": "2026-10-26T17:29:00.413Z",
+        "path": "/api/proposals/p-student/versions"
+      },
+      "result": "FAIL",
+      "requestBytes": 110377,
+      "schemaValid": true
+    },
+    {
+      "name": "missing-content",
+      "route": "/proposals/p-student/versions",
+      "actualStatus": 400,
+      "expectedStatus": 400,
+      "elapsedMs": 18.92,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "COMMON_003",
+          "message": "content: Required"
+        },
+        "timestamp": "2026-10-26T17:29:00.434Z"
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "wrong-revision-type",
+      "route": "/proposals/p-student/versions",
+      "actualStatus": 400,
+      "expectedStatus": 400,
+      "elapsedMs": 15.93,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "COMMON_003",
+          "message": "expectedRevision: Expected number, received string"
+        },
+        "timestamp": "2026-10-26T17:29:00.450Z"
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "actor-injection",
+      "route": "/proposals/p-student/versions",
+      "actualStatus": 400,
+      "expectedStatus": 400,
+      "elapsedMs": 11.35,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "COMMON_003",
+          "message": ": Unrecognized key(s) in object: 'actorId'"
+        },
+        "timestamp": "2026-10-26T17:29:00.462Z"
+      },
+      "result": "PASS"
+    },
+    {
+      "name": "invalid-token",
+      "route": "/proposals/p-student/editing-context",
+      "actualStatus": 401,
+      "expectedStatus": 401,
+      "elapsedMs": 5.6,
+      "body": {
+        "success": false,
+        "error": {
+          "code": "AUTH_003",
+          "message": "Token không hợp lệ hoặc đã hết hạn"
+        },
+        "timestamp": "2026-10-26T17:29:00.467Z"
+      },
+      "result": "PASS"
+    }
+  ],
+  "invariants": [
+    {
+      "name": "oversize rejection does not append partial version",
+      "before": 2,
+      "after": 2
+    }
+  ],
+  "finishedAt": "2026-10-26T17:29:00.492Z"
+}

@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-10-23T09:19:56.182Z",
+  "result": "FAIL",
+  "mergeReadiness": "BLOCKED_SEC_01_SEC_02",
+  "nodeVersion": "v24.13.1",
+  "pnpmVersion": "12.14.0",
+  "verify": {
+    "result": "PASS",
+    "log": "verify.log",
+    "backendUnit": 107,
+    "frontendUnit": 27,
+    "targetGuards": 12
+  },
+  "databaseSuites": {
+    "result": "PASS",
+    "suites": 14,
+    "apiChecks": 154
+  },
+  "browserMock": {
+    "result": "PASS",
+    "suites": 7,
+    "checks": 73
+  },
+  "liveWorkflow": {
+    "result": "PASS",
+    "browserChecks": 15,
+    "unhandledPageErrors": 0
+  },
+  "endpointGate": {
+    "operations": 66,
+    "anonymous401": 66,
+    "authenticatedNoPermission403": 63
+  },
+  "legacySecurity": {
+    "result": "FAIL",
+    "failingProbes": 4,
+    "openBugs": [
+      "SEC-01",
+      "SEC-02"
+    ]
+  },
+  "sharedDatabaseAccess": false,
+  "newMigrations": 0,
+  "applicationBusinessCodeChanges": 0
+}

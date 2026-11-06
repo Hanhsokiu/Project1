@@ -1,0 +1,286 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:30.548Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T10-incomplete-draft-not-sealed",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:36.320Z",
+    "detail": {
+      "draft": {
+        "id": "1e51aa03-c6c8-4500-9d44-9a84e80fce05",
+        "proposalId": "p-student2",
+        "versionNumber": 2,
+        "state": "DRAFT",
+        "contentHash": "f49a88669d1d6abc132909542a9bdf43c85c259c3029e121b22f03777678ae12",
+        "createdAt": "2026-10-28T02:55:35.168Z",
+        "createdByUserId": "student2",
+        "authorName": "qa-student2",
+        "submittedAt": null,
+        "submittedByUserId": null,
+        "basedOnVersionId": "v1-student2",
+        "changeSummary": "QA STEP6: draft chưa hoàn chỉnh.",
+        "responses": [
+          {
+            "targetType": "COMMENT",
+            "targetId": "690d3990-b11a-4315-a54d-0a98b088df20",
+            "text": "Đã xem góp ý, sẽ bổ sung ở snapshot tiếp theo."
+          }
+        ],
+        "provenance": null,
+        "contentBytes": 532,
+        "fieldLengths": {
+          "scope": 30,
+          "tools": 35,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 0,
+          "mainContents": 52,
+          "expectedResults": 27
+        }
+      },
+      "submitStatus": 400,
+      "code": "PROPOSAL_CONTENT_INVALID"
+    }
+  },
+  {
+    "id": "T09-inherit-clear-responses",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:36.809Z",
+    "detail": {
+      "v2": {
+        "id": "1e51aa03-c6c8-4500-9d44-9a84e80fce05",
+        "proposalId": "p-student2",
+        "versionNumber": 2,
+        "state": "DRAFT",
+        "contentHash": "f49a88669d1d6abc132909542a9bdf43c85c259c3029e121b22f03777678ae12",
+        "createdAt": "2026-10-28T02:55:35.168Z",
+        "createdByUserId": "student2",
+        "authorName": "qa-student2",
+        "submittedAt": null,
+        "submittedByUserId": null,
+        "basedOnVersionId": "v1-student2",
+        "changeSummary": "QA STEP6: draft chưa hoàn chỉnh.",
+        "responses": [
+          {
+            "targetType": "COMMENT",
+            "targetId": "690d3990-b11a-4315-a54d-0a98b088df20",
+            "text": "Đã xem góp ý, sẽ bổ sung ở snapshot tiếp theo."
+          }
+        ],
+        "provenance": null,
+        "contentBytes": 532,
+        "fieldLengths": {
+          "scope": 30,
+          "tools": 35,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 0,
+          "mainContents": 52,
+          "expectedResults": 27
+        }
+      },
+      "v3": {
+        "id": "0e4419f6-c85d-419d-a167-0205b2af6c83",
+        "proposalId": "p-student2",
+        "versionNumber": 3,
+        "state": "DRAFT",
+        "contentHash": "55abadc4466a34b94edb3c3cc229506152efeb5975cb8b4ec816f0238c5bb539",
+        "createdAt": "2026-10-28T02:55:36.509Z",
+        "createdByUserId": "student2",
+        "authorName": "qa-student2",
+        "submittedAt": null,
+        "submittedByUserId": null,
+        "basedOnVersionId": "1e51aa03-c6c8-4500-9d44-9a84e80fce05",
+        "changeSummary": null,
+        "responses": [
+          {
+            "targetType": "COMMENT",
+            "targetId": "690d3990-b11a-4315-a54d-0a98b088df20",
+            "text": "Đã xem góp ý, sẽ bổ sung ở snapshot tiếp theo."
+          }
+        ],
+        "provenance": null,
+        "contentBytes": 573,
+        "fieldLengths": {
+          "scope": 30,
+          "tools": 35,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 31,
+          "mainContents": 52,
+          "expectedResults": 27
+        }
+      },
+      "v4": {
+        "id": "76c4c0b5-80d3-40c5-8e6e-1b57ca60ba01",
+        "proposalId": "p-student2",
+        "versionNumber": 4,
+        "state": "DRAFT",
+        "contentHash": "a51556fa643ea014240d7d18c57fa1a3acd3974dd1f74a16b409f9b6d37527ad",
+        "createdAt": "2026-10-28T02:55:36.744Z",
+        "createdByUserId": "student2",
+        "authorName": "qa-student2",
+        "submittedAt": null,
+        "submittedByUserId": null,
+        "basedOnVersionId": "0e4419f6-c85d-419d-a167-0205b2af6c83",
+        "changeSummary": null,
+        "responses": [],
+        "provenance": null,
+        "contentBytes": 580,
+        "fieldLengths": {
+          "scope": 30,
+          "tools": 35,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 36,
+          "mainContents": 52,
+          "expectedResults": 27
+        }
+      }
+    }
+  },
+  {
+    "id": "T16-advisor-save-not-submit",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:38.939Z",
+    "detail": {
+      "version": {
+        "id": "d5556836-cb39-46d7-81d0-1ccf4364d88f",
+        "proposalId": "p-student2",
+        "versionNumber": 5,
+        "state": "DRAFT",
+        "contentHash": "21adb0ff9df4d7ffbe1403153e5f19ab96607363ec4f17d2b01f68f58ec7a4ef",
+        "createdAt": "2026-10-28T02:55:37.824Z",
+        "createdByUserId": "advisor",
+        "authorName": "qa-advisor",
+        "submittedAt": null,
+        "submittedByUserId": null,
+        "basedOnVersionId": "76c4c0b5-80d3-40c5-8e6e-1b57ca60ba01",
+        "changeSummary": null,
+        "responses": [],
+        "provenance": null,
+        "contentBytes": 570,
+        "fieldLengths": {
+          "scope": 30,
+          "tools": 35,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 31,
+          "mainContents": 52,
+          "expectedResults": 27
+        }
+      },
+      "submitStatus": 403
+    }
+  },
+  {
+    "id": "T23-conflict-preserve-and-reload",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:40.397Z",
+    "detail": {
+      "serverVersion": "d5556836-cb39-46d7-81d0-1ccf4364d88f",
+      "draftPreservedOn409": true,
+      "explicitReload": true
+    }
+  },
+  {
+    "id": "T22-real-SV-GVHD-CAS",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:40.826Z",
+    "detail": {
+      "statuses": [
+        201,
+        409
+      ],
+      "winner": {
+        "id": "fb4b1802-ff9a-41f3-b647-e3704b94c5ae",
+        "proposalId": "p-student2",
+        "versionNumber": 6,
+        "state": "DRAFT",
+        "contentHash": "328b565ea77cc32696f70f3e3d52c16a03d325847fa861f316b2aecf4e3a1346",
+        "createdAt": "2026-10-28T02:55:40.591Z",
+        "createdByUserId": "student2",
+        "authorName": "qa-student2",
+        "submittedAt": null,
+        "submittedByUserId": null,
+        "basedOnVersionId": "d5556836-cb39-46d7-81d0-1ccf4364d88f",
+        "changeSummary": "SV concurrent",
+        "responses": [],
+        "provenance": null,
+        "contentBytes": 583,
+        "fieldLengths": {
+          "scope": 30,
+          "tools": 35,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 37,
+          "mainContents": 52,
+          "expectedResults": 27
+        }
+      }
+    }
+  },
+  {
+    "id": "T24-stale-base-with-fresh-revision",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:40.918Z",
+    "detail": {
+      "status": 409,
+      "code": "STALE_VERSION"
+    }
+  },
+  {
+    "id": "T28-history-cross-page-compare",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:47.249Z",
+    "detail": {
+      "page1": [
+        23,
+        22,
+        21,
+        20,
+        19,
+        18,
+        17,
+        16,
+        15,
+        14,
+        13,
+        12,
+        11,
+        10,
+        9,
+        8,
+        7,
+        6,
+        5,
+        4
+      ],
+      "page2": [
+        3,
+        2,
+        1
+      ],
+      "accumulatedVersionOptions": 23
+    }
+  },
+  {
+    "id": "T44-T45-mobile-editor-history-axe",
+    "result": "PASS",
+    "at": "2026-10-28T02:55:50.215Z",
+    "detail": {
+      "width": 390,
+      "scrollWidth": 390,
+      "violations": []
+    }
+  }
+]

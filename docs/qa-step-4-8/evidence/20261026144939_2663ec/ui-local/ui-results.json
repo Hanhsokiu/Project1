@@ -1,0 +1,2102 @@
+{
+  "startedAt": "2026-10-26T14:50:44.960Z",
+  "mockedApi": false,
+  "cases": [
+    {
+      "actor": "giaovu",
+      "route": "/topic/review-groups",
+      "url": "http://127.0.0.1:5173/topic/review-groups?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 1114,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nNhóm duyệt đề cương\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nNhóm duyệt đề cương\nNhóm duyệt đề cương\n\nQuản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.\n\nNhóm duyệt\n0\n\nTheo bộ lọc đang chọn\n\nGiảng viên\n0\n\nThành viên trên trang hiện tại\n\nVòng đang duyệt\n0\n\nTrong các nhóm đang hiển thị\n\nQuyền truy cập\nQuản lý\n\nTrong đợt đồ án đang chọn\n\nDanh sách nhóm duyệt\n\nTổ chức giảng viên theo đợt đồ án và bộ môn\n\nĐợt mẫu kiểm tra giao diện sau merge\nĐợt đồ án\nChọn đợt đồ án\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTất cả trong phạm vi\nCông nghệ phần mềm\nTên nhóm\nChưa có nhóm duyệt\n\nKhông có nhóm trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-topic-review-groups.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/topic/review-groups/new",
+      "url": "http://127.0.0.1:5173/topic/review-groups/new",
+      "kind": "desktop",
+      "elapsedMs": 962,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nNhóm duyệt đề cương\n← Danh sách nhóm\nTạo nhóm duyệt\nĐợt tạo nhóm\nChọn đợt đồ án\nĐợt mẫu kiểm tra giao diện sau merge\nĐổi đợt sẽ xóa lựa chọn chưa lưu.\n\nVui lòng chọn đợt đồ án để tạo nhóm.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-topic-review-groups-new.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/topic/review-groups/new",
+      "kind": "empty-submit",
+      "invalidFields": 0,
+      "alerts": [],
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nNhóm duyệt đề cương\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nNhóm duyệt đề cương\nNhóm duyệt đề cương\n\nQuản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.\n\nNhóm duyệt\n0\n\nTheo bộ lọc đang chọn\n\nGiảng viên\n0\n\nThành viên trên trang hiện tại\n\nVòng đang duyệt\n0\n\nTrong các nhóm đang hiển thị\n\nQuyền truy cập\nQuản lý\n\nTrong đợt đồ án đang chọn\n\nDanh sách nhóm duyệt\n\nTổ chức giảng viên theo đợt đồ án và bộ môn\n\nĐợt mẫu kiểm tra giao diện sau merge\nĐợt đồ án\nChọn đợt đồ án\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTất cả trong phạm vi\nCông nghệ phần mềm\nTên nhóm\nChưa có nhóm duyệt\n\nKhông có nhóm trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC"
+    },
+    {
+      "actor": "giaovu",
+      "route": "/topic/reviews",
+      "url": "http://127.0.0.1:5173/topic/reviews?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 1135,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nPhân công & xét duyệt\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nPhân công & xét duyệt\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nChưa có phase PROPOSAL_REVIEW. Không thể ghi phân công hoặc kết luận khi đầu vào chưa sẵn sàng.\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-topic-reviews.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/topic/proposal",
+      "url": "http://127.0.0.1:5173/topic/proposal?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 1225,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nĐề cương & phiên bản\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nĐề cương & phiên bản\nĐề cương & phiên bản\n\nSV và GVHD hiện hành chỉnh sửa hồ sơ trong quyền của mình. Khoa và reviewer chỉ đọc theo phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nTìm đề cương\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-topic-proposal.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/topic/dossier",
+      "url": "http://127.0.0.1:5173/topic/dossier?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 1260,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nChốt đề cương & bản giấy\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nChốt đề cương & bản giấy\nChốt đề cương & hồ sơ chính thức\n\nPhân biệt kết luận duyệt, chốt hồ sơ, PDF và tiếp nhận bản giấy. Chỉ Khoa có quyền chốt/tiếp nhận trong phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nChỉ đề cương đã được duyệt\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-topic-dossier.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/guidance/plan",
+      "url": "http://127.0.0.1:5173/guidance/plan?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 1179,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nKế hoạch & nhiệm vụ hướng dẫn\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nKế hoạch hướng dẫn đồ án\n\nMỗi sinh viên có kế hoạch riêng theo hồ sơ chốt và GVHD chính thức. Đã duyệt đề cương chưa đồng nghĩa đã đủ điều kiện tạo kế hoạch.\n\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-guidance-plan.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/guidance/tasks",
+      "url": "http://127.0.0.1:5173/guidance/tasks?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 1240,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nKế hoạch & nhiệm vụ hướng dẫn\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhiệm vụ & tiến độ hướng dẫn\n\nXem trong phạm vi được cấp; Khoa tổng hợp theo đợt, GVHD và SV xem hồ sơ của mình.\n\nMở kế hoạch để giao nhiệm vụ →\nĐợt\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nTuần / mốc\nTất cả mốc\nTrạng thái\nTất cả trạng thái\nChưa bắt đầu\nĐang thực hiện\nĐã nộp\nCần làm lại\nĐã hoàn thành\nĐã hủy\nChỉ nhiệm vụ quá hạn\n\n0 nhiệm vụ · 0 quá hạn trong bộ lọc · Trang 1/1\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nNghĩa vụ báo cáo tuần\n\nHiển thị theo lịch và danh sách áp dụng, kể cả chưa có nhiệm vụ. Tạo task hoặc ghi tiến độ không được coi là đã nộp báo cáo hay hoàn thành.\n\nChưa cấu hình đầy đủ nghĩa vụ tuần. Không thể kết luận không thiếu báo cáo.\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-guidance-tasks.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/guidance/progress",
+      "url": "http://127.0.0.1:5173/guidance/progress",
+      "kind": "desktop",
+      "elapsedMs": 1228,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nTheo dõi tiến độ toàn đợt\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\n\nChọn đợt để xem thống kê trong phạm vi Khoa.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-guidance-progress.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/guidance/meetings",
+      "url": "http://127.0.0.1:5173/guidance/meetings",
+      "kind": "desktop",
+      "elapsedMs": 1072,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhật ký buổi hướng dẫn\n← Chọn / xem kế hoạch hướng dẫn\n\nMở kế hoạch của sinh viên rồi chọn “Nhật ký hướng dẫn”.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-guidance-meetings.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/guidance/notifications",
+      "url": "http://127.0.0.1:5173/guidance/notifications",
+      "kind": "desktop",
+      "elapsedMs": 1136,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nThông báo của tôi\n\nChưa có thông báo.\n\nTrang trước\nTrang 1 / 1\nTrang sau\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "giaovu-guidance-notifications.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "giaovu",
+      "route": "/guidance/tasks",
+      "kind": "mobile",
+      "screenshot": "giaovu-mobile-tasks.png",
+      "metrics": {
+        "width": 390,
+        "documentWidth": 390
+      }
+    },
+    {
+      "actor": "giaovu",
+      "kind": "nonexistent-detail",
+      "url": "http://127.0.0.1:5173/topic/proposal/qa-does-not-exist",
+      "alerts": [],
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nĐề cương & phiên bản\n← Danh sách đề cương\n\nĐang tải đề cương…\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC"
+    },
+    {
+      "actor": "gv001",
+      "route": "/topic/review-groups",
+      "url": "http://127.0.0.1:5173/topic/review-groups",
+      "kind": "desktop",
+      "elapsedMs": 1120,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nNhóm duyệt đề cương\nNhóm duyệt đề cương\n\nQuản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.\n\nNhóm duyệt\n—\n\nTheo bộ lọc đang chọn\n\nGiảng viên\n—\n\nThành viên trên trang hiện tại\n\nVòng đang duyệt\n—\n\nTrong các nhóm đang hiển thị\n\nQuyền truy cập\n—\n\nTrong đợt đồ án đang chọn\n\nDanh sách nhóm duyệt\n\nTổ chức giảng viên theo đợt đồ án và bộ môn\n\nChọn đợt đồ án\nĐợt đồ án\nChọn đợt đồ án\nBộ môn\nTất cả trong phạm vi\nTên nhóm\nChưa có nhóm duyệt\n\nKhông có nhóm trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-topic-review-groups.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/topic/reviews",
+      "url": "http://127.0.0.1:5173/topic/reviews",
+      "kind": "desktop",
+      "elapsedMs": 1253,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nPhân công & xét duyệt\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nBộ môn\nTrong phạm vi được cấp\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-topic-reviews.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/topic/proposal",
+      "url": "http://127.0.0.1:5173/topic/proposal",
+      "kind": "desktop",
+      "elapsedMs": 1270,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nĐề cương & phiên bản\nĐề cương & phiên bản\n\nSV và GVHD hiện hành chỉnh sửa hồ sơ trong quyền của mình. Khoa và reviewer chỉ đọc theo phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nTìm đề cương\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-topic-proposal.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/topic/dossier",
+      "url": "http://127.0.0.1:5173/topic/dossier",
+      "kind": "desktop",
+      "elapsedMs": 1027,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nChốt đề cương & bản giấy\nChốt đề cương & hồ sơ chính thức\n\nPhân biệt kết luận duyệt, chốt hồ sơ, PDF và tiếp nhận bản giấy. Chỉ Khoa có quyền chốt/tiếp nhận trong phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nChỉ đề cương đã được duyệt\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-topic-dossier.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/guidance/plan",
+      "url": "http://127.0.0.1:5173/guidance/plan",
+      "kind": "desktop",
+      "elapsedMs": 997,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nKế hoạch hướng dẫn đồ án\n\nMỗi sinh viên có kế hoạch riêng theo hồ sơ chốt và GVHD chính thức. Đã duyệt đề cương chưa đồng nghĩa đã đủ điều kiện tạo kế hoạch.\n\nĐợt đồ án\nChọn đợt\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-guidance-plan.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/guidance/tasks",
+      "url": "http://127.0.0.1:5173/guidance/tasks",
+      "kind": "desktop",
+      "elapsedMs": 1199,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhiệm vụ & tiến độ hướng dẫn\n\nXem trong phạm vi được cấp; Khoa tổng hợp theo đợt, GVHD và SV xem hồ sơ của mình.\n\nMở kế hoạch để giao nhiệm vụ →\nĐợt\nChọn đợt\nTuần / mốc\nTất cả mốc\nTrạng thái\nTất cả trạng thái\nChưa bắt đầu\nĐang thực hiện\nĐã nộp\nCần làm lại\nĐã hoàn thành\nĐã hủy\nChỉ nhiệm vụ quá hạn\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-guidance-tasks.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/guidance/review",
+      "url": "http://127.0.0.1:5173/guidance/review",
+      "kind": "desktop",
+      "elapsedMs": 1066,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nBáo cáo cần nhận xét\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\n\nChọn đợt để xem bài nộp của SV đang được phân công hướng dẫn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-guidance-review.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/guidance/meetings",
+      "url": "http://127.0.0.1:5173/guidance/meetings",
+      "kind": "desktop",
+      "elapsedMs": 1119,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhật ký buổi hướng dẫn\n← Chọn / xem kế hoạch hướng dẫn\n\nMở kế hoạch của sinh viên rồi chọn “Nhật ký hướng dẫn”.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-guidance-meetings.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/guidance/notifications",
+      "url": "http://127.0.0.1:5173/guidance/notifications",
+      "kind": "desktop",
+      "elapsedMs": 1179,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nThông báo của tôi\n\nChưa có thông báo.\n\nTrang trước\nTrang 1 / 1\nTrang sau\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "gv001-guidance-notifications.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "gv001",
+      "route": "/guidance/tasks",
+      "kind": "mobile",
+      "screenshot": "gv001-mobile-tasks.png",
+      "metrics": {
+        "width": 390,
+        "documentWidth": 390
+      }
+    },
+    {
+      "actor": "gv001",
+      "kind": "nonexistent-detail",
+      "url": "http://127.0.0.1:5173/topic/proposal/qa-does-not-exist",
+      "alerts": [],
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nĐề cương & phiên bản\n← Danh sách đề cương\n\nĐang tải đề cương…\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC"
+    },
+    {
+      "actor": "sv001",
+      "route": "/topic/reviews",
+      "url": "http://127.0.0.1:5173/topic/reviews?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 1241,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nPhân công & xét duyệt\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nPhân công & xét duyệt\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nChưa có phase PROPOSAL_REVIEW. Không thể ghi phân công hoặc kết luận khi đầu vào chưa sẵn sàng.\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "sv001-topic-reviews.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "sv001",
+      "route": "/topic/proposal",
+      "url": "http://127.0.0.1:5173/topic/proposal?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 919,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nĐề cương & phiên bản\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nĐề cương & phiên bản\nĐề cương & phiên bản\n\nSV và GVHD hiện hành chỉnh sửa hồ sơ trong quyền của mình. Khoa và reviewer chỉ đọc theo phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nTìm đề cương\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "sv001-topic-proposal.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "sv001",
+      "route": "/topic/dossier",
+      "url": "http://127.0.0.1:5173/topic/dossier?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 998,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nChốt đề cương & bản giấy\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nChốt đề cương & bản giấy\nChốt đề cương & hồ sơ chính thức\n\nPhân biệt kết luận duyệt, chốt hồ sơ, PDF và tiếp nhận bản giấy. Chỉ Khoa có quyền chốt/tiếp nhận trong phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nChỉ đề cương đã được duyệt\nChưa có đề cương\n\nKhông có hồ sơ trong phạm vi và bộ lọc đã chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "sv001-topic-dossier.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "sv001",
+      "route": "/guidance/plan",
+      "url": "http://127.0.0.1:5173/guidance/plan?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 925,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nKế hoạch & nhiệm vụ hướng dẫn\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nKế hoạch hướng dẫn đồ án\n\nMỗi sinh viên có kế hoạch riêng theo hồ sơ chốt và GVHD chính thức. Đã duyệt đề cương chưa đồng nghĩa đã đủ điều kiện tạo kế hoạch.\n\nĐợt đồ án\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "sv001-guidance-plan.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "sv001",
+      "route": "/guidance/tasks",
+      "url": "http://127.0.0.1:5173/guidance/tasks?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "kind": "desktop",
+      "elapsedMs": 954,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nĐợt mẫu kiểm tra giao diện sau merge\nKế hoạch & nhiệm vụ hướng dẫn\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhiệm vụ & tiến độ hướng dẫn\n\nXem trong phạm vi được cấp; Khoa tổng hợp theo đợt, GVHD và SV xem hồ sơ của mình.\n\nMở kế hoạch để giao nhiệm vụ →\nĐợt\nChọn đợt\nĐợt mẫu kiểm tra giao diện sau merge\nTuần / mốc\nTất cả mốc\nTrạng thái\nTất cả trạng thái\nChưa bắt đầu\nĐang thực hiện\nĐã nộp\nCần làm lại\nĐã hoàn thành\nĐã hủy\nChỉ nhiệm vụ quá hạn\n\n0 nhiệm vụ · 0 quá hạn trong bộ lọc · Trang 1/1\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nNghĩa vụ báo cáo tuần\n\nHiển thị theo lịch và danh sách áp dụng, kể cả chưa có nhiệm vụ. Tạo task hoặc ghi tiến độ không được coi là đã nộp báo cáo hay hoàn thành.\n\nChưa cấu hình đầy đủ nghĩa vụ tuần. Không thể kết luận không thiếu báo cáo.\n\nChưa có nhiệm vụ hoặc kế hoạch phù hợp\n\nKiểm tra phạm vi, lịch và bộ lọc đang chọn.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "sv001-guidance-tasks.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "sv001",
+      "route": "/guidance/meetings",
+      "url": "http://127.0.0.1:5173/guidance/meetings",
+      "kind": "desktop",
+      "elapsedMs": 986,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nNhật ký buổi hướng dẫn\n← Chọn / xem kế hoạch hướng dẫn\n\nMở kế hoạch của sinh viên rồi chọn “Nhật ký hướng dẫn”.\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "sv001-guidance-meetings.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "sv001",
+      "route": "/guidance/notifications",
+      "url": "http://127.0.0.1:5173/guidance/notifications",
+      "kind": "desktop",
+      "elapsedMs": 976,
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nKế hoạch & nhiệm vụ hướng dẫn\nThông báo của tôi\n\nChưa có thông báo.\n\nTrang trước\nTrang 1 / 1\nTrang sau\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC",
+      "screenshot": "sv001-guidance-notifications.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "sv001",
+      "route": "/guidance/tasks",
+      "kind": "mobile",
+      "screenshot": "sv001-mobile-tasks.png",
+      "metrics": {
+        "width": 390,
+        "documentWidth": 390
+      }
+    },
+    {
+      "actor": "sv001",
+      "kind": "mobile-navigation",
+      "expanded": "true"
+    },
+    {
+      "actor": "sv001",
+      "kind": "escape-navigation",
+      "expanded": "false"
+    },
+    {
+      "actor": "sv001",
+      "kind": "nonexistent-detail",
+      "url": "http://127.0.0.1:5173/topic/proposal/qa-does-not-exist",
+      "alerts": [],
+      "body": "KHOA CNTT · UTC\nHệ thống Quản lý Đồ án\nĐỢT ĐỒ ÁN ĐANG XEM\nChưa chọn đợt đồ án\nChọn đợt trong không gian làm việc\n\nQUẢN LÝ ĐÀO TẠO\n\nTổng quan\nĐăng ký đề tài & GVHD\nNhóm duyệt đề cương\nPhân công & xét duyệt\nĐề cương & phiên bản\nChốt đề cương & bản giấy\nĐợt đồ án\nKế hoạch hướng dẫn\nNhiệm vụ & tiến độ\nNhận xét báo cáo\nTheo dõi tiến độ Khoa\nNhật ký hướng dẫn\nThông báo của tôi\nHội đồng & phản biện\nChấm điểm & kết quả\nThống kê & báo cáo\nKhông gian học thuật\nĐồng hành cùng đồ án tốt nghiệp\nQuản lý đồ án tốt nghiệp\nCổng thông tin Khoa CNTT\nĐề cương & phiên bản\n← Danh sách đề cương\n\nĐang tải đề cương…\n\nHệ thống Quản lý Hướng dẫn Đồ án Tốt nghiệp\nKhông gian học thuật · UTC"
+    },
+    {
+      "actor": "admin",
+      "route": "/topic/review-groups",
+      "url": "http://127.0.0.1:5173/forbidden",
+      "kind": "desktop",
+      "elapsedMs": 1507,
+      "body": "KHOA CNTT – UTC\nGPMS Portal\nKhông gian làm việc\nKhoa Công nghệ thông tin\n\nKHÔNG GIAN LÀM VIỆC\n\nTổng quan\nThông báo\n\nQUẢN TRỊ HỆ THỐNG\n\nTài khoản\nVai trò & quyền\nNhật ký hoạt động\n\nDANH MỤC & KẾ HOẠCH\n\nSinh viên\nGiảng viên\nDanh mục đào tạo\nImport dữ liệu\nKỳ học & đợt đồ án\n\nĐĂNG KÝ & ĐỀ CƯƠNG\n\nPhân công GVHD\nDanh sách đăng ký\nĐiều chỉnh phân công\nKết quả phân công\nĐề tài đồ án\nHồ sơ đề tài\n\nBÁO CÁO BƯỚC 1–3\n\nBiểu mẫu & xuất dữ liệu\ntv\nQuản trị viên\nQuản trị viên\nUTC GPMS Portal\nTrang không tồn tại\nSTEP3-1793022429323 · Chính quy\ntv\nQuản trị viên\nQuản trị viên\n403 · Không đủ quyền\n\nVai trò hiện tại chưa được cấp quyền truy cập chức năng này.\n\nVề tổng quan",
+      "screenshot": "admin-topic-review-groups.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "admin",
+      "route": "/topic/proposal",
+      "url": "http://127.0.0.1:5173/forbidden",
+      "kind": "desktop",
+      "elapsedMs": 1383,
+      "body": "KHOA CNTT – UTC\nGPMS Portal\nKhông gian làm việc\nKhoa Công nghệ thông tin\n\nKHÔNG GIAN LÀM VIỆC\n\nTổng quan\nThông báo\n\nQUẢN TRỊ HỆ THỐNG\n\nTài khoản\nVai trò & quyền\nNhật ký hoạt động\n\nDANH MỤC & KẾ HOẠCH\n\nSinh viên\nGiảng viên\nDanh mục đào tạo\nImport dữ liệu\nKỳ học & đợt đồ án\n\nĐĂNG KÝ & ĐỀ CƯƠNG\n\nPhân công GVHD\nDanh sách đăng ký\nĐiều chỉnh phân công\nKết quả phân công\nĐề tài đồ án\nHồ sơ đề tài\n\nBÁO CÁO BƯỚC 1–3\n\nBiểu mẫu & xuất dữ liệu\ntv\nQuản trị viên\nQuản trị viên\nUTC GPMS Portal\nTrang không tồn tại\nSTEP3-1793022429323 · Chính quy\ntv\nQuản trị viên\nQuản trị viên\n403 · Không đủ quyền\n\nVai trò hiện tại chưa được cấp quyền truy cập chức năng này.\n\nVề tổng quan",
+      "screenshot": "admin-topic-proposal.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "admin",
+      "route": "/guidance/tasks",
+      "url": "http://127.0.0.1:5173/forbidden",
+      "kind": "desktop",
+      "elapsedMs": 1342,
+      "body": "KHOA CNTT – UTC\nGPMS Portal\nKhông gian làm việc\nKhoa Công nghệ thông tin\n\nKHÔNG GIAN LÀM VIỆC\n\nTổng quan\nThông báo\n\nQUẢN TRỊ HỆ THỐNG\n\nTài khoản\nVai trò & quyền\nNhật ký hoạt động\n\nDANH MỤC & KẾ HOẠCH\n\nSinh viên\nGiảng viên\nDanh mục đào tạo\nImport dữ liệu\nKỳ học & đợt đồ án\n\nĐĂNG KÝ & ĐỀ CƯƠNG\n\nPhân công GVHD\nDanh sách đăng ký\nĐiều chỉnh phân công\nKết quả phân công\nĐề tài đồ án\nHồ sơ đề tài\n\nBÁO CÁO BƯỚC 1–3\n\nBiểu mẫu & xuất dữ liệu\ntv\nQuản trị viên\nQuản trị viên\nUTC GPMS Portal\nTrang không tồn tại\nSTEP3-1793022429323 · Chính quy\ntv\nQuản trị viên\nQuản trị viên\n403 · Không đủ quyền\n\nVai trò hiện tại chưa được cấp quyền truy cập chức năng này.\n\nVề tổng quan",
+      "screenshot": "admin-guidance-tasks.png",
+      "metrics": {
+        "width": 1440,
+        "documentWidth": 1440,
+        "unlabeledInputs": []
+      }
+    },
+    {
+      "actor": "anonymous",
+      "kind": "protected-route",
+      "expected": "/login",
+      "url": "http://127.0.0.1:5173/login"
+    }
+  ],
+  "pageErrors": [],
+  "consoleErrors": [
+    {
+      "actor": "giaovu",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "actor": "gv001",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    },
+    {
+      "actor": "sv001",
+      "message": "Failed to load resource: the server responded with a status of 404 (Not Found)"
+    }
+  ],
+  "network": [
+    {
+      "actor": "giaovu",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/review-group-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-groups",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-group-options",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/review-group-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-groups",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-group-options",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposal-review-options",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/guidance-periods",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/weekly-report-coverage",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/guidance-tasks",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/guidance-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/me/notifications",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/guidance-periods",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/weekly-report-coverage",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/guidance-tasks",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposals/qa-does-not-exist/editing-context",
+      "status": 404,
+      "timing": -1
+    },
+    {
+      "actor": "giaovu",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/review-group-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/guidance-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/me/notifications",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposals/qa-does-not-exist/editing-context",
+      "status": 404,
+      "timing": -1
+    },
+    {
+      "actor": "gv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/registrations/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/registrations/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposal-review-options",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/proposals",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/weekly-report-coverage",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/guidance-periods",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/guidance-tasks",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/me/notifications",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/guidance-periods",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/weekly-report-coverage",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/guidance-tasks",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "sv001",
+      "method": "GET",
+      "path": "/api/proposals/qa-does-not-exist/editing-context",
+      "status": 404,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/accounts",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/accounts",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/accounts",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/accounts",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/accounts",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/accounts",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/accounts",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/accounts",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/registrations",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "status": 200,
+      "timing": -1
+    },
+    {
+      "actor": "admin",
+      "method": "GET",
+      "path": "/api/notifications/me",
+      "status": 200,
+      "timing": -1
+    }
+  ],
+  "a11y": [],
+  "finishedAt": "2026-10-26T14:51:33.450Z"
+}

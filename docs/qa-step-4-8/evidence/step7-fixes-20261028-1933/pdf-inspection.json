@@ -1,0 +1,199 @@
+{
+  "method": "actual PDF.js canvas rendering in real Edge; file viewer only, no application API mocked",
+  "files": {
+    "official": {
+      "path": "student-official.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 89
+        }
+      ],
+      "a4": true,
+      "overflow": 0,
+      "allFourSignatureLabels": true,
+      "annotationCount": 0,
+      "textCharacters": 1328,
+      "sourceTemplateLabels": {
+        "studentPhone": true,
+        "email": true,
+        "cohort": true
+      }
+    },
+    "mcp": {
+      "path": "mcp-student2-official.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 89
+        }
+      ],
+      "a4": true,
+      "overflow": 0,
+      "allFourSignatureLabels": true,
+      "annotationCount": 0,
+      "textCharacters": 1328,
+      "sourceTemplateLabels": {
+        "studentPhone": true,
+        "email": true,
+        "cohort": true
+      }
+    },
+    "preview": {
+      "path": "mcp-preview.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 91
+        }
+      ],
+      "a4": true,
+      "overflow": 0,
+      "allFourSignatureLabels": true,
+      "annotationCount": 0,
+      "textCharacters": 1355,
+      "sourceTemplateLabels": {
+        "studentPhone": true,
+        "email": true,
+        "cohort": true
+      }
+    },
+    "stress": {
+      "path": "dossiers-api/generated/step7-long-sample.pdf",
+      "pages": [
+        {
+          "page": 1,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 85
+        },
+        {
+          "page": 2,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 83
+        },
+        {
+          "page": 3,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 83
+        },
+        {
+          "page": 4,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 83
+        },
+        {
+          "page": 5,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 83
+        },
+        {
+          "page": 6,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 73
+        },
+        {
+          "page": 7,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 129
+        },
+        {
+          "page": 8,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 115
+        },
+        {
+          "page": 9,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 145
+        },
+        {
+          "page": 10,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 145
+        },
+        {
+          "page": 11,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 147
+        },
+        {
+          "page": 12,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 143
+        },
+        {
+          "page": 13,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 149
+        },
+        {
+          "page": 14,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 141
+        },
+        {
+          "page": 15,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 149
+        },
+        {
+          "page": 16,
+          "width": 595.28,
+          "height": 841.89,
+          "annotationCount": 0,
+          "items": 67
+        }
+      ],
+      "a4": true,
+      "overflow": 0,
+      "allFourSignatureLabels": true,
+      "annotationCount": 0,
+      "textCharacters": 39611,
+      "sourceTemplateLabels": {
+        "studentPhone": true,
+        "email": true,
+        "cohort": true
+      }
+    }
+  },
+  "events": []
+}

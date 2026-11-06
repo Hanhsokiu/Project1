@@ -1,0 +1,23 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "checks": [
+    {
+      "name": "injected SQL failure rolls back all nullable fields, indexes, owner/date triggers and permissions",
+      "result": "PASS"
+    },
+    {
+      "name": "legacy task/plan/submission/review data remains unchanged; metadata stays NULL without guessed authors or status",
+      "result": "PASS"
+    },
+    {
+      "name": "only faculty read, official-advisor actions and student progress/weekly permissions added; ADMIN denied",
+      "result": "PASS"
+    },
+    {
+      "name": "eight applied migration checksums match; repeat deployment applies nothing twice",
+      "result": "PASS"
+    }
+  ],
+  "sharedDatabaseDDL": false
+}

@@ -1,0 +1,3 @@
+const fs=require('node:fs'),path=require('node:path'),Module=require('node:module'),{createRequire}=Module;const root=path.resolve(__dirname,'../../../../..'),req=createRequire(path.join(root,'backend/package.json'));
+const load=Module._load;Module._load=function(name,parent,...args){fs.appendFileSync(path.join(__dirname,'../module-trace.log'),name+' from '+parent?.filename+'\n');return load.call(this,name,parent,...args)};
+for(const name of ['@nestjs/core','@nestjs/common','./dist/app.module','./dist/common/exception/global-exception.handler','./dist/common/http/body-parsers']){console.log('loading',name);req(name);console.log('loaded',name)}

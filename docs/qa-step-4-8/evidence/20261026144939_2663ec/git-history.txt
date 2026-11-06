@@ -1,0 +1,12 @@
+0c36170 Merge pull request #2 from Hanhsokiu/feature/step-4-8
+3697474 merge: integrate develop into feature/step-4-8
+02f2540 Merge pull request #3 from Hanhsokiu/feature/step-1-3
+102a64f fix: retry review group transaction conflicts
+f2d449a Cap nhat chuc nang step 1-3
+343da62 Implement thesis management steps 4-8 with tests and review reports
+43b6ca7 feat: update latest project code
+a91e096 Fix
+f225a86 Fix backend and frontend CI
+de0c798 Fix CI triggers for pnpm workspace
+067ec9d Fix backend CI configuration
+69b826c Add pnpm lockfile for CI

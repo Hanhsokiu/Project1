@@ -1,0 +1,122 @@
+{
+  "finishedAt": "2026-10-26T17:33:47.343Z",
+  "cases": [
+    {
+      "name": "prisma-validate",
+      "args": [
+        "<repo>\\node_modules\\.pnpm\\prisma@5.22.0\\node_modules\\prisma\\build\\index.js",
+        "validate",
+        "--schema",
+        "prisma/schema.prisma"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 1815,
+      "result": "PASS"
+    },
+    {
+      "name": "shared-typecheck",
+      "args": [
+        "<repo>\\shared\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit",
+        "--incremental",
+        "false"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 3413,
+      "result": "PASS"
+    },
+    {
+      "name": "backend-typecheck",
+      "args": [
+        "<repo>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit",
+        "--incremental",
+        "false"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 22601,
+      "result": "PASS"
+    },
+    {
+      "name": "frontend-typecheck",
+      "args": [
+        "<repo>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit",
+        "--incremental",
+        "false"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 22269,
+      "result": "PASS"
+    },
+    {
+      "name": "backend-unit",
+      "args": [
+        "<repo>\\node_modules\\.pnpm\\vitest@2.1.9_@types+node@22_d0e4a300e10624dd3110be8feaa594e2\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--cache=false",
+        "--reporter=json",
+        "--outputFile=<repo>\\docs\\qa-step-4-8\\evidence\\20261026144939_2663ec\\verification\\backend-unit.json"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 13227,
+      "result": "PASS"
+    },
+    {
+      "name": "frontend-unit",
+      "args": [
+        "<repo>\\node_modules\\.pnpm\\vitest@2.1.9_@types+node@22_d0e4a300e10624dd3110be8feaa594e2\\node_modules\\vitest\\vitest.mjs",
+        "run",
+        "--cache=false",
+        "--reporter=json",
+        "--outputFile=<repo>\\docs\\qa-step-4-8\\evidence\\20261026144939_2663ec\\verification\\frontend-unit.json"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 14205,
+      "result": "PASS"
+    },
+    {
+      "name": "shared-build",
+      "args": [
+        "<repo>\\shared\\node_modules\\typescript\\bin\\tsc",
+        "--outDir",
+        "<repo>\\docs\\qa-step-4-8\\evidence\\20261026144939_2663ec\\verification\\build\\shared"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 1505,
+      "result": "PASS"
+    },
+    {
+      "name": "backend-build",
+      "args": [
+        "<repo>\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc",
+        "-p",
+        "tsconfig.build.json",
+        "--incremental",
+        "false",
+        "--outDir",
+        "<repo>\\docs\\qa-step-4-8\\evidence\\20261026144939_2663ec\\verification\\build\\backend"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 14429,
+      "result": "PASS"
+    },
+    {
+      "name": "frontend-build",
+      "args": [
+        "<repo>\\node_modules\\.pnpm\\vite@5.4.21_@types+node@22.20.5_terser@5.51.2\\node_modules\\vite\\bin\\vite.js",
+        "build",
+        "--config",
+        "<repo>\\docs\\qa-step-4-8\\evidence\\harness\\vite.config.mjs",
+        "--outDir",
+        "<repo>\\docs\\qa-step-4-8\\evidence\\20261026144939_2663ec\\verification\\build\\frontend",
+        "--emptyOutDir"
+      ],
+      "exitCode": 0,
+      "elapsedMs": 18636,
+      "result": "PASS"
+    }
+  ],
+  "sourceFilesHashed": 416,
+  "changedDuringVerification": []
+}

@@ -1,0 +1,24 @@
+{
+  "result": "FAIL",
+  "probeAssertionsPassed": true,
+  "transportOnly": true,
+  "databaseAccess": false,
+  "cases": [
+    {
+      "name": "small-positive-control",
+      "schemaValid": true,
+      "bytes": 408,
+      "expectedStatusForValidContract": 201,
+      "actualStatus": 201,
+      "result": "PASS"
+    },
+    {
+      "name": "valid-utf8-content-over-default-json-limit",
+      "schemaValid": true,
+      "bytes": 110308,
+      "expectedStatusForValidContract": 201,
+      "actualStatus": 413,
+      "result": "FAIL"
+    }
+  ]
+}

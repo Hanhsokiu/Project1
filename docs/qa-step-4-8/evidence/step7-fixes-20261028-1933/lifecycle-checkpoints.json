@@ -1,0 +1,82 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:50.146Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50186/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "integration-guidance-before-paper",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:52.930Z",
+    "detail": {
+      "proposalId": "p-student2",
+      "dossierState": "FINALIZED",
+      "receipt": null,
+      "planState": "ACTIVE"
+    }
+  },
+  {
+    "id": "T37-contract-reopen-exception-to-edit-phase",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:53.046Z"
+  },
+  {
+    "id": "T37-positive-reopen-preserves-frozen-evidence",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:53.336Z",
+    "detail": {
+      "state": "REOPENED",
+      "current": null,
+      "plan": "PAUSED",
+      "oldReceiptCount": 1,
+      "oldBytesRetained": true
+    }
+  },
+  {
+    "id": "T38-historical-PDF-after-reopen",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:53.358Z"
+  },
+  {
+    "id": "T40-preview-watermark-availability",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:53.469Z"
+  },
+  {
+    "id": "T39-refinalize-does-not-transfer-PDF-receipt",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:54.361Z",
+    "detail": {
+      "oldId": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+      "newId": "0855599c-b878-4290-9291-c797b817e6b3",
+      "newVersion": 2,
+      "sequence": 2,
+      "newReceipt": null,
+      "newPDF": null,
+      "oldReceiptRetained": true,
+      "planStillPaused": true
+    }
+  },
+  {
+    "id": "T38-historical-PDF-after-refinalize",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:54.392Z"
+  },
+  {
+    "id": "T39-new-PDF-distinct-current-and-readonly",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:54.542Z",
+    "detail": {
+      "version": 2,
+      "checksum": "e92788eeef11b5d61483c8d64851e08ac8a2b025353c70119dbed01f4a844aaf",
+      "oldChecksum": "7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462",
+      "receipt": null
+    }
+  }
+]

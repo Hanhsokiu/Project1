@@ -1,0 +1,119 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:50.145Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "B02-trim-ascii-and-group-history",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:51.846Z",
+    "detail": {
+      "trimWorks": true,
+      "asciiCaseWorks": true,
+      "groupSemantics": "any historical round",
+      "ids": [
+        "p-student",
+        "p-student2"
+      ]
+    }
+  },
+  {
+    "id": "B02-vietnamese-case-reproduction",
+    "result": "FAIL",
+    "at": "2026-10-28T02:14:52.220Z",
+    "error": "AssertionError [ERR_ASSERTION]: Same Vietnamese name loses match under uppercase in C locale\n\n0 !== 1\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\boundaries.cjs:11:503\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\browser-common.cjs:19:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step5-local-20261028-0906\\harness\\boundaries.cjs:11:2"
+  },
+  {
+    "id": "W09-future",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:53.968Z",
+    "detail": {
+      "status": 409,
+      "error": {
+        "code": "TERM_003",
+        "message": "Phase duyệt chưa mở, đã khóa hoặc đã hết hạn."
+      },
+      "noAcademicRowsCreated": true
+    }
+  },
+  {
+    "id": "W09-expired",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:54.032Z",
+    "detail": {
+      "status": 409,
+      "error": {
+        "code": "TERM_003",
+        "message": "Phase duyệt chưa mở, đã khóa hoặc đã hết hạn."
+      },
+      "noAcademicRowsCreated": true
+    }
+  },
+  {
+    "id": "W09-locked",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:54.099Z",
+    "detail": {
+      "status": 409,
+      "error": {
+        "code": "TERM_003",
+        "message": "Phase duyệt chưa mở, đã khóa hoặc đã hết hạn."
+      },
+      "noAcademicRowsCreated": true
+    }
+  },
+  {
+    "id": "W09-cancelled",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:54.167Z",
+    "detail": {
+      "status": 409,
+      "error": {
+        "code": "TERM_003",
+        "message": "Đợt không cho phép xét duyệt."
+      },
+      "noAcademicRowsCreated": true
+    }
+  },
+  {
+    "id": "U02-mobile-editable-assignment",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:55.378Z",
+    "detail": {
+      "width": 390,
+      "scrollWidth": 390,
+      "selectThenLeaveDidNotAssign": true
+    }
+  },
+  {
+    "id": "U03-axe-editable-assignment",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:56.357Z",
+    "detail": {
+      "violations": []
+    }
+  },
+  {
+    "id": "W09-fixture-restored",
+    "result": "PASS",
+    "at": "2026-10-28T02:14:56.366Z",
+    "detail": {
+      "phaseAndTermFullyRestored": true,
+      "businessCountsUnchanged": {
+        "reviews": 3,
+        "comments": 3,
+        "decisions": 2,
+        "outbox": 2,
+        "commands": 0
+      },
+      "exactDeadlineMillisecond": "NOT RUN; real clock, no time mocking"
+    }
+  }
+]

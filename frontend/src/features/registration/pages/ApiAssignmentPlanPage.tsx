@@ -1,0 +1,346 @@
+import {
+  Pencil,
+  Eye,
+  RotateCcw,
+  LockKeyhole,
+  FileCheck2,
+  UserCheck,
+  UserRoundSearch,
+  FileClock,
+  Send,
+  Save,
+} from "lucide-react";
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  Badge,
+  Button,
+  Card,
+  Confirm,
+  DataTable,
+  Modal,
+  Notice,
+  PageHeader,
+  Person,
+  Stat,
+} from "../../../shared/components/kit";
+import { useWorkspace } from "../../../shared/hooks/use-workspace";
+import { useAction } from "../../../shared/hooks/use-demo";
+import {
+  assignmentApi,
+  assignmentContext,
+  type AssignmentPreview,
+} from "../services/assignment-api";
+export default function ApiAssignmentPlanPage() {
+  const { db, term, termId } = useWorkspace(),
+    action = useAction();
+  const ctx = assignmentContext(termId);
+  const [preview, setPreview] = useState<AssignmentPreview | null>(null),
+    [all, setAll] = useState(false);
+  const [confirm, setConfirm] = useState<"all" | "publish" | "finalize" | null>(
+    null,
+  );
+  const rows = ctx?.results ?? [],
+    assignments = db.assignments.filter((a) => a.termId === termId);
+  const notices = db.notifications.filter(
+    (n) => n.termId === termId && n.channel === "EMAIL",
+  );
+  const locked =
+    term.locked ||
+    term.quotaReady === false ||
+    term.assignmentPublished ||
+    term.status !== "CLOSED_REGISTRATION";
+  async function calculate(full: boolean) {
+    try {
+      setAll(full);
+      setPreview(await assignmentApi.preview(termId, full));
+      setConfirm(null);
+    } catch (e) {
+      await action.run(() => Promise.reject(e)).catch(() => {});
+    }
+  }
+  return (
+    <>
+      <PageHeader
+        eyebrow="PHÂN CÔNG GIẢNG VIÊN HƯỚNG DẪN"
+        title="Phương án phân công"
+        description={`${term.name} · NV1 toàn đợt → NV2 → NV3 → theo hướng.`}
+        actions={
+          <>
+            <Link className="btn btn-secondary" to="/registration/manual">
+              <Pencil size={16} aria-hidden="true" />
+              Điều chỉnh thủ công
+            </Link>
+            <Button
+              variant="secondary"
+              disabled={locked || action.pending}
+              onClick={() => calculate(false)} loading={action.pending}
+            >
+              <Eye size={16} aria-hidden="true" />
+              Xem trước phân bổ bổ sung
+            </Button>
+            <Button
+              variant="secondary"
+              disabled={locked || action.pending}
+              onClick={() => setConfirm("all")} loading={action.pending}
+            >
+              <RotateCcw size={16} aria-hidden="true" />
+              Tính lại toàn bộ
+            </Button>
+            <Button
+              disabled={locked || !assignments.length || action.pending}
+              onClick={() => setConfirm("publish")} loading={action.pending}
+            >
+              <LockKeyhole size={16} aria-hidden="true" />
+              {term.assignmentPublished ? "Đã công bố" : "Chốt & công bố"}
+            </Button>
+            {ctx?.plan?.status === "PUBLISHED" && (
+              <Button
+                disabled={term.locked || action.pending}
+                onClick={() => setConfirm("finalize")} loading={action.pending}
+              >
+                <LockKeyhole size={16} aria-hidden="true" />
+                Chốt phân công chính thức
+              </Button>
+            )}
+            {ctx?.plan?.status === "FINALIZED" && (
+              <Badge>Đã chốt chính thức</Badge>
+            )}
+          </>
+        }
+      />
+      {term.quotaReady === false && (
+        <div className="mb-5">
+          <Notice tone="warning">
+            Chỉ tiêu hướng dẫn chưa được chốt hoặc đã thay đổi.{" "}
+            <Link
+              className="underline"
+              to={`/terms/${termId}/roster?tab=lecturers`}
+            >
+              Tính và chốt chỉ tiêu
+            </Link>{" "}
+            trước khi phân công.
+          </Notice>
+        </div>
+      )}
+      <div className="stat-grid mt-5">
+        <Stat
+          label="Đã nộp đăng ký"
+          value={rows.length}
+          icon={<FileCheck2 size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Đã phân công"
+          value={assignments.length}
+          icon={<UserCheck size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Chưa phân"
+          value={rows.filter((r) => !r.assignedLecturerId).length}
+          icon={<UserRoundSearch size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Chưa nộp đăng ký"
+          value={ctx?.missingSubmissions.length ?? 0}
+          icon={<FileClock size={18} aria-hidden="true" />}
+        />
+      </div>
+      <div className="stack">
+        {!!ctx?.violations?.length && (
+          <Notice tone="warning">{ctx.violations.join(" · ")}</Notice>
+        )}
+        <Card
+          title={`Phương án ${ctx?.plan ? `· phiên ${ctx.plan.revision} · ${ctx.plan.status}` : "chưa lưu"}`}
+        >
+          <DataTable
+            rows={rows}
+            columns={[
+              {
+                key: "student",
+                title: "Sinh viên",
+                render: (r) => {
+                  const s = db.students.find((s) => s.id === r.studentId);
+                  return (
+                    <Person
+                      name={s?.name ?? r.studentId}
+                      sub={`${s?.code ?? ""} · GPA ${s?.gpa ?? "thiếu"}`}
+                    />
+                  );
+                },
+              },
+              {
+                key: "advisor",
+                title: "GVHD",
+                render: (r) =>
+                  db.lecturers.find((l) => l.id === r.assignedLecturerId)
+                    ?.name ?? "Chưa phân",
+              },
+              { key: "reason", title: "Lý do", render: (r) => r.reason },
+            ]}
+          />
+        </Card>
+        <Card title="SV chưa nộp đăng ký — cần xử lý riêng">
+          <DataTable
+            rows={ctx?.missingSubmissions ?? []}
+            columns={[
+              {
+                key: "student",
+                title: "Sinh viên",
+                render: (r) => {
+                  const s = db.students.find((s) => s.id === r.studentId);
+                  return `${s?.code ?? ""} · ${s?.name ?? r.studentId}`;
+                },
+              },
+              { key: "reason", title: "Lý do", render: (r) => r.reason },
+            ]}
+          />
+        </Card>
+        <Card title="Tải giảng viên / quota trong đợt">
+          <DataTable
+            rows={term.lecturers}
+            columns={[
+              {
+                key: "name",
+                title: "Giảng viên",
+                render: (r) =>
+                  db.lecturers.find((l) => l.id === r.lecturerId)?.name,
+              },
+              {
+                key: "load",
+                title: "Tải / Quota",
+                render: (r) =>
+                  `${assignments.filter((a) => a.lecturerId === r.lecturerId).length} / ${r.quota}`,
+              },
+            ]}
+          />
+        </Card>
+        <Card
+          title="Email outbox"
+          description="SENT: SMTP đã chấp nhận thư. FAILED có lỗi và có thể gửi lại."
+        >
+          <DataTable
+            rows={notices}
+            columns={[
+              { key: "subject", title: "Email", render: (n) => n.title },
+              {
+                key: "status",
+                title: "Trạng thái",
+                render: (n) => <Badge value={n.status} />,
+              },
+              {
+                key: "attempts",
+                title: "Lần thử",
+                render: (n) => n.attempts ?? 0,
+              },
+              {
+                key: "error",
+                title: "Chi tiết",
+                render: (n) => n.lastError ?? n.content,
+              },
+              {
+                key: "retry",
+                title: "Thao tác",
+                render: (n) =>
+                  n.status === "FAILED" ? (
+                    <Button
+                      disabled={action.pending}
+                      onClick={() =>
+                        action
+                          .run(() => assignmentApi.retry(n.id))
+                          .catch(() => {})
+                      } loading={action.pending}
+                    >
+                      <Send size={16} aria-hidden="true" />
+                      Gửi lại
+                    </Button>
+                  ) : null,
+              },
+            ]}
+          />
+        </Card>
+      </div>
+      {preview && (
+        <Modal
+          title="Xem trước — chưa ghi DB"
+          wide
+          onClose={() => setPreview(null)}
+        >
+          <DataTable
+            rows={preview.results}
+            columns={[
+              {
+                key: "student",
+                title: "Sinh viên",
+                render: (r) => {
+                  const reg = db.registrations.find(
+                    (reg) => reg.id === r.registrationId,
+                  );
+                  const s = db.students.find((s) => s.id === reg?.studentId);
+                  return `${s?.code ?? ""} · ${s?.name ?? r.registrationId}`;
+                },
+              },
+              {
+                key: "advisor",
+                title: "GVHD",
+                render: (r) =>
+                  db.lecturers.find((l) => l.id === r.assignedLecturerId)
+                    ?.name ?? "Chưa phân",
+              },
+              { key: "reason", title: "Lý do", render: (r) => r.reason },
+            ]}
+          />
+          <Button
+            disabled={action.pending}
+            onClick={async () => {
+              try {
+                await action.run(() =>
+                  assignmentApi.save(termId, preview, all),
+                );
+                setPreview(null);
+              } catch {
+                setPreview(null);
+              }
+            }} loading={action.pending}
+          >
+            <Save size={16} aria-hidden="true" />
+            Lưu phương án nháp
+          </Button>
+        </Modal>
+      )}
+      {confirm && (
+        <Confirm
+          title={
+            confirm === "finalize"
+              ? "Chốt phân công chính thức?"
+              : confirm === "all"
+                ? "Tính lại toàn bộ phương án nháp?"
+                : "Chốt và công bố phân công?"
+          }
+          description={
+            confirm === "finalize"
+              ? "Xác nhận phương án đã công bố để sử dụng ở các bước xét duyệt và hướng dẫn. Thao tác này ghi nhận người chốt và thời điểm chốt."
+              : confirm === "all"
+                ? "Các phân công nháp, kể cả điều chỉnh thủ công, sẽ được tính lại khi bạn lưu kết quả xem trước."
+                : "Kết quả chính thức sẽ mở cho SV/GV, chuyển đợt sang Đang thực hiện và tạo email outbox. Không sửa trực tiếp sau công bố."
+          }
+          onClose={() => setConfirm(null)}
+          onConfirm={async () => {
+            if (confirm === "all") await calculate(true);
+            else {
+              try {
+                await action.run(() =>
+                  confirm === "finalize"
+                    ? assignmentApi.finalize(termId)
+                    : assignmentApi.publish(termId),
+                );
+              } finally {
+                setConfirm(null);
+              }
+            }
+          }}
+          pending={action.pending}
+        />
+      )}
+    </>
+  );
+}

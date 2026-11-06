@@ -1,0 +1,2275 @@
+{
+  "startedAt": "2026-10-27T14:56:25.614Z",
+  "requests": [
+    {
+      "method": "POST",
+      "url": "http://127.0.0.1:3000/api/auth/login"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/auth/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/auth/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms?page=1&pageSize=100&limit=100"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/semesters"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/training-systems"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/departments"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/research-areas"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/students?page=1&pageSize=100&limit=100"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/lecturers?page=1&pageSize=100&limit=100"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms?page=1&pageSize=100&limit=100"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/semesters"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/training-systems"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/departments"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/research-areas"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/students?page=1&pageSize=100&limit=100"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/lecturers?page=1&pageSize=100&limit=100"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/registrations"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/registrations"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/assignments/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/plan"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/assignments/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/plan"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/topics/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/topics/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/outbox/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/outbox/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-history"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-candidates"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposal-review-options"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search="
+    }
+  ],
+  "responses": [
+    {
+      "status": 201,
+      "method": "POST",
+      "url": "http://127.0.0.1:3000/api/auth/login"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/auth/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/auth/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms?page=1&pageSize=100&limit=100"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/semesters"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/departments"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/research-areas"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/lecturers?page=1&pageSize=100&limit=100"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/semesters"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/research-areas"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/departments"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/lecturers?page=1&pageSize=100&limit=100"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms?page=1&pageSize=100&limit=100"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/training-systems"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/students?page=1&pageSize=100&limit=100"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/training-systems"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/students?page=1&pageSize=100&limit=100"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/registrations"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/registrations"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/assignments/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/plan"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/assignments/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/plan"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/assignments/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b/plan"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/outbox/term/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/topics/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/outbox/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/topics/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/outbox/term/d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          }
+        ],
+        "timestamp": "2026-10-27T14:56:28.659Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a",
+      "body": {
+        "success": true,
+        "data": {
+          "id": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+          "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+          "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+          "studentName": "Sinh viên B",
+          "studentCode": "S3S17930224293231",
+          "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+          "departmentName": "Công nghệ phần mềm",
+          "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+          "status": "SUBMITTED",
+          "revision": 5,
+          "submittedVersionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+          "versionNumber": 3,
+          "activeReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+          "groupName": "hkt",
+          "readiness": [],
+          "canAssign": true,
+          "version": {
+            "id": "ff737944-46c5-44c4-98c0-91f686ce8879",
+            "versionNumber": 3,
+            "content": {
+              "omitted": true,
+              "type": "object",
+              "keys": [
+                "scope",
+                "tools",
+                "endsAt",
+                "schedule",
+                "startsAt",
+                "objectives",
+                "mainContents",
+                "schemaVersion",
+                "expectedResults"
+              ],
+              "jsonLength": 792
+            },
+            "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+            "submittedAt": "2026-10-27T02:57:34.593Z"
+          }
+        },
+        "timestamp": "2026-10-27T14:56:28.710Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-history",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+            "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+            "studentName": "Sinh viên B",
+            "studentCode": "S3S17930224293231",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 5,
+            "revision": 0,
+            "state": "ASSIGNED",
+            "roundNumber": 3,
+            "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+            "groupName": "hkt",
+            "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+            "versionNumber": 3,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T02:57:34.593Z",
+              "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+            },
+            "assignedAt": "2026-10-27T13:14:34.712Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": null,
+            "startedByUserId": null,
+            "routingSnapshot": {
+              "reason": "gtdf",
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": null,
+            "allowedActions": [
+              "assign"
+            ],
+            "comments": [],
+            "decision": null
+          },
+          {
+            "id": "a72a649c-2301-4046-a212-19bca4e78377",
+            "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+            "studentName": "Sinh viên B",
+            "studentCode": "S3S17930224293231",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 5,
+            "revision": 2,
+            "state": "SUPERSEDED",
+            "roundNumber": 2,
+            "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+            "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+            "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+            "versionNumber": 3,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T02:57:34.593Z",
+              "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+            },
+            "assignedAt": "2026-10-27T13:14:10.152Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": null,
+            "startedByUserId": null,
+            "routingSnapshot": {
+              "reason": "gggg",
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+            "allowedActions": [],
+            "comments": [],
+            "decision": null
+          },
+          {
+            "id": "54d650c9-5a7b-4c7a-a2e7-c3a9e30f1d0f",
+            "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+            "studentName": "Sinh viên B",
+            "studentCode": "S3S17930224293231",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 5,
+            "revision": 2,
+            "state": "SUPERSEDED",
+            "roundNumber": 1,
+            "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+            "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+            "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+            "versionNumber": 3,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T02:57:34.593Z",
+              "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+            },
+            "assignedAt": "2026-10-27T02:57:43.734Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": null,
+            "startedByUserId": null,
+            "routingSnapshot": {
+              "reason": null,
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": "a72a649c-2301-4046-a212-19bca4e78377",
+            "allowedActions": [],
+            "comments": [],
+            "decision": null
+          }
+        ],
+        "timestamp": "2026-10-27T14:56:28.723Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-candidates",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+            "name": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+            "memberCount": 2,
+            "eligibleReviewerCount": 2,
+            "specialtyMatchCount": 2,
+            "activeReviewCount": 1,
+            "explanation": "Cùng đợt và bộ môn theo hướng đề tài. Số khớp chuyên môn chỉ để tham khảo; Khoa chọn và xác nhận, hệ thống không tự phân."
+          },
+          {
+            "id": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+            "name": "hkt",
+            "memberCount": 2,
+            "eligibleReviewerCount": 1,
+            "specialtyMatchCount": 1,
+            "activeReviewCount": 1,
+            "explanation": "Cùng đợt và bộ môn theo hướng đề tài. Số khớp chuyên môn chỉ để tham khảo; Khoa chọn và xác nhận, hệ thống không tự phân."
+          }
+        ],
+        "timestamp": "2026-10-27T14:56:28.790Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          }
+        ],
+        "timestamp": "2026-10-27T14:56:30.708Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposal-review-options",
+      "body": {
+        "success": true,
+        "data": {
+          "term": {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          "departments": [
+            {
+              "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "name": "Công nghệ phần mềm"
+            }
+          ],
+          "canAssign": true,
+          "phase": {
+            "startsAt": "2026-10-26T02:57:33.550Z",
+            "endsAt": "2027-01-25T02:57:33.550Z",
+            "isLocked": false
+          }
+        },
+        "timestamp": "2026-10-27T14:56:30.810Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?page=1&limit=20&search=",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+              "studentName": "Sinh viên B",
+              "studentCode": "S3S17930224293231",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 5,
+              "submittedVersionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+              "versionNumber": 3,
+              "activeReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+              "groupName": "hkt",
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+              "studentName": "Sinh viên A",
+              "studentCode": "S3S17930224293230",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 9,
+              "submittedVersionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+              "versionNumber": 4,
+              "activeReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "73d376de-3359-4de8-b88d-ba742cb0a3a1",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn",
+              "studentName": "Sinh viên N",
+              "studentCode": "S3S17930224293233",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 6,
+              "submittedVersionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true
+            },
+            {
+              "id": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt",
+              "studentName": "Sinh viên C",
+              "studentCode": "S3S17930224293232",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 5,
+              "submittedVersionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true
+            }
+          ],
+          "total": 4,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T14:56:30.824Z"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "console": [],
+  "failedRequests": [],
+  "observations": {
+    "identity": {
+      "status": 200,
+      "username": "giaovu",
+      "roles": [
+        "FACULTY"
+      ],
+      "lecturerId": null,
+      "studentId": null,
+      "permissions": [
+        "proposal:read",
+        "proposal:assign",
+        "proposal:finalize",
+        "proposal:export"
+      ]
+    },
+    "queue": {
+      "url": "http://127.0.0.1:5173/topic/reviews?termId=d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "text": "Tìm kiếm\nPhân công & xét duyệt đề cương\n\nKhoa quản lý trong phạm vi được cấp; giảng viên xem các vòng được phân cho nhóm mình.\n\nQuản lý nhóm duyệt →\n\nPhase duyệt: 09:57:33 26/10/2026 — 09:57:33 25/1/2027 · Theo lịch mở (Asia/Ho_Chi_Minh)\n\nHàng đợi / inbox theo đợt\nĐợt đồ án\nChọn đợt\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTrong phạm vi được cấp\nCông nghệ phần mềm\nTrạng thái\nTất cả trạng thái\nChờ duyệt\nĐang duyệt\nYêu cầu sửa\nĐã duyệt\nTìm hồ sơ\nChỉ hồ sơ chưa có vòng đang hoạt động\nĐỀ CƯƠNG / SINH VIÊN\tBỘ MÔN\tPHIÊN BẢN\tTRẠNG THÁI / NHÓM\tTHAO TÁC\n\n[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt\nSinh viên B · S3S17930224293231\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tChờ duyệt\nhkt\n\t\nHồ sơ / phân công\nXem vòng được phân\n\n\n[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa\nSinh viên A · S3S17930224293230\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv4\tChờ duyệt\nNhóm duyệt DEMO 4–8 · Công nghệ phần mềm\n\t\nHồ sơ / phân công\nXem vòng được phân\n\n\n[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn\nSinh viên N · S3S17930224293233\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tĐã duyệt\nChưa phân nhóm\n\t\nHồ sơ / phân công\n\n\n[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt\nSinh viên C · S3S17930224293232\n\tCông nghệ phần mềm\nHướng kiểm thử Bước 3 1793022429323\n\tv3\tĐã duyệt\nChưa phân nhóm\n\t\nHồ sơ / phân công\n4 hồ sơ · Trang 1/1\nTrước\nSau",
+      "rows": 4,
+      "statusOptions": [
+        {
+          "value": "",
+          "text": "Tất cả trạng thái"
+        },
+        {
+          "value": "SUBMITTED",
+          "text": "Chờ duyệt"
+        },
+        {
+          "value": "UNDER_REVIEW",
+          "text": "Đang duyệt"
+        },
+        {
+          "value": "REVISION_REQUESTED",
+          "text": "Yêu cầu sửa"
+        },
+        {
+          "value": "APPROVED",
+          "text": "Đã duyệt"
+        }
+      ]
+    },
+    "baseline": {
+      "list": {
+        "path": "/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposals?limit=100",
+        "status": 200,
+        "body": {
+          "success": true,
+          "data": {
+            "data": [
+              {
+                "id": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+                "studentName": "Sinh viên B",
+                "studentCode": "S3S17930224293231",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "departmentName": "Công nghệ phần mềm",
+                "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+                "status": "SUBMITTED",
+                "revision": 5,
+                "submittedVersionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+                "versionNumber": 3,
+                "activeReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+                "groupName": "hkt",
+                "readiness": [],
+                "canAssign": true
+              },
+              {
+                "id": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+                "studentName": "Sinh viên A",
+                "studentCode": "S3S17930224293230",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "departmentName": "Công nghệ phần mềm",
+                "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+                "status": "SUBMITTED",
+                "revision": 9,
+                "submittedVersionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+                "versionNumber": 4,
+                "activeReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+                "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "readiness": [],
+                "canAssign": true
+              },
+              {
+                "id": "73d376de-3359-4de8-b88d-ba742cb0a3a1",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn",
+                "studentName": "Sinh viên N",
+                "studentCode": "S3S17930224293233",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "departmentName": "Công nghệ phần mềm",
+                "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+                "status": "APPROVED",
+                "revision": 6,
+                "submittedVersionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+                "versionNumber": 3,
+                "activeReviewId": null,
+                "groupName": null,
+                "readiness": [],
+                "canAssign": true
+              },
+              {
+                "id": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt",
+                "studentName": "Sinh viên C",
+                "studentCode": "S3S17930224293232",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "departmentName": "Công nghệ phần mềm",
+                "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+                "status": "APPROVED",
+                "revision": 5,
+                "submittedVersionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+                "versionNumber": 3,
+                "activeReviewId": null,
+                "groupName": null,
+                "readiness": [],
+                "canAssign": true
+              }
+            ],
+            "total": 4,
+            "page": 1,
+            "limit": 100,
+            "totalPages": 1
+          },
+          "timestamp": "2026-10-27T14:56:34.805Z"
+        }
+      },
+      "options": {
+        "path": "/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/proposal-review-options",
+        "status": 200,
+        "body": {
+          "success": true,
+          "data": {
+            "term": {
+              "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+              "status": "IN_PROGRESS"
+            },
+            "departments": [
+              {
+                "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "name": "Công nghệ phần mềm"
+              }
+            ],
+            "canAssign": true,
+            "phase": {
+              "startsAt": "2026-10-26T02:57:33.550Z",
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "isLocked": false
+            }
+          },
+          "timestamp": "2026-10-27T14:56:34.847Z"
+        }
+      },
+      "proposals": [
+        {
+          "path": "/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+              "studentName": "Sinh viên B",
+              "studentCode": "S3S17930224293231",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 5,
+              "submittedVersionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+              "versionNumber": 3,
+              "activeReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+              "groupName": "hkt",
+              "readiness": [],
+              "canAssign": true,
+              "version": {
+                "id": "ff737944-46c5-44c4-98c0-91f686ce8879",
+                "versionNumber": 3,
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:34.593Z"
+              }
+            },
+            "timestamp": "2026-10-27T14:56:34.894Z"
+          }
+        },
+        {
+          "path": "/proposals/a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+              "studentName": "Sinh viên A",
+              "studentCode": "S3S17930224293230",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "SUBMITTED",
+              "revision": 9,
+              "submittedVersionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+              "versionNumber": 4,
+              "activeReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "readiness": [],
+              "canAssign": true,
+              "version": {
+                "id": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+                "versionNumber": 4,
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T13:10:51.285Z"
+              }
+            },
+            "timestamp": "2026-10-27T14:56:35.192Z"
+          }
+        },
+        {
+          "path": "/proposals/73d376de-3359-4de8-b88d-ba742cb0a3a1",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "73d376de-3359-4de8-b88d-ba742cb0a3a1",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn",
+              "studentName": "Sinh viên N",
+              "studentCode": "S3S17930224293233",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 6,
+              "submittedVersionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true,
+              "version": {
+                "id": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+                "versionNumber": 3,
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:35.162Z"
+              }
+            },
+            "timestamp": "2026-10-27T14:56:35.478Z"
+          }
+        },
+        {
+          "path": "/proposals/8c447530-71bb-4033-a3be-9ec680a6b1e3",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt",
+              "studentName": "Sinh viên C",
+              "studentCode": "S3S17930224293232",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "researchAreaName": "Hướng kiểm thử Bước 3 1793022429323",
+              "status": "APPROVED",
+              "revision": 5,
+              "submittedVersionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+              "versionNumber": 3,
+              "activeReviewId": null,
+              "groupName": null,
+              "readiness": [],
+              "canAssign": true,
+              "version": {
+                "id": "6ea7e093-69c1-4048-8a7d-25612c682561",
+                "versionNumber": 3,
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:34.879Z"
+              }
+            },
+            "timestamp": "2026-10-27T14:56:35.603Z"
+          }
+        }
+      ],
+      "histories": [
+        {
+          "path": "/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-history",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": [
+              {
+                "id": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+                "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+                "studentName": "Sinh viên B",
+                "studentCode": "S3S17930224293231",
+                "proposalStatus": "SUBMITTED",
+                "proposalRevision": 5,
+                "revision": 0,
+                "state": "ASSIGNED",
+                "roundNumber": 3,
+                "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+                "groupName": "hkt",
+                "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+                "versionNumber": 3,
+                "version": {
+                  "content": {
+                    "omitted": true,
+                    "type": "object",
+                    "keys": [
+                      "scope",
+                      "tools",
+                      "endsAt",
+                      "schedule",
+                      "startsAt",
+                      "objectives",
+                      "mainContents",
+                      "schemaVersion",
+                      "expectedResults"
+                    ],
+                    "jsonLength": 792
+                  },
+                  "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                  "submittedAt": "2026-10-27T02:57:34.593Z",
+                  "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+                },
+                "assignedAt": "2026-10-27T13:14:34.712Z",
+                "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+                "startedAt": null,
+                "startedByUserId": null,
+                "routingSnapshot": {
+                  "reason": "gtdf",
+                  "revision": 0,
+                  "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                  "groupRevision": 0,
+                  "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+                },
+                "phaseSnapshot": {
+                  "endsAt": "2027-01-25T02:57:33.550Z",
+                  "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                  "revision": 0,
+                  "startsAt": "2026-10-26T02:57:33.550Z"
+                },
+                "supersededByReviewId": null,
+                "allowedActions": [
+                  "assign"
+                ],
+                "comments": [],
+                "decision": null
+              },
+              {
+                "id": "a72a649c-2301-4046-a212-19bca4e78377",
+                "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+                "studentName": "Sinh viên B",
+                "studentCode": "S3S17930224293231",
+                "proposalStatus": "SUBMITTED",
+                "proposalRevision": 5,
+                "revision": 2,
+                "state": "SUPERSEDED",
+                "roundNumber": 2,
+                "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+                "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+                "versionNumber": 3,
+                "version": {
+                  "content": {
+                    "omitted": true,
+                    "type": "object",
+                    "keys": [
+                      "scope",
+                      "tools",
+                      "endsAt",
+                      "schedule",
+                      "startsAt",
+                      "objectives",
+                      "mainContents",
+                      "schemaVersion",
+                      "expectedResults"
+                    ],
+                    "jsonLength": 792
+                  },
+                  "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                  "submittedAt": "2026-10-27T02:57:34.593Z",
+                  "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+                },
+                "assignedAt": "2026-10-27T13:14:10.152Z",
+                "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+                "startedAt": null,
+                "startedByUserId": null,
+                "routingSnapshot": {
+                  "reason": "gggg",
+                  "revision": 0,
+                  "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                  "groupRevision": 0,
+                  "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+                },
+                "phaseSnapshot": {
+                  "endsAt": "2027-01-25T02:57:33.550Z",
+                  "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                  "revision": 0,
+                  "startsAt": "2026-10-26T02:57:33.550Z"
+                },
+                "supersededByReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+                "allowedActions": [],
+                "comments": [],
+                "decision": null
+              },
+              {
+                "id": "54d650c9-5a7b-4c7a-a2e7-c3a9e30f1d0f",
+                "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+                "studentName": "Sinh viên B",
+                "studentCode": "S3S17930224293231",
+                "proposalStatus": "SUBMITTED",
+                "proposalRevision": 5,
+                "revision": 2,
+                "state": "SUPERSEDED",
+                "roundNumber": 1,
+                "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+                "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+                "versionNumber": 3,
+                "version": {
+                  "content": {
+                    "omitted": true,
+                    "type": "object",
+                    "keys": [
+                      "scope",
+                      "tools",
+                      "endsAt",
+                      "schedule",
+                      "startsAt",
+                      "objectives",
+                      "mainContents",
+                      "schemaVersion",
+                      "expectedResults"
+                    ],
+                    "jsonLength": 792
+                  },
+                  "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                  "submittedAt": "2026-10-27T02:57:34.593Z",
+                  "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+                },
+                "assignedAt": "2026-10-27T02:57:43.734Z",
+                "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+                "startedAt": null,
+                "startedByUserId": null,
+                "routingSnapshot": {
+                  "reason": null,
+                  "revision": 0,
+                  "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                  "groupRevision": 0,
+                  "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+                },
+                "phaseSnapshot": {
+                  "endsAt": "2027-01-25T02:57:33.550Z",
+                  "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                  "revision": 0,
+                  "startsAt": "2026-10-26T02:57:33.550Z"
+                },
+                "supersededByReviewId": "a72a649c-2301-4046-a212-19bca4e78377",
+                "allowedActions": [],
+                "comments": [],
+                "decision": null
+              }
+            ],
+            "timestamp": "2026-10-27T14:56:34.947Z"
+          }
+        },
+        {
+          "path": "/proposals/a7bc28c0-873e-4dde-9a2d-ca97f351895d/review-history",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": [
+              {
+                "id": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+                "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+                "studentName": "Sinh viên A",
+                "studentCode": "S3S17930224293230",
+                "proposalStatus": "SUBMITTED",
+                "proposalRevision": 9,
+                "revision": 0,
+                "state": "ASSIGNED",
+                "roundNumber": 3,
+                "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+                "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "versionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+                "versionNumber": 4,
+                "version": {
+                  "content": {
+                    "omitted": true,
+                    "type": "object",
+                    "keys": [
+                      "scope",
+                      "tools",
+                      "endsAt",
+                      "schedule",
+                      "startsAt",
+                      "objectives",
+                      "mainContents",
+                      "schemaVersion",
+                      "expectedResults"
+                    ],
+                    "jsonLength": 792
+                  },
+                  "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                  "submittedAt": "2026-10-27T13:10:51.285Z",
+                  "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+                },
+                "assignedAt": "2026-10-27T13:13:51.856Z",
+                "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+                "startedAt": null,
+                "startedByUserId": null,
+                "routingSnapshot": {
+                  "reason": "thichs",
+                  "revision": 0,
+                  "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                  "groupRevision": 0,
+                  "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+                },
+                "phaseSnapshot": {
+                  "endsAt": "2027-01-25T02:57:33.550Z",
+                  "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                  "revision": 0,
+                  "startsAt": "2026-10-26T02:57:33.550Z"
+                },
+                "supersededByReviewId": null,
+                "allowedActions": [
+                  "assign"
+                ],
+                "comments": [],
+                "decision": null
+              },
+              {
+                "id": "2489f2e1-0b1b-4d32-9b7d-dbfab98c5c8a",
+                "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+                "studentName": "Sinh viên A",
+                "studentCode": "S3S17930224293230",
+                "proposalStatus": "SUBMITTED",
+                "proposalRevision": 9,
+                "revision": 2,
+                "state": "SUPERSEDED",
+                "roundNumber": 2,
+                "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+                "groupName": "hkt",
+                "versionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+                "versionNumber": 4,
+                "version": {
+                  "content": {
+                    "omitted": true,
+                    "type": "object",
+                    "keys": [
+                      "scope",
+                      "tools",
+                      "endsAt",
+                      "schedule",
+                      "startsAt",
+                      "objectives",
+                      "mainContents",
+                      "schemaVersion",
+                      "expectedResults"
+                    ],
+                    "jsonLength": 792
+                  },
+                  "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                  "submittedAt": "2026-10-27T13:10:51.285Z",
+                  "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+                },
+                "assignedAt": "2026-10-27T13:13:09.714Z",
+                "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+                "startedAt": null,
+                "startedByUserId": null,
+                "routingSnapshot": {
+                  "reason": null,
+                  "revision": 0,
+                  "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                  "groupRevision": 0,
+                  "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+                },
+                "phaseSnapshot": {
+                  "endsAt": "2027-01-25T02:57:33.550Z",
+                  "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                  "revision": 0,
+                  "startsAt": "2026-10-26T02:57:33.550Z"
+                },
+                "supersededByReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+                "allowedActions": [],
+                "comments": [],
+                "decision": null
+              },
+              {
+                "id": "db4d0153-fbbc-4baa-a8e5-f94d843592d2",
+                "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+                "studentName": "Sinh viên A",
+                "studentCode": "S3S17930224293230",
+                "proposalStatus": "SUBMITTED",
+                "proposalRevision": 9,
+                "revision": 2,
+                "state": "DECIDED",
+                "roundNumber": 1,
+                "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+                "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "versionId": "5105bfb3-6715-462c-a360-01ea551abb5c",
+                "versionNumber": 3,
+                "version": {
+                  "content": {
+                    "omitted": true,
+                    "type": "object",
+                    "keys": [
+                      "scope",
+                      "tools",
+                      "endsAt",
+                      "schedule",
+                      "startsAt",
+                      "objectives",
+                      "mainContents",
+                      "schemaVersion",
+                      "expectedResults"
+                    ],
+                    "jsonLength": 792
+                  },
+                  "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                  "submittedAt": "2026-10-27T02:57:34.272Z",
+                  "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+                },
+                "assignedAt": "2026-10-27T02:57:39.813Z",
+                "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+                "startedAt": "2026-10-27T02:57:42.077Z",
+                "startedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                "routingSnapshot": {
+                  "reason": null,
+                  "revision": 0,
+                  "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                  "groupRevision": 0,
+                  "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+                },
+                "phaseSnapshot": {
+                  "endsAt": "2027-01-25T02:57:33.550Z",
+                  "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                  "revision": 0,
+                  "startsAt": "2026-10-26T02:57:33.550Z"
+                },
+                "supersededByReviewId": null,
+                "allowedActions": [],
+                "comments": [],
+                "decision": {
+                  "id": "59144932-623a-4bfb-a2fa-924bb90a8093",
+                  "versionId": "5105bfb3-6715-462c-a360-01ea551abb5c",
+                  "decision": "REVISION_REQUIRED",
+                  "comment": "Bổ sung mục tiêu đo được và kế hoạch kiểm thử. Dữ liệu demo để sinh viên chỉnh sửa, phản hồi và nộp lại.",
+                  "decidedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                  "deciderName": "gv003",
+                  "decidedAt": "2026-10-27T02:57:42.867Z"
+                }
+              }
+            ],
+            "timestamp": "2026-10-27T14:56:35.251Z"
+          }
+        },
+        {
+          "path": "/proposals/73d376de-3359-4de8-b88d-ba742cb0a3a1/review-history",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": [
+              {
+                "id": "f781e02c-f1de-4f42-a8c5-a72a22c8048f",
+                "proposalId": "73d376de-3359-4de8-b88d-ba742cb0a3a1",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn",
+                "studentName": "Sinh viên N",
+                "studentCode": "S3S17930224293233",
+                "proposalStatus": "APPROVED",
+                "proposalRevision": 6,
+                "revision": 2,
+                "state": "DECIDED",
+                "roundNumber": 1,
+                "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+                "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "versionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+                "versionNumber": 3,
+                "version": {
+                  "content": {
+                    "omitted": true,
+                    "type": "object",
+                    "keys": [
+                      "scope",
+                      "tools",
+                      "endsAt",
+                      "schedule",
+                      "startsAt",
+                      "objectives",
+                      "mainContents",
+                      "schemaVersion",
+                      "expectedResults"
+                    ],
+                    "jsonLength": 792
+                  },
+                  "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                  "submittedAt": "2026-10-27T02:57:35.162Z",
+                  "submittedByUserId": "4bb3c1e0-b6cc-4ef1-8de3-e06bc42bc5ae"
+                },
+                "assignedAt": "2026-10-27T02:57:47.078Z",
+                "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+                "startedAt": "2026-10-27T02:57:47.778Z",
+                "startedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                "routingSnapshot": {
+                  "reason": null,
+                  "revision": 0,
+                  "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                  "groupRevision": 0,
+                  "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+                },
+                "phaseSnapshot": {
+                  "endsAt": "2027-01-25T02:57:33.550Z",
+                  "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                  "revision": 0,
+                  "startsAt": "2026-10-26T02:57:33.550Z"
+                },
+                "supersededByReviewId": null,
+                "allowedActions": [],
+                "comments": [],
+                "decision": {
+                  "id": "a840d185-bb91-4de4-86b2-a3a48a125d66",
+                  "versionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+                  "decision": "APPROVED",
+                  "comment": "Đề cương rõ mục tiêu, đủ phạm vi và kế hoạch thực hiện; đồng ý thông qua.",
+                  "decidedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                  "deciderName": "gv003",
+                  "decidedAt": "2026-10-27T02:57:48.593Z"
+                }
+              }
+            ],
+            "timestamp": "2026-10-27T14:56:35.519Z"
+          }
+        },
+        {
+          "path": "/proposals/8c447530-71bb-4033-a3be-9ec680a6b1e3/review-history",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": [
+              {
+                "id": "e2a8929d-dd99-4ecf-bead-9465c02604e5",
+                "proposalId": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+                "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+                "title": "[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt",
+                "studentName": "Sinh viên C",
+                "studentCode": "S3S17930224293232",
+                "proposalStatus": "APPROVED",
+                "proposalRevision": 5,
+                "revision": 2,
+                "state": "DECIDED",
+                "roundNumber": 1,
+                "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+                "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "versionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+                "versionNumber": 3,
+                "version": {
+                  "content": {
+                    "omitted": true,
+                    "type": "object",
+                    "keys": [
+                      "scope",
+                      "tools",
+                      "endsAt",
+                      "schedule",
+                      "startsAt",
+                      "objectives",
+                      "mainContents",
+                      "schemaVersion",
+                      "expectedResults"
+                    ],
+                    "jsonLength": 792
+                  },
+                  "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                  "submittedAt": "2026-10-27T02:57:34.879Z",
+                  "submittedByUserId": "479ec8ed-ae48-4f22-9c65-a06d1e95b609"
+                },
+                "assignedAt": "2026-10-27T02:57:44.516Z",
+                "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+                "startedAt": "2026-10-27T02:57:45.287Z",
+                "startedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                "routingSnapshot": {
+                  "reason": null,
+                  "revision": 0,
+                  "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                  "groupRevision": 0,
+                  "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+                },
+                "phaseSnapshot": {
+                  "endsAt": "2027-01-25T02:57:33.550Z",
+                  "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                  "revision": 0,
+                  "startsAt": "2026-10-26T02:57:33.550Z"
+                },
+                "supersededByReviewId": null,
+                "allowedActions": [],
+                "comments": [],
+                "decision": {
+                  "id": "c49a33c9-b770-4b8b-949d-4b149298180f",
+                  "versionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+                  "decision": "APPROVED",
+                  "comment": "Đề cương rõ mục tiêu, đủ phạm vi và kế hoạch thực hiện; đồng ý thông qua.",
+                  "decidedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                  "deciderName": "gv003",
+                  "decidedAt": "2026-10-27T02:57:46.201Z"
+                }
+              }
+            ],
+            "timestamp": "2026-10-27T14:56:35.641Z"
+          }
+        }
+      ],
+      "reviews": [
+        {
+          "path": "/proposal-reviews/5602d487-12d1-44f1-b879-6fa4855d43a8",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+              "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+              "studentName": "Sinh viên B",
+              "studentCode": "S3S17930224293231",
+              "proposalStatus": "SUBMITTED",
+              "proposalRevision": 5,
+              "revision": 0,
+              "state": "ASSIGNED",
+              "roundNumber": 3,
+              "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+              "groupName": "hkt",
+              "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+              "versionNumber": 3,
+              "version": {
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:34.593Z",
+                "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+              },
+              "assignedAt": "2026-10-27T13:14:34.712Z",
+              "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+              "startedAt": null,
+              "startedByUserId": null,
+              "routingSnapshot": {
+                "reason": "gtdf",
+                "revision": 0,
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "groupRevision": 0,
+                "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+              },
+              "phaseSnapshot": {
+                "endsAt": "2027-01-25T02:57:33.550Z",
+                "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                "revision": 0,
+                "startsAt": "2026-10-26T02:57:33.550Z"
+              },
+              "supersededByReviewId": null,
+              "allowedActions": [
+                "assign"
+              ],
+              "comments": [],
+              "decision": null
+            },
+            "timestamp": "2026-10-27T14:56:34.996Z"
+          }
+        },
+        {
+          "path": "/proposal-reviews/a72a649c-2301-4046-a212-19bca4e78377",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "a72a649c-2301-4046-a212-19bca4e78377",
+              "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+              "studentName": "Sinh viên B",
+              "studentCode": "S3S17930224293231",
+              "proposalStatus": "SUBMITTED",
+              "proposalRevision": 5,
+              "revision": 2,
+              "state": "SUPERSEDED",
+              "roundNumber": 2,
+              "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+              "versionNumber": 3,
+              "version": {
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:34.593Z",
+                "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+              },
+              "assignedAt": "2026-10-27T13:14:10.152Z",
+              "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+              "startedAt": null,
+              "startedByUserId": null,
+              "routingSnapshot": {
+                "reason": "gggg",
+                "revision": 0,
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "groupRevision": 0,
+                "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+              },
+              "phaseSnapshot": {
+                "endsAt": "2027-01-25T02:57:33.550Z",
+                "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                "revision": 0,
+                "startsAt": "2026-10-26T02:57:33.550Z"
+              },
+              "supersededByReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+              "allowedActions": [],
+              "comments": [],
+              "decision": null
+            },
+            "timestamp": "2026-10-27T14:56:35.038Z"
+          }
+        },
+        {
+          "path": "/proposal-reviews/54d650c9-5a7b-4c7a-a2e7-c3a9e30f1d0f",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "54d650c9-5a7b-4c7a-a2e7-c3a9e30f1d0f",
+              "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+              "studentName": "Sinh viên B",
+              "studentCode": "S3S17930224293231",
+              "proposalStatus": "SUBMITTED",
+              "proposalRevision": 5,
+              "revision": 2,
+              "state": "SUPERSEDED",
+              "roundNumber": 1,
+              "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+              "versionNumber": 3,
+              "version": {
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:34.593Z",
+                "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+              },
+              "assignedAt": "2026-10-27T02:57:43.734Z",
+              "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+              "startedAt": null,
+              "startedByUserId": null,
+              "routingSnapshot": {
+                "reason": null,
+                "revision": 0,
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "groupRevision": 0,
+                "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+              },
+              "phaseSnapshot": {
+                "endsAt": "2027-01-25T02:57:33.550Z",
+                "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                "revision": 0,
+                "startsAt": "2026-10-26T02:57:33.550Z"
+              },
+              "supersededByReviewId": "a72a649c-2301-4046-a212-19bca4e78377",
+              "allowedActions": [],
+              "comments": [],
+              "decision": null
+            },
+            "timestamp": "2026-10-27T14:56:35.081Z"
+          }
+        },
+        {
+          "path": "/proposal-reviews/2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+              "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+              "studentName": "Sinh viên A",
+              "studentCode": "S3S17930224293230",
+              "proposalStatus": "SUBMITTED",
+              "proposalRevision": 9,
+              "revision": 0,
+              "state": "ASSIGNED",
+              "roundNumber": 3,
+              "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "versionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+              "versionNumber": 4,
+              "version": {
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T13:10:51.285Z",
+                "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+              },
+              "assignedAt": "2026-10-27T13:13:51.856Z",
+              "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+              "startedAt": null,
+              "startedByUserId": null,
+              "routingSnapshot": {
+                "reason": "thichs",
+                "revision": 0,
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "groupRevision": 0,
+                "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+              },
+              "phaseSnapshot": {
+                "endsAt": "2027-01-25T02:57:33.550Z",
+                "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                "revision": 0,
+                "startsAt": "2026-10-26T02:57:33.550Z"
+              },
+              "supersededByReviewId": null,
+              "allowedActions": [
+                "assign"
+              ],
+              "comments": [],
+              "decision": null
+            },
+            "timestamp": "2026-10-27T14:56:35.296Z"
+          }
+        },
+        {
+          "path": "/proposal-reviews/2489f2e1-0b1b-4d32-9b7d-dbfab98c5c8a",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "2489f2e1-0b1b-4d32-9b7d-dbfab98c5c8a",
+              "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+              "studentName": "Sinh viên A",
+              "studentCode": "S3S17930224293230",
+              "proposalStatus": "SUBMITTED",
+              "proposalRevision": 9,
+              "revision": 2,
+              "state": "SUPERSEDED",
+              "roundNumber": 2,
+              "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+              "groupName": "hkt",
+              "versionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+              "versionNumber": 4,
+              "version": {
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T13:10:51.285Z",
+                "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+              },
+              "assignedAt": "2026-10-27T13:13:09.714Z",
+              "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+              "startedAt": null,
+              "startedByUserId": null,
+              "routingSnapshot": {
+                "reason": null,
+                "revision": 0,
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "groupRevision": 0,
+                "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+              },
+              "phaseSnapshot": {
+                "endsAt": "2027-01-25T02:57:33.550Z",
+                "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                "revision": 0,
+                "startsAt": "2026-10-26T02:57:33.550Z"
+              },
+              "supersededByReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+              "allowedActions": [],
+              "comments": [],
+              "decision": null
+            },
+            "timestamp": "2026-10-27T14:56:35.336Z"
+          }
+        },
+        {
+          "path": "/proposal-reviews/db4d0153-fbbc-4baa-a8e5-f94d843592d2",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "db4d0153-fbbc-4baa-a8e5-f94d843592d2",
+              "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+              "studentName": "Sinh viên A",
+              "studentCode": "S3S17930224293230",
+              "proposalStatus": "SUBMITTED",
+              "proposalRevision": 9,
+              "revision": 2,
+              "state": "DECIDED",
+              "roundNumber": 1,
+              "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "versionId": "5105bfb3-6715-462c-a360-01ea551abb5c",
+              "versionNumber": 3,
+              "version": {
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:34.272Z",
+                "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+              },
+              "assignedAt": "2026-10-27T02:57:39.813Z",
+              "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+              "startedAt": "2026-10-27T02:57:42.077Z",
+              "startedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+              "routingSnapshot": {
+                "reason": null,
+                "revision": 0,
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "groupRevision": 0,
+                "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+              },
+              "phaseSnapshot": {
+                "endsAt": "2027-01-25T02:57:33.550Z",
+                "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                "revision": 0,
+                "startsAt": "2026-10-26T02:57:33.550Z"
+              },
+              "supersededByReviewId": null,
+              "allowedActions": [],
+              "comments": [],
+              "decision": {
+                "id": "59144932-623a-4bfb-a2fa-924bb90a8093",
+                "versionId": "5105bfb3-6715-462c-a360-01ea551abb5c",
+                "decision": "REVISION_REQUIRED",
+                "comment": "Bổ sung mục tiêu đo được và kế hoạch kiểm thử. Dữ liệu demo để sinh viên chỉnh sửa, phản hồi và nộp lại.",
+                "decidedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                "deciderName": "gv003",
+                "decidedAt": "2026-10-27T02:57:42.867Z"
+              }
+            },
+            "timestamp": "2026-10-27T14:56:35.377Z"
+          }
+        },
+        {
+          "path": "/proposal-reviews/f781e02c-f1de-4f42-a8c5-a72a22c8048f",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "f781e02c-f1de-4f42-a8c5-a72a22c8048f",
+              "proposalId": "73d376de-3359-4de8-b88d-ba742cb0a3a1",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — theo dõi hướng dẫn",
+              "studentName": "Sinh viên N",
+              "studentCode": "S3S17930224293233",
+              "proposalStatus": "APPROVED",
+              "proposalRevision": 6,
+              "revision": 2,
+              "state": "DECIDED",
+              "roundNumber": 1,
+              "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "versionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+              "versionNumber": 3,
+              "version": {
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:35.162Z",
+                "submittedByUserId": "4bb3c1e0-b6cc-4ef1-8de3-e06bc42bc5ae"
+              },
+              "assignedAt": "2026-10-27T02:57:47.078Z",
+              "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+              "startedAt": "2026-10-27T02:57:47.778Z",
+              "startedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+              "routingSnapshot": {
+                "reason": null,
+                "revision": 0,
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "groupRevision": 0,
+                "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+              },
+              "phaseSnapshot": {
+                "endsAt": "2027-01-25T02:57:33.550Z",
+                "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                "revision": 0,
+                "startsAt": "2026-10-26T02:57:33.550Z"
+              },
+              "supersededByReviewId": null,
+              "allowedActions": [],
+              "comments": [],
+              "decision": {
+                "id": "a840d185-bb91-4de4-86b2-a3a48a125d66",
+                "versionId": "6f0ad758-3b3a-466a-a6b0-e64efe7ba00e",
+                "decision": "APPROVED",
+                "comment": "Đề cương rõ mục tiêu, đủ phạm vi và kế hoạch thực hiện; đồng ý thông qua.",
+                "decidedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                "deciderName": "gv003",
+                "decidedAt": "2026-10-27T02:57:48.593Z"
+              }
+            },
+            "timestamp": "2026-10-27T14:56:35.567Z"
+          }
+        },
+        {
+          "path": "/proposal-reviews/e2a8929d-dd99-4ecf-bead-9465c02604e5",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": {
+              "id": "e2a8929d-dd99-4ecf-bead-9465c02604e5",
+              "proposalId": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "title": "[DEMO 4–8] Quản lý đồ án — chờ Khoa chốt",
+              "studentName": "Sinh viên C",
+              "studentCode": "S3S17930224293232",
+              "proposalStatus": "APPROVED",
+              "proposalRevision": 5,
+              "revision": 2,
+              "state": "DECIDED",
+              "roundNumber": 1,
+              "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+              "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "versionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+              "versionNumber": 3,
+              "version": {
+                "content": {
+                  "omitted": true,
+                  "type": "object",
+                  "keys": [
+                    "scope",
+                    "tools",
+                    "endsAt",
+                    "schedule",
+                    "startsAt",
+                    "objectives",
+                    "mainContents",
+                    "schemaVersion",
+                    "expectedResults"
+                  ],
+                  "jsonLength": 792
+                },
+                "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+                "submittedAt": "2026-10-27T02:57:34.879Z",
+                "submittedByUserId": "479ec8ed-ae48-4f22-9c65-a06d1e95b609"
+              },
+              "assignedAt": "2026-10-27T02:57:44.516Z",
+              "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+              "startedAt": "2026-10-27T02:57:45.287Z",
+              "startedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+              "routingSnapshot": {
+                "reason": null,
+                "revision": 0,
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+                "groupRevision": 0,
+                "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+              },
+              "phaseSnapshot": {
+                "endsAt": "2027-01-25T02:57:33.550Z",
+                "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+                "revision": 0,
+                "startsAt": "2026-10-26T02:57:33.550Z"
+              },
+              "supersededByReviewId": null,
+              "allowedActions": [],
+              "comments": [],
+              "decision": {
+                "id": "c49a33c9-b770-4b8b-949d-4b149298180f",
+                "versionId": "6ea7e093-69c1-4048-8a7d-25612c682561",
+                "decision": "APPROVED",
+                "comment": "Đề cương rõ mục tiêu, đủ phạm vi và kế hoạch thực hiện; đồng ý thông qua.",
+                "decidedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+                "deciderName": "gv003",
+                "decidedAt": "2026-10-27T02:57:46.201Z"
+              }
+            },
+            "timestamp": "2026-10-27T14:56:35.683Z"
+          }
+        }
+      ],
+      "candidates": [
+        {
+          "path": "/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-candidates",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": [
+              {
+                "id": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+                "name": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "memberCount": 2,
+                "eligibleReviewerCount": 2,
+                "specialtyMatchCount": 2,
+                "activeReviewCount": 1,
+                "explanation": "Cùng đợt và bộ môn theo hướng đề tài. Số khớp chuyên môn chỉ để tham khảo; Khoa chọn và xác nhận, hệ thống không tự phân."
+              },
+              {
+                "id": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+                "name": "hkt",
+                "memberCount": 2,
+                "eligibleReviewerCount": 1,
+                "specialtyMatchCount": 1,
+                "activeReviewCount": 1,
+                "explanation": "Cùng đợt và bộ môn theo hướng đề tài. Số khớp chuyên môn chỉ để tham khảo; Khoa chọn và xác nhận, hệ thống không tự phân."
+              }
+            ],
+            "timestamp": "2026-10-27T14:56:35.141Z"
+          }
+        },
+        {
+          "path": "/proposals/a7bc28c0-873e-4dde-9a2d-ca97f351895d/review-candidates",
+          "status": 200,
+          "body": {
+            "success": true,
+            "data": [
+              {
+                "id": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+                "name": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+                "memberCount": 2,
+                "eligibleReviewerCount": 2,
+                "specialtyMatchCount": 2,
+                "activeReviewCount": 1,
+                "explanation": "Cùng đợt và bộ môn theo hướng đề tài. Số khớp chuyên môn chỉ để tham khảo; Khoa chọn và xác nhận, hệ thống không tự phân."
+              },
+              {
+                "id": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+                "name": "hkt",
+                "memberCount": 2,
+                "eligibleReviewerCount": 1,
+                "specialtyMatchCount": 1,
+                "activeReviewCount": 1,
+                "explanation": "Cùng đợt và bộ môn theo hướng đề tài. Số khớp chuyên môn chỉ để tham khảo; Khoa chọn và xác nhận, hệ thống không tự phân."
+              }
+            ],
+            "timestamp": "2026-10-27T14:56:35.433Z"
+          }
+        }
+      ]
+    }
+  },
+  "finishedAt": "2026-10-27T14:56:35.686Z"
+}

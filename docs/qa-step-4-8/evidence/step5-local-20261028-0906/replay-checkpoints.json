@@ -1,0 +1,117 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T02:17:26.887Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "W13-same-key-same-payload",
+    "result": "PASS",
+    "at": "2026-10-28T02:17:28.450Z",
+    "detail": {
+      "sameResult": true,
+      "countsBefore": {
+        "comments": 4,
+        "audit": 14,
+        "outbox": 2,
+        "idempotency": 14
+      },
+      "countsAfter": {
+        "comments": 5,
+        "audit": 15,
+        "outbox": 2,
+        "idempotency": 15
+      },
+      "review": {
+        "id": "d26b45ff-41f3-4a75-b897-1a313e39cdfe",
+        "proposalId": "p-student3",
+        "state": "IN_REVIEW",
+        "proposalStatus": "UNDER_REVIEW",
+        "revision": 3,
+        "proposalRevision": 2,
+        "roundNumber": 1,
+        "versionId": "v1-student3",
+        "contentHash": "a8816e49d937e135cc9132986c5460405662fad3a3ac2c8a53c4ba2848a7cbab",
+        "groupId": "qa-g3",
+        "allowedActions": [
+          "comment",
+          "decide"
+        ],
+        "comments": [
+          {
+            "id": "efda8250-ddda-4f1c-914d-315a9840e325",
+            "text": "QA STEP5: thao tác nhận xét trên màn hình 390px.",
+            "createdAt": "2026-10-28T02:16:07.990Z",
+            "versionId": "v1-student3",
+            "authorName": "qa-foreign",
+            "authorUserId": "foreign"
+          },
+          {
+            "id": "18703d00-fc50-4191-81dd-2039cb8d2dd9",
+            "text": "QA STEP5: một nhận xét duy nhất khi replay và thu hồi quyền.",
+            "createdAt": "2026-10-28T02:17:28.321Z",
+            "versionId": "v1-student3",
+            "authorName": "qa-foreign",
+            "authorUserId": "foreign"
+          }
+        ],
+        "decision": null,
+        "supersededByReviewId": null
+      }
+    }
+  },
+  {
+    "id": "W13-same-key-different-payload",
+    "result": "PASS",
+    "at": "2026-10-28T02:17:28.499Z",
+    "detail": {
+      "status": 409,
+      "error": {
+        "code": "IDEMPOTENCY_CONFLICT",
+        "message": "Khóa gửi lại đã được dùng với nội dung khác."
+      }
+    }
+  },
+  {
+    "id": "W14-permission-revoked-before-replay",
+    "result": "PASS",
+    "at": "2026-10-28T02:17:28.523Z",
+    "detail": {
+      "status": 403,
+      "error": {
+        "code": "AUTH_004",
+        "message": "Bạn không có quyền [proposal:comment] để thực hiện thao tác này"
+      },
+      "noCachedResultLeak": true
+    }
+  },
+  {
+    "id": "W14-membership-revoked-before-replay",
+    "result": "PASS",
+    "at": "2026-10-28T02:17:28.551Z",
+    "detail": {
+      "status": 404,
+      "error": {
+        "code": "COMMON_001",
+        "message": "Không tìm thấy vòng duyệt trong phạm vi."
+      },
+      "noCachedResultLeak": true
+    }
+  },
+  {
+    "id": "W14-restored-access-replays-original",
+    "result": "PASS",
+    "at": "2026-10-28T02:17:28.606Z",
+    "detail": {
+      "originalResultRestored": true,
+      "permissionAndMembershipRestored": true,
+      "noDuplicate": true
+    }
+  }
+]

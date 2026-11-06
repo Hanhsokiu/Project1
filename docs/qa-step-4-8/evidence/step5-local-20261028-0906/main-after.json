@@ -1,0 +1,508 @@
+{
+  "database": "btl_integration_ui",
+  "capturedAt": "2026-10-28T02:21:14.740Z",
+  "readOnlyTransaction": true,
+  "tables": [
+    {
+      "table": "ACADEMIC_SEMESTER",
+      "rows": 1,
+      "sha256": "9be87ba7c4eedee6a7ed63c6df539d06425b556f933f749f23cfee42b56b3cab"
+    },
+    {
+      "table": "ACADEMIC_TERM_GRANT",
+      "rows": 2,
+      "sha256": "01865f505cc77044a8068019dce8dde335aca98c6c237fd966daa9d6ac8955f1"
+    },
+    {
+      "table": "ADVISOR_ASSIGNMENT",
+      "rows": 4,
+      "sha256": "7c100f7effeabe9c5ed2c199f85f798b722f1015dfba4af3282df2d63059b97d"
+    },
+    {
+      "table": "ASSIGNMENT_CHANGE",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "ASSIGNMENT_PLAN",
+      "rows": 1,
+      "sha256": "735b348fb43055c41442bb6f104a7211102e8c192f3f17aafa17f4b03f3e1661"
+    },
+    {
+      "table": "ASSIGNMENT_PLAN_WORKFLOW",
+      "rows": 1,
+      "sha256": "491012fc969d481cd81d9dcf23f99330e6c186a04fc40e094e275a6b0ff8a882"
+    },
+    {
+      "table": "AUDIT_LOG",
+      "rows": 237,
+      "sha256": "c01c9ae9c10e888c555e59235f589a1ba44605396cf59e187bf52d1c45a9fb02"
+    },
+    {
+      "table": "COMMITTEE_MEMBER",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "COMMITTEE_STUDENT",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "DEFENSE_COMMITTEE",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "DEFENSE_CONFIRMATION",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "DEFENSE_ELIGIBILITY",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "DEFENSE_MINUTES",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "DEFENSE_SESSION",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "DEFERMENT_REQUEST",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "DEPARTMENT",
+      "rows": 1,
+      "sha256": "348fd4fd7206514ba8794ec4ab537bb6f55160f45fc7c720429f355a0a1ee1d0"
+    },
+    {
+      "table": "DOSSIER_FINALIZATION",
+      "rows": 1,
+      "sha256": "643d8bdbb78eda0168546a3f5853d37efbfcab9c94c534985f65fec3dbdfcdb5"
+    },
+    {
+      "table": "DOSSIER_HISTORY",
+      "rows": 2,
+      "sha256": "03c417835f0a5ff9b57c1f32f2f76ea3440f36ce9f6d78f115c97f6fc1fe3ccf"
+    },
+    {
+      "table": "DOSSIER_PDF_CONTENT",
+      "rows": 1,
+      "sha256": "4a4786fb7a81ba6ced6a8aaacc46c421745f1093ab26ec2b8223c967a3c9e718"
+    },
+    {
+      "table": "DOSSIER_RECEIPT",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "DOSSIER_STUDENT_PROFILE",
+      "rows": 4,
+      "sha256": "af5ca3517098da05a9c9f98ef33df22c640dedb5dc5857581244f87cc499c136"
+    },
+    {
+      "table": "DOSSIER_WORKFLOW",
+      "rows": 1,
+      "sha256": "a1357be402f1b157a516b5bb6e184d56a3d6a073b24bb264accbbfcf22670315"
+    },
+    {
+      "table": "EMAIL_OUTBOX",
+      "rows": 1,
+      "sha256": "4cf00ad9cbfc8ea64c8b1a5b961374b5bcc42c7092e0961e46726a88c0ca1eb8"
+    },
+    {
+      "table": "EVALUATION_EVIDENCE",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "EVALUATION_HISTORY",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "EVALUATION_WORKFLOW",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "EXPORT_JOB",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "FILE_ASSET",
+      "rows": 7,
+      "sha256": "8bdbf99910e33d1e424cc7e7a42a957ebf8fa2ad097904f0c2b41370325cab13"
+    },
+    {
+      "table": "FINAL_REPORT",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "FINAL_RESULT",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "GRANT_DEPARTMENT",
+      "rows": 2,
+      "sha256": "2e2f362b6e985c8d0e09c18037ebb7d7e4db3270e4b430b13802a08fffa8508c"
+    },
+    {
+      "table": "GUIDANCE_MEETING",
+      "rows": 1,
+      "sha256": "6d9cc868bc821c4e9d6ff1f6f81385d67b26161c527ce7f8e9e3b11544331914"
+    },
+    {
+      "table": "GUIDANCE_PERIOD",
+      "rows": 2,
+      "sha256": "5600100c713187a5027cb2bf587bd9b2d9ced56f9c596965a4e2c52815b87a51"
+    },
+    {
+      "table": "GUIDANCE_PLAN",
+      "rows": 1,
+      "sha256": "f8a750f82aa1a1edd10e5e22ef3db7da3e4d076c316061da4723c7d8f295a2f3"
+    },
+    {
+      "table": "GUIDANCE_PLAN_WORKFLOW",
+      "rows": 1,
+      "sha256": "528943abb5b6708d86df4ae9694ff5337a18f8a97dcedb4eb30a01f52a718860"
+    },
+    {
+      "table": "GUIDANCE_SUBMISSION_UPLOAD",
+      "rows": 6,
+      "sha256": "8eca05cc9b09c85b61f1d47aa713876505b88d5bcf03ef72026a634b4dd1f16e"
+    },
+    {
+      "table": "IDEMPOTENCY_RECORD",
+      "rows": 40,
+      "sha256": "11d47096cfa7b0dabd3608eedb51ccbcf7519a7e68b18f120df8b0fd297c1155"
+    },
+    {
+      "table": "IMPORT_JOB",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "LECTURER",
+      "rows": 4,
+      "sha256": "601a9b399f1356bb162dd83b777e120554e7c22e577be049793cb6a68bc1d2f2"
+    },
+    {
+      "table": "LECTURER_AREA",
+      "rows": 4,
+      "sha256": "1c08ddddfa0b4fdab1185dd97f4caf3cbffd62fdd8cfbb7c770ae75a87150873"
+    },
+    {
+      "table": "LOGIN_SESSION",
+      "rows": 126,
+      "sha256": "302d1645f1526975101d905f3fff2aea161b9eb085df7639eea4b9d2087df47b"
+    },
+    {
+      "table": "MEETING_HISTORY",
+      "rows": 1,
+      "sha256": "49324e4e700406d2650005168ea15afc7dda7de1959253fedd8e1a32c9f993ee"
+    },
+    {
+      "table": "MEETING_WORKFLOW",
+      "rows": 1,
+      "sha256": "2768caf8884b63cb244b12dd04d7647ca79cfc94fed84d102b9209bc032d7c70"
+    },
+    {
+      "table": "NOTIFICATION",
+      "rows": 26,
+      "sha256": "f9f74c9abe786867d03e576b46a4d965d2861feb06d7ae088dc0cffebc537e7e"
+    },
+    {
+      "table": "OUTBOX_EVENT",
+      "rows": 10,
+      "sha256": "65dc6056ef6ddd14c11652b59acd4d7dcee41e11e81e3927ddeefd5d1c175da5"
+    },
+    {
+      "table": "PERIOD_REQUIRED_STUDENT",
+      "rows": 1,
+      "sha256": "2b5cd891b26203b92c29fc3590d90e33c572d6205c22392301063cf506bf02ef"
+    },
+    {
+      "table": "PERMISSION",
+      "rows": 52,
+      "sha256": "deece734cad1ee3c5f9dc4edf1ce686351290ceb068471cab1487e6df8410ccd"
+    },
+    {
+      "table": "PHASE_EVALUATION",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "PLAN_HISTORY",
+      "rows": 1,
+      "sha256": "338fc333bde6b9e7325610d25f7ad983b3c465727f8c8335bca32898c8884fd0"
+    },
+    {
+      "table": "PROGRESS_REVIEW",
+      "rows": 2,
+      "sha256": "3114b6b7e1ece20cccce1b3bb2a832a8a06660696a74594488b2a11400328b47"
+    },
+    {
+      "table": "PROPOSAL",
+      "rows": 4,
+      "sha256": "aa56270a5f7dba48a8fbc7c24733e40d9bac1d7a98e29ab29822e54724ea9857"
+    },
+    {
+      "table": "PROPOSAL_REVIEW",
+      "rows": 8,
+      "sha256": "373affdb80f02142f69e3855b118ff39db0655259a9820604625ccf93cbf27a9"
+    },
+    {
+      "table": "PROPOSAL_REVIEW_DECISION",
+      "rows": 3,
+      "sha256": "69931429858dcb6c28b289c826002889b56c4030602a597c74a0cb2934fa28ad"
+    },
+    {
+      "table": "PROPOSAL_REVIEW_WORKFLOW",
+      "rows": 8,
+      "sha256": "bd41a24fbb4b5f324773424e73ae0618f80145e25b273c12e5d3fa5e78ef1a5d"
+    },
+    {
+      "table": "PROPOSAL_VERSION",
+      "rows": 13,
+      "sha256": "65319618dcf537a21d998b85eaf7ceebab2c79938e49089a34603d3c3ac1c72b"
+    },
+    {
+      "table": "PROPOSAL_VERSION_WORKFLOW",
+      "rows": 9,
+      "sha256": "3b4bc19db98d15a2ade92877df2606f8d2c529b1ff2b67bfb8005183d06de36a"
+    },
+    {
+      "table": "PROPOSAL_WORKFLOW",
+      "rows": 4,
+      "sha256": "7373840d569ff43b773531f68a14d46624e3ffb2454234e243cec125741bd269"
+    },
+    {
+      "table": "REGISTRATION",
+      "rows": 6,
+      "sha256": "26fc47533a66fb39584788c1eac5f0fe664e9cf22e134b75e009c3b05cb2bb37"
+    },
+    {
+      "table": "REGISTRATION_PREF",
+      "rows": 8,
+      "sha256": "eb5053dff3c5a24550e8514d29c0f86cff2c81058d7500b38c33f0308adda0e3"
+    },
+    {
+      "table": "RESEARCH_AREA",
+      "rows": 6,
+      "sha256": "5850a4d8402c313a5df042c49d2be14c3c83b11de6639592351af1a3d3625392"
+    },
+    {
+      "table": "RESEARCH_AREA_WORKFLOW",
+      "rows": 1,
+      "sha256": "4f2238a1de5a35522e7c92ff1cf586a141ff1ffad57a1fe269ea5a8203e4ce66"
+    },
+    {
+      "table": "REVIEWER_ASSIGNMENT",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "REVIEW_COMMENT",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "REVIEW_GROUP",
+      "rows": 2,
+      "sha256": "e202ca2a156cd279f3f4a875014d58de97867b8b7ac7959e836c0e1d31a2f829"
+    },
+    {
+      "table": "REVIEW_GROUP_MEMBER",
+      "rows": 4,
+      "sha256": "4c3e9c8d5cc051cad0f34c3bb2e35ef06b77090e6e736ca258cdcace19f3586e"
+    },
+    {
+      "table": "REVIEW_GROUP_WORKFLOW",
+      "rows": 2,
+      "sha256": "31b45199fc628ea550e7d657ca82f0d5770e05ed93080608e43b2dd98bf37d84"
+    },
+    {
+      "table": "REVIEW_MEMBERSHIP_HISTORY",
+      "rows": 4,
+      "sha256": "59b9d93d5043c8e7f72bd1dd3dfe133636ec1d7a34996cf68001efd5faa39232"
+    },
+    {
+      "table": "ROLE",
+      "rows": 5,
+      "sha256": "10ee4982ee51a605609fcccf6bb6b51747ab7e9ad00c5ae90cedea8ad7792e05"
+    },
+    {
+      "table": "ROLE_PERMISSION",
+      "rows": 109,
+      "sha256": "3d33383b796562dc78b1cf2679fcae1b5effc4fb2ab2da4bfb6a8d4614d86b3c"
+    },
+    {
+      "table": "ROOM",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "RUBRIC_CRITERIA",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "SCORE_DETAIL",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "SCORE_ENTRY",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "STUDENT",
+      "rows": 4,
+      "sha256": "5ee3c7d7141a2ad3c68de9ea8be70439efa585250b81d67db28b3482f3c4b494"
+    },
+    {
+      "table": "SUBMISSION_ASSET",
+      "rows": 6,
+      "sha256": "49687522e609a0af34f545fe6075ce73334ad9deaeecdca8f464ff626f27efdb"
+    },
+    {
+      "table": "SUBMISSION_FILE",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "SUBMISSION_WORKFLOW",
+      "rows": 3,
+      "sha256": "e3e6316705a5b529c61ac10d0eeb5881e46217f73500a06f1c296d5fd0b1ecf7"
+    },
+    {
+      "table": "TASK",
+      "rows": 5,
+      "sha256": "9129559162730b1ef2397236c52d37c72023a3876ccda8536200df3c30fe4999"
+    },
+    {
+      "table": "TASK_HISTORY",
+      "rows": 10,
+      "sha256": "70af2faf87a5d419a4f567a047d6b780cf2d3cd1e4989d3a52fc83fab5182734"
+    },
+    {
+      "table": "TASK_PROGRESS_EVENT",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "TASK_REVIEW",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "TASK_SUBMISSION",
+      "rows": 3,
+      "sha256": "ea252b9a4a44d004332358df44dfb50baf0feb10b5d3af8092f5b32bee4827e7"
+    },
+    {
+      "table": "TASK_WORKFLOW",
+      "rows": 5,
+      "sha256": "20ef5764113d383ad9860bd35d3aa6c99169a9a40096c0104501d5ec4a324bad"
+    },
+    {
+      "table": "TERM_LECTURER",
+      "rows": 8,
+      "sha256": "46e3b7cd80a8461c2f0acdcb108e2ca526f8584c9cf69e43343f356987ceb33f"
+    },
+    {
+      "table": "TERM_PARAMETER",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "TERM_PHASE",
+      "rows": 10,
+      "sha256": "b54eb444904f8ab9a3e5073e8cae4e28780784cd99d31e3756ebdcb345a5880d"
+    },
+    {
+      "table": "TERM_PHASE_WORKFLOW",
+      "rows": 5,
+      "sha256": "5765ab08de23df169efb4db634c06e5fd38e85e040df8a83c47d416e03d38e58"
+    },
+    {
+      "table": "TERM_STUDENT",
+      "rows": 8,
+      "sha256": "05336ef235cdb2d590fea8b6248ac3be251cd45ca8133adf5cbafd68b0790ae6"
+    },
+    {
+      "table": "TERM_WORKFLOW",
+      "rows": 1,
+      "sha256": "d7d6d3d8f4015630b994e5c20044352851950417c73c7d6a01a2187622fad795"
+    },
+    {
+      "table": "THESIS_DOSSIER",
+      "rows": 1,
+      "sha256": "dd091e1ba21af4abf1d458ef232a341b3773e68dce645f990d574d57a6649599"
+    },
+    {
+      "table": "THESIS_TERM",
+      "rows": 2,
+      "sha256": "cb1dd5acb3ec6b693b2f803d01aeb0667a96931aa6dfac5c19390c0b3f729971"
+    },
+    {
+      "table": "TITLE_CONFIG",
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "table": "TOPIC",
+      "rows": 4,
+      "sha256": "a6f3425bf8efdcd4299dee34604850ea38d067c3b1b44cb11d441fadcc16b9ff"
+    },
+    {
+      "table": "TOPIC_HISTORY",
+      "rows": 8,
+      "sha256": "b888ecafed7939e20d931a7d097b8efbd57aace3ef9a6a89a74abe4ec2119a04"
+    },
+    {
+      "table": "TOPIC_WORKFLOW",
+      "rows": 4,
+      "sha256": "0fe9882722f1b7b3caffc768a48bd6545100ae7251e0923b4f2fe8871b46e96f"
+    },
+    {
+      "table": "TRAINING_SYSTEM",
+      "rows": 3,
+      "sha256": "f0d79b438b1fb0c64a80ac4ea1e8829a595b0177aa659a92a0b78f19f29f3d4c"
+    },
+    {
+      "table": "USER_ACCOUNT",
+      "rows": 10,
+      "sha256": "ef4216d2d74a6ca77dabe14dc55ce42519fc907492717b39599221b87a63e1f9"
+    },
+    {
+      "table": "USER_ROLE",
+      "rows": 10,
+      "sha256": "0accf52705e1be145c4eea2e866ab32c36dcf6d692624fc6143e3f71472c2434"
+    },
+    {
+      "table": "WEEKLY_REPORT_OBLIGATION",
+      "rows": 1,
+      "sha256": "bd3546385df1dab64e86bd7d15a10d07e195d58eaf88963a79a945e3c0e914c4"
+    },
+    {
+      "table": "_prisma_migrations",
+      "rows": 12,
+      "sha256": "8063025f063e654915e4927f6f9d31ceef734af53eb961a6052117c72d20e76d"
+    }
+  ],
+  "unchanged": true
+}

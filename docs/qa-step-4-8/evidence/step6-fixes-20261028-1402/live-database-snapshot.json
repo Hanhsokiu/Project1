@@ -1,0 +1,2430 @@
+{
+  "database": "btl_pr2b_step6fix_1793171312226_08290c_live",
+  "coreHashBefore": "57e03e520942a4420ada7927350ea026ec5fea408269a5771b5809b36cb99456",
+  "coreHashAfter": "57e03e520942a4420ada7927350ea026ec5fea408269a5771b5809b36cb99456",
+  "coreUnchanged": true,
+  "states": {
+    "proposal": [
+      {
+        "id": "p-student3",
+        "topicId": "topic-student3",
+        "studentId": "student3",
+        "termId": "qa-t2",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:36.536Z",
+        "updatedAt": "2026-10-28T07:08:36.536Z"
+      },
+      {
+        "id": "p-page-01",
+        "topicId": "topic-page-01",
+        "studentId": "qa-page-01",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:36.912Z",
+        "updatedAt": "2026-10-28T07:08:36.912Z"
+      },
+      {
+        "id": "p-page-02",
+        "topicId": "topic-page-02",
+        "studentId": "qa-page-02",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:36.933Z",
+        "updatedAt": "2026-10-28T07:08:36.933Z"
+      },
+      {
+        "id": "p-page-03",
+        "topicId": "topic-page-03",
+        "studentId": "qa-page-03",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:36.952Z",
+        "updatedAt": "2026-10-28T07:08:36.952Z"
+      },
+      {
+        "id": "p-page-04",
+        "topicId": "topic-page-04",
+        "studentId": "qa-page-04",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:36.975Z",
+        "updatedAt": "2026-10-28T07:08:36.975Z"
+      },
+      {
+        "id": "p-page-05",
+        "topicId": "topic-page-05",
+        "studentId": "qa-page-05",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:36.992Z",
+        "updatedAt": "2026-10-28T07:08:36.992Z"
+      },
+      {
+        "id": "p-page-06",
+        "topicId": "topic-page-06",
+        "studentId": "qa-page-06",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.009Z",
+        "updatedAt": "2026-10-28T07:08:37.009Z"
+      },
+      {
+        "id": "p-page-07",
+        "topicId": "topic-page-07",
+        "studentId": "qa-page-07",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.026Z",
+        "updatedAt": "2026-10-28T07:08:37.026Z"
+      },
+      {
+        "id": "p-page-08",
+        "topicId": "topic-page-08",
+        "studentId": "qa-page-08",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.042Z",
+        "updatedAt": "2026-10-28T07:08:37.042Z"
+      },
+      {
+        "id": "p-page-09",
+        "topicId": "topic-page-09",
+        "studentId": "qa-page-09",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.060Z",
+        "updatedAt": "2026-10-28T07:08:37.060Z"
+      },
+      {
+        "id": "p-page-10",
+        "topicId": "topic-page-10",
+        "studentId": "qa-page-10",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.078Z",
+        "updatedAt": "2026-10-28T07:08:37.078Z"
+      },
+      {
+        "id": "p-page-11",
+        "topicId": "topic-page-11",
+        "studentId": "qa-page-11",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.096Z",
+        "updatedAt": "2026-10-28T07:08:37.096Z"
+      },
+      {
+        "id": "p-page-12",
+        "topicId": "topic-page-12",
+        "studentId": "qa-page-12",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.114Z",
+        "updatedAt": "2026-10-28T07:08:37.114Z"
+      },
+      {
+        "id": "p-page-13",
+        "topicId": "topic-page-13",
+        "studentId": "qa-page-13",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.134Z",
+        "updatedAt": "2026-10-28T07:08:37.134Z"
+      },
+      {
+        "id": "p-page-14",
+        "topicId": "topic-page-14",
+        "studentId": "qa-page-14",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.148Z",
+        "updatedAt": "2026-10-28T07:08:37.148Z"
+      },
+      {
+        "id": "p-page-15",
+        "topicId": "topic-page-15",
+        "studentId": "qa-page-15",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.164Z",
+        "updatedAt": "2026-10-28T07:08:37.164Z"
+      },
+      {
+        "id": "p-page-16",
+        "topicId": "topic-page-16",
+        "studentId": "qa-page-16",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.179Z",
+        "updatedAt": "2026-10-28T07:08:37.179Z"
+      },
+      {
+        "id": "p-page-17",
+        "topicId": "topic-page-17",
+        "studentId": "qa-page-17",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.195Z",
+        "updatedAt": "2026-10-28T07:08:37.195Z"
+      },
+      {
+        "id": "p-page-18",
+        "topicId": "topic-page-18",
+        "studentId": "qa-page-18",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.212Z",
+        "updatedAt": "2026-10-28T07:08:37.212Z"
+      },
+      {
+        "id": "p-page-19",
+        "topicId": "topic-page-19",
+        "studentId": "qa-page-19",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.228Z",
+        "updatedAt": "2026-10-28T07:08:37.228Z"
+      },
+      {
+        "id": "p-page-20",
+        "topicId": "topic-page-20",
+        "studentId": "qa-page-20",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.242Z",
+        "updatedAt": "2026-10-28T07:08:37.242Z"
+      },
+      {
+        "id": "p-page-21",
+        "topicId": "topic-page-21",
+        "studentId": "qa-page-21",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:37.256Z",
+        "updatedAt": "2026-10-28T07:08:37.256Z"
+      },
+      {
+        "id": "p-student",
+        "topicId": "topic-student",
+        "studentId": "student",
+        "termId": "qa-t1",
+        "status": "SUBMITTED",
+        "createdAt": "2026-10-28T07:08:36.449Z",
+        "updatedAt": "2026-10-28T07:10:36.719Z"
+      },
+      {
+        "id": "p-student2",
+        "topicId": "topic-student2",
+        "studentId": "student2",
+        "termId": "qa-t1",
+        "status": "UNDER_REVIEW",
+        "createdAt": "2026-10-28T07:08:36.515Z",
+        "updatedAt": "2026-10-28T07:10:39.182Z"
+      }
+    ],
+    "proposalWorkflow": [
+      {
+        "id": "91cd8687-d7e1-41ef-9d54-db5ba9906807",
+        "createdAt": "2026-10-28T07:08:36.541Z",
+        "updatedAt": "2026-10-28T07:08:36.541Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-student3",
+        "workingVersionId": "v1-student3",
+        "submittedVersionId": "v1-student3"
+      },
+      {
+        "id": "1d7d5117-27f1-4fd3-bbc1-f5f3642ee696",
+        "createdAt": "2026-10-28T07:08:36.917Z",
+        "updatedAt": "2026-10-28T07:08:36.917Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-01",
+        "workingVersionId": "v1-page-01",
+        "submittedVersionId": "v1-page-01"
+      },
+      {
+        "id": "29937117-d5c4-406a-8dee-ea4573a51286",
+        "createdAt": "2026-10-28T07:08:36.938Z",
+        "updatedAt": "2026-10-28T07:08:36.938Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-02",
+        "workingVersionId": "v1-page-02",
+        "submittedVersionId": "v1-page-02"
+      },
+      {
+        "id": "0600b786-9c2b-4921-afa9-95a5ea688d0c",
+        "createdAt": "2026-10-28T07:08:36.959Z",
+        "updatedAt": "2026-10-28T07:08:36.959Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-03",
+        "workingVersionId": "v1-page-03",
+        "submittedVersionId": "v1-page-03"
+      },
+      {
+        "id": "31e8bbd4-760e-4cf8-b852-7991923664d7",
+        "createdAt": "2026-10-28T07:08:36.979Z",
+        "updatedAt": "2026-10-28T07:08:36.979Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-04",
+        "workingVersionId": "v1-page-04",
+        "submittedVersionId": "v1-page-04"
+      },
+      {
+        "id": "034a1d02-3030-49ac-bf22-2608c7470774",
+        "createdAt": "2026-10-28T07:08:36.997Z",
+        "updatedAt": "2026-10-28T07:08:36.997Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-05",
+        "workingVersionId": "v1-page-05",
+        "submittedVersionId": "v1-page-05"
+      },
+      {
+        "id": "9b874a1a-5fe5-48b8-9258-4ccfa635941e",
+        "createdAt": "2026-10-28T07:08:37.014Z",
+        "updatedAt": "2026-10-28T07:08:37.014Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-06",
+        "workingVersionId": "v1-page-06",
+        "submittedVersionId": "v1-page-06"
+      },
+      {
+        "id": "d6b3afdd-4c58-4804-99fd-f7951566c83c",
+        "createdAt": "2026-10-28T07:08:37.030Z",
+        "updatedAt": "2026-10-28T07:08:37.030Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-07",
+        "workingVersionId": "v1-page-07",
+        "submittedVersionId": "v1-page-07"
+      },
+      {
+        "id": "b09d61e6-3c74-4e1f-a174-fb95c44f26c9",
+        "createdAt": "2026-10-28T07:08:37.047Z",
+        "updatedAt": "2026-10-28T07:08:37.047Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-08",
+        "workingVersionId": "v1-page-08",
+        "submittedVersionId": "v1-page-08"
+      },
+      {
+        "id": "ae7137ce-8857-4b8a-b565-3b8d1763f7b7",
+        "createdAt": "2026-10-28T07:08:37.065Z",
+        "updatedAt": "2026-10-28T07:08:37.065Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-09",
+        "workingVersionId": "v1-page-09",
+        "submittedVersionId": "v1-page-09"
+      },
+      {
+        "id": "48ab8a84-eb98-4776-8fd3-8a25b325ac6e",
+        "createdAt": "2026-10-28T07:08:37.083Z",
+        "updatedAt": "2026-10-28T07:08:37.083Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-10",
+        "workingVersionId": "v1-page-10",
+        "submittedVersionId": "v1-page-10"
+      },
+      {
+        "id": "dae5d377-a41a-460c-961c-dbfa8dd46ff4",
+        "createdAt": "2026-10-28T07:08:37.101Z",
+        "updatedAt": "2026-10-28T07:08:37.101Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-11",
+        "workingVersionId": "v1-page-11",
+        "submittedVersionId": "v1-page-11"
+      },
+      {
+        "id": "6b075bb7-bd9c-4fca-a732-680943d799e5",
+        "createdAt": "2026-10-28T07:08:37.119Z",
+        "updatedAt": "2026-10-28T07:08:37.119Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-12",
+        "workingVersionId": "v1-page-12",
+        "submittedVersionId": "v1-page-12"
+      },
+      {
+        "id": "d5d39b3b-70ce-4d76-a217-4d9cc92c6054",
+        "createdAt": "2026-10-28T07:08:37.138Z",
+        "updatedAt": "2026-10-28T07:08:37.138Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-13",
+        "workingVersionId": "v1-page-13",
+        "submittedVersionId": "v1-page-13"
+      },
+      {
+        "id": "7e315b97-43e9-41ff-b6aa-b1f49c56b40f",
+        "createdAt": "2026-10-28T07:08:37.152Z",
+        "updatedAt": "2026-10-28T07:08:37.152Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-14",
+        "workingVersionId": "v1-page-14",
+        "submittedVersionId": "v1-page-14"
+      },
+      {
+        "id": "4d2a003d-3d4b-41bf-89a6-2d0e6e38e19a",
+        "createdAt": "2026-10-28T07:08:37.170Z",
+        "updatedAt": "2026-10-28T07:08:37.170Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-15",
+        "workingVersionId": "v1-page-15",
+        "submittedVersionId": "v1-page-15"
+      },
+      {
+        "id": "e2ba2f22-907e-4600-919d-29d0d84267fa",
+        "createdAt": "2026-10-28T07:08:37.184Z",
+        "updatedAt": "2026-10-28T07:08:37.184Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-16",
+        "workingVersionId": "v1-page-16",
+        "submittedVersionId": "v1-page-16"
+      },
+      {
+        "id": "17b86565-df7e-4d4b-9e0d-59f74491de15",
+        "createdAt": "2026-10-28T07:08:37.200Z",
+        "updatedAt": "2026-10-28T07:08:37.200Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-17",
+        "workingVersionId": "v1-page-17",
+        "submittedVersionId": "v1-page-17"
+      },
+      {
+        "id": "41eebfaf-c6bd-4f92-be8a-b1a1b72dd16c",
+        "createdAt": "2026-10-28T07:08:37.216Z",
+        "updatedAt": "2026-10-28T07:08:37.216Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-18",
+        "workingVersionId": "v1-page-18",
+        "submittedVersionId": "v1-page-18"
+      },
+      {
+        "id": "3f33afdc-b91c-4636-8515-f11808b4eae5",
+        "createdAt": "2026-10-28T07:08:37.232Z",
+        "updatedAt": "2026-10-28T07:08:37.232Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-19",
+        "workingVersionId": "v1-page-19",
+        "submittedVersionId": "v1-page-19"
+      },
+      {
+        "id": "fce6a002-bf8f-4f00-ac47-a1a28f5e1627",
+        "createdAt": "2026-10-28T07:08:37.246Z",
+        "updatedAt": "2026-10-28T07:08:37.246Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-20",
+        "workingVersionId": "v1-page-20",
+        "submittedVersionId": "v1-page-20"
+      },
+      {
+        "id": "6d0d8ce3-65cc-44a1-a3fa-757524cf44ac",
+        "createdAt": "2026-10-28T07:08:37.261Z",
+        "updatedAt": "2026-10-28T07:08:37.261Z",
+        "revision": 0,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 1,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-page-21",
+        "workingVersionId": "v1-page-21",
+        "submittedVersionId": "v1-page-21"
+      },
+      {
+        "id": "3cf91d2f-ff32-4820-bfd7-b7ba26fb6581",
+        "createdAt": "2026-10-28T07:08:36.479Z",
+        "updatedAt": "2026-10-28T07:10:36.717Z",
+        "revision": 15,
+        "nextVersionNumber": 5,
+        "nextReviewRound": 3,
+        "submissionKind": "RESUBMISSION",
+        "proposalId": "p-student",
+        "workingVersionId": "9e1f9e5d-fd82-4114-b393-a937bc9506e4",
+        "submittedVersionId": "9e1f9e5d-fd82-4114-b393-a937bc9506e4"
+      },
+      {
+        "id": "7b0c7d9d-1c91-4c87-b8b7-ebf28ab0e53e",
+        "createdAt": "2026-10-28T07:08:36.521Z",
+        "updatedAt": "2026-10-28T07:10:39.181Z",
+        "revision": 2,
+        "nextVersionNumber": 2,
+        "nextReviewRound": 2,
+        "submissionKind": "INITIAL",
+        "proposalId": "p-student2",
+        "workingVersionId": "v1-student2",
+        "submittedVersionId": "v1-student2"
+      }
+    ],
+    "proposalVersion": [
+      {
+        "id": "v1-student",
+        "proposalId": "p-student",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:36.461Z"
+      },
+      {
+        "id": "v1-student2",
+        "proposalId": "p-student2",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:36.517Z"
+      },
+      {
+        "id": "v1-student3",
+        "proposalId": "p-student3",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:36.538Z"
+      },
+      {
+        "id": "v1-page-01",
+        "proposalId": "p-page-01",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:36.914Z"
+      },
+      {
+        "id": "v1-page-02",
+        "proposalId": "p-page-02",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:36.935Z"
+      },
+      {
+        "id": "v1-page-03",
+        "proposalId": "p-page-03",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:36.954Z"
+      },
+      {
+        "id": "v1-page-04",
+        "proposalId": "p-page-04",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:36.977Z"
+      },
+      {
+        "id": "v1-page-05",
+        "proposalId": "p-page-05",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:36.994Z"
+      },
+      {
+        "id": "v1-page-06",
+        "proposalId": "p-page-06",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.011Z"
+      },
+      {
+        "id": "v1-page-07",
+        "proposalId": "p-page-07",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.027Z"
+      },
+      {
+        "id": "v1-page-08",
+        "proposalId": "p-page-08",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.044Z"
+      },
+      {
+        "id": "v1-page-09",
+        "proposalId": "p-page-09",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.061Z"
+      },
+      {
+        "id": "v1-page-10",
+        "proposalId": "p-page-10",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.080Z"
+      },
+      {
+        "id": "v1-page-11",
+        "proposalId": "p-page-11",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.098Z"
+      },
+      {
+        "id": "v1-page-12",
+        "proposalId": "p-page-12",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.116Z"
+      },
+      {
+        "id": "v1-page-13",
+        "proposalId": "p-page-13",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.135Z"
+      },
+      {
+        "id": "v1-page-14",
+        "proposalId": "p-page-14",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.150Z"
+      },
+      {
+        "id": "v1-page-15",
+        "proposalId": "p-page-15",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.167Z"
+      },
+      {
+        "id": "v1-page-16",
+        "proposalId": "p-page-16",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.181Z"
+      },
+      {
+        "id": "v1-page-17",
+        "proposalId": "p-page-17",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.196Z"
+      },
+      {
+        "id": "v1-page-18",
+        "proposalId": "p-page-18",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.213Z"
+      },
+      {
+        "id": "v1-page-19",
+        "proposalId": "p-page-19",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.229Z"
+      },
+      {
+        "id": "v1-page-20",
+        "proposalId": "p-page-20",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.244Z"
+      },
+      {
+        "id": "v1-page-21",
+        "proposalId": "p-page-21",
+        "version": 1,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:08:37.258Z"
+      },
+      {
+        "id": "11954fe6-e030-4548-a3e6-675aa952e54c",
+        "proposalId": "p-student",
+        "version": 2,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "UI lifecycle v2 — bảo toàn bản cũ",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:10:30.314Z"
+      },
+      {
+        "id": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+        "proposalId": "p-student",
+        "version": 3,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "UI lifecycle v3 — bảo toàn bản cũ",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:10:32.728Z"
+      },
+      {
+        "id": "9e1f9e5d-fd82-4114-b393-a937bc9506e4",
+        "proposalId": "p-student",
+        "version": 4,
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:08:36.140Z",
+              "startsAt": "2026-10-27T07:08:36.140Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:08:36.140Z",
+          "objectives": "UI lifecycle v4 — bảo toàn bản cũ",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "status": "DRAFT",
+        "createdBy": null,
+        "submittedAt": null,
+        "filePath": null,
+        "createdAt": "2026-10-28T07:10:36.567Z"
+      }
+    ],
+    "proposalVersionWorkflow": [
+      {
+        "id": "ca4d2e04-87df-42e4-a5d2-6a5c5dac4196",
+        "createdAt": "2026-10-28T07:08:36.461Z",
+        "updatedAt": "2026-10-28T07:08:36.461Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:31.140Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-student",
+        "createdByUserId": "student",
+        "submittedByUserId": "student",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "5fb33597-3ecc-4679-bf85-b1f02a9e0ae3",
+        "createdAt": "2026-10-28T07:08:36.517Z",
+        "updatedAt": "2026-10-28T07:08:36.517Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:31.140Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-student2",
+        "createdByUserId": "student2",
+        "submittedByUserId": "student2",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "7ed9f159-57cf-4605-8ed0-c049c3bd5f6e",
+        "createdAt": "2026-10-28T07:08:36.538Z",
+        "updatedAt": "2026-10-28T07:08:36.538Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:31.140Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-student3",
+        "createdByUserId": "student3",
+        "submittedByUserId": "student3",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "a63a346c-c747-4c8b-9d74-d4715fc7876a",
+        "createdAt": "2026-10-28T07:08:36.914Z",
+        "updatedAt": "2026-10-28T07:08:36.914Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:36.909Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-01",
+        "createdByUserId": "qa-page-01",
+        "submittedByUserId": "qa-page-01",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "684abe8f-ab9b-4cfb-8f39-3a66a06292b6",
+        "createdAt": "2026-10-28T07:08:36.935Z",
+        "updatedAt": "2026-10-28T07:08:36.935Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:36.930Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-02",
+        "createdByUserId": "qa-page-02",
+        "submittedByUserId": "qa-page-02",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "bb845f48-3d31-45b5-861c-3314383259e1",
+        "createdAt": "2026-10-28T07:08:36.954Z",
+        "updatedAt": "2026-10-28T07:08:36.954Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:36.949Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-03",
+        "createdByUserId": "qa-page-03",
+        "submittedByUserId": "qa-page-03",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "9082466b-d1e4-422e-9396-dd5746120d85",
+        "createdAt": "2026-10-28T07:08:36.977Z",
+        "updatedAt": "2026-10-28T07:08:36.977Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:36.971Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-04",
+        "createdByUserId": "qa-page-04",
+        "submittedByUserId": "qa-page-04",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "b05990fe-6ef2-4041-a821-436aaaf3fc74",
+        "createdAt": "2026-10-28T07:08:36.994Z",
+        "updatedAt": "2026-10-28T07:08:36.994Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:36.989Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-05",
+        "createdByUserId": "qa-page-05",
+        "submittedByUserId": "qa-page-05",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "bd6f8d97-c773-4be2-883f-530d06f0c8c1",
+        "createdAt": "2026-10-28T07:08:37.011Z",
+        "updatedAt": "2026-10-28T07:08:37.011Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.005Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-06",
+        "createdByUserId": "qa-page-06",
+        "submittedByUserId": "qa-page-06",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "7831b4cb-f9af-404f-b84b-6ec081b4e927",
+        "createdAt": "2026-10-28T07:08:37.027Z",
+        "updatedAt": "2026-10-28T07:08:37.027Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.022Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-07",
+        "createdByUserId": "qa-page-07",
+        "submittedByUserId": "qa-page-07",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "8cdf0265-6b4b-4fa8-aa07-aa260be5e6bd",
+        "createdAt": "2026-10-28T07:08:37.044Z",
+        "updatedAt": "2026-10-28T07:08:37.044Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.039Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-08",
+        "createdByUserId": "qa-page-08",
+        "submittedByUserId": "qa-page-08",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "cf86d76b-a982-45cb-ab16-59828748fdaa",
+        "createdAt": "2026-10-28T07:08:37.061Z",
+        "updatedAt": "2026-10-28T07:08:37.061Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.056Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-09",
+        "createdByUserId": "qa-page-09",
+        "submittedByUserId": "qa-page-09",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "7385b2c8-8da5-47d0-a757-d88ff6359c9d",
+        "createdAt": "2026-10-28T07:08:37.080Z",
+        "updatedAt": "2026-10-28T07:08:37.080Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.075Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-10",
+        "createdByUserId": "qa-page-10",
+        "submittedByUserId": "qa-page-10",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "d24a07bb-bf75-468b-82c2-de96b25a56a3",
+        "createdAt": "2026-10-28T07:08:37.098Z",
+        "updatedAt": "2026-10-28T07:08:37.098Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.093Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-11",
+        "createdByUserId": "qa-page-11",
+        "submittedByUserId": "qa-page-11",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "af8fa110-5952-4029-a3cd-b36725c1eb65",
+        "createdAt": "2026-10-28T07:08:37.116Z",
+        "updatedAt": "2026-10-28T07:08:37.116Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.110Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-12",
+        "createdByUserId": "qa-page-12",
+        "submittedByUserId": "qa-page-12",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "6dc8a5d3-3737-4904-8001-7b5644455da1",
+        "createdAt": "2026-10-28T07:08:37.135Z",
+        "updatedAt": "2026-10-28T07:08:37.135Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.130Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-13",
+        "createdByUserId": "qa-page-13",
+        "submittedByUserId": "qa-page-13",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "567c4ad8-e27b-416d-ba5a-69a106ce0cb8",
+        "createdAt": "2026-10-28T07:08:37.150Z",
+        "updatedAt": "2026-10-28T07:08:37.150Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.144Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-14",
+        "createdByUserId": "qa-page-14",
+        "submittedByUserId": "qa-page-14",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "50e269cb-7d62-48dd-a056-2ac490dc0090",
+        "createdAt": "2026-10-28T07:08:37.167Z",
+        "updatedAt": "2026-10-28T07:08:37.167Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.161Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-15",
+        "createdByUserId": "qa-page-15",
+        "submittedByUserId": "qa-page-15",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "886827e5-e8d5-4225-a4af-351ea6066dd8",
+        "createdAt": "2026-10-28T07:08:37.181Z",
+        "updatedAt": "2026-10-28T07:08:37.181Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.176Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-16",
+        "createdByUserId": "qa-page-16",
+        "submittedByUserId": "qa-page-16",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "e4bffa13-640b-4e54-bc2c-2b159512e4d0",
+        "createdAt": "2026-10-28T07:08:37.196Z",
+        "updatedAt": "2026-10-28T07:08:37.196Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.191Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-17",
+        "createdByUserId": "qa-page-17",
+        "submittedByUserId": "qa-page-17",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "970b01bc-b0b3-44fa-9dc4-c84cdd916fd0",
+        "createdAt": "2026-10-28T07:08:37.213Z",
+        "updatedAt": "2026-10-28T07:08:37.213Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.208Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-18",
+        "createdByUserId": "qa-page-18",
+        "submittedByUserId": "qa-page-18",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "b1dbfdf7-8789-4b7a-8d6e-aa70f8499b25",
+        "createdAt": "2026-10-28T07:08:37.229Z",
+        "updatedAt": "2026-10-28T07:08:37.229Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.224Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-19",
+        "createdByUserId": "qa-page-19",
+        "submittedByUserId": "qa-page-19",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "58da1aa5-7e54-436e-97a9-973b83b35274",
+        "createdAt": "2026-10-28T07:08:37.244Z",
+        "updatedAt": "2026-10-28T07:08:37.244Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.238Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-20",
+        "createdByUserId": "qa-page-20",
+        "submittedByUserId": "qa-page-20",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "06faa56f-1f26-4202-9e1b-8991467ffb4f",
+        "createdAt": "2026-10-28T07:08:37.258Z",
+        "updatedAt": "2026-10-28T07:08:37.258Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "94c1448806722be928f24eac500e1f39c488fa1d987c58308a11f736aa61993b",
+        "submittedAt": "2026-10-28T07:08:37.252Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": null,
+        "revision": 0,
+        "versionId": "v1-page-21",
+        "createdByUserId": "qa-page-21",
+        "submittedByUserId": "qa-page-21",
+        "basedOnVersionId": null
+      },
+      {
+        "id": "bbc33ae2-d0da-48e6-8630-c3d14fee7f3f",
+        "createdAt": "2026-10-28T07:10:30.314Z",
+        "updatedAt": "2026-10-28T07:10:30.503Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "c9dc110a2ddaad969c76f53ace7e263312e7ee31d18e6733ecf641d6ede071cf",
+        "submittedAt": "2026-10-28T07:10:30.500Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": [],
+        "revision": 1,
+        "versionId": "11954fe6-e030-4548-a3e6-675aa952e54c",
+        "createdByUserId": "student",
+        "submittedByUserId": "student",
+        "basedOnVersionId": "v1-student"
+      },
+      {
+        "id": "0bde088d-d1a9-4a0e-8f5e-12dff82d341a",
+        "createdAt": "2026-10-28T07:10:32.728Z",
+        "updatedAt": "2026-10-28T07:10:32.905Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "fd8b1044fac49e2d9141d52874a6f2a995667e6ebdf1cda8e952fe30d1499a59",
+        "submittedAt": "2026-10-28T07:10:32.901Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": [],
+        "revision": 1,
+        "versionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+        "createdByUserId": "student",
+        "submittedByUserId": "student",
+        "basedOnVersionId": "11954fe6-e030-4548-a3e6-675aa952e54c"
+      },
+      {
+        "id": "8c4cba72-e9cd-47f6-a5c3-c953d73dc15b",
+        "createdAt": "2026-10-28T07:10:36.567Z",
+        "updatedAt": "2026-10-28T07:10:36.715Z",
+        "state": "SEALED",
+        "contentSchemaVersion": 1,
+        "contentHash": "d13ae290e66cdbb48ed6c7f3a4ce7d0f0267b30d1c9080a3e88c476d0b627eb5",
+        "submittedAt": "2026-10-28T07:10:36.711Z",
+        "provenance": null,
+        "changeSummary": null,
+        "revisionResponses": [],
+        "revision": 1,
+        "versionId": "9e1f9e5d-fd82-4114-b393-a937bc9506e4",
+        "createdByUserId": "student",
+        "submittedByUserId": "student",
+        "basedOnVersionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f"
+      }
+    ],
+    "proposalReview": [
+      {
+        "id": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+        "proposalId": "p-student",
+        "reviewGroupId": "qa-g1",
+        "decision": null,
+        "comment": null,
+        "reviewedAt": null,
+        "createdAt": "2026-10-28T07:10:30.695Z"
+      },
+      {
+        "id": "a9a72832-170e-49d3-a840-4da20fd1c2fc",
+        "proposalId": "p-student",
+        "reviewGroupId": "qa-g1",
+        "decision": "APPROVED",
+        "comment": "QA UI lifecycle: đạt bản đã nộp.",
+        "reviewedAt": "2026-10-28T07:10:33.295Z",
+        "createdAt": "2026-10-28T07:10:33.093Z"
+      },
+      {
+        "id": "decaeba0-bb14-40a7-aeec-d93164d916da",
+        "proposalId": "p-student2",
+        "reviewGroupId": "qa-g1",
+        "decision": null,
+        "comment": null,
+        "reviewedAt": null,
+        "createdAt": "2026-10-28T07:10:39.048Z"
+      }
+    ],
+    "proposalReviewWorkflow": [
+      {
+        "id": "85912961-4885-4cc5-be11-f95182dc0c8f",
+        "createdAt": "2026-10-28T07:10:30.695Z",
+        "updatedAt": "2026-10-28T07:10:32.040Z",
+        "roundNumber": 1,
+        "state": "SUPERSEDED",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T07:08:36.140Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T07:10:30.871Z",
+        "assignedAt": "2026-10-28T07:10:30.691Z",
+        "assignedByUserId": "faculty",
+        "revision": 3,
+        "reviewId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+        "proposalId": "p-student",
+        "versionId": "11954fe6-e030-4548-a3e6-675aa952e54c",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": null
+      },
+      {
+        "id": "b0a3e127-2d32-4853-a230-d809ccf4c225",
+        "createdAt": "2026-10-28T07:10:33.093Z",
+        "updatedAt": "2026-10-28T07:10:33.301Z",
+        "roundNumber": 2,
+        "state": "DECIDED",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T07:08:36.140Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T07:10:33.194Z",
+        "assignedAt": "2026-10-28T07:10:33.090Z",
+        "assignedByUserId": "faculty",
+        "revision": 2,
+        "reviewId": "a9a72832-170e-49d3-a840-4da20fd1c2fc",
+        "proposalId": "p-student",
+        "versionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": null
+      },
+      {
+        "id": "ed2b0c11-4eff-487f-b18f-0f21b40ec7c3",
+        "createdAt": "2026-10-28T07:10:39.048Z",
+        "updatedAt": "2026-10-28T07:10:39.179Z",
+        "roundNumber": 1,
+        "state": "IN_REVIEW",
+        "phaseSnapshot": {
+          "endsAt": "2026-11-04T07:08:36.140Z",
+          "phaseId": "qa-t1-PROPOSAL_REVIEW",
+          "revision": 0,
+          "startsAt": "2026-10-27T07:08:36.140Z"
+        },
+        "routingSnapshot": {
+          "reason": null,
+          "revision": 0,
+          "departmentId": "qa-d",
+          "groupRevision": 0,
+          "researchAreaId": "qa-area"
+        },
+        "startedAt": "2026-10-28T07:10:39.175Z",
+        "assignedAt": "2026-10-28T07:10:39.045Z",
+        "assignedByUserId": "faculty",
+        "revision": 1,
+        "reviewId": "decaeba0-bb14-40a7-aeec-d93164d916da",
+        "proposalId": "p-student2",
+        "versionId": "v1-student2",
+        "startedByUserId": "reviewer",
+        "supersededByReviewId": null
+      }
+    ],
+    "reviewComment": [
+      {
+        "id": "08eba99b-4080-4198-9816-1ce5ed618c71",
+        "createdAt": "2026-10-28T07:10:31.040Z",
+        "updatedAt": "2026-10-28T07:10:31.040Z",
+        "text": "Nhận xét phải giữ sau khi Khoa trả nháp.",
+        "reviewId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+        "versionId": "11954fe6-e030-4548-a3e6-675aa952e54c",
+        "authorUserId": "reviewer"
+      }
+    ],
+    "proposalReviewDecision": [
+      {
+        "id": "9ed727b9-e570-4d7e-898f-16c2bb1ec798",
+        "createdAt": "2026-10-28T07:10:33.299Z",
+        "updatedAt": "2026-10-28T07:10:33.299Z",
+        "decision": "APPROVED",
+        "comment": "QA UI lifecycle: đạt bản đã nộp.",
+        "decidedAt": "2026-10-28T07:10:33.295Z",
+        "reviewId": "a9a72832-170e-49d3-a840-4da20fd1c2fc",
+        "versionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+        "decidedByUserId": "reviewer"
+      }
+    ],
+    "outboxEvent": [
+      {
+        "id": "3189b84f-dead-448d-91a4-acd3d5c6e8db",
+        "createdAt": "2026-10-28T07:10:29.486Z",
+        "updatedAt": "2026-10-28T07:10:29.486Z",
+        "eventId": "29ac11e2-8c15-4d0a-819b-755890f8af3d",
+        "type": "PROPOSAL_WITHDRAWN",
+        "aggregateId": "p-student",
+        "payload": {
+          "reason": "SV rút để chỉnh sửa theo kế hoạch mới.",
+          "status": "DRAFT",
+          "termId": "qa-t1",
+          "revision": 1,
+          "proposalId": "p-student",
+          "actorUserId": "student",
+          "pausedPlanId": null,
+          "advisorUserId": "advisor",
+          "studentUserId": "student",
+          "workingVersionId": "v1-student",
+          "reopenedDossierId": null,
+          "submittedVersionId": "v1-student",
+          "supersededReviewId": null
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      },
+      {
+        "id": "a54db7f4-af64-47ce-bdf0-2e674a16c96b",
+        "createdAt": "2026-10-28T07:10:30.513Z",
+        "updatedAt": "2026-10-28T07:10:30.513Z",
+        "eventId": "00c2855e-177e-49fe-a19e-68cea3ea77de",
+        "type": "PROPOSAL_VERSION_SUBMITTED",
+        "aggregateId": "p-student",
+        "payload": {
+          "termId": "qa-t1",
+          "versionId": "11954fe6-e030-4548-a3e6-675aa952e54c",
+          "proposalId": "p-student",
+          "advisorUserId": "advisor",
+          "studentUserId": "student",
+          "submissionKind": "RESUBMISSION"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      },
+      {
+        "id": "8dbf8900-5707-4c06-84a2-8ac869243a42",
+        "createdAt": "2026-10-28T07:10:32.046Z",
+        "updatedAt": "2026-10-28T07:10:32.046Z",
+        "eventId": "9df6c884-eb16-4ec7-8db1-e9f974aa65a1",
+        "type": "PROPOSAL_RETURNED_TO_DRAFT",
+        "aggregateId": "p-student",
+        "payload": {
+          "reason": "Khoa trả nháp để bổ sung phạm vi và sản phẩm.",
+          "status": "DRAFT",
+          "termId": "qa-t1",
+          "revision": 6,
+          "proposalId": "p-student",
+          "actorUserId": "faculty",
+          "pausedPlanId": null,
+          "advisorUserId": "advisor",
+          "studentUserId": "student",
+          "workingVersionId": "11954fe6-e030-4548-a3e6-675aa952e54c",
+          "reopenedDossierId": null,
+          "submittedVersionId": "11954fe6-e030-4548-a3e6-675aa952e54c",
+          "supersededReviewId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      },
+      {
+        "id": "68d744c6-0ca2-4186-a859-2e158d873377",
+        "createdAt": "2026-10-28T07:10:32.910Z",
+        "updatedAt": "2026-10-28T07:10:32.910Z",
+        "eventId": "19ce490e-a0e9-460d-94e8-ec5ec2329be2",
+        "type": "PROPOSAL_VERSION_SUBMITTED",
+        "aggregateId": "p-student",
+        "payload": {
+          "termId": "qa-t1",
+          "versionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+          "proposalId": "p-student",
+          "advisorUserId": "advisor",
+          "studentUserId": "student",
+          "submissionKind": "RESUBMISSION"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      },
+      {
+        "id": "6b2f483d-8dab-4c85-b4fe-7df116aef972",
+        "createdAt": "2026-10-28T07:10:33.312Z",
+        "updatedAt": "2026-10-28T07:10:33.312Z",
+        "eventId": "495108f9-7edb-4e20-959f-8a0fbc2dcb85",
+        "type": "PROPOSAL_REVIEW_DECIDED",
+        "aggregateId": "p-student",
+        "payload": {
+          "decision": "APPROVED",
+          "reviewId": "a9a72832-170e-49d3-a840-4da20fd1c2fc",
+          "versionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+          "proposalId": "p-student",
+          "advisorUserId": "advisor",
+          "studentUserId": "student"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      },
+      {
+        "id": "4aa4ab25-6656-4cfe-befe-c4ebb560ef2a",
+        "createdAt": "2026-10-28T07:10:35.537Z",
+        "updatedAt": "2026-10-28T07:10:35.537Z",
+        "eventId": "d78f6250-b49d-4d31-97cb-6c8b6b70ff05",
+        "type": "PROPOSAL_REOPENED",
+        "aggregateId": "p-student",
+        "payload": {
+          "reason": "Mở lại để điều chỉnh phạm vi sau khi nhận giấy.",
+          "status": "DRAFT",
+          "termId": "qa-t1",
+          "revision": 13,
+          "proposalId": "p-student",
+          "actorUserId": "faculty",
+          "pausedPlanId": "ebc801e4-9e6b-4a48-be5d-c9980baf2dba",
+          "advisorUserId": "advisor",
+          "studentUserId": "student",
+          "workingVersionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+          "reopenedDossierId": "114d2798-db43-46c0-8020-81c10fc85023",
+          "submittedVersionId": "5b00e0de-d08d-4a79-9f4f-beb633bb766f",
+          "supersededReviewId": null
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      },
+      {
+        "id": "5967acd9-55a1-4842-8a2e-c0cf1607c0d2",
+        "createdAt": "2026-10-28T07:10:36.730Z",
+        "updatedAt": "2026-10-28T07:10:36.730Z",
+        "eventId": "90ab9df3-51a9-4903-ac7c-f5bbf1d957eb",
+        "type": "PROPOSAL_VERSION_SUBMITTED",
+        "aggregateId": "p-student",
+        "payload": {
+          "termId": "qa-t1",
+          "versionId": "9e1f9e5d-fd82-4114-b393-a937bc9506e4",
+          "proposalId": "p-student",
+          "advisorUserId": "advisor",
+          "studentUserId": "student",
+          "submissionKind": "RESUBMISSION"
+        },
+        "state": "PENDING",
+        "attempts": 0,
+        "nextAttemptAt": null
+      }
+    ],
+    "notification": [
+      {
+        "id": "f0ccd9f4-3a97-4c85-9b6d-48a73e50838e",
+        "userId": "student",
+        "termId": "qa-t1",
+        "title": "Đề cương đã được rút về nháp",
+        "body": "SV rút để chỉnh sửa theo kế hoạch mới.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:29.494Z",
+        "readAt": null
+      },
+      {
+        "id": "f3c1ac25-7c90-40a0-b34c-4419ec97beec",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Đề cương đã được rút về nháp",
+        "body": "SV rút để chỉnh sửa theo kế hoạch mới.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:29.497Z",
+        "readAt": null
+      },
+      {
+        "id": "b1e3b905-d0d7-477c-9f3f-01d41d8b8708",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Đề cương được nộp xét duyệt",
+        "body": "Sinh viên đã nộp một phiên bản đề cương. Mở hồ sơ để xem nội dung và tiến trình xét duyệt.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:30.516Z",
+        "readAt": null
+      },
+      {
+        "id": "5f743dae-d6ac-4445-a722-5569c3c7aaf9",
+        "userId": "student",
+        "termId": "qa-t1",
+        "title": "Khoa đã trả đề cương về nháp",
+        "body": "Khoa trả nháp để bổ sung phạm vi và sản phẩm.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:32.049Z",
+        "readAt": null
+      },
+      {
+        "id": "92995ab5-66f9-4f66-a0d2-85a25072462e",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Khoa đã trả đề cương về nháp",
+        "body": "Khoa trả nháp để bổ sung phạm vi và sản phẩm.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:32.050Z",
+        "readAt": null
+      },
+      {
+        "id": "ea2a6a55-6b9e-4764-a248-3684427bde23",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Đề cương được nộp xét duyệt",
+        "body": "Sinh viên đã nộp một phiên bản đề cương. Mở hồ sơ để xem nội dung và tiến trình xét duyệt.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:32.912Z",
+        "readAt": null
+      },
+      {
+        "id": "51166380-b8c1-4d7c-9c54-992de361c9c9",
+        "userId": "student",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/a9a72832-170e-49d3-a840-4da20fd1c2fc",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:33.310Z",
+        "readAt": null
+      },
+      {
+        "id": "fda5a4c4-08f1-4117-8b2f-93422620f848",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Kết quả xét duyệt đề cương",
+        "body": "Nhóm duyệt đã ghi nhận kết luận cho một phiên bản đề cương. Mở hồ sơ để xem kết quả và yêu cầu tiếp theo.",
+        "link": "/topic/reviews/a9a72832-170e-49d3-a840-4da20fd1c2fc",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:33.311Z",
+        "readAt": null
+      },
+      {
+        "id": "1f9d10cf-fc84-426c-bfff-8f6af0eab571",
+        "userId": "student",
+        "termId": "qa-t1",
+        "title": "Khoa đã mở lại đề cương",
+        "body": "Mở lại để điều chỉnh phạm vi sau khi nhận giấy.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:35.538Z",
+        "readAt": null
+      },
+      {
+        "id": "4b088d7b-7ce4-47de-bbcf-22a35d9641b9",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Khoa đã mở lại đề cương",
+        "body": "Mở lại để điều chỉnh phạm vi sau khi nhận giấy.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:35.538Z",
+        "readAt": null
+      },
+      {
+        "id": "7a31a8f7-cbe5-43b5-9552-d2a07bb2f8c8",
+        "userId": "advisor",
+        "termId": "qa-t1",
+        "title": "Đề cương được nộp xét duyệt",
+        "body": "Sinh viên đã nộp một phiên bản đề cương. Mở hồ sơ để xem nội dung và tiến trình xét duyệt.",
+        "link": "/topic/proposal/p-student",
+        "status": "UNREAD",
+        "createdAt": "2026-10-28T07:10:36.732Z",
+        "readAt": null
+      }
+    ]
+  },
+  "counts": {
+    "thesisDossier": 1,
+    "dossierFinalization": 1,
+    "guidancePlan": 1,
+    "task": 0,
+    "progressReview": 0,
+    "finalResult": 0
+  },
+  "audit": [
+    {
+      "id": "dc396ca9-7916-4a23-aec1-60bc10198245",
+      "userId": "student",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "student",
+      "createdAt": "2026-10-28T07:10:23.456Z"
+    },
+    {
+      "id": "332fbc73-7931-44dd-b35b-c74c271031bd",
+      "userId": "faculty",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T07:10:25.500Z"
+    },
+    {
+      "id": "54f9c98f-5559-4c4f-bf74-3a6335d0a830",
+      "userId": "reviewer",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T07:10:27.027Z"
+    },
+    {
+      "id": "0f8923ac-4fe5-4d33-8272-a397d70d859b",
+      "userId": "advisor",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "advisor",
+      "createdAt": "2026-10-28T07:10:28.449Z"
+    },
+    {
+      "id": "46ffc178-cbad-4f44-b8cf-a79306360119",
+      "userId": "student",
+      "action": "PROPOSAL_WITHDRAWN",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:29.484Z"
+    },
+    {
+      "id": "a0bf84a5-79ea-4359-a58e-866f4d37cf20",
+      "userId": "student",
+      "action": "VERSION_SAVED",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:30.334Z"
+    },
+    {
+      "id": "c93d93c1-8ae0-44f3-b368-972986f7ed46",
+      "userId": "student",
+      "action": "VERSION_SUBMITTED",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:30.510Z"
+    },
+    {
+      "id": "9cf20317-4b31-49d9-a09b-bdc2c631f751",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+      "createdAt": "2026-10-28T07:10:30.705Z"
+    },
+    {
+      "id": "59470a5b-a8ba-4edb-bb48-c2cb88339b7c",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+      "createdAt": "2026-10-28T07:10:30.883Z"
+    },
+    {
+      "id": "83157aea-ef84-4d4a-ba28-f819d4a22732",
+      "userId": "reviewer",
+      "action": "COMMENT",
+      "resource": "proposal-review",
+      "resourceId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+      "createdAt": "2026-10-28T07:10:31.044Z"
+    },
+    {
+      "id": "15d736ff-c029-4e67-9818-1a9773eb3f54",
+      "userId": "faculty",
+      "action": "PROPOSAL_RETURNED_TO_DRAFT",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:32.043Z"
+    },
+    {
+      "id": "77003a58-6a3a-434e-9d28-a96a0389e3ce",
+      "userId": "faculty",
+      "action": "SUPERSEDED",
+      "resource": "proposal-review",
+      "resourceId": "d7804c79-1d2f-4bb3-a7a5-7ebf98fa3f11",
+      "createdAt": "2026-10-28T07:10:32.045Z"
+    },
+    {
+      "id": "2ea46b2d-e0eb-433f-acd3-9a60c0dfc5fe",
+      "userId": "student",
+      "action": "VERSION_SAVED",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:32.736Z"
+    },
+    {
+      "id": "9b865c4d-83db-4cb0-bbfd-6c9fda9d0665",
+      "userId": "student",
+      "action": "VERSION_SUBMITTED",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:32.909Z"
+    },
+    {
+      "id": "7c679dbe-ae2d-46b4-a1ae-6a04d5674a97",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "a9a72832-170e-49d3-a840-4da20fd1c2fc",
+      "createdAt": "2026-10-28T07:10:33.098Z"
+    },
+    {
+      "id": "6e03bb82-9b2a-48a3-816c-7a2f2a17bb66",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "a9a72832-170e-49d3-a840-4da20fd1c2fc",
+      "createdAt": "2026-10-28T07:10:33.200Z"
+    },
+    {
+      "id": "2fe2ec0c-db8c-4ceb-9b47-4c93777b3045",
+      "userId": "reviewer",
+      "action": "DECISION",
+      "resource": "proposal-review",
+      "resourceId": "a9a72832-170e-49d3-a840-4da20fd1c2fc",
+      "createdAt": "2026-10-28T07:10:33.313Z"
+    },
+    {
+      "id": "964af687-1f13-4605-bb05-004aa0657daf",
+      "userId": "faculty",
+      "action": "FINALIZED",
+      "resource": "dossier",
+      "resourceId": "114d2798-db43-46c0-8020-81c10fc85023",
+      "createdAt": "2026-10-28T07:10:33.553Z"
+    },
+    {
+      "id": "c5507617-f777-4747-83bc-c128232475d4",
+      "userId": "faculty",
+      "action": "PHYSICAL_RECEIVED",
+      "resource": "dossier",
+      "resourceId": "114d2798-db43-46c0-8020-81c10fc85023",
+      "createdAt": "2026-10-28T07:10:33.650Z"
+    },
+    {
+      "id": "afa4e3e5-85ea-4eba-9a10-642f424381a6",
+      "userId": "advisor",
+      "action": "PLAN_CREATED",
+      "resource": "guidance-task",
+      "resourceId": "ebc801e4-9e6b-4a48-be5d-c9980baf2dba",
+      "createdAt": "2026-10-28T07:10:33.761Z"
+    },
+    {
+      "id": "e48d384d-9c96-4fa4-8662-a5f6ace00e0c",
+      "userId": "faculty",
+      "action": "REOPENED",
+      "resource": "dossier",
+      "resourceId": "114d2798-db43-46c0-8020-81c10fc85023",
+      "createdAt": "2026-10-28T07:10:35.529Z"
+    },
+    {
+      "id": "39c7bf94-082c-4b30-9f68-71be30e24b12",
+      "userId": "faculty",
+      "action": "PROPOSAL_REOPENED",
+      "resource": "guidance-plan",
+      "resourceId": "ebc801e4-9e6b-4a48-be5d-c9980baf2dba",
+      "createdAt": "2026-10-28T07:10:35.533Z"
+    },
+    {
+      "id": "c624fdac-eb6e-4d03-bf11-edf33668a601",
+      "userId": "student2",
+      "action": "AUTH_LOGIN",
+      "resource": "account",
+      "resourceId": "student2",
+      "createdAt": "2026-10-28T07:10:38.442Z"
+    },
+    {
+      "id": "314c7aaa-603f-436c-bb64-05fb87dd9c95",
+      "userId": "faculty",
+      "action": "PROPOSAL_REOPENED",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:35.535Z"
+    },
+    {
+      "id": "f4b739c1-72d3-4d34-b7b4-37f1c0c0b880",
+      "userId": "student",
+      "action": "VERSION_SAVED",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:36.576Z"
+    },
+    {
+      "id": "10e71c77-4a00-4009-8be7-1e490c849d84",
+      "userId": "student",
+      "action": "VERSION_SUBMITTED",
+      "resource": "proposal-version",
+      "resourceId": "p-student",
+      "createdAt": "2026-10-28T07:10:36.720Z"
+    },
+    {
+      "id": "ef84b7c2-07e1-4e28-b907-658a8fcddcb6",
+      "userId": "reviewer",
+      "action": "START",
+      "resource": "proposal-review",
+      "resourceId": "decaeba0-bb14-40a7-aeec-d93164d916da",
+      "createdAt": "2026-10-28T07:10:39.183Z"
+    },
+    {
+      "id": "c4491d1d-02c2-452f-a906-ea034d88978d",
+      "userId": "faculty",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "faculty",
+      "createdAt": "2026-10-28T07:10:40.400Z"
+    },
+    {
+      "id": "0e2d7de7-265e-4d6e-9c6e-aea0bc286e3f",
+      "userId": "student2",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "student2",
+      "createdAt": "2026-10-28T07:10:40.945Z"
+    },
+    {
+      "id": "063a0f2d-80b6-482c-b6aa-5a40d74e01ee",
+      "userId": "faculty",
+      "action": "ASSIGN",
+      "resource": "proposal-review",
+      "resourceId": "decaeba0-bb14-40a7-aeec-d93164d916da",
+      "createdAt": "2026-10-28T07:10:39.057Z"
+    },
+    {
+      "id": "fe2a7d4c-ff60-4256-9f71-23e31ce33f86",
+      "userId": "student",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "student",
+      "createdAt": "2026-10-28T07:10:40.216Z"
+    },
+    {
+      "id": "8c040452-31f4-437c-bf78-687039c3c653",
+      "userId": "reviewer",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "reviewer",
+      "createdAt": "2026-10-28T07:10:40.624Z"
+    },
+    {
+      "id": "323bf60c-0a8e-4beb-8fea-877ce3cac0c9",
+      "userId": "advisor",
+      "action": "AUTH_LOGOUT",
+      "resource": "account",
+      "resourceId": "advisor",
+      "createdAt": "2026-10-28T07:10:40.808Z"
+    }
+  ]
+}

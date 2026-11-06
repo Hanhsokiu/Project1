@@ -1,0 +1,8 @@
+const base=require('./browser-common.cjs');const crypto=require('node:crypto');
+const summarize=v=>({id:v.id,proposalId:v.proposalId,versionNumber:v.versionNumber,state:v.state,contentHash:v.contentHash,createdAt:v.createdAt,createdByUserId:v.createdByUserId,authorName:v.authorName,submittedAt:v.submittedAt,submittedByUserId:v.submittedByUserId,basedOnVersionId:v.basedOnVersionId,changeSummary:v.changeSummary,responses:v.responses,provenance:v.provenance,contentBytes:Buffer.byteLength(JSON.stringify(v.content)),fieldLengths:Object.fromEntries(Object.entries(v.content??{}).filter(([,x])=>typeof x==='string').map(([k,x])=>[k,x.length]))});
+const hash=value=>crypto.createHash('sha256').update(JSON.stringify(value,(_,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.keys(v).sort().map(k=>[k,v[k]])):v)).digest('hex');
+const context=(a,p)=>a.data('/proposals/'+p+'/editing-context');
+async function editor(a,p){await a.go('/topic/proposal/'+p);await base.expect(a.page.getByRole('heading',{name:'Bản làm việc hiện hành',exact:true})).toBeVisible();return context(a,p);}
+async function saveDraft(a,p,content,extra={}){const c=await context(a,p);const r=await a.api('/proposals/'+p+'/versions',{method:'POST',body:{expectedRevision:c.revision,basedOnVersionId:(c.status==='REVISION_REQUESTED'?c.submittedVersionId:c.workingVersionId)||undefined,content,...extra}});base.assert.equal(r.status,201,JSON.stringify(r.error));return r.data;}
+const reviewEvidence=review=>{const copy=structuredClone(review);delete copy.proposalStatus;delete copy.proposalRevision;return copy;};
+module.exports={...base,summarize,hash,context,editor,saveDraft,reviewEvidence};

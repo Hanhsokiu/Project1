@@ -1,0 +1,194 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:01.654Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50186/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T03-list-paging-filter-empty",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:03.062Z",
+    "detail": {
+      "pages": [
+        20,
+        3
+      ],
+      "approvedEmptyBeforeProducer": true
+    }
+  },
+  {
+    "id": "T07-T08-readiness-no-GET-writes",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:04.315Z",
+    "detail": {
+      "ready": {
+        "proposalId": "p-student",
+        "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+        "proposalStatus": "APPROVED",
+        "proposalRevision": 3,
+        "submittedVersionId": "v1-student",
+        "submittedVersionNumber": 1,
+        "state": "DRAFT",
+        "revision": 0,
+        "readiness": [],
+        "previewSnapshot": {
+          "schemaVersion": 1,
+          "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+          "termName": "Đợt kiểm thử qa-t1",
+          "student": {
+            "id": "student",
+            "name": "Nguyễn Văn Sinh",
+            "code": "QA-student",
+            "className": "Công nghệ thông tin K63",
+            "majorName": "Khoa học máy tính",
+            "trainingSystem": "Đại học — dữ liệu kiểm thử",
+            "cohort": "K63",
+            "phone": "0912345678",
+            "email": "student@example.invalid"
+          },
+          "advisor": {
+            "id": "advisor",
+            "name": "Trần Văn Hướng Dẫn",
+            "department": "Bộ môn kiểm thử tổng hợp",
+            "phone": "0987654321",
+            "email": "advisor@example.invalid"
+          },
+          "academicProfileRevision": 0,
+          "assignmentId": "00d89501-2924-4433-afd1-53bf46ee4089",
+          "assignmentRevision": 0,
+          "topicRevision": 0,
+          "content": {
+            "schemaVersion": 1,
+            "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+            "scope": "Phạm vi hệ thống quản lý đồ án",
+            "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+            "tools": "NestJS, Prisma, React và PostgreSQL",
+            "expectedResults": "Phần mềm và báo cáo tiến độ",
+            "startsAt": "2026-10-27T12:44:14.581Z",
+            "endsAt": "2026-11-04T12:44:14.581Z",
+            "schedule": [
+              {
+                "label": "Phân tích và kiểm thử",
+                "startsAt": "2026-10-27T12:44:14.581Z",
+                "endsAt": "2026-11-04T12:44:14.581Z",
+                "deliverables": "Báo cáo PDF và source ZIP"
+              }
+            ]
+          }
+        },
+        "previewVersionId": "v1-student",
+        "finalizations": [],
+        "allowedActions": [
+          "finalize"
+        ],
+        "currentFinalization": null,
+        "receipt": null,
+        "history": []
+      },
+      "missing": {
+        "proposalId": "p-page-01",
+        "title": "Phân trang hồ sơ — 01",
+        "proposalStatus": "APPROVED",
+        "proposalRevision": 3,
+        "submittedVersionId": "v1-page-01",
+        "submittedVersionNumber": 1,
+        "state": "DRAFT",
+        "revision": 0,
+        "readiness": [
+          "STUDENT_PROFILE_NOT_READY"
+        ],
+        "previewSnapshot": null,
+        "previewVersionId": "v1-page-01",
+        "finalizations": [],
+        "allowedActions": [],
+        "currentFinalization": null,
+        "receipt": null,
+        "history": []
+      },
+      "noGetWrites": true
+    }
+  },
+  {
+    "id": "T03-Unicode-and-approved-filter",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:04.897Z",
+    "detail": {
+      "unicodeSearch": true,
+      "approved": 3
+    }
+  },
+  {
+    "id": "T15-T16-real-UI-finalize",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:05.528Z",
+    "detail": {
+      "id": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+      "version": 1,
+      "state": "FINALIZED",
+      "receipt": null,
+      "pdf": null,
+      "plan": 0
+    }
+  },
+  {
+    "id": "T04-owner-advisor-read-and-no-faculty-actions",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:07.099Z",
+    "detail": {
+      "ownerExport": true,
+      "advisorExport": true,
+      "noFinalizeOrReceive": true
+    }
+  },
+  {
+    "id": "T21-T22-T23-real-UI-PDF-download",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:07.717Z",
+    "detail": {
+      "filename": "de-cuong-chinh-thuc.pdf",
+      "checksum": "7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462",
+      "state": "FINALIZED",
+      "receipt": null,
+      "finalizationId": "f1166ac7-a1be-40f1-8d46-f27dae63f475"
+    }
+  },
+  {
+    "id": "T31-T35-phase-locked-receipt-note-preserved",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:08.108Z",
+    "detail": {
+      "blockedReceipt": true,
+      "downloadWhileLocked": true,
+      "noteLength": 2000,
+      "notePreserved": true
+    }
+  },
+  {
+    "id": "T32-real-UI-physical-receipt",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:08.441Z",
+    "detail": {
+      "state": "RECEIVED",
+      "receivedByUserId": "faculty",
+      "receivedAt": "2026-10-28T12:45:08.193Z",
+      "finalizationId": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+      "noteLength": 2000
+    }
+  },
+  {
+    "id": "T41-mobile-axe-detail",
+    "result": "PASS",
+    "at": "2026-10-28T12:45:09.345Z",
+    "detail": {
+      "viewport": 390,
+      "noPageOverflow": true,
+      "axeViolations": 0
+    }
+  }
+]

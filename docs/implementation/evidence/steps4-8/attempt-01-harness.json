@@ -1,0 +1,11 @@
+{
+  "result": "FAIL",
+  "startedAt": "2026-10-23T09:04:21.536Z",
+  "finishedAt": "2026-10-23T09:04:24.272Z",
+  "database": "btl_pr2b_qa_e2e_20261023160420",
+  "postgresMajor": 17,
+  "sharedDatabaseAccess": false,
+  "mockedApi": false,
+  "checks": [],
+  "failure": "\nInvalid `Promise.all([db.student.findMany()` invocation in\nD:\\Project1\\BTL\\backend\\scripts\\test-steps4-8-e2e.cjs:30:192\n\n  27 assert.equal(deploy.status, 0, \"Isolated migration replay failed\");\n  28 const seed = await seedSteps48(db, url.toString());\n  29 await assert.rejects(seedSteps48(db, url.toString()), /Seed refuses existing/);\n→ 30 const legacySnapshot = async () => JSON.stringify(await Promise.all([db.student.findMany({\n       orderBy: {\n         id: \"asc\",\n         ~~\n     ?   termId?: SortOrder,\n     ?   lecturerId?: SortOrder,\n     ?   quota?: SortOrder,\n     ?   term?: ThesisTermOrderByWithRelationInput,\n     ?   lecturer?: LecturerOrderByWithRelationInput\n       }\n     })\n\nUnknown argument `id`. Available options are marked with ?."
+}

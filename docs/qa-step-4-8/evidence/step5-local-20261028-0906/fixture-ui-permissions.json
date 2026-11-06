@@ -1,0 +1,48 @@
+{
+  "source": "backend/prisma/seed.cjs:44-70",
+  "reason": "Synthetic seed omits standard permissions; initial workflow 403s outside canonical STEP5 routes are retained in raw logs.",
+  "privateDatabaseOnly": true,
+  "applicationRbacChanged": false,
+  "changes": [
+    {
+      "role": "LECTURER",
+      "permission": "term:read"
+    },
+    {
+      "role": "STUDENT",
+      "permission": "term:read"
+    },
+    {
+      "role": "COMMITTEE",
+      "permission": "term:read"
+    },
+    {
+      "role": "LECTURER",
+      "permission": "lecturer:read"
+    },
+    {
+      "role": "STUDENT",
+      "permission": "lecturer:read"
+    },
+    {
+      "role": "COMMITTEE",
+      "permission": "lecturer:read"
+    },
+    {
+      "role": "COMMITTEE",
+      "permission": "catalog:read"
+    },
+    {
+      "role": "FACULTY",
+      "permission": "assignment:read"
+    },
+    {
+      "role": "LECTURER",
+      "permission": "assignment:read"
+    },
+    {
+      "role": "STUDENT",
+      "permission": "assignment:read"
+    }
+  ]
+}

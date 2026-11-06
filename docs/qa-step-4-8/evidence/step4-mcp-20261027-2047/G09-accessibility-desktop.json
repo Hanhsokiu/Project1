@@ -1,0 +1,41 @@
+{
+  "startedAt": "2026-10-27T13:57:13.992Z",
+  "requests": [],
+  "responses": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "observations": {
+    "identity": {
+      "status": 200,
+      "username": "giaovu",
+      "roles": [
+        "FACULTY"
+      ],
+      "reviewPermissions": [
+        "review-group:read",
+        "review-group:manage"
+      ],
+      "lecturerId": null
+    },
+    "axeList": {
+      "violations": [],
+      "incomplete": [],
+      "passes": 26
+    },
+    "keyboardAfterName": {
+      "tag": "SELECT",
+      "role": null,
+      "ariaLabel": "Bộ môn"
+    },
+    "keyboardReverse": {
+      "tag": "INPUT",
+      "ariaLabel": "Tên nhóm"
+    },
+    "axeForm": {
+      "violations": [],
+      "incomplete": [],
+      "passes": 24
+    }
+  },
+  "finishedAt": "2026-10-27T13:57:20.457Z"
+}

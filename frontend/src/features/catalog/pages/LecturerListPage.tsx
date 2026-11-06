@@ -1,19 +1,441 @@
-/**
- * LecturerListPage – Danh sách giảng viên.
- * Tra cứu, thêm và cập nhật thông tin giảng viên hướng dẫn.
- */
+import { useState, type FormEvent } from "react";
+import { Link } from "react-router-dom";
+import {
+  Users,
+  Upload,
+  Building2,
+  UserCheck,
+  ChartNoAxesColumnIncreasing,
+  X,
+  Save,
+  RotateCcw,
+  Pencil,
+  Download,
+} from "lucide-react";
+import type { Lecturer } from "../../../shared/data/types";
+import {
+  Badge,
+  Button,
+  Card,
+  DataTable,
+  Field,
+  Modal,
+  Notice,
+  PageHeader,
+  Person,
+  Stat,
+} from "../../../shared/components/kit";
+import { useWorkspace } from "../../../shared/hooks/use-workspace";
+import { useAction } from "../../../shared/hooks/use-demo";
+import { catalogService } from "../services/catalog-service";
+import {
+  academicDegreeLabels,
+  academicRankLabels,
+  MAX_QUOTA,
+} from "@doan/shared";
+import "./catalog-directory.css";
+import { exportExcel } from "../../../shared/services/export-service";
+type LecturerForm = Lecturer;
 export default function LecturerListPage() {
+  const { db, user, term } = useWorkspace();
+  const action = useAction();
+  const manager = user.roles.some((r) => r === "ADMIN" || r === "FACULTY");
+  const hasTerm = db.terms.some((t) => t.id === term.id);
+  const [department, setDepartment] = useState("");
+  const [direction, setDirection] = useState("");
+  const [scope, setScope] = useState("all");
+  const [tableVersion, setTableVersion] = useState(0);
+  const [form, setForm] = useState<LecturerForm | null>(null);
+  const departments = db.catalogs.filter((c) => c.kind === "department");
+  const directions = db.catalogs.filter((c) => c.kind === "direction");
+  const rows = db.lecturers.filter(
+    (l) =>
+      (!department || l.departmentId === department) &&
+      (!direction || l.directionIds.includes(direction)) &&
+      (scope === "all" ||
+        term.lecturers.some((entry) => entry.lecturerId === l.id)),
+  );
+  function resetFilters() {
+    setDepartment("");
+    setDirection("");
+    setScope("all");
+    setTableVersion((version) => version + 1);
+  }
+  async function save(e: FormEvent) {
+    e.preventDefault();
+    if (!form) return;
+    try {
+      await action.run(() => catalogService.saveLecturer(form));
+      setForm(null);
+    } catch {
+      // useAction displays the failure; keep the current form available for correction.
+    }
+  }
   return (
-    <div className="p-6">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Danh sách giảng viên</h1>
-        <p className="mt-1 text-sm text-gray-500">
-          Quản lý thông tin giảng viên: chuyên ngành, học hàm/học vị và số lượng hướng dẫn
-        </p>
+    <div className="catalog-directory">
+      <PageHeader
+        title="Đội ngũ giảng viên"
+        description="Tra cứu chuyên môn, thông tin liên hệ và số lượng sinh viên mỗi giảng viên có thể hướng dẫn."
+        actions={
+          manager && (
+            <>
+              <Link
+                className="btn btn-secondary"
+                to="/catalog/import?type=lecturer"
+              >
+                <Upload size={16} aria-hidden="true" />
+                Import giảng viên
+              </Link>
+              {hasTerm && (
+                <Link
+                  className="btn btn-primary"
+                  to={`/terms/${term.id}/roster?tab=lecturers`}
+                >
+                  <Users size={16} aria-hidden="true" />
+                  Danh sách tham gia đợt
+                </Link>
+              )}
+            </>
+          )
+        }
+      />
+      <div className="stat-grid">
+        <Stat
+          label="Giảng viên"
+          value={db.lecturers.length}
+          icon={<Users size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Bộ môn"
+          value={departments.length}
+          icon={<Building2 size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Tham gia đợt"
+          value={term.lecturers.length}
+          icon={<UserCheck size={18} aria-hidden="true" />}
+        />
+        <Stat
+          label="Tổng chỉ tiêu hướng dẫn"
+          value={term.lecturers.reduce((a, l) => a + l.quota, 0)}
+          sub={term.code}
+          icon={<ChartNoAxesColumnIncreasing size={18} aria-hidden="true" />}
+        />
       </div>
-      <div className="bg-white rounded-lg border border-gray-200 p-8 text-center">
-        <p className="text-gray-400">Trang đang được phát triển...</p>
-      </div>
+      <Card
+        title="Hồ sơ giảng viên"
+        description={
+          hasTerm
+            ? `Đợt đang chọn: ${term.name}. Chỉ tiêu hướng dẫn được thiết lập riêng cho từng đợt.`
+            : "Tìm giảng viên theo mã, họ tên hoặc thông tin liên hệ."
+        }
+        action={
+          <Button variant="ghost" onClick={resetFilters}>
+            <RotateCcw size={15} aria-hidden="true" />
+            Đặt lại bộ lọc
+          </Button>
+        }
+      >
+        <DataTable
+          key={tableVersion}
+          rows={rows}
+          label="Danh sách giảng viên"
+          filterCount={[department, direction, scope === "all" ? "" : scope].filter(Boolean).length}
+          selectionActions={(selected) => <Button variant="secondary" loading={action.pending} onClick={() => action.run(() => exportExcel("Giảng viên đã chọn", selected.map(l => ({ "Mã giảng viên": l.code, "Họ tên": l.name, "Bộ môn": db.catalogs.find(c => c.id === l.departmentId)?.name || "", "Chỉ tiêu mặc định": l.quota, Email: l.email, "Số điện thoại": l.phone })))).catch(() => {})}><Download size={16} />Xuất {selected.length} giảng viên</Button>}
+          searchText={(l) => `${l.code} ${l.name} ${l.email}`}
+          filters={
+            <div className="catalog-filters catalog-filters-lecturers">
+              <Field label="Phạm vi danh sách">
+                <select
+                  aria-label="Phạm vi giảng viên"
+                  value={scope}
+                  onChange={(e) => setScope(e.target.value)}
+                >
+                  <option value="all">Toàn danh mục</option>
+                  {hasTerm && (
+                    <option value="term">Tham gia đợt đang chọn</option>
+                  )}
+                </select>
+              </Field>
+              <Field label="Bộ môn">
+                <select
+                  aria-label="Lọc bộ môn"
+                  value={department}
+                  onChange={(e) => setDepartment(e.target.value)}
+                >
+                  <option value="">Mọi bộ môn</option>
+                  {departments.map((d) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Hướng chuyên môn">
+                <select
+                  aria-label="Lọc hướng chuyên môn"
+                  value={direction}
+                  onChange={(e) => setDirection(e.target.value)}
+                >
+                  <option value="">Mọi hướng chuyên môn</option>
+                  {directions.map((d) => (
+                    <option key={d.id} value={d.id}>
+                      {d.name}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+            </div>
+          }
+          columns={[
+            {
+              key: "name",
+              title: "Giảng viên",
+              sortValue: (l) => l.name,
+              render: (l) => <Person name={l.name} sub={l.code} />,
+            },
+            {
+              key: "department",
+              title: "Bộ môn",
+              render: (l) =>
+                db.catalogs.find((c) => c.id === l.departmentId)?.name || "—",
+            },
+            {
+              key: "academic",
+              title: "Học vị / học hàm",
+              render: (l) => (
+                <div>
+                  {l.academicDegree
+                    ? academicDegreeLabels[l.academicDegree]
+                    : "Chưa cập nhật"}
+                  <small className="block muted">
+                    {academicRankLabels[l.academicRank ?? "NONE"]}
+                  </small>
+                </div>
+              ),
+            },
+            {
+              key: "areas",
+              title: "Hướng chuyên môn",
+              render: (l) => (
+                <div className="flex flex-wrap gap-1 max-w-xs">
+                  {l.directionIds.map((id) => (
+                    <Badge key={id}>
+                      {db.catalogs.find((c) => c.id === id)?.name || id}
+                    </Badge>
+                  ))}
+                </div>
+              ),
+            },
+            {
+              key: "quota",
+              title: "Hướng dẫn trong đợt",
+              render: (l) => {
+                const quota = term.lecturers.find(
+                  (x) => x.lecturerId === l.id,
+                )?.quota;
+                const count = db.assignments.filter(
+                  (a) => a.termId === term.id && a.lecturerId === l.id,
+                ).length;
+                return (
+                  <div>
+                    {quota === undefined ? (
+                      <span className="muted">Chưa tham gia đợt</span>
+                    ) : (
+                      <strong>
+                        {count} / {quota} sinh viên
+                      </strong>
+                    )}
+                    <small className="block muted mt-1">
+                      Giới hạn mặc định: {l.quota} SV
+                    </small>
+                  </div>
+                );
+              },
+            },
+            {
+              key: "contact",
+              title: "Liên hệ",
+              render: (l) => (
+                <div>
+                  {l.email || "Chưa có email"}
+                  <small className="block muted mt-1">
+                    {l.phone || "Chưa có số điện thoại"}
+                  </small>
+                </div>
+              ),
+            },
+            ...(manager
+              ? [
+                  {
+                    key: "edit",
+                    title: "Thao tác",
+                    render: (l: Lecturer) => (
+                      <Button
+                        variant="ghost"
+                        onClick={() =>
+                          setForm({ ...l, directionIds: [...l.directionIds] })
+                        }
+                      >
+                        <Pencil size={14} aria-hidden="true" />
+                        Cập nhật
+                      </Button>
+                    ),
+                  },
+                ]
+              : []),
+          ]}
+        />
+      </Card>
+      {form && (
+        <Modal title="Cập nhật giảng viên" onClose={() => setForm(null)} wide>
+          <form onSubmit={save}>
+            <div className="form-grid">
+              <Field label="Mã giảng viên">
+                <input
+                  required
+                  minLength={2}
+                  value={form.code}
+                  onChange={(e) => setForm({ ...form, code: e.target.value })}
+                />
+              </Field>
+              <Field label="Họ tên">
+                <input
+                  required
+                  minLength={3}
+                  value={form.name}
+                  onChange={(e) => setForm({ ...form, name: e.target.value })}
+                />
+              </Field>
+              <Field label="Học vị">
+                <select
+                  value={form.academicDegree ?? ""}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      academicDegree: (e.target.value ||
+                        null) as Lecturer["academicDegree"],
+                    })
+                  }
+                >
+                  <option value="">Chưa cập nhật</option>
+                  {Object.entries(academicDegreeLabels).map(
+                    ([value, label]) => (
+                      <option key={value} value={value}>
+                        {label}
+                      </option>
+                    ),
+                  )}
+                </select>
+              </Field>
+              <Field label="Học hàm">
+                <select
+                  value={form.academicRank ?? "NONE"}
+                  onChange={(e) =>
+                    setForm({
+                      ...form,
+                      academicRank: e.target.value as Lecturer["academicRank"],
+                    })
+                  }
+                >
+                  {Object.entries(academicRankLabels).map(([value, label]) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+              <Field label="Bộ môn">
+                <select
+                  required
+                  value={form.departmentId}
+                  onChange={(e) =>
+                    setForm({ ...form, departmentId: e.target.value })
+                  }
+                >
+                  {departments.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.name}
+                    </option>
+                  ))}
+                </select>
+              </Field>
+              <Field
+                label="Giới hạn hướng dẫn mặc định"
+                hint="Số sinh viên tối đa khi thiết lập một đợt mới."
+              >
+                <input
+                  required
+                  type="number"
+                  min={0}
+                  max={MAX_QUOTA}
+                  step={1}
+                  value={form.quota}
+                  onChange={(e) =>
+                    setForm({ ...form, quota: Number(e.target.value) })
+                  }
+                />
+              </Field>
+              <Field label="Email">
+                <input
+                  required
+                  type="email"
+                  value={form.email}
+                  onChange={(e) => setForm({ ...form, email: e.target.value })}
+                />
+              </Field>
+              <Field label="Số điện thoại">
+                <input
+                  required
+                  value={form.phone}
+                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                />
+              </Field>
+              <fieldset className="full">
+                <legend className="text-sm mb-2">
+                  Hướng chuyên môn có thể hướng dẫn
+                </legend>
+                {directions.map((d) => (
+                  <label className="checkbox-row" key={d.id}>
+                    <input
+                      type="checkbox"
+                      checked={form.directionIds.includes(d.id)}
+                      onChange={(e) =>
+                        setForm({
+                          ...form,
+                          directionIds: e.target.checked
+                            ? [...form.directionIds, d.id]
+                            : form.directionIds.filter((x) => x !== d.id),
+                        })
+                      }
+                    />
+                    {d.name}
+                  </label>
+                ))}
+              </fieldset>
+            </div>
+            <Notice>
+              Chỉ tiêu của đợt hiện tại được quản lý tại Danh sách tham gia đợt.
+              Thay đổi giới hạn mặc định ở đây không thay đổi chỉ tiêu đã thiết
+              lập trong các đợt.
+            </Notice>
+            <div className="form-actions">
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => setForm(null)}
+              >
+                <X size={16} aria-hidden="true" />
+                Hủy
+              </Button>
+              <Button disabled={action.pending} loading={action.pending}>
+                <Save size={16} aria-hidden="true" />
+                Lưu giảng viên
+              </Button>
+            </div>
+          </form>
+        </Modal>
+      )}
     </div>
   );
 }

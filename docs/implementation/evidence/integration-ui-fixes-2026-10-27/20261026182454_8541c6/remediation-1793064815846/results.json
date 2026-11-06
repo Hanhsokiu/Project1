@@ -1,0 +1,10 @@
+{
+  "startedAt": "2026-10-27T01:33:35.852Z",
+  "database": "btl_pr2b_audit_20261026182454_8541c6_live_e2e",
+  "syntheticOnly": true,
+  "checks": [],
+  "traffic": [],
+  "result": "FAIL",
+  "failure": "\nInvalid `db.notification.groupBy()` invocation in\nD:\\Project1\\BTL\\backend\\scripts\\test-workflow-remediation.cjs:19:43\n\n  16 let app;\n  17 const pass = (name, actual) => { result.checks.push({ name, actual, result: \"PASS\" }); console.log(\"PASS \" + name); };\n  18 try {\n→ 19   const initial = await db.notification.groupBy(\nError querying the database: FATAL: the database system is starting up",
+  "finishedAt": "2026-10-27T01:33:35.951Z"
+}

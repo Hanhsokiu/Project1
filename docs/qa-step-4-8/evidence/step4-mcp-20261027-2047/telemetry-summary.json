@@ -1,0 +1,169 @@
+﻿{
+    "GeneratedAt":  "2026-10-27T21:10:47.4589367+07:00",
+    "BrowserConsoleErrorEntries":  6,
+    "BrowserConsoleErrorClasses":  [
+                                       "404 expected: nonexistent synthetic group and nonmember group",
+                                       "400 expected: search \u003e255 chars"
+                                   ],
+    "BrowserWarningEntries":  17,
+    "BrowserWarningType":  "React Router v7_startTransition future flag",
+    "Http5xxInBrowserLog":  0,
+    "AuthLoginRequests":  7,
+    "AuthLogoutRequests":  7,
+    "NonAuthMutationRequests":  0,
+    "Chunks":  [
+                   {
+                       "File":  "anonymous-results.json",
+                       "StartedAt":  "2026-10-27T13:49:20.854Z",
+                       "FinishedAt":  "2026-10-27T13:49:29.025Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "auth-cleanup.json",
+                       "StartedAt":  "2026-10-27T14:07:53.566Z",
+                       "FinishedAt":  "2026-10-27T14:07:53.716Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "BUG01-reproduction.json",
+                       "StartedAt":  "2026-10-27T14:04:31.961Z",
+                       "FinishedAt":  "2026-10-27T14:04:43.347Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "BUG02-mobile-offscreen-focus.json",
+                       "StartedAt":  "2026-10-27T13:58:40.638Z",
+                       "FinishedAt":  "2026-10-27T13:58:43.684Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "final-verification.json",
+                       "StartedAt":  "2026-10-27T14:06:37.972Z",
+                       "FinishedAt":  "2026-10-27T14:06:38.647Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "G01-G02-faculty-list.json",
+                       "StartedAt":  "2026-10-27T13:52:32.079Z",
+                       "FinishedAt":  "2026-10-27T13:52:32.754Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "G03-G04-filters-terms.json",
+                       "StartedAt":  "2026-10-27T13:53:59.426Z",
+                       "FinishedAt":  "2026-10-27T13:53:59.956Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "G05-G08-detail-lock-cancel-retry.json",
+                       "StartedAt":  "2026-10-27T13:55:24.133Z",
+                       "FinishedAt":  "2026-10-27T13:55:32.682Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "G05-G08-detail-lock-cancel.json",
+                       "StartedAt":  "2026-10-27T13:54:27.269Z",
+                       "FinishedAt":  "2026-10-27T13:55:01.913Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  "locator.click: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole(\u0027button\u0027, { name: \u0027Hủy\u0027, exact: true })\u001b[22m\n"
+                   },
+                   {
+                       "File":  "G06-G08-create-candidate-reset-cancel.json",
+                       "StartedAt":  "2026-10-27T13:56:06.443Z",
+                       "FinishedAt":  "2026-10-27T13:56:07.082Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "G09-accessibility-desktop.json",
+                       "StartedAt":  "2026-10-27T13:57:13.992Z",
+                       "FinishedAt":  "2026-10-27T13:57:20.457Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "G09-G10-mobile-keyboard.json",
+                       "StartedAt":  "2026-10-27T13:57:54.128Z",
+                       "FinishedAt":  "2026-10-27T13:58:06.725Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "P01-P02-gv003-scope.json",
+                       "StartedAt":  "2026-10-27T14:00:14.242Z",
+                       "FinishedAt":  "2026-10-27T14:00:20.930Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "P01-P02-lecturer-member-scope.json",
+                       "StartedAt":  "2026-10-27T13:59:27.698Z",
+                       "FinishedAt":  "2026-10-27T13:59:42.453Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  "locator.waitFor: Timeout 7000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByRole(\u0027textbox\u0027, { name: \u0027Tên nhóm\u0027, exact: true }) to be visible\u001b[22m\n"
+                   },
+                   {
+                       "File":  "P02-cross-term-clarification.json",
+                       "StartedAt":  "2026-10-27T14:01:04.227Z",
+                       "FinishedAt":  "2026-10-27T14:01:04.264Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "P02-gv002-no-membership.json",
+                       "StartedAt":  "2026-10-27T14:02:33.637Z",
+                       "FinishedAt":  "2026-10-27T14:02:39.699Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "P03-student-deny.json",
+                       "StartedAt":  "2026-10-27T14:01:07.037Z",
+                       "FinishedAt":  "2026-10-27T14:01:14.396Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "P04-admin-deny.json",
+                       "StartedAt":  "2026-10-27T14:01:30.528Z",
+                       "FinishedAt":  "2026-10-27T14:01:37.183Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   },
+                   {
+                       "File":  "R01-R05-read-boundaries.json",
+                       "StartedAt":  "2026-10-27T14:03:48.440Z",
+                       "FinishedAt":  "2026-10-27T14:03:54.914Z",
+                       "PageErrorCount":  0,
+                       "FailedRequestCount":  0,
+                       "RunnerError":  null
+                   }
+               ],
+    "Limitation":  "browser_network_requests does not list page.request API probes; those are recorded in scenario JSON. Browser buffer spans MCP session; custom chunk timestamps identify this run. Do not sum duplicate console log exports."
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T12:54:53.918Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50186/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T03-code-search-UI-ready-term",
+    "result": "PASS",
+    "at": "2026-10-28T12:54:54.570Z",
+    "detail": {
+      "before": "http://127.0.0.1:50186/topic/dossier?termId=qa-t1",
+      "after": "http://127.0.0.1:50186/topic/dossier?search=QA-PAGE-01&termId=qa-t1",
+      "count": 1
+    }
+  }
+]

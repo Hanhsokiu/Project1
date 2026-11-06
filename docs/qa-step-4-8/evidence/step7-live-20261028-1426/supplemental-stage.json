@@ -1,0 +1,213 @@
+{
+  "primary": {
+    "proposalId": "p-student",
+    "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+    "proposalStatus": "APPROVED",
+    "proposalRevision": 11,
+    "submittedVersionId": "0bcf931a-6768-4381-a405-60ce4b820abf",
+    "submittedVersionNumber": 2,
+    "state": "FINALIZED",
+    "revision": 6,
+    "readiness": [
+      "DOSSIER_LOCKED"
+    ],
+    "previewSnapshot": null,
+    "allowedActions": [
+      "download",
+      "receive"
+    ],
+    "currentFinalization": {
+      "id": "76301022-91cc-46bf-b6d4-26faee75a9f4",
+      "approvedVersionId": "0bcf931a-6768-4381-a405-60ce4b820abf",
+      "versionNumber": 2,
+      "finalizedAt": "2026-10-28T12:13:41.568Z",
+      "finalizedByUserId": "faculty",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdfGeneratedAt": "2026-10-28T12:13:42.249Z",
+      "pdfChecksum": "65f16352fc69ddd2354c7745c21176eaa99553cfffeb9a2bd56a34e8aed2bf0c",
+      "snapshot": {
+        "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+        "advisor": {
+          "id": "advisor",
+          "name": "Trần Văn Hướng Dẫn",
+          "department": "Bộ môn kiểm thử tổng hợp"
+        },
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:29:53.775Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:29:53.775Z",
+              "startsAt": "2026-10-27T07:29:53.775Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:29:53.775Z",
+          "objectives": "QA STEP7 bản mới sau mở lại — tiêu chí nghiệm thu đã cập nhật.",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "student": {
+          "id": "student",
+          "code": "QA-student",
+          "name": "Nguyễn Văn Sinh",
+          "className": "Công nghệ thông tin K63",
+          "majorName": "Khoa học máy tính",
+          "trainingSystem": "Đại học — dữ liệu kiểm thử"
+        },
+        "termName": "Đợt kiểm thử qa-t1",
+        "assignmentId": "3874be59-c268-4d8b-a367-a10e0cda58c6",
+        "schemaVersion": 1,
+        "topicRevision": 0,
+        "assignmentRevision": 0,
+        "academicProfileRevision": 0
+      }
+    },
+    "receipt": null,
+    "history": [
+      {
+        "id": "adf9a5bd-f867-474d-8acb-7d573c479993",
+        "action": "PDF_GENERATED",
+        "actorId": "student",
+        "createdAt": "2026-10-28T12:13:42.262Z"
+      },
+      {
+        "id": "e1df4f65-7431-493b-811e-5c8a24788083",
+        "action": "FINALIZED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:13:41.580Z"
+      },
+      {
+        "id": "e80caa42-7bd7-455e-8241-c6a6b851df8f",
+        "action": "REOPENED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:13:40.893Z"
+      },
+      {
+        "id": "eb24c749-7a14-4eaf-bde7-c0831328692b",
+        "action": "PHYSICAL_RECEIVED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:06:18.870Z"
+      },
+      {
+        "id": "61f922e4-9dcf-48d8-a0a5-3651fb3c482a",
+        "action": "PDF_GENERATED",
+        "actorId": "student",
+        "createdAt": "2026-10-28T12:06:17.921Z"
+      },
+      {
+        "id": "d0bb15f9-3797-4260-8b84-e18e7f917c61",
+        "action": "FINALIZED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:06:15.270Z"
+      }
+    ]
+  },
+  "secondary": {
+    "proposalId": "p-student2",
+    "title": "Hệ thống quản lý đồ án — Sinh viên khác",
+    "proposalStatus": "APPROVED",
+    "proposalRevision": 4,
+    "submittedVersionId": "v1-student2",
+    "submittedVersionNumber": 1,
+    "state": "RECEIVED",
+    "revision": 3,
+    "readiness": [
+      "DOSSIER_LOCKED"
+    ],
+    "previewSnapshot": null,
+    "allowedActions": [
+      "download"
+    ],
+    "currentFinalization": {
+      "id": "cf2e5906-3cb4-4236-add2-050f1112dc7f",
+      "approvedVersionId": "v1-student2",
+      "versionNumber": 1,
+      "finalizedAt": "2026-10-28T12:06:15.541Z",
+      "finalizedByUserId": "faculty",
+      "templateVersion": "project1-docx-individual-v1",
+      "pdfGeneratedAt": "2026-10-28T12:08:17.937Z",
+      "pdfChecksum": "3f21511b43c0f88bf5caa050b9e5447afc11e72a661c506d01b941d10690482e",
+      "snapshot": {
+        "title": "Hệ thống quản lý đồ án — Sinh viên khác",
+        "advisor": {
+          "id": "advisor",
+          "name": "Trần Văn Hướng Dẫn",
+          "department": "Bộ môn kiểm thử tổng hợp"
+        },
+        "content": {
+          "scope": "Phạm vi hệ thống quản lý đồ án",
+          "tools": "NestJS, Prisma, React và PostgreSQL",
+          "endsAt": "2026-11-04T07:29:53.775Z",
+          "schedule": [
+            {
+              "label": "Phân tích và kiểm thử",
+              "endsAt": "2026-11-04T07:29:53.775Z",
+              "startsAt": "2026-10-27T07:29:53.775Z",
+              "deliverables": "Báo cáo PDF và source ZIP"
+            }
+          ],
+          "startsAt": "2026-10-27T07:29:53.775Z",
+          "objectives": "Mục tiêu ban đầu cần bổ sung kiểm thử",
+          "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+          "schemaVersion": 1,
+          "expectedResults": "Phần mềm và báo cáo tiến độ"
+        },
+        "student": {
+          "id": "student2",
+          "code": "QA-student2",
+          "name": "Sinh viên khác",
+          "className": "Công nghệ thông tin K63",
+          "majorName": "Khoa học máy tính",
+          "trainingSystem": "Đại học — dữ liệu kiểm thử"
+        },
+        "termName": "Đợt kiểm thử qa-t1",
+        "assignmentId": "2cb28c35-6cc6-4a2b-b758-38c5edf510f5",
+        "schemaVersion": 1,
+        "topicRevision": 0,
+        "assignmentRevision": 0,
+        "academicProfileRevision": 0
+      }
+    },
+    "receipt": {
+      "id": "3e20826f-07c5-489c-9374-5ae5e66d3116",
+      "finalizationId": "cf2e5906-3cb4-4236-add2-050f1112dc7f",
+      "receivedAt": "2026-10-28T12:23:03.488Z",
+      "receivedByUserId": "faculty",
+      "note": null
+    },
+    "history": [
+      {
+        "id": "957b7524-ca11-415f-9398-4f7e3885fc05",
+        "action": "PHYSICAL_RECEIVED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:23:03.492Z"
+      },
+      {
+        "id": "11e5616a-cb68-45a6-be4a-0c2a75218609",
+        "action": "PDF_GENERATED",
+        "actorId": "student2",
+        "createdAt": "2026-10-28T12:08:17.958Z"
+      },
+      {
+        "id": "94c00d21-3eb3-4eb3-8774-1357c52fde52",
+        "action": "FINALIZED",
+        "actorId": "faculty",
+        "createdAt": "2026-10-28T12:06:15.544Z"
+      }
+    ]
+  },
+  "counts": {
+    "dossier": 3,
+    "finalization": 3,
+    "receipt": 2,
+    "assets": 3,
+    "pdf": 3,
+    "history": 9,
+    "audit": 9,
+    "keys": 27
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "sharedDatabaseDDL": false,
+  "step8bPrelude": true,
+  "checks": [
+    {
+      "name": "ten-migration replay and all 8A→8B producer checks with real HTTP/private files; no shared database",
+      "result": "PASS"
+    },
+    {
+      "name": "inbox/options use current advisor roster and term scope; JWT role claims/ADMIN cannot bypass",
+      "result": "PASS"
+    },
+    {
+      "name": "8A task→8B PDF/source→8C exact-version review/download; owner/faculty read, no unauthorized reviewer or IDOR",
+      "result": "PASS"
+    },
+    {
+      "name": "strict three-way DTO, required failure/revision comment and CAS reject invalid or stale writes",
+      "result": "PASS"
+    },
+    {
+      "name": "revision result stores immutable reviewer/version/time/comment; one notification/outbox/audit and idempotent effective decision",
+      "result": "PASS"
+    },
+    {
+      "name": "student sees revision requirement and submits v2; v1/comment/files remain and stale v1 review/amend is blocked",
+      "result": "PASS"
+    },
+    {
+      "name": "PASS of current v2 atomically completes task; student cannot submit on completed task",
+      "result": "PASS"
+    },
+    {
+      "name": "amend PASS→FAIL→REVISION_REQUIRED appends distinct decisions/reasons and recalculates task without overwriting history",
+      "result": "PASS"
+    },
+    {
+      "name": "concurrent amendments create one effective record, bounded retry/optimistic conflict and replay no duplicate",
+      "result": "PASS"
+    },
+    {
+      "name": "review amendment versus student resubmission serializes on same task and never concludes a superseded version",
+      "result": "PASS"
+    },
+    {
+      "name": "audit failure rolls back review, completion, pointers, history, notifications and outbox together",
+      "result": "PASS"
+    },
+    {
+      "name": "transactional in-app notices are self-only, generic and idempotently read; legacy notification IDOR closed with array shape preserved",
+      "result": "PASS"
+    },
+    {
+      "name": "confirmed meeting create/amend is scoped, versioned and audited; concurrent edits preserve original discussion/conclusion history",
+      "result": "PASS"
+    },
+    {
+      "name": "faculty metrics use real canonical task/review data with current advisor/student/department filters; weekly missing exists without manual task",
+      "result": "PASS"
+    },
+    {
+      "name": "no completion without effective current PASS; locked phase or reopened dossier blocks review mutation",
+      "result": "PASS"
+    },
+    {
+      "name": "real concurrent phase closure serializes with review commit and leaves no late conclusion/notification",
+      "result": "PASS"
+    },
+    {
+      "name": "legacy boolean review, graduation score and defense eligibility untouched; technical audit stores IDs/hashes rather than academic text",
+      "result": "PASS"
+    }
+  ]
+}

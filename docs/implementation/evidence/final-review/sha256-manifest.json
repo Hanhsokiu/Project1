@@ -1,0 +1,57 @@
+{
+  "generatedAt": "2026-10-23T14:03:11.089Z",
+  "entries": [
+    {
+      "file": "backend/scripts/integration/review-http-body-contract.cjs",
+      "sha256": "47d780885a7a8f3c550030b0844d548762277baf67848c7320d048eaddb4f51a"
+    },
+    {
+      "file": "docs/implementation/06-final-review.md",
+      "sha256": "9e73f7df44ee753388008ce47d566a9767ecdb79f7cfe77031a757f772ae2e75"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/git-final-diff-stat.log",
+      "sha256": "f440521852453d9a7f062a6c137bb4b25fd79767787eafd2ca3ea2b0a272d994"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/git-final-status.log",
+      "sha256": "8b2d384981114f655272fe9c05552b8a18568f8d652226b69964153fbdeaa584"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/http-body-contract.json",
+      "sha256": "bd6da28b192fdc41f875aedc0e1b84542dfb01e70ea2a98a73b685a205ce567e"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/http-body-contract.log",
+      "sha256": "22f8c2e595d86b0f90892bc963cea3edb97e6e3a61d85da7dec2447b55e1f6b6"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/spa-cache-after.log",
+      "sha256": "a1c59980d4ade14a695d11bc707842377f54315234bb79a7952281c807651e72"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/spa-cache-before.log",
+      "sha256": "3658f26d317cd88bc09f0d2a45f262313d370003ff6f4479aa08e360a94f0ba8"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/step6-browser-after.json",
+      "sha256": "5b6cca483084153ce13feb41f4dd5040b3fe8aa2254cd94a0d0b29d3070cd323"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/summary.json",
+      "sha256": "d22ed9bd78d499c23009e1412ae8753749c7ea545fa3a0e296cc0e4c89ad8852"
+    },
+    {
+      "file": "docs/implementation/evidence/final-review/verify-after.log",
+      "sha256": "da9eb26d019f8a1b98d61d1566ee6cad2fe93b027ec9b31ead2ab949a704cefd"
+    },
+    {
+      "file": "frontend/scripts/test-proposal-versions-browser.cjs",
+      "sha256": "f19dc73a79714b0fcc74ee6994b28009a4b6ad82c109930c0db565774ab17c3b"
+    },
+    {
+      "file": "frontend/src/features/proposal-versions/pages.tsx",
+      "sha256": "7ce2158ad383cd47e1af1fd42e2683572336f8389dabdc29119382fb8b29f597"
+    }
+  ]
+}

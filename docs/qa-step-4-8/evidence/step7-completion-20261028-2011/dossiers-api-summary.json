@@ -1,0 +1,9 @@
+{
+  "suite": "dossiers",
+  "database": "btl_pr2b_step7fix_dossiers_1793193124907_e870d9",
+  "exitCode": 0,
+  "result": "PASS",
+  "finishedAt": "2026-10-28T13:12:32.554Z",
+  "newEmptyDatabase": true,
+  "regressionAssertionsAdded": true
+}

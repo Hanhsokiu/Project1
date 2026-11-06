@@ -1,0 +1,162 @@
+{
+  "result": "FAIL",
+  "startedAt": "2026-10-26T18:19:46.423Z",
+  "finishedAt": "2026-10-26T18:20:22.793Z",
+  "mockedApi": false,
+  "sharedDatabaseAccess": false,
+  "checks": [],
+  "pageErrors": [],
+  "requests": [
+    {
+      "actor": "faculty",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "status": 201
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/training-systems",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/departments",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/semesters",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/research-areas",
+      "status": 403
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/students",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/lecturers",
+      "status": 200
+    },
+    {
+      "actor": "faculty",
+      "method": "GET",
+      "path": "/api/terms",
+      "status": 200
+    }
+  ],
+  "failure": "locator.selectOption: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Đợt tạo nhóm', { exact: true })\u001b[22m\n"
+}

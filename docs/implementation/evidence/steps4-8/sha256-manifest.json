@@ -1,0 +1,348 @@
+{
+  "generatedAt": "2026-10-23T09:21:17.338Z",
+  "gitHead": "43b6ca7d90e12a9a0e81b646622d73f5f20fadbe",
+  "workingTree": "contains pre-existing uncommitted work; not a clean commit",
+  "stagedFiles": 0,
+  "entries": [
+    {
+      "file": "backend/package.json",
+      "bytes": 4775,
+      "sha256": "57268a05eba5fa09ccc619d1df6d0819eda46d0af727d79a0824cf19c0dade6b"
+    },
+    {
+      "file": "backend/scripts/integration/seed-steps4-8.cjs",
+      "bytes": 8858,
+      "sha256": "957937f06a4426b570c4c7afdd45a7c8553bd4b9e1a976e156f00db1a861766c"
+    },
+    {
+      "file": "backend/scripts/test-steps4-8-e2e.cjs",
+      "bytes": 12829,
+      "sha256": "163f36dd6aef2693650ae206e7bd284280f15a3378f971175ca15175a9b39342"
+    },
+    {
+      "file": "backend/scripts/test-steps4-8-suite.cjs",
+      "bytes": 4846,
+      "sha256": "35c163c4b4aeedec1458895f49a3d01420ad891757a8cc2e1708486cddf55749"
+    },
+    {
+      "file": "docs/implementation/03-team-development-guide.md",
+      "bytes": 24110,
+      "sha256": "10bc8f8c70e2e009ec3dfce977ddfd7d4268e9f5edef29df4d806f6ea15fe1e6"
+    },
+    {
+      "file": "docs/implementation/05-integration-test-report.md",
+      "bytes": 32805,
+      "sha256": "033ae16f3074b76e235852a22c774c28cbd88492ffd39f2122e36ae8694953ed"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/attempt-01-harness.json",
+      "bytes": 1054,
+      "sha256": "275ab3bea99b9403253b2426323db5a40f19fa4d56ee2e46bf82ab067ee9f5cb"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/attempt-02-browser.json",
+      "bytes": 16051,
+      "sha256": "f0aff6833c9865b1dfa67cb284b440effa7bbe65037c573ca7bdb25f1515fcaa"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/attempt-02-failure.png",
+      "bytes": 104090,
+      "sha256": "9a3456366eae5318ffb156046bd2b77c9a868f831e12299006ec6a794770d225"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/attempt-02-harness.json",
+      "bytes": 859,
+      "sha256": "f9a00649e2fa1f8d3ed88386abdb9e47c8634793c794eecd491810d993e1f8bb"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/browser-suite.json",
+      "bytes": 1531,
+      "sha256": "ddcb08601dc4907e12b73fa5671daf660bcd266725e1745590977400734fb6a1"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/database-suite.json",
+      "bytes": 3292,
+      "sha256": "3e2d283c4e8b05bcac1e92f1210e7d4ad1803bd176eb746f2a2438b3d6555023"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/endpoint-auth.json",
+      "bytes": 15764,
+      "sha256": "fb4634fbedb3e950deee3b36e2fd6501cc1a4f33e3f3bf5c3b9a239ad44c1187"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/git-final-diff-stat.log",
+      "bytes": 1460,
+      "sha256": "39ac896032680e5e64a93ee9b9b73b164dd182c430512d8dafcf5c138a9801ed"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/git-final-status.log",
+      "bytes": 4921,
+      "sha256": "824690f5db03401ee9b29d02bdd2a121d48fd87a9ce0b63ac2948cd778cce6ea"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/legacy-security.json",
+      "bytes": 1058,
+      "sha256": "6b8c048c0f0d2f09ab806dc29c2cceb96b4f060b497d4a65622e0c7f7a478164"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/live-api-traffic.json",
+      "bytes": 29722,
+      "sha256": "65edfc62b2e0b64198899ebcad4c888093efe73f375ede44c0b8b5fec6e901c1"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/live-browser.json",
+      "bytes": 17365,
+      "sha256": "06e2efa0e5814b0b8038e8893aed1ef108903395001f2f0170238bbae016095c"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/live-browser.log",
+      "bytes": 1334,
+      "sha256": "439eb52437ff578b4afc72645906b8c4d193311276e10c10d53907ad2f5f75c0"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/live-e2e.json",
+      "bytes": 1765,
+      "sha256": "4843f81dd1b866084bc14f4a22b3df23df194b038440329a57d778e50584643a"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/live-faculty-dashboard.png",
+      "bytes": 104083,
+      "sha256": "ddf902f8c54606ea540c3659035939d8bdd60664e67363968f0bbd28e254e57b"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/live-finalized.pdf",
+      "bytes": 29158,
+      "sha256": "cd140a1d0f4471db6c845c732d052898064afa700defcb64d0a7bc64d8145a53"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/live-stale-version-mobile.png",
+      "bytes": 47556,
+      "sha256": "0a8014b36e2c15c187300bf45764179030b1465d9974a2b4f060e79df2e20d6b"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step4-api.json",
+      "bytes": 4686,
+      "sha256": "95c01ed9a7ca221c685bd9d424433ed787148dd8bb07afe5ec50522a7bc94b56"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step4-api.log",
+      "bytes": 1635,
+      "sha256": "fff89187df243369e63fa12e7aed140175b17da184fcf09f43abad18a0fa12e0"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step4-browser.json",
+      "bytes": 1120,
+      "sha256": "7d99420a2e49d574deaf456091a4ade25e9d5e3b7d6fb2af18f4f04a32001d8b"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step4-browser.log",
+      "bytes": 549,
+      "sha256": "b9a07d5a889c507f460450e7c2db5e9faf8f18fe19297c83836e7ea65ee8836c"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step4-upgrade.json",
+      "bytes": 493,
+      "sha256": "2a33a5383eb6f6ad7728701ff9fba6e84510744aeb2a6e1146c87a331d86acb5"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step4-upgrade.log",
+      "bytes": 187,
+      "sha256": "ed33f8f4ed09063c93a1a77efc14710f678de8a4a43195eb18c653d730c15955"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step5-api.json",
+      "bytes": 3916,
+      "sha256": "f20feb4f109ff812bc2397c718c3f17276240dd8b8a5aecae063b676f9e4ece9"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step5-api.log",
+      "bytes": 2138,
+      "sha256": "e83656cf0df2a58f85bf64dd2008f44b34760f9502c7bb0e43825e5c49c53869"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step5-browser.json",
+      "bytes": 1177,
+      "sha256": "9e4e7f849e66b79dfcc01a092bcc6fd77e8712362840991c6eddd1429318cccb"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step5-browser.log",
+      "bytes": 634,
+      "sha256": "f6b09096d5fbe665927155e0747faf23f7db70c23240050943b6e2e5edef9255"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step5-upgrade.json",
+      "bytes": 405,
+      "sha256": "c433d6673349e4e4aefc8962308d8a21cf49147066a0ef9b010a8b7f8f5bfa2e"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step5-upgrade.log",
+      "bytes": 102,
+      "sha256": "6080184a9ad0287227c2b8d00c104e1ec94ca94311b5d710bb890ab0ff7aba72"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step6-api.json",
+      "bytes": 3301,
+      "sha256": "319b601943e1081b459d617a4c4436e78caffe888df657f4f2b035261c4abb1a"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step6-api.log",
+      "bytes": 2059,
+      "sha256": "7f5a45f67503a8a669bae96018357a930a74fd3c2421f9753c16a8d7d6505fdf"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step6-browser.json",
+      "bytes": 1933,
+      "sha256": "a96116b942990b6de9ad8cf58a645d7f8a8c70ce701e27d020e567e8a9ff0ba0"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step6-browser.log",
+      "bytes": 1150,
+      "sha256": "620321cda80e59a0cd9fa063a41307e885670e7efd16ce2ccf01f68677967d4c"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step6-upgrade.json",
+      "bytes": 467,
+      "sha256": "ae84acd2b30084a4e870427324296be2246904f77dda0b03155c68e9dad79aa7"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step6-upgrade.log",
+      "bytes": 97,
+      "sha256": "5c6846fac8405da79487c69d1c5366e8b0204167c6a2b639a460643b9ff1d68f"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step7-api.json",
+      "bytes": 2911,
+      "sha256": "692a6416ff2baff1eceb6e324106398262aa078e661123e24ec38282b1718aec"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step7-api.log",
+      "bytes": 1894,
+      "sha256": "f2c3e33450fa0ea001457d3ea3dabee88954fc1cc3946a41ae8365b6461525e1"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step7-browser.json",
+      "bytes": 1233,
+      "sha256": "38e723aeeee3e7aa49e36459aa42fe1cdb2999922aa071f9a1369fe3168b0138"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step7-browser.log",
+      "bytes": 785,
+      "sha256": "efd93f64cc322b51f309b137281767234b016c68e32adc0b0e77d8827c991b5e"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step7-upgrade.json",
+      "bytes": 664,
+      "sha256": "b43270b0903a2acd1738c81da5ac2f195a8923f78cc8631d48e3c585ccd0b5d5"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step7-upgrade.log",
+      "bytes": 370,
+      "sha256": "f4c4f5da518e0a217cb6ed9dfa955fcc9bfe713ea76e86556237b05abbdfc4e1"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8a-api.json",
+      "bytes": 3137,
+      "sha256": "227e9fcb7620804bc98f3628a8c96d3cbb616b3534bcf94e09ddfdbaa08c8a48"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8a-api.log",
+      "bytes": 2128,
+      "sha256": "3f48488ae0dc2d9b5f506425fd27201b91467bb0a301dc6573c4e4fb301635f0"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8a-browser.json",
+      "bytes": 1595,
+      "sha256": "3f2870fa517559091ec239a37464a9948108e8d2d2b829b8d96d44748f83b9c4"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8a-browser.log",
+      "bytes": 1005,
+      "sha256": "aa80f8c1514e1bb559fef6aec1e1d8847a703d2dc5bb2fd08e8133ac7a3b411f"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8a-upgrade.json",
+      "bytes": 710,
+      "sha256": "3199b4eca1e727ce6fe0589d558f1b87391afb7a899d79939ea4315df72c48a3"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8a-upgrade.log",
+      "bytes": 416,
+      "sha256": "4aed593fab8616bfb6e4684c09294fd6441001e42b91da3807d5ea1864ee5542"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8b-api.json",
+      "bytes": 2863,
+      "sha256": "adc46094e8916f6c99e54613bd11914eee3264ae624cbdd9d331be8b3b57ef7d"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8b-api.log",
+      "bytes": 1920,
+      "sha256": "44e4ecd46f46622887655ac803f02ea0aaa7664be344649b39f60d1aef7e5740"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8b-browser.json",
+      "bytes": 1447,
+      "sha256": "94ed79bb14db971d7907d121c7d2688530591363086d00f3ee632ca2ab46600c"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8b-browser.log",
+      "bytes": 905,
+      "sha256": "74da90aa70a13edf8e5e4ce7fda44110c45af6042fc11a328542f5e3d7c377d0"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8b-upgrade.json",
+      "bytes": 686,
+      "sha256": "d6e3e563cc7b47044d04076176f0d6d0f36d523282f854baf1faff58ec783bd8"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8b-upgrade.log",
+      "bytes": 392,
+      "sha256": "8e33a2c06204bb69bd6b98298f40b2289d36699d33bbc53265885015f610eee5"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8c-api.json",
+      "bytes": 2943,
+      "sha256": "a55b7273042d3ecd8872fd377ab6e846112611252da0ea930f61dfda3fb5f0fc"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8c-api.log",
+      "bytes": 2029,
+      "sha256": "65b0ec54a3e33b0ff6f362f79b0e4578ed8208c73e3e65a6828ea7d090666875"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8c-browser.json",
+      "bytes": 1512,
+      "sha256": "e6473e69dd367441f809294589dbb233c2168e4a294731a97fd96be13265aebe"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8c-browser.log",
+      "bytes": 970,
+      "sha256": "cd53d0c34e729ed4fa3a2fe3b743acce0de09418e2172f6fc91453b9f37a36ce"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8c-upgrade.json",
+      "bytes": 695,
+      "sha256": "820dc4445f055adc430439e6b54894a9e967302e43ce6332515eab777c81f7a2"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/step8c-upgrade.log",
+      "bytes": 401,
+      "sha256": "945a84d2536224ec3eafbb8f4ca4ff3be7b7ec47338c7a0ae8e19922127a2eb8"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/summary.json",
+      "bytes": 908,
+      "sha256": "e4cd452f6e94e2c973905cb7f18295c1a27be9aea695dc312a2f5ad4e4707a12"
+    },
+    {
+      "file": "docs/implementation/evidence/steps4-8/verify.log",
+      "bytes": 26566,
+      "sha256": "d88a84ed9dd43ae106fd52bff5c5d59d4babe131d1ff25673b53df4f14238baf"
+    },
+    {
+      "file": "frontend/scripts/test-steps4-8-browser.cjs",
+      "bytes": 16990,
+      "sha256": "e6d34106ce9bb58b8decc74284f8f710c40bc327a5985bd52fc1195333e4370e"
+    }
+  ]
+}

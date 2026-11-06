@@ -1,0 +1,186 @@
+{
+  "startedAt": "2026-10-27T13:53:59.426Z",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-groups?page=1&limit=20&search=&departmentId=e10282e3-59c0-408e-9f54-853f2a6c6609"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-group-options?page=1&limit=20&search="
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-groups?page=1&limit=20&search="
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/d4e2575a-c68d-40f7-8398-3fdcf34af59b/review-groups?page=1&limit=20&search=&departmentId=e10282e3-59c0-408e-9f54-853f2a6c6609",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [
+            {
+              "id": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "name": "hkt",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "revision": 0,
+              "createdAt": "2026-10-27T03:28:43.187Z",
+              "updatedAt": "2026-10-27T03:28:43.187Z",
+              "activeReviewCount": 1,
+              "canManage": true,
+              "members": [
+                {
+                  "lecturerId": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+                  "fullName": "Giảng viên T",
+                  "lecturerCode": "S3L17930224293233",
+                  "role": "MEMBER"
+                },
+                {
+                  "lecturerId": "199ee947-055e-4560-81b3-74d15625c2ad",
+                  "fullName": "Giảng viên X",
+                  "lecturerCode": "S3L17930224293230",
+                  "role": "MEMBER"
+                }
+              ]
+            },
+            {
+              "id": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+              "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+              "name": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "departmentName": "Công nghệ phần mềm",
+              "revision": 0,
+              "createdAt": "2026-10-27T02:57:39.000Z",
+              "updatedAt": "2026-10-27T02:57:39.000Z",
+              "activeReviewCount": 1,
+              "canManage": true,
+              "members": [
+                {
+                  "lecturerId": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+                  "fullName": "Giảng viên T",
+                  "lecturerCode": "S3L17930224293233",
+                  "role": "MEMBER"
+                },
+                {
+                  "lecturerId": "0bf21346-ca5e-441f-b934-e02567d2b288",
+                  "fullName": "Giảng viên Z",
+                  "lecturerCode": "S3L17930224293232",
+                  "role": "MEMBER"
+                }
+              ]
+            }
+          ],
+          "total": 2,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 1
+        },
+        "timestamp": "2026-10-27T13:53:59.486Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-groups?page=1&limit=20&search=",
+      "body": {
+        "success": true,
+        "data": {
+          "data": [],
+          "total": 0,
+          "page": 1,
+          "limit": 20,
+          "totalPages": 0
+        },
+        "timestamp": "2026-10-27T13:53:59.623Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/terms/726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc/review-group-options?page=1&limit=20&search=",
+      "body": {
+        "success": true,
+        "data": {
+          "term": {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          },
+          "canManage": true,
+          "departments": [
+            {
+              "id": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "name": "Công nghệ phần mềm"
+            }
+          ],
+          "lecturers": {
+            "data": [
+              {
+                "id": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+                "fullName": "Giảng viên T",
+                "lecturerCode": "S3L17930224293233",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "199ee947-055e-4560-81b3-74d15625c2ad",
+                "fullName": "Giảng viên X",
+                "lecturerCode": "S3L17930224293230",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "932282fd-756b-407d-a662-12c946059077",
+                "fullName": "Giảng viên Y",
+                "lecturerCode": "S3L17930224293231",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              },
+              {
+                "id": "0bf21346-ca5e-441f-b934-e02567d2b288",
+                "fullName": "Giảng viên Z",
+                "lecturerCode": "S3L17930224293232",
+                "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609"
+              }
+            ],
+            "total": 4,
+            "page": 1,
+            "limit": 20,
+            "totalPages": 1
+          }
+        },
+        "timestamp": "2026-10-27T13:53:59.627Z"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "failedRequests": [],
+  "observations": {
+    "start": {
+      "url": "http://127.0.0.1:5173/topic/review-groups?termId=d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "search": ""
+    },
+    "departmentFilteredText": "Tìm kiếm\nNhóm duyệt đề cương\n\nQuản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.\n\nTạo nhóm\nNhóm duyệt\n2\n\nTheo bộ lọc đang chọn\n\nGiảng viên\n3\n\nThành viên trên trang hiện tại\n\nVòng đang duyệt\n2\n\nTrong các nhóm đang hiển thị\n\nQuyền truy cập\nQuản lý\n\nTrong đợt đồ án đang chọn\n\nDanh sách nhóm duyệt\n\nTổ chức giảng viên theo đợt đồ án và bộ môn\n\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt đồ án\nChọn đợt đồ án\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTất cả trong phạm vi\nCông nghệ phần mềm\nTên nhóm\nNHÓM DUYỆT\tBỘ MÔN\tTHÀNH VIÊN\tVÒNG ĐANG HOẠT ĐỘNG\t\nCHI TIẾT\n\n\nhkt\nNhóm giảng viên duyệt đề cương\n\tCông nghệ phần mềm\t\nvT\nvX\n2 giảng viên\n\t\n1 vòng đang duyệt\tChi tiết\n\n\nNhóm duyệt DEMO 4–8 · Công nghệ phần mềm\nNhóm giảng viên duyệt đề cương\n\tCông nghệ phần mềm\t\nvT\nvZ\n2 giảng viên\n\t\n1 vòng đang duyệt\tChi tiết\n2 nhóm · Trang 1/1\nTrước\nSau",
+    "oldTerm": {
+      "url": "http://127.0.0.1:5173/topic/review-groups?termId=726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "text": "Tìm kiếm\nNhóm duyệt đề cương\n\nQuản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.\n\nNhóm duyệt\n0\n\nTheo bộ lọc đang chọn\n\nGiảng viên\n0\n\nThành viên trên trang hiện tại\n\nVòng đang duyệt\n0\n\nTrong các nhóm đang hiển thị\n\nQuyền truy cập\nQuản lý\n\nTrong đợt đồ án đang chọn\n\nDanh sách nhóm duyệt\n\nTổ chức giảng viên theo đợt đồ án và bộ môn\n\nĐợt mẫu kiểm tra giao diện sau merge\nĐợt đồ án\nChọn đợt đồ án\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTất cả trong phạm vi\nCông nghệ phần mềm\nTên nhóm\nChưa có nhóm duyệt\n\nKhông có nhóm trong phạm vi và bộ lọc đã chọn.",
+      "headerTerm": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+      "department": "",
+      "createLinks": 0
+    },
+    "restored": {
+      "url": "http://127.0.0.1:5173/topic/review-groups?termId=d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "headerTerm": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "rowCount": 2,
+      "previousDisabled": true,
+      "nextDisabled": true
+    },
+    "matchText": "Tìm kiếm\nNhóm duyệt đề cương\n\nQuản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.\n\nTạo nhóm\nNhóm duyệt\n1\n\nTheo bộ lọc đang chọn\n\nGiảng viên\n2\n\nThành viên trên trang hiện tại\n\nVòng đang duyệt\n1\n\nTrong các nhóm đang hiển thị\n\nQuyền truy cập\nQuản lý\n\nTrong đợt đồ án đang chọn\n\nDanh sách nhóm duyệt\n\nTổ chức giảng viên theo đợt đồ án và bộ môn\n\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt đồ án\nChọn đợt đồ án\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTất cả trong phạm vi\nCông nghệ phần mềm\nTên nhóm\nNHÓM DUYỆT\tBỘ MÔN\tTHÀNH VIÊN\tVÒNG ĐANG HOẠT ĐỘNG\t\nCHI TIẾT\n\n\nhkt\nNhóm giảng viên duyệt đề cương\n\tCông nghệ phần mềm\t\nvT\nvX\n2 giảng viên\n\t\n1 vòng đang duyệt\tChi tiết\n1 nhóm · Trang 1/1\nTrước\nSau",
+    "noMatchText": "Tìm kiếm\nNhóm duyệt đề cương\n\nQuản lý nhóm và giảng viên theo từng đợt đồ án, bộ môn.\n\nTạo nhóm\nNhóm duyệt\n0\n\nTheo bộ lọc đang chọn\n\nGiảng viên\n0\n\nThành viên trên trang hiện tại\n\nVòng đang duyệt\n0\n\nTrong các nhóm đang hiển thị\n\nQuyền truy cập\nQuản lý\n\nTrong đợt đồ án đang chọn\n\nDanh sách nhóm duyệt\n\nTổ chức giảng viên theo đợt đồ án và bộ môn\n\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt đồ án\nChọn đợt đồ án\nDEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn\nĐợt mẫu kiểm tra giao diện sau merge\nBộ môn\nTất cả trong phạm vi\nCông nghệ phần mềm\nTên nhóm\nChưa có nhóm duyệt\n\nKhông có nhóm trong phạm vi và bộ lọc đã chọn.",
+    "clearedCount": 2
+  },
+  "finishedAt": "2026-10-27T13:53:59.956Z"
+}

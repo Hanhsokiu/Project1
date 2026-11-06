@@ -1,0 +1,203 @@
+{
+  "context": {
+    "proposalId": "p-student",
+    "topicId": "topic-student",
+    "termId": "qa-t1",
+    "termStudentId": "ts-student",
+    "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+    "studentName": "Nguyễn Văn Sinh",
+    "status": "SUBMITTED",
+    "revision": 6,
+    "workingVersionId": "642c76d2-a799-46f7-b055-8d18141f6313",
+    "submittedVersionId": "642c76d2-a799-46f7-b055-8d18141f6313",
+    "workingVersion": {
+      "id": "642c76d2-a799-46f7-b055-8d18141f6313",
+      "proposalId": "p-student",
+      "versionNumber": 2,
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T02:51:53.477Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T02:51:53.477Z",
+            "startsAt": "2026-10-27T02:51:53.477Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T02:51:53.477Z",
+        "objectives": "QA STEP6: bổ sung kiểm thử và tiêu chí đánh giá sau góp ý.",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "state": "SEALED",
+      "contentHash": "9590e8ac3bce9cf9c6bd873049d3c48c50624ae557ed489c72abf8e2854cca29",
+      "createdAt": "2026-10-28T02:52:50.926Z",
+      "createdByUserId": "student",
+      "authorName": "qa-student",
+      "submittedAt": "2026-10-28T02:53:39.460Z",
+      "submittedByUserId": "student",
+      "basedOnVersionId": "v1-student",
+      "changeSummary": "QA STEP6: cập nhật mục tiêu và phản hồi hai góp ý.",
+      "responses": [
+        {
+          "targetType": "COMMENT",
+          "targetId": "168296b2-1d24-4104-9651-d73fdd86d1cb",
+          "text": "Đã bổ sung theo COMMENT trong bản mới."
+        },
+        {
+          "targetType": "DECISION",
+          "targetId": "4a02675a-53c1-41c9-ac63-8346bd157341",
+          "text": "Đã bổ sung theo DECISION trong bản mới."
+        }
+      ],
+      "provenance": null
+    },
+    "submittedVersion": {
+      "id": "642c76d2-a799-46f7-b055-8d18141f6313",
+      "proposalId": "p-student",
+      "versionNumber": 2,
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T02:51:53.477Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T02:51:53.477Z",
+            "startsAt": "2026-10-27T02:51:53.477Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T02:51:53.477Z",
+        "objectives": "QA STEP6: bổ sung kiểm thử và tiêu chí đánh giá sau góp ý.",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "state": "SEALED",
+      "contentHash": "9590e8ac3bce9cf9c6bd873049d3c48c50624ae557ed489c72abf8e2854cca29",
+      "createdAt": "2026-10-28T02:52:50.926Z",
+      "createdByUserId": "student",
+      "authorName": "qa-student",
+      "submittedAt": "2026-10-28T02:53:39.460Z",
+      "submittedByUserId": "student",
+      "basedOnVersionId": "v1-student",
+      "changeSummary": "QA STEP6: cập nhật mục tiêu và phản hồi hai góp ý.",
+      "responses": [
+        {
+          "targetType": "COMMENT",
+          "targetId": "168296b2-1d24-4104-9651-d73fdd86d1cb",
+          "text": "Đã bổ sung theo COMMENT trong bản mới."
+        },
+        {
+          "targetType": "DECISION",
+          "targetId": "4a02675a-53c1-41c9-ac63-8346bd157341",
+          "text": "Đã bổ sung theo DECISION trong bản mới."
+        }
+      ],
+      "provenance": null
+    },
+    "feedback": [
+      {
+        "targetType": "COMMENT",
+        "targetId": "168296b2-1d24-4104-9651-d73fdd86d1cb",
+        "reviewId": "d93537a1-612d-45c1-804d-9655beed55a0",
+        "sourceVersionId": "v1-student",
+        "versionNumber": 1,
+        "roundNumber": 1,
+        "authorUserId": "reviewer",
+        "authorName": "qa-reviewer",
+        "text": "QA STEP6: bổ sung tiêu chí kiểm thử cho p-student.",
+        "createdAt": "2026-10-28T02:52:47.889Z"
+      },
+      {
+        "targetType": "DECISION",
+        "targetId": "4a02675a-53c1-41c9-ac63-8346bd157341",
+        "reviewId": "d93537a1-612d-45c1-804d-9655beed55a0",
+        "sourceVersionId": "v1-student",
+        "versionNumber": 1,
+        "roundNumber": 1,
+        "authorUserId": "reviewer",
+        "authorName": "qa-reviewer",
+        "text": "QA STEP6: làm rõ phạm vi và sản phẩm của từng mốc.",
+        "createdAt": "2026-10-28T02:52:47.988Z"
+      }
+    ],
+    "allowedActions": [],
+    "readiness": [
+      "STATE_TRANSITION_INVALID"
+    ],
+    "phase": {
+      "startsAt": "2026-10-27T02:51:53.477Z",
+      "endsAt": "2026-11-04T02:51:53.477Z",
+      "isLocked": false
+    }
+  },
+  "review": {
+    "id": "f72b4bfc-4ae3-4005-9792-74fb7603617a",
+    "proposalId": "p-student",
+    "termId": "qa-t1",
+    "title": "Hệ thống quản lý đồ án — Nguyễn Văn Sinh",
+    "studentName": "Nguyễn Văn Sinh",
+    "studentCode": "QA-student",
+    "proposalStatus": "SUBMITTED",
+    "proposalRevision": 6,
+    "revision": 0,
+    "state": "ASSIGNED",
+    "roundNumber": 2,
+    "groupId": "qa-g2",
+    "groupName": "Nhóm kiểm thử qa-g2",
+    "versionId": "642c76d2-a799-46f7-b055-8d18141f6313",
+    "versionNumber": 2,
+    "version": {
+      "content": {
+        "scope": "Phạm vi hệ thống quản lý đồ án",
+        "tools": "NestJS, Prisma, React và PostgreSQL",
+        "endsAt": "2026-11-04T02:51:53.477Z",
+        "schedule": [
+          {
+            "label": "Phân tích và kiểm thử",
+            "endsAt": "2026-11-04T02:51:53.477Z",
+            "startsAt": "2026-10-27T02:51:53.477Z",
+            "deliverables": "Báo cáo PDF và source ZIP"
+          }
+        ],
+        "startsAt": "2026-10-27T02:51:53.477Z",
+        "objectives": "QA STEP6: bổ sung kiểm thử và tiêu chí đánh giá sau góp ý.",
+        "mainContents": "Phân tích, thiết kế, phát triển và kiểm thử hệ thống",
+        "schemaVersion": 1,
+        "expectedResults": "Phần mềm và báo cáo tiến độ"
+      },
+      "contentHash": "9590e8ac3bce9cf9c6bd873049d3c48c50624ae557ed489c72abf8e2854cca29",
+      "submittedAt": "2026-10-28T02:53:39.460Z",
+      "submittedByUserId": "student"
+    },
+    "assignedAt": "2026-10-28T02:53:40.072Z",
+    "assignedByUserId": "faculty",
+    "startedAt": null,
+    "startedByUserId": null,
+    "routingSnapshot": {
+      "reason": null,
+      "revision": 0,
+      "departmentId": "qa-d",
+      "groupRevision": 0,
+      "researchAreaId": "qa-area"
+    },
+    "phaseSnapshot": {
+      "endsAt": "2026-11-04T02:51:53.477Z",
+      "phaseId": "qa-t1-PROPOSAL_REVIEW",
+      "revision": 0,
+      "startsAt": "2026-10-27T02:51:53.477Z"
+    },
+    "supersededByReviewId": null,
+    "allowedActions": [
+      "start",
+      "comment"
+    ],
+    "comments": [],
+    "decision": null
+  }
+}

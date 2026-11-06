@@ -1,0 +1,333 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:27.148Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50186/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T02-anonymous-UI-and-API",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:29.663Z",
+    "detail": {
+      "statuses": [
+        {
+          "route": "/proposals/p-student/dossier",
+          "status": 401
+        },
+        {
+          "route": "/proposals/p-student/dossier.pdf",
+          "status": 401
+        },
+        {
+          "route": "/terms/qa-t1/proposals",
+          "status": 401
+        }
+      ],
+      "redirect": true
+    }
+  },
+  {
+    "id": "T05-T06-scope-no-PDF-or-content-leak",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:34.434Z",
+    "detail": {
+      "results": [
+        {
+          "user": "reviewer",
+          "dossier": 404,
+          "pdf": 404,
+          "error": {
+            "code": "COMMON_001",
+            "message": "Không tìm thấy hồ sơ trong phạm vi được cấp."
+          }
+        },
+        {
+          "user": "faculty2",
+          "dossier": 404,
+          "pdf": 404,
+          "error": {
+            "code": "COMMON_001",
+            "message": "Không tìm thấy hồ sơ trong phạm vi được cấp."
+          }
+        },
+        {
+          "user": "student3",
+          "dossier": 404,
+          "pdf": 404,
+          "error": {
+            "code": "COMMON_001",
+            "message": "Không tìm thấy hồ sơ trong phạm vi được cấp."
+          }
+        },
+        {
+          "user": "foreign",
+          "dossier": 404,
+          "pdf": 404,
+          "error": {
+            "code": "COMMON_001",
+            "message": "Không tìm thấy hồ sơ trong phạm vi được cấp."
+          }
+        },
+        {
+          "user": "admin",
+          "dossier": 403,
+          "pdf": 403,
+          "error": {
+            "code": "AUTH_004",
+            "message": "Bạn không có quyền [proposal:read] để thực hiện thao tác này"
+          }
+        },
+        {
+          "user": "unprivileged",
+          "dossier": 403,
+          "pdf": 403,
+          "error": {
+            "code": "AUTH_004",
+            "message": "Bạn không có quyền [proposal:read] để thực hiện thao tác này"
+          }
+        }
+      ],
+      "crossStudent": 404
+    }
+  },
+  {
+    "id": "T14-T29-strict-DTO-query-and-parser",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:34.650Z",
+    "detail": {
+      "probes": [
+        {
+          "kind": "finalize DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'status'"
+          }
+        },
+        {
+          "kind": "finalize DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'finalizedByUserId'"
+          }
+        },
+        {
+          "kind": "finalize DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'finalizedAt'"
+          }
+        },
+        {
+          "kind": "finalize DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "expectedProposalRevision: Number must be greater than or equal to 0"
+          }
+        },
+        {
+          "kind": "finalize DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "expectedDossierRevision: Expected number, received string"
+          }
+        },
+        {
+          "kind": "finalize DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "templateVersion: Invalid literal value, expected \"project1-docx-individual-v1\""
+          }
+        },
+        {
+          "kind": "receipt DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "note: String must contain at most 2000 character(s)"
+          }
+        },
+        {
+          "kind": "receipt DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'receivedByUserId'"
+          }
+        },
+        {
+          "kind": "receipt DTO",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'receivedAt'"
+          }
+        },
+        {
+          "kind": "request key",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "Thiếu hoặc sai Idempotency-Key."
+          }
+        },
+        {
+          "kind": "request key",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "Thiếu hoặc sai Idempotency-Key."
+          }
+        },
+        {
+          "kind": "request key",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": "Thiếu hoặc sai Idempotency-Key."
+          }
+        },
+        {
+          "kind": "PDF query",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'unknown'"
+          }
+        },
+        {
+          "kind": "PDF query",
+          "status": 400,
+          "error": {
+            "code": "COMMON_003",
+            "message": ": Unrecognized key(s) in object: 'path'"
+          }
+        }
+      ],
+      "malformed": 400,
+      "tooLarge": 413,
+      "noPartialWrites": true
+    }
+  },
+  {
+    "id": "T22-T29-MCP-and-local-bytes-headers",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:34.685Z",
+    "detail": {
+      "headers": {
+        "contentType": "application/pdf",
+        "cacheControl": "private, no-store",
+        "disposition": "attachment; filename=\"de-cuong-a481371f-9415-48f6-b472-2e458be94b4f.pdf\"",
+        "nosniff": "nosniff"
+      },
+      "bytes": 30065,
+      "checksum": "c717b8271ca21cdc4f922497b9a7fde56f2924c62b72f732900330cd53092fd0",
+      "mcpFileExact": true
+    }
+  },
+  {
+    "id": "T27-generate-replay-no-extra-asset",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:34.777Z",
+    "detail": {
+      "replay": 200,
+      "conflict": 409,
+      "assetCount": 2
+    }
+  },
+  {
+    "id": "T30-corrupt-asset-metadata-rejects-download",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:34.905Z",
+    "detail": {
+      "results": [
+        {
+          "name": "size",
+          "status": 409,
+          "error": {
+            "code": "FILE_NOT_READY",
+            "message": "File PDF không khớp metadata."
+          }
+        },
+        {
+          "name": "checksum",
+          "status": 409,
+          "error": {
+            "code": "FILE_NOT_READY",
+            "message": "File PDF không khớp metadata."
+          }
+        },
+        {
+          "name": "kind",
+          "status": 409,
+          "error": {
+            "code": "PDF_NOT_GENERATED",
+            "message": "Hãy tạo PDF cho bản chốt trước khi tải."
+          }
+        },
+        {
+          "name": "state",
+          "status": 409,
+          "error": {
+            "code": "PDF_NOT_GENERATED",
+            "message": "Hãy tạo PDF cho bản chốt trước khi tải."
+          }
+        }
+      ],
+      "metadataRestored": true
+    }
+  },
+  {
+    "id": "T28-frozen-snapshot-and-bytes-after-live-profile-change",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:34.987Z",
+    "detail": {
+      "snapshotUnchanged": true,
+      "pdfBytesUnchanged": true,
+      "fixturesRestored": true
+    }
+  },
+  {
+    "id": "T36-grant-revoked-before-replay",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:35.078Z",
+    "detail": {
+      "replayDenied": 404,
+      "pdfDenied": 404,
+      "grantRestored": true
+    }
+  },
+  {
+    "id": "T36-current-advisor-scope-and-history-actor",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:36.789Z",
+    "detail": {
+      "oldAdvisorDenied": true,
+      "newCurrentAdvisorAllowed": true,
+      "historicalSnapshotUnchanged": true,
+      "fixture": "temporary private-DB assignment relationship only; no handover UI claim"
+    }
+  },
+  {
+    "id": "T42-real-loading-404-and-mobile-list",
+    "result": "PASS",
+    "at": "2026-10-28T12:46:40.770Z",
+    "detail": {
+      "latencyMs": 1200,
+      "mocked": false,
+      "notFoundRecovery": true,
+      "mobileNoOverflow": true
+    }
+  }
+]

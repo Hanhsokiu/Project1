@@ -1,0 +1,14 @@
+{
+  "method": "Playwright MCP",
+  "frontend": "http://127.0.0.1:50185",
+  "database": "btl_pr2b_step7_1793172588137_95906b_live",
+  "browserControl": "Opened real login and toggled password text/password successfully before interruption",
+  "authenticatedActor": "qa-student2, synthetic account in private test database only",
+  "authenticatedUrl": "http://127.0.0.1:50185/topic/dossier/p-student2",
+  "results": {"authenticated": true,"downloadButtonVisible":true,"finalizeButtons":0,"receiptButtons":0,"actualUiDownloadSaved":true,"stateAfterDownload":"FINALIZED","receiptAfterDownload":null},
+  "download": "mcp-student2-official.pdf",
+  "snapshot": "mcp-after-download.yml",
+  "console": "0 errors, React Router future-flag warning",
+  "credentialHandling": "Only an isolated generated QA credential; excluded from evidence and rendered tool output",
+  "mockedResponse": false
+}

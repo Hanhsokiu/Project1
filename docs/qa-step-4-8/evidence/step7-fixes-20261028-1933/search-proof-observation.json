@@ -1,0 +1,35 @@
+{
+  "url": "http://127.0.0.1:50186/topic/dossier?search=QA-PAGE-01&termId=qa-t1",
+  "text": "Tìm kiếm\nChốt đề cương & hồ sơ chính thức\n\nPhân biệt kết luận duyệt, chốt hồ sơ, PDF và tiếp nhận bản giấy. Chỉ Khoa có quyền chốt/tiếp nhận trong phạm vi được cấp.\n\nĐợt đồ án\nChọn đợt\nĐợt kiểm thử qa-t1\nChỉ đề cương đã được duyệt\nPhân trang hồ sơ — 01\n\nSinh viên phân trang 01 · QA-PAGE-01 · APPROVED\n\nXem hồ sơ chính thức\n1 hồ sơ · Trang 1/1\nTrước\nSau",
+  "api": {
+    "status": 200,
+    "success": true,
+    "data": {
+      "data": [
+        {
+          "id": "p-page-01",
+          "termId": "qa-t1",
+          "title": "Phân trang hồ sơ — 01",
+          "studentName": "Sinh viên phân trang 01",
+          "studentCode": "QA-PAGE-01",
+          "departmentId": "qa-d",
+          "departmentName": "Bộ môn kiểm thử tổng hợp",
+          "researchAreaName": "Kỹ nghệ phần mềm",
+          "status": "APPROVED",
+          "revision": 4,
+          "submittedVersionId": "v1-page-01",
+          "versionNumber": 1,
+          "activeReviewId": null,
+          "groupName": null,
+          "readiness": [],
+          "canAssign": true
+        }
+      ],
+      "total": 1,
+      "page": 1,
+      "limit": 20,
+      "totalPages": 1
+    },
+    "timestamp": "2026-10-28T12:54:54.604Z"
+  }
+}

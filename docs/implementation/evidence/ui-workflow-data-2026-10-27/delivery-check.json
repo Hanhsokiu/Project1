@@ -1,0 +1,39 @@
+{
+    "Result":  "PASS",
+    "CheckedAt":  "2026-10-27T03:14:17.6926979Z",
+    "Branch":  "fix/integration-ui",
+    "FrontendBuild":  "PASS",
+    "Formatting":  "PASS",
+    "SecretScan":  "PASS",
+    "EvidenceFilesScanned":  11,
+    "BrowserResult":  "check-1793070568144/results.json",
+    "FunctionalChecks":  15,
+    "AxeScans":  12,
+    "AxeViolations":  0,
+    "SourceHashes":  [
+                         {
+                             "File":  "scripts/seed-integration-workflow.cjs",
+                             "SHA256":  "53bb2f295059c9ef77a3f42af3a3cba953d727ed6ebc66aa9f02e5f7120b43eb"
+                         },
+                         {
+                             "File":  "frontend/scripts/prepare-ui-workflow-browser.cjs",
+                             "SHA256":  "5b564f873e53e7fe4b20c719ef3b057555d5631d4441f15e5096c17bf27a3b01"
+                         },
+                         {
+                             "File":  "frontend/scripts/check-local-workflow.cjs",
+                             "SHA256":  "bd5455850a7e8e0e967eafd2f69d6b6d25c386b4c01aee1fbfd750930aafaa59"
+                         },
+                         {
+                             "File":  "frontend/src/features/review-groups/workspace.css",
+                             "SHA256":  "4a50e1aeac62ea650455df0b23ac51f9b28c450e2e3c689650a803fd09140305"
+                         },
+                         {
+                             "File":  "frontend/src/index.css",
+                             "SHA256":  "e5f7f7a639f6d38f607f6a02ca84d82602d98af9d27d9dcdb9bd736c9ffc2b62"
+                         },
+                         {
+                             "File":  "package.json",
+                             "SHA256":  "d3ae2f786156d5806d6d08a0fb6b1a748984393f9da9ce00f79a7e15e9f36ddf"
+                         }
+                     ]
+}

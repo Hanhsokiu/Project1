@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "checks": [
+    "injected migration failure rolls back additive DDL and permission/trigger changes",
+    "populated Step 5 versions and reviews preserved byte-for-byte",
+    "new summary/responses NULL without guessed backfill",
+    "only STUDENT edit/submit and LECTURER edit added; old actions retained; no ADMIN rights",
+    "six applied checksums and repeat deploy match"
+  ],
+  "sharedDatabaseDDL": false
+}

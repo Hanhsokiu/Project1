@@ -1,0 +1,20 @@
+{
+  "result": "PASS",
+  "date": "2026-11-05T02:43:51.922Z",
+  "checks": [
+    "additive migration replay over complete step 4–8A producer chain",
+    "faculty scope, DTOs, duplicate week, draft visibility, concurrent idempotent publication and roster obligations",
+    "own persisted draft with CAS/idempotency, hidden from other users, excluded from submission statistics",
+    "real PDF/ZIP screening, two mandatory files, structured content, private download authorization, concurrent submit creates one immutable version",
+    "expired revision deadline blocks direct uploads; authorized correction keeps append-only history",
+    "current advisor only, one concurrent review, mandatory revision deadline, audited extension, lock/reopen week, v2 preserves v1 review and deadline",
+    "FAIL requires separately authorized append-only reopening; v3 PASS seals report; versions/reviews persist; statistics count one student per week",
+    "transactional outbox delivery retries without duplicate notifications",
+    "scheduled due reminders persist and repeated ticks deduplicate by student/week/revision",
+    "missing private storage object returns controlled error without exposing path or deleting metadata",
+    "live browser student draft/upload -> revision -> v2 PASS -> faculty summary"
+  ],
+  "postgresVersion": "170011",
+  "sharedDatabaseAccess": false,
+  "browser": true
+}

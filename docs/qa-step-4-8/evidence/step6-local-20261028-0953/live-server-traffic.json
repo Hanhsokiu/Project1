@@ -1,0 +1,4088 @@
+[
+  {
+    "at": "2026-10-28T02:52:45.406Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:45.621Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.644Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.672Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.676Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.698Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.714Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.730Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.735Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.744Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.750Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.763Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.766Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.776Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.784Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.863Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.891Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.893Z",
+    "method": "GET",
+    "path": "/api/registrations",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.908Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:52:45.910Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:52:45.914Z",
+    "method": "GET",
+    "path": "/api/registrations",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:45.968Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:52:45.974Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:52:46.017Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:46.024Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:46.062Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:46.131Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.113Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:47.266Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.292Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.308Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.315Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.320Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.322Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.326Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.336Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.339Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.345Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.347Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.349Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.363Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.382Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:52:47.386Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:52:47.401Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.437Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:52:47.439Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:52:47.456Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.482Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.521Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.538Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.570Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.648Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student/review-assignments",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:47.810Z",
+    "method": "POST",
+    "path": "/api/proposal-reviews/d93537a1-612d-45c1-804d-9655beed55a0/start",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:47.916Z",
+    "method": "POST",
+    "path": "/api/proposal-reviews/d93537a1-612d-45c1-804d-9655beed55a0/comments",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:48.035Z",
+    "method": "POST",
+    "path": "/api/proposal-reviews/d93537a1-612d-45c1-804d-9655beed55a0/decision",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:48.061Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:48.129Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/review-assignments",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:48.225Z",
+    "method": "POST",
+    "path": "/api/proposal-reviews/81ffccca-a92d-4ef0-83c6-eb90f7b73c3e/start",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:48.348Z",
+    "method": "POST",
+    "path": "/api/proposal-reviews/81ffccca-a92d-4ef0-83c6-eb90f7b73c3e/comments",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:48.464Z",
+    "method": "POST",
+    "path": "/api/proposal-reviews/81ffccca-a92d-4ef0-83c6-eb90f7b73c3e/decision",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.354Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:49.490Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.505Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.521Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.523Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.527Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.530Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.537Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.543Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.546Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.548Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.553Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.559Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.565Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.583Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:52:49.597Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.635Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:52:49.650Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.652Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.904Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.906Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:49.984Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.029Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.070Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.124Z",
+    "method": "GET",
+    "path": "/api/proposal-reviews/d93537a1-612d-45c1-804d-9655beed55a0",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.457Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.664Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.668Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.696Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.728Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:50.965Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:51.011Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:51.027Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:51.191Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:51.277Z",
+    "method": "GET",
+    "path": "/api/proposal-reviews/d93537a1-612d-45c1-804d-9655beed55a0",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:52:51.323Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:51.526Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:52:51.712Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:53:34.713Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:53:34.857Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.872Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.894Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.896Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.898Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.900Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.907Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.920Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.921Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.924Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.925Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.928Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.932Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.944Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.946Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.954Z",
+    "method": "GET",
+    "path": "/api/registrations",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.955Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:34.971Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:53:34.974Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:53:34.985Z",
+    "method": "GET",
+    "path": "/api/registrations",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:35.032Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:53:35.036Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:53:35.059Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:35.063Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:35.085Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:35.182Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.000Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:53:36.149Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.167Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.182Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.184Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.190Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.193Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.201Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.206Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.212Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.215Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.216Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.218Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.222Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.233Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:53:36.235Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:53:36.253Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.292Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:53:36.297Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:53:36.320Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.330Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.360Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:36.412Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.234Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:53:37.385Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.413Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.427Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.430Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.432Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.434Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.447Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.451Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.452Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.458Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.460Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.462Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.470Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.476Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:53:37.488Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.530Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:53:37.550Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.552Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.812Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.816Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.842Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.879Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.922Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:37.991Z",
+    "method": "GET",
+    "path": "/api/proposal-reviews/d93537a1-612d-45c1-804d-9655beed55a0",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:38.296Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:38.330Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/642c76d2-a799-46f7-b055-8d18141f6313",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:53:38.364Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/compare",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:53:38.413Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/compare",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:38.475Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/compare",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:38.769Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/v1-student",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.287Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.288Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.311Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.345Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.370Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.488Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student/submit",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.535Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.547Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.629Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.662Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:39.937Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/642c76d2-a799-46f7-b055-8d18141f6313",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:53:39.969Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/review-history",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:40.016Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:40.109Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student/review-assignments",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:53:40.168Z",
+    "method": "GET",
+    "path": "/api/proposal-reviews/d93537a1-612d-45c1-804d-9655beed55a0",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:40.206Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/642c76d2-a799-46f7-b055-8d18141f6313",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:40.252Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:40.302Z",
+    "method": "GET",
+    "path": "/api/proposal-reviews/f72b4bfc-4ae3-4005-9792-74fb7603617a",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:53:40.345Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:53:40.534Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:53:40.724Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:31.176Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:31.350Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.404Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.458Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.460Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.478Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.500Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.518Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 401
+  },
+  {
+    "at": "2026-10-28T02:55:31.533Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.536Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.542Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.551Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 401
+  },
+  {
+    "at": "2026-10-28T02:55:31.552Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.567Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/v1-student",
+    "status": 401
+  },
+  {
+    "at": "2026-10-28T02:55:31.574Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions/compare",
+    "status": 401
+  },
+  {
+    "at": "2026-10-28T02:55:31.582Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.590Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.632Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.650Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:31.703Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.761Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:31.801Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.814Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:31.951Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:32.039Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:33.879Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:34.026Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.067Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.090Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.111Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.217Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.219Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.258Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.397Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.400Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.417Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.424Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.432Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.434Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.444Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:34.447Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:34.449Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:34.489Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.524Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:34.528Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:34.554Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.589Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.613Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.632Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.638Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.640Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.647Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.651Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.675Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.678Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.681Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.689Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.694Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.701Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.709Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.721Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.726Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.745Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.748Z",
+    "method": "GET",
+    "path": "/api/registrations",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.775Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:34.779Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:34.817Z",
+    "method": "GET",
+    "path": "/api/registrations",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.840Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.890Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:34.918Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:34.931Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:35.014Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.032Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.203Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:35.425Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.492Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.584Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.631Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.849Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.921Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.924Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:35.979Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.048Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.080Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.083Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.209Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.225Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:36.316Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.318Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.382Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.401Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.540Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:36.613Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.743Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.747Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.760Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:36.782Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.807Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/1e51aa03-c6c8-4500-9d44-9a84e80fce05",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.907Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:36.976Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:37.050Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:37.266Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:37.288Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:37.379Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:37.461Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:37.546Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:37.701Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:37.857Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:38.585Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:38.592Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.635Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.672Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.731Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.733Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.760Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.796Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.799Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.817Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.824Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.839Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.846Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.848Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.855Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.857Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.862Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.866Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.882Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:38.900Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.919Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.935Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:38.959Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:38.993Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:38.997Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:39.047Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:39.067Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:39.078Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:39.097Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:55:39.126Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/v1-student2",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:39.151Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:39.173Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/compare",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:39.311Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:39.643Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:39.648Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:39.665Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:40.176Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:40.181Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:40.230Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:40.285Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:40.472Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:40.613Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:40.728Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:40.744Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:55:40.823Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:40.916Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:55:40.989Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:41.147Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:41.219Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:41.393Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:41.500Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:41.723Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:41.830Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:42.016Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:42.116Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:42.348Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:42.634Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:42.859Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:42.963Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:43.022Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.054Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.057Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.067Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.075Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.085Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.092Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.109Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.120Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.124Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.126Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.134Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.136Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.165Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:43.172Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.176Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:43.193Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.260Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:43.272Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:43.292Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.311Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.314Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:43.315Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:43.382Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.518Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:43.583Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.712Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:43.781Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:43.943Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:44.026Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:44.218Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:44.303Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:44.384Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:44.428Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:44.508Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:44.614Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:44.669Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:44.677Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:44.746Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:44.885Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:44.991Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:45.187Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:45.279Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:45.470Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:45.563Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:45.726Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:46.382Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:46.401Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.413Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.450Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.533Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.546Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.559Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.602Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.622Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.624Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.626Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.648Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.652Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.659Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.675Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.680Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.685Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.707Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.712Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:46.715Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:46.727Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.751Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.809Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:46.816Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:46.826Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.843Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.852Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:46.858Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:46.920Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:47.023Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:47.183Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/compare",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:47.301Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:47.383Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/v1-student2",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:47.950Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:49.181Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:49.355Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.382Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.435Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.441Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.442Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.451Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.482Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.487Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.496Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.501Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.508Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.511Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.533Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.548Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.551Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.560Z",
+    "method": "GET",
+    "path": "/api/registrations",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.580Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.600Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:49.611Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:49.626Z",
+    "method": "GET",
+    "path": "/api/registrations",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.703Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:49.712Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/plan",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:49.746Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.757Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.826Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:49.891Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t2/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:50.090Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:50.136Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:50.350Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:50.575Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:50.950Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:52.187Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:52.345Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:52.367Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:52.376Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.401Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.409Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.416Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.427Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.435Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.454Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.467Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.475Z",
+    "method": "GET",
+    "path": "/api/accounts",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.483Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.485Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.491Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.509Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.516Z",
+    "method": "GET",
+    "path": "/api/students",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.526Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.538Z",
+    "method": "GET",
+    "path": "/api/accounts",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.629Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.650Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:52.666Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/v1-student2",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:54.408Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:54.576Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.592Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.621Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.625Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.638Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.643Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.651Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.662Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.675Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.680Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.683Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.690Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.696Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.744Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.816Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:54.852Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:54.886Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/v1-student2",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:54.922Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.957Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.959Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.962Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.967Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.974Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:54.981Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:56.331Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:56.476Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:56.486Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:56.544Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.617Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.623Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.625Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.630Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.634Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.656Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.675Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.685Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.690Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.693Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.699Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.700Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.745Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:56.757Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/v1-student2",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:55:58.285Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:55:58.434Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.464Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.499Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.505Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.508Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.514Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.530Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.533Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.536Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.555Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.558Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.560Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.598Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.605Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:58.608Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:58.625Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.706Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t2/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:58.710Z",
+    "method": "GET",
+    "path": "/api/assignments/term/qa-t1/results",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:55:58.757Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.787Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:58.941Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:59.081Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:59.213Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:59.282Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:59.841Z",
+    "method": "GET",
+    "path": "/api/proposals/not-a-proposal/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:55:59.846Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:55:59.848Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:56:00.896Z",
+    "method": "GET",
+    "path": "/api/proposals/not-a-proposal/editing-context",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:56:01.459Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:56:01.619Z",
+    "method": "GET",
+    "path": "/api/terms/qa-t1/proposals",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:56:03.092Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:56:03.382Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:56:03.626Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:56:03.895Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:56:04.168Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:56:04.459Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:56:04.781Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:58:27.938Z",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:58:28.151Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.177Z",
+    "method": "GET",
+    "path": "/api/auth/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.202Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.211Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.218Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.246Z",
+    "method": "GET",
+    "path": "/api/research-areas",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.248Z",
+    "method": "GET",
+    "path": "/api/semesters",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.260Z",
+    "method": "GET",
+    "path": "/api/lecturers",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.265Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.285Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.292Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.297Z",
+    "method": "GET",
+    "path": "/api/departments",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.310Z",
+    "method": "GET",
+    "path": "/api/training-systems",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.333Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:58:28.357Z",
+    "method": "GET",
+    "path": "/api/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.406Z",
+    "method": "GET",
+    "path": "/api/registrations/term/qa-t1/me",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:58:28.427Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.432Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.552Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.640Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.861Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:28.919Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:28.931Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:28.950Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:28.969Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:28.986Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.000Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.018Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.031Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.054Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.067Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.177Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.188Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.199Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.279Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.364Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.379Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.389Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.402Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.415Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.443Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.454Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.465Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.479Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.490Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.501Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.514Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/compare",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.525Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/compare",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:29.549Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions/v1-student",
+    "status": 404
+  },
+  {
+    "at": "2026-10-28T02:58:29.621Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:29.664Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:29.723Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:29.812Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:29.857Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:29.912Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:29.986Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:30.036Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:30.439Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:30.501Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:58:30.535Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:30.601Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:30.688Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:30.787Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:58:30.847Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:30.902Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:30.948Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:31.041Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:58:31.183Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 400
+  },
+  {
+    "at": "2026-10-28T02:58:31.259Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:31.323Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:31.484Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:58:31.618Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:31.744Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:58:32.206Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:32.246Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:32.366Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:32.502Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:32.632Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:34.155Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 201
+  },
+  {
+    "at": "2026-10-28T02:58:34.234Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:34.262Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:34.288Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:39.699Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:40.017Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:40.104Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:40.146Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:40.298Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:40.370Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:40.465Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:40.545Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:40.584Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/submit",
+    "status": 403
+  },
+  {
+    "at": "2026-10-28T02:58:40.995Z",
+    "method": "GET",
+    "path": "/api/notifications/me",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:41.001Z",
+    "method": "GET",
+    "path": "/api/proposal-review-options/terms",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:41.045Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:41.121Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:41.541Z",
+    "method": "GET",
+    "path": "/api/proposals/p-student2/editing-context",
+    "status": 200
+  },
+  {
+    "at": "2026-10-28T02:58:41.671Z",
+    "method": "POST",
+    "path": "/api/proposals/p-student2/versions",
+    "status": 409
+  },
+  {
+    "at": "2026-10-28T02:58:41.777Z",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "status": 201
+  }
+]

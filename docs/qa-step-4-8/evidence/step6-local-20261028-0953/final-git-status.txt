@@ -1,0 +1,49 @@
+﻿ M README.md
+ M backend/scripts/test-proposal-reviews.cjs
+ M backend/src/common/exception/global-exception.handler.spec.ts
+ M backend/src/common/exception/global-exception.handler.ts
+ M backend/src/guidance/reviews/progress-review.repository.ts
+ M backend/src/guidance/reviews/progress-review.service.ts
+ M backend/src/guidance/submissions/submission.service.ts
+ M backend/src/guidance/tasks/guidance.service.ts
+ M backend/src/main.ts
+ M backend/src/topic/proposal-reviews/proposal-review.repository.ts
+ M backend/src/topic/proposal-reviews/proposal-review.service.ts
+ M backend/src/topic/proposal-reviews/proposal-review.spec.ts
+ M backend/src/topic/proposal-versions/proposal-version.service.ts
+ M frontend/src/app/layouts/WorkspaceLayout.tsx
+ M frontend/src/app/router/route-manifest.ts
+ M frontend/src/app/router/routes.tsx
+ M frontend/src/features/auth/pages/NotificationsPage.tsx
+ M frontend/src/features/proposal-reviews/pages.tsx
+ M frontend/src/features/review-groups/components.tsx
+ M frontend/src/features/review-groups/workspace.css
+ M frontend/src/features/review-groups/workspace.tsx
+ M frontend/src/features/topic/pages/MyTopicPage.tsx
+ M frontend/src/index.css
+ M frontend/src/shared/api/api-session.ts
+ M frontend/src/shared/components/ui/Button.tsx
+ M frontend/src/shared/data/snapshot-api.ts
+ M frontend/src/shared/data/types.ts
+ M frontend/src/shared/hooks/use-workspace.tsx
+ M package.json
+ M pnpm-lock.yaml
+?? .playwright-mcp/
+?? backend/scripts/test-integration-ui-fixes.cjs
+?? backend/scripts/test-workflow-remediation.cjs
+?? backend/src/common/http/
+?? docs/implementation/evidence/integration-ui-fixes-2026-10-27/
+?? docs/implementation/evidence/ui-workflow-data-2026-10-27/
+?? docs/implementation/integration-ui-fixes-2026-10-27.md
+?? docs/implementation/integration-ui-local.md
+?? docs/implementation/integration-ui-workflow-demo.md
+?? docs/qa-step-4-8/
+?? frontend/scripts/check-local-workflow.cjs
+?? frontend/scripts/prepare-ui-workflow-browser.cjs
+?? frontend/scripts/test-large-proposal.cjs
+?? frontend/scripts/test-unified-workspace.cjs
+?? frontend/src/features/review-groups/shell-data.ts
+?? frontend/src/shared/hooks/use-api-session.ts
+?? scripts/integration-ui.cjs
+?? scripts/seed-integration-ui.cjs
+?? scripts/seed-integration-workflow.cjs

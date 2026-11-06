@@ -1,0 +1,500 @@
+{
+  "total": 41,
+  "counts": {
+    "PASS": 24,
+    "BLOCKED": 5,
+    "FAIL": 3,
+    "NOT RUN": 9
+  },
+  "cases": [
+    {
+      "id": "E01",
+      "status": "PASS",
+      "source": "Yêu cầu MCP",
+      "steps": "Anonymous; mở login và click hiện/ẩn mật khẩu",
+      "expected": "Trang thật, input đổi text rồi password",
+      "actual": "Đã mở Vite client; toggle và khôi phục thành công",
+      "evidence": [
+        "E01-toggle-shown.txt",
+        "E01-login.png"
+      ]
+    },
+    {
+      "id": "A01",
+      "status": "PASS",
+      "source": "S2 §5.1",
+      "steps": "Anonymous; mở URL list",
+      "expected": "Redirect login, không lộ nhóm",
+      "actual": "/login; 0 bảng nhóm",
+      "evidence": [
+        "anonymous-results.json",
+        "A01-anonymous.png"
+      ]
+    },
+    {
+      "id": "A02",
+      "status": "PASS",
+      "source": "S2 §5.1",
+      "steps": "Anonymous; GET 5 endpoint đọc",
+      "expected": "401, không dữ liệu nhóm",
+      "actual": "5/5 trả 401 AUTH_003",
+      "evidence": [
+        "anonymous-results.json"
+      ]
+    },
+    {
+      "id": "A03",
+      "status": "PASS",
+      "source": "S2 §5.1",
+      "steps": "Anonymous; URL /new",
+      "expected": "Không có form quản lý khả dụng",
+      "actual": "Redirect /login",
+      "evidence": [
+        "anonymous-results.json",
+        "A03-anonymous.png"
+      ]
+    },
+    {
+      "id": "A04",
+      "status": "PASS",
+      "source": "S2 §5.1",
+      "steps": "Anonymous; URL detail ID tổng hợp",
+      "expected": "Không có chi tiết khả dụng",
+      "actual": "Redirect /login; chỉ kiểm auth, không chứng minh ID tồn tại",
+      "evidence": [
+        "anonymous-results.json",
+        "A04-anonymous.png"
+      ]
+    },
+    {
+      "id": "G01",
+      "status": "PASS",
+      "source": "S1/S2 D03",
+      "steps": "giaovu; sidebar và URL trực tiếp",
+      "expected": "Cùng trang đúng đợt",
+      "actual": "Cả hai mở demo term và 2 nhóm",
+      "evidence": [
+        "G01-G02-faculty-list.json",
+        "G01-faculty-list.png"
+      ]
+    },
+    {
+      "id": "G02",
+      "status": "PASS",
+      "source": "S2 D03/D13",
+      "steps": "giaovu; đối chiếu identity/list/options",
+      "expected": "FACULTY có quyền; UI khớp canonical response",
+      "actual": "FACULTY, read/manage; đúng 1 bộ môn; 2 nhóm, 3 GV duy nhất, 2 vòng active",
+      "evidence": [
+        "G01-G02-faculty-list.json",
+        "G09-accessibility-desktop.json"
+      ]
+    },
+    {
+      "id": "G03",
+      "status": "PASS",
+      "source": "S2 D03",
+      "steps": "giaovu; đổi demo → đợt cũ → demo",
+      "expected": "Không lẫn nhóm/header/bộ lọc bộ môn",
+      "actual": "2 → 0 → 2; header đồng bộ, department reset",
+      "evidence": [
+        "G03-G04-filters-terms.json",
+        "G03-old-term.png"
+      ]
+    },
+    {
+      "id": "G04",
+      "status": "PASS",
+      "source": "S3",
+      "steps": "giaovu; search hkt/no-match/clear; lọc bộ môn",
+      "expected": "1/0/2 nhóm; thống kê đúng",
+      "actual": "Đúng; Trước/Sau disabled ở trang 1/1; UI nhiều trang tách R06",
+      "evidence": [
+        "G03-G04-filters-terms.json",
+        "G04-empty-search.png"
+      ]
+    },
+    {
+      "id": "G05",
+      "status": "PASS",
+      "source": "S3",
+      "steps": "giaovu; detail, edit và reload",
+      "expected": "Thông tin/role/số lượng khớp response",
+      "actual": "2 thành viên MEMBER; 1 vòng active; revision 0",
+      "evidence": [
+        "G05-G08-detail-lock-cancel.json",
+        "G05-G08-detail-lock-cancel-retry.json",
+        "G05-detail.png"
+      ]
+    },
+    {
+      "id": "G06",
+      "status": "BLOCKED",
+      "source": "S2 D04/S3",
+      "steps": "giaovu; đọc 4 candidates, chọn/search/clear",
+      "expected": "Candidate đúng roster/active/role; không cấm khác bộ môn",
+      "actual": "UI khớp 4 candidates và giữ lựa chọn. Không đủ fixture GV khác bộ môn/inactive/cross-term hoặc DB read độc lập để xác minh toàn bộ eligibility; lỗi tên tách U01",
+      "evidence": [
+        "G06-G08-create-candidate-reset-cancel.json"
+      ]
+    },
+    {
+      "id": "G07",
+      "status": "BLOCKED",
+      "source": "S2 §3.2",
+      "steps": "giaovu; form demo IN_PROGRESS và đợt cũ OPEN_REGISTRATION",
+      "expected": "Chuẩn bị nhóm đúng trạng thái, không đòi preconditions bước sau",
+      "actual": "IN_PROGRESS mở form; OPEN_REGISTRATION read-only và không link tạo. Thiếu DRAFT/CLOSED_REGISTRATION/đợt không proposal/phase đóng để xác minh các nhánh còn lại",
+      "evidence": [
+        "G06-G08-create-candidate-reset-cancel.json",
+        "G07-old-term-form-readonly.png"
+      ]
+    },
+    {
+      "id": "G08",
+      "status": "PASS",
+      "source": "S3/ràng buộc dữ liệu",
+      "steps": "giaovu; draft tên/lý do/thành viên rồi Hủy; đóng xác nhận archive bằng toggle",
+      "expected": "Không mutation; reload giữ nguyên",
+      "actual": "Không POST/PATCH/DELETE nghiệp vụ; 2 nhóm giữ nguyên revision 0",
+      "evidence": [
+        "G05-G08-detail-lock-cancel-retry.json",
+        "G06-G08-create-candidate-reset-cancel.json",
+        "final-verification.json"
+      ]
+    },
+    {
+      "id": "G09",
+      "status": "FAIL",
+      "source": "S3 accessibility",
+      "steps": "giaovu; Tab/Shift+Tab desktop, menu mobile/Escape",
+      "expected": "Focus rõ ràng và không vào sidebar đóng",
+      "actual": "Desktop name → department → name đúng. Mobile Shift+Tab vào Đăng xuất x=-51.8 ngoài viewport; cùng lỗi U02",
+      "evidence": [
+        "G09-accessibility-desktop.json",
+        "BUG02-mobile-offscreen-focus.json"
+      ]
+    },
+    {
+      "id": "G10",
+      "status": "PASS",
+      "source": "S3 responsive",
+      "steps": "giaovu; list/detail/form ở 390×844",
+      "expected": "Không tràn ngang toàn trang, thao tác điều hướng được",
+      "actual": "document/body ~375px < viewport 390px; mở detail/form và Hủy được. Lỗi focus được ghi riêng G09/U02",
+      "evidence": [
+        "G09-G10-mobile-keyboard.json",
+        "G10-list-mobile.png",
+        "G10-detail-mobile.png",
+        "G10-form-mobile.png"
+      ]
+    },
+    {
+      "id": "G11",
+      "status": "PASS",
+      "source": "S2 D04/D05",
+      "steps": "giaovu; quan sát các field form/detail",
+      "expected": "Không tự thêm trưởng nhóm/quorum/phiên phòng; deadline nếu hiện phải đúng phase",
+      "actual": "Không có field thêm trái baseline; vai trò MEMBER. Không hiển thị deadline trên các màn này, không kết luận đã đối chiếu thời hạn phase",
+      "evidence": [
+        "G06-G08-create-candidate-reset-cancel.json",
+        "G05-G08-detail-lock-cancel.json"
+      ]
+    },
+    {
+      "id": "P01",
+      "status": "PASS",
+      "source": "S2 D04/D13",
+      "steps": "gv004/gv003; list/detail; URL edit trực tiếp",
+      "expected": "Chỉ nhóm là thành viên; read-only; options không lộ roster toàn đợt",
+      "actual": "gv004 là T thấy 2 nhóm, gv003 là Z thấy 1 nhóm; canManage=false; own options 1 GV; edit redirect /forbidden",
+      "evidence": [
+        "P01-P02-lecturer-member-scope.json",
+        "P01-P02-gv003-scope.json",
+        "P01-lecturer-edit-forbidden.png"
+      ]
+    },
+    {
+      "id": "P02",
+      "status": "PASS",
+      "source": "S2 D04/D13",
+      "steps": "gv003 không member hkt; gv002 không member nhóm nào; GET/detail UI",
+      "expected": "Không đọc được nhóm ngoài membership",
+      "actual": "gv003 detail/members hkt 404; gv002 list 200 rỗng và detail 404; UI hiển thị lỗi đúng; đợt cũ 200 rỗng không phải leak",
+      "evidence": [
+        "P01-P02-gv003-scope.json",
+        "P02-cross-term-clarification.json",
+        "P02-gv002-no-membership.json"
+      ]
+    },
+    {
+      "id": "P03",
+      "status": "PASS",
+      "source": "S2 D13",
+      "steps": "sv001; URL list/new và 4 GET canonical",
+      "expected": "UI deny, server deny; không chỉ ẩn menu",
+      "actual": "/forbidden, không link nhóm; 4/4 API 403 AUTH_004",
+      "evidence": [
+        "P03-student-deny.json",
+        "P03-student-forbidden.png"
+      ]
+    },
+    {
+      "id": "P04",
+      "status": "PASS",
+      "source": "S2 D13",
+      "steps": "admin chỉ ADMIN; URL và 4 GET canonical",
+      "expected": "Không bypass quyền học thuật",
+      "actual": "ADMIN-only, không review permission; UI /forbidden; 4/4 API 403",
+      "evidence": [
+        "P04-admin-deny.json",
+        "P04-admin-forbidden.png"
+      ]
+    },
+    {
+      "id": "P05",
+      "status": "BLOCKED",
+      "source": "S2 D13",
+      "steps": "Cần COMMITTEE-only có credentials được cấp",
+      "expected": "Không tự là reviewer",
+      "actual": "Không có tài khoản COMMITTEE-only được cung cấp; không tạo/sửa role",
+      "evidence": [
+        "authorization.md",
+        "plan.md"
+      ]
+    },
+    {
+      "id": "P06",
+      "status": "BLOCKED",
+      "source": "S2 D03/D13",
+      "steps": "Cần FACULTY thiếu action/ngoài grant/bộ môn khác",
+      "expected": "403 thiếu action; 404 ngoài scope tài nguyên",
+      "actual": "Chỉ có giaovu hợp lệ trong dữ liệu được phép; không giả token hoặc đổi grant để tạo nhánh âm tính",
+      "evidence": [
+        "authorization.md",
+        "plan.md"
+      ]
+    },
+    {
+      "id": "W01",
+      "status": "NOT RUN",
+      "source": "S3",
+      "steps": "DB test riêng được phép ghi; tạo tên blank/space/unknown field",
+      "expected": "Validation đúng; không ghi dở",
+      "actual": "Không submit mutation. Quy tắc unique tên nhóm chưa được chốt rõ; không tự coi tên trùng là lỗi",
+      "evidence": [
+        "plan.md"
+      ]
+    },
+    {
+      "id": "W02",
+      "status": "NOT RUN",
+      "source": "S2 D04/S3",
+      "steps": "DB test riêng; tạo với duplicate/unknown/cross-term/inactive member",
+      "expected": "Từ chối từng nhánh, không nhóm dở",
+      "actual": "Chưa được phép ghi và thiếu fixture độc lập",
+      "evidence": [
+        "plan.md"
+      ]
+    },
+    {
+      "id": "W03",
+      "status": "NOT RUN",
+      "source": "S2 D04",
+      "steps": "DB test riêng; tạo nhiều nhóm/bộ môn và GV nhiều nhóm",
+      "expected": "Tạo hợp lệ rồi reload xác nhận",
+      "actual": "Chỉ đọc thấy dữ liệu hiện có hỗ trợ nhiều nhóm/membership; không thay kiểm luồng tạo",
+      "evidence": [
+        "plan.md",
+        "G01-G02-faculty-list.json"
+      ]
+    },
+    {
+      "id": "W04",
+      "status": "NOT RUN",
+      "source": "S3",
+      "steps": "DB test riêng; update reason/revision và thử term/department",
+      "expected": "Update hợp lệ; trường bất biến reject",
+      "actual": "Chỉ kiểm UI department disabled và Hủy; không kiểm server PATCH",
+      "evidence": [
+        "plan.md",
+        "G05-G08-detail-lock-cancel-retry.json"
+      ]
+    },
+    {
+      "id": "W05",
+      "status": "NOT RUN",
+      "source": "S2 §5.1/S3",
+      "steps": "DB test riêng; CAS 2 tab/idempotency replay/conflict",
+      "expected": "Không lost update/trùng history",
+      "actual": "Không gửi mutation; chưa xác minh CAS/idempotency live",
+      "evidence": [
+        "plan.md"
+      ]
+    },
+    {
+      "id": "W06",
+      "status": "NOT RUN",
+      "source": "S3",
+      "steps": "DB test riêng có ASSIGNED/IN_REVIEW/legacy; đổi membership",
+      "expected": "Server chặn từng trạng thái",
+      "actual": "UI khóa active count=1 đã quan sát; chưa thử lệnh ghi hoặc phân loại trạng thái từng review",
+      "evidence": [
+        "plan.md",
+        "G05-G08-detail-lock-cancel-retry.json"
+      ]
+    },
+    {
+      "id": "W07",
+      "status": "NOT RUN",
+      "source": "S3",
+      "steps": "DB test riêng; archive nhóm có/không review",
+      "expected": "Chặn khi có review; soft archive giữ lịch sử",
+      "actual": "Chỉ mở/đóng xác nhận, không bấm Xác nhận xóa",
+      "evidence": [
+        "plan.md",
+        "G05-G08-detail-lock-cancel.json",
+        "G05-G08-detail-lock-cancel-retry.json"
+      ]
+    },
+    {
+      "id": "W08",
+      "status": "NOT RUN",
+      "source": "S2 §3.2",
+      "steps": "DB test riêng đủ trạng thái; thử mutation",
+      "expected": "Cho/chặn ghi theo status đúng",
+      "actual": "UI quan sát 2 trạng thái không thay test ghi mọi trạng thái",
+      "evidence": [
+        "plan.md"
+      ]
+    },
+    {
+      "id": "W09",
+      "status": "NOT RUN",
+      "source": "S3",
+      "steps": "DB test riêng + phép ghi + đối chứng DB read-only",
+      "expected": "Atomic group/member/history/audit và rollback",
+      "actual": "Không kết nối DB trực tiếp, không fault injection, không mutation",
+      "evidence": [
+        "plan.md"
+      ]
+    },
+    {
+      "id": "Q01",
+      "status": "PASS",
+      "source": "Yêu cầu telemetry",
+      "steps": "Các chunk đã chạy + console/network MCP",
+      "expected": "Thu và phân loại đúng lỗi",
+      "actual": "0 pageerror/failed request trong telemetry đã lưu; 6 console resource errors thuộc negative 404/400; không HTTP5xx ghi nhận",
+      "evidence": [
+        "telemetry-summary.json",
+        "console-errors-final.log",
+        "network-final.log"
+      ]
+    },
+    {
+      "id": "R01",
+      "status": "PASS",
+      "source": "S2 §5.1/S3",
+      "steps": "giaovu; GET limit=1 pages 1/2/3",
+      "expected": "2 nhóm, IDs disjoint, trang 3 rỗng",
+      "actual": "200 cả 3; total=2, pages 1/2 mỗi trang 1 nhóm khác nhau, page3 rỗng",
+      "evidence": [
+        "R01-R05-read-boundaries.json"
+      ]
+    },
+    {
+      "id": "R02",
+      "status": "PASS",
+      "source": "S3 validation query",
+      "steps": "giaovu; 7 query sai page/limit/unknown/search length",
+      "expected": "400 envelope, không stack/Prisma",
+      "actual": "7/7 trả 400 COMMON_003",
+      "evidence": [
+        "R01-R05-read-boundaries.json"
+      ]
+    },
+    {
+      "id": "R03",
+      "status": "PASS",
+      "source": "S3 search",
+      "steps": "giaovu; HKT và space-hkt-space",
+      "expected": "Case insensitive và trim",
+      "actual": "Cả hai 200, total 1, cùng ID hkt",
+      "evidence": [
+        "R01-R05-read-boundaries.json"
+      ]
+    },
+    {
+      "id": "R04",
+      "status": "PASS",
+      "source": "Yêu cầu error/recovery",
+      "steps": "giaovu; search UI 256 ký tự rồi clear",
+      "expected": "Error banner rõ; không success giả; phục hồi",
+      "actual": "Banner 400, không blank page; clear: 2 rows, 0 alert; thông báo validation hiện bằng tiếng Anh",
+      "evidence": [
+        "R01-R05-read-boundaries.json",
+        "R04-search-error.png"
+      ]
+    },
+    {
+      "id": "R05",
+      "status": "PASS",
+      "source": "Ràng buộc giữ dữ liệu",
+      "steps": "So sánh canonical group views đầu/cuối",
+      "expected": "Cùng group views, revision, timestamps, member IDs",
+      "actual": "sameGroupViews=true cho cả 2 nhóm; không suy ra hash toàn DB",
+      "evidence": [
+        "final-verification.json"
+      ]
+    },
+    {
+      "id": "R06",
+      "status": "BLOCKED",
+      "source": "S3 UI pagination",
+      "steps": "Cần >20 nhóm và >20 candidates",
+      "expected": "Bấm Trước/Sau và giữ selection qua trang",
+      "actual": "Dữ liệu chỉ 2 nhóm/4 candidates; chỉ kiểm trạng thái trang 1/1; API limit=1 không thay kiểm UI",
+      "evidence": [
+        "G03-G04-filters-terms.json",
+        "G06-G08-create-candidate-reset-cancel.json"
+      ]
+    },
+    {
+      "id": "U01",
+      "status": "FAIL",
+      "source": "S3 labels/giữ thành viên khi tìm kiếm",
+      "steps": "giaovu; chọn T rồi tìm Z",
+      "expected": "Chip giữ tên T, lựa chọn vẫn nhận diện được",
+      "actual": "Chip đổi Giảng viên T thành UUID; count vẫn 1; tái hiện cả search rỗng kết quả và search Z",
+      "evidence": [
+        "BUG01-reproduction.json",
+        "BUG01-selected-member-before.png",
+        "BUG01-selected-member-after.png"
+      ]
+    },
+    {
+      "id": "U02",
+      "status": "FAIL",
+      "source": "S3 keyboard/mobile",
+      "steps": "giaovu; 390px, mở menu → Escape → Shift+Tab",
+      "expected": "Không focus điều hướng đã đóng ngoài màn hình",
+      "actual": "Focus Đăng xuất x=-51.8, width 33, whollyOutsideViewport=true, inert=false; cùng bug G09",
+      "evidence": [
+        "BUG02-mobile-offscreen-focus.json",
+        "BUG02-mobile-offscreen-focus.png"
+      ]
+    },
+    {
+      "id": "L01",
+      "status": "PASS",
+      "source": "Yêu cầu loading",
+      "steps": "giaovu; reload thật, không mock/throttle",
+      "expected": "Quan sát đúng status đang tải rồi list thật",
+      "actual": "Đã bắt được status Đang tải nhóm duyệt…; sau đó 2 nhóm",
+      "evidence": [
+        "final-verification.json"
+      ]
+    }
+  ]
+}

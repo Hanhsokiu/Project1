@@ -1,0 +1,135 @@
+{
+  "result": "PASS",
+  "complete": true,
+  "startedAt": "2026-10-26T08:18:22.115Z",
+  "updatedAt": "2026-10-26T08:21:32.968Z",
+  "sharedDatabaseAccess": false,
+  "cases": [
+    {
+      "name": "step4:api",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 31,
+      "elapsedMs": 8079,
+      "log": "step4-api.log",
+      "database": "btl_pr2b_qa_f64499207853_step4_api"
+    },
+    {
+      "name": "step4:upgrade",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": null,
+      "elapsedMs": 5322,
+      "log": "step4-upgrade.log",
+      "database": "btl_pr2b_qa_f64499207853_step4_upgrade"
+    },
+    {
+      "name": "step5:api",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 27,
+      "elapsedMs": 13018,
+      "log": "step5-api.log",
+      "database": "btl_pr2b_qa_f64499207853_step5_api"
+    },
+    {
+      "name": "step5:upgrade",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 5,
+      "elapsedMs": 4867,
+      "log": "step5-upgrade.log",
+      "database": "btl_pr2b_qa_f64499207853_step5_upgrade"
+    },
+    {
+      "name": "step6:api",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 24,
+      "elapsedMs": 13055,
+      "log": "step6-api.log",
+      "database": "btl_pr2b_qa_f64499207853_step6_api"
+    },
+    {
+      "name": "step6:upgrade",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 5,
+      "elapsedMs": 4575,
+      "log": "step6-upgrade.log",
+      "database": "btl_pr2b_qa_f64499207853_step6_upgrade"
+    },
+    {
+      "name": "step7:api",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 19,
+      "elapsedMs": 17140,
+      "log": "step7-api.log",
+      "database": "btl_pr2b_qa_f64499207853_step7_api"
+    },
+    {
+      "name": "step7:upgrade",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 4,
+      "elapsedMs": 3797,
+      "log": "step7-upgrade.log",
+      "database": "btl_pr2b_qa_f64499207853_step7_upgrade"
+    },
+    {
+      "name": "step8a:api",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 19,
+      "elapsedMs": 26516,
+      "log": "step8a-api.log",
+      "database": "btl_pr2b_qa_f64499207853_step8a_api"
+    },
+    {
+      "name": "step8a:upgrade",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 4,
+      "elapsedMs": 3865,
+      "log": "step8a-upgrade.log",
+      "database": "btl_pr2b_qa_f64499207853_step8a_upgrade"
+    },
+    {
+      "name": "step8b:api",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 17,
+      "elapsedMs": 34258,
+      "log": "step8b-api.log",
+      "database": "btl_pr2b_qa_f64499207853_step8b_api"
+    },
+    {
+      "name": "step8b:upgrade",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 4,
+      "elapsedMs": 3975,
+      "log": "step8b-upgrade.log",
+      "database": "btl_pr2b_qa_f64499207853_step8b_upgrade"
+    },
+    {
+      "name": "step8c:api",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 17,
+      "elapsedMs": 44826,
+      "log": "step8c-api.log",
+      "database": "btl_pr2b_qa_f64499207853_step8c_api"
+    },
+    {
+      "name": "step8c:upgrade",
+      "result": "PASS",
+      "exitCode": 0,
+      "checks": 4,
+      "elapsedMs": 3962,
+      "log": "step8c-upgrade.log",
+      "database": "btl_pr2b_qa_f64499207853_step8c_upgrade"
+    }
+  ]
+}

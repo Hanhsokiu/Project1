@@ -1,0 +1,70 @@
+[
+  {
+    "user": "faculty",
+    "phase": "login-faculty",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "reviewer",
+    "phase": "login-reviewer",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T07-T08-readiness-no-GET-writes",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T03-Unicode-and-approved-filter",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T03-Unicode-and-approved-filter",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T03-Unicode-and-approved-filter",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "student",
+    "phase": "login-student",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "advisor",
+    "phase": "login-advisor",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  },
+  {
+    "user": "faculty",
+    "phase": "T31-T35-phase-locked-receipt-note-preserved",
+    "kind": "http-error",
+    "method": "POST",
+    "url": "http://127.0.0.1:61158/api/proposals/p-student/dossier/receipt",
+    "status": 409
+  },
+  {
+    "user": "faculty",
+    "phase": "T31-T35-phase-locked-receipt-note-preserved",
+    "kind": "console-error",
+    "message": "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  },
+  {
+    "user": "student",
+    "phase": "T41-mobile-axe-detail",
+    "kind": "console-warning",
+    "message": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition."
+  }
+]

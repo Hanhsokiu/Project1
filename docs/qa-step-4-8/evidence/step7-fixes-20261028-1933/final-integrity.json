@@ -1,0 +1,158 @@
+{
+  "at": "2026-10-28T12:59:43.924Z",
+  "counts": {
+    "proposal": 24,
+    "proposalVersion": 25,
+    "thesisDossier": 5,
+    "dossierWorkflow": 4,
+    "dossierFinalization": 5,
+    "dossierReceipt": 4,
+    "dossierPdfContent": 4,
+    "guidancePlan": 2,
+    "task": 0,
+    "progressReview": 0,
+    "finalResult": 0
+  },
+  "finalizations": [
+    {
+      "id": "9083ca8f-b927-4d1b-ab2f-9ac826ff2943",
+      "proposalId": "p-page-01",
+      "sequence": 1,
+      "versionId": "v1-page-01",
+      "supersededAt": null,
+      "hasSnapshot": true,
+      "checksum": "ac929e3e60b1e3ef866dc3b6aa481f908dcc6aa2ff6e47854292930d3eef5b55",
+      "bytesMatch": true,
+      "receipt": {
+        "id": "c715266d-85f1-4708-a277-01c2974c5c54",
+        "receivedAt": "2026-10-28T12:50:49.590Z",
+        "receivedByUserId": "faculty",
+        "noteCharacters": 43
+      }
+    },
+    {
+      "id": "3c9650f3-dd89-46fd-b784-e80e74d13744",
+      "proposalId": "p-page-03",
+      "sequence": 1,
+      "versionId": "v1-page-03",
+      "supersededAt": null,
+      "hasSnapshot": false,
+      "checksum": null,
+      "bytesMatch": null,
+      "receipt": null
+    },
+    {
+      "id": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+      "proposalId": "p-student",
+      "sequence": 1,
+      "versionId": "v1-student",
+      "supersededAt": "2026-10-28T12:46:53.015Z",
+      "hasSnapshot": true,
+      "checksum": "7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462",
+      "bytesMatch": true,
+      "receipt": {
+        "id": "b17324ea-f0f5-49f9-a61c-dbf55d69b830",
+        "receivedAt": "2026-10-28T12:45:08.193Z",
+        "receivedByUserId": "faculty",
+        "noteCharacters": 2000
+      }
+    },
+    {
+      "id": "0855599c-b878-4290-9291-c797b817e6b3",
+      "proposalId": "p-student",
+      "sequence": 2,
+      "versionId": "4fa1a32a-e971-4db8-be87-0cc2dc3cd152",
+      "supersededAt": null,
+      "hasSnapshot": true,
+      "checksum": "e92788eeef11b5d61483c8d64851e08ac8a2b025353c70119dbed01f4a844aaf",
+      "bytesMatch": true,
+      "receipt": {
+        "id": "ff489ba1-9d38-4bc2-a0db-01d1166b8eed",
+        "receivedAt": "2026-10-28T12:50:49.998Z",
+        "receivedByUserId": "faculty",
+        "noteCharacters": 38
+      }
+    },
+    {
+      "id": "a481371f-9415-48f6-b472-2e458be94b4f",
+      "proposalId": "p-student2",
+      "sequence": 1,
+      "versionId": "v1-student2",
+      "supersededAt": null,
+      "hasSnapshot": true,
+      "checksum": "c717b8271ca21cdc4f922497b9a7fde56f2924c62b72f732900330cd53092fd0",
+      "bytesMatch": true,
+      "receipt": {
+        "id": "f13a03c9-4eea-4e14-bfed-a39762e6e94c",
+        "receivedAt": "2026-10-28T12:47:57.513Z",
+        "receivedByUserId": "faculty",
+        "noteCharacters": 0
+      }
+    }
+  ],
+  "historicalFileExact": true,
+  "dossierWorkflows": [
+    {
+      "id": "eea1f1e9-eed2-4363-8d76-530c99da1ab9",
+      "createdAt": "2026-10-28T12:45:05.606Z",
+      "updatedAt": "2026-10-28T12:47:57.515Z",
+      "state": "RECEIVED",
+      "revision": 3,
+      "dossierId": "13286f2b-bbf4-45f8-8ac8-cbbc90e5acf1",
+      "currentFinalizationId": "a481371f-9415-48f6-b472-2e458be94b4f"
+    },
+    {
+      "id": "9e505acc-682d-4374-a568-8751323d616e",
+      "createdAt": "2026-10-28T12:50:47.121Z",
+      "updatedAt": "2026-10-28T12:50:47.135Z",
+      "state": "FINALIZED",
+      "revision": 0,
+      "dossierId": "0421bfaf-55c5-4430-a19b-f1e84634e30b",
+      "currentFinalizationId": "3c9650f3-dd89-46fd-b784-e80e74d13744"
+    },
+    {
+      "id": "5f1b19a3-4860-4613-b5f5-200edbc2071b",
+      "createdAt": "2026-10-28T12:50:47.601Z",
+      "updatedAt": "2026-10-28T12:50:49.592Z",
+      "state": "RECEIVED",
+      "revision": 3,
+      "dossierId": "b127fb90-12cc-4c7b-9763-ea2773442556",
+      "currentFinalizationId": "9083ca8f-b927-4d1b-ab2f-9ac826ff2943"
+    },
+    {
+      "id": "ec9510ff-4bc1-4c79-96f1-da6ea23d521f",
+      "createdAt": "2026-10-28T12:45:05.308Z",
+      "updatedAt": "2026-10-28T12:50:50.000Z",
+      "state": "RECEIVED",
+      "revision": 7,
+      "dossierId": "c7fcc1b5-8ec1-4178-bea1-c84de3846a52",
+      "currentFinalizationId": "0855599c-b878-4290-9291-c797b817e6b3"
+    }
+  ],
+  "plans": [
+    {
+      "id": "8fad28b3-bd8f-4c43-9ed5-cb30e5cc1c42",
+      "createdAt": "2026-10-28T12:46:52.902Z",
+      "updatedAt": "2026-10-28T12:46:52.902Z",
+      "state": "ACTIVE",
+      "assignmentRevision": 0,
+      "revision": 0,
+      "planId": "15308bac-a5c5-4769-952b-2abd4c166776",
+      "proposalId": "p-student2",
+      "finalizationId": "a481371f-9415-48f6-b472-2e458be94b4f",
+      "assignmentId": "83f980ae-a207-4264-b2e1-a047a4c72dc9"
+    },
+    {
+      "id": "76507505-9f35-40e1-a1fa-1a719044436f",
+      "createdAt": "2026-10-28T12:46:52.802Z",
+      "updatedAt": "2026-10-28T12:46:53.023Z",
+      "state": "PAUSED",
+      "assignmentRevision": 0,
+      "revision": 1,
+      "planId": "86074691-ecd7-4162-95d3-dba36a8b0dfe",
+      "proposalId": "p-student",
+      "finalizationId": "f1166ac7-a1be-40f1-8d46-f27dae63f475",
+      "assignmentId": "00d89501-2924-4433-afd1-53bf46ee4089"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "S7-03",
+  "requirement": "Contract API GET /proposals/:id/preview.pdf?versionId returns watermarked preview for visible version",
+  "expectedStatus": 200,
+  "actual": {
+    "status": 200
+  },
+  "actor": "current owner",
+  "versionId": "v1-student"
+}

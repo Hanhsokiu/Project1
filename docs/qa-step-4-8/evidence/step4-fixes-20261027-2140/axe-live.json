@@ -1,0 +1,100 @@
+{
+  "startedAt": "2026-10-27T14:43:01.735Z",
+  "checks": [
+    {
+      "name": "Axe danh sách desktop không violation",
+      "status": "PASS",
+      "actual": {
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ],
+        "passes": 26
+      }
+    },
+    {
+      "name": "Axe form desktop sau lọc không violation",
+      "status": "PASS",
+      "actual": {
+        "violations": [],
+        "incomplete": [
+          "color-contrast"
+        ],
+        "passes": 24
+      }
+    },
+    {
+      "name": "Axe form mobile không violation",
+      "status": "PASS",
+      "actual": {
+        "violations": [],
+        "incomplete": [],
+        "passes": 23
+      }
+    },
+    {
+      "name": "Không mutation nghiệp vụ sau retest axe",
+      "status": "PASS",
+      "actual": []
+    }
+  ],
+  "requests": [],
+  "responses": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "finalGroups": [
+    {
+      "id": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+      "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "name": "hkt",
+      "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+      "departmentName": "Công nghệ phần mềm",
+      "revision": 0,
+      "createdAt": "2026-10-27T03:28:43.187Z",
+      "updatedAt": "2026-10-27T03:28:43.187Z",
+      "activeReviewCount": 1,
+      "canManage": true,
+      "members": [
+        {
+          "lecturerId": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+          "fullName": "Giảng viên T",
+          "lecturerCode": "S3L17930224293233",
+          "role": "MEMBER"
+        },
+        {
+          "lecturerId": "199ee947-055e-4560-81b3-74d15625c2ad",
+          "fullName": "Giảng viên X",
+          "lecturerCode": "S3L17930224293230",
+          "role": "MEMBER"
+        }
+      ]
+    },
+    {
+      "id": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+      "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+      "name": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+      "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+      "departmentName": "Công nghệ phần mềm",
+      "revision": 0,
+      "createdAt": "2026-10-27T02:57:39.000Z",
+      "updatedAt": "2026-10-27T02:57:39.000Z",
+      "activeReviewCount": 1,
+      "canManage": true,
+      "members": [
+        {
+          "lecturerId": "93355433-df35-48b3-b85a-cb1ddf0545e4",
+          "fullName": "Giảng viên T",
+          "lecturerCode": "S3L17930224293233",
+          "role": "MEMBER"
+        },
+        {
+          "lecturerId": "0bf21346-ca5e-441f-b934-e02567d2b288",
+          "fullName": "Giảng viên Z",
+          "lecturerCode": "S3L17930224293232",
+          "role": "MEMBER"
+        }
+      ]
+    }
+  ],
+  "finishedAt": "2026-10-27T14:43:02.432Z"
+}

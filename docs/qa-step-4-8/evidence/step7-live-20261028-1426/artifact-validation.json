@@ -1,0 +1,27 @@
+{
+  "checkedAt": "2026-10-28T12:29:57.451Z",
+  "filesScanned": 92,
+  "knownCredentialsChecked": 3,
+  "sensitiveFindings": [],
+  "brokenReportLinks": [],
+  "matrix": {
+    "total": 45,
+    "PASS": 28,
+    "PARTIAL": 13,
+    "FAIL": 4
+  },
+  "axe": {
+    "T41-mobile-dossier": {
+      "violations": 0,
+      "incomplete": 0
+    },
+    "T41-mobile-list": {
+      "violations": 0,
+      "incomplete": 0
+    },
+    "T41-mobile-form-history": {
+      "violations": 0,
+      "incomplete": 0
+    }
+  }
+}

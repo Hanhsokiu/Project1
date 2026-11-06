@@ -1,11 +1,11 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { TermRepository } from "../repository/term.repository";
 @Injectable()
 export class TermParameterService {
-  constructor(private readonly prisma: PrismaService) {}
-
+  constructor(private readonly repository: TermRepository) {}
   async getParameters(termId: string) {
-    return this.prisma.termParameter.findMany({ where: { termId } });
+    const term = await this.repository.findById(termId);
+    if (!term) throw new NotFoundException("Không tìm thấy đợt.");
+    return term.parameters;
   }
 }

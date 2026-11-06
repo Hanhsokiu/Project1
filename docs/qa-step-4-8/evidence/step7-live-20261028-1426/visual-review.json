@@ -1,0 +1,35 @@
+{
+  "method": "Direct visual review of original DOCX image and freshly rendered first/last PDF pages; all 16 stress pages also canvas-rendered and text-bound checked",
+  "reviewed": [
+    "source-template.png",
+    "pdf-official-first.png",
+    "pdf-stress-first.png",
+    "pdf-stress-last.png"
+  ],
+  "good": [
+    "Vietnamese characters legible",
+    "A4 margins and footer",
+    "four content sections",
+    "35th schedule row and repeated table header",
+    "all four signature positions with empty space for paper signing"
+  ],
+  "finding": {
+    "id": "S7-04",
+    "severity": "Medium",
+    "requirement": "Original Project_1_06.docx: export using standard proposal template",
+    "actual": "PDF omits student/advisor phone and email fields, and a separate cohort (Khóa) field that exist in the source form",
+    "evidence": [
+      "source-template.png",
+      "pdf-official-first.png",
+      "pdf-inspection.json"
+    ],
+    "impact": "Technical PDF rendering passes, but field completeness against the supplied standard form fails",
+    "mappingCaveat": "Confirm approved input mapping for cohort/contact fields; do not invent values or pull mutable live values into an existing finalized snapshot"
+  },
+  "notExecuted": [
+    "physical printing",
+    "human signatures",
+    "faculty template acceptance",
+    "manual visual review of every middle stress page"
+  ]
+}

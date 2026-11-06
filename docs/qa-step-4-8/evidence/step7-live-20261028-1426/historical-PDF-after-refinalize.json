@@ -1,0 +1,14 @@
+{
+  "id": "S7-02",
+  "stage": "new current finalization exists",
+  "oldFinalizationId": "08ed514b-a877-43b7-a1d9-f3624dfa023a",
+  "newFinalizationId": "76301022-91cc-46bf-b6d4-26faee75a9f4",
+  "expectedStatus": 200,
+  "actual": {
+    "status": 409,
+    "error": {
+      "code": "STALE_FINALIZATION",
+      "message": "Bản chốt đã thay đổi hoặc không thuộc hồ sơ."
+    }
+  }
+}

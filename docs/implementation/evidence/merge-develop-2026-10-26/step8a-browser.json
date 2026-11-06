@@ -1,0 +1,51 @@
+{
+  "result": "PASS",
+  "mockedApi": true,
+  "sharedDatabaseAccess": false,
+  "checks": [
+    {
+      "name": "official-advisor UI creates a plan from finalization and reveals task creation",
+      "result": "PASS"
+    },
+    {
+      "name": "task form validates required fields, sends UTC+7 dates and opens the saved task",
+      "result": "PASS"
+    },
+    {
+      "name": "edit conflict preserves draft/reason and retry updates only the expected task revision",
+      "result": "PASS"
+    },
+    {
+      "name": "student starts/appends progress without advisor controls, upload or self-completion",
+      "result": "PASS"
+    },
+    {
+      "name": "week/status/overdue filtering and empty state keep overdue separate from task state",
+      "result": "PASS"
+    },
+    {
+      "name": "weekly missing report appears before manual task creation and stays missing after explicit ensure",
+      "result": "PASS"
+    },
+    {
+      "name": "faculty can inspect term summary and task history with no student/advisor mutations",
+      "result": "PASS"
+    },
+    {
+      "name": "cancel requires a reason and removes mutation/overdue controls while keeping history",
+      "result": "PASS"
+    },
+    {
+      "name": "locked phase or invalid finalization hides task creation instead of bypassing readiness",
+      "result": "PASS"
+    },
+    {
+      "name": "mobile task detail and history have no horizontal page overflow",
+      "result": "PASS"
+    },
+    {
+      "name": "scope failures hide academic content and navigation causes no unhandled page errors",
+      "result": "PASS"
+    }
+  ]
+}

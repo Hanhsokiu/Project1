@@ -1,0 +1,7 @@
+{
+  "method": "Playwright MCP",
+  "logout": true,
+  "afterLogoutUrl": "http://127.0.0.1:50186/login",
+  "browserCloseResult": "No open tabs. Navigate to a URL to create one.",
+  "applicationBusinessDataTouchedByCleanup": false
+}

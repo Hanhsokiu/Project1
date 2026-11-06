@@ -1,0 +1,29 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T13:13:10.743Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50187/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "preview-shows-real-business-error",
+    "result": "PASS",
+    "at": "2026-10-28T13:13:12.273Z",
+    "detail": {
+      "expectedStatus": 409,
+      "message": "Bước 1–3 chưa cung cấp lớp/ngành đã xác nhận cho sinh viên trong đợt.",
+      "noPartialWrites": true
+    }
+  },
+  {
+    "id": "historical-corrupt-PDF-error-and-recovery",
+    "result": "FAIL",
+    "at": "2026-10-28T13:13:14.412Z",
+    "error": "AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:\n+ actual - expected\n... Skipped lines\n\n  [\n    [\n      {\n        createdAt: 2026-10-28T12:45:05.308Z,\n        filePath: null,\n...\n      {\n-       checksum: '7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462',\n-       createdAt: 2026-10-28T12:45:07.310Z,\n-       createdByUserId: 'student',\n-       id: '016d8271-b52a-46c9-8e08-5af0bc2bab2d',\n-       kind: 'DOSSIER_PDF',\n-       mimeType: 'application/pdf',\n-       originalName: 'de-cuong.pdf',\n-       sizeBytes: 30184,\n-       state: 'READY',\n-       storageKey: 'db:dossier-pdf/016d8271-b52a-46c9-8e08-5af0bc2bab2d',\n-       updatedAt: 2026-10-28T12:45:07.310Z\n-     },\n-     {\n        checksum: 'e92788eeef11b5d61483c8d64851e08ac8a2b025353c70119dbed01f4a844aaf',\n        createdAt: 2026-10-28T12:46:54.504Z,\n        createdByUserId: 'student',\n        id: '4504282c-27c2-47ef-89c1-b503579c86d2',\n        kind: 'DOSSIER_PDF',\n...\n      },\n+     {\n+       checksum: '7e500b199eb1ab35332a200db1e20f419dd55013d79324de0c7d5165d2e14462',\n+       createdAt: 2026-10-28T12:45:07.310Z,\n+       createdByUserId: 'student',\n+       id: '016d8271-b52a-46c9-8e08-5af0bc2bab2d',\n+       kind: 'DOSSIER_PDF',\n+       mimeType: 'application/pdf',\n+       originalName: 'de-cuong.pdf',\n+       sizeBytes: 30184,\n+       state: 'READY',\n+       storageKey: 'db:dossier-pdf/016d8271-b52a-46c9-8e08-5af0bc2bab2d',\n+       updatedAt: 2026-10-28T12:45:07.310Z\n+     }\n    ],\n    [\n      {\n        assetId: '016d8271-b52a-46c9-8e08-5af0bc2bab2d',\n        bytes: Buffer(30184) [Uint8Array] [\n\n    at D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-completion-20261028-2011\\harness\\pdf-errors.cjs:26:11\n    at async Object.check (D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-completion-20261028-2011\\harness\\browser-common.cjs:20:52)\n    at async D:\\Project1\\BTL\\docs\\qa-step-4-8\\evidence\\step7-completion-20261028-2011\\harness\\pdf-errors.cjs:16:2"
+  }
+]

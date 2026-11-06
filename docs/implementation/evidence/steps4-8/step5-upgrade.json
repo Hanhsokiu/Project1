@@ -1,0 +1,12 @@
+{
+  "result": "PASS",
+  "postgresVersion": "170011",
+  "checks": [
+    "populated step4 baseline preserved",
+    "assignment actor/time remain NULL for old rounds",
+    "legacy boolean/ownership/audit not backfilled",
+    "only explicit faculty/lecturer actions and student read bound; ADMIN/unrelated actions excluded",
+    "five checksums and deploy retry preserved"
+  ],
+  "sharedDatabaseDDL": false
+}

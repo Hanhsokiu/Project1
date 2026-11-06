@@ -1,0 +1,2839 @@
+{
+  "startedAt": "2026-10-27T14:58:27.567Z",
+  "requests": [
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/topic/reviews/5602d487-12d1-44f1-b879-6fa4855d43a8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@vite/client"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/main.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@react-refresh"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/App.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/index.css?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5TQEKTOH.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-SNAQBZPT.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-AAEUBMPE.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/node_modules/.pnpm/vite@5.4.21_@types+node@22.20.5_terser@5.51.2/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/routes.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/sonner.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QK4RWHDV.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/pages.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/layouts/WorkspaceLayout.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-workspace.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/route-manifest.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/kit.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-session.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-api-session.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/index.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/error-message.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/store.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/auth/services/auth-service.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-demo.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/components.tsx?t=1793111826894"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/ui/Button.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/zod.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/review-groups.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-reviews.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-versions.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step2.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step1.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-dossiers.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-tasks.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/task-submissions.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-reviews.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/http-client.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/snapshot-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/seed.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/schemas.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/shell-data.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-data.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/assignment-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/topic/services/topic-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/registration-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Regular.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Bold.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Medium.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-SemiBold.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-reviews/5602d487-12d1-44f1-b879-6fa4855d43a8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-history"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/topic/reviews/5602d487-12d1-44f1-b879-6fa4855d43a8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@vite/client"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/main.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@react-refresh"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/App.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/index.css?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/node_modules/.pnpm/vite@5.4.21_@types+node@22.20.5_terser@5.51.2/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5TQEKTOH.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-SNAQBZPT.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-AAEUBMPE.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/routes.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/sonner.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QK4RWHDV.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/pages.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/layouts/WorkspaceLayout.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-workspace.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/route-manifest.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/kit.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-session.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-api-session.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/index.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/error-message.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/store.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-demo.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/auth/services/auth-service.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/components.tsx?t=1793111826894"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/ui/Button.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/zod.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/review-groups.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-reviews.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-versions.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step2.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step1.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-dossiers.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-tasks.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/task-submissions.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-reviews.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/http-client.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/snapshot-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/seed.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/schemas.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/shell-data.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-data.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/assignment-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/topic/services/topic-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/registration-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Regular.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Bold.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Medium.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-SemiBold.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-reviews/5602d487-12d1-44f1-b879-6fa4855d43a8"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/favicon.svg"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-history"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/topic/reviews/db4d0153-fbbc-4baa-a8e5-f94d843592d2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@vite/client"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/main.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@react-refresh"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/node_modules/.pnpm/vite@5.4.21_@types+node@22.20.5_terser@5.51.2/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/App.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/index.css?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5TQEKTOH.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-SNAQBZPT.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-AAEUBMPE.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/routes.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/sonner.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QK4RWHDV.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/pages.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/pages.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/layouts/WorkspaceLayout.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-workspace.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/route-manifest.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/kit.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-session.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-api-session.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/index.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/error-message.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/components.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/components.tsx?t=1793111826894"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/ui/Button.tsx"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.tsx?t=1793111871054"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/store.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/auth/services/auth-service.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-demo.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/zod.js?v=451a0809"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/review-groups.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-reviews.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-versions.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step2.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step1.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-dossiers.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-tasks.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/task-submissions.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-reviews.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/http-client.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.css"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/shell-data.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/snapshot-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/seed.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/schemas.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-data.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/assignment-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/topic/services/topic-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/registration-api.ts"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Regular.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Bold.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Medium.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-SemiBold.ttf"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-reviews/db4d0153-fbbc-4baa-a8e5-f94d843592d2"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/a7bc28c0-873e-4dde-9a2d-ca97f351895d/review-history"
+    }
+  ],
+  "responses": [
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/topic/reviews/5602d487-12d1-44f1-b879-6fa4855d43a8"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/main.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@vite/client"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5TQEKTOH.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-SNAQBZPT.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-AAEUBMPE.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@react-refresh"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/App.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/sonner.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/index.css?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QK4RWHDV.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/node_modules/.pnpm/vite@5.4.21_@types+node@22.20.5_terser@5.51.2/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/routes.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/layouts/WorkspaceLayout.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/route-manifest.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-workspace.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/pages.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-session.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/kit.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-api-session.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/index.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/error-message.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/zod.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/store.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-demo.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/auth/services/auth-service.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/ui/Button.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/components.tsx?t=1793111826894"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/review-groups.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step2.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-reviews.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-dossiers.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-versions.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step1.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/http-client.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/task-submissions.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-tasks.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/schemas.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.css"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-reviews.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/snapshot-api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/shell-data.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/seed.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-data.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/topic/services/topic-api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/assignment-api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/registration-api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Regular.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Bold.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Medium.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-SemiBold.ttf"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          }
+        ],
+        "timestamp": "2026-10-27T14:58:35.067Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-reviews/5602d487-12d1-44f1-b879-6fa4855d43a8",
+      "body": {
+        "success": true,
+        "data": {
+          "id": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+          "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+          "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+          "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+          "studentName": "Sinh viên B",
+          "studentCode": "S3S17930224293231",
+          "proposalStatus": "SUBMITTED",
+          "proposalRevision": 5,
+          "revision": 0,
+          "state": "ASSIGNED",
+          "roundNumber": 3,
+          "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+          "groupName": "hkt",
+          "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+          "versionNumber": 3,
+          "version": {
+            "content": {
+              "omitted": true,
+              "type": "object",
+              "keys": [
+                "scope",
+                "tools",
+                "endsAt",
+                "schedule",
+                "startsAt",
+                "objectives",
+                "mainContents",
+                "schemaVersion",
+                "expectedResults"
+              ],
+              "jsonLength": 792
+            },
+            "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+            "submittedAt": "2026-10-27T02:57:34.593Z",
+            "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+          },
+          "assignedAt": "2026-10-27T13:14:34.712Z",
+          "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+          "startedAt": null,
+          "startedByUserId": null,
+          "routingSnapshot": {
+            "reason": "gtdf",
+            "revision": 0,
+            "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+            "groupRevision": 0,
+            "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+          },
+          "phaseSnapshot": {
+            "endsAt": "2027-01-25T02:57:33.550Z",
+            "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+            "revision": 0,
+            "startsAt": "2026-10-26T02:57:33.550Z"
+          },
+          "supersededByReviewId": null,
+          "allowedActions": [
+            "assign"
+          ],
+          "comments": [],
+          "decision": null
+        },
+        "timestamp": "2026-10-27T14:58:35.080Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/201335e2-9fe4-49b6-bc2e-1c805f44803a/review-history",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+            "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+            "studentName": "Sinh viên B",
+            "studentCode": "S3S17930224293231",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 5,
+            "revision": 0,
+            "state": "ASSIGNED",
+            "roundNumber": 3,
+            "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+            "groupName": "hkt",
+            "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+            "versionNumber": 3,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T02:57:34.593Z",
+              "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+            },
+            "assignedAt": "2026-10-27T13:14:34.712Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": null,
+            "startedByUserId": null,
+            "routingSnapshot": {
+              "reason": "gtdf",
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": null,
+            "allowedActions": [
+              "assign"
+            ],
+            "comments": [],
+            "decision": null
+          },
+          {
+            "id": "a72a649c-2301-4046-a212-19bca4e78377",
+            "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+            "studentName": "Sinh viên B",
+            "studentCode": "S3S17930224293231",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 5,
+            "revision": 2,
+            "state": "SUPERSEDED",
+            "roundNumber": 2,
+            "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+            "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+            "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+            "versionNumber": 3,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T02:57:34.593Z",
+              "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+            },
+            "assignedAt": "2026-10-27T13:14:10.152Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": null,
+            "startedByUserId": null,
+            "routingSnapshot": {
+              "reason": "gggg",
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+            "allowedActions": [],
+            "comments": [],
+            "decision": null
+          },
+          {
+            "id": "54d650c9-5a7b-4c7a-a2e7-c3a9e30f1d0f",
+            "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+            "studentName": "Sinh viên B",
+            "studentCode": "S3S17930224293231",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 5,
+            "revision": 2,
+            "state": "SUPERSEDED",
+            "roundNumber": 1,
+            "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+            "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+            "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+            "versionNumber": 3,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T02:57:34.593Z",
+              "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+            },
+            "assignedAt": "2026-10-27T02:57:43.734Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": null,
+            "startedByUserId": null,
+            "routingSnapshot": {
+              "reason": null,
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": "a72a649c-2301-4046-a212-19bca4e78377",
+            "allowedActions": [],
+            "comments": [],
+            "decision": null
+          }
+        ],
+        "timestamp": "2026-10-27T14:58:35.176Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/topic/reviews/5602d487-12d1-44f1-b879-6fa4855d43a8"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/main.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@vite/client"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5TQEKTOH.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-SNAQBZPT.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-AAEUBMPE.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@react-refresh"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/App.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/node_modules/.pnpm/vite@5.4.21_@types+node@22.20.5_terser@5.51.2/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/sonner.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/index.css?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QK4RWHDV.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/routes.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-workspace.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/route-manifest.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-session.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/layouts/WorkspaceLayout.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/pages.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/kit.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/pages.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-api-session.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/index.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/zod.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/error-message.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/store.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-demo.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/auth/services/auth-service.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/ui/Button.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/components.tsx?t=1793111826894"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/review-groups.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-dossiers.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step2.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-versions.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-reviews.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step1.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/task-submissions.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-tasks.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-reviews.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/http-client.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/snapshot-api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/seed.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/schemas.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.css"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/shell-data.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-data.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/topic/services/topic-api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/assignment-api.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/registration-api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Regular.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Bold.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Medium.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-SemiBold.ttf"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/favicon.svg"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          }
+        ],
+        "timestamp": "2026-10-27T14:58:38.368Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-reviews/5602d487-12d1-44f1-b879-6fa4855d43a8",
+      "body": {
+        "success": true,
+        "data": {
+          "id": "5602d487-12d1-44f1-b879-6fa4855d43a8",
+          "proposalId": "201335e2-9fe4-49b6-bc2e-1c805f44803a",
+          "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+          "title": "[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt",
+          "studentName": "Sinh viên B",
+          "studentCode": "S3S17930224293231",
+          "proposalStatus": "SUBMITTED",
+          "proposalRevision": 5,
+          "revision": 0,
+          "state": "ASSIGNED",
+          "roundNumber": 3,
+          "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+          "groupName": "hkt",
+          "versionId": "ff737944-46c5-44c4-98c0-91f686ce8879",
+          "versionNumber": 3,
+          "version": {
+            "content": {
+              "omitted": true,
+              "type": "object",
+              "keys": [
+                "scope",
+                "tools",
+                "endsAt",
+                "schedule",
+                "startsAt",
+                "objectives",
+                "mainContents",
+                "schemaVersion",
+                "expectedResults"
+              ],
+              "jsonLength": 792
+            },
+            "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+            "submittedAt": "2026-10-27T02:57:34.593Z",
+            "submittedByUserId": "673a8486-a8a4-4de6-9193-0527d81ae886"
+          },
+          "assignedAt": "2026-10-27T13:14:34.712Z",
+          "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+          "startedAt": null,
+          "startedByUserId": null,
+          "routingSnapshot": {
+            "reason": "gtdf",
+            "revision": 0,
+            "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+            "groupRevision": 0,
+            "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+          },
+          "phaseSnapshot": {
+            "endsAt": "2027-01-25T02:57:33.550Z",
+            "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+            "revision": 0,
+            "startsAt": "2026-10-26T02:57:33.550Z"
+          },
+          "supersededByReviewId": null,
+          "allowedActions": [
+            "assign"
+          ],
+          "comments": [],
+          "decision": null
+        },
+        "timestamp": "2026-10-27T14:58:38.385Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/topic/reviews/db4d0153-fbbc-4baa-a8e5-f94d843592d2"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@vite/client"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/main.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-dom_client.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-5TQEKTOH.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-SNAQBZPT.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-AAEUBMPE.js?v=451a0809"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@react-refresh"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/node_modules/.pnpm/vite@5.4.21_@types+node@22.20.5_terser@5.51.2/node_modules/vite/dist/client/env.mjs"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/App.tsx?t=1793111871054"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/index.css?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/@tanstack_react-query.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/sonner.js?v=451a0809"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/chunk-QK4RWHDV.js?v=451a0809"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/routes.tsx?t=1793111871054"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/pages.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/pages.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/pages.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/pages.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/pages.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/pages.tsx?t=1793111871054"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/axios.js?v=451a0809"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/layouts/WorkspaceLayout.tsx?t=1793111871054"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-workspace.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/app/router/route-manifest.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/kit.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-api-session.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-session.ts"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/lucide-react.js?v=451a0809"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/index.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/task-submissions/api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/components.tsx"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/zod.js?v=451a0809"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/error-message.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/guidance-tasks/api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-reviews/components.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-dossiers/components.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/proposal-versions/components.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/components.tsx?t=1793111826894"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/components/ui/Button.tsx"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.tsx?t=1793111871054"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/store.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/auth/services/auth-service.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/hooks/use-demo.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/review-groups.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-reviews.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-versions.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step2.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/step1.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/proposal-dossiers.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-tasks.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/task-submissions.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/@fs/D:/Project1/BTL/shared/src/contracts/guidance-reviews.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/http-client.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/workspace.css"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/review-groups/shell-data.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/snapshot-api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/seed.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/data/schemas.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/shared/api/api-data.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/assignment-api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/topic/services/topic-api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/src/features/registration/services/registration-api.ts"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Regular.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Bold.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-Medium.ttf"
+    },
+    {
+      "status": 304,
+      "method": "GET",
+      "url": "http://127.0.0.1:5173/fonts/BeVietnamPro-SemiBold.ttf"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/notifications/me"
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-review-options/terms",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "name": "DEMO 4–8 · Hồ sơ, xét duyệt và hướng dẫn",
+            "status": "IN_PROGRESS"
+          },
+          {
+            "id": "726d8edf-bac0-47c3-bb9e-f8ce0b39cbcc",
+            "name": "Đợt mẫu kiểm tra giao diện sau merge",
+            "status": "OPEN_REGISTRATION"
+          }
+        ],
+        "timestamp": "2026-10-27T14:58:38.713Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposal-reviews/db4d0153-fbbc-4baa-a8e5-f94d843592d2",
+      "body": {
+        "success": true,
+        "data": {
+          "id": "db4d0153-fbbc-4baa-a8e5-f94d843592d2",
+          "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+          "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+          "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+          "studentName": "Sinh viên A",
+          "studentCode": "S3S17930224293230",
+          "proposalStatus": "SUBMITTED",
+          "proposalRevision": 9,
+          "revision": 2,
+          "state": "DECIDED",
+          "roundNumber": 1,
+          "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+          "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+          "versionId": "5105bfb3-6715-462c-a360-01ea551abb5c",
+          "versionNumber": 3,
+          "version": {
+            "content": {
+              "omitted": true,
+              "type": "object",
+              "keys": [
+                "scope",
+                "tools",
+                "endsAt",
+                "schedule",
+                "startsAt",
+                "objectives",
+                "mainContents",
+                "schemaVersion",
+                "expectedResults"
+              ],
+              "jsonLength": 792
+            },
+            "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+            "submittedAt": "2026-10-27T02:57:34.272Z",
+            "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+          },
+          "assignedAt": "2026-10-27T02:57:39.813Z",
+          "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+          "startedAt": "2026-10-27T02:57:42.077Z",
+          "startedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+          "routingSnapshot": {
+            "reason": null,
+            "revision": 0,
+            "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+            "groupRevision": 0,
+            "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+          },
+          "phaseSnapshot": {
+            "endsAt": "2027-01-25T02:57:33.550Z",
+            "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+            "revision": 0,
+            "startsAt": "2026-10-26T02:57:33.550Z"
+          },
+          "supersededByReviewId": null,
+          "allowedActions": [],
+          "comments": [],
+          "decision": {
+            "id": "59144932-623a-4bfb-a2fa-924bb90a8093",
+            "versionId": "5105bfb3-6715-462c-a360-01ea551abb5c",
+            "decision": "REVISION_REQUIRED",
+            "comment": "Bổ sung mục tiêu đo được và kế hoạch kiểm thử. Dữ liệu demo để sinh viên chỉnh sửa, phản hồi và nộp lại.",
+            "decidedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+            "deciderName": "gv003",
+            "decidedAt": "2026-10-27T02:57:42.867Z"
+          }
+        },
+        "timestamp": "2026-10-27T14:58:38.732Z"
+      }
+    },
+    {
+      "status": 200,
+      "method": "GET",
+      "url": "http://127.0.0.1:3000/api/proposals/a7bc28c0-873e-4dde-9a2d-ca97f351895d/review-history",
+      "body": {
+        "success": true,
+        "data": [
+          {
+            "id": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+            "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+            "studentName": "Sinh viên A",
+            "studentCode": "S3S17930224293230",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 9,
+            "revision": 0,
+            "state": "ASSIGNED",
+            "roundNumber": 3,
+            "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+            "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+            "versionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+            "versionNumber": 4,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T13:10:51.285Z",
+              "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+            },
+            "assignedAt": "2026-10-27T13:13:51.856Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": null,
+            "startedByUserId": null,
+            "routingSnapshot": {
+              "reason": "thichs",
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": null,
+            "allowedActions": [
+              "assign"
+            ],
+            "comments": [],
+            "decision": null
+          },
+          {
+            "id": "2489f2e1-0b1b-4d32-9b7d-dbfab98c5c8a",
+            "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+            "studentName": "Sinh viên A",
+            "studentCode": "S3S17930224293230",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 9,
+            "revision": 2,
+            "state": "SUPERSEDED",
+            "roundNumber": 2,
+            "groupId": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+            "groupName": "hkt",
+            "versionId": "79d50a52-532a-4661-8dc1-8c9aedafdc34",
+            "versionNumber": 4,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T13:10:51.285Z",
+              "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+            },
+            "assignedAt": "2026-10-27T13:13:09.714Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": null,
+            "startedByUserId": null,
+            "routingSnapshot": {
+              "reason": null,
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": "2d7c22c3-0c38-4fd6-be9b-580ebb5b9aad",
+            "allowedActions": [],
+            "comments": [],
+            "decision": null
+          },
+          {
+            "id": "db4d0153-fbbc-4baa-a8e5-f94d843592d2",
+            "proposalId": "a7bc28c0-873e-4dde-9a2d-ca97f351895d",
+            "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+            "title": "[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa",
+            "studentName": "Sinh viên A",
+            "studentCode": "S3S17930224293230",
+            "proposalStatus": "SUBMITTED",
+            "proposalRevision": 9,
+            "revision": 2,
+            "state": "DECIDED",
+            "roundNumber": 1,
+            "groupId": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+            "groupName": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm",
+            "versionId": "5105bfb3-6715-462c-a360-01ea551abb5c",
+            "versionNumber": 3,
+            "version": {
+              "content": {
+                "omitted": true,
+                "type": "object",
+                "keys": [
+                  "scope",
+                  "tools",
+                  "endsAt",
+                  "schedule",
+                  "startsAt",
+                  "objectives",
+                  "mainContents",
+                  "schemaVersion",
+                  "expectedResults"
+                ],
+                "jsonLength": 792
+              },
+              "contentHash": "4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1",
+              "submittedAt": "2026-10-27T02:57:34.272Z",
+              "submittedByUserId": "53ae1a49-413a-4d87-b2e7-a8f4fdc0a568"
+            },
+            "assignedAt": "2026-10-27T02:57:39.813Z",
+            "assignedByUserId": "c0deb095-5436-47ee-8375-83dc0e206814",
+            "startedAt": "2026-10-27T02:57:42.077Z",
+            "startedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+            "routingSnapshot": {
+              "reason": null,
+              "revision": 0,
+              "departmentId": "e10282e3-59c0-408e-9f54-853f2a6c6609",
+              "groupRevision": 0,
+              "researchAreaId": "be9ec0b5-76f6-4a58-889b-2f275c68f1ab"
+            },
+            "phaseSnapshot": {
+              "endsAt": "2027-01-25T02:57:33.550Z",
+              "phaseId": "50fd302e-94ce-45f8-867c-636fa40162f0",
+              "revision": 0,
+              "startsAt": "2026-10-26T02:57:33.550Z"
+            },
+            "supersededByReviewId": null,
+            "allowedActions": [],
+            "comments": [],
+            "decision": {
+              "id": "59144932-623a-4bfb-a2fa-924bb90a8093",
+              "versionId": "5105bfb3-6715-462c-a360-01ea551abb5c",
+              "decision": "REVISION_REQUIRED",
+              "comment": "Bổ sung mục tiêu đo được và kế hoạch kiểm thử. Dữ liệu demo để sinh viên chỉnh sửa, phản hồi và nộp lại.",
+              "decidedByUserId": "762914cd-7505-45c8-95b6-5c82db6684af",
+              "deciderName": "gv003",
+              "decidedAt": "2026-10-27T02:57:42.867Z"
+            }
+          }
+        ],
+        "timestamp": "2026-10-27T14:58:38.836Z"
+      }
+    }
+  ],
+  "pageErrors": [],
+  "console": [
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.",
+      "location": {
+        "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809",
+        "line": 4416,
+        "column": 12,
+        "lineNumber": 4416,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.",
+      "location": {
+        "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809",
+        "line": 4416,
+        "column": 12,
+        "lineNumber": 4416,
+        "columnNumber": 12
+      }
+    },
+    {
+      "type": "warning",
+      "text": "⚠️ React Router Future Flag Warning: React Router will begin wrapping state updates in `React.startTransition` in v7. You can use the `v7_startTransition` future flag to opt-in early. For more information, see https://reactrouter.com/v6/upgrading/future#v7_starttransition.",
+      "location": {
+        "url": "http://127.0.0.1:5173/node_modules/.vite/deps/react-router-dom.js?v=451a0809",
+        "line": 4416,
+        "column": 12,
+        "lineNumber": 4416,
+        "columnNumber": 12
+      }
+    }
+  ],
+  "failedRequests": [],
+  "observations": {
+    "assignmentInitial": {
+      "url": "http://127.0.0.1:5173/topic/review-assignments/201335e2-9fe4-49b6-bc2e-1c805f44803a",
+      "groupValue": "",
+      "options": [
+        {
+          "value": "",
+          "text": "Khoa chọn nhóm duyệt",
+          "disabled": false
+        },
+        {
+          "value": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+          "text": "Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm · 2 người hợp lệ · 2 khớp hướng · 1 vòng active",
+          "disabled": false
+        },
+        {
+          "value": "9c926490-89d0-4443-be44-c3e14cb7ca8e",
+          "text": "hkt · 1 người hợp lệ · 1 khớp hướng · 1 vòng active",
+          "disabled": false
+        }
+      ],
+      "reasonVisible": true,
+      "reasonRequired": "",
+      "text": "Tìm kiếm\n← Danh sách đề cương\n[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt\n\nSinh viên B · S3S17930224293231 · Chờ duyệt\n\nPhiên bản đã nộp v3 · 09:57:34 27/10/2026\nHash: 4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1\n\nKhoa xác nhận phân công — v3\n\nDanh sách cùng đợt và bộ môn theo hướng đề tài. Khớp chuyên môn là thông tin tham khảo; không tự chọn nhóm hoặc áp dụng trọng số.\n\nNhóm duyệt\nKhoa chọn nhóm duyệt\nNhóm duyệt DEMO 4–8 · Công nghệ phần mềm · 2 người hợp lệ · 2 khớp hướng · 1 vòng active\nhkt · 1 người hợp lệ · 1 khớp hướng · 1 vòng active\nLý do phân lạiVòng cũ được giữ lịch sử và thay bằng một vòng mới.\nXác nhận phân lại\nNội dung phiên bản được xét\nPhạm vi\nMột khoa, một đợt đồ án; phân quyền giáo vụ, sinh viên, GVHD và nhóm duyệt.\nCông cụ\nReact, TypeScript, NestJS, Prisma, PostgreSQL và Playwright\nKết thúc\n2027-01-25T02:57:33.550Z\nKế hoạch thực hiện\nMốc\nPhân tích, phát triển và kiểm thử\nKết thúc\n2027-01-25T02:57:33.550Z\nBắt đầu\n2026-10-26T02:57:33.550Z\nSản phẩm\nỨng dụng, báo cáo PDF và mã nguồn ZIP\nBắt đầu\n2026-10-26T02:57:33.550Z\nMục tiêu\nThiết kế và xây dựng phần mềm quản lý hướng dẫn đồ án tốt nghiệp, hỗ trợ quy trình có kiểm soát và truy vết.\nNội dung chính\nKhảo sát quy trình; thiết kế dữ liệu; phát triển API và giao diện; kiểm thử chức năng và phân quyền; hoàn thiện tài liệu.\nPhiên bản cấu trúc\n1\nKết quả dự kiến\nMã nguồn, cơ sở dữ liệu, báo cáo PDF, bộ kiểm thử và hướng dẫn sử dụng.\nLịch sử các vòng trong phạm vi truy cập\nVòng 3 · v3 · hkt\n\nĐã phân nhóm · Chưa có kết luận · Phân lúc 20:14:34 27/10/2026 · Actor c0deb095-5436-47ee-8375-83dc0e206814\n\nVòng 2 · v3 · Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm\n\nĐã thay thế · Chưa có kết luận · Phân lúc 20:14:10 27/10/2026 · Actor c0deb095-5436-47ee-8375-83dc0e206814\n\nVòng 1 · v3 · Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm\n\nĐã thay thế · Chưa có kết luận · Phân lúc 09:57:43 27/10/2026 · Actor c0deb095-5436-47ee-8375-83dc0e206814"
+    },
+    "assignmentDraft": {
+      "value": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+      "confirmText": "Xác nhận phân lại"
+    },
+    "afterCancel": {
+      "groupValue": "",
+      "reason": ""
+    },
+    "activeReview": {
+      "url": "http://127.0.0.1:5173/topic/reviews/5602d487-12d1-44f1-b879-6fa4855d43a8",
+      "text": "Tìm kiếm\n← Inbox / danh sách đề cương\n[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt\n\nSinh viên B · S3S17930224293231 · hkt\n\nĐang xem phiên bản v3 · Vòng 3\n\nĐã phân nhóm · Đề cương: Chờ duyệt\n\nVersion ID: ff737944-46c5-44c4-98c0-91f686ce8879\nHash: 4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1\nNộp lúc: 09:57:34 27/10/2026\n\nKhoa điều chỉnh phân công →\nNội dung phiên bản được xét\nPhạm vi\nMột khoa, một đợt đồ án; phân quyền giáo vụ, sinh viên, GVHD và nhóm duyệt.\nCông cụ\nReact, TypeScript, NestJS, Prisma, PostgreSQL và Playwright\nKết thúc\n2027-01-25T02:57:33.550Z\nKế hoạch thực hiện\nMốc\nPhân tích, phát triển và kiểm thử\nKết thúc\n2027-01-25T02:57:33.550Z\nBắt đầu\n2026-10-26T02:57:33.550Z\nSản phẩm\nỨng dụng, báo cáo PDF và mã nguồn ZIP\nBắt đầu\n2026-10-26T02:57:33.550Z\nMục tiêu\nThiết kế và xây dựng phần mềm quản lý hướng dẫn đồ án tốt nghiệp, hỗ trợ quy trình có kiểm soát và truy vết.\nNội dung chính\nKhảo sát quy trình; thiết kế dữ liệu; phát triển API và giao diện; kiểm thử chức năng và phân quyền; hoàn thiện tài liệu.\nPhiên bản cấu trúc\n1\nKết quả dự kiến\nMã nguồn, cơ sở dữ liệu, báo cáo PDF, bộ kiểm thử và hướng dẫn sử dụng.\nNhận xét thành viên (0)\n\nNhận xét tham khảo; kết luận chung được lưu riêng. Chưa áp dụng tiêu chí hoặc kết quả cá nhân.\n\nChưa có nhận xét.\n\nKết luận chung của vòng\n\nChưa có kết luận chung. Mỗi vòng chỉ có một quyết định có hiệu lực.\n\nĐang tải đề cương…",
+      "startButtons": 0,
+      "commentFields": 0,
+      "decisionControls": 0
+    },
+    "afterReadReload": "Tìm kiếm\n← Inbox / danh sách đề cương\n[DEMO 4–8] Quản lý đồ án — chờ nhóm duyệt\n\nSinh viên B · S3S17930224293231 · hkt\n\nĐang xem phiên bản v3 · Vòng 3\n\nĐã phân nhóm · Đề cương: Chờ duyệt\n\nVersion ID: ff737944-46c5-44c4-98c0-91f686ce8879\nHash: 4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1\nNộp lúc: 09:57:34 27/10/2026\n\nKhoa điều chỉnh phân công →\nNội dung phiên bản được xét\nPhạm vi\nMột khoa, một đợt đồ án; phân quyền giáo vụ, sinh viên, GVHD và nhóm duyệt.\nCông cụ\nReact, TypeScript, NestJS, Prisma, PostgreSQL và Playwright\nKết thúc\n2027-01-25T02:57:33.550Z\nKế hoạch thực hiện\nMốc\nPhân tích, phát triển và kiểm thử\nKết thúc\n2027-01-25T02:57:33.550Z\nBắt đầu\n2026-10-26T02:57:33.550Z\nSản phẩm\nỨng dụng, báo cáo PDF và mã nguồn ZIP\nBắt đầu\n2026-10-26T02:57:33.550Z\nMục tiêu\nThiết kế và xây dựng phần mềm quản lý hướng dẫn đồ án tốt nghiệp, hỗ trợ quy trình có kiểm soát và truy vết.\nNội dung chính\nKhảo sát quy trình; thiết kế dữ liệu; phát triển API và giao diện; kiểm thử chức năng và phân quyền; hoàn thiện tài liệu.\nPhiên bản cấu trúc\n1\nKết quả dự kiến\nMã nguồn, cơ sở dữ liệu, báo cáo PDF, bộ kiểm thử và hướng dẫn sử dụng.\nNhận xét thành viên (0)\n\nNhận xét tham khảo; kết luận chung được lưu riêng. Chưa áp dụng tiêu chí hoặc kết quả cá nhân.\n\nChưa có nhận xét.\n\nKết luận chung của vòng\n\nChưa có kết luận chung. Mỗi vòng chỉ có một quyết định có hiệu lực.\n\nĐang tải đề cương…",
+    "oldDecided": {
+      "url": "http://127.0.0.1:5173/topic/reviews/db4d0153-fbbc-4baa-a8e5-f94d843592d2",
+      "text": "Tìm kiếm\n← Inbox / danh sách đề cương\n[DEMO 4–8] Quản lý đồ án — cần chỉnh sửa\n\nSinh viên A · S3S17930224293230 · Nhóm duyệt DEMO 4–8 · Công nghệ phần mềm\n\nĐang xem phiên bản v3 · Vòng 1\n\nĐã kết luận · Đề cương: Chờ duyệt\n\nVersion ID: 5105bfb3-6715-462c-a360-01ea551abb5c\nHash: 4a928358cbda3c5a1f74f9327a49312bd0c4fae13faf7e894a788e9eedda40a1\nNộp lúc: 09:57:34 27/10/2026\n\nNội dung phiên bản được xét\nPhạm vi\nMột khoa, một đợt đồ án; phân quyền giáo vụ, sinh viên, GVHD và nhóm duyệt.\nCông cụ\nReact, TypeScript, NestJS, Prisma, PostgreSQL và Playwright\nKết thúc\n2027-01-25T02:57:33.550Z\nKế hoạch thực hiện\nMốc\nPhân tích, phát triển và kiểm thử\nKết thúc\n2027-01-25T02:57:33.550Z\nBắt đầu\n2026-10-26T02:57:33.550Z\nSản phẩm\nỨng dụng, báo cáo PDF và mã nguồn ZIP\nBắt đầu\n2026-10-26T02:57:33.550Z\nMục tiêu\nThiết kế và xây dựng phần mềm quản lý hướng dẫn đồ án tốt nghiệp, hỗ trợ quy trình có kiểm soát và truy vết.\nNội dung chính\nKhảo sát quy trình; thiết kế dữ liệu; phát triển API và giao diện; kiểm thử chức năng và phân quyền; hoàn thiện tài liệu.\nPhiên bản cấu trúc\n1\nKết quả dự kiến\nMã nguồn, cơ sở dữ liệu, báo cáo PDF, bộ kiểm thử và hướng dẫn sử dụng.\nNhận xét thành viên (0)\n\nNhận xét tham khảo; kết luận chung được lưu riêng. Chưa áp dụng tiêu chí hoặc kết quả cá nhân.\n\nChưa có nhận xét.\n\nKết luận chung của vòng\nYêu cầu sửa\n\ngv003 · 09:57:42 27/10/2026\n\nBổ sung mục tiêu đo được và kế hoạch kiểm thử. Dữ liệu demo để sinh viên chỉnh sửa, phản hồi và nộp lại.\n\nĐang tải đề cương…",
+      "textareas": 0,
+      "decideControls": 0
+    }
+  },
+  "finishedAt": "2026-10-27T14:58:41.831Z"
+}

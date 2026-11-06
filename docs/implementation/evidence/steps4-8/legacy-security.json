@@ -1,0 +1,42 @@
+{
+  "result": "FAIL",
+  "syntheticDataOnly": true,
+  "findings": [
+    {
+      "actor": "unprivileged",
+      "method": "GET",
+      "path": "/topics/term/qa-t1",
+      "expected": "403/404 or no out-of-scope academic/owner data",
+      "actualStatus": 200,
+      "exposedRows": 2,
+      "result": "FAIL"
+    },
+    {
+      "actor": "unprivileged",
+      "method": "GET",
+      "path": "/registrations/term/qa-t1",
+      "expected": "403/404 or no out-of-scope academic/owner data",
+      "actualStatus": 200,
+      "exposedRows": 2,
+      "result": "FAIL"
+    },
+    {
+      "actor": "student3",
+      "method": "GET",
+      "path": "/topics/term/qa-t1",
+      "expected": "403/404 or no out-of-scope academic/owner data",
+      "actualStatus": 200,
+      "exposedRows": 2,
+      "result": "FAIL"
+    },
+    {
+      "actor": "student3",
+      "method": "GET",
+      "path": "/registrations/term/qa-t1",
+      "expected": "403/404 or no out-of-scope academic/owner data",
+      "actualStatus": 200,
+      "exposedRows": 2,
+      "result": "FAIL"
+    }
+  ]
+}

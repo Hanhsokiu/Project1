@@ -1,0 +1,39 @@
+[
+  {
+    "path": "/api/proposals/p-page-01/finalize",
+    "key": "a2ca43da-a494-40c8-8975-53b731e5d89a",
+    "body": {
+      "expectedProposalRevision": 3,
+      "expectedDossierRevision": 0,
+      "approvedVersionId": "v1-page-01",
+      "templateVersion": "project1-docx-individual-v1"
+    }
+  },
+  {
+    "path": "/api/proposals/p-page-01/dossier/receipt",
+    "key": "b0c864e1-aa74-47e4-a9b2-d8f3531490a1",
+    "body": {
+      "expectedRevision": 1,
+      "finalizationId": "9083ca8f-b927-4d1b-ab2f-9ac826ff2943",
+      "note": "QA note giữ nguyên khi stale revision"
+    }
+  },
+  {
+    "path": "/api/proposals/p-page-01/dossier/receipt",
+    "key": "eba217ca-adc5-44e1-9ed8-9c27f337f4ab",
+    "body": {
+      "expectedRevision": 2,
+      "finalizationId": "9083ca8f-b927-4d1b-ab2f-9ac826ff2943",
+      "note": "QA note giữ nguyên khi stale revision"
+    }
+  },
+  {
+    "path": "/api/proposals/p-student/dossier/receipt",
+    "key": "16e8ff72-cd5c-4f43-8da9-86ba791a74f0",
+    "body": {
+      "expectedRevision": 6,
+      "finalizationId": "0855599c-b878-4290-9291-c797b817e6b3",
+      "note": "QA biên nhận riêng của v2 sau chốt lại"
+    }
+  }
+]

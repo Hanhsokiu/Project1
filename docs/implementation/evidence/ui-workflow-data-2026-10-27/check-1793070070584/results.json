@@ -1,0 +1,124 @@
+{
+  "startedAt": "2026-10-27T03:01:10.881Z",
+  "origin": "http://127.0.0.1:5173",
+  "termId": "d4e2575a-c68d-40f7-8398-3fdcf34af59b",
+  "readOnly": true,
+  "checks": [
+    {
+      "name": "Nhóm duyệt có dữ liệu và có thao tác tạo nhóm",
+      "actual": "5cab3d95-87d6-404b-92a9-6b30e53d8b85",
+      "result": "PASS"
+    },
+    {
+      "name": "Bộ lọc xét duyệt trả đúng 1 hồ sơ chờ duyệt, bỏ lọc có 4 hồ sơ",
+      "actual": "4 → 1 → 4",
+      "result": "PASS"
+    },
+    {
+      "name": "gv003 mở đúng vòng chờ duyệt và có nút bắt đầu",
+      "actual": "54d650c9-5a7b-4c7a-a2e7-c3a9e30f1d0f",
+      "result": "PASS"
+    },
+    {
+      "name": "sv001 có nội dung, phản hồi kết luận và được lưu bản sửa",
+      "actual": "REVISION_REQUIRED",
+      "result": "PASS"
+    },
+    {
+      "name": "sv002 không sửa trực tiếp bản SEALED đang chờ duyệt",
+      "actual": "read-only as required",
+      "result": "PASS"
+    },
+    {
+      "name": "sv003 sẵn sàng chốt, không chốt hộ người dùng",
+      "actual": "8c447530-71bb-4033-a3be-9ec680a6b1e3",
+      "result": "PASS"
+    },
+    {
+      "name": "sv004 có bản chốt/PDF và thao tác tiếp nhận giấy vẫn chưa bị tiêu thụ",
+      "actual": "FINALIZED, receipt absent",
+      "result": "PASS"
+    },
+    {
+      "name": "sv004 thấy đủ 5 nhiệm vụ và phần báo cáo tuần",
+      "actual": "5 task states",
+      "result": "PASS"
+    },
+    {
+      "name": "Đổi đợt ở header thực sự đổi dữ liệu và quay lại được",
+      "actual": "old empty → demo populated",
+      "result": "PASS"
+    },
+    {
+      "name": "Danh sách có dữ liệu không tràn ngang trên mobile",
+      "actual": "390px",
+      "result": "PASS"
+    },
+    {
+      "name": "Task cần sửa mở được form upload/nộp lại thật",
+      "actual": "PDF and ZIP enabled",
+      "result": "PASS"
+    },
+    {
+      "name": "GVHD có bài chờ đánh giá và form đánh giá thao tác được",
+      "actual": "pending submission",
+      "result": "PASS"
+    }
+  ],
+  "axe": [
+    {
+      "name": "step4-populated-list",
+      "violations": [
+        {
+          "id": "color-contrast",
+          "impact": "serious",
+          "nodes": [
+            {
+              "target": [
+                ".rg-member-count > span:nth-child(2)"
+              ],
+              "html": "<span>2 giảng viên</span>",
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.29 (foreground color: #6d7b90, background color: #ffffff, font size: 9.0pt (12px), font weight: normal). Expected contrast ratio of 4.5:1"
+            },
+            {
+              "target": [
+                ".rg-round-badge"
+              ],
+              "html": "<span class=\"rg-round-badge rg-round-badge-active\"><i></i>1 vòng đang duyệt</span>",
+              "summary": "Fix any of the following:\n  Element has insufficient color contrast of 4.12 (foreground color: #a46a12, background color: #fff4d9, font size: 7.5pt (10px), font weight: normal). Expected contrast ratio of 4.5:1"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "step4-populated-editor",
+      "violations": []
+    },
+    {
+      "name": "step5-ready-review",
+      "violations": []
+    },
+    {
+      "name": "step6-revision-editor",
+      "violations": []
+    },
+    {
+      "name": "step8-populated-tasks",
+      "violations": []
+    },
+    {
+      "name": "step8-resubmission-form",
+      "violations": []
+    },
+    {
+      "name": "step8-advisor-review",
+      "violations": []
+    }
+  ],
+  "pageErrors": [],
+  "httpErrors": [],
+  "result": "FAIL",
+  "failure": "expect(locator).toBeVisible() failed\n\nLocator: getByText('Nội dung: Đối chiếu mục tiêu, mô hình dữ liệu và kết quả kiểm thử của sinh viên.', { exact: true })\nExpected: visible\nError: strict mode violation: getByText('Nội dung: Đối chiếu mục tiêu, mô hình dữ liệu và kết quả kiểm thử của sinh viên.', { exact: true }) resolved to 2 elements:\n    1) <p class=\"whitespace-pre-wrap break-words\">Nội dung: Đối chiếu mục tiêu, mô hình dữ liệu và …</p> aka getByRole('paragraph').filter({ hasText: 'Nội dung: Đối chiếu mục tiêu' })\n    2) <p class=\"whitespace-pre-wrap break-words\">Nội dung: Đối chiếu mục tiêu, mô hình dữ liệu và …</p> aka getByRole('group').getByText('Nội dung: Đối chiếu mục tiêu')\n\nCall log:\n  - Expect \"toBeVisible\" getByText('Nội dung: Đối chiếu mục tiêu, mô hình dữ liệu và kết quả kiểm thử của sinh viên.', { exact: true }) with timeout 5000ms\n  - waiting for getByText('Nội dung: Đối chiếu mục tiêu, mô hình dữ liệu và kết quả kiểm thử của sinh viên.', { exact: true })\n",
+  "finishedAt": "2026-10-27T03:01:37.084Z"
+}

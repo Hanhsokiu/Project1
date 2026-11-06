@@ -1,0 +1,259 @@
+{
+  "suites": [
+    {
+      "suite": "workflow",
+      "finishedAt": "2026-10-28T02:52:52.125Z",
+      "method": "local Playwright + real Edge",
+      "frontend": "http://127.0.0.1:50185",
+      "database": "btl_pr2b_step6_1793155911083_8ed178_live",
+      "passed": 4,
+      "failed": 1,
+      "consoleErrors": 10,
+      "pageErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "suite": "workflow-resumed",
+      "finishedAt": "2026-10-28T02:53:41.194Z",
+      "method": "local Playwright + real Edge",
+      "frontend": "http://127.0.0.1:50185",
+      "database": "btl_pr2b_step6_1793155911083_8ed178_live",
+      "passed": 10,
+      "failed": 0,
+      "consoleErrors": 10,
+      "pageErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "suite": "roles-ui",
+      "finishedAt": "2026-10-28T02:56:05.319Z",
+      "method": "local Playwright + real Edge",
+      "frontend": "http://127.0.0.1:50185",
+      "database": "btl_pr2b_step6_1793155911083_8ed178_live",
+      "passed": 15,
+      "failed": 0,
+      "consoleErrors": 56,
+      "pageErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "suite": "snapshots",
+      "finishedAt": "2026-10-28T02:55:51.850Z",
+      "method": "local Playwright + real Edge",
+      "frontend": "http://127.0.0.1:50185",
+      "database": "btl_pr2b_step6_1793155911083_8ed178_live",
+      "passed": 9,
+      "failed": 0,
+      "consoleErrors": 7,
+      "pageErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "suite": "boundaries",
+      "finishedAt": "2026-10-28T02:58:42.326Z",
+      "method": "local Playwright + real Edge",
+      "frontend": "http://127.0.0.1:50185",
+      "database": "btl_pr2b_step6_1793155911083_8ed178_live",
+      "passed": 10,
+      "failed": 1,
+      "consoleErrors": 2,
+      "pageErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "suite": "final-cases",
+      "finishedAt": "2026-10-28T06:51:29.478Z",
+      "method": "local Playwright + real Edge",
+      "frontend": "http://127.0.0.1:50185",
+      "database": "btl_pr2b_step6_1793155911083_8ed178_live",
+      "passed": 5,
+      "failed": 3,
+      "consoleErrors": 20,
+      "pageErrors": 0,
+      "failedRequests": 0
+    },
+    {
+      "suite": "rechecks",
+      "finishedAt": "2026-10-28T06:52:32.116Z",
+      "method": "local Playwright + real Edge",
+      "frontend": "http://127.0.0.1:50185",
+      "database": "btl_pr2b_step6_1793155911083_8ed178_live",
+      "passed": 4,
+      "failed": 0,
+      "consoleErrors": 10,
+      "pageErrors": 0,
+      "failedRequests": 0
+    }
+  ],
+  "events": [
+    {
+      "kind": "console-warning",
+      "count": 49
+    },
+    {
+      "kind": "http-error",
+      "count": 115
+    },
+    {
+      "kind": "console-error",
+      "count": 115
+    }
+  ],
+  "http": [
+    {
+      "request": "GET /api/assignments/term/qa-t2/plan 403",
+      "count": 9,
+      "phases": [
+        "login-faculty",
+        "login-reviewer",
+        "login-faculty2"
+      ]
+    },
+    {
+      "request": "GET /api/assignments/term/qa-t1/plan 403",
+      "count": 9,
+      "phases": [
+        "login-faculty",
+        "login-reviewer",
+        "login-faculty2"
+      ]
+    },
+    {
+      "request": "GET /api/assignments/term/qa-t2/results 400",
+      "count": 22,
+      "phases": [
+        "login-reviewer",
+        "login-outsider",
+        "login-foreign",
+        "login-advisor",
+        "T47-SPA-no-draft-feedback-or-compare-leak",
+        "login-page-21",
+        "T47-SPA-recheck"
+      ]
+    },
+    {
+      "request": "GET /api/assignments/term/qa-t1/results 400",
+      "count": 22,
+      "phases": [
+        "login-reviewer",
+        "login-outsider",
+        "login-foreign",
+        "login-advisor",
+        "T47-SPA-no-draft-feedback-or-compare-leak",
+        "login-page-21"
+      ]
+    },
+    {
+      "request": "GET /api/registrations/term/qa-t1/me 403",
+      "count": 16,
+      "phases": [
+        "login-student",
+        "T17-other-owner-denied",
+        "login-student2",
+        "T44-large-diff-mobile-recheck"
+      ]
+    },
+    {
+      "request": "GET /api/proposals/p-student2/editing-context 404",
+      "count": 6,
+      "phases": [
+        "T17-other-owner-denied",
+        "login-outsider",
+        "T17-outsider-no-draft-access",
+        "login-foreign",
+        "login-faculty2"
+      ]
+    },
+    {
+      "request": "GET /api/terms 403",
+      "count": 4,
+      "phases": [
+        "login-admin",
+        "login-unprivileged",
+        "T19-unprivileged-no-bypass"
+      ]
+    },
+    {
+      "request": "GET /api/semesters 403",
+      "count": 4,
+      "phases": [
+        "login-admin",
+        "login-unprivileged",
+        "T19-unprivileged-no-bypass"
+      ]
+    },
+    {
+      "request": "GET /api/training-systems 403",
+      "count": 4,
+      "phases": [
+        "login-admin",
+        "T19-unprivileged-no-bypass"
+      ]
+    },
+    {
+      "request": "GET /api/research-areas 403",
+      "count": 4,
+      "phases": [
+        "login-admin",
+        "T19-unprivileged-no-bypass"
+      ]
+    },
+    {
+      "request": "GET /api/departments 403",
+      "count": 4,
+      "phases": [
+        "login-admin",
+        "T19-unprivileged-no-bypass"
+      ]
+    },
+    {
+      "request": "GET /api/students 403",
+      "count": 2,
+      "phases": [
+        "login-admin"
+      ]
+    },
+    {
+      "request": "GET /api/lecturers 403",
+      "count": 4,
+      "phases": [
+        "login-admin",
+        "T19-unprivileged-no-bypass"
+      ]
+    },
+    {
+      "request": "GET /api/accounts 403",
+      "count": 2,
+      "phases": [
+        "login-admin"
+      ]
+    },
+    {
+      "request": "GET /api/proposals/not-a-proposal/editing-context 404",
+      "count": 2,
+      "phases": [
+        "T46-404-recovery"
+      ]
+    },
+    {
+      "request": "POST /api/proposals/p-student2/versions 409",
+      "count": 1,
+      "phases": [
+        "login-advisor"
+      ]
+    }
+  ],
+  "api": {
+    "result": "PASS",
+    "checks": 24,
+    "step5PreludeGroups": 1,
+    "step6SpecificGroups": 23,
+    "step5ProducerChecks": 28
+  },
+  "consoleMessages": [
+    "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+    "Failed to load resource: the server responded with a status of 400 (Bad Request)",
+    "Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "Failed to load resource: the server responded with a status of 409 (Conflict)"
+  ]
+}

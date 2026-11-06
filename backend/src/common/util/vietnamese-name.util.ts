@@ -12,17 +12,20 @@ export class VietnameseNameUtil {
    * Tách họ và tên đệm, tên chính
    * Ví dụ: "Nguyễn Thị Phương Anh" -> { firstName: "Anh", lastName: "Nguyễn Thị Phương" }
    */
-  static splitFullName(fullName: string): { firstName: string; lastName: string } {
-    const trimmed = (fullName || '').trim();
-    if (!trimmed) return { firstName: '', lastName: '' };
+  static splitFullName(fullName: string): {
+    firstName: string;
+    lastName: string;
+  } {
+    const trimmed = (fullName || "").trim();
+    if (!trimmed) return { firstName: "", lastName: "" };
 
     const parts = trimmed.split(/\s+/);
     if (parts.length === 1) {
-      return { firstName: parts[0], lastName: '' };
+      return { firstName: parts[0], lastName: "" };
     }
 
     const firstName = parts[parts.length - 1];
-    const lastName = parts.slice(0, parts.length - 1).join(' ');
+    const lastName = parts.slice(0, parts.length - 1).join(" ");
     return { firstName, lastName };
   }
 
@@ -35,13 +38,19 @@ export class VietnameseNameUtil {
       const nameB = this.splitFullName(b.fullName);
 
       // 1. So sánh tên chính (localeCompare tiếng Việt)
-      const firstNameCompare = nameA.firstName.localeCompare(nameB.firstName, 'vi', { sensitivity: 'base' });
+      const firstNameCompare = nameA.firstName.localeCompare(
+        nameB.firstName,
+        "vi",
+        { sensitivity: "base" },
+      );
       if (firstNameCompare !== 0) {
         return firstNameCompare;
       }
 
       // 2. Nếu tên trùng nhau, so sánh họ và tên đệm
-      return nameA.lastName.localeCompare(nameB.lastName, 'vi', { sensitivity: 'base' });
+      return nameA.lastName.localeCompare(nameB.lastName, "vi", {
+        sensitivity: "base",
+      });
     });
   }
 }

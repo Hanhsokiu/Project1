@@ -1,0 +1,89 @@
+TRƯỜNG ĐẠI HỌC GTVT
+
+KHOA CÔNG NGHỆ THÔNG TIN
+
+CỘNG HÒA XÃ HỘI CHỦ NGHĨA VIỆT NAM
+
+Độc lập - Tự do - Hạnh phúc
+
+Hà Nội, ngày …… tháng …… năm ……
+
+ĐỀ CƯƠNG ĐỒ ÁN TỐT NGHIỆP CỬ NHÂN
+
+Họ và tên sinh viên: Nguyễn Văn Sinh
+
+Mã SV: QA-student
+
+Lớp: Công nghệ thông tin K63
+ 
+Khóa: K63
+
+Số điện thoại: 0912345678
+ 
+Email: student@example.invalid
+
+Ngành: Khoa học máy tính
+
+Hệ đào tạo: Đại học — dữ liệu kiểm thử
+
+Giảng viên hướng dẫn: Trần Văn Hướng Dẫn
+
+Đơn vị công tác: Bộ môn kiểm thử tổng hợp
+
+Số điện thoại GVHD: 0987654321
+ 
+Email GVHD: advisor@example.invalid
+
+Tên đề tài: Hệ thống quản lý đồ án — Nguyễn Văn Sinh
+
+1. Nội dung, phạm vi của đề tài
+
+Mục tiêu: Mục tiêu ban đầu cần bổ sung kiểm thử
+
+Nội dung: Phân tích, thiết kế, phát triển và kiểm thử hệ thống
+
+Phạm vi: Phạm vi hệ thống quản lý đồ án
+
+2. Công nghệ, công cụ và ngôn ngữ lập trình
+
+NestJS, Prisma, React và PostgreSQL
+
+3. Các kết quả chính dự kiến đạt được
+
+Phần mềm và báo cáo tiến độ
+
+4. Kế hoạch thực hiện đề tài
+
+STT
+ 
+Nội dung công việc
+ 
+Thời gian dự kiến
+ 
+Ghi chú
+
+1
+ 
+Phân tích và kiểm thử
+ 
+27/10/2026 – 4/11/2026
+ 
+Báo cáo PDF và source ZIP
+
+Trưởng Khoa
+
+(Ký và ghi rõ họ tên)
+
+Trưởng Bộ môn
+
+(Ký và ghi rõ họ tên)
+
+Giảng viên hướng dẫn
+
+(Ký và ghi rõ họ tên)
+
+Sinh viên thực hiện
+
+(Ký và ghi rõ họ tên)
+
+Hồ sơ f1166ac7-a1be-40f1-8d46-f27dae63f475 · 1/1

@@ -1,0 +1,44 @@
+{
+  "verifiedAt": "2026-11-05T02:52:22.626Z",
+  "lint": "PASS",
+  "typeCheck": "PASS",
+  "build": "PASS_WITH_EXISTING_CHUNK_WARNINGS",
+  "prismaSchema": "VALIDATED_AND_GENERATED",
+  "unit": {
+    "frontend": {
+      "passed": 156,
+      "failed": 0,
+      "files": 31
+    },
+    "backend": {
+      "passed": 331,
+      "failed": 2,
+      "files": 34
+    },
+    "failures": [
+      "existing-profiles.spec.ts: missing student CREATE preview STRICT",
+      "existing-profiles.spec.ts: missing student CREATE preview VALID_ONLY"
+    ]
+  },
+  "integration": {
+    "weeklyGroups": 11,
+    "realBrowser": true,
+    "tasksGroups": 19,
+    "submissionsGroups": 17,
+    "reviewsGroups": 18,
+    "preludeStep5Groups": 28,
+    "preludeStep7Groups": 21
+  },
+  "sharedDatabase": {
+    "access": "READ_ONLY",
+    "migrationCount": 16,
+    "latestMigration": "202611040001_lecturer_quota_policy",
+    "newMigrationApplied": false
+  },
+  "notRun": [
+    "real mid-upload network loss",
+    "database outage",
+    "shared pool exhaustion/load test",
+    "complete regression suites for all steps 1-10"
+  ]
+}

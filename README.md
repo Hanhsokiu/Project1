@@ -3,6 +3,15 @@
 ## Giới thiệu
 Hệ thống quản lý đồ án tốt nghiệp dành cho khoa/bộ môn đại học, hỗ trợ toàn bộ quy trình từ đăng ký đến bảo vệ.
 
+B?n t?ch h?p b??c 1?3 g?m API auth, danh m?c, k?/??t, import, ??ng k?, ph?n c?ng v? ?? c??ng/PDF. N?n workflow PR2B ???c gi? l?i. Xem [ghi ch? t?ch h?p v? ki?m ch?ng](docs/implementation/cherry-pick-step1-3.md).
+
+## Môi trường nhóm và hướng dẫn người dùng
+
+- [Hướng dẫn kết nối Supabase và tạo database bước 1–8](docs/implementation/supabase-steps1-8-setup.md)
+- [Đề xuất mới: Windows + Supabase DB/Storage + truy cập riêng cho nhóm](docs/implementation/windows-supabase-shared-proposal.md)
+- [Thiết lập một backend, database và kho file chung](docs/implementation/team-shared-environment.md)
+- [Hướng dẫn thao tác và tìm lỗi bước 4–8 theo từng vai trò](docs/implementation/user-guide-steps4-8.md)
+
 ## Stack
 - **Backend**: NestJS + Prisma + PostgreSQL
 - **Frontend**: React + Vite + TypeScript + shadcn/ui + Tailwind
@@ -18,6 +27,9 @@ Hệ thống quản lý đồ án tốt nghiệp dành cho khoa/bộ môn đại
 ## Bắt đầu cho nhóm ba người
 
 Xem [hướng dẫn chia việc, contract và môi trường local](docs/implementation/03-team-development-guide.md).
+
+Để xem bản giao diện đã merge với database riêng và tài khoản mẫu trên máy Windows, xem [hướng dẫn UI local](docs/implementation/integration-ui-local.md) (`pnpm ui:prepare`, `pnpm ui:dev`, `pnpm ui:sample`).
+Để có hồ sơ và nhiệm vụ thao tác bước 4–8 trên cùng UI, chạy `pnpm ui:workflow`; xem [tài khoản, đợt demo và link kiểm tra](docs/implementation/integration-ui-workflow-demo.md).
 Phân công: người 1 bước 1–3, người 2 bước 4–8, người 3 bước 9–10; schema/migration dùng chung một cây.
 
 ```powershell

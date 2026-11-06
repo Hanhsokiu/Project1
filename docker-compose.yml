@@ -34,6 +34,8 @@ services:
       - NODE_ENV=${NODE_ENV:-development}
       - MAIL_HOST=mailhog
       - MAIL_PORT=1025
+      - SMTP_HOST=mailhog
+      - SMTP_PORT=1025
       - STORAGE_LOCAL_PATH=/app/uploads
     ports:
       - '${PORT:-3000}:3000'
@@ -57,6 +59,12 @@ services:
       - backend
     environment:
       - VITE_API_URL=http://localhost:${PORT:-3000}/api
+      - VITE_AUTH_API=true
+      - VITE_TERM_API=true
+      - VITE_CATALOG_API=true
+      - VITE_IMPORT_API=true
+      - VITE_REGISTRATION_API=true
+      - VITE_DEMO_MODE=false
     ports:
       - '5173:5173'
     volumes:

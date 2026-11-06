@@ -1,0 +1,29 @@
+{
+  "result": [
+    {
+      "route": "withdraw",
+      "status": 404,
+      "error": {
+        "code": "NOT_FOUND",
+        "message": "Cannot POST /api/proposals/p-student2/withdraw"
+      }
+    },
+    {
+      "route": "return-to-draft",
+      "status": 404,
+      "error": {
+        "code": "NOT_FOUND",
+        "message": "Cannot POST /api/proposals/p-student2/return-to-draft"
+      }
+    },
+    {
+      "route": "reopen",
+      "status": 404,
+      "error": {
+        "code": "NOT_FOUND",
+        "message": "Cannot POST /api/proposals/p-student2/reopen"
+      }
+    }
+  ],
+  "classification": "Missing contract operations, not a successful business flow; confirm requirement scope before release."
+}

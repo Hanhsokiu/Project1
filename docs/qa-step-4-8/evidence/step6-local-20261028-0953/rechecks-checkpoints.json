@@ -1,0 +1,73 @@
+[
+  {
+    "id": "browser-control",
+    "result": "PASS",
+    "at": "2026-10-28T06:52:08.015Z",
+    "detail": {
+      "browser": "156.0.4314.50",
+      "method": "local Playwright + real Edge",
+      "opened": "http://127.0.0.1:50185/login",
+      "passwordToggle": true
+    }
+  },
+  {
+    "id": "T44-large-diff-mobile-recheck",
+    "result": "PASS",
+    "at": "2026-10-28T06:52:25.707Z",
+    "detail": {
+      "sizes": {
+        "viewport": 390,
+        "width": 390
+      },
+      "largeVersion": {
+        "id": "14143778-8457-4e17-9a06-ac1778060ddd",
+        "proposalId": "p-student2",
+        "versionNumber": 29,
+        "state": "SEALED",
+        "contentHash": "94b96083224906612a26b089ef692f31267086d8a1d34ff2c18cfda8eb280b88",
+        "createdAt": "2026-10-28T02:58:33.973Z",
+        "createdByUserId": "student2",
+        "authorName": "qa-student2",
+        "submittedAt": "2026-10-28T02:58:39.854Z",
+        "submittedByUserId": "student2",
+        "basedOnVersionId": "c13ce7da-4dff-4432-b50b-070148060820",
+        "changeSummary": null,
+        "responses": [],
+        "provenance": null,
+        "contentBytes": 240344,
+        "fieldLengths": {
+          "scope": 20000,
+          "tools": 20000,
+          "endsAt": 24,
+          "startsAt": 24,
+          "objectives": 20000,
+          "mainContents": 20000,
+          "expectedResults": 20000
+        }
+      }
+    }
+  },
+  {
+    "id": "T47-SPA-recheck",
+    "result": "PASS",
+    "at": "2026-10-28T06:52:29.129Z",
+    "detail": {
+      "sameDocument": true,
+      "noAutosave": true,
+      "proposalRevisionFeedbackAndSelectionReset": true
+    }
+  },
+  {
+    "id": "T27-T48-legacy-recheck",
+    "result": "PASS",
+    "at": "2026-10-28T06:52:31.216Z",
+    "detail": {
+      "readOnlyUI": true,
+      "scriptExecuted": false,
+      "readsDidNotBackfill": true,
+      "keyOrderIgnored": true,
+      "jsonPointerEscaped": true,
+      "nullPresenceDistinguished": true
+    }
+  }
+]

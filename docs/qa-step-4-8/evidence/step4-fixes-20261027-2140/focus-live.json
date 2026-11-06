@@ -1,0 +1,173 @@
+{
+  "startedAt": "2026-10-27T14:41:27.456Z",
+  "checks": [
+    {
+      "name": "Sidebar đóng bị ẩn khỏi accessibility tree và focus",
+      "status": "PASS",
+      "actual": {
+        "visibility": "hidden",
+        "accessibleNavs": 0
+      }
+    },
+    {
+      "name": "Menu mở cho phép focus link điều hướng",
+      "status": "PASS",
+      "actual": {
+        "visibility": "visible"
+      }
+    },
+    {
+      "name": "Escape từ sidebar trả focus về nút menu",
+      "status": "PASS",
+      "actual": {
+        "aria": "Mở điều hướng",
+        "expanded": "false"
+      }
+    },
+    {
+      "name": "U02: Shift+Tab sau Escape không vào sidebar đóng",
+      "status": "PASS",
+      "actual": {
+        "tag": "BODY",
+        "aria": null,
+        "inSidebar": false,
+        "x": 0,
+        "right": 375.20001220703125
+      }
+    },
+    {
+      "name": "20 bước Tab không đi vào sidebar đã đóng",
+      "status": "PASS",
+      "actual": [
+        {
+          "aria": "Đợt làm việc",
+          "inSidebar": false
+        },
+        {
+          "aria": "Thông báo",
+          "inSidebar": false
+        },
+        {
+          "aria": "Mở hồ sơ",
+          "inSidebar": false
+        },
+        {
+          "aria": "Tìm kiếm nhóm duyệt",
+          "inSidebar": false
+        },
+        {
+          "aria": "Tìm nhóm",
+          "inSidebar": false
+        },
+        {
+          "aria": "+ Tạo nhóm",
+          "inSidebar": false
+        },
+        {
+          "aria": "Đợt đồ án",
+          "inSidebar": false
+        },
+        {
+          "aria": "Lọc bộ môn",
+          "inSidebar": false
+        },
+        {
+          "aria": "Tìm tên nhóm",
+          "inSidebar": false
+        },
+        {
+          "aria": null,
+          "inSidebar": false
+        },
+        {
+          "aria": null,
+          "inSidebar": false
+        },
+        {
+          "aria": null,
+          "inSidebar": false
+        },
+        {
+          "aria": null,
+          "inSidebar": false
+        },
+        {
+          "aria": null,
+          "inSidebar": false
+        },
+        {
+          "aria": "Mở điều hướng",
+          "inSidebar": false
+        },
+        {
+          "aria": "Đợt làm việc",
+          "inSidebar": false
+        },
+        {
+          "aria": "Thông báo",
+          "inSidebar": false
+        },
+        {
+          "aria": "Mở hồ sơ",
+          "inSidebar": false
+        },
+        {
+          "aria": "Tìm kiếm nhóm duyệt",
+          "inSidebar": false
+        },
+        {
+          "aria": "Tìm nhóm",
+          "inSidebar": false
+        }
+      ]
+    },
+    {
+      "name": "Bấm backdrop đóng menu và trả focus",
+      "status": "PASS",
+      "actual": {
+        "visibility": "hidden",
+        "active": "Mở điều hướng"
+      }
+    },
+    {
+      "name": "Bấm link cùng trang cũng đóng menu và giữ focus nhìn thấy",
+      "status": "PASS",
+      "actual": {
+        "visibility": "hidden",
+        "url": "http://127.0.0.1:5173/topic/review-groups?termId=d4e2575a-c68d-40f7-8398-3fdcf34af59b"
+      }
+    },
+    {
+      "name": "Breakpoint 760px giữ menu đóng khỏi tab order",
+      "status": "PASS",
+      "actual": {
+        "visibility": "hidden"
+      }
+    },
+    {
+      "name": "Breakpoint desktop 761px hiện sidebar trở lại",
+      "status": "PASS",
+      "actual": {
+        "visibility": "visible",
+        "accessibleNavs": 1
+      }
+    },
+    {
+      "name": "Desktop giữ menu điều hướng và Đăng xuất khả dụng",
+      "status": "PASS",
+      "actual": {
+        "visibility": "visible"
+      }
+    },
+    {
+      "name": "Không có mutation nghiệp vụ trong kiểm tra focus",
+      "status": "PASS",
+      "actual": []
+    }
+  ],
+  "requests": [],
+  "responses": [],
+  "pageErrors": [],
+  "failedRequests": [],
+  "finishedAt": "2026-10-27T14:41:30.521Z"
+}

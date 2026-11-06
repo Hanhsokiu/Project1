@@ -1,0 +1,1438 @@
+{
+  "generatedAt": "2026-10-26T17:36:59.637Z",
+  "files": [
+    {
+      "file": "backend/src/topic/controller/topic.controller.ts",
+      "lines": 113,
+      "sha256": "933306379a82b174a03e5353c284d01dcb00de813ead50478416e56f3062931b",
+      "exportedClasses": [
+        "TopicController"
+      ],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/dto/proposal.dto.ts",
+      "lines": 28,
+      "sha256": "cb4b7a3dc1a972a99eda23a762dad658c4e7855fa687ca71acc5f2caa04d3721",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/proposal-dossiers/dossier-pdf.service.ts",
+      "lines": 224,
+      "sha256": "0f49ecf8ec277704e92f74346c61236d9b0225799b201143c246ff6e5fa912c3",
+      "exportedClasses": [
+        "DossierPdfService"
+      ],
+      "operations": [
+        "split",
+        "widthOfString",
+        "entries"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-dossiers/dossier.controller.ts",
+      "lines": 183,
+      "sha256": "4eb6d6a4a89e62953db46184021eb24c197284d27c6cb9c982482776088982ed",
+      "exportedClasses": [
+        "DossierController"
+      ],
+      "operations": [
+        "constructor",
+        "user",
+        "detail"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-dossiers/dossier.repository.ts",
+      "lines": 145,
+      "sha256": "e42abc2decff6b5770cb0c90c80d0ae6a06e89752e188516ff51a091bfd27e47",
+      "exportedClasses": [
+        "DossierSession",
+        "DossierRepository"
+      ],
+      "operations": [
+        "constructor",
+        "dossier",
+        "profile",
+        "printStudent",
+        "printAdvisor",
+        "createDossier",
+        "addFinalization",
+        "addReceipt",
+        "addAsset",
+        "addPdf",
+        "pdf",
+        "linkPdf",
+        "dossierHistory",
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-dossiers/dossier.service.ts",
+      "lines": 502,
+      "sha256": "e124c62af3d853b633e2291139eb7932158a867c16f241fee841febac0f83df1",
+      "exportedClasses": [
+        "DossierService"
+      ],
+      "operations": [
+        "load",
+        "role",
+        "current",
+        "detail",
+        "download"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-dossiers/dossier.spec.ts",
+      "lines": 301,
+      "sha256": "12bc61cc7afa972c2114c56db56813ad98bb45b1de9f1fc3d9c57639975aa43c",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/proposal-dossiers/dossier.validator.ts",
+      "lines": 169,
+      "sha256": "7b95cc4db4c9f095df9388f80d9012704309e752051b8855ade7a1c23806052c",
+      "exportedClasses": [
+        "DossierValidator"
+      ],
+      "operations": [
+        "constructor",
+        "open",
+        "approval",
+        "snapshotIntegrity"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.controller.ts",
+      "lines": 235,
+      "sha256": "4d039f483e2d908264dc95266f6bd944a27cdd951a03f2cdd904c0943fdf1986",
+      "exportedClasses": [
+        "ProposalReviewController"
+      ],
+      "operations": [
+        "constructor",
+        "user",
+        "terms",
+        "options",
+        "proposal",
+        "candidates",
+        "history",
+        "detail"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.repository.ts",
+      "lines": 417,
+      "sha256": "dd1ff67105fd29e93395a2091a4aad9e90b1f23b23e4eca71327abadddc8405f",
+      "exportedClasses": [
+        "ProposalReviewSession",
+        "ProposalReviewRepository"
+      ],
+      "operations": [
+        "constructor",
+        "principal",
+        "grants",
+        "term",
+        "terms",
+        "departments",
+        "roster",
+        "memberTerms",
+        "studentTerms",
+        "advisorTerms",
+        "proposal",
+        "proposals",
+        "count",
+        "review",
+        "history",
+        "phase",
+        "advisor",
+        "group",
+        "groups",
+        "lecturers",
+        "lock",
+        "status",
+        "createReview",
+        "comment",
+        "decision",
+        "outbox",
+        "replay",
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.service.ts",
+      "lines": 1031,
+      "sha256": "76326af99d0bff6cb74f1691e32b88893211a1a85313d0653cdc30b4771fd561",
+      "exportedClasses": [
+        "ProposalReviewService"
+      ],
+      "operations": [
+        "observerTerms",
+        "role",
+        "role",
+        "terms",
+        "role",
+        "options",
+        "list",
+        "proposal",
+        "observer",
+        "candidates",
+        "includes",
+        "detail",
+        "history",
+        "assign"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.spec.ts",
+      "lines": 365,
+      "sha256": "206517b5290a1b84863fa6dad1ef9b1304908766763f915235b267da181382ed",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/proposal-reviews/proposal-review.validator.ts",
+      "lines": 207,
+      "sha256": "0f122b06fc73d6d83e0c36294183187e692faaaacc8c771fa785dd734e5b477e",
+      "exportedClasses": [
+        "ProposalReviewValidator"
+      ],
+      "operations": [
+        "principal",
+        "role",
+        "revision",
+        "state",
+        "ownership",
+        "advisor",
+        "routing",
+        "phase",
+        "active"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-version.controller.ts",
+      "lines": 188,
+      "sha256": "01f60ab03483bc0c08e24de10ff6fec72b70c2e0e87caae9c0201314c46dfcef",
+      "exportedClasses": [
+        "ProposalVersionController"
+      ],
+      "operations": [
+        "constructor",
+        "user",
+        "context"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-version.repository.ts",
+      "lines": 135,
+      "sha256": "0c6a368c196a9b28330acd76dc103b68b0715b3d8b523a5c7272225c01603c2f",
+      "exportedClasses": [
+        "ProposalVersionSession",
+        "ProposalVersionRepository"
+      ],
+      "operations": [
+        "constructor",
+        "version",
+        "versionCount",
+        "editPhase",
+        "dossier",
+        "addVersion",
+        "workflow",
+        "seal",
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-version.service.ts",
+      "lines": 581,
+      "sha256": "18d5f96ed7d0bd309dc72eeff744802f56aaee12aee0eb3a0d59e444c1f8894f",
+      "exportedClasses": [
+        "ProposalVersionService"
+      ],
+      "operations": [
+        "role",
+        "history",
+        "context",
+        "writer",
+        "list",
+        "detail",
+        "compare"
+      ]
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-version.spec.ts",
+      "lines": 372,
+      "sha256": "b1876ff4d2ccad554262dcdd96cf7ce252b395f265094167049bc3c223ae85ad",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/proposal-versions/proposal-version.validator.ts",
+      "lines": 154,
+      "sha256": "c6f625e6bed266039263aa07abeabf08347e3e16ef0b7ef68e73eb9d36bef57f",
+      "exportedClasses": [
+        "ProposalVersionValidator"
+      ],
+      "operations": [
+        "constructor",
+        "phase",
+        "editable",
+        "responses",
+        "content"
+      ]
+    },
+    {
+      "file": "backend/src/topic/repository/topic.repository.ts",
+      "lines": 145,
+      "sha256": "871d513db9da2b85a587b46324c1c6f15e7008bff122b2c45d1476490d663928",
+      "exportedClasses": [
+        "TopicRepository"
+      ],
+      "operations": [
+        "proposals",
+        "find"
+      ]
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.controller.ts",
+      "lines": 300,
+      "sha256": "bf716ae930adb6219242a2c756f99a9890f867bf1050244c68ccd9791eeecd47",
+      "exportedClasses": [
+        "ReviewGroupController"
+      ],
+      "operations": [
+        "constructor",
+        "user",
+        "terms",
+        "detail",
+        "members"
+      ]
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.dto.ts",
+      "lines": 19,
+      "sha256": "f63f8280208b4cce8126dfe95c5fdcbb73b08b2ce569dcaa12151284d8c0e6b9",
+      "exportedClasses": [
+        "ReviewGroupPipe"
+      ],
+      "operations": [
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.errors.ts",
+      "lines": 49,
+      "sha256": "823e66fd2f89a555eb87cd42d9340780df9069e64cb4d04199e8a72fff7212b5",
+      "exportedClasses": [
+        "ReviewGroupExceptionFilter"
+      ],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.repository.spec.ts",
+      "lines": 60,
+      "sha256": "041acff57c03992f5224ebc10da24fb78fc6b53a9e2d6f3fe8cb37fc67fdd697",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.repository.ts",
+      "lines": 246,
+      "sha256": "067248924ca84f6cd93820f7b2814c8f3bcd0e73ba44e08aa50a07e106d175c0",
+      "exportedClasses": [
+        "ReviewGroupSession",
+        "ReviewGroupRepository"
+      ],
+      "operations": [
+        "constructor",
+        "principal",
+        "grants",
+        "lockTerm",
+        "lockGroup",
+        "term",
+        "terms",
+        "roster",
+        "group",
+        "groups",
+        "count",
+        "memberTerms",
+        "departments",
+        "lecturers",
+        "lecturerCount",
+        "create",
+        "rename",
+        "advance",
+        "add",
+        "remove",
+        "replay",
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.response.ts",
+      "lines": 58,
+      "sha256": "14e05a637f7b3fbd7939222c5ae1f1d39fa7bd1eeeec8c5c871cbb7efc8208a4",
+      "exportedClasses": [
+        "ReviewGroupMemberResponse",
+        "ReviewGroupResponse"
+      ],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.service.ts",
+      "lines": 427,
+      "sha256": "7b9f757ec8897f9e339fb1bf32e2e9baa8b3ee95782023d9b11dda8bf1ecce65",
+      "exportedClasses": [
+        "ReviewGroupService"
+      ],
+      "operations": [
+        "role",
+        "terms",
+        "options",
+        "list",
+        "detail",
+        "eligible"
+      ]
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.spec.ts",
+      "lines": 273,
+      "sha256": "a8466b71ff9f48abf2ea73adfbfac8a0bd170e9d7dde694f332df594dc6afd1f",
+      "exportedClasses": [],
+      "operations": [
+        "setup"
+      ]
+    },
+    {
+      "file": "backend/src/topic/review-groups/review-group.validator.ts",
+      "lines": 66,
+      "sha256": "a12313b80906bc278d904097cc493f214020a96b7853cf33356c4b88f3a8cfcc",
+      "exportedClasses": [
+        "ReviewGroupValidator"
+      ],
+      "operations": [
+        "principal",
+        "mutable",
+        "membershipEditable",
+        "eligible"
+      ]
+    },
+    {
+      "file": "backend/src/topic/service/proposal-pdf.service.ts",
+      "lines": 93,
+      "sha256": "17de881fbc27050a5ded485a3317b09c5ee385b58397b87f40e312fd60249b2d",
+      "exportedClasses": [
+        "ProposalPdfService"
+      ],
+      "operations": [
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/topic/service/topic.service.ts",
+      "lines": 388,
+      "sha256": "c2d2e997d325d1c8623603631aaf4762e74434dad383a880c6ac1a18352ecdcb",
+      "exportedClasses": [
+        "TopicService"
+      ],
+      "operations": [
+        "list",
+        "agree",
+        "prepareWorkflow",
+        "version"
+      ]
+    },
+    {
+      "file": "backend/src/topic/topic.module.ts",
+      "lines": 57,
+      "sha256": "437ddbebefc80efe65e49cc295cef96882d9f7029001a5b2c73fdccef38f88ba",
+      "exportedClasses": [
+        "TopicModule"
+      ],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/validator/proposal.validator.spec.ts",
+      "lines": 48,
+      "sha256": "c99113cec970323aae18622f19a98b457e93b1c520c120d3c3df668a4575a452",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "backend/src/topic/validator/proposal.validator.ts",
+      "lines": 57,
+      "sha256": "3cbfcebe09ea0d39dbe2688ae25443593d0b59715438e8887f846526e0bf662f",
+      "exportedClasses": [
+        "ProposalValidator"
+      ],
+      "operations": [
+        "editable",
+        "version",
+        "submit"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/controller/task.controller.ts",
+      "lines": 33,
+      "sha256": "e440bb8482e3733cd7daa951808b3417eebae942f46a8adc13b2b5dc2ece9444",
+      "exportedClasses": [
+        "TaskController"
+      ],
+      "operations": [
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/guidance.module.ts",
+      "lines": 45,
+      "sha256": "ef9ee6159ce5754535c239b02031a440476cb637addf5ff72616afde1b2426c6",
+      "exportedClasses": [
+        "GuidanceModule"
+      ],
+      "operations": []
+    },
+    {
+      "file": "backend/src/guidance/reviews/progress-review.controller.ts",
+      "lines": 219,
+      "sha256": "5f43402947cf2e5942723503b87d39abed39df2f9829fed8ebaba41ccc4be42b",
+      "exportedClasses": [
+        "ProgressReviewController"
+      ],
+      "operations": [
+        "options",
+        "constructor",
+        "user",
+        "context"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/reviews/progress-review.repository.ts",
+      "lines": 182,
+      "sha256": "df780823c28c3789a7ef77906c90b6cacf298361bfe0b85b2342d159c310033f",
+      "exportedClasses": [
+        "ProgressSession",
+        "ProgressRepository"
+      ],
+      "operations": [
+        "constructor",
+        "reviews",
+        "progressReview",
+        "addReview",
+        "supersedeReview",
+        "notify",
+        "termPlanIds",
+        "monitorTasks",
+        "meeting",
+        "meetings",
+        "meetingCount",
+        "addMeeting",
+        "updateMeeting",
+        "meetingHistory",
+        "lockMeeting",
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/reviews/progress-review.service.ts",
+      "lines": 799,
+      "sha256": "ca3c677f4287e6c7b3ee3c6a0b2806572a5409e4b1219aa79ac442b95a05d692",
+      "exportedClasses": [
+        "ProgressReviewService"
+      ],
+      "operations": [
+        "options",
+        "terms",
+        "sub",
+        "termPlanIds",
+        "monitorTasks",
+        "filter",
+        "inbox"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/reviews/progress-review.spec.ts",
+      "lines": 269,
+      "sha256": "b4cf66ee4509fbd6d3d122bef4d9b7def6f52f3bff4b56fa1488f097ec77c742",
+      "exportedClasses": [],
+      "operations": [
+        "fixture",
+        "fails"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/reviews/progress-review.validator.ts",
+      "lines": 130,
+      "sha256": "df32e82992f52735a8218ae090ce72b2dc475083d81e92f281202d2f354073b6",
+      "exportedClasses": [
+        "ProgressReviewValidator"
+      ],
+      "operations": [
+        "comment",
+        "taskState",
+        "meeting"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/service/task.service.ts",
+      "lines": 12,
+      "sha256": "0f653c4738193bde102cf303036b1c6c89947ef562c1aea2fb68b6873f02d7fb",
+      "exportedClasses": [
+        "TaskService"
+      ],
+      "operations": [
+        "constructor",
+        "findByPlan"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/submissions/submission-policy.ts",
+      "lines": 22,
+      "sha256": "97f3652411819b42bbf01995f76a2f7a8ca45544b0283bbc7d6ffc432f7c3f23",
+      "exportedClasses": [],
+      "operations": [
+        "readSubmissionPolicy"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/submissions/submission.controller.ts",
+      "lines": 224,
+      "sha256": "40d894de9a45c62d7cb272a66320f17708d959b1952ad93b09412c84c3126f12",
+      "exportedClasses": [
+        "SubmissionUploadInterceptor",
+        "SubmissionController"
+      ],
+      "operations": [
+        "identity",
+        "constructor",
+        "intercept",
+        "constructor",
+        "context",
+        "detail"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/submissions/submission.repository.ts",
+      "lines": 167,
+      "sha256": "d80b760c4d418a1f46d345d6238ae1bb13f1b2d15fe961c1fe6bc9dbde8dd1f6",
+      "exportedClasses": [
+        "SubmissionSession",
+        "SubmissionRepository"
+      ],
+      "operations": [
+        "constructor",
+        "upload",
+        "uploadByKey",
+        "pendingCount",
+        "addUpload",
+        "lockUpload",
+        "submission",
+        "submissionPage",
+        "submissionCount",
+        "legacySubmissionCount",
+        "addSubmission",
+        "supersede",
+        "linkAsset",
+        "assetUpload",
+        "assetUsed",
+        "quarantine",
+        "expired",
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/submissions/submission.service.ts",
+      "lines": 581,
+      "sha256": "f5cbe8f22245035f811106d96127f5bc04836f20b0c586827be9a758afd055b5",
+      "exportedClasses": [
+        "SubmissionService"
+      ],
+      "operations": [
+        "policy",
+        "key",
+        "locked",
+        "ready",
+        "preflight",
+        "detail",
+        "sort",
+        "download",
+        "cleanup"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/submissions/submission.spec.ts",
+      "lines": 284,
+      "sha256": "4f7e1433cb48015d3e6161ce292d2263d0a4ec68710ee609e8d70391def2d8d9",
+      "exportedClasses": [],
+      "operations": [
+        "zip"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/submissions/submission.validator.ts",
+      "lines": 295,
+      "sha256": "31f4dac68dc512b0e1e271e9be364c8bf39c766c74d8c370858e2fcab3b6f3c9",
+      "exportedClasses": [
+        "SubmissionValidator"
+      ],
+      "operations": [
+        "crc32",
+        "filename",
+        "task",
+        "pdf",
+        "png",
+        "jpeg",
+        "includes",
+        "zip",
+        "max",
+        "late"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/tasks/guidance.controller.ts",
+      "lines": 351,
+      "sha256": "94225e541ad4530b37389788287bb847e4d32788cb57aeb3101e7e5813304893",
+      "exportedClasses": [
+        "GuidanceController"
+      ],
+      "operations": [
+        "constructor",
+        "user",
+        "context",
+        "plan",
+        "periods",
+        "detail"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/tasks/guidance.repository.ts",
+      "lines": 292,
+      "sha256": "3f8e3702d7ad7d8fe185e2cb58004bbd51a3abeb0dbfc934f880c2a5db7be010",
+      "exportedClasses": [
+        "GuidanceSession",
+        "GuidanceRepository"
+      ],
+      "operations": [
+        "constructor",
+        "guidancePhase",
+        "plan",
+        "planFor",
+        "periods",
+        "period",
+        "task",
+        "tasks",
+        "taskCount",
+        "legacyTasks",
+        "addPlan",
+        "addTask",
+        "updatePlan",
+        "updateTask",
+        "planHistory",
+        "taskHistory",
+        "progress",
+        "lockAggregate",
+        "obligation",
+        "ownerProposal",
+        "obligations",
+        "linkObligations",
+        "coveragePairs",
+        "guidanceReplay",
+        "constructor"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/tasks/guidance.service.ts",
+      "lines": 1274,
+      "sha256": "67e077b8ed5136b0cf6b7cbbc52c56e5bda589d4a225bb04f23c0eb581784a0c",
+      "exportedClasses": [
+        "GuidanceService"
+      ],
+      "operations": [
+        "proposal",
+        "reviewAccess",
+        "role",
+        "planByProposal",
+        "periodOptions",
+        "detailTask",
+        "legacyTasks",
+        "coverage"
+      ]
+    },
+    {
+      "file": "backend/src/guidance/tasks/guidance.spec.ts",
+      "lines": 267,
+      "sha256": "1962577683d1748b67273b89ad1ec4776f19e235cea6ab7627021d6bf76f8c22",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "backend/src/guidance/tasks/guidance.validator.ts",
+      "lines": 267,
+      "sha256": "4ae4fa8d4db0fa6d7bf056945b9fafb5405c4bf5b58078df3ab3ccab07aa9bf0",
+      "exportedClasses": [
+        "GuidanceValidator"
+      ],
+      "operations": [
+        "constructor",
+        "role",
+        "phase",
+        "official",
+        "finalized",
+        "dates",
+        "period",
+        "editable",
+        "progress",
+        "overdue",
+        "obligation"
+      ]
+    },
+    {
+      "file": "backend/src/notification/controller/notification.controller.ts",
+      "lines": 94,
+      "sha256": "9e5ffe4e6269465caabc3f54da5858cc91a1d4173b934253e0e848109f9ce329",
+      "exportedClasses": [
+        "NotificationController"
+      ],
+      "operations": [
+        "constructor",
+        "user",
+        "own",
+        "readAll",
+        "outbox",
+        "retry"
+      ]
+    },
+    {
+      "file": "backend/src/notification/notification.module.ts",
+      "lines": 19,
+      "sha256": "d3734629328fa26bbc1e01358c1ada2f7cdaabae9f1b0ddea0025d8494ed01a3",
+      "exportedClasses": [
+        "NotificationModule"
+      ],
+      "operations": []
+    },
+    {
+      "file": "backend/src/notification/repository/notification.repository.ts",
+      "lines": 135,
+      "sha256": "9fc26fbd78f9d343aee4b5a858ec99b876383f7fe930751eeed35eb242b182eb",
+      "exportedClasses": [
+        "NotificationRepository"
+      ],
+      "operations": [
+        "constructor",
+        "own",
+        "readAll",
+        "outbox",
+        "retry",
+        "claim",
+        "sent",
+        "failed",
+        "principal",
+        "legacy",
+        "list",
+        "read"
+      ]
+    },
+    {
+      "file": "backend/src/notification/service/email-worker.service.ts",
+      "lines": 79,
+      "sha256": "49d72caf8ca70c033f19d0bf67e559c28d9fb281cb068315b8b6e42a20fa83c6",
+      "exportedClasses": [
+        "EmailWorkerService"
+      ],
+      "operations": [
+        "tick"
+      ]
+    },
+    {
+      "file": "backend/src/notification/service/notification.service.ts",
+      "lines": 47,
+      "sha256": "4e1d786b15c63cc6f269290e05eee1c3216011a45bfd9db78f0fad7d2e9bc01b",
+      "exportedClasses": [
+        "NotificationService"
+      ],
+      "operations": [
+        "getUserNotifications",
+        "list",
+        "own",
+        "readAll",
+        "outbox",
+        "retry",
+        "active",
+        "read"
+      ]
+    },
+    {
+      "file": "shared/src/contracts/academic-context.ts",
+      "lines": 67,
+      "sha256": "6957140676c566baee6401bbd0691850f27005ab8e8f7aa51a0c0e79505ffce6",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "shared/src/contracts/guidance-reviews.ts",
+      "lines": 211,
+      "sha256": "1c2be62e8e5cb6327e2d28535abf08cddb7e8a71e38f2962129335e20da05ea8",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "shared/src/contracts/guidance-tasks.ts",
+      "lines": 236,
+      "sha256": "bcc1b73d99a85adc28c25ca6554a409426e86d19b6f354b3a76af3fe8bb93b08",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "shared/src/contracts/proposal-dossiers.ts",
+      "lines": 87,
+      "sha256": "b89a19fb144a9af700e9f714d8e07dd1f776295467e66ed13234430c4359baa6",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "shared/src/contracts/proposal-reviews.ts",
+      "lines": 155,
+      "sha256": "a0374defc978e26e1448774a0a0af981d965b348758c8c175bf3a6a4b4552d83",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "shared/src/contracts/proposal-versions.ts",
+      "lines": 246,
+      "sha256": "56ab6981832cd9469d449628ce26e400953f49265d291d5121d862bafc598207",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "shared/src/contracts/review-groups.ts",
+      "lines": 82,
+      "sha256": "a3000bfde5fe03b5a1010c004920d22b96347a4d4685e5c2ecd99d642c31c662",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "shared/src/contracts/task-submissions.ts",
+      "lines": 119,
+      "sha256": "0454643d27412372dc5e30c9f659a36cd5e222d2b05c913e705ae1bbc5f2bb6d",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/review-groups/api.ts",
+      "lines": 54,
+      "sha256": "a47612afebc3a7c611457540636a39db873e141df3c0185c9727d742c0ccfee9",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/review-groups/components.spec.tsx",
+      "lines": 92,
+      "sha256": "2cc2371d7e8d69be15ca31e2b6058bbebd2c26b51ed7f03e45bc37ed3260f9f3",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/review-groups/components.tsx",
+      "lines": 345,
+      "sha256": "4556e80da4e78da273e7463bbea8b9f1546e3f6ee0666bf81dd7ffc2ff7fa029",
+      "exportedClasses": [],
+      "operations": [
+        "submit"
+      ]
+    },
+    {
+      "file": "frontend/src/features/review-groups/pages.tsx",
+      "lines": 655,
+      "sha256": "774d4b8eb5646a4d3cce10cf08cf232b6137bd66914a71c79ca1c9d016587192",
+      "exportedClasses": [],
+      "operations": [
+        "useRequestKey",
+        "ReviewGroupListPage",
+        "ReviewGroupEditorPage",
+        "ReviewGroupDetailPage"
+      ]
+    },
+    {
+      "file": "frontend/src/features/review-groups/workspace.css",
+      "lines": 627,
+      "sha256": "83972d131c0b0a96c8d560d94b98cc08f6159028d5bfe87053f396d4a95fd606",
+      "exportedClasses": [],
+      "operations": [
+        "is",
+        "child"
+      ]
+    },
+    {
+      "file": "frontend/src/features/review-groups/workspace.tsx",
+      "lines": 265,
+      "sha256": "83d44fd8ebcf2595cc391c402f2c6338cbea72486072a8a1ea9dd99f1140468a",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/proposal-reviews/api.ts",
+      "lines": 88,
+      "sha256": "dac48cb932eab0a4d572d287b2197d8e93d616bc3b11e316e8ddf8a1cf8ea670",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/proposal-reviews/components.spec.tsx",
+      "lines": 68,
+      "sha256": "77eb6bd03246b0bac0e0ab9d9ee428e17e07c0d5346362d2ff8be4bd241e73a4",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/proposal-reviews/components.tsx",
+      "lines": 263,
+      "sha256": "329647a01d33bd43bd1309fc65f05880af6da2ab2f9d4d3f1d576b7de5d9d90b",
+      "exportedClasses": [],
+      "operations": [
+        "ProposalContent",
+        "ReviewEvidence"
+      ]
+    },
+    {
+      "file": "frontend/src/features/proposal-reviews/pages.tsx",
+      "lines": 760,
+      "sha256": "c1a8f7abedcbdf6725b835ed68a5e417a0101259c36af2e18c92156a0ec8cbf8",
+      "exportedClasses": [],
+      "operations": [
+        "useRequestKey",
+        "ProposalReviewQueuePage",
+        "ProposalReviewAssignmentPage",
+        "ReviewHistory",
+        "ProposalReviewDetailPage",
+        "ProposalReviewDetail"
+      ]
+    },
+    {
+      "file": "frontend/src/features/proposal-versions/api.ts",
+      "lines": 40,
+      "sha256": "dd18497650db7916e8098e1db225458da9440061c54f8b5c9bba0c2fb18d1f2b",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/proposal-versions/components.spec.tsx",
+      "lines": 88,
+      "sha256": "69de8065984044c2c175a82431b5d83cbc0c4188f4ad9b2d35ac9ba0c97de4f2",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/proposal-versions/components.tsx",
+      "lines": 279,
+      "sha256": "4cf36d98c88ae4963d90107db36fceba5822b6b7833fea2bfd42a6d2d18be9d3",
+      "exportedClasses": [],
+      "operations": [
+        "VersionChanges"
+      ]
+    },
+    {
+      "file": "frontend/src/features/proposal-versions/pages.tsx",
+      "lines": 607,
+      "sha256": "7ce2158ad383cd47e1af1fd42e2683572336f8389dabdc29119382fb8b29f597",
+      "exportedClasses": [],
+      "operations": [
+        "useRequestKey",
+        "ProposalEditorListPage",
+        "Editor",
+        "saveDraft",
+        "send",
+        "VersionHistory",
+        "ProposalEditorPage"
+      ]
+    },
+    {
+      "file": "frontend/src/features/proposal-dossiers/api.ts",
+      "lines": 36,
+      "sha256": "dc6539c007f21103005bf972d134bda3cc606e49435f25bac9aea2a29766f103",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/proposal-dossiers/components.spec.tsx",
+      "lines": 54,
+      "sha256": "f4b0774f0c12a55794ce98f89259cd9be5921a39e01d7cb30bfd5f434d529b94",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/proposal-dossiers/components.tsx",
+      "lines": 72,
+      "sha256": "4b533ea2ac3c3495b70109a246841cbb6c9ed4e42fafba94052d65d698f60983",
+      "exportedClasses": [],
+      "operations": [
+        "DossierStatus"
+      ]
+    },
+    {
+      "file": "frontend/src/features/proposal-dossiers/pages.tsx",
+      "lines": 340,
+      "sha256": "6e23be8b44025b80dc2fbcee06ac3c227d16b66e563c326d2662b74269e5351b",
+      "exportedClasses": [],
+      "operations": [
+        "DossierListPage",
+        "DossierDetailPage"
+      ]
+    },
+    {
+      "file": "frontend/src/features/guidance-tasks/api.ts",
+      "lines": 114,
+      "sha256": "b6d02fc47b6e459a7e88ccab2d4c6be3643b5ddf6c81b46629180cbeafc99389",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/guidance-tasks/components.spec.tsx",
+      "lines": 57,
+      "sha256": "badc5ee61a7cc129a98abd59b338cc7d929fefba5b2c94a70be1e17ba7118eaf",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/guidance-tasks/components.tsx",
+      "lines": 294,
+      "sha256": "c2a0e692d6976066ac8c3648859df4172d4ee5db3d541e6e6f44b13b8f962b7c",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/guidance-tasks/pages.tsx",
+      "lines": 992,
+      "sha256": "fac2634f8ad77122a284e6a4a5702c22be0fb26fb4a088835b94a359b01efbd6",
+      "exportedClasses": [],
+      "operations": [
+        "useKey",
+        "useRefresh",
+        "useTerm",
+        "GuidancePlanListPage",
+        "GuidancePlanDetailPage",
+        "TaskCard",
+        "GuidanceTaskListPage",
+        "GuidanceTaskCreatePage",
+        "GuidanceTaskDetailPage"
+      ]
+    },
+    {
+      "file": "frontend/src/features/guidance-reviews/api.ts",
+      "lines": 96,
+      "sha256": "69926decf2e93317150dd031e73a82a8ce3bb1aa429dce847fa54bd4f916ca7f",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/guidance-reviews/components.spec.tsx",
+      "lines": 59,
+      "sha256": "b50f709857f5507f56e7636776cfb23f026597b340397d05b96c0426875788c8",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/guidance-reviews/components.tsx",
+      "lines": 420,
+      "sha256": "3d5624eca38c37e6498b6a31b469d22920e83dba9b9a115b74fe7da97990de58",
+      "exportedClasses": [],
+      "operations": [
+        "MeetingHistoryContent",
+        "ProgressTaskTable"
+      ]
+    },
+    {
+      "file": "frontend/src/features/guidance-reviews/pages.tsx",
+      "lines": 705,
+      "sha256": "e7fa1f1e654841a9bb595dfb10f60c91d3c437d35cac45e05227d0a52c1a3cd2",
+      "exportedClasses": [],
+      "operations": [
+        "useKey",
+        "useTerm",
+        "ProgressReviewInboxPage",
+        "ProgressReviewDetailPage",
+        "GuidanceProgressDashboardPage",
+        "GuidanceMeetingsPage",
+        "GuidanceNotificationsPage"
+      ]
+    },
+    {
+      "file": "frontend/src/features/task-submissions/api.ts",
+      "lines": 75,
+      "sha256": "15ab119397444e85561256cff1bc4d485bf938153e51f7f1f60a66b04e505741",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/task-submissions/pages.spec.tsx",
+      "lines": 82,
+      "sha256": "f85cc05b1c5eb03d0daa18eba43cbc7a3dbc453927ad042ca51b995b35f3f022",
+      "exportedClasses": [],
+      "operations": []
+    },
+    {
+      "file": "frontend/src/features/task-submissions/pages.tsx",
+      "lines": 514,
+      "sha256": "4a598fb90709dd8f7838ef504e11daf92488233f144bdf0e7a73d0ef7788520c",
+      "exportedClasses": [],
+      "operations": [
+        "upload",
+        "submit",
+        "TaskSubmissionsPage",
+        "refresh",
+        "reload"
+      ]
+    }
+  ],
+  "enums": [
+    {
+      "name": "AccountStatus",
+      "values": [
+        "ACTIVE",
+        "LOCKED",
+        "PENDING_ACTIVATION"
+      ]
+    },
+    {
+      "name": "TermStatus",
+      "values": [
+        "DRAFT",
+        "OPEN_REGISTRATION",
+        "CLOSED_REGISTRATION",
+        "IN_PROGRESS",
+        "DEFENDING",
+        "COMPLETED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "RegistrationStatus",
+      "values": [
+        "DRAFT",
+        "SUBMITTED",
+        "//",
+        "Legacy",
+        "values",
+        "are",
+        "retained",
+        "for",
+        "existing",
+        "records;",
+        "new",
+        "writes",
+        "use",
+        "DRAFT/SUBMITTED.",
+        "PENDING",
+        "APPROVED",
+        "REJECTED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "AssignmentStatus",
+      "values": [
+        "DRAFT",
+        "PUBLISHED",
+        "FINALIZED"
+      ]
+    },
+    {
+      "name": "ProposalStatus",
+      "values": [
+        "DRAFT",
+        "SUBMITTED",
+        "UNDER_REVIEW",
+        "REVISION_REQUESTED",
+        "APPROVED",
+        "REJECTED"
+      ]
+    },
+    {
+      "name": "TaskStatus",
+      "values": [
+        "TODO",
+        "IN_PROGRESS",
+        "SUBMITTED",
+        "REVIEWED",
+        "OVERDUE"
+      ]
+    },
+    {
+      "name": "DefenseEligibilityStatus",
+      "values": [
+        "PENDING",
+        "ELIGIBLE",
+        "INELIGIBLE",
+        "DEFERRED"
+      ]
+    },
+    {
+      "name": "DefermentStatus",
+      "values": [
+        "PENDING",
+        "DEPARTMENT_APPROVED",
+        "FACULTY_APPROVED",
+        "REJECTED"
+      ]
+    },
+    {
+      "name": "ExportJobStatus",
+      "values": [
+        "QUEUED",
+        "PROCESSING",
+        "DONE",
+        "FAILED"
+      ]
+    },
+    {
+      "name": "NotificationStatus",
+      "values": [
+        "UNREAD",
+        "READ"
+      ]
+    },
+    {
+      "name": "ImportJobStatus",
+      "values": [
+        "QUEUED",
+        "PROCESSING",
+        "DONE",
+        "FAILED",
+        "VALIDATED",
+        "PARTIAL"
+      ]
+    },
+    {
+      "name": "WorkflowPhaseKey",
+      "values": [
+        "PROPOSAL_EDIT",
+        "PROPOSAL_REVIEW",
+        "GUIDANCE"
+      ]
+    },
+    {
+      "name": "ProposalVersionState",
+      "values": [
+        "DRAFT",
+        "SEALED"
+      ]
+    },
+    {
+      "name": "ProposalSubmissionKind",
+      "values": [
+        "INITIAL",
+        "RESUBMISSION"
+      ]
+    },
+    {
+      "name": "ProposalReviewState",
+      "values": [
+        "ASSIGNED",
+        "IN_REVIEW",
+        "DECIDED",
+        "SUPERSEDED"
+      ]
+    },
+    {
+      "name": "ProposalReviewResult",
+      "values": [
+        "APPROVED",
+        "REVISION_REQUIRED"
+      ]
+    },
+    {
+      "name": "DossierState",
+      "values": [
+        "DRAFT",
+        "FINALIZED",
+        "RECEIVED",
+        "REOPENED"
+      ]
+    },
+    {
+      "name": "GuidancePlanState",
+      "values": [
+        "ACTIVE",
+        "PAUSED",
+        "ARCHIVED"
+      ]
+    },
+    {
+      "name": "GuidancePeriodType",
+      "values": [
+        "WEEK",
+        "MILESTONE"
+      ]
+    },
+    {
+      "name": "TaskWorkflowState",
+      "values": [
+        "TODO",
+        "IN_PROGRESS",
+        "SUBMITTED",
+        "REVISION_REQUESTED",
+        "COMPLETED",
+        "CANCELLED"
+      ]
+    },
+    {
+      "name": "GuidanceTaskKind",
+      "values": [
+        "WEEKLY_REPORT",
+        "AD_HOC"
+      ]
+    },
+    {
+      "name": "SubmissionState",
+      "values": [
+        "SUBMITTED",
+        "REVIEWED",
+        "SUPERSEDED"
+      ]
+    },
+    {
+      "name": "ProgressReviewResult",
+      "values": [
+        "PASS",
+        "FAIL",
+        "REVISION_REQUIRED"
+      ]
+    },
+    {
+      "name": "ProgressReviewState",
+      "values": [
+        "RECORDED",
+        "SUPERSEDED"
+      ]
+    },
+    {
+      "name": "FileAssetKind",
+      "values": [
+        "REPORT",
+        "SOURCE",
+        "EVIDENCE",
+        "DOSSIER_PDF",
+        "RECEIPT_SCAN"
+      ]
+    },
+    {
+      "name": "FileAssetState",
+      "values": [
+        "READY",
+        "QUARANTINED"
+      ]
+    },
+    {
+      "name": "OutboxDeliveryState",
+      "values": [
+        "PENDING",
+        "PROCESSING",
+        "DELIVERED",
+        "FAILED"
+      ]
+    }
+  ],
+  "modelCount": 99,
+  "analysisMethod": "File inventory plus manual review of contracts, routing, modules, critical state/auth/transaction/file paths; dynamic suites exercise services. Inventory alone is not full line-by-line verification."
+}
