@@ -60,6 +60,7 @@ export const areaSchema = z.object({
   isActive: z.boolean().optional(),
   name: z.string().trim().min(2).max(200),
   description: z.string().trim().max(3000).nullable().optional(),
+  departmentId: z.string().uuid().optional(),
 });
 export type StudentInput = z.infer<typeof studentSchema>;
 export type LecturerInput = z.infer<typeof lecturerSchema>;

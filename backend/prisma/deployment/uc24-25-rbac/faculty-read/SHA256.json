@@ -1,0 +1,6 @@
+{
+  "preflight.sql": "bdd9bdf114f5f55492e9fb12c7f41053fece549365db8b7adb7b6e9980209580",
+  "migration.sql": "2f533b94ea44e9fdcfd9f1ca4e67e5441ca43304467f3b9b740f9fd342b91056",
+  "postflight.sql": "bf6f65eeef32f3b8915df8066d928d99e58409198823e3e1175619ea61a45ec4",
+  "rollback.sql": "ac6bef0bd4410bee6084ab0e0bcc5a3d8bf55576133347cf9f104ee562242e71"
+}

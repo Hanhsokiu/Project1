@@ -147,11 +147,11 @@ export class ThesisTermController {
   async phases(
     @Param("id") id: string,
     @Body(new ZodValidationPipe(phasePlanSchema))
-    input: { phases: PhaseInput[] },
+    input: { phases: PhaseInput[]; reason?: string },
     @CurrentUser() user: CurrentUserPayload,
   ) {
     return ApiResponse.ok(
-      await this.service.savePhases(id, input.phases, user.userId),
+      await this.service.savePhases(id, input.phases, user.userId, input.reason),
     );
   }
 

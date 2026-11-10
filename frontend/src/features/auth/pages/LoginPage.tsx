@@ -79,6 +79,11 @@ function LoginForm({ user }: { user?: Account }) {
   return (
     <div className="login-shell">
       <section className="login-branding">
+        {import.meta.env.VITE_ACCEPTANCE_STAGING === "true" && (
+          <p className="badge bg-amber-100 text-amber-950" data-testid="acceptance-login-badge">
+            STAGING — Tài khoản và dữ liệu TEST, tách khỏi Supabase chung
+          </p>
+        )}
         <div className="relative">
           <div className="brand">
             <span className="brand-mark">UTC</span>

@@ -1,4 +1,5 @@
 import { AUTH_API } from "../../shared/api/api-session";
+import { AcceptanceBanner } from "../../shared/components/AcceptanceBanner";
 import {
   useCallback,
   useEffect,
@@ -397,6 +398,7 @@ function Shell({ children }: { children?: ReactNode }) {
             </Link>
           </div>
         </header>
+        <AcceptanceBanner />
         <main id="workspace-main" tabIndex={-1} className="page-content" key={`${termId}-${user.id}`}>
           {children ?? <Outlet />}
         </main>

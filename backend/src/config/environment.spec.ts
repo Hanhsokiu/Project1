@@ -10,6 +10,10 @@ const base = {
 
 describe('backend environment', () => {
   it('accepts local CI and TLS Supabase URLs, coercing ports', () => {
+    expect(validateEnvironment(base).UC23_WRITES_ENABLED).toBe('false');
+    expect(validateEnvironment(base).UC24_WRITES_ENABLED).toBe('false');
+    expect(validateEnvironment(base).UC25_WRITES_ENABLED).toBe('false');
+    expect(validateEnvironment(base).UC25_MAX_ROWS).toBe(100);
     expect(validateEnvironment({ ...base, PORT: '3001' }).PORT).toBe(3001);
     expect(validateEnvironment({ ...base, DIRECT_URL: 'postgresql://user:example@db.example.supabase.co:5432/postgres?sslmode=require' }).PORT).toBe(3000);
   });

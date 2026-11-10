@@ -1,12 +1,8 @@
 import { apiData, getStep1Resources } from "../../../shared/data/snapshot-api";
 import type { Term, TermStatus } from "../../../shared/data/types";
 import type { TermInput } from "./term-service";
-
-export function vietnamInstant(value: string, end = false) {
-  if (value.length === 10)
-    return `${value}T${end ? "23:59:59.999" : "00:00:00"}+07:00`;
-  return /[zZ]|[+-]\d\d:\d\d$/.test(value) ? value : `${value}+07:00`;
-}
+import { vietnamInstant } from "../../../shared/utils/vietnam-time";
+export { vietnamInstant } from "../../../shared/utils/vietnam-time";
 export const termApi = {
   async save(input: TermInput) {
     const resources = getStep1Resources();
@@ -18,15 +14,20 @@ export const termApi = {
       throw new Error(
         "Vui lòng chọn kỳ học và hệ đào tạo đã được tải từ hệ thống.",
       );
+    const existing = resources?.terms?.find(t => t.id === input.id) as
+      (Term & { startDate?: string; endDate?: string }) | undefined;
     const payload = {
       code: input.code,
       name: input.name,
       semesterId: semester.id,
       trainingSystemId: program.id,
-      startDate: vietnamInstant(input.start),
-      endDate: vietnamInstant(input.end, true),
+      startDate: existing?.start === input.start && existing.startDate
+        ? existing.startDate : vietnamInstant(input.start),
+      endDate: existing?.end === input.end && existing.endDate
+        ? existing.endDate : vietnamInstant(input.end, true),
       registrationStart: vietnamInstant(input.registrationStart),
       registrationEnd: vietnamInstant(input.registrationEnd, true),
+      ...(input.id && input.reason?.trim() ? { reason: input.reason.trim() } : {}),
     };
     const term = await apiData<Term>(
       input.id ? "PATCH" : "POST",
@@ -45,8 +46,9 @@ export const termApi = {
       locked: !term.locked,
     });
   },
-  savePhases: (id: string, phases: Term["phases"]) =>
+  savePhases: (id: string, phases: Term["phases"], reason?: string) =>
     apiData<Term>("PUT", `/terms/${id}/phases`, {
+      ...(reason?.trim() ? { reason: reason.trim() } : {}),
       phases: phases.map((phase) => ({
         ...phase,
         id: /^[0-9a-f-]{36}$/i.test(phase.id) ? phase.id : undefined,

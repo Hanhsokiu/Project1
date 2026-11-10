@@ -16,3 +16,20 @@
 **/.codex
 **/.aws
 **/.ssh
+
+# Acceptance runners, TEST policy producers and live deployment evidence are not runtime code.
+backend/scripts/acceptance
+backend/src/acceptance
+backend/test
+backend/prisma/review
+backend/prisma/deployment
+docs
+**/*.dpapi
+**/*.aes
+**/*.dump*
+**/*.pem
+**/*.key
+DATN-UC*-database-review*.zip
+
+**/.acceptance-build
+**/.main-compat

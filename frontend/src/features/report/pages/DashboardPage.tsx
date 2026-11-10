@@ -1046,7 +1046,7 @@ function CommitteeDashboard({
     </>
   );
 }
-function DashboardContent({ db }: { db: DemoDb }) {
+export function DashboardContent({ db }: { db: DemoDb }) {
   const { user, termId } = useWorkspace();
   const availableRoles = user.roles;
   const [selectedRole, setSelectedRole] = useState<Role>(
@@ -1056,13 +1056,13 @@ function DashboardContent({ db }: { db: DemoDb }) {
     ? selectedRole
     : availableRoles[0];
   if (!role) return <CommitteeDashboard db={db} />;
-  if (!db.terms.length)
+  if (!db.terms.some(t => t.id === termId))
     return (
       <>
         <PageHeader
           eyebrow="GPMS · KHÔNG GIAN LÀM VIỆC"
           title="Chưa có đợt đồ án"
-          description="Khoa chưa tạo đợt đồ án trên hệ thống."
+          description="Chưa có đợt đồ án trong phạm vi tài khoản đang chọn."
         />
         <Card>
           <Empty

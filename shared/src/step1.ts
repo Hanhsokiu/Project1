@@ -44,6 +44,11 @@ export const TermPhaseInputSchema = z
     locked: z.boolean(),
   })
   .strict();
+/** Required by the service for changes to a plan after the term leaves DRAFT. */
+export const TermPhasePlanSchema = z.object({
+  phases: z.array(TermPhaseInputSchema).min(6).max(7),
+  reason: z.string().trim().min(5).max(2000).optional(),
+}).strict();
 export const TermRosterInputSchema = z
   .object({
     studentIds: z.array(z.string()),

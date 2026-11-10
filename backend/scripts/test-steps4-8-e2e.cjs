@@ -8,6 +8,12 @@ const { seedSteps48 } = require("./integration/seed-steps4-8.cjs");
 const evidence = path.resolve(__dirname, "../../docs/implementation/evidence/steps4-8");
 async function main() {
   const url = testTarget(process.env.PR2B_TEST_URL), backend = path.resolve(__dirname, "..");
+  // Fixed port 50180 can belong to the Windows/Hyper-V excluded range.
+  const listener = require('node:net').createServer();
+  await new Promise((resolve, reject) => { listener.once('error', reject); listener.listen(0, '127.0.0.1', resolve); });
+  const browserPort = listener.address().port;
+  await new Promise(resolve => listener.close(resolve));
+  process.env.DATN_BROWSER_TEST_PORT = String(browserPort);
   const privateRoot = fs.mkdtempSync(path.join(os.tmpdir(), "btl-integration-48-"));
   Object.assign(process.env, { DATABASE_URL: url.toString(), DIRECT_URL: url.toString(), NODE_ENV: "test", JWT_SECRET: crypto.randomBytes(32).toString("hex"), JWT_REFRESH_SECRET: crypto.randomBytes(32).toString("hex"), STORAGE_LOCAL_PATH: privateRoot, GUIDANCE_UPLOAD_ENABLED: "true" });
   delete process.env.GUIDANCE_UPLOAD_POLICY_JSON;
@@ -23,7 +29,7 @@ async function main() {
     assert.equal(Math.floor(Number(identity.version) / 10000), 17);
     const [tables] = await db.$queryRaw`SELECT count(*)::int AS n FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE'`;
     assert.equal(tables.n, 0, "Must supply a NEW empty test DB; no reset or reuse");
-    const deploy = spawnSync(process.execPath, [require.resolve("prisma/build/index.js"), "migrate", "deploy", "--schema", path.join(backend, "prisma/schema.prisma")], { cwd: backend, env: process.env, windowsHide: true, encoding: "utf8" });
+    const deploy = await require('./integration/deploy-test-chain.cjs').deploy(db, backend, url.toString());
     assert.equal(deploy.status, 0, "Isolated migration replay failed");
     const seed = await seedSteps48(db, url.toString());
     await assert.rejects(seedSteps48(db, url.toString()), /Seed refuses existing/);
@@ -34,7 +40,7 @@ async function main() {
     const { SwaggerModule, DocumentBuilder } = require("@nestjs/swagger");
     app = await NestFactory.create(AppModule, { logger: false, abortOnError: false });
     app.setGlobalPrefix("api");
-    app.enableCors({ origin: "http://127.0.0.1:50180", credentials: true });
+    app.enableCors({ origin: "http://127.0.0.1:" + browserPort, credentials: true });
     app.use((req, res, next) => { res.on("finish", () => { if (req.method !== "OPTIONS") traffic.push({ method: req.method, path: req.path, status: res.statusCode }); }); next(); });
     app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
     await app.listen(0, "127.0.0.1");

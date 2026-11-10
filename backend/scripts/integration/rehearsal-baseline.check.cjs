@@ -1,0 +1,9 @@
+'use strict';
+const {test}=require('node:test'),assert=require('node:assert/strict'),path=require('node:path');
+const scope=require('./rehearsal-baseline.cjs'),backend=path.resolve(__dirname,'../..');
+function using(values,fn){const keys=['DATN_REHEARSAL_PG_MAJOR','DATN_REHEARSAL_BASELINE','PR2B_TEST_URL'];const old=Object.fromEntries(keys.map(k=>[k,process.env[k]]));try{for(const k of keys){if(values[k]===undefined)delete process.env[k];else process.env[k]=values[k];}fn();}finally{for(const k of keys){if(old[k]===undefined)delete process.env[k];else process.env[k]=old[k];}}}
+test('existing integration defaults remain PG17 and canonical schema',()=>using({},()=>{assert.equal(scope.expectedMajor(),17);assert.equal(scope.schema(backend),path.join(backend,'prisma/schema.prisma'));}));
+test('PG16 override requires explicit isolated loopback test URL',()=>using({DATN_REHEARSAL_PG_MAJOR:'16',PR2B_TEST_URL:'postgresql://synthetic:synthetic@127.0.0.1:5432/btl_pr2b_local'},()=>assert.equal(scope.expectedMajor(),16)));
+test('PG16 override rejects a remote/shared target before connection',()=>using({DATN_REHEARSAL_PG_MAJOR:'16',PR2B_TEST_URL:'postgresql://synthetic:synthetic@shared.example.invalid/postgres'},()=>assert.throws(()=>scope.expectedMajor())));
+test('baseline scope is the verified 17-migration prefix only',()=>using({DATN_REHEARSAL_BASELINE:'true',PR2B_TEST_URL:'postgresql://synthetic:synthetic@127.0.0.1:5432/btl_pr2b_local'},()=>assert.equal(scope.schema(backend),path.resolve(backend,'../.cache/uc17-24-deploy/b1-b8/prisma/schema.prisma'))));
+test('baseline override cannot redirect production migration commands',()=>using({DATN_REHEARSAL_BASELINE:'true',PR2B_TEST_URL:'postgresql://synthetic:synthetic@shared.example.invalid/postgres'},()=>assert.throws(()=>scope.schema(backend))));

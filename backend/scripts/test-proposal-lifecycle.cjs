@@ -37,11 +37,7 @@ async function main() {
       "SELECT count(*)::int AS n FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE'",
     );
     assert.equal(tables.n, 0, "Fresh empty database required");
-    const migration = spawnSync(
-      process.execPath,
-      [require.resolve("prisma/build/index.js"), "migrate", "deploy"],
-      { cwd: backend, env: process.env, encoding: "utf8", windowsHide: true },
-    );
+    const migration = await require('./integration/deploy-test-chain.cjs').deploy(db, backend, url.toString());
     assert.equal(migration.status, 0, "Migration failed: " + migration.stderr);
     const fixture = await seedSteps48(db, url.toString());
     await db.reviewGroup.create({

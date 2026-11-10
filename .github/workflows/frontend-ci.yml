@@ -50,6 +50,8 @@ jobs:
         working-directory: frontend
         env:
           VITE_API_URL: http://localhost:3000/api
+          VITE_AUTH_API: 'true'
+          VITE_DEMO_MODE: 'false'
         run: pnpm build
 
       - name: Run tests

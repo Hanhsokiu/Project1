@@ -114,6 +114,8 @@ enum ImportJobStatus {
 // ============================================
 
 model UserAccount {
+  assignedCommitteeStudents DefenseCommitteeAssignment[] @relation("CommitteeAssignmentAssignedBy")
+  updatedCommitteeStudents DefenseCommitteeAssignment[] @relation("CommitteeAssignmentUpdatedBy")
   weeklyReopens GuidanceReopen[]
   id                 String        @id @default(uuid())
   username           String        @unique
@@ -441,6 +443,7 @@ model AcademicSemester {
 }
 
 model ThesisTerm {
+  committeeAssignments DefenseCommitteeAssignment[]
   quotaPolicy Json? @map("quota_policy")
   id               String     @id @default(uuid())
   code             String     @unique
@@ -527,6 +530,7 @@ model TermLecturer {
 }
 
 model TermStudent {
+  committeeAssignment DefenseCommitteeAssignment?
   pr2bDossierStudentProfile DossierStudentProfile?
   id        String   @id @default(uuid())
   termId    String   @map("term_id")
@@ -664,6 +668,7 @@ model TopicHistory {
 }
 
 model Proposal {
+  committeeAssignment DefenseCommitteeAssignment?
   id        String         @id @default(uuid())
   topicId   String         @map("topic_id")
   studentId String         @map("student_id")
@@ -922,6 +927,8 @@ model PhaseEvaluation {
 }
 
 model FinalReport {
+  revision    Int       @default(0)
+  versions    FinalReportVersion[]
   id          String    @id @default(uuid())
   proposalId  String    @unique @map("proposal_id")
   filePath    String?   @map("file_path")
@@ -933,6 +940,10 @@ model FinalReport {
 }
 
 model DefenseConfirmation {
+  revision    Int       @default(0)
+  reportVersionId String? @map("report_version_id") @db.VarChar(36)
+  reportVersion FinalReportVersion? @relation(fields: [reportVersionId], references: [id], onDelete: Restrict, map: "final_confirmation_version_fk")
+  context     Json?
   id          String    @id @default(uuid())
   proposalId  String    @unique @map("proposal_id")
   advisorId   String    @map("advisor_id")
@@ -956,6 +967,13 @@ model DefenseEligibility {
   checkedAt  DateTime?                @map("checked_at") @db.Timestamptz(6)
   note       String?
   createdAt  DateTime                 @default(now()) @map("created_at") @db.Timestamptz(6)
+  revision Int @default(0)
+  context Json?
+  reviewedBy String? @map("reviewed_by") @db.VarChar(36)
+  decidedBy String? @map("decided_by") @db.VarChar(36)
+  decidedAt DateTime? @map("decided_at") @db.Timestamptz(6)
+  finalizedBy String? @map("finalized_by") @db.VarChar(36)
+  finalizedAt DateTime? @map("finalized_at") @db.Timestamptz(6)
 
   @@map("DEFENSE_ELIGIBILITY")
 
@@ -979,9 +997,24 @@ model ReviewerAssignment {
   reviewerId String   @map("reviewer_id")
   assignedAt DateTime @default(now()) @map("assigned_at") @db.Timestamptz(6)
 
+  // UC20 review package only. Revision zero retains the legacy meaning.
+  termId String? @map("term_id") @db.VarChar(36)
+  termStudentId String? @map("term_student_id") @db.VarChar(36)
+  committeeId String? @map("committee_id") @db.VarChar(36)
+  revision Int @default(0)
+  state String? @db.VarChar(20)
+  selected Boolean?
+  context Json?
+  createdBy String? @map("created_by") @db.VarChar(36)
+  updatedBy String? @map("updated_by") @db.VarChar(36)
+  updatedAt DateTime? @map("updated_at") @db.Timestamptz(6)
+  finalizedBy String? @map("finalized_by") @db.VarChar(36)
+  finalizedAt DateTime? @map("finalized_at") @db.Timestamptz(6)
+
   reviewer Lecturer @relation("ReviewerAssignment", fields: [reviewerId], references: [id])
 
   @@unique([proposalId, reviewerId])
+  @@index([termId, termStudentId])
   @@map("REVIEWER_ASSIGNMENT")
 
 }
@@ -1001,6 +1034,17 @@ model Room {
 }
 
 model DefenseCommittee {
+  code String? @db.VarChar(50)
+  departmentId String? @map("department_id") @db.VarChar(36)
+  revision Int @default(0)
+  state String? @db.VarChar(20)
+  context Json?
+  createdBy String? @map("created_by") @db.VarChar(36)
+  updatedBy String? @map("updated_by") @db.VarChar(36)
+  updatedAt DateTime? @map("updated_at") @db.Timestamptz(6)
+  finalizedBy String? @map("finalized_by") @db.VarChar(36)
+  finalizedAt DateTime? @map("finalized_at") @db.Timestamptz(6)
+  studentAssignments DefenseCommitteeAssignment[]
   id        String   @id @default(uuid())
   termId    String   @map("term_id")
   name      String
@@ -1011,7 +1055,32 @@ model DefenseCommittee {
   defenseSessions DefenseSession[]
 
   @@map("DEFENSE_COMMITTEE")
+  @@unique([termId, code])
 
+}
+
+// UC19 assignment before scheduling; COMMITTEE_STUDENT is bound to a UC21 session.
+model DefenseCommitteeAssignment {
+  id String @id @default(uuid()) @db.VarChar(36)
+  committeeId String @map("committee_id")
+  committee DefenseCommittee @relation(fields: [committeeId], references: [id], onDelete: Restrict)
+  termId String @map("term_id") @db.VarChar(36)
+  termStudentId String @unique @map("term_student_id") @db.VarChar(36)
+  proposalId String @unique @map("proposal_id") @db.VarChar(36)
+  state String @default("ACTIVE") @db.VarChar(20)
+  revision Int @default(1)
+  context Json
+  assignedBy String @map("assigned_by") @db.VarChar(36)
+  assignedAt DateTime @default(now()) @map("assigned_at") @db.Timestamptz(6)
+  updatedBy String @map("updated_by") @db.VarChar(36)
+  updatedAt DateTime @map("updated_at") @db.Timestamptz(6)
+  term ThesisTerm @relation(fields: [termId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  termStudent TermStudent @relation(fields: [termStudentId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  proposal Proposal @relation(fields: [proposalId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  assignedByUser UserAccount @relation("CommitteeAssignmentAssignedBy", fields: [assignedBy], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  updatedByUser UserAccount @relation("CommitteeAssignmentUpdatedBy", fields: [updatedBy], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  @@index([termId, committeeId, state])
+  @@map("DEFENSE_COMMITTEE_ASSIGNMENT")
 }
 
 model CommitteeMember {
@@ -1028,6 +1097,20 @@ model CommitteeMember {
 }
 
 model DefenseSession {
+  revision Int @default(0)
+  state String? @db.VarChar(20)
+  localDate String? @map("local_date") @db.VarChar(10)
+  sessionType String? @map("session_type") @db.VarChar(20)
+  timezone String? @db.VarChar(50)
+  endsAt DateTime? @map("ends_at") @db.Timestamptz(6)
+  context Json?
+  createdBy String? @map("created_by") @db.VarChar(36)
+  updatedBy String? @map("updated_by") @db.VarChar(36)
+  updatedAt DateTime? @map("updated_at") @db.Timestamptz(6)
+  finalizedBy String? @map("finalized_by") @db.VarChar(36)
+  finalizedAt DateTime? @map("finalized_at") @db.Timestamptz(6)
+  publishedBy String? @map("published_by") @db.VarChar(36)
+  publishedAt DateTime? @map("published_at") @db.Timestamptz(6)
   id          String   @id @default(uuid())
   committeeId String   @map("committee_id")
   roomId      String   @map("room_id")
@@ -1090,6 +1173,11 @@ model RubricCriteria {
 }
 
 model ScoreEntry {
+  revision    Int       @default(0)
+  reportVersionId String? @map("report_version_id") @db.VarChar(36)
+  reportVersion FinalReportVersion? @relation(fields: [reportVersionId], references: [id], onDelete: Restrict, map: "advisor_score_version_fk")
+  comment     String?
+  context     Json?
   id         String   @id @default(uuid())
   proposalId String   @map("proposal_id")
   scorerId   String   @map("scorer_id") // Lecturer ID
@@ -1123,6 +1211,13 @@ model ScoreDetail {
 }
 
 model FinalResult {
+  revision      Int       @default(0)
+  state         String    @default("LEGACY_UNVERIFIED")
+  context       Json?
+  isLocked      Boolean   @default(false) @map("is_locked")
+  finalizedBy   String?   @map("finalized_by") @db.VarChar(36)
+  finalizedAt   DateTime? @map("finalized_at") @db.Timestamptz(6)
+  publishedBy   String?   @map("published_by") @db.VarChar(36)
   id            String    @id @default(uuid())
   proposalId    String    @unique @map("proposal_id")
   advisorScore  Decimal?  @map("advisor_score") @db.Decimal(4, 1)
@@ -1798,6 +1893,7 @@ model GuidanceReopen {
 }
 
 model FileAsset {
+  finalReportVersion FinalReportVersion?
   guidanceUpload GuidanceSubmissionUpload?
   pr2bDossierPdfContent DossierPdfContent?
   id String @id @default(uuid()) @db.VarChar(36)
@@ -1817,6 +1913,21 @@ model FileAsset {
   pr2bSubmissionAssetFileId SubmissionAsset[] @relation("SubmissionAsset_fileId")
   pr2bEvaluationEvidenceFileId EvaluationEvidence[] @relation("EvaluationEvidence_fileId")
   @@map("FILE_ASSET")
+}
+
+// Final thesis PDFs have their own owner/version chain; never a weekly submission.
+model FinalReportVersion {
+  id String @id @default(uuid()) @db.VarChar(36)
+  reportId String @map("report_id")
+  report FinalReport @relation(fields: [reportId], references: [id], onDelete: Restrict)
+  sequence Int
+  fileAssetId String @unique @map("file_asset_id") @db.VarChar(36)
+  fileAsset FileAsset @relation(fields: [fileAssetId], references: [id], onDelete: Restrict)
+  submittedAt DateTime @default(now()) @map("submitted_at") @db.Timestamptz(6)
+  scores ScoreEntry[]
+  confirmations DefenseConfirmation[]
+  @@unique([reportId, sequence])
+  @@map("FINAL_REPORT_VERSION")
 }
 
 // Private staging intent recorded before writing bytes; no public storage path.
