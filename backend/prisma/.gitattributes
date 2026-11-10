@@ -1,0 +1,3 @@
+# Match the reviewed migration-lock bytes on Windows and Linux checkouts.
+# SQL migrations retain their existing, more specific byte-preservation rules.
+migrations/migration_lock.toml text eol=crlf
