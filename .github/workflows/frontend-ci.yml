@@ -48,13 +48,11 @@ jobs:
         working-directory: frontend
         run: pnpm lint
 
-      - name: Build
+      - name: Verify actual Vercel builds with missing and stale Preview auth flags
         working-directory: frontend
         env:
           VITE_API_URL: http://localhost:3000/api
-          VITE_AUTH_API: 'true'
-          VITE_DEMO_MODE: 'false'
-        run: pnpm build
+        run: node scripts/verify-vercel-build.cjs
 
       - name: Run tests
         working-directory: frontend
