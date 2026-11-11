@@ -17,6 +17,7 @@ import { useSession } from "../../../shared/hooks/use-demo";
 import { useApiSession } from "../../../shared/hooks/use-api-session";
 import type { Account } from "../../../shared/data/types";
 import { Button, Field, Modal, Notice } from "../../../shared/components/kit";
+import { acceptanceClientAllowed } from "../../../shared/components/acceptance-tools";
 export default function LoginPage() {
   const user = useApiSession();
   return AUTH_API ? <LoginForm user={user} /> : <DemoLoginPage />;
@@ -79,6 +80,19 @@ function LoginForm({ user }: { user?: Account }) {
   return (
     <div className="login-shell">
       <section className="login-branding">
+        {import.meta.env.DEV &&
+          acceptanceClientAllowed(
+            true,
+            import.meta.env.VITE_ACCEPTANCE_STAGING === "true",
+            typeof window === "undefined" ? "" : window.location.hostname,
+          ) && (
+            <p
+              className="badge bg-amber-100 text-amber-950"
+              data-testid="acceptance-login-badge"
+            >
+              STAGING — Tài khoản và dữ liệu TEST, tách khỏi Supabase chung
+            </p>
+          )}
         <div className="relative">
           <div className="brand">
             <span className="brand-mark">UTC</span>
@@ -180,7 +194,8 @@ function LoginForm({ user }: { user?: Account }) {
                   type="button"
                   className="icon-btn"
                   aria-label={visible ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
-                  onClick={() => setVisible(!visible)} title={visible ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
+                  onClick={() => setVisible(!visible)}
+                  title={visible ? "Ẩn mật khẩu" : "Hiện mật khẩu"}
                 >
                   {visible ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>

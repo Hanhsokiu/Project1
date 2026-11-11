@@ -24,7 +24,7 @@ export type TermInput = Pick<
   | "end"
   | "registrationStart"
   | "registrationEnd"
-> & { id?: string };
+> & { id?: string; reason?: string };
 function instant(value: string, end = false) {
   return new Date(
     value.length === 10
@@ -397,9 +397,9 @@ export const termService = {
       : mockTermService.transition(id, status),
   toggleLock: (id: string) =>
     step1Api.term ? termApi.toggleLock(id) : mockTermService.toggleLock(id),
-  savePhases: (id: string, phases: Term["phases"]) =>
+  savePhases: (id: string, phases: Term["phases"], reason?: string) =>
     step1Api.term
-      ? termApi.savePhases(id, phases)
+      ? termApi.savePhases(id, phases, reason)
       : mockTermService.savePhases(id, phases),
   saveParameters: (id: string, values: Record<string, number>) =>
     step1Api.term

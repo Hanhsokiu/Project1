@@ -1,4 +1,5 @@
 import { apiData } from "../api/api-data";
+import { vietnamDateTime as phaseTime } from "../utils/vietnam-time";
 export { apiData } from "../api/api-data";
 import { AUTH_API, getAccessToken, getApiUser } from "../api/api-session";
 import {
@@ -206,14 +207,6 @@ function overlay(mock: DemoDb, api: Step1Resources): DemoDb {
         result.students.push(structuredClone(s));
   }
   return result;
-}
-function phaseTime(value: string) {
-  return value.length === 10
-    ? `${value}T00:00`
-    : new Date(value)
-        .toLocaleString("sv-SE", { timeZone: "Asia/Ho_Chi_Minh" })
-        .replace(" ", "T")
-        .slice(0, 16);
 }
 /** Cached API data remains authoritative for synchronous consumers. */
 export function mergeStep1Snapshot(mock: DemoDb): DemoDb {

@@ -1,0 +1,15 @@
+{
+  "status": "DRAFT",
+  "runId": "REPLACE_WITH_UNIQUE_RELEASE_ID",
+  "database": "REPLACE_WITH_VERIFIED_DATABASE_NAME",
+  "approvedBy": null,
+  "approvedAt": null,
+  "expiresAt": null,
+  "decisionReference": null,
+  "backupEvidence": null,
+  "impact": "GLOBAL_ROLE_ALL_CURRENT_AND_FUTURE_USERS",
+  "approvedGlobalRoleImpact": false,
+  "expectedGrantCount": null,
+  "expectedScopeFingerprint": null,
+  "requests": []
+}

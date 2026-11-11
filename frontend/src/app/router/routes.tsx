@@ -171,11 +171,10 @@ const NotificationsPage = lazy(
 const ReferenceCatalogPage = lazy(
   () => import("../../features/catalog/pages/ReferenceCatalogPage"),
 );
-const DefenseConfirmPage = lazy(
-  () => import("../../features/guidance/pages/DefenseConfirmPage"),
-);
-const FinalReportUploadPage = lazy(
-  () => import("../../features/guidance/pages/FinalReportUploadPage"),
+const FinalDefensePage = lazy(() =>
+  import("../../features/guidance/final-defense/page").then((module) => ({
+    default: module.FinalDefensePage,
+  })),
 );
 function PermissionGuard() {
   const { user } = useWorkspace();
@@ -443,13 +442,27 @@ export const router = createBrowserRouter([
           { path: "topic/overview", element: wrap(<DossierPage />) },
           {
             path: "guidance/defense-confirm",
-            element: wrap(<DefenseConfirmPage />),
+            element: wrap(<FinalDefensePage />),
           },
           {
             path: "guidance/final-report",
-            element: wrap(<FinalReportUploadPage />),
+            element: wrap(<FinalDefensePage />),
           },
 
+          { path: "defense/eligibility", element: wrap(<EligibilityPage />) },
+          { path: "defense/results", element: wrap(<FinalResultPage />) },
+          { path: "defense/reports", element: wrap(<DefenseReportsPage />) },
+          { path: "defense/committees", element: wrap(<CommitteePage />) },
+          { path: "defense/reviewers", element: wrap(<ReviewerPage />) },
+          { path: "defense/schedule", element: wrap(<SchedulePage />) },
+          {
+            path: "defense/committee-grading",
+            element: wrap(<CommitteeGradePage />),
+          },
+          {
+            path: "defense/reviewer-grading",
+            element: wrap(<ReviewerGradePage />),
+          },
           { path: "report/export", element: wrap(<ExportCenterPage />) },
           { path: "profile", element: wrap(<ProfilePage />) },
           { path: "change-password", element: wrap(<ChangePasswordPage />) },
@@ -461,3 +474,11 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
+import { EligibilityPage } from "../../features/defense/eligibility/page";
+import { CommitteePage } from "../../features/defense/committees/page";
+import { ReviewerPage } from "../../features/defense/reviewers/page";
+import { SchedulePage } from "../../features/defense/scheduling/page";
+import { CommitteeGradePage } from "../../features/defense/committee-grading/page";
+import { FinalResultPage } from "../../features/defense/final-results/page";
+import { DefenseReportsPage } from "../../features/report/defense-reporting/page";
+import { ReviewerGradePage } from "../../features/defense/reviewer-grading/page";

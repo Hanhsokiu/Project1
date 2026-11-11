@@ -1,4 +1,11 @@
 import { Module } from "@nestjs/common";
+import {
+  FinalDefenseController,
+  FinalPdfInterceptor,
+} from "./final-defense/final-defense.controller";
+import { FinalDefenseService } from "./final-defense/final-defense.service";
+import { FinalDefenseRepository } from "./final-defense/final-defense.repository";
+import { FinalDefenseValidator } from "./final-defense/final-defense.validator";
 import { WeeklyController } from "./weekly/weekly.controller";
 import { WeeklyService } from "./weekly/weekly.service";
 import { WeeklyRepository } from "./weekly/weekly.repository";
@@ -24,6 +31,7 @@ import { ProposalReviewValidator } from "../topic/proposal-reviews/proposal-revi
 
 @Module({
   controllers: [
+    FinalDefenseController,
     WeeklyController,
     TaskController,
     GuidanceController,
@@ -31,6 +39,10 @@ import { ProposalReviewValidator } from "../topic/proposal-reviews/proposal-revi
     ProgressReviewController,
   ],
   providers: [
+    FinalDefenseService,
+    FinalDefenseRepository,
+    FinalDefenseValidator,
+    FinalPdfInterceptor,
     WeeklyService,
     WeeklyRepository,
     WeeklyNotificationWorker,

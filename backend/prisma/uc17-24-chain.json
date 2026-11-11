@@ -1,0 +1,138 @@
+{
+  "sourceZip": "DATN-UC18-UC25-database-review-v2.zip",
+  "sourceZipSha256": "6F4F8808B8B37C9B72FA3444734E78C8E67943B2CB794E80AE224167201E38F6",
+  "baseline": [
+    {
+      "name": "0_init",
+      "sha256": "533FFB3D89181A690EE6AFBB15B9673D4F34DD5C75ECF542C596571CD1687504"
+    },
+    {
+      "name": "202610210001_empty_baseline_bridge",
+      "sha256": "892D68D8E13C2C863E8786A841D3CBAFA7603F3853EBBEC35E979B919FEEC993"
+    },
+    {
+      "name": "202610210002_expand_workflow",
+      "sha256": "933A053C2AF980CB78D182D2A9B5FA915385374EA97A7948FAE9DE5D34B95503"
+    },
+    {
+      "name": "202610210003_review_group_management",
+      "sha256": "924E394BF9AE7F69629ABC698E9FA7D0073A2462EC9D4A7CA08905CE8389525B"
+    },
+    {
+      "name": "202610220001_proposal_review_assignment",
+      "sha256": "1A77A25E8DCA6BAACEFAF69AE8EE67B0B96A8B97EE0D4B30A17EB22EBA39DC37"
+    },
+    {
+      "name": "202610220002_proposal_version_snapshots",
+      "sha256": "69EDD06F7A2AA15C5B18C19C741F0B4D52605E80286EF0EC10503D39F8712B39"
+    },
+    {
+      "name": "202610220003_dossier_finalization",
+      "sha256": "C6D8B146D02DC25374BB06E38BDF73F4213E6E66CCA4B5D812AEE493EF4E26A3"
+    },
+    {
+      "name": "202610220004_guidance_task_management",
+      "sha256": "505B31121767A48D7A33C06B86229F5583717D86C118FA770A78C4F10B47FED8"
+    },
+    {
+      "name": "202610220005_guidance_submissions",
+      "sha256": "C13CD1CA97E453CF765E9D861B1E08EAD088DD5456DBB5A91F42A88743E1D3AE"
+    },
+    {
+      "name": "202610230001_guidance_reviews",
+      "sha256": "684722701D412F58E6DD2C824344BD74EB98F5E284AC2D97945EEDC24D179B9E"
+    },
+    {
+      "name": "202610260001_step1_3_enum_values",
+      "sha256": "D5CDA509149BAC10A8377F41D6A8F7F6EF703C92EBB3800C77E54984D14034DE"
+    },
+    {
+      "name": "202610260002_integrate_step1_3",
+      "sha256": "A2A965AD2E81460304E9E1D5BC298696528229C4CE592785F54AB299465762FC"
+    },
+    {
+      "name": "202610280001_proposal_lifecycle",
+      "sha256": "4313B7C8E390560977E3FC419054B99E6F3C4C3181EF4C9F173775BA37548880"
+    },
+    {
+      "name": "202610290001_student_major_name",
+      "sha256": "681B1AF0D5FC20F580E53560747F51F3EE5AA3EB00B584FAD1716349C3FF82CB"
+    },
+    {
+      "name": "202610290002_term_creator_academic_scope",
+      "sha256": "F1E0D7BB9A41EC9AA9DB6AD0D3E68B209BF89BD8FF5366156769275CF4FD2E10"
+    },
+    {
+      "name": "202611040001_lecturer_quota_policy",
+      "sha256": "43E798278DAD1823E855C1A22F06D5C8B7BCB428C53148B06CD37DD5527306A9"
+    },
+    {
+      "name": "202611040002_weekly_progress",
+      "sha256": "43EC562BBE9E73C762A9DC36BA220E376924A6EC190AD9DCD0CFF3973B0B775F"
+    }
+  ],
+  "migrations": [
+    {
+      "uc": 17,
+      "name": "202611090001_uc17_final_defense",
+      "source": "migrations/final-defense/migration.sql",
+      "sha256": "75CD92D5F97ACF26F3FE6A3EADBBCADFC54F9C81432BEEF4735E8BD8A51E092F",
+      "dependsOn": "202611040002_weekly_progress"
+    },
+    {
+      "uc": 18,
+      "name": "202611090002_uc18_defense_eligibility",
+      "source": "migrations/defense-eligibility/migration.sql",
+      "sha256": "5D6165CBD16902D64619E871D42D85519FA4C8CBB0DB3BE4A33F8C9C737DF389",
+      "dependsOn": "202611090001_uc17_final_defense"
+    },
+    {
+      "uc": 19,
+      "name": "202611090003_uc19_defense_committee",
+      "source": "migrations/defense-committee/migration.sql",
+      "sha256": "D3D20DF62E6B18C31197A0C7C441653B5DDAF65B6530732CF4E8A75F5B9970B4",
+      "dependsOn": "202611090002_uc18_defense_eligibility"
+    },
+    {
+      "uc": 20,
+      "name": "202611090004_uc20_defense_reviewers",
+      "source": "migrations/defense-reviewers/migration.sql",
+      "sha256": "0B2908058248EE8C3E066D57871E03050A98D84E2AA382284F55B585EAB91C53",
+      "dependsOn": "202611090003_uc19_defense_committee"
+    },
+    {
+      "uc": 21,
+      "name": "202611090005_uc21_defense_scheduling",
+      "source": "migrations/defense-scheduling/migration.sql",
+      "sha256": "08DFA2D05BD8F8BA28D18637B5E832E04E1410F6C5AF7C68777838ED9A41054D",
+      "dependsOn": "202611090004_uc20_defense_reviewers"
+    },
+    {
+      "uc": 22,
+      "name": "202611090006_uc22_defense_reviewer_grading",
+      "source": "migrations/defense-reviewer-grading/migration.sql",
+      "sha256": "252D4A363BA93D761A89BA267E3F4F0946D94FAE8F78B859805681569879DDB4",
+      "dependsOn": "202611090005_uc21_defense_scheduling"
+    },
+    {
+      "uc": 23,
+      "name": "202611090007_uc23_defense_committee_grading",
+      "source": "migrations/defense-committee-grading/migration.sql",
+      "sha256": "27C00F73F17B05E08A71D586A6E64F33CE6B6AEC5337B1448FC79DD52CE10E84",
+      "dependsOn": "202611090006_uc22_defense_reviewer_grading"
+    },
+    {
+      "uc": 24,
+      "name": "202611090008_uc24_defense_final_results",
+      "source": "migrations/defense-final-results/migration.sql",
+      "sha256": "6A1F8328747A2780DD9D9BB25A542980113C01C1577EB7CB6D493D626D8E3F70",
+      "reviewedSha256": "796C75EFEFAFA85E3E09996055A07C4C144D317212F43731A896938D00565D1F",
+      "dependsOn": "202611090007_uc23_defense_committee_grading"
+    }
+  ],
+  "migrationLockSha256": "E0F301404B533BEA819CAFBC56CA2A9D9BCC2CF97D6350473E3A008F0637CC12",
+  "schemaSha256": "E9F6B80C2F02239D21EDABB0CC37CBEA4AEF4601239072DF77FC132ABB2482AC",
+  "postgresqlRehearsal": "BLOCKED_NO_APPROVED_ENVIRONMENT",
+  "databaseConnected": false,
+  "writeFlagsChanged": false
+}

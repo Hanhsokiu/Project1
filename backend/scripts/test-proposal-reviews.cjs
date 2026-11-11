@@ -40,21 +40,11 @@ async function main() {
     const [identity] =
       await db.$queryRaw`SELECT current_database() AS db,current_setting('server_version_num') AS version`;
     assert.equal(identity.db, url.pathname.slice(1));
-    assert.equal(Math.floor(Number(identity.version) / 10000), 17);
+    assert.equal(Math.floor(Number(identity.version) / 10000), require('./integration/rehearsal-baseline.cjs').expectedMajor());
     const [empty] =
       await db.$queryRaw`SELECT count(*)::int AS n FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE'`;
     assert.equal(empty.n, 0, 'Fresh isolated empty database required');
-    const deploy = spawnSync(
-      process.execPath,
-      [
-        require.resolve('prisma/build/index.js'),
-        'migrate',
-        'deploy',
-        '--schema',
-        path.join(backend, 'prisma/schema.prisma'),
-      ],
-      { cwd: backend, env: process.env, windowsHide: true, encoding: 'utf8' },
-    );
+    const deploy = await require('./integration/deploy-test-chain.cjs').deploy(db, backend, url.toString());
     assert.equal(
       deploy.status,
       0,
@@ -65,7 +55,7 @@ async function main() {
     assert.equal(
       history.length,
       fs
-        .readdirSync(path.join(backend, 'prisma/migrations'))
+        .readdirSync(path.join(path.dirname(require('./integration/rehearsal-baseline.cjs').schema(backend)), 'migrations'))
         .filter((n) =>
           fs.existsSync(
             path.join(backend, 'prisma/migrations', n, 'migration.sql'),
@@ -93,7 +83,7 @@ async function main() {
     }
     pass('active migration chain replays with matching history/checksums');
     for (const name of ['FACULTY', 'LECTURER', 'STUDENT', 'ADMIN'])
-      await db.role.create({ data: { id: name, name } });
+      await db.role.upsert({ where: { name }, create: { id: name, name }, update: {} });
     const permissions = await db.permission.findMany({
       where: { resource: { in: ['proposal', 'review-group'] } },
     });

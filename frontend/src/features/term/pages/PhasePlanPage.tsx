@@ -24,10 +24,12 @@ import {
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import { step1Api } from "../../../shared/data/snapshot-api";
+import { AUTH_API } from "../../../shared/api/api-session";
 import { termService } from "../services/term-service";
 export default function PhasePlanPage() {
   const { id } = useParams();
-  const { db } = useWorkspace();
+  const { db, user } = useWorkspace();
+  const [reason, setReason] = useState("");
   const t = db.terms.find((t) => t.id === id);
   const action = useAction({ invalidateTerms: true });
   const [phases, setPhases] = useState<Phase[]>(() =>
@@ -48,7 +50,10 @@ export default function PhasePlanPage() {
         <Back to="/terms" />
       </Card>
     );
-  const disabled = t.locked || ["COMPLETED", "CANCELLED"].includes(t.status);
+  const disabled = t.locked || ["COMPLETED", "CANCELLED"].includes(t.status) ||
+    (AUTH_API && !user.permissions?.includes("term:plan"));
+  const reasonRequired = step1Api.term && t.status !== "DRAFT";
+  const reasonMissing = reasonRequired && reason.trim().length < 5;
   const dirty = JSON.stringify(phases) !== JSON.stringify(t.phases);
   const update = (index: number, patch: Partial<Phase>) =>
     setPhases(phases.map((p, i) => (i === index ? { ...p, ...patch } : p)));
@@ -59,7 +64,8 @@ export default function PhasePlanPage() {
   };
   async function save() {
     try {
-      await action.run(() => termService.savePhases(t!.id, phases));
+      await action.run(() => termService.savePhases(t!.id, phases, reason.trim() || undefined));
+      setReason("");
     } catch {
       // useAction displays the failure; keep the current form available for correction.
     }
@@ -73,9 +79,11 @@ export default function PhasePlanPage() {
           phases.map((p) =>
             p.id === confirm.id ? { ...p, locked: confirm.locked } : p,
           ),
+          reason.trim() || undefined,
         ),
       );
       setConfirm(null);
+      setReason("");
     } catch {
       // useAction displays the failure; keep the current form available for correction.
     }
@@ -138,7 +146,7 @@ export default function PhasePlanPage() {
       {disabled && (
         <div className="mb-6">
           <Notice tone="warning">
-            Đợt đang khóa hoặc đã kết thúc; chỉ được xem kế hoạch.
+            Đợt đang khóa, đã kết thúc hoặc tài khoản thiếu quyền lập kế hoạch; chỉ được xem.
           </Notice>
         </div>
       )}
@@ -207,7 +215,7 @@ export default function PhasePlanPage() {
                   <Button
                     type="button"
                     variant="secondary"
-                    disabled={disabled || action.pending}
+                    disabled={disabled || action.pending || reasonMissing}
                     onClick={() =>
                       setConfirm({ id: phase.id, locked: !phase.locked })
                     } loading={action.pending}
@@ -223,8 +231,9 @@ export default function PhasePlanPage() {
                     required
                     disabled={disabled}
                     type={step1Api.term ? "datetime-local" : "date"}
+                    step={step1Api.term ? "0.001" : undefined}
                     min={step1Api.term ? t.start + "T00:00" : t.start}
-                    max={step1Api.term ? t.end + "T23:59" : t.end}
+                    max={step1Api.term ? t.end + "T23:59:59.999" : t.end}
                     value={phase.start}
                     onChange={(e) => update(i, { start: e.target.value })}
                   />
@@ -236,8 +245,9 @@ export default function PhasePlanPage() {
                     required
                     disabled={disabled}
                     type={step1Api.term ? "datetime-local" : "date"}
+                    step={step1Api.term ? "0.001" : undefined}
                     min={phase.start}
-                    max={step1Api.term ? t.end + "T23:59" : t.end}
+                    max={step1Api.term ? t.end + "T23:59:59.999" : t.end}
                     value={phase.end}
                     onChange={(e) => update(i, { end: e.target.value })}
                   />
@@ -247,7 +257,13 @@ export default function PhasePlanPage() {
           ))}
         </div>
         <div className="mt-6">
+          <Field label="Lý do điều chỉnh/gia hạn kế hoạch">
+            <textarea disabled={disabled} required={reasonRequired} minLength={5} maxLength={2000}
+              value={reason} onChange={e => setReason(e.target.value)}
+              placeholder="Nêu lý do đổi lịch hoặc khóa/mở giai đoạn; được lưu trong nhật ký." />
+          </Field>
           <Notice>
+            Các mốc dùng giờ Việt Nam (UTC+7). Được thao tác từ thời điểm bắt đầu và bị khóa ngay tại thời điểm kết thúc. Gia hạn phải nằm trong đợt, không chồng lấn giai đoạn tiếp theo; không tự đổi trạng thái nghiệp vụ.
             Thứ tự thời gian phải hợp lý và nằm trong đợt. Khóa giai đoạn chặn
             thao tác ghi tương ứng, kể cả khi chưa hết thời hạn. Khóa/mở sẽ lưu
             toàn bộ kế hoạch đang chỉnh sửa.
@@ -265,7 +281,7 @@ export default function PhasePlanPage() {
             <RotateCcw size={16} aria-hidden="true" />
             Khôi phục bản đã lưu
           </Button>
-          <Button disabled={disabled || action.pending || !dirty} loading={action.pending}>
+          <Button disabled={disabled || action.pending || !dirty || reasonMissing} loading={action.pending}>
             <Save size={16} aria-hidden="true" />
             Lưu kế hoạch
           </Button>

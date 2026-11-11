@@ -35,7 +35,7 @@ async function main() {
     const [identity] =
       await db.$queryRaw`SELECT current_database() AS name,current_setting('server_version_num') AS version`;
     assert.equal(identity.name, url.pathname.slice(1));
-    assert.equal(Math.floor(Number(identity.version) / 10000), 17);
+    assert.equal(Math.floor(Number(identity.version) / 10000), require('./integration/rehearsal-baseline.cjs').expectedMajor());
     const [count] =
       await db.$queryRaw`SELECT count(*)::int AS n FROM information_schema.tables WHERE table_schema='public'`;
     if (!count.n) {

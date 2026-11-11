@@ -11,6 +11,7 @@ import {
   X,
 } from "lucide-react";
 import { useDemo } from "../hooks/use-demo";
+import { vietnamInstant } from "../utils/vietnam-time";
 import type { DemoDb, StoredFile } from "../data/types";
 import { PageActions } from "./action-menu";
 export { ActionMenu, PageActions } from "./action-menu";
@@ -398,7 +399,7 @@ export function readFile(file: File): Promise<StoredFile> {
 export const date = (value: string) =>
   value
     ? new Date(
-        value.length === 10 ? `${value}T12:00:00+07:00` : value,
+        vietnamInstant(value),
       ).toLocaleDateString("vi-VN", { timeZone: "Asia/Ho_Chi_Minh" })
     : "—";
 export function Progress({ value }: { value: number }) {

@@ -66,7 +66,7 @@ async function main() {
     assert.equal(
       history.length,
       fs
-        .readdirSync(path.join(backend, "prisma/migrations"))
+        .readdirSync(path.join(path.dirname(require('./integration/rehearsal-baseline.cjs').schema(backend)), 'migrations'))
         .filter((n) =>
           fs.existsSync(
             path.join(backend, "prisma/migrations", n, "migration.sql"),

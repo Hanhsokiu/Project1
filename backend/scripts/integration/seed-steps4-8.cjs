@@ -9,13 +9,14 @@ async function seedSteps48(db, rawUrl) {
   const url = testTarget(rawUrl);
   const [identity] = await db.$queryRaw`SELECT current_database() AS name`;
   assert.equal(identity.name, url.pathname.slice(1));
-  for (const model of ["userAccount", "thesisTerm", "department", "proposal", "role"])
+  for (const model of ["userAccount", "thesisTerm", "department", "proposal"])
     assert.equal(await db[model].count(), 0, "Seed refuses existing " + model);
   const password = "Qa!" + crypto.randomBytes(18).toString("hex");
   const hash = await bcrypt.hash(password, 10);
   const now = Date.now(), start = new Date(now - 86400000), end = new Date(now + 7 * 86400000);
   const roles = ["FACULTY", "LECTURER", "STUDENT", "ADMIN"];
-  for (const name of roles) await db.role.create({ data: { id: name, name } });
+  for (const role of await db.role.findMany()) assert(["FACULTY","LECTURER","STUDENT","ADMIN","COMMITTEE"].includes(role.name) && role.id === role.name, "Unexpected pre-existing test role");
+  for (const name of roles) await db.role.upsert({ where: { name }, create: { id: name, name }, update: {} });
   // Match the step 1-3 seed's faculty read grants for the legacy API regressions.
   for (const resource of ['registration', 'topic']) {
     const permission = await db.permission.upsert({

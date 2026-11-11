@@ -13,6 +13,25 @@ out/
 .env
 .env.local
 .env.*.local
+.env.*
+!.env.example
+!.env.*.example
+
+# Private operational artifacts must never enter a release.
+*.dpapi
+*.aes
+*.dump
+*.dump.*
+*.pem
+*.key
+**/credentials*.json
+~$*.docx
+DATN-UC*-database-review*.zip
+backend/prisma/deployment/**/evidence/
+backend/prisma/deployment/**/production-*.json
+backend/prisma/deployment/**/history*.json
+backend/prisma/deployment/**/forward-*.json
+*.NOT-EXECUTABLE.sql
 
 # Logs
 *.log
@@ -58,3 +77,10 @@ test-results-*/
 
 # TypeScript incremental compiler caches
 *.tsbuildinfo
+
+# Generated staging-only producer build
+.acceptance-build/
+.main-compat/
+docs/implementation/evidence/
+backend/prisma/review/**/*results*.json
+backend/prisma/review/*.pdf

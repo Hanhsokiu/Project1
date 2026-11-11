@@ -1,5 +1,4 @@
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { readFileSync } from "fs";
 import * as bcrypt from "bcryptjs";
 import { randomUUID } from "crypto";
 import { PrismaService } from "../../prisma/prisma.service";
@@ -8,13 +7,8 @@ import { ImportRepository } from "../repository/import.repository";
 import { ImportService } from "./import.service";
 import { LecturerImportService } from "./lecturer-import.service";
 import type { ImportFile } from "../dto/catalog.dto";
-const envLine = readFileSync(".env", "utf8")
-  .split(/\r?\n/)
-  .find((line) => line.startsWith("DATABASE_URL="));
-if (!process.env.DATABASE_URL && envLine)
-  process.env.DATABASE_URL = envLine
-    .slice("DATABASE_URL=".length)
-    .replace(/^['"]|['"]$/g, "");
+const target = new URL(process.env.DATABASE_URL!);
+if (target.hostname !== '127.0.0.1' || !/^\/btl_pr2b_[a-z0-9_]+$/.test(target.pathname)) throw new Error('Dedicated loopback test database required');
 const prisma = new PrismaService();
 const service = new ImportService(
   new ImportRepository(prisma, new AuditService(prisma)),

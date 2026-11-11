@@ -1,0 +1,7 @@
+#!/bin/sh
+# Apply the test clock only after the stock entrypoint has dropped root privileges.
+# Root initdb/entrypoint commands must not create shared semaphores for the postgres process.
+if [ "$(id -u)" = "0" ]; then
+  exec /usr/lib/postgresql/17/bin/postgres "$@"
+fi
+exec env LD_PRELOAD=/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1 /usr/lib/postgresql/17/bin/postgres "$@"

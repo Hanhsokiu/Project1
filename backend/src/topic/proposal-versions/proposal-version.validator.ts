@@ -18,7 +18,7 @@ export class ProposalVersionValidator {
     const term = await s.term(termId),
       phase = await s.editPhase(termId),
       now = new Date();
-    if (!term || !['CLOSED_REGISTRATION', 'IN_PROGRESS'].includes(term.status))
+    if (!term || term.isLocked || now < term.startDate || now >= term.endDate || !['CLOSED_REGISTRATION', 'IN_PROGRESS'].includes(term.status))
       groupError(409, 'TERM_003', 'Đợt không cho phép sửa/gửi đề cương.');
     if (!phase || phase.refPhaseId.termId !== termId)
       groupError(409, 'INPUT_NOT_READY', 'Chưa cấu hình phase PROPOSAL_EDIT.');

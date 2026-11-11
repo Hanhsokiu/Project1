@@ -34,10 +34,10 @@ describe.runIf(process.env.RUN_AUTOMATION_DB_TESTS === "1")(
       const target = new URL(process.env.DATABASE_URL!);
       if (
         target.hostname !== "127.0.0.1" ||
-        !target.pathname.startsWith("/btl_pr2b_autofix_")
+        !/^\/btl_pr2b_[a-z0-9_]+$/.test(target.pathname)
       )
         throw new Error(
-          "Dedicated loopback btl_pr2b_autofix_* database required",
+          "Dedicated loopback btl_pr2b_* database required",
         );
       systemId = (
         await db.trainingSystem.create({
@@ -56,7 +56,16 @@ describe.runIf(process.env.RUN_AUTOMATION_DB_TESTS === "1")(
       ).id;
       actorId = (
         await db.userAccount.create({
-          data: { username: `actor-${tag}`, passwordHash: "fixture" },
+          data: {
+            username: `actor-${tag}`,
+            passwordHash: "fixture",
+            status: "ACTIVE",
+            userRoles: {
+              create: {
+                roleId: (await db.role.findUniqueOrThrow({ where: { name: "ADMIN" } })).id,
+              },
+            },
+          },
         })
       ).id;
       const department = await db.department.create({

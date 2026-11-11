@@ -1,0 +1,14 @@
+# Preserve reviewed SQL bytes across Git checkouts; baseline migrations unaffected.
+# Supabase's existing 0_init checksum is the CRLF checkout. Its Git blob stays
+# unchanged (LF); force the same applied bytes on Linux/Render as on Windows.
+0_init/migration.sql text eol=crlf
+202611090001_uc17_final_defense/migration.sql -text
+202611090002_uc18_defense_eligibility/migration.sql -text
+202611090003_uc19_defense_committee/migration.sql -text
+202611090004_uc20_defense_reviewers/migration.sql -text
+202611090005_uc21_defense_scheduling/migration.sql -text
+202611090006_uc22_defense_reviewer_grading/migration.sql -text
+202611090007_uc23_defense_committee_grading/migration.sql -text
+202611090008_uc24_defense_final_results/migration.sql -text
+20261109150000_uc24_uc25_rbac_permissions/migration.sql -text
+202611110001_uc24_fr_guard_forward_fix/migration.sql -text
