@@ -47,11 +47,11 @@ export async function createReviewerGradeFixture(
   await rw.assign(reviewers);
   await rw.finalize();
   const policy: ReviewerGradePolicy = {
-    version: "TEST_ONLY_UC22",
+    version: "UNIT_MEMORY_FIXTURE_UC22",
     status: "APPROVED",
     approvedBy: ids.faculty,
     approvedAt: "2020-01-01T00:00:00Z",
-    reference: "TEST_ONLY; not approved by faculty",
+    reference: "UNIT_MEMORY_FIXTURE; not approved by faculty",
     phaseCode: "FINAL",
     scoreStep: "0.5",
     draftAllowed: true,

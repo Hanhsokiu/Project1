@@ -22,7 +22,7 @@ describe("UC22 current assignment, privacy and independent score workflow", () =
   it("exact rational rubric accepts recurring fractions only when the final total is exactly representable", async () => {
     f.policy.scoreStep = "0.1";
     f.policy.rubric = {
-      version: "TEST_ONLY_FRACTIONS",
+      version: "UNIT_MEMORY_FIXTURE_FRACTIONS",
       calculation: "WEIGHTED_NORMALIZED_10_EXACT",
       criteria: [
         { id: "a", name: "A", maxScore: "3", step: "1", weight: "0.5" },
@@ -418,7 +418,7 @@ describe("UC22 current assignment, privacy and independent score workflow", () =
   });
   it("validates rubric exact totals, all criteria, unknown criteria and source metadata", async () => {
     f.policy.rubric = {
-      version: "TEST_ONLY_RUBRIC",
+      version: "UNIT_MEMORY_FIXTURE_RUBRIC",
       calculation: "WEIGHTED_NORMALIZED_10_EXACT",
       criteria: [
         {
@@ -471,7 +471,7 @@ describe("UC22 current assignment, privacy and independent score workflow", () =
       v.policy(JSON.stringify({ ...f.policy, scoreStep: "0.01" })),
     ).toBeNull();
     f.policy.rubric = {
-      version: "TEST_ONLY",
+      version: "UNIT_MEMORY_FIXTURE",
       calculation: "WEIGHTED_NORMALIZED_10_EXACT",
       criteria: [
         { id: "r", name: "T", weight: "0.9", maxScore: "10", step: "1" },

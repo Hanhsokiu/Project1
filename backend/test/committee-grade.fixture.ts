@@ -57,11 +57,11 @@ export async function createCommitteeGradeFixture(dual = false, committeeCount =
   await sc.transition(sessionId, "finalize");
   f.term.status = "DEFENDING";
   const policy: CommitteeGradePolicy = {
-    version: "TEST_ONLY_UC23",
+    version: "UNIT_MEMORY_FIXTURE_UC23",
     status: "APPROVED",
     approvedBy: ids.faculty,
     approvedAt: "2020-01-01T00:00:00Z",
-    reference: "TEST_ONLY, never faculty approval",
+    reference: "UNIT_MEMORY_FIXTURE, never faculty approval",
     effectiveFrom: "2020-01-01T00:00:00Z",
     effectiveScope: "GRADING_WINDOW",
     effectiveUntil: null,
@@ -75,7 +75,7 @@ export async function createCommitteeGradeFixture(dual = false, committeeCount =
     schedule: { required: true, requirePublished: false, anchor: "SESSION" },
     defenseEvidence: "NOT_REQUIRED",
     rubric: {
-      version: "TEST_ONLY_COMMITTEE_RUBRIC",
+      version: "UNIT_MEMORY_FIXTURE_COMMITTEE_RUBRIC",
       calculation: "WEIGHTED_NORMALIZED_10",
       missingOptional: "BLOCK",
       rounding: { mode: "EXACT", decimalPlaces: 1 },

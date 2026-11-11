@@ -79,6 +79,45 @@ afterEach(async () => {
   vi.useRealTimers();
 });
 describe("UC24 isolated HTTP with real JWT/session/RBAC/Zod", () => {
+  it("revoked department scope blocks a previously valid finalization without audit mutation", async () => {
+    await f.confirm();
+    const body = await f.body();
+    const before = structuredClone(f.state);
+    f.f.control.facultyDepartment = "department-other";
+    expect((await post("finalize", body)).status).toBe(404);
+    expect(f.state).toEqual(before);
+  });
+  it.each(["finalize", "publish"] as const)(
+    "read permission cannot authorize %s and an ADMIN grant cannot augment FACULTY",
+    async (action) => {
+      await f.confirm();
+      if (action === "publish") await f.command("finalize");
+      const b = await f.body();
+      const faculty = f.users.get(ids.faculty)!;
+      faculty.userRoles[0].role.rolePermissions =
+        faculty.userRoles[0].role.rolePermissions.filter(
+          (p) =>
+            p.permission.resource !== "defense-result" ||
+            p.permission.action !== action,
+        );
+      const before = structuredClone(f.state);
+      expect((await post(action, b)).status).toBe(403);
+      faculty.userRoles.push({
+        role: {
+          name: "ADMIN",
+          rolePermissions: [
+            { permission: { resource: "defense-result", action } },
+          ],
+        },
+      } as never);
+      // The HTTP gate sees the union, but the service still requires the action
+      // on the FACULTY role itself and the authorized term/department scope.
+      expect((await post(action, b, ids.faculty, "mixed-role")).status).toBe(
+        409,
+      );
+      expect(f.state).toEqual(before);
+    },
+  );
   it("requires auth; GET/options/list/POST-preview are readonly and no-store", async () => {
     expect((await fetch(root + "/options")).status).toBe(401);
     for (const path of [

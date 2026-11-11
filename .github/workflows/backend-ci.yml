@@ -2,7 +2,7 @@ name: Backend CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, fix/integration-ui]
     paths:
       - 'backend/**'
       - 'shared/**'
@@ -10,8 +10,9 @@ on:
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - '.github/workflows/backend-ci.yml'
+      - 'scripts/check-production-assets*'
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, fix/integration-ui]
     paths:
       - 'backend/**'
       - 'shared/**'
@@ -19,6 +20,7 @@ on:
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - '.github/workflows/backend-ci.yml'
+      - 'scripts/check-production-assets*'
   workflow_dispatch:
 jobs:
   pr2b-review:
@@ -92,6 +94,7 @@ jobs:
           createdb btl_pr2b_ci_active
           pnpm db:test:active-chain
           pnpm build
+          node ../scripts/check-production-assets.cjs --backend dist
           pnpm test:smoke:local
       - name: Step 4 API and populated-baseline upgrade
         working-directory: backend
@@ -216,6 +219,21 @@ jobs:
           pnpm test:database-tools
           node ../scripts/check-release-source.cjs
           node --test ../scripts/check-release-source.test.cjs scripts/integration/rehearsal-baseline.check.cjs scripts/acceptance/runtime-safety.check.cjs scripts/web-readonly-preview.test.cjs
+          node --test ../scripts/check-production-assets.test.cjs scripts/integration-rbac-plan.check.cjs
+
+      - name: Verify RBAC release and rollback on a separate PostgreSQL 17 container
+        working-directory: backend
+        shell: bash
+        run: |
+          export RBAC_SQL_TEST_CONTAINER="datn-rbac-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          docker run -d --name "$RBAC_SQL_TEST_CONTAINER" --label datn.rbac-test=true --tmpfs /var/lib/postgresql/data -e POSTGRES_HOST_AUTH_METHOD=trust postgres:17-alpine
+          trap 'docker rm -f "$RBAC_SQL_TEST_CONTAINER" >/dev/null' EXIT
+          for attempt in $(seq 1 30); do
+            if docker exec "$RBAC_SQL_TEST_CONTAINER" pg_isready -U postgres; then break; fi
+            sleep 1
+          done
+          docker exec "$RBAC_SQL_TEST_CONTAINER" pg_isready -U postgres
+          node scripts/integration-rbac-sql.check.cjs
 
       - name: Type check
         working-directory: backend

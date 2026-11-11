@@ -2,7 +2,7 @@ name: Frontend CI
 
 on:
   push:
-    branches: [main, develop]
+    branches: [main, develop, fix/integration-ui]
     paths:
       - 'frontend/**'
       - 'shared/**'
@@ -10,8 +10,9 @@ on:
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - '.github/workflows/frontend-ci.yml'
+      - 'scripts/check-production-assets*'
   pull_request:
-    branches: [main, develop]
+    branches: [main, develop, fix/integration-ui]
     paths:
       - 'frontend/**'
       - 'shared/**'
@@ -19,6 +20,7 @@ on:
       - 'pnpm-lock.yaml'
       - 'pnpm-workspace.yaml'
       - '.github/workflows/frontend-ci.yml'
+      - 'scripts/check-production-assets*'
   workflow_dispatch:
 jobs:
   build:
@@ -57,3 +59,8 @@ jobs:
       - name: Run tests
         working-directory: frontend
         run: pnpm test
+
+      - name: Reject test controls and credentials in production assets
+        run: |
+          node --test scripts/check-production-assets.test.cjs
+          node scripts/check-production-assets.cjs --frontend frontend/dist

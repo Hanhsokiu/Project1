@@ -95,6 +95,31 @@ afterEach(async () => {
   await app?.close();
 });
 describe("UC22 isolated JWT/session/RBAC/Zod HTTP, no real database", () => {
+  it("denies a fully permitted lecturer without the actual reviewer assignment", async () => {
+    const b = await f.body();
+    const unrelated = structuredClone(f.users.get(reviewerActor)!);
+    unrelated.id = ids.outsider;
+    unrelated.lecturer!.id = "unassigned-reviewer";
+    f.users.set(ids.outsider, unrelated);
+    expect(
+      (await get(`/${memberId}?termId=${ids.term}`, ids.outsider)).status,
+    ).toBe(404);
+    for (const action of ["save", "finalize"]) {
+      expect(
+        (
+          await post(
+            `/${memberId}/${action}`,
+            b,
+            `denied-${action}`,
+            ids.outsider,
+          )
+        ).status,
+      ).toBe(404);
+    }
+    expect(f.state.scores).toEqual([]);
+    expect(f.state.events).toEqual([]);
+    expect(f.state.replays.size).toBe(0);
+  });
   it("uses actual prefixed GET/options/list/detail/private PDF, without writes", async () => {
     expect(
       (await fetch(root + "/defense-reviewer-grades/options")).status,

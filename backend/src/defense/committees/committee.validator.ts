@@ -1,3 +1,4 @@
+import { applicationPolicyRuntimeAllowed } from "../../common/security/application-policy-runtime";
 import { Injectable } from "@nestjs/common";
 import { CommitteePolicySchema } from "@doan/shared";
 import type { CommitteeMemberInput, CommitteePolicy } from "@doan/shared";
@@ -30,6 +31,7 @@ export class CommitteeValidator {
   policy(raw?: string | null): CommitteePolicy | null {
     try {
       const p = CommitteePolicySchema.parse(JSON.parse(raw ?? "null"));
+      if (!applicationPolicyRuntimeAllowed(p)) return null;
       return Date.parse(p.approvedAt) <= Date.now() ? p : null;
     } catch {
       return null;

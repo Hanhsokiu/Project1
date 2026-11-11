@@ -25,11 +25,11 @@ export async function createReportingFixture(publish = true) {
   if (publish) await result.command("publish");
   const templates = new ReportTemplates(),
     policy: ReportPolicy = {
-      version: "TEST_ONLY_UC25",
+      version: "UNIT_MEMORY_FIXTURE_UC25",
       status: "APPROVED",
       approvedBy: ids.faculty,
       approvedAt: "2020-01-01T00:00:00Z",
-      reference: "TEST_ONLY; not faculty approval",
+      reference: "UNIT_MEMORY_FIXTURE; not faculty approval",
       memberResults: "EXPLICIT_RESULT_PERMISSION",
       statisticsRelease: "PUBLISHED_ONLY",
       incompleteDraft: false,
@@ -38,12 +38,12 @@ export async function createReportingFixture(publish = true) {
       distribution: [],
       templates: templates.all(null).map((t) => ({
         ...t,
-        version: "TEST_ONLY_V1",
+        version: "UNIT_MEMORY_FIXTURE_V1",
         status: "APPROVED",
         approval: {
           by: ids.faculty,
           at: "2020-01-01T00:00:00Z",
-          reference: "TEST_ONLY layout",
+          reference: "UNIT_MEMORY_FIXTURE layout",
         },
         institution: { school: "TRƯỜNG KIỂM THỬ", faculty: "KHOA KIỂM THỬ" },
         signatureRoles: t.code === "PDF_MINUTES" ? ["CHAIR", "SECRETARY"] : [],
@@ -234,7 +234,7 @@ export async function createReportingFixture(publish = true) {
       ...(committee ? { committeeId: result.cg.committeeId } : {}),
     },
     templateCode: code,
-    templateVersion: "TEST_ONLY_V1",
+    templateVersion: policy.templates.find(t => t.code === code)!.version,
     mode,
   });
   const preview = (b = request(), actor = ids.faculty) =>

@@ -1,3 +1,4 @@
+import { applicationPolicyRuntimeAllowed } from "../../common/security/application-policy-runtime";
 import { Injectable } from "@nestjs/common";
 import {
   AcademicAttestationSchema,
@@ -30,6 +31,7 @@ export class EligibilityValidator {
   policy(raw?: string | null): EligibilityPolicy | null {
     try {
       const p = EligibilityPolicySchema.parse(JSON.parse(raw ?? "null"));
+      if (!applicationPolicyRuntimeAllowed(p)) return null;
       return Date.parse(p.approvedAt) <= Date.now() ? p : null;
     } catch {
       return null;

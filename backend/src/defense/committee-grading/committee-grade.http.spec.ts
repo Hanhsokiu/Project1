@@ -90,6 +90,29 @@ afterEach(async () => {
 const detailPath = () =>
   `/${memberId}?termId=${ids.term}&committeeId=${f.committeeId}`;
 describe("UC23 prefixed HTTP JWT/session/RBAC/Zod with isolated transactional adapters", () => {
+  it("denies another committee member despite identical lecturer permissions", async () => {
+    const b = await f.body();
+    const unrelated = structuredClone(f.users.get(f.actor())!);
+    unrelated.id = ids.outsider;
+    unrelated.lecturer!.id = "member-of-another-committee";
+    f.users.set(ids.outsider, unrelated);
+    expect((await get(detailPath(), ids.outsider)).status).toBe(404);
+    for (const action of ["save", "finalize"]) {
+      expect(
+        (
+          await post(
+            `/${memberId}/${action}`,
+            b,
+            `denied-${action}`,
+            ids.outsider,
+          )
+        ).status,
+      ).toBe(404);
+    }
+    expect(f.state.scores).toEqual([]);
+    expect(f.state.events).toEqual([]);
+    expect(f.state.replays.size).toBe(0);
+  });
   it("GET/options/own sheet/private PDF never create score/audit/idempotency", async () => {
     expect(
       (await fetch(root + "/defense-committee-grades/options")).status,

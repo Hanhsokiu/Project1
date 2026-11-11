@@ -33,11 +33,11 @@ export async function createScheduleFixture(committeeCount = 3) {
         permission: { resource: "defense-schedule", action },
       } as never);
   const policy: SchedulePolicy = {
-    version: "TEST_ONLY_UC21",
+    version: "UNIT_MEMORY_FIXTURE_UC21",
     status: "APPROVED",
     approvedBy: ids.faculty,
     approvedAt: "2020-01-01T00:00:00Z",
-    reference: "TEST_ONLY, not faculty approval",
+    reference: "UNIT_MEMORY_FIXTURE, not faculty approval",
     phaseCode: "FINAL",
     timezone: "Asia/Ho_Chi_Minh",
     allowedDates: ["2030-11-07"],

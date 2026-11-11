@@ -73,6 +73,29 @@ afterEach(async () => {
   vi.useRealTimers();
 });
 describe("UC25 isolated HTTP JWT/session/RBAC, real XLSX/PDF bytes", () => {
+  it("read cannot authorize export/download; ADMIN action cannot augment FACULTY", async () => {
+    const body = await f.body();
+    const faculty = f.users.get(ids.faculty)!;
+    faculty.userRoles[0].role.rolePermissions =
+      faculty.userRoles[0].role.rolePermissions.filter(
+        (p) =>
+          p.permission.resource !== "defense-report" ||
+          !["export", "download"].includes(p.permission.action),
+      );
+    const before = structuredClone(f.state);
+    expect((await post("/exports", body)).status).toBe(403);
+    faculty.userRoles.push({
+      role: {
+        name: "ADMIN",
+        rolePermissions: [
+          { permission: { resource: "defense-report", action: "export" } },
+          { permission: { resource: "defense-report", action: "download" } },
+        ],
+      },
+    } as never);
+    expect((await post("/exports", body, "mixed-role")).status).toBe(404);
+    expect(f.state).toEqual(before);
+  });
   it("requires auth and all GET/preview are readonly/no-store", async () => {
     expect((await fetch(root + "/options")).status).toBe(401);
     for (const path of [

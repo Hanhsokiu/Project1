@@ -1,0 +1,301 @@
+{
+  "kind": "OFFICIAL_POLICY_DRAFT",
+  "termId": "__REQUIRED_DECISION__",
+  "purpose": "OFFICIAL",
+  "authority": {
+    "decisionId": null,
+    "reference": null,
+    "actorId": null,
+    "approvedAt": null,
+    "contentHash": null
+  },
+  "policies": {
+    "UC17_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "scoreStep": "__REQUIRED_DECISION__",
+      "maxPdfBytes": "__REQUIRED_DECISION__",
+      "replacementAfterDecision": "__REQUIRED_DECISION__",
+      "rubric": "__REQUIRED_DECISION__"
+    },
+    "UC18_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "phaseCode": "__REQUIRED_DECISION__",
+      "progressRule": "__REQUIRED_DECISION__",
+      "academicSources": [
+        {
+          "key": "__REQUIRED_DECISION__",
+          "label": "__REQUIRED_DECISION__",
+          "mode": "FACULTY_ATTESTATION"
+        }
+      ]
+    },
+    "UC19_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "reference": "__REQUIRED_DECISION__",
+      "phaseCode": "__REQUIRED_DECISION__",
+      "chairCount": "__REQUIRED_DECISION__",
+      "secretaryCount": "__REQUIRED_DECISION__",
+      "distinctOfficers": true,
+      "allowEmptyFinalization": "__REQUIRED_DECISION__",
+      "memberScope": "__REQUIRED_DECISION__",
+      "studentScope": "SAME_DEPARTMENT",
+      "allowedTitleIds": "__REQUIRED_DECISION__",
+      "maxCommitteesPerLecturer": "__REQUIRED_DECISION__",
+      "maxStudentsPerCommittee": "__REQUIRED_DECISION__",
+      "maxStudentsPerLecturer": "__REQUIRED_DECISION__"
+    },
+    "UC20_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "reference": "__REQUIRED_DECISION__",
+      "phaseCode": "__REQUIRED_DECISION__",
+      "reviewersPerStudent": "__REQUIRED_DECISION__",
+      "maxReviewsPerLecturer": "__REQUIRED_DECISION__",
+      "maxTotalStudentDuties": "__REQUIRED_DECISION__",
+      "totalLoadRule": "ADVISOR_PLUS_COMMITTEE_PLUS_REVIEW",
+      "departmentRule": "__REQUIRED_DECISION__",
+      "allowedTitleIds": "__REQUIRED_DECISION__",
+      "expertiseRule": "__REQUIRED_DECISION__",
+      "committeeMembership": "__REQUIRED_DECISION__",
+      "formerAdvisorRule": "__REQUIRED_DECISION__"
+    },
+    "UC21_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "reference": "__REQUIRED_DECISION__",
+      "phaseCode": "__REQUIRED_DECISION__",
+      "timezone": "Asia/Ho_Chi_Minh",
+      "allowedDates": [
+        "__REQUIRED_DECISION__"
+      ],
+      "periods": {
+        "MORNING": {
+          "start": "__REQUIRED_DECISION__",
+          "end": "__REQUIRED_DECISION__",
+          "breaks": []
+        },
+        "AFTERNOON": {
+          "start": "__REQUIRED_DECISION__",
+          "end": "__REQUIRED_DECISION__",
+          "breaks": []
+        }
+      },
+      "durationMin": "__REQUIRED_DECISION__",
+      "bufferMin": "__REQUIRED_DECISION__",
+      "sessionBufferMin": "__REQUIRED_DECISION__",
+      "startStepMin": "__REQUIRED_DECISION__",
+      "maxStudentsPerSession": "__REQUIRED_DECISION__",
+      "minRoomCapacity": "__REQUIRED_DECISION__",
+      "roomAccess": [
+        {
+          "roomId": "__REQUIRED_DECISION__",
+          "departmentIds": [
+            "__REQUIRED_DECISION__"
+          ]
+        }
+      ],
+      "reviewerAttendance": "__REQUIRED_DECISION__",
+      "nameRule": "LAST_TOKEN_MIDDLE_THEN_FAMILY",
+      "compoundFamilyNames": [],
+      "manualOrderAllowed": "__REQUIRED_DECISION__",
+      "studentVisibility": "__REQUIRED_DECISION__",
+      "lecturerVisibility": "__REQUIRED_DECISION__",
+      "advisorCanView": "__REQUIRED_DECISION__",
+      "publishNotBefore": "__REQUIRED_DECISION__",
+      "crossTermConflicts": "ALL_TERMS",
+      "legacyRule": "BLOCK_SHARED_RESOURCES_UNTIL_RECONCILED"
+    },
+    "UC22_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "reference": "__REQUIRED_DECISION__",
+      "phaseCode": "__REQUIRED_DECISION__",
+      "scoreStep": "__REQUIRED_DECISION__",
+      "draftAllowed": "__REQUIRED_DECISION__",
+      "requiredFeedback": "__REQUIRED_DECISION__",
+      "minimumQuestions": "__REQUIRED_DECISION__",
+      "sourceChange": "BLOCK",
+      "afterFinalize": "IMMUTABLE",
+      "studentRelease": "WITHHELD",
+      "schedule": {
+        "required": "__REQUIRED_DECISION__",
+        "requirePublished": "__REQUIRED_DECISION__",
+        "window": "__REQUIRED_DECISION__"
+      },
+      "rubric": {
+        "version": "__REQUIRED_DECISION__",
+        "calculation": "WEIGHTED_NORMALIZED_10_EXACT",
+        "criteria": [
+          {
+            "id": "__REQUIRED_DECISION__",
+            "name": "__REQUIRED_DECISION__",
+            "maxScore": "__REQUIRED_DECISION__",
+            "weight": "__REQUIRED_DECISION__",
+            "step": "__REQUIRED_DECISION__"
+          }
+        ]
+      }
+    },
+    "UC23_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "reference": "__REQUIRED_DECISION__",
+      "effectiveFrom": "__REQUIRED_DECISION__",
+      "effectiveUntil": "__REQUIRED_DECISION__",
+      "effectiveScope": "GRADING_WINDOW",
+      "phaseCode": "DEFENSE",
+      "gradingRoles": "__REQUIRED_DECISION__",
+      "draftAllowed": "__REQUIRED_DECISION__",
+      "commentRequired": "__REQUIRED_DECISION__",
+      "sourceChange": "BLOCK",
+      "afterFinalize": "IMMUTABLE",
+      "studentRelease": "WITHHELD",
+      "schedule": {
+        "required": true,
+        "requirePublished": "__REQUIRED_DECISION__",
+        "anchor": "__REQUIRED_DECISION__"
+      },
+      "defenseEvidence": "__REQUIRED_DECISION__",
+      "rubric": {
+        "version": "__REQUIRED_DECISION__",
+        "calculation": "WEIGHTED_NORMALIZED_10",
+        "missingOptional": "__REQUIRED_DECISION__",
+        "rounding": {
+          "mode": "__REQUIRED_DECISION__",
+          "decimalPlaces": "__REQUIRED_DECISION__"
+        },
+        "totalStep": "__REQUIRED_DECISION__",
+        "criteria": [
+          {
+            "id": "__REQUIRED_DECISION__",
+            "name": "__REQUIRED_DECISION__",
+            "maxScore": "__REQUIRED_DECISION__",
+            "weight": "__REQUIRED_DECISION__",
+            "step": "__REQUIRED_DECISION__",
+            "description": "__REQUIRED_DECISION__",
+            "minScore": "__REQUIRED_DECISION__",
+            "required": "__REQUIRED_DECISION__"
+          }
+        ]
+      }
+    },
+    "UC24_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "reference": "__REQUIRED_DECISION__",
+      "formula": "WEIGHTED_SUM",
+      "advisorSource": "__REQUIRED_DECISION__",
+      "components": [
+        {
+          "source": "__REQUIRED_DECISION__",
+          "weight": "__REQUIRED_DECISION__"
+        }
+      ],
+      "reviewerAggregate": {
+        "mode": "__REQUIRED_DECISION__",
+        "rounding": {
+          "mode": "__REQUIRED_DECISION__",
+          "decimalPlaces": "__REQUIRED_DECISION__"
+        }
+      },
+      "committeeAggregate": {
+        "mode": "__REQUIRED_DECISION__",
+        "rounding": {
+          "mode": "__REQUIRED_DECISION__",
+          "decimalPlaces": "__REQUIRED_DECISION__"
+        }
+      },
+      "finalRounding": {
+        "mode": "__REQUIRED_DECISION__",
+        "decimalPlaces": "__REQUIRED_DECISION__"
+      },
+      "finalStep": "__REQUIRED_DECISION__",
+      "storageDecimalPlaces": "__REQUIRED_DECISION__",
+      "passRule": "__REQUIRED_DECISION__",
+      "classifications": [],
+      "confirmation": {
+        "scope": "STUDENT",
+        "rule": "ONE_PER_ROLE",
+        "roles": "__REQUIRED_DECISION__",
+        "distinctActors": "__REQUIRED_DECISION__",
+        "reasonRequired": "__REQUIRED_DECISION__"
+      },
+      "separation": {
+        "finalizerNotConfirmer": "__REQUIRED_DECISION__",
+        "publisherNotFinalizer": "__REQUIRED_DECISION__"
+      },
+      "finalizeWindow": {
+        "phaseCode": "DEFENSE",
+        "notBefore": "__REQUIRED_DECISION__",
+        "before": "__REQUIRED_DECISION__"
+      },
+      "publication": {
+        "phaseCode": "DEFENSE",
+        "notBefore": "__REQUIRED_DECISION__",
+        "before": "__REQUIRED_DECISION__",
+        "studentFinal": "__REQUIRED_DECISION__",
+        "studentComponents": "__REQUIRED_DECISION__"
+      },
+      "sourceChange": "BLOCK",
+      "afterFinalize": "IMMUTABLE",
+      "sourceLock": "PRESERVE_PRODUCER_LOCKS"
+    },
+    "UC25_POLICY": {
+      "version": "__REQUIRED_DECISION__",
+      "status": "DRAFT",
+      "approvedBy": null,
+      "approvedAt": null,
+      "reference": "__REQUIRED_DECISION__",
+      "memberResults": "__REQUIRED_DECISION__",
+      "statisticsRelease": "__REQUIRED_DECISION__",
+      "incompleteDraft": "__REQUIRED_DECISION__",
+      "retentionDays": "__REQUIRED_DECISION__",
+      "distribution": [],
+      "templates": [
+        {
+          "code": "__REQUIRED_DECISION__",
+          "version": "__REQUIRED_DECISION__",
+          "name": "__REQUIRED_DECISION__",
+          "format": "__REQUIRED_DECISION__",
+          "engineVersion": "UC25_V1",
+          "owner": "__REQUIRED_DECISION__",
+          "status": "DRAFT",
+          "approval": null,
+          "effectiveFrom": "__REQUIRED_DECISION__",
+          "effectiveUntil": "__REQUIRED_DECISION__",
+          "roles": "__REQUIRED_DECISION__",
+          "columns": "__REQUIRED_DECISION__",
+          "draftAllowed": "__REQUIRED_DECISION__",
+          "requirePublished": "__REQUIRED_DECISION__",
+          "allowMissing": [],
+          "signatureRoles": "__REQUIRED_DECISION__",
+          "institution": {
+            "school": "__REQUIRED_DECISION__",
+            "faculty": "__REQUIRED_DECISION__"
+          },
+          "dossierTemplateVersion": "__REQUIRED_DECISION__"
+        }
+      ],
+      "signature": "UNSIGNED_ONLY"
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { applicationPolicyRuntimeAllowed } from "../../common/security/application-policy-runtime";
 import { Injectable } from "@nestjs/common";
 import { FinalDefensePolicySchema } from "@doan/shared";
 import type { AdvisorSummary, FinalDefensePolicy } from "@doan/shared";
@@ -15,6 +16,7 @@ export class FinalDefenseValidator {
   policy(raw?: string | null): FinalDefensePolicy | null {
     try {
       const p = FinalDefensePolicySchema.parse(JSON.parse(raw ?? "null"));
+      if (!applicationPolicyRuntimeAllowed(p)) return null;
       return new Date(p.approvedAt) <= new Date() ? p : null;
     } catch {
       return null;

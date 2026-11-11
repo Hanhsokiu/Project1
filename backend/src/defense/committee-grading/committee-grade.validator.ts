@@ -1,3 +1,4 @@
+import { applicationPolicyRuntimeAllowed } from "../../common/security/application-policy-runtime";
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { CommitteeGradePolicySchema, committeeRubricTotal } from "@doan/shared";
@@ -14,6 +15,7 @@ export class CommitteeGradeValidator {
     try {
       const p = CommitteeGradePolicySchema.parse(JSON.parse(raw ?? "null")),
         now = new Date();
+      if (!applicationPolicyRuntimeAllowed(p)) return null;
       if (
         new Date(p.approvedAt) > now ||
         new Set(p.gradingRoles).size !== p.gradingRoles.length

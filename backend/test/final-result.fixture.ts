@@ -57,11 +57,11 @@ export async function createFinalResultFixture(
     permit(cg.actor(m), "LECTURER", ["read", "components-read", "confirm"]);
   permit(ids.student, "STUDENT", ["read", "read-own", "final-read"]);
   const policy: FinalResultPolicy = {
-    version: "TEST_ONLY_UC24",
+    version: "UNIT_MEMORY_FIXTURE_UC24",
     status: "APPROVED",
     approvedBy: ids.faculty,
     approvedAt: "2020-01-01T00:00:00Z",
-    reference: "TEST_ONLY; not faculty approval",
+    reference: "UNIT_MEMORY_FIXTURE; not faculty approval",
     formula: "WEIGHTED_SUM",
     advisorSource: "UC17_OFFICIAL_SUMMARY",
     components: [

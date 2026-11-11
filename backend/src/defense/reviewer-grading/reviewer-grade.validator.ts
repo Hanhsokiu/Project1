@@ -1,3 +1,4 @@
+import { applicationPolicyRuntimeAllowed } from "../../common/security/application-policy-runtime";
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import {
@@ -46,6 +47,7 @@ export class ReviewerGradeValidator {
   policy(raw?: string | null): ReviewerGradePolicy | null {
     try {
       const p = ReviewerGradePolicySchema.parse(JSON.parse(raw ?? "null"));
+      if (!applicationPolicyRuntimeAllowed(p)) return null;
       if (
         new Date(p.approvedAt) > new Date() ||
         D(p.scoreStep).lte(0) ||

@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { randomUUID } from "crypto";
 import { buildAcceptancePolicies } from "./policy-bundle";
 import { FinalDefenseValidator } from "../guidance/final-defense/final-defense.validator";
@@ -22,6 +22,11 @@ export function acceptanceContext() {
   };
 }
 describe("project acceptance policies are concrete, term-bound technical choices", () => {
+  beforeEach(() => {
+    vi.stubEnv("NODE_ENV", "test");
+    vi.stubEnv("DATABASE_URL", "postgresql://unit@127.0.0.1/btl_pr2b_acceptance_unit");
+  });
+  afterEach(() => vi.unstubAllEnvs());
   it("builds all nine strict contracts without invented human identity or time", () => {
     const c = acceptanceContext(), b = buildAcceptancePolicies(c);
     expect(Object.keys(b.policies)).toHaveLength(9);

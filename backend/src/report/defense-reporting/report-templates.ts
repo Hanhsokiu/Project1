@@ -1,3 +1,4 @@
+import { applicationPolicyRuntimeAllowed } from "../../common/security/application-policy-runtime";
 import { Injectable } from "@nestjs/common";
 import {
   ReportCodeSchema,
@@ -149,6 +150,7 @@ export class ReportTemplates {
   policy(raw?: string | null): ReportPolicy | null {
     try {
       const p = ReportPolicySchema.parse(JSON.parse(raw ?? "null"));
+      if (!applicationPolicyRuntimeAllowed(p)) return null;
       if (
         Date.parse(p.approvedAt) > Date.now() ||
         new Set(p.templates.map((t) => t.code)).size !== p.templates.length
@@ -160,7 +162,7 @@ export class ReportTemplates {
             (t.approval && Date.parse(t.approval.at) > Date.now()) ||
             (t.effectiveFrom &&
               t.effectiveUntil &&
-              t.effectiveFrom >= t.effectiveUntil) ||
+              Date.parse(t.effectiveFrom) >= Date.parse(t.effectiveUntil)) ||
             t.columns.some((c) => !defaultColumns(t.code).includes(c)),
         )
       )

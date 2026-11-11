@@ -1,5 +1,6 @@
 import { HttpException, Injectable } from "@nestjs/common";
-import { validateFinalResultPolicy, calculateFinalResult } from "@doan/shared";
+import { calculateFinalResult } from "@doan/shared";
+import { readRuntimeFinalResultPolicy } from "../../common/security/application-policy-runtime";
 import type {
   EffectiveCommittee,
   FinalResultPolicy,
@@ -71,7 +72,7 @@ export class FinalResultSources {
     if (!raw) blockers.push("UC24_POLICY_REQUIRED");
     else
       try {
-        policy = validateFinalResultPolicy(JSON.parse(raw));
+        policy = readRuntimeFinalResultPolicy(JSON.parse(raw));
       } catch (e) {
         blockers.push(e instanceof Error ? e.message : "UNSUPPORTED_POLICY");
       }

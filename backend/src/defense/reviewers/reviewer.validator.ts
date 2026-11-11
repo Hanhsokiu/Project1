@@ -1,3 +1,4 @@
+import { applicationPolicyRuntimeAllowed } from "../../common/security/application-policy-runtime";
 import { Injectable } from "@nestjs/common";
 import { ReviewerPolicySchema } from "@doan/shared";
 import type { ReviewerLecturer, ReviewerPolicy } from "@doan/shared";
@@ -56,6 +57,7 @@ export class ReviewerValidator {
   policy(raw?: string | null): ReviewerPolicy | null {
     try {
       const p = ReviewerPolicySchema.parse(JSON.parse(raw ?? "null"));
+      if (!applicationPolicyRuntimeAllowed(p)) return null;
       return Date.parse(p.approvedAt) <= Date.now() ? p : null;
     } catch {
       return null;

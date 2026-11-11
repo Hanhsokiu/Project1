@@ -96,6 +96,21 @@ afterEach(async () => {
 });
 
 describe("UC17 HTTP integration: real JWT/RBAC, Zod, multipart, service; in-memory persistence", () => {
+  it("denies another student's dossier and private PDF even with the same student permissions", async () => {
+    const uploaded = await upload();
+    expect(uploaded.status).toBe(201);
+    const version = (await uploaded.json()).data.versionId;
+    const before = structuredClone(f.state);
+    f.users.get(ids.student)!.student!.id = "another-student-profile";
+    for (const path of [endpoint, `${endpoint}/versions/${version}/pdf`]) {
+      const response = await fetch(root + path, {
+        headers: headers(ids.student),
+      });
+      expect(response.status).toBe(404);
+      expect(await response.text()).not.toContain("%PDF-");
+    }
+    expect(f.state).toEqual(before);
+  });
   it("serves the frontend term-options URL on the controller and keeps GET read-only", async () => {
     expect((await fetch(root + "/final-defense/options")).status).toBe(401);
     const response = await fetch(root + "/final-defense/options", {

@@ -1,7 +1,8 @@
-import { afterEach, beforeEach, describe, expect, it } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { ConfigService } from "@nestjs/config";
-import { mkdtemp, rm, stat } from "fs/promises";
+import { copyFile, mkdir, mkdtemp, rm, stat } from "fs/promises";
 import { tmpdir } from "os";
+import { createHash } from "crypto";
 import path from "path";
 import { FileStorageService } from "./file-storage.service";
 let root: string;
@@ -12,6 +13,7 @@ beforeEach(async () => {
   root = await mkdtemp(path.join(tmpdir(), "uc17-storage-readonly-"));
 });
 afterEach(async () => {
+  vi.unstubAllGlobals();
   const owned = path.resolve(root),
     parent = path.resolve(tmpdir());
   if (
@@ -55,5 +57,83 @@ describe("private guidance storage remains read-only on GET", () => {
     await expect(
       stat(path.join(root, ".private-guidance")),
     ).rejects.toMatchObject({ code: "ENOENT" });
+  });
+  it("restores synthetic immutable PDF bytes into a separate root and verifies SHA-256", async () => {
+    const bytes = Buffer.from("%PDF-1.7\nsynthetic-backup-fixture\n%%EOF");
+    const sha = (b: Buffer) => createHash("sha256").update(b).digest("hex");
+    await service().savePrivateGuidance(key, bytes);
+    const backupRoot = path.join(root, "owned-synthetic-backup");
+    const restoreRoot = path.join(root, "owned-synthetic-restore");
+    await mkdir(backupRoot, { recursive: true, mode: 0o700 });
+    await mkdir(path.join(restoreRoot, ".private-guidance"), {
+      recursive: true,
+      mode: 0o700,
+    });
+    const filename = key.slice("guidance/".length);
+    await copyFile(
+      path.join(root, ".private-guidance", filename),
+      path.join(backupRoot, filename),
+    );
+    await copyFile(
+      path.join(backupRoot, filename),
+      path.join(restoreRoot, ".private-guidance", filename),
+    );
+    const restored = new FileStorageService(
+      new ConfigService({ STORAGE_LOCAL_PATH: restoreRoot }),
+    );
+    const actual = await restored.readPrivateGuidance(key, bytes.length);
+    expect(actual).toEqual(bytes);
+    expect(sha(actual)).toBe(sha(bytes));
+    expect(await service().readPrivateGuidance(key, bytes.length)).toEqual(
+      bytes,
+    );
+    await expect(
+      restored.readPrivateGuidance(key, bytes.length - 1),
+    ).rejects.toThrow("Invalid private file");
+  });
+  it("rejects unbounded limits on local reads", async () => {
+    await expect(service().readPrivateGuidance(key, Infinity)).rejects.toThrow(
+      "size limit",
+    );
+    await expect(service().readPrivateGuidance(key, 0)).rejects.toThrow(
+      "size limit",
+    );
+  });
+  it("does not fall back to local bytes or delete them after switching to an empty object provider", async () => {
+    const bytes = Buffer.from("%PDF-1.7\nowned-local-fixture\n%%EOF");
+    await service().savePrivateGuidance(key, bytes);
+    const remote = new FileStorageService(
+      new ConfigService({
+        STORAGE_LOCAL_PATH: root,
+        STORAGE_GUIDANCE_DRIVER: "supabase",
+        STORAGE_SUPABASE_URL: "https://storage.example.invalid",
+        STORAGE_SUPABASE_BUCKET: "private-synthetic-fixtures",
+        STORAGE_SUPABASE_SERVICE_KEY: "synthetic-test-only-credential",
+      }),
+    );
+    vi.stubGlobal(
+      "fetch",
+      vi
+        .fn()
+        .mockImplementation(async (url: string) =>
+          url.includes("/bucket/")
+            ? new Response(
+                JSON.stringify({
+                  id: "private-synthetic-fixtures",
+                  public: false,
+                }),
+              )
+            : new Response("missing", { status: 404 }),
+        ),
+    );
+    await expect(remote.readPrivateGuidance(key, bytes.length)).rejects.toThrow(
+      "unavailable",
+    );
+    await expect(remote.deletePrivateGuidance(key)).rejects.toThrow(
+      "cleanup was not completed",
+    );
+    expect(await service().readPrivateGuidance(key, bytes.length)).toEqual(
+      bytes,
+    );
   });
 });
