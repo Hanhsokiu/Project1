@@ -28,6 +28,8 @@ Không thay 27 migration đã áp dụng. Không chạy `db push`, `migrate rese
 
 Blueprint dùng `autoDeployTrigger: off`; secrets `sync: false` để operator cấp khi tạo/cấu hình. Đối chiếu [Render Blueprint specification](https://render.com/docs/blueprint-spec) trước khi dùng mẫu. Supabase private bucket yêu cầu tải có xác thực theo [Storage downloads](https://supabase.com/docs/guides/storage/serving/downloads); ứng dụng tiếp tục proxy qua API có quyền, không trả provider URL/signed URL cho trình duyệt.
 
+Build command trong `frontend/vercel.json` ghim hai cờ public `VITE_AUTH_API=true` và `VITE_DEMO_MODE=false` cho tiến trình build frontend, áp dụng cả Preview lẫn Production. Nhờ đó Preview thiếu cờ hoặc còn giá trị demo cũ vẫn tạo bản dùng đăng nhập backend thật; kiểm tra auth, API URL và secret trong `vite.config.ts` tiếp tục có hiệu lực. `VITE_API_URL` vẫn phải cấu hình riêng cho đúng môi trường Vercel, trỏ API Render được nhóm duyệt. Không đưa credentials vào `VITE_*`; build PASS không xác minh backend đích hay quyền vận hành. CI chạy chính build command Vercel với hai tình huống thiếu cờ và cờ demo cũ, rồi kiểm tra production assets.
+
 ## Nghiệm thu sau triển khai
 
 Tạo một đợt tích hợp riêng qua workflow B1, mã và runId rõ ràng; không lấy hồ sơ/điểm chính thức để thử. Dùng lịch thực do Khoa cấu hình, không TEST clock. Trước ghi: backup DB và byte file, restore kiểm chứng, danh tính/role/phạm vi/phân công được duyệt, chín policy đúng term/version/contract và không có rollout đồng thời. Bật từng flag theo quyết định vận hành riêng, không bật chín cờ chỉ vì build PASS.

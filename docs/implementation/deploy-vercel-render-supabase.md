@@ -180,14 +180,14 @@ Hướng dẫn dành cho repository hiện tại, nhánh `fix/integration-ui`. C
    | Root Directory | `frontend` |
    | Node.js Version | `22.x` |
    | Install Command | `corepack pnpm install --frozen-lockfile` |
-   | Build Command | `corepack pnpm --filter @doan/shared build && corepack pnpm --filter @doan/frontend build` |
+   | Build Command | `corepack pnpm --filter @doan/shared build && VITE_AUTH_API=true VITE_DEMO_MODE=false corepack pnpm --filter @doan/frontend build` |
    | Output Directory | `dist` |
 
    Bật Include source files outside of the Root Directory in the Build Step trong cấu hình Root Directory để build đọc được `shared` và workspace gốc. Xem [Vercel monorepo](https://vercel.com/docs/monorepos/monorepo-faq). Output Directory là `dist` vì Root Directory đã là `frontend`.
 
    `package.json` ở gốc ghim `packageManager` thành `pnpm@9.15.9`. `frontend/vercel.json` đã chứa các lệnh install/build và thư mục output tương ứng; cần commit và push cả hai file. Nếu Dashboard có Install Command cũ, đổi sang lệnh Corepack trong bảng. Không dùng Override chỉ ghi `pnpm install --frozen-lockfile`: Vercel có thể chọn pnpm 6 và báo `ERR_PNPM_UNSUPPORTED_ENGINE`. Xem [Vercel Package Managers](https://vercel.com/docs/package-managers).
 
-   Thêm Environment Variables cho Production, với giá trị Render thật:
+   Thêm Environment Variables cho Production và Preview cần kiểm thử, với giá trị Render thật:
 
    ```dotenv
    ENABLE_EXPERIMENTAL_COREPACK=1
@@ -201,6 +201,8 @@ Hướng dẫn dành cho repository hiện tại, nhánh `fix/integration-ui`. C
    ```
 
    `VITE_API_URL` phải có `/api`, dùng HTTPS và không trỏ localhost. Dùng kết nối trực tiếp tới API Render; không cần rewrite API qua Vercel trong phương án này. Không thêm `DATABASE_URL`, JWT secret hoặc mật khẩu vào bất kỳ biến `VITE_*` nào. Không cần thêm biến Supabase Auth cho kiến trúc hiện tại.
+
+   Lệnh build trong `vercel.json` ghim hai cờ public auth/demo cho tiến trình frontend. Preview thiếu cờ hoặc còn cờ demo cũ sẽ được build với backend auth thật và demo tắt. Không bỏ kiểm tra trong `vite.config.ts`. Cấu hình `VITE_API_URL` và các biến khác vẫn theo đúng scope Preview/Production; file `.env.production.example` là mẫu, không được Vite tự nạp.
 
    Trong Settings → Environments → Production → Branch Tracking, đặt `fix/integration-ui` và Save. Chỉ dùng bản Production từ đúng nhánh này để kiểm tra theo hướng dẫn. Xem [cấu hình nhánh Production](https://vercel.com/docs/git). Nếu lần import đầu đã build nhánh khác, cấu hình lại trước rồi tạo deployment từ nhánh đúng; kiểm tra tên nhánh và commit trong Deployment Details.
 
