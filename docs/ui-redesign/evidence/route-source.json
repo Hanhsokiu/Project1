@@ -1,0 +1,882 @@
+[
+  {
+    "id": "R01",
+    "path": "/guidance/weeks",
+    "component": "WeeklyPlansPage",
+    "source": "frontend/src/features/weekly-plans/pages.tsx",
+    "title": "Kế hoạch và báo cáo tuần",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menu": true
+  },
+  {
+    "id": "R02",
+    "path": "/guidance/review",
+    "component": "ProgressReviewInboxPage",
+    "source": "frontend/src/features/guidance-reviews/pages.tsx",
+    "title": "Nhận xét báo cáo",
+    "roles": [
+      "LECTURER"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "task:review",
+    "menu": true
+  },
+  {
+    "id": "R03",
+    "path": "/guidance/review/:submissionId",
+    "component": "ProgressReviewDetailPage",
+    "source": "frontend/src/features/guidance-reviews/pages.tsx",
+    "title": "Chi tiết nhận xét",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "submission:read",
+    "menu": false
+  },
+  {
+    "id": "R04",
+    "path": "/guidance/progress",
+    "component": "GuidanceProgressDashboardPage",
+    "source": "frontend/src/features/guidance-reviews/pages.tsx",
+    "title": "Theo dõi tiến độ",
+    "roles": [
+      "FACULTY"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:monitor",
+    "menu": true
+  },
+  {
+    "id": "R05",
+    "path": "/guidance/meetings",
+    "component": "GuidanceMeetingsPage",
+    "source": "frontend/src/features/guidance-reviews/pages.tsx",
+    "title": "Nhật ký hướng dẫn",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menuRoles": [],
+    "menu": true
+  },
+  {
+    "id": "R06",
+    "path": "/guidance/notifications",
+    "component": "GuidanceNotificationsPage",
+    "source": "frontend/src/features/guidance-reviews/pages.tsx",
+    "title": "Thông báo hướng dẫn",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menu": false
+  },
+  {
+    "id": "R07",
+    "path": "/guidance/plan",
+    "component": "GuidancePlanListPage",
+    "source": "frontend/src/features/guidance-tasks/pages.tsx",
+    "title": "Kế hoạch hướng dẫn",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "roleTitles": {
+      "STUDENT": "Kế hoạch của tôi",
+      "LECTURER": "Kế hoạch hướng dẫn"
+    },
+    "menuRoles": [
+      "LECTURER",
+      "STUDENT"
+    ],
+    "menu": true
+  },
+  {
+    "id": "R08",
+    "path": "/guidance/plan/:proposalId",
+    "component": "GuidancePlanDetailPage",
+    "source": "frontend/src/features/guidance-tasks/pages.tsx",
+    "title": "Chi tiết kế hoạch",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menu": false
+  },
+  {
+    "id": "R09",
+    "path": "/guidance/plan/:proposalId/tasks/new",
+    "component": "GuidanceTaskCreatePage",
+    "source": "frontend/src/features/guidance-tasks/pages.tsx",
+    "title": "Giao nhiệm vụ",
+    "roles": [
+      "LECTURER"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "task:manage",
+    "menu": false
+  },
+  {
+    "id": "R10",
+    "path": "/guidance/tasks",
+    "component": "GuidanceTaskListPage",
+    "source": "frontend/src/features/guidance-tasks/pages.tsx",
+    "title": "Nhiệm vụ & tiến độ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "roleTitles": {
+      "STUDENT": "Nhiệm vụ & nộp báo cáo",
+      "LECTURER": "Nhiệm vụ sinh viên"
+    },
+    "menuRoles": [
+      "LECTURER",
+      "STUDENT"
+    ],
+    "menu": true
+  },
+  {
+    "id": "R11",
+    "path": "/guidance/tasks/:id",
+    "component": "GuidanceTaskDetailPage",
+    "source": "frontend/src/features/guidance-tasks/pages.tsx",
+    "title": "Chi tiết nhiệm vụ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menu": false
+  },
+  {
+    "id": "R12",
+    "path": "/guidance/tasks/:id/submissions",
+    "component": "TaskSubmissionsPage",
+    "source": "frontend/src/features/task-submissions/pages.tsx",
+    "title": "Nộp báo cáo",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "submission:read",
+    "menu": false
+  },
+  {
+    "id": "R13",
+    "path": "/topic/dossier",
+    "component": "DossierListPage",
+    "source": "frontend/src/features/proposal-dossiers/pages.tsx",
+    "title": "Chốt đề cương & bản giấy",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "roleTitles": {
+      "STUDENT": "Hồ sơ & bản in",
+      "LECTURER": "Hồ sơ sinh viên",
+      "FACULTY": "Chốt hồ sơ & nhận bản giấy"
+    },
+    "menu": true
+  },
+  {
+    "id": "R14",
+    "path": "/topic/dossier/:proposalId",
+    "component": "DossierDetailPage",
+    "source": "frontend/src/features/proposal-dossiers/pages.tsx",
+    "title": "Chi tiết hồ sơ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "menu": false
+  },
+  {
+    "id": "R15",
+    "path": "/topic/proposal",
+    "component": "ProposalEditorListPage",
+    "source": "frontend/src/features/proposal-versions/pages.tsx",
+    "title": "Đề cương & phiên bản",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "roleTitles": {
+      "STUDENT": "Đề cương của tôi",
+      "LECTURER": "Đề cương sinh viên",
+      "FACULTY": "Tra cứu đề cương"
+    },
+    "menu": true
+  },
+  {
+    "id": "R16",
+    "path": "/topic/proposal/:proposalId",
+    "component": "VersionEditorPage",
+    "source": "frontend/src/features/proposal-versions/pages.tsx",
+    "title": "Phiên bản đề cương",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "menu": false
+  },
+  {
+    "id": "R17",
+    "path": "/topic/proposal/:proposalId/versions/:versionId",
+    "component": "VersionEditorPage",
+    "source": "frontend/src/features/proposal-versions/pages.tsx",
+    "title": "Lịch sử đề cương",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "menu": false
+  },
+  {
+    "id": "R18",
+    "path": "/topic/reviews",
+    "component": "ProposalReviewQueuePage",
+    "source": "frontend/src/features/proposal-reviews/pages.tsx",
+    "title": "Xét duyệt đề cương",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "roleTitles": {
+      "FACULTY": "Phân công & xét duyệt",
+      "LECTURER": "Đề cương cần xét duyệt",
+      "STUDENT": "Kết quả xét duyệt"
+    },
+    "menu": true
+  },
+  {
+    "id": "R19",
+    "path": "/topic/reviews/:id",
+    "component": "ProposalReviewDetailPage",
+    "source": "frontend/src/features/proposal-reviews/pages.tsx",
+    "title": "Chi tiết xét duyệt",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "menu": false
+  },
+  {
+    "id": "R20",
+    "path": "/topic/review-assignments/:proposalId",
+    "component": "ProposalReviewAssignmentPage",
+    "source": "frontend/src/features/proposal-reviews/pages.tsx",
+    "title": "Phân công xét duyệt",
+    "roles": [
+      "FACULTY"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:assign",
+    "menu": false
+  },
+  {
+    "id": "R21",
+    "path": "/topic/review-groups",
+    "component": "ReviewGroupListPage",
+    "source": "frontend/src/features/review-groups/pages.tsx",
+    "title": "Nhóm duyệt đề cương",
+    "roles": [
+      "FACULTY",
+      "LECTURER"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "review-group:read",
+    "roleTitles": {
+      "LECTURER": "Nhóm duyệt của tôi"
+    },
+    "menu": true
+  },
+  {
+    "id": "R22",
+    "path": "/topic/review-groups/new",
+    "component": "ReviewGroupEditorPage",
+    "source": "frontend/src/features/review-groups/pages.tsx",
+    "title": "Tạo nhóm duyệt",
+    "roles": [
+      "FACULTY"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "review-group:manage",
+    "menu": false
+  },
+  {
+    "id": "R23",
+    "path": "/topic/review-groups/:id/edit",
+    "component": "ReviewGroupEditorPage",
+    "source": "frontend/src/features/review-groups/pages.tsx",
+    "title": "Sửa nhóm duyệt",
+    "roles": [
+      "FACULTY"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "review-group:manage",
+    "menu": false
+  },
+  {
+    "id": "R24",
+    "path": "/topic/review-groups/:id",
+    "component": "ReviewGroupDetailPage",
+    "source": "frontend/src/features/review-groups/pages.tsx",
+    "title": "Chi tiết nhóm duyệt",
+    "roles": [
+      "FACULTY",
+      "LECTURER"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "review-group:read",
+    "menu": false
+  },
+  {
+    "id": "R25",
+    "path": "/login",
+    "component": "LoginPage",
+    "source": "frontend/src/features/auth/pages/LoginPage.tsx"
+  },
+  {
+    "id": "R26",
+    "path": "/",
+    "component": "DashboardPage",
+    "source": "frontend/src/features/report/pages/DashboardPage.tsx",
+    "title": "Tổng quan",
+    "group": "Không gian làm việc",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ]
+  },
+  {
+    "id": "R27",
+    "path": "/admin/accounts",
+    "component": "AccountsPage",
+    "source": "frontend/src/features/auth/pages/AccountsPage.tsx",
+    "title": "Tài khoản",
+    "group": "Quản trị hệ thống",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "id": "R28",
+    "path": "/admin/roles",
+    "component": "RolesPermissionsPage",
+    "source": "frontend/src/features/auth/pages/RolesPermissionsPage.tsx",
+    "title": "Vai trò & quyền",
+    "group": "Quản trị hệ thống",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "id": "R29",
+    "path": "/admin/audit-logs",
+    "component": "AuditLogPage",
+    "source": "frontend/src/features/auth/pages/AuditLogPage.tsx",
+    "permission": "audit:read",
+    "title": "Nhật ký hoạt động",
+    "group": "Quản trị hệ thống",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "id": "R30",
+    "path": "/catalog/students",
+    "component": "StudentListPage",
+    "source": "frontend/src/features/catalog/pages/StudentListPage.tsx",
+    "title": "Sinh viên",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "id": "R31",
+    "path": "/catalog/lecturers",
+    "component": "LecturerListPage",
+    "source": "frontend/src/features/catalog/pages/LecturerListPage.tsx",
+    "title": "Giảng viên",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER"
+    ]
+  },
+  {
+    "id": "R32",
+    "path": "/catalog/import",
+    "component": "ImportPage",
+    "source": "frontend/src/features/catalog/pages/ImportPage.tsx",
+    "title": "Import dữ liệu",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "id": "R33",
+    "path": "/catalog/reference",
+    "component": "ReferenceCatalogPage",
+    "source": "frontend/src/features/catalog/pages/ReferenceCatalogPage.tsx",
+    "title": "Danh mục đào tạo",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "id": "R34",
+    "path": "/terms",
+    "component": "TermListPage",
+    "source": "frontend/src/features/term/pages/TermListPage.tsx",
+    "title": "Kỳ học & đợt đồ án",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "id": "R35",
+    "path": "/terms/:id",
+    "component": "TermDetailPage",
+    "source": "frontend/src/features/term/pages/TermDetailPage.tsx",
+    "title": "Chi tiết đợt",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ],
+    "menu": false
+  },
+  {
+    "id": "R36",
+    "path": "/terms/:id/phases",
+    "component": "PhasePlanPage",
+    "source": "frontend/src/features/term/pages/PhasePlanPage.tsx",
+    "title": "Kế hoạch giai đoạn",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ],
+    "menu": false
+  },
+  {
+    "id": "R37",
+    "path": "/terms/:id/parameters",
+    "component": "TermParameterPage",
+    "source": "frontend/src/features/term/pages/TermParameterPage.tsx",
+    "title": "Tham số đợt",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ],
+    "menu": false
+  },
+  {
+    "id": "R38",
+    "path": "/terms/:id/roster",
+    "component": "TermRosterPage",
+    "source": "frontend/src/features/term/pages/TermRosterPage.tsx",
+    "title": "Danh sách tham gia",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ],
+    "menu": false
+  },
+  {
+    "id": "R39",
+    "path": "/registration",
+    "component": "StudentRegistrationPage",
+    "source": "frontend/src/features/registration/pages/StudentRegistrationPage.tsx",
+    "title": "Đăng ký nguyện vọng",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "STUDENT"
+    ]
+  },
+  {
+    "id": "R40",
+    "path": "/registration/list",
+    "component": "RegistrationListPage",
+    "source": "frontend/src/features/registration/pages/RegistrationListPage.tsx",
+    "title": "Danh sách đăng ký",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "id": "R41",
+    "path": "/registration/assignment",
+    "component": "AssignmentPlanPage",
+    "source": "frontend/src/features/registration/pages/AssignmentPlanPage.tsx",
+    "title": "Phân công GVHD",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "id": "R42",
+    "path": "/registration/result",
+    "component": "AssignmentResultPage",
+    "source": "frontend/src/features/registration/pages/AssignmentResultPage.tsx",
+    "title": "Kết quả phân công",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ]
+  },
+  {
+    "id": "R43",
+    "path": "/registration/manual",
+    "component": "ManualAdjustPage",
+    "source": "frontend/src/features/registration/pages/ManualAdjustPage.tsx",
+    "title": "Điều chỉnh phân công",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "id": "R44",
+    "path": "/topic/my",
+    "component": "MyTopicPage",
+    "source": "frontend/src/features/topic/pages/MyTopicPage.tsx",
+    "title": "Thống nhất đề tài",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ]
+  },
+  {
+    "id": "R45",
+    "path": "/topic/draft",
+    "component": "ProposalEditorPage",
+    "source": "frontend/src/features/topic/pages/ProposalEditorPage.tsx",
+    "title": "Soạn đề cương",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "STUDENT",
+      "LECTURER"
+    ],
+    "menu": false
+  },
+  {
+    "id": "R46",
+    "path": "/topic/overview",
+    "component": "DossierPage",
+    "source": "frontend/src/features/topic/pages/DossierPage.tsx",
+    "title": "Hồ sơ đề tài",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ],
+    "menu": false
+  },
+  {
+    "id": "R47",
+    "path": "/guidance/defense-confirm",
+    "component": "FinalDefensePage",
+    "source": "frontend/src/features/guidance/final-defense/page.tsx",
+    "title": "Xác nhận bảo vệ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "defense-confirmation:read",
+    "menuRoles": [
+      "FACULTY",
+      "LECTURER"
+    ],
+    "menu": true
+  },
+  {
+    "id": "R48",
+    "path": "/guidance/final-report",
+    "component": "FinalDefensePage",
+    "source": "frontend/src/features/guidance/final-defense/page.tsx",
+    "title": "Báo cáo cuối kỳ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "final-report:read",
+    "menuRoles": [
+      "STUDENT"
+    ],
+    "menu": true
+  },
+  {
+    "id": "R49",
+    "path": "/defense/eligibility",
+    "component": "EligibilityPage",
+    "source": "frontend/src/features/defense/eligibility/page.tsx",
+    "title": "Xét điều kiện bảo vệ",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "permission": "defense-eligibility:read",
+    "menu": true
+  },
+  {
+    "id": "R50",
+    "path": "/defense/results",
+    "component": "FinalResultPage",
+    "source": "frontend/src/features/defense/final-results/page.tsx",
+    "title": "Kết quả bảo vệ",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "permission": "defense-result:read",
+    "menu": true
+  },
+  {
+    "id": "R51",
+    "path": "/defense/reports",
+    "component": "DefenseReportsPage",
+    "source": "frontend/src/features/report/defense-reporting/page.tsx",
+    "title": "Báo cáo & biểu mẫu bảo vệ",
+    "group": "Báo cáo & biểu mẫu",
+    "roles": [
+      "FACULTY",
+      "LECTURER"
+    ],
+    "permission": "defense-report:read",
+    "menu": true,
+    "menuMode": "API"
+  },
+  {
+    "id": "R52",
+    "path": "/defense/committees",
+    "component": "CommitteePage",
+    "source": "frontend/src/features/defense/committees/page.tsx",
+    "title": "Hội đồng bảo vệ",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY"
+    ],
+    "permission": "defense-committee:read",
+    "menu": true
+  },
+  {
+    "id": "R53",
+    "path": "/defense/reviewers",
+    "component": "ReviewerPage",
+    "source": "frontend/src/features/defense/reviewers/page.tsx",
+    "title": "Phân công phản biện",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY"
+    ],
+    "permission": "defense-reviewer:read",
+    "menu": true
+  },
+  {
+    "id": "R54",
+    "path": "/defense/schedule",
+    "component": "SchedulePage",
+    "source": "frontend/src/features/defense/scheduling/page.tsx",
+    "title": "Lịch bảo vệ",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY",
+      "STUDENT",
+      "LECTURER"
+    ],
+    "permission": "defense-schedule:read",
+    "menu": true
+  },
+  {
+    "id": "R55",
+    "path": "/defense/committee-grading",
+    "component": "CommitteeGradePage",
+    "source": "frontend/src/features/defense/committee-grading/page.tsx",
+    "title": "Chấm điểm hội đồng",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "LECTURER",
+      "FACULTY"
+    ],
+    "permission": "defense-committee-grade:read",
+    "menu": true
+  },
+  {
+    "id": "R56",
+    "path": "/defense/reviewer-grading",
+    "component": "ReviewerGradePage",
+    "source": "frontend/src/features/defense/reviewer-grading/page.tsx",
+    "title": "Chấm điểm phản biện",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "LECTURER",
+      "FACULTY"
+    ],
+    "permission": "defense-reviewer-grade:read",
+    "menu": true
+  },
+  {
+    "id": "R57",
+    "path": "/report/export",
+    "component": "ExportCenterPage",
+    "source": "frontend/src/features/report/pages/ExportCenterPage.tsx",
+    "title": "Biểu mẫu & xuất dữ liệu",
+    "group": "Báo cáo & biểu mẫu",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ],
+    "menuMode": "DEMO"
+  },
+  {
+    "id": "R58",
+    "path": "/profile",
+    "component": "ProfilePage",
+    "source": "frontend/src/features/auth/pages/ProfilePage.tsx",
+    "title": "Thông tin cá nhân",
+    "group": "Cá nhân",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ],
+    "menu": false
+  },
+  {
+    "id": "R59",
+    "path": "/change-password",
+    "component": "ChangePasswordPage",
+    "source": "frontend/src/features/auth/pages/ChangePasswordPage.tsx",
+    "title": "Đổi mật khẩu",
+    "group": "Cá nhân",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ],
+    "menu": false
+  },
+  {
+    "id": "R60",
+    "path": "/notifications",
+    "component": "NotificationsPage",
+    "source": "frontend/src/features/auth/pages/NotificationsPage.tsx",
+    "title": "Thông báo",
+    "group": "Không gian làm việc",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ]
+  },
+  {
+    "id": "R61",
+    "path": "/forbidden",
+    "component": "Forbidden",
+    "source": "frontend/src/app/router/routes.tsx"
+  },
+  {
+    "id": "R62",
+    "path": "/*",
+    "component": "NotFound",
+    "source": "frontend/src/app/router/routes.tsx"
+  }
+]

@@ -1,0 +1,672 @@
+{
+  "at": "2026-11-15T15:55:58.269Z",
+  "application": "http://127.0.0.1:5173",
+  "source": "Playwright MCP / existing mau18 sample accounts / live API",
+  "businessMutationsPerformed": false,
+  "screens": [
+    {
+      "role": "STUDENT",
+      "route": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "student-dashboard-1440.png",
+      "at": "2026-11-15T15:45:46.073Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "file": "student-dashboard-1024.png",
+      "at": "2026-11-15T15:45:48.710Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "student-dashboard-768.png",
+      "at": "2026-11-15T15:45:51.874Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "student-dashboard-390.png",
+      "at": "2026-11-15T15:45:53.269Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "file": "student-dashboard-320.png",
+      "at": "2026-11-15T15:45:54.696Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "lecturer-dashboard-1440.png",
+      "at": "2026-11-15T15:47:43.649Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "file": "lecturer-dashboard-1024.png",
+      "at": "2026-11-15T15:47:44.569Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "lecturer-dashboard-768.png",
+      "at": "2026-11-15T15:47:45.319Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "lecturer-dashboard-390.png",
+      "at": "2026-11-15T15:47:46.077Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "file": "lecturer-dashboard-320.png",
+      "at": "2026-11-15T15:47:46.739Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/terms",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "faculty-terms-1440.png",
+      "at": "2026-11-15T15:47:48.165Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/terms",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "file": "faculty-terms-1024.png",
+      "at": "2026-11-15T15:47:49.013Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/terms",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "faculty-terms-768.png",
+      "at": "2026-11-15T15:47:49.765Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/terms",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "faculty-terms-390.png",
+      "at": "2026-11-15T15:47:50.450Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/terms",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "file": "faculty-terms-320.png",
+      "at": "2026-11-15T15:47:51.120Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "ANON",
+      "route": "/login",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "login-1440.png",
+      "at": "2026-11-15T15:47:53.824Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "ANON",
+      "route": "/login",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "file": "login-1024.png",
+      "at": "2026-11-15T15:47:55.967Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "ANON",
+      "route": "/login",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "login-768.png",
+      "at": "2026-11-15T15:47:58.125Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "ANON",
+      "route": "/login",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "login-390.png",
+      "at": "2026-11-15T15:48:01.221Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "ANON",
+      "route": "/login",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "file": "login-320.png",
+      "at": "2026-11-15T15:48:03.315Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "lecturer-review-queue-1440.png",
+      "at": "2026-11-15T15:49:51.006Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "file": "lecturer-review-queue-1024.png",
+      "at": "2026-11-15T15:49:51.643Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "lecturer-review-queue-768.png",
+      "at": "2026-11-15T15:49:52.170Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "lecturer-review-queue-390.png",
+      "at": "2026-11-15T15:49:52.740Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "file": "lecturer-review-queue-320.png",
+      "at": "2026-11-15T15:49:53.261Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "lecturer-review-detail-1440.png",
+      "at": "2026-11-15T15:52:18.161Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "file": "lecturer-review-detail-1024.png",
+      "at": "2026-11-15T15:52:18.811Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "lecturer-review-detail-768.png",
+      "at": "2026-11-15T15:52:19.397Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "lecturer-review-detail-390.png",
+      "at": "2026-11-15T15:52:19.970Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "LECTURER",
+      "route": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "file": "lecturer-review-detail-320.png",
+      "at": "2026-11-15T15:52:20.548Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/registration",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "student-registration-1440.png",
+      "at": "2026-11-15T15:52:35.169Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/registration",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "file": "student-registration-1024.png",
+      "at": "2026-11-15T15:52:35.885Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/registration",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "student-registration-768.png",
+      "at": "2026-11-15T15:52:36.597Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/registration",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "student-registration-390.png",
+      "at": "2026-11-15T15:52:37.208Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "STUDENT",
+      "route": "/registration",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "file": "student-registration-320.png",
+      "at": "2026-11-15T15:52:37.843Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "faculty-dashboard-1440.png",
+      "at": "2026-11-15T15:53:09.404Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "file": "faculty-dashboard-1024.png",
+      "at": "2026-11-15T15:53:10.137Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "faculty-dashboard-768.png",
+      "at": "2026-11-15T15:53:10.783Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "faculty-dashboard-390.png",
+      "at": "2026-11-15T15:53:11.388Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    },
+    {
+      "role": "FACULTY",
+      "route": "/",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "file": "faculty-dashboard-320.png",
+      "at": "2026-11-15T15:53:11.996Z",
+      "overflow": false,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ],
+      "font": true
+    }
+  ],
+  "checks": [
+    "real table search and empty state",
+    "term modal receives focus",
+    "modal Escape restores opener",
+    "shared UTC drawer keyboard focus",
+    "drawer Escape restores focus",
+    "shared reduced motion",
+    "login required fields block empty form",
+    "keyboard toggles password visibility",
+    "login help dialog receives focus",
+    "login help Escape restores focus"
+  ],
+  "events": [],
+  "blocked": [
+    {
+      "route": "/defense/eligibility",
+      "body": "timeout of 20000ms exceeded\nThử lại",
+      "shell": false,
+      "file": "faculty-eligibility-blocked.png",
+      "at": "2026-11-15T15:55:16.211Z",
+      "note": "Initial shell/form loading was visible; complete business content could not be verified."
+    }
+  ],
+  "facultyConsoleAndPageErrors": []
+}

@@ -63,6 +63,7 @@ export class EligibilitySession extends FinalDefenseSession {
   }
   eligibilityProgress(proposalId: string) {
     return this.finalDb.guidancePlan.findUnique({
+      relationLoadStrategy: "join",
       where: { proposalId },
       include: {
         pr2bGuidancePlanWorkflowPlanId: true,
@@ -128,6 +129,7 @@ export class EligibilitySession extends FinalDefenseSession {
   eligibilityEvents(proposalId: string) {
     return this.finalDb.auditLog.findMany({
       where: { resource: "defense-eligibility", resourceId: proposalId },
+      select: {id:true,userId:true,action:true,createdAt:true,newValue:true},
       orderBy: [{ createdAt: "desc" }, { id: "desc" }],
       take: 100,
     });

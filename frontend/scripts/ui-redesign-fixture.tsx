@@ -19,6 +19,7 @@ import TaskReview from "../src/features/guidance/pages/TaskReviewPage";
 import Meetings from "../src/features/guidance/pages/MeetingLogPage";
 import "../src/index.css";
 import "../src/design-system.css";
+import "../src/utc-theme.css";
 
 if (import.meta.env.MODE !== "test") throw new Error("UI fixtures are available only in test mode.");
 const screens: Record<string, React.ComponentType> = {

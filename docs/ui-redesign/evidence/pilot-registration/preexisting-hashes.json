@@ -1,0 +1,62 @@
+[
+  {
+    "Path": "README.md",
+    "Hash": "28C66E7F3F810160675080B40D61DC8D95D06F85162DAC9CBB7FFEFE881308BE"
+  },
+  {
+    "Path": "backend/package.json",
+    "Hash": "D97B752221F93FE0C4EA73CC653421D7A780C071BAC19BCA64DB559976AE5B62"
+  },
+  {
+    "Path": "backend/src/common/storage/file-storage.service.spec.ts",
+    "Hash": "E32256A34C78C4A4C8C15C034539FF8C1CD79A08106B6BBD26360D0D2EC10366"
+  },
+  {
+    "Path": "frontend/scripts/test-ui-redesign-browser.cjs",
+    "Hash": "EF3DF8FD404A0A34ADC71083DED86193C97A625CA34B136B6D536CABC58F3A76"
+  },
+  {
+    "Path": "frontend/src/app/layouts/AdminLayout.tsx",
+    "Hash": "3FB1F199045010C51FB71EB7670990E1BCA83DF8A8B902461B58147D4AE9DDAE"
+  },
+  {
+    "Path": "frontend/src/app/layouts/WorkspaceLayout.tsx",
+    "Hash": "BB895AD11C5A111730547CFDC3C098E2191E37F02CC7BA9E785826315171C12D"
+  },
+  {
+    "Path": "frontend/src/design-system.css",
+    "Hash": "B8B78F28B2F1A4C5C357B8FA529B03B37D3CEF24931F8F0424B191DF8D47E11A"
+  },
+  {
+    "Path": "frontend/src/features/auth/pages/LoginPage.tsx",
+    "Hash": "EF585AD40B0B02B0D260F80AB53DE775236BE670B721105358A630DD36DB6DD6"
+  },
+  {
+    "Path": "frontend/src/features/guidance/components/guidance-kit.tsx",
+    "Hash": "B034A0AD95BA042536921278C267408C7454D7653B309C9C9D4870F26D37771C"
+  },
+  {
+    "Path": "frontend/src/features/report/pages/DashboardPage.tsx",
+    "Hash": "13345CE9BE8D265200E31F6869F7C23F832728AD52D316B9EC6D3C97013140DD"
+  },
+  {
+    "Path": "frontend/src/index.css",
+    "Hash": "D3F3B5F5C15CEE9FB406A9F1B4987EDBCEE6F505830A21F8A9D62190CE04FD93"
+  },
+  {
+    "Path": "frontend/src/shared/components/data-table.tsx",
+    "Hash": "ADA26806FBF7263C25D13D694A686920250109A4E04640C76380820198C028EA"
+  },
+  {
+    "Path": "frontend/src/shared/components/kit.tsx",
+    "Hash": "3761D3B99E4A901016FE5509E1B9873274934813534CA814AE4DE7C92BB086BB"
+  },
+  {
+    "Path": "frontend/tailwind.config.ts",
+    "Hash": "1BA94809E05F7211976697AA4751F39415D193EE914DF7F10779566B7EB35D71"
+  },
+  {
+    "Path": "package.json",
+    "Hash": "0CA25E2FA266556A303D862E7B9BBB35B6AB51343BA680BDD2CEB1DB65DBEAA1"
+  }
+]

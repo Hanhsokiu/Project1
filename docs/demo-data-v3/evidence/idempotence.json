@@ -1,0 +1,828 @@
+{
+  "status": "PASS",
+  "database": "btl_pr2b_acceptance_utc_demo_v3_baseline_v3",
+  "generatedAt": "2026-11-16T04:13:33.933Z",
+  "models": 102,
+  "phasesReused": 184,
+  "before": {
+    "UserAccount": {
+      "count": 105,
+      "digest": "adbad4b2b64aafb9ee57d6cba58bfd3f21fd1fbcb858c6ea2d1b8d687635d66d"
+    },
+    "Role": {
+      "count": 5,
+      "digest": "765ea620cd9ec5dbf6ed8ddc3c95abe8d2d78709345595dae25df325d3888ba9"
+    },
+    "Permission": {
+      "count": 124,
+      "digest": "fdd58c5488f55cf5e9a7fe09cdce669d3aff930e1551ca2e1c6ee1263b29a2a5"
+    },
+    "UserRole": {
+      "count": 117,
+      "digest": "590e39e30346bdb93899cd6a8739df4f056277c70e0104e709b5285b60e72dd6"
+    },
+    "RolePermission": {
+      "count": 192,
+      "digest": "1f9eb9f4c476d15c36657f7bbefa4d9d2195d92ec78443a445a24818abcf26a8"
+    },
+    "LoginSession": {
+      "count": 17,
+      "digest": "b1ccea46101e9960b6bad9bcdc1b4db4027770aa1b5894f2b544a411d2dbf82a"
+    },
+    "AuditLog": {
+      "count": 753,
+      "digest": "15d234b23c70d8cb4f0d22a08cf1bf8537543c78609235141dbd902d31fb051e"
+    },
+    "Notification": {
+      "count": 87,
+      "digest": "a9352cf1f52fbb7fe5743409088f089fe702dadeabe66874b6a7bc8f4d28ad63"
+    },
+    "Department": {
+      "count": 1,
+      "digest": "8baa3d633e1bb6302b17ac4d0a7391b2b13af307d39b1ee29c9eed76f9e570c3"
+    },
+    "TitleConfig": {
+      "count": 1,
+      "digest": "24dc4a7e58ff3947b5affee6290b6fe373378f11fb07f96802d2bac3bf7aae82"
+    },
+    "TrainingSystem": {
+      "count": 1,
+      "digest": "5cdb2683949b8c471d6e90acbef9b45f5b4ff95d58431ccea09c8001b6aab3d6"
+    },
+    "Lecturer": {
+      "count": 18,
+      "digest": "96169df934ecbfbde1021ee094aca5c611d62e1d1ae5fe89874b8c443a575ac6"
+    },
+    "Student": {
+      "count": 84,
+      "digest": "f5b2ee21d3a64c68967fdb6c85fa5e40598eb3afe404576c93279b71c6f74829"
+    },
+    "ResearchArea": {
+      "count": 5,
+      "digest": "6a74575c878fb06bff54d142884aa9cfb4733910ab844aa17209c3ad3fd966b5"
+    },
+    "LecturerArea": {
+      "count": 18,
+      "digest": "565f20d5671049b7ddf4c09dea41d1dd45939c9fd8ff07f8cab92d13e9bd3e6c"
+    },
+    "ImportJob": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "AcademicSemester": {
+      "count": 2,
+      "digest": "66088e75872c4d0f6b5c20a77158050ea92b6b8372a7ffac4c4b38989e81d02d"
+    },
+    "ThesisTerm": {
+      "count": 2,
+      "digest": "9c5b3d1962745880d19049b500575a81e12a23697e9f9ae18a9e57266361cd45"
+    },
+    "TermPhase": {
+      "count": 14,
+      "digest": "ef369552be1f6e9a7b07569bef95c66d49f250cf83bdf55e397cd93998941b65"
+    },
+    "TermParameter": {
+      "count": 25,
+      "digest": "1b47845129c4032e58e1bb27d27965a666e55902cbff578c820482058df9006a"
+    },
+    "TermLecturer": {
+      "count": 36,
+      "digest": "685a7745c480daca1b7c2f522fe74d437b6763cc6dc1aeb456a5ff8d1560a127"
+    },
+    "TermStudent": {
+      "count": 87,
+      "digest": "38ce8c691af19637cc441862bbbed23ecc9d6e87d99d9076cfe69c899b9333b9"
+    },
+    "Registration": {
+      "count": 87,
+      "digest": "3212686422075ed19288e1d74707a694562f7569cdb55b10d3c733f371a1febc"
+    },
+    "RegistrationPref": {
+      "count": 172,
+      "digest": "2906aca06834191a9e37b3e5122c9f4b8927f78b1777555110c34d848e5edb02"
+    },
+    "AssignmentPlan": {
+      "count": 2,
+      "digest": "1dce208b4a16f87571a3c9acd4a6b877b6548ac638d9e29b91881e9f95aca932"
+    },
+    "AdvisorAssignment": {
+      "count": 87,
+      "digest": "12515e672e5e9dea9ce99add3fbffa2c664d35c28c7631e5882b3609a56cc58a"
+    },
+    "Topic": {
+      "count": 87,
+      "digest": "f8fbb78f38eee2bf09fffd71e6775a40fb18c694eba37a73acd2fa5316f191c8"
+    },
+    "TopicHistory": {
+      "count": 87,
+      "digest": "7f62487987069a14d458d0c9d23eadd27cff802327a40fe19006cc778c0c04a6"
+    },
+    "Proposal": {
+      "count": 87,
+      "digest": "c245168f7c7a2de0bbd730197af38c8c8e7d88306043cb7a91a954f700a9020e"
+    },
+    "ProposalVersion": {
+      "count": 133,
+      "digest": "98a7634f1a931a26f31f6bdf97f12e2e4fc9f035b5a29bfb258e942421bb8414"
+    },
+    "EmailOutbox": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "ReviewGroup": {
+      "count": 6,
+      "digest": "56178ccbea8aa25c23792117c9fc6adcaee8177abdd6e384a73d8dd0866d771f"
+    },
+    "ReviewGroupMember": {
+      "count": 36,
+      "digest": "7c11add087535e7bf6166ce02ac58ba01cde5980fe95f4c3da2e3e75641f48e5"
+    },
+    "ProposalReview": {
+      "count": 133,
+      "digest": "d4b22a145c496af9ea42fb5dfb718f3b2da22375ac14baa59b491fd75be8c9bf"
+    },
+    "ThesisDossier": {
+      "count": 87,
+      "digest": "5d5f5061a2e6c80d3c782acdab2c06c5653c701e0cab656c9833d5528df2c5e5"
+    },
+    "GuidancePlan": {
+      "count": 87,
+      "digest": "6794917215793476d5fead76dfd1b2b3edfc00be723a9e5ef4011bf218a35657"
+    },
+    "Task": {
+      "count": 890,
+      "digest": "d18d8753beb39130bf9026346c51026aafd55b072f45d45b991f6a9d4eca3724"
+    },
+    "TaskSubmission": {
+      "count": 890,
+      "digest": "915c0d2eb4413eeafca2bd35a14edb984bc0e6c7aebc87d62937158014c7cbd5"
+    },
+    "SubmissionFile": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "TaskReview": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "GuidanceMeeting": {
+      "count": 87,
+      "digest": "a78c0f67eb1932c1113e55d77298c0cfd0772cd8454c11f364434b933cf7bf38"
+    },
+    "PhaseEvaluation": {
+      "count": 87,
+      "digest": "26af6889081353dc6cc9e96e19f96aaec7c0669e28e8793f286e4b9b3070ae35"
+    },
+    "FinalReport": {
+      "count": 60,
+      "digest": "c2d1f12396ad4ae1b069b54aba85623196dd5a9585a8045fec057228c3a71acf"
+    },
+    "DefenseConfirmation": {
+      "count": 60,
+      "digest": "74f1b58d2c4d9904c6ac44f678aae25d4a3941b0611e502032407b0b27b57701"
+    },
+    "DefenseEligibility": {
+      "count": 60,
+      "digest": "cd7ac0c1ac3d28f0934f6edd2d21dbf4f01ccfc89db692cddfc76ee279f5f6b4"
+    },
+    "DefermentRequest": {
+      "count": 16,
+      "digest": "0dd1df955212742aa8a3f7d5b3b18275b0aedf62f8d85713b74339a28aa4c75d"
+    },
+    "ReviewerAssignment": {
+      "count": 60,
+      "digest": "178482d1dc4d008459e0f7095bfe5310fa1ca1525b6fb798401103de668bac33"
+    },
+    "Room": {
+      "count": 3,
+      "digest": "f3735923d9bdf33bed1ab99ada4abddc59fdd7b0b2f362859909e1e0e4c0f630"
+    },
+    "DefenseCommittee": {
+      "count": 3,
+      "digest": "0dc3462fa9d7fb8bf9e65f5f79ff21b4a86ee7749c7034103ac4d7fc573f7498"
+    },
+    "DefenseCommitteeAssignment": {
+      "count": 60,
+      "digest": "97c20a62e27dc66e9320a0f5fcbe165866ad3f25e4ab81056131ffc59eedf7ec"
+    },
+    "CommitteeMember": {
+      "count": 12,
+      "digest": "048f1dc7a59ea59ed73b97f61c7a8c212452f3c3419b06e1c765a97fbc535e79"
+    },
+    "DefenseSession": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "CommitteeStudent": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "DefenseMinutes": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "RubricCriteria": {
+      "count": 10,
+      "digest": "b0b279524885641eb311b4fb836ae66c2c7cf0cde778360a5e2859ac9d914d74"
+    },
+    "ScoreEntry": {
+      "count": 60,
+      "digest": "2d48becd460556f3ec0c407513b220c217aa6044ff4123128408850bb7a4d645"
+    },
+    "ScoreDetail": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "FinalResult": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "ExportJob": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "AcademicTermGrant": {
+      "count": 4,
+      "digest": "f57f1e2ee857167e9cd07c451915853e616b3149104538f46b0f6926d02a9660"
+    },
+    "GrantDepartment": {
+      "count": 4,
+      "digest": "8ce104a5c07adf8ad94d12c2ccded9302722ae048ad5644fb46ed53234aafedb"
+    },
+    "ResearchAreaWorkflow": {
+      "count": 5,
+      "digest": "716bd5db57e5a3684c353c6f047377e4b17595be0c046b168b83fe9e6931a9f5"
+    },
+    "TermWorkflow": {
+      "count": 2,
+      "digest": "08a39f85b5fae04c816ad546181d1bf95b93412097794cc6faa6e5a7ce94ac99"
+    },
+    "TermPhaseWorkflow": {
+      "count": 6,
+      "digest": "01379b3d3f08c722a4ee1d1b04f237b4ac0cf99081fd8709f1a1b0882da22786"
+    },
+    "AssignmentPlanWorkflow": {
+      "count": 2,
+      "digest": "b2848715e4edba6950123d4265ac84a820683e24e708f82682ea154b7e281fb9"
+    },
+    "AssignmentChange": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "TopicWorkflow": {
+      "count": 87,
+      "digest": "4bf2b771b88798a5d32a941dc05c043a58ea008c9552539644b2e9c1c070b2a5"
+    },
+    "ProposalWorkflow": {
+      "count": 87,
+      "digest": "d5344f83ab96a84b4d2f3cb37a43aff2a6b253bc0af2d6ae49095a1f7c9f50f5"
+    },
+    "ProposalVersionWorkflow": {
+      "count": 133,
+      "digest": "b4596c251907c7f2e5be8962c6a24796613b753b4a4efb11d73a4483d8277c48"
+    },
+    "ReviewGroupWorkflow": {
+      "count": 6,
+      "digest": "e9727ac08a1334b321fd52bd0e02bdc4e74fa3d78552b45047e247585104e115"
+    },
+    "ReviewMembershipHistory": {
+      "count": 36,
+      "digest": "cb94d6232e04194cf812d42a78f364a3b0a673c7516eae1ddec78bc72505b9b5"
+    },
+    "ProposalReviewWorkflow": {
+      "count": 133,
+      "digest": "3b905aae36b6028257e47b74b3aaf2c61bf11c63fc1549ec7789d04bba8ad105"
+    },
+    "ProposalReviewDecision": {
+      "count": 133,
+      "digest": "387d3268c34b908a62668d871f82590519847e19c2df25a9e539fcb5da52b296"
+    },
+    "ReviewComment": {
+      "count": 133,
+      "digest": "7ce775c1d6ead0951c0e2d12db3e8d3509fe802666f60c33004ae9868ac373f4"
+    },
+    "DossierWorkflow": {
+      "count": 87,
+      "digest": "9cc657216e0ed1596755ce1cc985d737d014b3cc27eaf5e46bf4511d47880506"
+    },
+    "DossierFinalization": {
+      "count": 87,
+      "digest": "0e1dad21d8718ff81d4e3ffbc9175ca5d0499ac36e6a12355bdcfde9e31d60b7"
+    },
+    "DossierReceipt": {
+      "count": 87,
+      "digest": "7c596181ef6f84c87a34ea0de6139d94ce6f3511289a36e33ca2eb05ba86c7e8"
+    },
+    "DossierHistory": {
+      "count": 261,
+      "digest": "92d6c99f651d2c75a0a3a2172c1444bb4f066872aea84277f6f053b3ed8caa20"
+    },
+    "GuidancePlanWorkflow": {
+      "count": 87,
+      "digest": "c68ea567ccf8f054f2c855e392945240304332eb025a064dac40e2a54326aad7"
+    },
+    "PlanHistory": {
+      "count": 103,
+      "digest": "c7745252440b2aabadbf732f64f3a2c823aa3c4d1c99271ba97442b01a5a26aa"
+    },
+    "GuidancePeriod": {
+      "count": 20,
+      "digest": "a468da813e80b055e07de24ad4292682cea12f7d82a8158c2f05841645335dfa"
+    },
+    "PeriodRequiredStudent": {
+      "count": 890,
+      "digest": "75bac6feae9578c3612ba0ccfa02d0d712ca0c7945d93ef3382d62be7ac989ac"
+    },
+    "WeeklyReportObligation": {
+      "count": 890,
+      "digest": "0b5d840e4ab2f2131c1448492e7db7c68400248da91672c4f6e003131d0dc42d"
+    },
+    "TaskWorkflow": {
+      "count": 890,
+      "digest": "214c3d43eae249c849a42bb395cdeee978a3fe48dcd6d70fc75c5233f5a92b83"
+    },
+    "TaskProgressEvent": {
+      "count": 877,
+      "digest": "5aecd02aa7bf012bd638e01d74f532bb7cb2ad22bed6c6bd0ccc706b63acc102"
+    },
+    "TaskHistory": {
+      "count": 2669,
+      "digest": "85033e24311a901b35c87f969b13bbcc2d9db7904813ffd1447fea979e082af2"
+    },
+    "SubmissionWorkflow": {
+      "count": 890,
+      "digest": "86a9136d9749d22302931536766ef29709e74a3e11b1294bae86733d8c07ca95"
+    },
+    "ProgressReview": {
+      "count": 889,
+      "digest": "e09ef3aaa56f50ee76649539c3bb96eb43f8ae072f4f8f9ff983baca55234c75"
+    },
+    "GuidanceReopen": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "FileAsset": {
+      "count": 2020,
+      "digest": "b51621bbf1abb1be9fa3537662e7b52ddb8bee09d1d5d3b90d9edb8f8eb52f09"
+    },
+    "FinalReportVersion": {
+      "count": 60,
+      "digest": "2c258b82de73cc1c7980337ebfe82026e0d7546048df0563daeea12bb23d1732"
+    },
+    "GuidanceSubmissionUpload": {
+      "count": 1873,
+      "digest": "5b7fc3f7d5d6f213a27a59107a7520dd9cdf187cbcbd2ef2bb23df8594eb0821"
+    },
+    "DossierStudentProfile": {
+      "count": 87,
+      "digest": "c5dd90125d098f192329f7caa67056d18f4e0f7dc34f5faaa8fa227bba1b429c"
+    },
+    "DossierPdfContent": {
+      "count": 87,
+      "digest": "49edee3533729459023456648a62b3c8f65f1f8ec27c4b4d37cb5cd902ac93ad"
+    },
+    "SubmissionAsset": {
+      "count": 1873,
+      "digest": "15907efb83571a4b54f3ce4e9a3ecada32c2806100490b05a047d9c5ef8e2859"
+    },
+    "MeetingWorkflow": {
+      "count": 87,
+      "digest": "d8dddb600c038b9e8e96b976990edcf017498b0ab0523a788960a55e996a9f3a"
+    },
+    "MeetingHistory": {
+      "count": 87,
+      "digest": "f95adfdc8918f212d4361eedf7daf3858f1d30ad3abe928e912964ec42e01757"
+    },
+    "EvaluationWorkflow": {
+      "count": 87,
+      "digest": "790509c90e91dda631b778955a80a92be2545026f41997f1a2b51d4c98691d58"
+    },
+    "EvaluationEvidence": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "EvaluationHistory": {
+      "count": 87,
+      "digest": "fa42d988347f3e84b1b40f00a5730480f889a051c079edb051d5fbf2380a65e1"
+    },
+    "OutboxEvent": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "IdempotencyRecord": {
+      "count": 329,
+      "digest": "4c808215736762f0f420579cfec86037b4d4c664e2243ae6a86faff5b8ca0637"
+    }
+  },
+  "after": {
+    "UserAccount": {
+      "count": 105,
+      "digest": "adbad4b2b64aafb9ee57d6cba58bfd3f21fd1fbcb858c6ea2d1b8d687635d66d"
+    },
+    "Role": {
+      "count": 5,
+      "digest": "765ea620cd9ec5dbf6ed8ddc3c95abe8d2d78709345595dae25df325d3888ba9"
+    },
+    "Permission": {
+      "count": 124,
+      "digest": "fdd58c5488f55cf5e9a7fe09cdce669d3aff930e1551ca2e1c6ee1263b29a2a5"
+    },
+    "UserRole": {
+      "count": 117,
+      "digest": "590e39e30346bdb93899cd6a8739df4f056277c70e0104e709b5285b60e72dd6"
+    },
+    "RolePermission": {
+      "count": 192,
+      "digest": "1f9eb9f4c476d15c36657f7bbefa4d9d2195d92ec78443a445a24818abcf26a8"
+    },
+    "LoginSession": {
+      "count": 17,
+      "digest": "b1ccea46101e9960b6bad9bcdc1b4db4027770aa1b5894f2b544a411d2dbf82a"
+    },
+    "AuditLog": {
+      "count": 753,
+      "digest": "15d234b23c70d8cb4f0d22a08cf1bf8537543c78609235141dbd902d31fb051e"
+    },
+    "Notification": {
+      "count": 87,
+      "digest": "a9352cf1f52fbb7fe5743409088f089fe702dadeabe66874b6a7bc8f4d28ad63"
+    },
+    "Department": {
+      "count": 1,
+      "digest": "8baa3d633e1bb6302b17ac4d0a7391b2b13af307d39b1ee29c9eed76f9e570c3"
+    },
+    "TitleConfig": {
+      "count": 1,
+      "digest": "24dc4a7e58ff3947b5affee6290b6fe373378f11fb07f96802d2bac3bf7aae82"
+    },
+    "TrainingSystem": {
+      "count": 1,
+      "digest": "5cdb2683949b8c471d6e90acbef9b45f5b4ff95d58431ccea09c8001b6aab3d6"
+    },
+    "Lecturer": {
+      "count": 18,
+      "digest": "96169df934ecbfbde1021ee094aca5c611d62e1d1ae5fe89874b8c443a575ac6"
+    },
+    "Student": {
+      "count": 84,
+      "digest": "f5b2ee21d3a64c68967fdb6c85fa5e40598eb3afe404576c93279b71c6f74829"
+    },
+    "ResearchArea": {
+      "count": 5,
+      "digest": "6a74575c878fb06bff54d142884aa9cfb4733910ab844aa17209c3ad3fd966b5"
+    },
+    "LecturerArea": {
+      "count": 18,
+      "digest": "565f20d5671049b7ddf4c09dea41d1dd45939c9fd8ff07f8cab92d13e9bd3e6c"
+    },
+    "ImportJob": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "AcademicSemester": {
+      "count": 2,
+      "digest": "66088e75872c4d0f6b5c20a77158050ea92b6b8372a7ffac4c4b38989e81d02d"
+    },
+    "ThesisTerm": {
+      "count": 2,
+      "digest": "9c5b3d1962745880d19049b500575a81e12a23697e9f9ae18a9e57266361cd45"
+    },
+    "TermPhase": {
+      "count": 14,
+      "digest": "ef369552be1f6e9a7b07569bef95c66d49f250cf83bdf55e397cd93998941b65"
+    },
+    "TermParameter": {
+      "count": 25,
+      "digest": "1b47845129c4032e58e1bb27d27965a666e55902cbff578c820482058df9006a"
+    },
+    "TermLecturer": {
+      "count": 36,
+      "digest": "685a7745c480daca1b7c2f522fe74d437b6763cc6dc1aeb456a5ff8d1560a127"
+    },
+    "TermStudent": {
+      "count": 87,
+      "digest": "38ce8c691af19637cc441862bbbed23ecc9d6e87d99d9076cfe69c899b9333b9"
+    },
+    "Registration": {
+      "count": 87,
+      "digest": "3212686422075ed19288e1d74707a694562f7569cdb55b10d3c733f371a1febc"
+    },
+    "RegistrationPref": {
+      "count": 172,
+      "digest": "2906aca06834191a9e37b3e5122c9f4b8927f78b1777555110c34d848e5edb02"
+    },
+    "AssignmentPlan": {
+      "count": 2,
+      "digest": "1dce208b4a16f87571a3c9acd4a6b877b6548ac638d9e29b91881e9f95aca932"
+    },
+    "AdvisorAssignment": {
+      "count": 87,
+      "digest": "12515e672e5e9dea9ce99add3fbffa2c664d35c28c7631e5882b3609a56cc58a"
+    },
+    "Topic": {
+      "count": 87,
+      "digest": "f8fbb78f38eee2bf09fffd71e6775a40fb18c694eba37a73acd2fa5316f191c8"
+    },
+    "TopicHistory": {
+      "count": 87,
+      "digest": "7f62487987069a14d458d0c9d23eadd27cff802327a40fe19006cc778c0c04a6"
+    },
+    "Proposal": {
+      "count": 87,
+      "digest": "c245168f7c7a2de0bbd730197af38c8c8e7d88306043cb7a91a954f700a9020e"
+    },
+    "ProposalVersion": {
+      "count": 133,
+      "digest": "98a7634f1a931a26f31f6bdf97f12e2e4fc9f035b5a29bfb258e942421bb8414"
+    },
+    "EmailOutbox": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "ReviewGroup": {
+      "count": 6,
+      "digest": "56178ccbea8aa25c23792117c9fc6adcaee8177abdd6e384a73d8dd0866d771f"
+    },
+    "ReviewGroupMember": {
+      "count": 36,
+      "digest": "7c11add087535e7bf6166ce02ac58ba01cde5980fe95f4c3da2e3e75641f48e5"
+    },
+    "ProposalReview": {
+      "count": 133,
+      "digest": "d4b22a145c496af9ea42fb5dfb718f3b2da22375ac14baa59b491fd75be8c9bf"
+    },
+    "ThesisDossier": {
+      "count": 87,
+      "digest": "5d5f5061a2e6c80d3c782acdab2c06c5653c701e0cab656c9833d5528df2c5e5"
+    },
+    "GuidancePlan": {
+      "count": 87,
+      "digest": "6794917215793476d5fead76dfd1b2b3edfc00be723a9e5ef4011bf218a35657"
+    },
+    "Task": {
+      "count": 890,
+      "digest": "d18d8753beb39130bf9026346c51026aafd55b072f45d45b991f6a9d4eca3724"
+    },
+    "TaskSubmission": {
+      "count": 890,
+      "digest": "915c0d2eb4413eeafca2bd35a14edb984bc0e6c7aebc87d62937158014c7cbd5"
+    },
+    "SubmissionFile": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "TaskReview": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "GuidanceMeeting": {
+      "count": 87,
+      "digest": "a78c0f67eb1932c1113e55d77298c0cfd0772cd8454c11f364434b933cf7bf38"
+    },
+    "PhaseEvaluation": {
+      "count": 87,
+      "digest": "26af6889081353dc6cc9e96e19f96aaec7c0669e28e8793f286e4b9b3070ae35"
+    },
+    "FinalReport": {
+      "count": 60,
+      "digest": "c2d1f12396ad4ae1b069b54aba85623196dd5a9585a8045fec057228c3a71acf"
+    },
+    "DefenseConfirmation": {
+      "count": 60,
+      "digest": "74f1b58d2c4d9904c6ac44f678aae25d4a3941b0611e502032407b0b27b57701"
+    },
+    "DefenseEligibility": {
+      "count": 60,
+      "digest": "cd7ac0c1ac3d28f0934f6edd2d21dbf4f01ccfc89db692cddfc76ee279f5f6b4"
+    },
+    "DefermentRequest": {
+      "count": 16,
+      "digest": "0dd1df955212742aa8a3f7d5b3b18275b0aedf62f8d85713b74339a28aa4c75d"
+    },
+    "ReviewerAssignment": {
+      "count": 60,
+      "digest": "178482d1dc4d008459e0f7095bfe5310fa1ca1525b6fb798401103de668bac33"
+    },
+    "Room": {
+      "count": 3,
+      "digest": "f3735923d9bdf33bed1ab99ada4abddc59fdd7b0b2f362859909e1e0e4c0f630"
+    },
+    "DefenseCommittee": {
+      "count": 3,
+      "digest": "0dc3462fa9d7fb8bf9e65f5f79ff21b4a86ee7749c7034103ac4d7fc573f7498"
+    },
+    "DefenseCommitteeAssignment": {
+      "count": 60,
+      "digest": "97c20a62e27dc66e9320a0f5fcbe165866ad3f25e4ab81056131ffc59eedf7ec"
+    },
+    "CommitteeMember": {
+      "count": 12,
+      "digest": "048f1dc7a59ea59ed73b97f61c7a8c212452f3c3419b06e1c765a97fbc535e79"
+    },
+    "DefenseSession": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "CommitteeStudent": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "DefenseMinutes": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "RubricCriteria": {
+      "count": 10,
+      "digest": "b0b279524885641eb311b4fb836ae66c2c7cf0cde778360a5e2859ac9d914d74"
+    },
+    "ScoreEntry": {
+      "count": 60,
+      "digest": "2d48becd460556f3ec0c407513b220c217aa6044ff4123128408850bb7a4d645"
+    },
+    "ScoreDetail": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "FinalResult": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "ExportJob": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "AcademicTermGrant": {
+      "count": 4,
+      "digest": "f57f1e2ee857167e9cd07c451915853e616b3149104538f46b0f6926d02a9660"
+    },
+    "GrantDepartment": {
+      "count": 4,
+      "digest": "8ce104a5c07adf8ad94d12c2ccded9302722ae048ad5644fb46ed53234aafedb"
+    },
+    "ResearchAreaWorkflow": {
+      "count": 5,
+      "digest": "716bd5db57e5a3684c353c6f047377e4b17595be0c046b168b83fe9e6931a9f5"
+    },
+    "TermWorkflow": {
+      "count": 2,
+      "digest": "08a39f85b5fae04c816ad546181d1bf95b93412097794cc6faa6e5a7ce94ac99"
+    },
+    "TermPhaseWorkflow": {
+      "count": 6,
+      "digest": "01379b3d3f08c722a4ee1d1b04f237b4ac0cf99081fd8709f1a1b0882da22786"
+    },
+    "AssignmentPlanWorkflow": {
+      "count": 2,
+      "digest": "b2848715e4edba6950123d4265ac84a820683e24e708f82682ea154b7e281fb9"
+    },
+    "AssignmentChange": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "TopicWorkflow": {
+      "count": 87,
+      "digest": "4bf2b771b88798a5d32a941dc05c043a58ea008c9552539644b2e9c1c070b2a5"
+    },
+    "ProposalWorkflow": {
+      "count": 87,
+      "digest": "d5344f83ab96a84b4d2f3cb37a43aff2a6b253bc0af2d6ae49095a1f7c9f50f5"
+    },
+    "ProposalVersionWorkflow": {
+      "count": 133,
+      "digest": "b4596c251907c7f2e5be8962c6a24796613b753b4a4efb11d73a4483d8277c48"
+    },
+    "ReviewGroupWorkflow": {
+      "count": 6,
+      "digest": "e9727ac08a1334b321fd52bd0e02bdc4e74fa3d78552b45047e247585104e115"
+    },
+    "ReviewMembershipHistory": {
+      "count": 36,
+      "digest": "cb94d6232e04194cf812d42a78f364a3b0a673c7516eae1ddec78bc72505b9b5"
+    },
+    "ProposalReviewWorkflow": {
+      "count": 133,
+      "digest": "3b905aae36b6028257e47b74b3aaf2c61bf11c63fc1549ec7789d04bba8ad105"
+    },
+    "ProposalReviewDecision": {
+      "count": 133,
+      "digest": "387d3268c34b908a62668d871f82590519847e19c2df25a9e539fcb5da52b296"
+    },
+    "ReviewComment": {
+      "count": 133,
+      "digest": "7ce775c1d6ead0951c0e2d12db3e8d3509fe802666f60c33004ae9868ac373f4"
+    },
+    "DossierWorkflow": {
+      "count": 87,
+      "digest": "9cc657216e0ed1596755ce1cc985d737d014b3cc27eaf5e46bf4511d47880506"
+    },
+    "DossierFinalization": {
+      "count": 87,
+      "digest": "0e1dad21d8718ff81d4e3ffbc9175ca5d0499ac36e6a12355bdcfde9e31d60b7"
+    },
+    "DossierReceipt": {
+      "count": 87,
+      "digest": "7c596181ef6f84c87a34ea0de6139d94ce6f3511289a36e33ca2eb05ba86c7e8"
+    },
+    "DossierHistory": {
+      "count": 261,
+      "digest": "92d6c99f651d2c75a0a3a2172c1444bb4f066872aea84277f6f053b3ed8caa20"
+    },
+    "GuidancePlanWorkflow": {
+      "count": 87,
+      "digest": "c68ea567ccf8f054f2c855e392945240304332eb025a064dac40e2a54326aad7"
+    },
+    "PlanHistory": {
+      "count": 103,
+      "digest": "c7745252440b2aabadbf732f64f3a2c823aa3c4d1c99271ba97442b01a5a26aa"
+    },
+    "GuidancePeriod": {
+      "count": 20,
+      "digest": "a468da813e80b055e07de24ad4292682cea12f7d82a8158c2f05841645335dfa"
+    },
+    "PeriodRequiredStudent": {
+      "count": 890,
+      "digest": "75bac6feae9578c3612ba0ccfa02d0d712ca0c7945d93ef3382d62be7ac989ac"
+    },
+    "WeeklyReportObligation": {
+      "count": 890,
+      "digest": "0b5d840e4ab2f2131c1448492e7db7c68400248da91672c4f6e003131d0dc42d"
+    },
+    "TaskWorkflow": {
+      "count": 890,
+      "digest": "214c3d43eae249c849a42bb395cdeee978a3fe48dcd6d70fc75c5233f5a92b83"
+    },
+    "TaskProgressEvent": {
+      "count": 877,
+      "digest": "5aecd02aa7bf012bd638e01d74f532bb7cb2ad22bed6c6bd0ccc706b63acc102"
+    },
+    "TaskHistory": {
+      "count": 2669,
+      "digest": "85033e24311a901b35c87f969b13bbcc2d9db7904813ffd1447fea979e082af2"
+    },
+    "SubmissionWorkflow": {
+      "count": 890,
+      "digest": "86a9136d9749d22302931536766ef29709e74a3e11b1294bae86733d8c07ca95"
+    },
+    "ProgressReview": {
+      "count": 889,
+      "digest": "e09ef3aaa56f50ee76649539c3bb96eb43f8ae072f4f8f9ff983baca55234c75"
+    },
+    "GuidanceReopen": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "FileAsset": {
+      "count": 2020,
+      "digest": "b51621bbf1abb1be9fa3537662e7b52ddb8bee09d1d5d3b90d9edb8f8eb52f09"
+    },
+    "FinalReportVersion": {
+      "count": 60,
+      "digest": "2c258b82de73cc1c7980337ebfe82026e0d7546048df0563daeea12bb23d1732"
+    },
+    "GuidanceSubmissionUpload": {
+      "count": 1873,
+      "digest": "5b7fc3f7d5d6f213a27a59107a7520dd9cdf187cbcbd2ef2bb23df8594eb0821"
+    },
+    "DossierStudentProfile": {
+      "count": 87,
+      "digest": "c5dd90125d098f192329f7caa67056d18f4e0f7dc34f5faaa8fa227bba1b429c"
+    },
+    "DossierPdfContent": {
+      "count": 87,
+      "digest": "49edee3533729459023456648a62b3c8f65f1f8ec27c4b4d37cb5cd902ac93ad"
+    },
+    "SubmissionAsset": {
+      "count": 1873,
+      "digest": "15907efb83571a4b54f3ce4e9a3ecada32c2806100490b05a047d9c5ef8e2859"
+    },
+    "MeetingWorkflow": {
+      "count": 87,
+      "digest": "d8dddb600c038b9e8e96b976990edcf017498b0ab0523a788960a55e996a9f3a"
+    },
+    "MeetingHistory": {
+      "count": 87,
+      "digest": "f95adfdc8918f212d4361eedf7daf3858f1d30ad3abe928e912964ec42e01757"
+    },
+    "EvaluationWorkflow": {
+      "count": 87,
+      "digest": "790509c90e91dda631b778955a80a92be2545026f41997f1a2b51d4c98691d58"
+    },
+    "EvaluationEvidence": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "EvaluationHistory": {
+      "count": 87,
+      "digest": "fa42d988347f3e84b1b40f00a5730480f889a051c079edb051d5fbf2380a65e1"
+    },
+    "OutboxEvent": {
+      "count": 0,
+      "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "IdempotencyRecord": {
+      "count": 329,
+      "digest": "4c808215736762f0f420579cfec86037b4d4c664e2243ae6a86faff5b8ca0637"
+    }
+  },
+  "limits": "Completed baseline phases only. The blocked defense producer and concurrent seeding are not proven idempotent by this check."
+}

@@ -1,0 +1,47 @@
+{
+  "result": "PASS",
+  "mockedApi": true,
+  "sharedDatabaseAccess": false,
+  "checks": [
+    {
+      "name": "student sees scoped upload policy, late policy and empty history",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid extension and oversized selection blocked before any API upload",
+      "result": "PASS"
+    },
+    {
+      "name": "multipart boundary/idempotency and real upload progress work; failed source retry keeps staged PDF and user text",
+      "result": "PASS"
+    },
+    {
+      "name": "409 preserves staged files/content; explicit revision refresh commits and resets file pickers",
+      "result": "PASS"
+    },
+    {
+      "name": "history downloads authenticated attachment through API instead of public file URL",
+      "result": "PASS"
+    },
+    {
+      "name": "resubmission appends v2, preserves v1 text/files and displays lateness without completion",
+      "result": "PASS"
+    },
+    {
+      "name": "advisor and faculty inspect/download history with no upload or evaluation controls",
+      "result": "PASS"
+    },
+    {
+      "name": "locked phase hides submission form while preserving readable historical evidence",
+      "result": "PASS"
+    },
+    {
+      "name": "mobile upload controls and history fit 375px viewport",
+      "result": "PASS"
+    },
+    {
+      "name": "scope error hides academic data with no unhandled page error or missing idempotency key",
+      "result": "PASS"
+    }
+  ]
+}

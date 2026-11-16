@@ -225,7 +225,7 @@ describe("UC23 official independent committee rubric grading", () => {
       f.policy.rubric.version = "changed";
     }
     if (kind === "weights") f.policy.rubric.criteria[0].weight = "0.8";
-    if (kind === "precision") f.policy.rubric.rounding.decimalPlaces = 2;
+    if (kind === "precision") f.policy.rubric.rounding.decimalPlaces = 3;
     if (kind === "db-rubric") f.control.rubricMismatch = true;
     if (kind === "inactive-policy")
       f.policy.effectiveUntil = "2029-01-01T00:00:00Z";

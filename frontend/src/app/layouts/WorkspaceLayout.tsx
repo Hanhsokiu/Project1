@@ -65,6 +65,7 @@ import {
 import { authService } from "../../features/auth/services/auth-service";
 import type { DemoDb } from "../../shared/data/types";
 import { termLabel } from "../../shared/data/term-selection";
+import "./utc-registration-shell.css";
 export default function WorkspaceLayout({
   children,
   data,
@@ -121,8 +122,11 @@ function Shell({ children }: { children?: ReactNode }) {
   const cache = useQueryClient();
   const [mobile, setMobile] = useState(false);
   const [collapsed, setCollapsed] = useState(() => {
-    try { return localStorage.getItem("utc-sidebar-collapsed") === "true"; }
-    catch { return false; }
+    try {
+      return localStorage.getItem("utc-sidebar-collapsed") === "true";
+    } catch {
+      return false;
+    }
   });
   const [reset, setReset] = useState(false);
   const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>(
@@ -130,12 +134,18 @@ function Shell({ children }: { children?: ReactNode }) {
   );
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const sidebarRef = useRef<HTMLElement>(null);
+  const mainRef = useRef<HTMLDivElement>(null);
   const closeMobileMenu = useCallback(() => {
     setMobile(false);
+    mainRef.current?.removeAttribute("inert");
     menuButtonRef.current?.focus({ preventScroll: true });
   }, []);
   useEffect(() => {
-    try { localStorage.setItem("utc-sidebar-collapsed", String(collapsed)); } catch { /* Browser storage may be unavailable. */ }
+    try {
+      localStorage.setItem("utc-sidebar-collapsed", String(collapsed));
+    } catch {
+      /* Browser storage may be unavailable. */
+    }
   }, [collapsed]);
   useEffect(() => {
     setMobile(false);
@@ -148,21 +158,52 @@ function Shell({ children }: { children?: ReactNode }) {
   }, [location.pathname]);
   useEffect(() => {
     if (!mobile) return;
+    mainRef.current?.setAttribute("inert", "");
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    sidebarRef.current?.querySelector<HTMLElement>("a,button")?.focus();
+    const focusSidebar = () =>
+      sidebarRef.current?.querySelector<HTMLElement>("a,button")?.focus();
+    const focusFrame = requestAnimationFrame(focusSidebar);
     const close = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeMobileMenu();
       if (event.key === "Tab") {
-        const items = Array.from(sidebarRef.current?.querySelectorAll<HTMLElement>('a[href],button:not(:disabled)') || []).filter(item => item.getClientRects().length);
-        const first = items[0], last = items[items.length - 1];
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
-        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+        const items = Array.from(
+          sidebarRef.current?.querySelectorAll<HTMLElement>(
+            "a[href],button:not(:disabled)",
+          ) || [],
+        ).filter((item) => item.getClientRects().length);
+        const first = items[0],
+          last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last?.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first?.focus();
+        }
       }
     };
     window.addEventListener("keydown", close);
-    return () => { window.removeEventListener("keydown", close); document.body.style.overflow = previousOverflow; };
+    return () => {
+      if (focusFrame !== undefined) cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", close);
+      document.body.style.overflow = previousOverflow;
+      mainRef.current?.removeAttribute("inert");
+    };
   }, [mobile, closeMobileMenu]);
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    const onResize = () => {
+      if (desktop.matches) setMobile(false);
+      // Closing animation must not leave off-screen navigation tabbable.
+      if (desktop.matches || mobile)
+        sidebarRef.current?.removeAttribute("inert");
+      else sidebarRef.current?.setAttribute("inert", "");
+    };
+    onResize();
+    desktop.addEventListener("change", onResize);
+    return () => desktop.removeEventListener("change", onResize);
+  }, [mobile]);
   const routes = navigationRoutes(user, AUTH_API);
   const groups = [...new Set(routes.map((r) => r.group))];
   const active = routeManifest.find((r) =>
@@ -185,7 +226,8 @@ function Shell({ children }: { children?: ReactNode }) {
     if (path.includes("review-group")) return Users;
     if (path.includes("review")) return MessageSquareText;
     if (path.includes("tasks")) return ListChecks;
-    if (path.includes("plan") || path.includes("assignment")) return FolderKanban;
+    if (path.includes("plan") || path.includes("assignment"))
+      return FolderKanban;
     if (path.includes("registration")) return ClipboardList;
     if (path.includes("topic")) return BookOpen;
     return FileText;
@@ -194,13 +236,18 @@ function Shell({ children }: { children?: ReactNode }) {
     !AUTH_API &&
     (import.meta.env.DEV || import.meta.env.VITE_DEMO_MODE === "true");
   return (
-    <div className={`app-shell ${collapsed ? "sidebar-collapsed" : ""}`}>
-      <a className="skip-link" href="#workspace-main">Đi đến nội dung chính</a>
+    <div
+      className={`app-shell ${collapsed ? "sidebar-collapsed" : ""} utc-shell`}
+    >
+      <a className="skip-link" href="#workspace-main">
+        Đi đến nội dung chính
+      </a>
       {mobile && (
         <button
           aria-label="Đóng điều hướng"
           className={`sidebar-shade ${mobile ? "open" : ""}`}
-          onClick={closeMobileMenu} title="Đóng điều hướng"
+          onClick={closeMobileMenu}
+          title="Đóng điều hướng"
         />
       )}
       <aside
@@ -208,14 +255,29 @@ function Shell({ children }: { children?: ReactNode }) {
         id="workspace-navigation"
         className={`sidebar ${mobile ? "open" : ""}`}
         aria-label="Thanh điều hướng"
+        role={mobile ? "dialog" : undefined}
+        aria-modal={mobile ? true : undefined}
       >
-        <Link to="/" className="brand" aria-label="KHOA CNTT – UTC Quản lý đồ án tốt nghiệp — Tổng quan" title="Tổng quan hệ thống">
-          <span className="brand-mark">
-            <GraduationCap size={22} />
-          </span>
-          <div>
-            <strong>KHOA CNTT – UTC</strong>
-            <small>Quản lý đồ án tốt nghiệp</small>
+        <Link to="/" className="brand" title="Tổng quan hệ thống">
+          <img
+            className="utc-seal"
+            src="/brand/utc-seal.png"
+            alt="Logo Trường Đại học Giao thông vận tải"
+            width={58}
+            height={58}
+          />
+          <div className="utc-brand-copy">
+            <strong>
+              TRƯỜNG ĐẠI HỌC
+              <br />
+              GIAO THÔNG VẬN TẢI
+            </strong>
+            <small>
+              University of Transport
+              <br />
+              and Communications
+            </small>
+            <b>UTC</b>
           </div>
         </Link>
         <div className="sidebar-context">
@@ -231,7 +293,8 @@ function Shell({ children }: { children?: ReactNode }) {
               type="button"
               className="icon-btn sidebar-close"
               aria-label="Đóng menu điều hướng"
-              onClick={closeMobileMenu} title="Đóng menu điều hướng"
+              onClick={closeMobileMenu}
+              title="Đóng menu điều hướng"
             >
               <X size={18} />
             </button>
@@ -240,10 +303,11 @@ function Shell({ children }: { children?: ReactNode }) {
         <nav className="sidebar-nav" aria-label="Điều hướng chính">
           {groups.map((group, i) => {
             const expanded =
-              collapsed || (expandedGroups[group] ??
-              (!workflowPage ||
-                group === active?.group ||
-                group === "Không gian làm việc"));
+              collapsed ||
+              (expandedGroups[group] ??
+                (!workflowPage ||
+                  group === active?.group ||
+                  group === "Không gian làm việc"));
             return (
               <div className="nav-group" key={group}>
                 <button
@@ -270,35 +334,36 @@ function Shell({ children }: { children?: ReactNode }) {
                     .map((r) => {
                       const Icon = navigationIcon(r.path);
                       return (
-                      <NavLink
-                        key={r.path}
-                        to={
-                          r.path.startsWith("/topic/") ||
-                          r.path.startsWith("/guidance/")
-                            ? `${r.path}?${new URLSearchParams(termId ? { termId } : {})}`
-                            : r.path
-                        }
-                        end={r.path === "/"}
-                        title={routeTitle(r, user)}
-                        aria-label={routeTitle(r, user)}
-                        onClick={() => {
-                          if (mobile) closeMobileMenu();
-                        }}
-                        className={({ isActive }) =>
-                          `nav-item ${isActive ? "active" : ""}`
-                        }
-                      >
-                        <Icon />
-                        <span>{routeTitle(r, user)}</span>
-                      </NavLink>
-                    ); })}
+                        <NavLink
+                          key={r.path}
+                          to={
+                            r.path.startsWith("/topic/") ||
+                            r.path.startsWith("/guidance/")
+                              ? `${r.path}?${new URLSearchParams(termId ? { termId } : {})}`
+                              : r.path
+                          }
+                          end={r.path === "/"}
+                          title={routeTitle(r, user)}
+                          aria-label={routeTitle(r, user)}
+                          onClick={() => {
+                            if (mobile) closeMobileMenu();
+                          }}
+                          className={({ isActive }) =>
+                            `nav-item ${isActive ? "active" : ""}`
+                          }
+                        >
+                          <Icon />
+                          <span>{routeTitle(r, user)}</span>
+                        </NavLink>
+                      );
+                    })}
                 </div>
               </div>
             );
           })}
         </nav>
         <div className="sidebar-footer flex items-center justify-between">
-          <Link to="/profile" aria-label={`${user.name} ${user.roles.map(r => labels[r]).join(" · ")} — Thông tin cá nhân`} title="Thông tin cá nhân">
+          <Link to="/profile" title="Thông tin cá nhân">
             <Person
               name={user.name}
               sub={user.roles.map((r) => labels[r]).join(" · ")}
@@ -321,11 +386,28 @@ function Shell({ children }: { children?: ReactNode }) {
             <LogOut size={17} />
           </button>
         </div>
-        <button type="button" className="sidebar-collapse" aria-label={collapsed ? "Mở rộng thanh điều hướng" : "Thu gọn thanh điều hướng"} title={collapsed ? "Mở rộng thanh điều hướng" : "Thu gọn thanh điều hướng"} aria-expanded={!collapsed} onClick={() => setCollapsed(value => !value)}>
-          {collapsed ? <PanelLeftOpen size={18} /> : <PanelLeftClose size={18} />}<span>Thu gọn thanh điều hướng</span>
+        <div className="utc-campus-panel" aria-hidden="true" />
+        <button
+          type="button"
+          className="sidebar-collapse"
+          aria-label={
+            collapsed ? "Mở rộng thanh điều hướng" : "Thu gọn thanh điều hướng"
+          }
+          title={
+            collapsed ? "Mở rộng thanh điều hướng" : "Thu gọn thanh điều hướng"
+          }
+          aria-expanded={!collapsed}
+          onClick={() => setCollapsed((value) => !value)}
+        >
+          {collapsed ? (
+            <PanelLeftOpen size={18} />
+          ) : (
+            <PanelLeftClose size={18} />
+          )}
+          <span>Thu gọn thanh điều hướng</span>
         </button>
       </aside>
-      <div className="app-main">
+      <div className="app-main" ref={mainRef}>
         <header className="topbar">
           <button
             ref={menuButtonRef}
@@ -333,15 +415,39 @@ function Shell({ children }: { children?: ReactNode }) {
             aria-label={mobile ? "Đóng menu" : "Mở điều hướng"}
             aria-controls="workspace-navigation"
             aria-expanded={mobile}
-            onClick={() => setMobile((open) => !open)} title={mobile ? "Đóng menu" : "Mở điều hướng"}
+            onClick={() => setMobile((open) => !open)}
+            title={mobile ? "Đóng menu" : "Mở điều hướng"}
           >
             <Menu size={22} />
           </button>
+          {
+            <Link
+              to="/"
+              className="utc-mobile-brand"
+              aria-label="UTC — Tổng quan"
+            >
+              <img src="/brand/utc-seal.png" alt="" width={32} height={32} />
+              <strong>UTC</strong>
+            </Link>
+          }
           <nav className="breadcrumbs" aria-label="Đường dẫn trang">
-            <Link to="/" title="Tổng quan" aria-label="Tổng quan"><Home size={16} /></Link>
+            <Link to="/" title="Tổng quan" aria-label="Tổng quan">
+              <Home size={16} />
+            </Link>
             <ChevronRight size={13} aria-hidden="true" />
-            {active?.path !== "/" && <><span className="breadcrumb-group">{active?.group}</span><ChevronRight className="breadcrumb-group" size={13} aria-hidden="true" /></>}
-            <span aria-current="page">{active ? routeTitle(active, user) : "Trang không tồn tại"}</span>
+            {active?.path !== "/" && (
+              <>
+                <span className="breadcrumb-group">{active?.group}</span>
+                <ChevronRight
+                  className="breadcrumb-group"
+                  size={13}
+                  aria-hidden="true"
+                />
+              </>
+            )}
+            <span aria-current="page">
+              {active ? routeTitle(active, user) : "Trang không tồn tại"}
+            </span>
           </nav>
           <div className="topbar-controls">
             <select
@@ -350,7 +456,9 @@ function Shell({ children }: { children?: ReactNode }) {
               value={termId}
               onChange={(e) => setTermId(e.target.value)}
             >
-              {!termId && <option value="">Chọn đợt trong phạm vi được phép</option>}
+              {!termId && (
+                <option value="">Chọn đợt trong phạm vi được phép</option>
+              )}
               {db.terms
                 .filter(
                   (t) =>
@@ -376,9 +484,8 @@ function Shell({ children }: { children?: ReactNode }) {
             </Link>
             <Link
               to="/profile"
-              aria-label={`${user.name} ${user.roles.map(r => labels[r]).join(" · ")} — Thông tin cá nhân`}
               title="Thông tin cá nhân"
-              className="hidden lg:flex"
+              className="topbar-profile"
             >
               <Person
                 name={user.name}
@@ -387,8 +494,13 @@ function Shell({ children }: { children?: ReactNode }) {
             </Link>
             <Link
               to="/profile"
-              aria-label="Mở hồ sơ"
-              className="avatar lg:hidden" title="Mở hồ sơ"
+              aria-label={`${user.name
+                .split(" ")
+                .slice(-2)
+                .map((s) => s[0])
+                .join("")} — Mở hồ sơ của ${user.name}`}
+              className="avatar topbar-avatar"
+              title="Mở hồ sơ"
             >
               {user.name
                 .split(" ")
@@ -399,12 +511,21 @@ function Shell({ children }: { children?: ReactNode }) {
           </div>
         </header>
         <AcceptanceBanner />
-        <main id="workspace-main" tabIndex={-1} className="page-content" key={`${termId}-${user.id}`}>
+        <main
+          id="workspace-main"
+          tabIndex={-1}
+          className="page-content"
+          key={`${termId}-${user.id}`}
+        >
           {children ?? <Outlet />}
         </main>
       </div>
       {isDemo && (
-        <div className="demo-control" role="region" aria-label="Điều khiển dữ liệu demo">
+        <div
+          className="demo-control"
+          role="region"
+          aria-label="Điều khiển dữ liệu demo"
+        >
           <span>
             <Sparkles size={13} /> DEMO
           </span>

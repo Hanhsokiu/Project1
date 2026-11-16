@@ -75,6 +75,7 @@ describe("UC17 capability check before migration", () => {
     const query = vi
       .fn()
       .mockResolvedValueOnce(columns)
+      .mockResolvedValueOnce([{ready:true}])
       .mockResolvedValueOnce(guards);
     const s = new FinalDefenseSession({
       $queryRaw: query,
@@ -82,6 +83,7 @@ describe("UC17 capability check before migration", () => {
     expect(await s.schemaReady()).toBe(false);
     query
       .mockResolvedValueOnce(columns)
+      .mockResolvedValueOnce([{ready:true}])
       .mockResolvedValueOnce([
         ...guards,
         { name: "final_pdf_asset_immutable" },
@@ -89,7 +91,7 @@ describe("UC17 capability check before migration", () => {
     expect(await s.schemaReady()).toBe(true);
     // Static query contract: a matching trigger name on the wrong relation,
     // function, event or disabled/replica-only trigger must not count.
-    const text = query.mock.calls[1][0].join("");
+    const text = query.mock.calls[2][0].join("");
     expect(text).toContain("pn.nspname='public'");
     expect(text).toContain("NOT t.tgisinternal");
     expect(text).toContain("t.tgenabled IN ('O','A')");

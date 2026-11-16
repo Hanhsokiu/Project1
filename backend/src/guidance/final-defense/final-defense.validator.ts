@@ -32,7 +32,7 @@ export class FinalDefenseValidator {
         body.score / policy.scoreStep -
           Math.round(body.score / policy.scoreStep),
       ) > 1e-7 ||
-      Math.abs(body.score * 10 - Math.round(body.score * 10)) > 1e-7
+      Math.abs(body.score * 100 - Math.round(body.score * 100)) > 1e-7
     )
       groupError(
         400,

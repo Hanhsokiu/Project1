@@ -1,0 +1,294 @@
+{
+  "reportedAt": "2026-11-15T17:57:24.418Z",
+  "timeZone": "Asia/Saigon",
+  "application": "http://127.0.0.1:5173",
+  "dataSource": "Existing authorized test account and real API; no seed or real business mutation",
+  "before": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "file": "registration-before-1440.png",
+      "at": "2026-11-15T17:28:47.003Z",
+      "role": "STUDENT",
+      "route": "/registration",
+      "state": "SUBMITTED; registration open; real API"
+    },
+    {
+      "viewport": {
+        "width": 1280,
+        "height": 900
+      },
+      "file": "registration-before-1280.png",
+      "at": "2026-11-15T17:28:47.232Z",
+      "role": "STUDENT",
+      "route": "/registration",
+      "state": "SUBMITTED; registration open; real API"
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "file": "registration-before-1024.png",
+      "at": "2026-11-15T17:28:47.513Z",
+      "role": "STUDENT",
+      "route": "/registration",
+      "state": "SUBMITTED; registration open; real API"
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "file": "registration-before-768.png",
+      "at": "2026-11-15T17:28:47.772Z",
+      "role": "STUDENT",
+      "route": "/registration",
+      "state": "SUBMITTED; registration open; real API"
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "file": "registration-before-390.png",
+      "at": "2026-11-15T17:28:47.958Z",
+      "role": "STUDENT",
+      "route": "/registration",
+      "state": "SUBMITTED; registration open; real API"
+    },
+    {
+      "viewport": {
+        "width": 375,
+        "height": 844
+      },
+      "file": "registration-before-375.png",
+      "at": "2026-11-15T17:28:48.134Z",
+      "role": "STUDENT",
+      "route": "/registration",
+      "state": "SUBMITTED; registration open; real API"
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "file": "registration-before-320.png",
+      "at": "2026-11-15T17:28:48.250Z",
+      "role": "STUDENT",
+      "route": "/registration",
+      "state": "SUBMITTED; registration open; real API"
+    }
+  ],
+  "after": {
+    "shots": [
+      {
+        "viewport": {
+          "width": 1440,
+          "height": 900
+        },
+        "file": "registration-after-1440.png",
+        "at": "2026-11-15T17:56:29.109Z",
+        "role": "STUDENT",
+        "route": "/registration",
+        "overflow": false,
+        "axe": {
+          "violations": [],
+          "incomplete": []
+        },
+        "axeAt": "2026-11-15T17:48:03.574Z",
+        "state": "SUBMITTED; registration open; mobile contact/direction collapsed, preferences expanded",
+        "outside": []
+      },
+      {
+        "viewport": {
+          "width": 1280,
+          "height": 900
+        },
+        "file": "registration-after-1280.png",
+        "at": "2026-11-15T17:56:31.223Z",
+        "role": "STUDENT",
+        "route": "/registration",
+        "overflow": false,
+        "axe": {
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "targets": [
+                [
+                  "a[title=\"Báo cáo cuối kỳ\"] > span"
+                ]
+              ]
+            }
+          ]
+        },
+        "axeAt": "2026-11-15T17:48:07.764Z",
+        "state": "SUBMITTED; registration open; mobile contact/direction collapsed, preferences expanded",
+        "outside": []
+      },
+      {
+        "viewport": {
+          "width": 1024,
+          "height": 900
+        },
+        "file": "registration-after-1024.png",
+        "at": "2026-11-15T17:56:33.342Z",
+        "role": "STUDENT",
+        "route": "/registration",
+        "overflow": false,
+        "axe": {
+          "violations": [],
+          "incomplete": []
+        },
+        "axeAt": "2026-11-15T17:48:10.905Z",
+        "state": "SUBMITTED; registration open; mobile contact/direction collapsed, preferences expanded",
+        "outside": []
+      },
+      {
+        "viewport": {
+          "width": 768,
+          "height": 1024
+        },
+        "file": "registration-after-768.png",
+        "at": "2026-11-15T17:56:36.426Z",
+        "role": "STUDENT",
+        "route": "/registration",
+        "overflow": false,
+        "axe": {
+          "violations": [],
+          "incomplete": []
+        },
+        "axeAt": "2026-11-15T17:48:18.053Z",
+        "state": "SUBMITTED; registration open; mobile contact/direction collapsed, preferences expanded",
+        "outside": []
+      },
+      {
+        "viewport": {
+          "width": 390,
+          "height": 844
+        },
+        "file": "registration-after-390.png",
+        "at": "2026-11-15T17:56:38.490Z",
+        "role": "STUDENT",
+        "route": "/registration",
+        "overflow": false,
+        "axe": {
+          "violations": [],
+          "incomplete": []
+        },
+        "axeAt": "2026-11-15T17:48:22.155Z",
+        "state": "SUBMITTED; registration open; mobile contact/direction collapsed, preferences expanded",
+        "outside": []
+      },
+      {
+        "viewport": {
+          "width": 375,
+          "height": 844
+        },
+        "file": "registration-after-375.png",
+        "at": "2026-11-15T17:56:40.561Z",
+        "role": "STUDENT",
+        "route": "/registration",
+        "overflow": false,
+        "axe": {
+          "violations": [],
+          "incomplete": []
+        },
+        "axeAt": "2026-11-15T17:48:24.235Z",
+        "state": "SUBMITTED; registration open; mobile contact/direction collapsed, preferences expanded",
+        "outside": []
+      },
+      {
+        "viewport": {
+          "width": 320,
+          "height": 844
+        },
+        "file": "registration-after-320.png",
+        "at": "2026-11-15T17:56:42.628Z",
+        "role": "STUDENT",
+        "route": "/registration",
+        "overflow": false,
+        "axe": {
+          "violations": [],
+          "incomplete": []
+        },
+        "axeAt": "2026-11-15T17:48:28.312Z",
+        "state": "SUBMITTED; registration open; mobile contact/direction collapsed, preferences expanded",
+        "outside": []
+      }
+    ],
+    "visual": {
+      "primaryBackgroundImage": "none",
+      "cardShadow": "none",
+      "cardRadius": "12px",
+      "buttonRadius": "8px",
+      "headingWeight": "600",
+      "documentAnimations": 0
+    },
+    "reflow": {
+      "method": "720 CSS px viewport simulates layout width of 1440px at 200%; not native browser zoom",
+      "overflow": false
+    },
+    "focus": {
+      "top": 400.25,
+      "bottom": 445.85000228881836,
+      "headerBottom": 112.80000305175781,
+      "viewport": 450,
+      "visible": true
+    }
+  },
+  "interactions": {
+    "checks": [
+      "Invalid email reveals collapsed contact section; client validation blocks API mutation",
+      "Drawer opens by Enter, focuses inside, Escape restores focus and marks it inert",
+      "Real available lecturer can be selected and removed locally; original two preferences restored",
+      "Real reorder, cancellation of in-flight motion and reduced motion checked; original order restored",
+      "Optional note opens with Enter and closes without losing mounted field",
+      "Submit dialog opens, focuses inside, Escape cancels and restores focus"
+    ],
+    "writes": []
+  },
+  "focusedSidebarContrast": {
+    "violations": [],
+    "incomplete": []
+  },
+  "sharedComponentCoverage": {
+    "isolatedUiGroups": 22,
+    "isolatedWorkflowGroups": 10,
+    "isolatedRegistrationGroups": 7,
+    "realFacultyTable": {
+      "status": "blocked",
+      "detail": "First login navigation timed out during API outage; retry reached '/', but the /terms menu was not observed within 30 seconds. No table content is claimed as inspected."
+    }
+  },
+  "environment": {
+    "observedErrors": [
+      {
+        "path": "/api/registrations/term/:termId/me",
+        "error": "net::ERR_CONNECTION_REFUSED",
+        "count": 2
+      },
+      {
+        "path": "/api/auth/me",
+        "error": "net::ERR_CONNECTION_REFUSED",
+        "count": 2
+      }
+    ],
+    "laterProbe": {
+      "port3000HttpStatus": 404,
+      "port5173HttpStatus": 200,
+      "note": "Root HTTP probe only; not an authenticated API health certification."
+    },
+    "registrationRecovered": true,
+    "backendSourceChanged": false
+  },
+  "limitations": [
+    "No physical mobile virtual-keyboard or native browser zoom test; viewport/reflow simulations are explicitly labelled.",
+    "Axe incomplete for partially clipped sidebar link was separately checked after scrolling into view.",
+    "Real data writes were not performed; write/pending/failure/lock cases verified only through existing isolated browser fixtures.",
+    "No claim of all routes/all roles/all API states being verified."
+  ]
+}

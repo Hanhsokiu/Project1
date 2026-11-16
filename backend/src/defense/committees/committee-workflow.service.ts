@@ -539,7 +539,9 @@ export class CommitteeWorkflowService {
   }
   // Contract reader for future UC20/UC21 commands; caller supplies its transaction.
   workspaceInSession(s: CommitteeSession, actor: string, termId: string) {
-    return this.load(s, actor, termId).then((d) => d.workspace);
+    const load = () => this.load(s, actor, termId).then((d) => d.workspace);
+    // Downstream UC20–25 do not write UC19 sources. Own commands still call load fresh.
+    return s.upstreamReads?.read("UC19", actor, termId, load) ?? load();
   }
   // This does not perform reviewer assignment or scheduling.
   async effectiveInSession(
@@ -550,7 +552,7 @@ export class CommitteeWorkflowService {
     expectedRevision: number,
     evidenceHash: string,
   ) {
-    const { workspace } = await this.load(s, actor, termId),
+    const workspace = await this.workspaceInSession(s, actor, termId),
       c = workspace.committees.find((c) => c.id === id);
     if (!c) return notFound();
     this.review.revision(c.revision, expectedRevision);

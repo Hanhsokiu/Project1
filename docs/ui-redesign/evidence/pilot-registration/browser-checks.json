@@ -1,0 +1,333 @@
+{
+  "environment": {
+    "app": "http://127.0.0.1:5173",
+    "route": "/registration",
+    "role": "STUDENT",
+    "fontLoaded": true,
+    "baselineData": "existing mau18 sample records, no seed or fixtures"
+  },
+  "screens": [
+    {
+      "phase": "before",
+      "path": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:36:30.938Z",
+      "screenshot": "before-1440.png",
+      "title": "Đăng ký hướng đồ án & GVHD",
+      "scrollWidth": 1425,
+      "canSubmit": true,
+      "notices": [
+        "[MẪU 1–8] 01 · Đăng ký nguyện vọng · [MẪU 1–8] Chính quyThời gian đăng ký: 6/9/2026 → 19/11/2026. Cổng đăng ký đang mở. Quota không được giữ chỗ khi đăng ký."
+      ],
+      "preferenceCount": 2
+    },
+    {
+      "phase": "before",
+      "path": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:36:31.562Z",
+      "screenshot": "before-390.png",
+      "title": "Đăng ký hướng đồ án & GVHD",
+      "scrollWidth": 390,
+      "canSubmit": true,
+      "notices": [
+        "[MẪU 1–8] 01 · Đăng ký nguyện vọng · [MẪU 1–8] Chính quyThời gian đăng ký: 6/9/2026 → 19/11/2026. Cổng đăng ký đang mở. Quota không được giữ chỗ khi đăng ký."
+      ],
+      "preferenceCount": 2
+    },
+    {
+      "phase": "after-final",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:51:05.037Z",
+      "screenshot": "after-1440.png",
+      "scrollWidth": 1425,
+      "clientWidth": 1425,
+      "prefs": 2,
+      "canSubmit": true
+    },
+    {
+      "phase": "after-final",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:51:05.922Z",
+      "screenshot": "after-390.png",
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "prefs": 2,
+      "canSubmit": true
+    },
+    {
+      "phase": "after-final",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T13:51:06.662Z",
+      "screenshot": "after-320.png",
+      "scrollWidth": 320,
+      "clientWidth": 320,
+      "prefs": 2,
+      "canSubmit": true
+    },
+    {
+      "phase": "after-final",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T13:51:07.616Z",
+      "screenshot": "after-768.png",
+      "scrollWidth": 753,
+      "clientWidth": 753,
+      "prefs": 2,
+      "canSubmit": true
+    }
+  ],
+  "dialogScreens": [
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:54:12.118Z",
+      "screenshot": "confirm-1440.png",
+      "state": "confirmation open; no submit"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:54:13.244Z",
+      "screenshot": "confirm-390.png",
+      "state": "confirmation open; no submit"
+    }
+  ],
+  "readOnly": {
+    "route": "/registration",
+    "role": "STUDENT",
+    "term": "proposal",
+    "reason": "Đã hết hạn đăng ký.",
+    "disabledFields": [
+      true,
+      true,
+      true
+    ],
+    "submitDisabled": true,
+    "at": "2026-11-15T13:46:07.384Z"
+  },
+  "finalInteractions": {
+    "at": "2026-11-15T13:51:53.396Z",
+    "addRemoveReorder": true,
+    "directionResets": true,
+    "restoredOriginal": true,
+    "nativeInvalidEmail": true,
+    "reorderFocus": {
+      "name": "Nguyện vọng 2: Nguyễn Hoài An",
+      "visible": true,
+      "outline": "1.6px"
+    },
+    "dialogs": [
+      {
+        "width": 1440,
+        "tab": true,
+        "backtab": true,
+        "restored": true,
+        "axe": {
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "nodes": [
+                [
+                  ".sidebar-footer > a[title=\"Thông tin cá nhân\"][href$=\"profile\"] > .person > .avatar[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".topbar-profile > .person > .avatar[aria-hidden=\"true\"]"
+                ],
+                [
+                  ".topbar-profile > .person > div > strong"
+                ],
+                [
+                  ".modal-body > .muted"
+                ]
+              ]
+            }
+          ]
+        },
+        "at": "2026-11-15T13:51:51.810Z"
+      },
+      {
+        "width": 390,
+        "tab": true,
+        "backtab": true,
+        "restored": true,
+        "axe": {
+          "violations": [],
+          "incomplete": [
+            {
+              "id": "color-contrast",
+              "nodes": [
+                [
+                  ".topbar-avatar"
+                ],
+                [
+                  ".modal-body > .muted"
+                ]
+              ]
+            }
+          ]
+        },
+        "at": "2026-11-15T13:51:52.962Z"
+      }
+    ],
+    "reducedMotion": {
+      "animation": "none",
+      "transition": "1e-05s"
+    },
+    "forcedColors": {
+      "border": "rgb(55, 0, 110)",
+      "outline": "solid",
+      "outlineWidth": "1.6px"
+    },
+    "mutations": []
+  },
+  "finalAxe": [
+    {
+      "width": 1440,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              ".sidebar-footer > a[title=\"Thông tin cá nhân\"][href$=\"profile\"] > .person > .avatar[aria-hidden=\"true\"]"
+            ],
+            [
+              ".topbar-profile > .person > .avatar[aria-hidden=\"true\"]"
+            ],
+            [
+              ".topbar-profile > .person > div > strong"
+            ]
+          ]
+        }
+      ],
+      "passes": 31
+    },
+    {
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "nodes": [
+            [
+              "span[aria-current=\"page\"]"
+            ],
+            [
+              ".topbar-avatar"
+            ]
+          ]
+        }
+      ],
+      "passes": 30
+    }
+  ],
+  "tabletAxe": {
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "nodes": [
+          [
+            ".sidebar-footer > a[title=\"Thông tin cá nhân\"][href$=\"profile\"] > .person > .avatar[aria-hidden=\"true\"]"
+          ],
+          [
+            ".topbar-avatar"
+          ]
+        ]
+      }
+    ],
+    "passes": 29
+  },
+  "contrast": {
+    "samples": [
+      {
+        "selector": ".registration-pilot .btn-primary",
+        "text": "rgb(255, 255, 255)",
+        "background": "rgb(38, 93, 120)",
+        "contrast": 7.19
+      },
+      {
+        "selector": ".registration-pilot .notice",
+        "text": "rgb(37, 86, 111)",
+        "background": "rgb(237, 243, 247)",
+        "contrast": 7.11
+      },
+      {
+        "selector": ".registration-pilot input",
+        "text": "rgb(29, 44, 59)",
+        "background": "rgb(255, 255, 255)",
+        "contrast": 14.23,
+        "borderContrast": 7.19
+      },
+      {
+        "selector": ".registration-pilot .registration-hint",
+        "text": "rgb(82, 99, 115)",
+        "background": "rgb(255, 255, 255)",
+        "contrast": 6.19
+      }
+    ],
+    "modal": {
+      "text": "rgb(82, 99, 115)",
+      "background": "rgb(255, 255, 255)",
+      "opacity": "1"
+    }
+  },
+  "realApi": {
+    "path": "/api/registrations/term/cf40d4f4-6c49-490a-a361-4e2719ee40b2/me",
+    "status": 200,
+    "at": "2026-11-15T13:54:11.337Z"
+  },
+  "events": [
+    {
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/src/features/registration/pages/StudentRegistrationPage.tsx",
+      "at": "2026-11-15T13:39:04.427Z"
+    },
+    {
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/src/features/registration/pages/StudentRegistrationPage.tsx",
+      "at": "2026-11-15T13:39:04.427Z"
+    }
+  ]
+}

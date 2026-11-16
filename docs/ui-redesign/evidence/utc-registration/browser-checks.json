@@ -1,0 +1,266 @@
+{
+  "at": "2026-11-15T15:13:32.729Z",
+  "app": "http://127.0.0.1:5173",
+  "realApi": true,
+  "apiWritesPerformed": false,
+  "screens": [
+    {
+      "phase": "before",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T14:58:16.013Z",
+      "file": "before-1440.png"
+    },
+    {
+      "phase": "before",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "at": "2026-11-15T14:58:16.702Z",
+      "file": "before-1024.png"
+    },
+    {
+      "phase": "before",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T14:58:17.325Z",
+      "file": "before-768.png"
+    },
+    {
+      "phase": "before",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T14:58:17.954Z",
+      "file": "before-390.png"
+    },
+    {
+      "phase": "before",
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "at": "2026-11-15T14:58:18.507Z",
+      "file": "before-320.png"
+    }
+  ],
+  "events": [],
+  "after": [
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "state": "SUBMITTED, canWrite=true",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T15:13:30.516Z",
+      "overflow": false,
+      "font": true,
+      "sidebarRight": 248,
+      "mainLeft": 248,
+      "smallTargets": [],
+      "file": "after-1440.png",
+      "viewportFile": "viewport-1440.png"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "state": "SUBMITTED, canWrite=true",
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "at": "2026-11-15T15:13:31.149Z",
+      "overflow": false,
+      "font": true,
+      "sidebarRight": 248,
+      "mainLeft": 248,
+      "smallTargets": [],
+      "file": "after-1024.png",
+      "viewportFile": "viewport-1024.png"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "state": "SUBMITTED, canWrite=true",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T15:13:31.720Z",
+      "overflow": false,
+      "font": true,
+      "sidebarRight": 0,
+      "mainLeft": 0,
+      "smallTargets": [],
+      "file": "after-768.png",
+      "viewportFile": "viewport-768.png"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "state": "SUBMITTED, canWrite=true",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T15:13:32.240Z",
+      "overflow": false,
+      "font": true,
+      "sidebarRight": 0,
+      "mainLeft": 0,
+      "smallTargets": [],
+      "file": "after-390.png",
+      "viewportFile": "viewport-390.png"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "state": "SUBMITTED, canWrite=true",
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "at": "2026-11-15T15:13:32.707Z",
+      "overflow": false,
+      "font": true,
+      "sidebarRight": 0,
+      "mainLeft": 0,
+      "smallTargets": [],
+      "file": "after-320.png",
+      "viewportFile": "viewport-320.png"
+    }
+  ],
+  "interactions": [
+    "select lecturer from real API list; max three hides add",
+    "maximum preference limit",
+    "keyboard reorder",
+    "focus follows reordered row",
+    "remove restores original preferences",
+    "invalid email feedback",
+    "invalid form performs no API writes",
+    "submit dialog receives focus",
+    "Escape closes confirmation without submitting",
+    "confirmation restores focus"
+  ],
+  "keyboard": [
+    "mobile navigation is modal dialog",
+    "background inert while drawer open",
+    "drawer receives focus",
+    "drawer Shift+Tab wraps",
+    "drawer Tab wraps",
+    "drawer Escape restores toggle focus",
+    "background released after close",
+    "reduced motion disables drawer transition",
+    "resize to desktop clears modal inert state"
+  ],
+  "axe": [
+    {
+      "width": 1440,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 1024,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 768,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 390,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    },
+    {
+      "width": 320,
+      "violations": [],
+      "incomplete": [
+        "color-contrast"
+      ]
+    }
+  ],
+  "scope": {
+    "route": "/profile",
+    "utcApplied": false,
+    "sidebarBackground": "rgb(255, 255, 255)",
+    "utcToken": "",
+    "heading": "Thông tin cá nhân"
+  },
+  "moreInteractions": [
+    "invalid phone rejected before HTTP",
+    "changing direction clears preferences",
+    "adding lecturer requires direction",
+    "unsaved local edits preserve saved status",
+    "desktop sidebar collapses to 80px",
+    "desktop sidebar expands to 248px",
+    "all live interaction checks made no API writes"
+  ],
+  "contrast": [
+    {
+      "name": "heading",
+      "fg": "#0d1747",
+      "bg": "#ffffff",
+      "ratio": 17.06
+    },
+    {
+      "name": "metadata",
+      "fg": "#60738a",
+      "bg": "#ffffff",
+      "ratio": 4.86
+    },
+    {
+      "name": "control border",
+      "fg": "#7b91ad",
+      "bg": "#ffffff",
+      "ratio": 3.23
+    },
+    {
+      "name": "primary label",
+      "fg": "#ffffff",
+      "bg": "#075095",
+      "ratio": 8.11
+    },
+    {
+      "name": "section number",
+      "fg": "#ffffff",
+      "bg": "#075095",
+      "ratio": 8.11
+    },
+    {
+      "name": "submitted",
+      "fg": "#12652e",
+      "bg": "#ddf6e4",
+      "ratio": 6.28
+    }
+  ],
+  "consoleErrors": []
+}

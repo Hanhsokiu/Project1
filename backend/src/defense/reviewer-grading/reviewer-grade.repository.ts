@@ -16,7 +16,7 @@ export class ReviewerGradeSession extends ScheduleSession {
       UNION ALL SELECT tgname::text FROM pg_trigger WHERE tgenabled IN ('O','A') AND ((tgrelid='public."SCORE_ENTRY"'::regclass AND tgname IN ('rg_score_guard','rg_commit_guard')) OR (tgrelid='public."SCORE_DETAIL"'::regclass AND tgname='rg_detail_guard'))
       UNION ALL SELECT 'rg_score_unique' WHERE EXISTS(SELECT 1 FROM pg_constraint k WHERE k.conrelid='public."SCORE_ENTRY"'::regclass AND k.contype='u' AND k.convalidated AND ARRAY(SELECT a.attname::text FROM unnest(k.conkey) WITH ORDINALITY c(num,ord) JOIN pg_attribute a ON a.attrelid=k.conrelid AND a.attnum=c.num ORDER BY c.ord)=ARRAY['proposal_id','scorer_id','role'])
       UNION ALL SELECT 'rg_detail_unique' WHERE EXISTS(SELECT 1 FROM pg_constraint k WHERE k.conrelid='public."SCORE_DETAIL"'::regclass AND k.contype='u' AND k.convalidated AND ARRAY(SELECT a.attname::text FROM unnest(k.conkey) WITH ORDINALITY c(num,ord) JOIN pg_attribute a ON a.attrelid=k.conrelid AND a.attnum=c.num ORDER BY c.ord)=ARRAY['score_entry_id','rubric_criteria_id'])
-      UNION ALL SELECT 'rg_decimal_storage' WHERE (SELECT count(*) FROM information_schema.columns WHERE table_schema='public' AND (table_name,column_name) IN (('SCORE_ENTRY','total_score'),('SCORE_DETAIL','score')) AND numeric_precision=4 AND numeric_scale=1)=2`;
+      UNION ALL SELECT 'rg_decimal_storage' WHERE (SELECT count(*) FROM information_schema.columns WHERE table_schema='public' AND (table_name,column_name) IN (('SCORE_ENTRY','total_score'),('SCORE_DETAIL','score')) AND numeric_precision=5 AND numeric_scale=2)=2`;
     return new Set(guards.map((g) => g.name)).size === 7;
   }
   rgPolicy(termId: string) {

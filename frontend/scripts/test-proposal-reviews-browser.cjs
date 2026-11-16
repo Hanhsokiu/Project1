@@ -363,7 +363,7 @@ async function main() {
     pass('mobile detail has no horizontal page overflow');
     deny = true;
     await page.goto(origin + '/topic/reviews/r1');
-    await expect(page.getByRole('alert').first()).toContainText(
+    await expect(page.getByRole('alert').filter({ hasText: 'Không tìm thấy hồ sơ' })).toContainText(
       'Không tìm thấy hồ sơ',
     );
     await expect(page.getByText('Mục tiêu demo', { exact: true })).toHaveCount(

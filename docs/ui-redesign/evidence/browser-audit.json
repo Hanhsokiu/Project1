@@ -1,0 +1,3420 @@
+{
+  "auditedAt": "2026-11-15",
+  "baseUrl": "http://127.0.0.1:5173",
+  "method": "Playwright MCP; API thật, đa số chuyển route bằng history/popstate; không giả response.",
+  "visits": [
+    {
+      "evidenceId": "E001",
+      "routeId": "R26",
+      "id": "dashboard",
+      "role": "STUDENT",
+      "path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:37:22.778Z",
+      "screenshot": "student-dashboard-1440.png",
+      "loading": true,
+      "settled": false,
+      "scrollWidth": 1440,
+      "actualPath": "/",
+      "actor": "STUDENT",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E002",
+      "routeId": "R26",
+      "id": "dashboard",
+      "role": "LECTURER",
+      "path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:37:41.280Z",
+      "screenshot": "lecturer-dashboard-1440.png",
+      "loading": true,
+      "settled": false,
+      "scrollWidth": 1440,
+      "actualPath": "/",
+      "actor": "GV xét duyệt",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E003",
+      "routeId": "R34",
+      "id": "terms",
+      "role": "FACULTY",
+      "path": "/terms",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:37:59.878Z",
+      "screenshot": "faculty-terms-1440.png",
+      "loading": true,
+      "settled": false,
+      "scrollWidth": 1440,
+      "actualPath": "/terms",
+      "actor": "FACULTY",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E004",
+      "routeId": "R26",
+      "id": "dashboard",
+      "role": "STUDENT",
+      "path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:09.701Z",
+      "screenshot": "student-dashboard-1440-4.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E005",
+      "routeId": "R26",
+      "id": "dashboard",
+      "role": "LECTURER",
+      "path": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:10.058Z",
+      "screenshot": "lecturer-dashboard-1440-5.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/",
+      "actor": "GV xét duyệt",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E006",
+      "routeId": "R34",
+      "id": "terms",
+      "role": "FACULTY",
+      "path": "/terms",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:10.431Z",
+      "screenshot": "faculty-terms-1440-6.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/terms",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E007",
+      "routeId": "R39",
+      "id": "registration",
+      "role": "STUDENT",
+      "path": "/registration?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:21.503Z",
+      "screenshot": "student-registration-1440-7.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/registration",
+      "actor": "STUDENT",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E008",
+      "routeId": "R10",
+      "id": "tasks",
+      "role": "STUDENT",
+      "path": "/guidance/tasks?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:21.733Z",
+      "screenshot": "student-tasks-1440-8.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/guidance/tasks",
+      "actor": "STUDENT",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E009",
+      "routeId": "R02",
+      "id": "review",
+      "role": "LECTURER",
+      "path": "/guidance/review?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:21.916Z",
+      "screenshot": "lecturer-review-1440-9.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/review",
+      "actor": "GV xét duyệt",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E010",
+      "routeId": "R21",
+      "id": "groups",
+      "role": "FACULTY",
+      "path": "/topic/review-groups?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:22.135Z",
+      "screenshot": "faculty-groups-1440-10.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/topic/review-groups",
+      "actor": "FACULTY",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E011",
+      "routeId": "R39",
+      "id": "registration",
+      "role": "STUDENT",
+      "path": "/registration?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:58.603Z",
+      "screenshot": "student-registration-1440-11.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/registration",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E012",
+      "routeId": "R10",
+      "id": "tasks",
+      "role": "STUDENT",
+      "path": "/guidance/tasks?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:42:59.303Z",
+      "screenshot": "student-tasks-1440-12.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/tasks",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E013",
+      "routeId": "R11",
+      "id": "task-detail",
+      "role": "STUDENT",
+      "path": "/guidance/tasks/3873b769-e270-476c-be1f-b807cc6d6f1a?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:43:12.514Z",
+      "screenshot": "student-task-detail-1440-13.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/guidance/tasks/3873b769-e270-476c-be1f-b807cc6d6f1a",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E014",
+      "routeId": "R21",
+      "id": "groups",
+      "role": "FACULTY",
+      "path": "/topic/review-groups?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:43:12.728Z",
+      "screenshot": "faculty-groups-1440-14.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/topic/review-groups",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E015",
+      "routeId": "R12",
+      "id": "submissions",
+      "role": "STUDENT",
+      "path": "/guidance/tasks/3873b769-e270-476c-be1f-b807cc6d6f1a/submissions?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:43:31.314Z",
+      "screenshot": "student-submissions-1440-15.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/tasks/3873b769-e270-476c-be1f-b807cc6d6f1a/submissions",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E016",
+      "routeId": "R08",
+      "id": "plan-detail",
+      "role": "STUDENT",
+      "path": "/guidance/plan/fe97acad-7567-481d-99ff-8ab07feb6a8d?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:43:38.314Z",
+      "screenshot": "student-plan-detail-1440-16.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/guidance/plan/fe97acad-7567-481d-99ff-8ab07feb6a8d",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E017",
+      "routeId": "R18",
+      "id": "proposal-reviews",
+      "role": "FACULTY",
+      "path": "/topic/reviews?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:43:45.137Z",
+      "screenshot": "faculty-proposal-reviews-1440-17.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/reviews",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E018",
+      "routeId": "R15",
+      "id": "proposal-list",
+      "role": "FACULTY",
+      "path": "/topic/proposal?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:43:53.540Z",
+      "screenshot": "faculty-proposal-list-1440-18.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/proposal",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E019",
+      "routeId": "R24",
+      "id": "group-detail",
+      "role": "FACULTY",
+      "path": "/topic/review-groups/4d9d8861-301a-45c0-a4c6-1372f4bfa623?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:44:11.583Z",
+      "screenshot": "faculty-group-detail-1440-19.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/topic/review-groups/4d9d8861-301a-45c0-a4c6-1372f4bfa623",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E020",
+      "routeId": "R22",
+      "id": "group-create",
+      "role": "FACULTY",
+      "path": "/topic/review-groups/new?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:44:15.892Z",
+      "screenshot": "faculty-group-create-1440-20.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/review-groups/new",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E021",
+      "routeId": "R23",
+      "id": "group-edit",
+      "role": "FACULTY",
+      "path": "/topic/review-groups/4d9d8861-301a-45c0-a4c6-1372f4bfa623/edit?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:44:16.530Z",
+      "screenshot": "faculty-group-edit-1440-21.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/topic/review-groups/4d9d8861-301a-45c0-a4c6-1372f4bfa623/edit",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E022",
+      "routeId": "R16",
+      "id": "proposal-edit",
+      "role": "STUDENT",
+      "path": "/topic/proposal/f797923f-4e1a-4c08-80ee-213d874ccf6e?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:44:21.829Z",
+      "screenshot": "student-proposal-edit-1440-22.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/proposal/f797923f-4e1a-4c08-80ee-213d874ccf6e",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E023",
+      "routeId": "R04",
+      "id": "progress",
+      "role": "FACULTY",
+      "path": "/guidance/progress?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:01.503Z",
+      "screenshot": "faculty-progress-1440-23.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/guidance/progress",
+      "actor": "FACULTY",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E024",
+      "routeId": "R02",
+      "id": "review",
+      "role": "LECTURER",
+      "path": "/guidance/review?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:01.694Z",
+      "screenshot": "lecturer-review-1440-24.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/guidance/review",
+      "actor": "GV xét duyệt",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E025",
+      "routeId": "R01",
+      "id": "weeks",
+      "role": "STUDENT",
+      "path": "/guidance/weeks?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:11.846Z",
+      "screenshot": "student-weeks-1440-25.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/weeks",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E026",
+      "routeId": "R13",
+      "id": "dossier-list",
+      "role": "FACULTY",
+      "path": "/topic/dossier?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:22.344Z",
+      "screenshot": "faculty-dossier-list-1440-26.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/dossier",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E027",
+      "routeId": "R35",
+      "id": "term-detail",
+      "role": "FACULTY",
+      "path": "/terms/cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:39.316Z",
+      "screenshot": "faculty-term-detail-1440-27.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/terms/cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E028",
+      "routeId": "R36",
+      "id": "phases",
+      "role": "FACULTY",
+      "path": "/terms/cf40d4f4-6c49-490a-a361-4e2719ee40b2/phases",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:40.270Z",
+      "screenshot": "faculty-phases-1440-28.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/terms/cf40d4f4-6c49-490a-a361-4e2719ee40b2/phases",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E029",
+      "routeId": "R37",
+      "id": "parameters",
+      "role": "FACULTY",
+      "path": "/terms/cf40d4f4-6c49-490a-a361-4e2719ee40b2/parameters",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:40.961Z",
+      "screenshot": "faculty-parameters-1440-29.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/terms/cf40d4f4-6c49-490a-a361-4e2719ee40b2/parameters",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E030",
+      "routeId": "R38",
+      "id": "roster",
+      "role": "FACULTY",
+      "path": "/terms/cf40d4f4-6c49-490a-a361-4e2719ee40b2/roster",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:41.860Z",
+      "screenshot": "faculty-roster-1440-30.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/terms/cf40d4f4-6c49-490a-a361-4e2719ee40b2/roster",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E031",
+      "routeId": "R30",
+      "id": "students",
+      "role": "FACULTY",
+      "path": "/catalog/students",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:57.072Z",
+      "screenshot": null,
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/catalog/students",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": "Đã mở bảng thật; bỏ ảnh có liên hệ ngoài dữ liệu mẫu."
+    },
+    {
+      "evidenceId": "E032",
+      "routeId": "R31",
+      "id": "lecturers",
+      "role": "FACULTY",
+      "path": "/catalog/lecturers",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:58.017Z",
+      "screenshot": null,
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/catalog/lecturers",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": "Đã mở bảng thật; bỏ ảnh có liên hệ ngoài dữ liệu mẫu."
+    },
+    {
+      "evidenceId": "E033",
+      "routeId": "R32",
+      "id": "import",
+      "role": "FACULTY",
+      "path": "/catalog/import",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:58.815Z",
+      "screenshot": "faculty-import-1440-33.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/catalog/import",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E034",
+      "routeId": "R33",
+      "id": "catalog",
+      "role": "FACULTY",
+      "path": "/catalog/reference",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:45:59.459Z",
+      "screenshot": "faculty-catalog-1440-34.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/catalog/reference",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E035",
+      "routeId": "R40",
+      "id": "registration-list",
+      "role": "FACULTY",
+      "path": "/registration/list?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:00.177Z",
+      "screenshot": "faculty-registration-list-1440-35.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/registration/list",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E036",
+      "routeId": "R41",
+      "id": "assignment",
+      "role": "FACULTY",
+      "path": "/registration/assignment?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:01.129Z",
+      "screenshot": "faculty-assignment-1440-36.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/registration/assignment",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E037",
+      "routeId": "R43",
+      "id": "manual",
+      "role": "FACULTY",
+      "path": "/registration/manual?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:14.116Z",
+      "screenshot": "faculty-manual-1440-37.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/registration/manual",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E038",
+      "routeId": "R42",
+      "id": "result",
+      "role": "STUDENT",
+      "path": "/registration/result?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:14.671Z",
+      "screenshot": "student-result-1440-38.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/registration/result",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E039",
+      "routeId": "R44",
+      "id": "my-topic",
+      "role": "STUDENT",
+      "path": "/topic/my?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:15.240Z",
+      "screenshot": "student-my-topic-1440-39.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/topic/my",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E040",
+      "routeId": "R45",
+      "id": "draft",
+      "role": "STUDENT",
+      "path": "/topic/draft?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:15.880Z",
+      "screenshot": "student-draft-1440-40.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/draft",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E041",
+      "routeId": "R46",
+      "id": "overview",
+      "role": "STUDENT",
+      "path": "/topic/overview?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:16.540Z",
+      "screenshot": "student-overview-1440-41.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/overview",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E042",
+      "routeId": "R17",
+      "id": "version",
+      "role": "STUDENT",
+      "path": "/topic/proposal/f797923f-4e1a-4c08-80ee-213d874ccf6e/versions/ec305310-fb9e-4e61-a341-972872ad9bb0?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:20.953Z",
+      "screenshot": "student-version-1440-42.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/proposal/f797923f-4e1a-4c08-80ee-213d874ccf6e/versions/ec305310-fb9e-4e61-a341-972872ad9bb0",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E043",
+      "routeId": "R14",
+      "id": "dossier-detail",
+      "role": "FACULTY",
+      "path": "/topic/dossier/c9fd250b-1721-48cc-80c6-68efa3a0359e?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:38.431Z",
+      "screenshot": "faculty-dossier-detail-1440-43.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/dossier/c9fd250b-1721-48cc-80c6-68efa3a0359e",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E044",
+      "routeId": "R20",
+      "id": "review-assignment",
+      "role": "FACULTY",
+      "path": "/topic/review-assignments/869d227c-bc06-4194-8960-6321ca252c31?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:43.826Z",
+      "screenshot": "faculty-review-assignment-1440-44.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/review-assignments/869d227c-bc06-4194-8960-6321ca252c31",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E045",
+      "routeId": "R19",
+      "id": "proposal-review-detail",
+      "role": "LECTURER",
+      "path": "/topic/reviews/a4e2af69-3190-4293-869a-47b571abf99d?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:52.364Z",
+      "screenshot": "lecturer-proposal-review-detail-1440-45.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/topic/reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "actor": "GV xét duyệt",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E046",
+      "routeId": "R03",
+      "id": "review-detail",
+      "role": "STUDENT",
+      "path": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:46:54.990Z",
+      "screenshot": "student-review-detail-1440-46.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E047",
+      "routeId": "R05",
+      "id": "meetings",
+      "role": "STUDENT",
+      "path": "/guidance/meetings?planId=2e396ebc-0849-4af5-a76f-7ccc80c880ae&termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:47:01.571Z",
+      "screenshot": "student-meetings-1440-47.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/guidance/meetings",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E048",
+      "routeId": "R03",
+      "id": "review-detail-advisor",
+      "role": "LECTURER",
+      "path": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:47:44.676Z",
+      "screenshot": "lecturer-review-detail-advisor-1440-48.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "actor": "GVHD",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E049",
+      "routeId": "R09",
+      "id": "task-create",
+      "role": "LECTURER",
+      "path": "/guidance/plan/fe97acad-7567-481d-99ff-8ab07feb6a8d/tasks/new?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:47:52.774Z",
+      "screenshot": "lecturer-task-create-1440-49.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/plan/fe97acad-7567-481d-99ff-8ab07feb6a8d/tasks/new",
+      "actor": "GVHD",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E050",
+      "routeId": "R07",
+      "id": "plans",
+      "role": "LECTURER",
+      "path": "/guidance/plan?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:47:57.711Z",
+      "screenshot": "lecturer-plans-1440-50.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/plan",
+      "actor": "GVHD",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E051",
+      "routeId": "R04",
+      "id": "progress-final",
+      "role": "FACULTY",
+      "path": "/guidance/progress?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:48:18.332Z",
+      "screenshot": "faculty-progress-final-1440-51.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/guidance/progress",
+      "actor": "FACULTY",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E052",
+      "routeId": "R49",
+      "id": "eligibility",
+      "role": "FACULTY",
+      "path": "/defense/eligibility?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:48:55.710Z",
+      "screenshot": "faculty-eligibility-1440-52.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/defense/eligibility",
+      "actor": "FACULTY",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E053",
+      "routeId": "R52",
+      "id": "committees",
+      "role": "FACULTY",
+      "path": "/defense/committees?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:48:56.224Z",
+      "screenshot": "faculty-committees-1440-53.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/defense/committees",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E054",
+      "routeId": "R53",
+      "id": "reviewers",
+      "role": "FACULTY",
+      "path": "/defense/reviewers?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:48:56.743Z",
+      "screenshot": "faculty-reviewers-1440-54.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/defense/reviewers",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E055",
+      "routeId": "R54",
+      "id": "schedule",
+      "role": "FACULTY",
+      "path": "/defense/schedule?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:48:57.240Z",
+      "screenshot": "faculty-schedule-1440-55.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/defense/schedule",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E056",
+      "routeId": "R55",
+      "id": "committee-grading",
+      "role": "FACULTY",
+      "path": "/defense/committee-grading?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:49:28.744Z",
+      "screenshot": "faculty-committee-grading-1440-56.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/defense/committee-grading",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E057",
+      "routeId": "R56",
+      "id": "reviewer-grading",
+      "role": "FACULTY",
+      "path": "/defense/reviewer-grading?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:49:29.304Z",
+      "screenshot": "faculty-reviewer-grading-1440-57.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/defense/reviewer-grading",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E058",
+      "routeId": "R50",
+      "id": "defense-results",
+      "role": "FACULTY",
+      "path": "/defense/results?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:49:29.871Z",
+      "screenshot": "faculty-defense-results-1440-58.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/defense/results",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E059",
+      "routeId": "R51",
+      "id": "defense-reports",
+      "role": "FACULTY",
+      "path": "/defense/reports?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:49:30.405Z",
+      "screenshot": "faculty-defense-reports-1440-59.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/defense/reports",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E060",
+      "routeId": "R47",
+      "id": "defense-confirm",
+      "role": "LECTURER",
+      "path": "/guidance/defense-confirm?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:49:50.501Z",
+      "screenshot": "lecturer-defense-confirm-1440-60.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/defense-confirm",
+      "actor": "GVHD",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E061",
+      "routeId": "R48",
+      "id": "final-report",
+      "role": "STUDENT",
+      "path": "/guidance/final-report?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:50:11.195Z",
+      "screenshot": "student-final-report-1440-61.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/guidance/final-report",
+      "actor": "STUDENT",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E062",
+      "routeId": "R48",
+      "id": "final-report",
+      "role": "STUDENT",
+      "path": "/guidance/final-report?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:02:43.125Z",
+      "screenshot": "student-final-report-1440-62.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/final-report",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E063",
+      "routeId": "R06",
+      "id": "guidance-notifications",
+      "role": "STUDENT",
+      "path": "/guidance/notifications?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:02:47.576Z",
+      "screenshot": "student-guidance-notifications-1440-63.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/guidance/notifications",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E064",
+      "routeId": "R58",
+      "id": "profile",
+      "role": "STUDENT",
+      "path": "/profile",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:02:48.235Z",
+      "screenshot": "student-profile-1440-64.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/profile",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E065",
+      "routeId": "R59",
+      "id": "password",
+      "role": "STUDENT",
+      "path": "/change-password",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:02:48.790Z",
+      "screenshot": "student-password-1440-65.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/change-password",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E066",
+      "routeId": "R60",
+      "id": "notifications",
+      "role": "STUDENT",
+      "path": "/notifications",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:03:04.565Z",
+      "screenshot": "student-notifications-1440-66.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1425,
+      "actualPath": "/notifications",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E067",
+      "routeId": "R61",
+      "id": "forbidden",
+      "role": "STUDENT",
+      "path": "/forbidden",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:03:05.172Z",
+      "screenshot": "student-forbidden-1440-67.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/forbidden",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E068",
+      "routeId": "R62",
+      "id": "not-found",
+      "role": "STUDENT",
+      "path": "/audit-nonexistent-page",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:03:05.697Z",
+      "screenshot": "student-not-found-1440-68.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/audit-nonexistent-page",
+      "actor": "STUDENT",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E069",
+      "routeId": "R29",
+      "id": "audit-logs",
+      "role": "FACULTY",
+      "path": "/admin/audit-logs",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:03:06.212Z",
+      "screenshot": "faculty-audit-logs-1440-69.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/admin/audit-logs",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E070",
+      "routeId": "R57",
+      "id": "export",
+      "role": "FACULTY",
+      "path": "/report/export",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:03:06.715Z",
+      "screenshot": "faculty-export-1440-70.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/report/export",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E071",
+      "routeId": "R39",
+      "id": "registration-reflow",
+      "role": "STUDENT",
+      "path": "/registration?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:03:35.903Z",
+      "screenshot": "student-registration-reflow-390-71.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 390,
+      "actualPath": "/registration",
+      "actor": "STUDENT",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E072",
+      "routeId": "R39",
+      "id": "registration-reflow",
+      "role": "STUDENT",
+      "path": "/registration?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T13:03:35.965Z",
+      "screenshot": "student-registration-reflow-320-72.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 320,
+      "actualPath": "/registration",
+      "actor": "STUDENT",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E073",
+      "routeId": "R39",
+      "id": "registration-reflow",
+      "role": "STUDENT",
+      "path": "/registration?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T13:03:36.078Z",
+      "screenshot": "student-registration-reflow-768-73.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 768,
+      "actualPath": "/registration",
+      "actor": "STUDENT",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E074",
+      "routeId": "R03",
+      "id": "review-detail-advisor-reflow",
+      "role": "LECTURER",
+      "path": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:03:51.136Z",
+      "screenshot": "lecturer-review-detail-advisor-reflow-390-74.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 514,
+      "actualPath": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "actor": "GVHD",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E075",
+      "routeId": "R03",
+      "id": "review-detail-advisor-reflow",
+      "role": "LECTURER",
+      "path": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T13:03:51.256Z",
+      "screenshot": "lecturer-review-detail-advisor-reflow-320-75.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 305,
+      "actualPath": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "actor": "GVHD",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E076",
+      "routeId": "R03",
+      "id": "review-detail-advisor-reflow",
+      "role": "LECTURER",
+      "path": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T13:03:51.480Z",
+      "screenshot": "lecturer-review-detail-advisor-reflow-768-76.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 753,
+      "actualPath": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "actor": "GVHD",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E077",
+      "routeId": "R34",
+      "id": "terms-reflow",
+      "role": "FACULTY",
+      "path": "/terms",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:03:51.595Z",
+      "screenshot": "faculty-terms-reflow-390-77.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 390,
+      "actualPath": "/terms",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E078",
+      "routeId": "R34",
+      "id": "terms-reflow",
+      "role": "FACULTY",
+      "path": "/terms",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T13:03:51.674Z",
+      "screenshot": "faculty-terms-reflow-320-78.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 320,
+      "actualPath": "/terms",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E079",
+      "routeId": "R34",
+      "id": "terms-reflow",
+      "role": "FACULTY",
+      "path": "/terms",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T13:03:51.760Z",
+      "screenshot": "faculty-terms-reflow-768-79.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 768,
+      "actualPath": "/terms",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E080",
+      "routeId": "R25",
+      "id": "login",
+      "role": "ANON",
+      "path": "/login",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T13:05:06.804Z",
+      "screenshot": "anon-login-1440-80.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 1440,
+      "actualPath": "/login",
+      "actor": "ANON",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E081",
+      "routeId": "R25",
+      "id": "login-reflow",
+      "role": "ANON",
+      "path": "/login",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:05:21.105Z",
+      "screenshot": "anon-login-reflow-390-81.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 390,
+      "actualPath": "/login",
+      "actor": "ANON",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E082",
+      "routeId": "R25",
+      "id": "login-reflow",
+      "role": "ANON",
+      "path": "/login",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T13:05:21.193Z",
+      "screenshot": "anon-login-reflow-320-82.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 320,
+      "actualPath": "/login",
+      "actor": "ANON",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E083",
+      "routeId": "R25",
+      "id": "login-reflow",
+      "role": "ANON",
+      "path": "/login",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T13:05:21.476Z",
+      "screenshot": "anon-login-reflow-768-83.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 768,
+      "actualPath": "/login",
+      "actor": "ANON",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E084",
+      "routeId": "R21",
+      "id": "groups-mobile",
+      "role": "FACULTY",
+      "path": "/topic/review-groups?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:06:31.470Z",
+      "screenshot": "faculty-groups-mobile-390-84.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 514,
+      "actualPath": "/topic/review-groups",
+      "actor": "FACULTY",
+      "state": "bị chặn (đang tải)",
+      "note": "Loading tại thời điểm chụp; không dùng để kết luận nội dung đã tải."
+    },
+    {
+      "evidenceId": "E085",
+      "routeId": "R22",
+      "id": "group-create-mobile",
+      "role": "FACULTY",
+      "path": "/topic/review-groups/new?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:06:36.378Z",
+      "screenshot": "faculty-group-create-mobile-390-85.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 375,
+      "actualPath": "/topic/review-groups/new",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E086",
+      "routeId": "R18",
+      "id": "proposal-reviews-mobile",
+      "role": "FACULTY",
+      "path": "/topic/reviews?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:06:49.144Z",
+      "screenshot": "faculty-proposal-reviews-mobile-390-86.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 375,
+      "actualPath": "/topic/reviews",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E087",
+      "routeId": "R13",
+      "id": "dossier-list-mobile",
+      "role": "FACULTY",
+      "path": "/topic/dossier?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:06:59.027Z",
+      "screenshot": "faculty-dossier-list-mobile-390-87.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 375,
+      "actualPath": "/topic/dossier",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E088",
+      "routeId": "R15",
+      "id": "proposal-list-mobile",
+      "role": "FACULTY",
+      "path": "/topic/proposal?termId=b2c1a53f-b94a-4f90-a95a-c4257bf09b4b",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:07:13.142Z",
+      "screenshot": "faculty-proposal-list-mobile-390-88.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 375,
+      "actualPath": "/topic/proposal",
+      "actor": "FACULTY",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E089",
+      "routeId": "R26",
+      "id": "dashboard-reflow",
+      "role": "STUDENT",
+      "path": "/",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:10:48.312Z",
+      "screenshot": "student-dashboard-reflow-390-89.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 514,
+      "actualPath": "/",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E090",
+      "routeId": "R39",
+      "id": "registration-retry",
+      "role": "STUDENT",
+      "path": "/registration?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:10:59.970Z",
+      "screenshot": "student-registration-retry-390-90.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 375,
+      "actualPath": "/registration",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E091",
+      "routeId": "R39",
+      "id": "registration-retry",
+      "role": "STUDENT",
+      "path": "/registration?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T13:11:00.167Z",
+      "screenshot": "student-registration-retry-320-91.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 305,
+      "actualPath": "/registration",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E092",
+      "routeId": "R39",
+      "id": "registration-retry",
+      "role": "STUDENT",
+      "path": "/registration?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T13:11:00.558Z",
+      "screenshot": "student-registration-retry-768-92.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 753,
+      "actualPath": "/registration",
+      "actor": "STUDENT",
+      "state": "đã quan sát",
+      "note": null
+    },
+    {
+      "evidenceId": "E093",
+      "routeId": "R34",
+      "id": "terms-retry",
+      "role": "FACULTY",
+      "path": "/terms",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:11:02.335Z",
+      "screenshot": "faculty-terms-retry-390-93.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 390,
+      "actualPath": "/terms",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E094",
+      "routeId": "R26",
+      "id": "dashboard-reflow",
+      "role": "STUDENT",
+      "path": "/?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T13:12:27.010Z",
+      "screenshot": "student-dashboard-reflow-320-94.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 320,
+      "actualPath": "/",
+      "actor": "STUDENT",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E095",
+      "routeId": "R26",
+      "id": "dashboard-reflow",
+      "role": "STUDENT",
+      "path": "/?termId=cf40d4f4-6c49-490a-a361-4e2719ee40b2",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T13:12:27.101Z",
+      "screenshot": "student-dashboard-reflow-768-95.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 768,
+      "actualPath": "/",
+      "actor": "STUDENT",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E096",
+      "routeId": "R34",
+      "id": "terms-final",
+      "role": "FACULTY",
+      "path": "/terms",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:12:27.152Z",
+      "screenshot": "faculty-terms-final-390-96.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 390,
+      "actualPath": "/terms",
+      "actor": "FACULTY",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E097",
+      "routeId": "R34",
+      "id": "denied-terms",
+      "role": "STUDENT",
+      "path": "/terms",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:12:27.655Z",
+      "screenshot": "student-denied-terms-390-97.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 390,
+      "actualPath": "/terms",
+      "actor": "STUDENT",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E098",
+      "routeId": "R02",
+      "id": "denied-review",
+      "role": "STUDENT",
+      "path": "/guidance/review",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T13:12:28.194Z",
+      "screenshot": "student-denied-review-390-98.png",
+      "loading": false,
+      "settled": true,
+      "scrollWidth": 390,
+      "actualPath": "/forbidden",
+      "actor": "STUDENT",
+      "state": "bị chặn",
+      "note": "Boundary chung báo timeout; chưa kiểm tra được nội dung màn."
+    },
+    {
+      "evidenceId": "E099",
+      "routeId": "R26",
+      "id": "dashboard-initial",
+      "role": "FACULTY",
+      "actor": "FACULTY",
+      "path": "/",
+      "actualPath": "/",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T12:36:13Z",
+      "screenshot": "faculty-dashboard-desktop.png",
+      "state": "đã quan sát",
+      "note": "Ảnh giai đoạn đầu; thời điểm lấy từ LastWriteTimeUtc, không có DOM record tương ứng."
+    }
+  ],
+  "interactions": [
+    {
+      "role": "FACULTY",
+      "at": "2026-11-15T12:49:16.440Z",
+      "case": "Retry global DataBoundary after timeout",
+      "path": "/defense/schedule"
+    },
+    {
+      "case": "mobile-review-reflow-and-tab",
+      "role": "LECTURER",
+      "at": "2026-11-15T13:04:49.112Z",
+      "before": {
+        "width": 390,
+        "client": 375,
+        "scroll": 375,
+        "overflow": []
+      },
+      "focus": [
+        {
+          "tag": "A",
+          "text": "Đi đến nội dung chính",
+          "x": 16,
+          "y": -74.3499984741211,
+          "sidebar": false
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Mở điều hướng",
+          "x": 16,
+          "y": 11.600000381469727,
+          "sidebar": false
+        },
+        {
+          "tag": "SELECT",
+          "text": "Đợt làm việc",
+          "x": 173.90000915527344,
+          "y": 13.600000381469727,
+          "sidebar": false
+        },
+        {
+          "tag": "A",
+          "text": "Thông báo",
+          "x": 288.20001220703125,
+          "y": 13.600000381469727,
+          "sidebar": false
+        },
+        {
+          "tag": "A",
+          "text": "HA — Mở hồ sơ của Nguyễn Hoài An",
+          "x": 325.20001220703125,
+          "y": 12.600000381469727,
+          "sidebar": false
+        },
+        {
+          "tag": "A",
+          "text": "← Báo cáo và lịch sử nộp",
+          "x": 16,
+          "y": 81.5999984741211,
+          "sidebar": false
+        },
+        {
+          "tag": "A",
+          "text": "Kế hoạch / giao nhiệm vụ tiếp theo",
+          "x": 34.29999923706055,
+          "y": 325.70001220703125,
+          "sidebar": false
+        },
+        {
+          "tag": "BUTTON",
+          "text": "Tải báo cáo: bao-cao-sv09-v1.pdf",
+          "x": 34.29999923706055,
+          "y": 1071.7000732421875,
+          "sidebar": false
+        }
+      ]
+    },
+    {
+      "case": "mobile-menu-keyboard-reduced-motion",
+      "role": "LECTURER",
+      "at": "2026-11-15T13:05:04.688Z",
+      "opened": {
+        "open": true,
+        "focus": "KHOA CNTT – UTCQuản lý đồ án tốt nghiệp",
+        "bodyOverflow": "hidden"
+      },
+      "trapped": true,
+      "closed": {
+        "open": false,
+        "focus": "Mở điều hướng"
+      },
+      "motion": {
+        "requested": true,
+        "sidebarTransition": "1e-05s"
+      }
+    },
+    {
+      "case": "login-reflow-forgot",
+      "at": "2026-11-15T13:05:21.593Z",
+      "role": "ANON",
+      "viewports": [
+        {
+          "width": 390,
+          "scroll": 390,
+          "screenshot": "anon-login-reflow-390-81.png"
+        },
+        {
+          "width": 320,
+          "scroll": 320,
+          "screenshot": "anon-login-reflow-320-82.png"
+        },
+        {
+          "width": 768,
+          "scroll": 768,
+          "screenshot": "anon-login-reflow-768-83.png"
+        }
+      ],
+      "detail": {
+        "dialog": 1,
+        "text": "[Không lưu hướng dẫn chứa mật khẩu mặc định; chỉ ghi nhận copy demo.]",
+        "trapped": true,
+        "closed": true,
+        "focus": "Quên mật khẩu?"
+      }
+    },
+    {
+      "case": "login-empty-local-validation",
+      "role": "ANON",
+      "at": "2026-11-15T13:05:41.803Z",
+      "validation": [
+        {
+          "type": "text",
+          "valid": false,
+          "missing": true,
+          "focused": true,
+          "labels": [
+            "Tên đăng nhập / Mã định danh *"
+          ],
+          "describedBy": null,
+          "invalid": null
+        },
+        {
+          "type": "password",
+          "valid": false,
+          "missing": true,
+          "focused": false,
+          "labels": [
+            "Mật khẩu *"
+          ],
+          "describedBy": null,
+          "invalid": null
+        }
+      ]
+    },
+    {
+      "case": "proposal-search-clear",
+      "role": "FACULTY",
+      "at": "2026-11-15T13:09:56.284Z",
+      "beforeCount": [
+        "12 hồ sơ"
+      ],
+      "empty": "ĐỀ CƯƠNG & XÉT DUYỆT\nTra cứu đề cương\n\nTra cứu nội dung và lịch sử phiên bản trong phạm vi phụ trách.\n\nTìm đề cương\nBộ lọc\n\nĐang tải đề cương…",
+      "restoredCount": [
+        "12 hồ sơ"
+      ]
+    },
+    {
+      "case": "sample-computed-text-contrast",
+      "role": "FACULTY",
+      "path": "/topic/proposal",
+      "at": "2026-11-15T13:09:56.297Z",
+      "measurements": [
+        {
+          "class": "",
+          "text": "Không gian làm việc",
+          "color": "rgb(95, 111, 133)",
+          "font": "10px",
+          "bg": [
+            248,
+            250,
+            252
+          ],
+          "gradient": false,
+          "ratio": 4.9
+        }
+      ]
+    },
+    {
+      "case": "axe-real-page",
+      "role": "ANON",
+      "path": "/login",
+      "at": "2026-11-15T13:10:32.488Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot": "anon-accessibility-390.png",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "count": 3
+        }
+      ],
+      "passes": 20
+    },
+    {
+      "case": "axe-real-page",
+      "role": "LECTURER",
+      "path": "/guidance/review/fa57d781-f04c-44e3-8490-72458cbbffec",
+      "at": "2026-11-15T13:10:33.810Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot": "lecturer-accessibility-390.png",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "count": 1
+        }
+      ],
+      "passes": 24
+    },
+    {
+      "case": "axe-real-page",
+      "role": "FACULTY",
+      "path": "/topic/proposal",
+      "at": "2026-11-15T13:10:35.323Z",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "screenshot": "faculty-accessibility-390.png",
+      "violations": [],
+      "incomplete": [
+        {
+          "id": "color-contrast",
+          "count": 1
+        }
+      ],
+      "passes": 22
+    }
+  ],
+  "events": [
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-groups",
+      "at": "2026-11-15T12:42:27.589Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-group-options",
+      "at": "2026-11-15T12:42:27.590Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/01649c80-d8e1-4393-a8a5-29d585eb4ef6/proposals",
+      "at": "2026-11-15T12:48:22.736Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:48:29.917Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:48:29.922Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/01649c80-d8e1-4393-a8a5-29d585eb4ef6/proposals",
+      "at": "2026-11-15T12:48:30.283Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/defense-eligibility/options",
+      "at": "2026-11-15T12:48:58.082Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/defense-committees/options",
+      "at": "2026-11-15T12:49:03.038Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/defense-committees/workspace",
+      "at": "2026-11-15T12:49:03.039Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:49:53.629Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:49:54.928Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T12:49:54.931Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:49:58.840Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T12:49:58.845Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:49:58.846Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:49:59.236Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:51:00.106Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:51:00.109Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T12:51:00.110Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T12:53:01.903Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:53:01.905Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:53:01.914Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:53:08.275Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:53:08.281Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T12:53:08.285Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T12:54:21.155Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:54:25.007Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T12:54:25.007Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T12:54:25.007Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:54:31.714Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T12:54:31.719Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:54:31.720Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:54:36.173Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T12:54:36.187Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T12:54:41.328Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/fe97acad-7567-481d-99ff-8ab07feb6a8d/final-report",
+      "at": "2026-11-15T12:55:31.095Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:55:31.218Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:55:31.221Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/fe97acad-7567-481d-99ff-8ab07feb6a8d/final-report",
+      "at": "2026-11-15T12:55:38.038Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:55:38.128Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:55:38.130Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T12:57:20.340Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:57:20.341Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:57:41.534Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/fe97acad-7567-481d-99ff-8ab07feb6a8d/final-report",
+      "at": "2026-11-15T12:57:41.537Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T12:57:41.539Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:57:53.090Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/fe97acad-7567-481d-99ff-8ab07feb6a8d/final-report",
+      "at": "2026-11-15T12:57:53.091Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:58:15.465Z"
+    },
+    {
+      "role": "STUDENT",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/fe97acad-7567-481d-99ff-8ab07feb6a8d/final-report",
+      "at": "2026-11-15T12:58:15.465Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:58:28.274Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:58:28.275Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T12:58:52.614Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T12:58:52.614Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T12:58:52.614Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T12:58:57.757Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:58:57.759Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:58:57.761Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T12:59:04.413Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T12:59:04.782Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T12:59:04.782Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T12:59:04.783Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T13:01:25.651Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T13:01:25.653Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T13:01:25.654Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T13:02:26.372Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T13:02:26.374Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T13:02:26.375Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T13:02:58.739Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense/options",
+      "at": "2026-11-15T13:02:58.739Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/final-defense",
+      "at": "2026-11-15T13:02:58.739Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:03:00.603Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:03:00.604Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:03:00.605Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:03:08.625Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:03:08.626Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:03:08.627Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/93d4bed3-4252-4c89-a440-782977de14dc/final-report",
+      "at": "2026-11-15T13:03:09.390Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:03:29.840Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:03:29.840Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:03:29.843Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:03:41.552Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:03:41.553Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:03:41.554Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:05:02.216Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:05:02.220Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:05:02.221Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:05:13.656Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/review-group-options/terms",
+      "at": "2026-11-15T13:06:22.823Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-group-options",
+      "at": "2026-11-15T13:06:22.828Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-groups",
+      "at": "2026-11-15T13:06:22.828Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-groups",
+      "at": "2026-11-15T13:06:31.426Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-group-options",
+      "at": "2026-11-15T13:06:31.427Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:06:31.787Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:06:31.792Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:06:31.792Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/proposals",
+      "at": "2026-11-15T13:08:45.014Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/proposals",
+      "at": "2026-11-15T13:09:15.140Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:09:15.141Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:10:01.438Z"
+    },
+    {
+      "role": "FACULTY",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/proposals",
+      "at": "2026-11-15T13:10:15.718Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:10:31.031Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:10:31.033Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:10:31.034Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:10:37.440Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:10:37.444Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:11:35.151Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:11:47.192Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:12:04.150Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:12:31.442Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:12:31.444Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:12:31.446Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:13:30.373Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:13:30.375Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:13:30.376Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:13:36.084Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:13:36.084Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:13:36.085Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-reviews/a4e2af69-3190-4293-869a-47b571abf99d",
+      "at": "2026-11-15T13:14:00.883Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposal-review-options/terms",
+      "at": "2026-11-15T13:14:00.888Z"
+    },
+    {
+      "role": "LECTURER",
+      "kind": "http",
+      "status": 500,
+      "method": "GET",
+      "path": "/api/proposals/ab1f6a25-5f86-4258-acd7-4db9210fe7f1/review-history",
+      "at": "2026-11-15T13:14:00.888Z"
+    }
+  ],
+  "console": {
+    "scope": "Playwright selected/root context only; not all isolated role contexts",
+    "errorLineCount": 16,
+    "examples": [
+      "[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3000/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-groups?page=1&limit=20&search=:1",
+      "[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3000/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-group-options?page=1&limit=20&search=:1",
+      "[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3000/api/defense-eligibility/options:1",
+      "[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3000/api/defense-committees/options:1",
+      "[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3000/api/defense-committees/workspace?termId=01649c80-d8e1-4393-a8a5-29d585eb4ef6:1",
+      "[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3000/api/review-group-options/terms:1",
+      "[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3000/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-group-options?page=1&limit=20&search=:1",
+      "[ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3000/api/terms/b2c1a53f-b94a-4f90-a95a-c4257bf09b4b/review-groups?page=1&limit=20&search=:1"
+    ]
+  },
+  "sessionPermissions": {
+    "FACULTY": {
+      "roles": [
+        "FACULTY"
+      ],
+      "permissions": [
+        "defense-committee:finalize",
+        "defense-schedule:update",
+        "defense-report:read",
+        "term:create",
+        "lecturer:read",
+        "defense-result:read",
+        "student:update",
+        "student:read",
+        "student:create",
+        "defense-schedule:create",
+        "term:lock",
+        "defense-committee:update",
+        "term:roster",
+        "defense-committee:read",
+        "term:parameters",
+        "defense-eligibility:finalize",
+        "defense-committee:create",
+        "defense-schedule:finalize",
+        "term:transition",
+        "term:update",
+        "defense-committee-grade:progress-read",
+        "defense-confirmation:status-read",
+        "final-report:download",
+        "defense-schedule:publish",
+        "defense-schedule:read",
+        "defense-reviewer-grade:read",
+        "student:import",
+        "term:read",
+        "defense-committee:assign",
+        "defense-report:statistics",
+        "final-report:read",
+        "catalog:read",
+        "defense-confirmation:read",
+        "lecturer:create",
+        "term:plan",
+        "registration:read",
+        "catalog:manage",
+        "defense-eligibility:read",
+        "lecturer:update",
+        "defense-eligibility:decide",
+        "defense-committee-grade:read",
+        "audit:read",
+        "defense-report:templates-read",
+        "defense-eligibility:review",
+        "lecturer:import",
+        "dossier:receive",
+        "guidance:monitor",
+        "guidance:read",
+        "proposal:assign",
+        "proposal:export",
+        "proposal:finalize",
+        "proposal:read",
+        "proposal:reopen",
+        "review-group:manage",
+        "review-group:read",
+        "submission:download",
+        "submission:read",
+        "assignment:manage",
+        "assignment:read",
+        "notification:own",
+        "topic:agree",
+        "topic:read",
+        "topic:write",
+        "defense-reviewer:assign",
+        "defense-reviewer:finalize",
+        "defense-reviewer:read",
+        "defense-reviewer:update"
+      ],
+      "mustChangePassword": false
+    },
+    "STUDENT": {
+      "roles": [
+        "STUDENT"
+      ],
+      "permissions": [
+        "lecturer:read",
+        "registration:own",
+        "defense-confirmation:status-read",
+        "final-report:download",
+        "defense-schedule:read",
+        "term:read",
+        "final-report:read",
+        "catalog:read",
+        "defense-confirmation:read",
+        "final-report:create",
+        "defense-eligibility:read",
+        "guidance:read",
+        "proposal:edit",
+        "proposal:export",
+        "proposal:read",
+        "proposal:submit",
+        "submission:create",
+        "submission:download",
+        "submission:read",
+        "task:ensure-weekly",
+        "task:progress",
+        "assignment:read",
+        "notification:own",
+        "topic:read",
+        "topic:write"
+      ],
+      "mustChangePassword": false
+    },
+    "LECTURER": {
+      "roles": [
+        "LECTURER"
+      ],
+      "permissions": [
+        "defense-reviewer-grade:save",
+        "lecturer:read",
+        "defense-confirmation:comment-read",
+        "defense-confirmation:score-read",
+        "defense-committee-grade:read-own",
+        "defense-confirmation:status-read",
+        "defense-committee-grade:download-own",
+        "final-report:download",
+        "defense-schedule:read",
+        "defense-reviewer-grade:read",
+        "term:read",
+        "defense-confirmation:rejection-read",
+        "final-report:read",
+        "catalog:read",
+        "defense-confirmation:read",
+        "defense-reviewer-grade:download",
+        "defense-confirmation:review",
+        "defense-confirmation:decide",
+        "defense-committee-grade:save-own",
+        "defense-eligibility:read",
+        "defense-reviewer-grade:finalize",
+        "defense-committee-grade:read",
+        "defense-committee-grade:finalize-own",
+        "guidance:manage",
+        "guidance:read",
+        "proposal:comment",
+        "proposal:edit",
+        "proposal:export",
+        "proposal:read",
+        "proposal:review",
+        "review-group:read",
+        "submission:download",
+        "submission:read",
+        "task:ensure-weekly",
+        "task:manage",
+        "task:review",
+        "assignment:read",
+        "notification:own",
+        "topic:agree",
+        "topic:read",
+        "topic:write"
+      ],
+      "mustChangePassword": false
+    },
+    "REVIEWER": {
+      "roles": [
+        "LECTURER"
+      ],
+      "permissions": [
+        "defense-reviewer-grade:save",
+        "lecturer:read",
+        "defense-confirmation:comment-read",
+        "defense-confirmation:score-read",
+        "defense-committee-grade:read-own",
+        "defense-confirmation:status-read",
+        "defense-committee-grade:download-own",
+        "final-report:download",
+        "defense-schedule:read",
+        "defense-reviewer-grade:read",
+        "term:read",
+        "defense-confirmation:rejection-read",
+        "final-report:read",
+        "catalog:read",
+        "defense-confirmation:read",
+        "defense-reviewer-grade:download",
+        "defense-confirmation:review",
+        "defense-confirmation:decide",
+        "defense-committee-grade:save-own",
+        "defense-eligibility:read",
+        "defense-reviewer-grade:finalize",
+        "defense-committee-grade:read",
+        "defense-committee-grade:finalize-own",
+        "guidance:manage",
+        "guidance:read",
+        "proposal:comment",
+        "proposal:edit",
+        "proposal:export",
+        "proposal:read",
+        "proposal:review",
+        "review-group:read",
+        "submission:download",
+        "submission:read",
+        "task:ensure-weekly",
+        "task:manage",
+        "task:review",
+        "assignment:read",
+        "notification:own",
+        "topic:agree",
+        "topic:read",
+        "topic:write"
+      ],
+      "mustChangePassword": false
+    }
+  }
+}

@@ -1,0 +1,16 @@
+﻿{
+    "protectedFiles":  670,
+    "changedBaselineFiles":  [
+                                 "frontend/scripts/test-utc-registration-browser.cjs",
+                                 "frontend/src/app/layouts/utc-registration-shell.css",
+                                 "frontend/src/features/registration/pages/student-registration.css",
+                                 "frontend/src/utc-theme.css",
+                                 "frontend/scripts/test-ui-redesign-browser.cjs",
+                                 "frontend/src/app/layouts/WorkspaceLayout.tsx",
+                                 "frontend/src/design-system.css",
+                                 "frontend/src/features/registration/pages/StudentRegistrationPage.tsx"
+                             ],
+    "protectedChanged":  [
+
+                         ]
+}

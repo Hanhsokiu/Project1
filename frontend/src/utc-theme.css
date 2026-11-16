@@ -1,0 +1,702 @@
+/* Shared UTC presentation. Feature-specific structure and semantic status colours stay intact. */
+::selection {
+  background: #cce5ff;
+  color: var(--utc-navy-950);
+}
+body {
+  color: var(--ink);
+  background: var(--utc-canvas);
+}
+
+.card,
+.stat-card,
+.rg-stat,
+.rg-panel {
+  background: var(--utc-surface-gradient);
+  border-color: var(--utc-border);
+  border-radius: var(--utc-radius-card);
+  box-shadow: var(--utc-shadow-card);
+}
+.card:hover,
+.stat-card:hover {
+  transform: none;
+  box-shadow: var(--utc-shadow-card);
+}
+.card-heading {
+  padding: 16px 20px;
+}
+.card-heading h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+.card-body {
+  padding: 20px;
+}
+
+.utc-shell .utc-page-heading,
+.utc-shell .workflow-page-heading {
+  position: relative;
+  isolation: isolate;
+  max-width: none;
+  padding: 4px 0 18px;
+  margin-bottom: 20px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow-wrap: anywhere;
+  gap: 16px;
+}
+.utc-shell :is(.utc-page-heading, .workflow-page-heading)::after {
+  content: none;
+}
+.utc-shell .utc-page-heading > div:first-child {
+  min-width: 0;
+}
+.utc-shell .utc-page-heading .page-actions {
+  flex-wrap: wrap;
+}
+.utc-shell h1 {
+  color: var(--utc-text-primary);
+  font-weight: 600;
+}
+.utc-shell :is(.eyebrow, .workflow-eyebrow) {
+  color: var(--utc-blue-700);
+}
+.utc-shell .page-content:has(.registration-pilot) {
+  padding-top: 0;
+}
+.utc-shell .page-content {
+  animation: none;
+}
+.utc-shell .registration-hero .utc-page-heading {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+}
+.utc-shell .registration-hero .utc-page-heading::after {
+  display: none;
+}
+
+.btn {
+  position: relative;
+  min-height: 44px;
+  border-radius: var(--utc-radius-control);
+  font-weight: 600;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+.btn[aria-busy="true"] {
+  color: transparent !important;
+}
+.btn[aria-busy="true"] > :not(.btn-spinner) {
+  opacity: 0;
+}
+.btn[aria-busy="true"] > svg:not(.animate-spin) {
+  display: block;
+}
+.btn .btn-spinner {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: calc(50% - 8px);
+  color: var(--utc-blue-700);
+}
+.btn-primary {
+  color: white;
+  background: var(--utc-primary-gradient);
+  border: 1px solid var(--utc-blue-700);
+  box-shadow: none;
+}
+.btn-primary:hover:not(:disabled) {
+  background: var(--utc-navy-800);
+  border-color: var(--utc-navy-800);
+  color: white;
+  transform: none;
+  box-shadow: none;
+}
+.btn-secondary {
+  color: var(--utc-text-primary);
+  border-color: var(--utc-border-control);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--utc-surface-muted);
+  border-color: var(--utc-blue-700);
+}
+.icon-btn {
+  width: 44px;
+  height: 44px;
+}
+.btn:disabled,
+.icon-btn:disabled {
+  opacity: 1;
+  color: var(--ink-disabled);
+  background: var(--utc-surface-muted);
+  border-color: var(--utc-border);
+  box-shadow: none;
+  transform: none;
+}
+.btn[aria-busy="true"] {
+  opacity: 1;
+}
+:is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select,
+  textarea
+) {
+  min-height: 44px;
+  border: 1px solid var(--utc-border-control);
+  border-radius: var(--utc-radius-control);
+  color: var(--utc-text-primary);
+}
+.field {
+  color: var(--utc-text-primary);
+  font-weight: 600;
+}
+.field small {
+  font-size: 12px;
+  color: var(--utc-text-secondary);
+}
+.badge {
+  border-radius: var(--utc-radius-small);
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 3px 7px;
+  font-weight: 500;
+  white-space: normal;
+}
+.badge-OPEN_REGISTRATION,
+.badge-IN_PROGRESS,
+.badge-LECTURER,
+.badge-ADVISOR {
+  color: var(--utc-blue-700);
+  background: var(--utc-blue-100);
+}
+.badge-SUBMITTED,
+.badge-APPROVED,
+.badge-PASS,
+.badge-SENT,
+.badge-COMPLETED {
+  color: var(--utc-success-text);
+  background: var(--utc-success-bg);
+}
+.badge-DEFENDING,
+.badge-COMMITTEE,
+.badge-ADMIN {
+  color: var(--utc-navy-800);
+  background: #e4edff;
+}
+.avatar {
+  background: var(--utc-surface-blue);
+  color: var(--utc-blue-700);
+}
+.person strong {
+  font-size: 13px;
+  color: var(--utc-text-primary);
+  font-weight: 600;
+}
+.person small {
+  font-size: 12px;
+}
+.data-table tr.is-selected {
+  background: var(--utc-blue-100);
+}
+.data-table tr.is-selected .person small {
+  color: var(--utc-text-secondary);
+}
+.notice {
+  border-radius: var(--utc-radius-control);
+}
+.notice-info {
+  background: var(--utc-blue-100);
+  color: var(--utc-blue-700);
+}
+.tabs {
+  background: var(--utc-surface-muted);
+  border-color: var(--utc-border);
+}
+.tab.active {
+  background: white;
+  color: var(--utc-blue-700);
+  box-shadow: 0 1px 4px rgb(30 80 153 / 10%);
+}
+
+.data-table {
+  background: white;
+  border-radius: inherit;
+}
+.table-toolbar,
+.workflow-filterbar {
+  background: var(--utc-surface-muted);
+  border-color: var(--utc-border);
+}
+.table-count {
+  font-size: 12px;
+  color: var(--utc-text-secondary);
+}
+.data-table th {
+  background: var(--utc-surface-muted);
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+}
+.data-table td {
+  font-size: 13px;
+  color: var(--utc-text-primary);
+}
+.data-table tbody tr:hover {
+  background: var(--utc-surface-muted);
+}
+.table-pagination {
+  background: var(--utc-surface-muted);
+  color: var(--utc-text-secondary);
+}
+.table-toolbar .search-input input {
+  min-height: 44px !important;
+  border-color: var(--utc-border-control);
+  background: white !important;
+  font-size: 13px;
+}
+.search-clear {
+  width: 28px;
+  height: 28px;
+  right: 6px;
+}
+.table-filter-panel,
+.action-menu-panel {
+  background: white;
+  border-color: var(--utc-border);
+  border-radius: var(--utc-radius-control);
+  box-shadow: var(--utc-elevation-2);
+}
+.modal-backdrop {
+  background: rgb(0 27 68 / 42%);
+  backdrop-filter: none;
+}
+.modal {
+  border-radius: var(--utc-radius-dialog);
+  border-color: var(--utc-border);
+  box-shadow: var(--utc-shadow-overlay);
+}
+.modal-heading {
+  background: var(--utc-surface-gradient);
+  border-color: var(--utc-border);
+}
+.modal-heading h2 {
+  color: var(--utc-text-primary);
+  font-size: 17px;
+  font-weight: 600;
+}
+.modal.modal-wide {
+  border-radius: var(--utc-radius-card) 0 0 var(--utc-radius-card);
+}
+.empty-icon {
+  background: var(--utc-blue-100);
+  color: var(--utc-blue-700);
+}
+.empty h3 {
+  color: var(--utc-text-primary);
+}
+[data-sonner-toast] {
+  font-family: "Be Vietnam Pro", sans-serif;
+  border-radius: var(--utc-radius-control) !important;
+}
+
+.utc-shell .dashboard-overview {
+  border: 1px solid var(--utc-border);
+  border-radius: var(--utc-radius-card);
+  background: white;
+  box-shadow: var(--utc-shadow-card);
+}
+.utc-shell .dashboard-overview-title {
+  color: var(--utc-text-primary);
+  font-weight: 600;
+}
+.utc-shell .dashboard-metric .text-slate-500 {
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+}
+.utc-shell :is(.dashboard-metric, .dashboard-overview-step) {
+  background: var(--utc-surface-muted);
+  border-color: var(--utc-border);
+}
+.utc-shell .stat-card .stat-icon {
+  background: var(--utc-blue-100);
+  color: var(--utc-blue-700);
+}
+.utc-shell .stat-card:nth-child(2) .stat-icon {
+  color: var(--utc-success-text);
+  background: var(--utc-success-bg);
+}
+.utc-shell .stat-card:nth-child(3) .stat-icon {
+  color: var(--utc-warning-text);
+  background: var(--utc-warning-bg);
+}
+.utc-shell .quick-link {
+  background: var(--utc-surface-gradient);
+  border-color: var(--utc-border);
+}
+.utc-shell .quick-link:hover {
+  transform: none;
+  box-shadow: var(--utc-shadow-card);
+}
+
+/* API workflow pages have their own kit; align its visual tokens and controls. */
+.utc-shell .workflow-content {
+  --rg-navy: var(--utc-text-primary);
+  --rg-blue: var(--utc-blue-700);
+  --rg-low: var(--utc-blue-100);
+  --rg-border: var(--utc-border);
+}
+.utc-shell .workflow-content :is(.rg-panel, .rg-stat) {
+  background: var(--utc-surface-gradient);
+  border-color: var(--utc-border);
+  box-shadow: var(--utc-shadow-card);
+  border-radius: var(--utc-radius-card);
+}
+.utc-shell .workflow-content .rg-panel-heading {
+  background: var(--utc-surface-muted);
+  border-color: var(--utc-border);
+}
+.utc-shell .workflow-content .rg-panel-heading h2 {
+  color: var(--utc-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+}
+.utc-shell
+  .workflow-content
+  :is(
+    .rg-stat-note,
+    .rg-stat-top,
+    .rg-panel-heading p,
+    .rg-filters label,
+    .rg-group-cell small
+  ) {
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+}
+.utc-shell .workflow-content table th {
+  background: var(--utc-surface-muted);
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+  text-transform: none;
+  letter-spacing: 0;
+  padding-block: 12px;
+}
+.utc-shell .workflow-content table td {
+  color: var(--utc-text-primary);
+  padding-block: 13px;
+  font-size: 13px;
+}
+.utc-shell .workflow-content .rg-filters :is(select, input) {
+  min-height: 44px;
+  border-color: var(--utc-border-control);
+  background: white;
+  font-size: 13px;
+}
+.utc-shell .workflow-content :is(button, a).bg-blue-600 {
+  background: var(--utc-primary-gradient);
+  border: 1px solid var(--utc-blue-700);
+  color: white;
+  border-radius: var(--utc-radius-control);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.utc-shell .workflow-content :is(button, a).bg-blue-600:disabled {
+  background: var(--utc-surface-muted);
+  border-color: var(--utc-border);
+  color: var(--ink-disabled);
+}
+.utc-shell .workflow-content :is(input, select, textarea):focus-visible {
+  outline: 2px solid var(--utc-blue-600);
+  outline-offset: 2px;
+}
+.utc-shell .import-page {
+  --import-accent: var(--utc-blue-700);
+  --import-soft: var(--utc-blue-100);
+}
+.utc-shell .import-steps li.active {
+  border-color: var(--utc-border-control);
+  color: var(--utc-text-primary);
+}
+.utc-shell .import-dropzone {
+  border-color: var(--utc-border-control);
+  background: var(--utc-surface-muted);
+}
+.utc-shell .import-dropzone:hover,
+.utc-shell .import-dropzone.dragging,
+.utc-shell .import-dropzone:focus-within {
+  border-color: var(--utc-blue-700);
+  background: var(--utc-blue-100);
+}
+.utc-shell .import-dropzone:focus-within {
+  outline-color: var(--utc-blue-600);
+}
+
+/* Authentication uses the same official assets, with a quieter form surface. */
+.login-shell {
+  background: var(--utc-canvas);
+}
+.login-branding {
+  padding: 40px;
+  background: linear-gradient(180deg, #001b44 15%, #083b70);
+}
+.login-branding::before {
+  inset: auto 0 0;
+  width: 100%;
+  height: 32%;
+  border-radius: 0;
+  background:
+    linear-gradient(180deg, #073563, transparent 40%),
+    url("/brand/utc-campus-banner.jpg") center 65% / cover;
+  opacity: 0.35;
+}
+.login-branding::after {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  border-radius: 0;
+  background: url("/brand/utc-ribbon.svg") center / 100% 100% no-repeat;
+}
+.login-utc-seal {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.login-branding p {
+  color: #d8e7f9;
+}
+.login-branding .brand small {
+  color: #d8e7f9;
+}
+.login-branding .brand strong {
+  color: white;
+}
+.login-branding .stat-icon {
+  color: var(--utc-gold-500);
+  background: #164577;
+}
+.login-branding .badge {
+  color: var(--utc-text-primary);
+}
+.login-form-wrap {
+  padding: 40px;
+}
+.login-form {
+  padding: 28px;
+  width: 480px;
+  background: white;
+  border: 1px solid var(--utc-border);
+  border-radius: 18px;
+  box-shadow: var(--utc-shadow-card);
+}
+.login-form > .badge {
+  color: var(--utc-blue-700);
+  background: var(--utc-blue-100);
+}
+.login-form h1 {
+  color: var(--utc-text-primary);
+}
+.password-field .icon-btn {
+  width: 44px;
+  height: 44px;
+}
+
+/* Movement explains arrival, available actions and overlay hierarchy. No ambient loops. */
+@keyframes utc-content-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes utc-overlay-enter {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes utc-backdrop-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .modal-backdrop {
+    animation: utc-backdrop-enter 180ms ease-out;
+  }
+  .modal {
+    animation: utc-overlay-enter 240ms var(--utc-ease);
+  }
+  .modal.modal-wide {
+    animation: slideInRight 260ms var(--utc-ease);
+  }
+  .action-menu-panel,
+  .table-filter-panel {
+    transform-origin: top right;
+    animation: utc-overlay-enter 180ms var(--utc-ease);
+  }
+  .app-shell.utc-shell .sidebar-shade.open {
+    animation: utc-backdrop-enter 200ms ease-out;
+  }
+}
+.utc-shell :is(.btn, .icon-btn),
+.login-form .btn {
+  transition:
+    color var(--utc-motion-fast) var(--utc-ease),
+    background-color var(--utc-motion-fast) var(--utc-ease),
+    border-color var(--utc-motion-fast) var(--utc-ease),
+    box-shadow var(--utc-motion-fast) var(--utc-ease),
+    transform var(--utc-motion-fast) var(--utc-ease);
+}
+.utc-shell :is(.btn, .icon-btn):active:not(:disabled),
+.login-form .btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+@media (hover: hover) and (pointer: fine) {
+  .utc-shell .quick-link:hover {
+    border-color: var(--utc-blue-600);
+    box-shadow: 0 3px 10px rgb(11 48 91 / 8%);
+  }
+}
+
+@media (min-width: 1024px) {
+  .utc-shell .utc-page-heading {
+    align-items: center;
+  }
+}
+@media (max-width: 1023px) {
+  .utc-shell .utc-page-heading {
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .login-branding {
+    padding: 28px;
+  }
+  .login-form-wrap {
+    padding: 24px;
+  }
+}
+@media (max-width: 767px) {
+  .utc-shell :is(.utc-page-heading, .workflow-page-heading) {
+    padding: 0 0 8px;
+    margin-bottom: 16px;
+  }
+  .utc-shell .utc-page-heading .page-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .utc-shell .registration-hero .utc-page-heading {
+    padding: 0;
+    margin: 0;
+  }
+  .utc-shell h1 {
+    font-size: 23px;
+  }
+  .card-heading,
+  .card-body {
+    padding: 16px;
+  }
+  .btn {
+    white-space: normal;
+  }
+  .table-toolbar {
+    padding: 12px;
+  }
+  .login-form-wrap {
+    padding: 20px 14px;
+  }
+  .login-form {
+    padding: 22px 18px;
+  }
+  .login-branding {
+    padding: 24px;
+  }
+  .login-branding::before {
+    display: none;
+  }
+  .login-branding h1 {
+    font-size: 26px;
+  }
+  .login-utc-seal {
+    width: 52px;
+    height: 52px;
+  }
+  .modal.modal-wide {
+    border-radius: 0;
+  }
+  :is(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    font-size: 16px;
+  }
+}
+@media (max-width: 374px) {
+  .utc-shell h1 {
+    font-size: 22px;
+  }
+  .utc-shell .utc-page-heading {
+    padding: 0 0 8px;
+  }
+  .utc-shell .registration-hero .utc-page-heading {
+    padding: 0;
+  }
+  .page-actions {
+    min-width: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .utc-shell :is(.btn, .icon-btn):active:not(:disabled),
+  .login-form .btn:active:not(:disabled),
+  .app-shell.utc-shell .nav-item:hover svg {
+    transform: none !important;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media print {
+  .utc-shell .utc-page-heading,
+  .utc-shell .workflow-page-heading {
+    background: white;
+    border: 0;
+    box-shadow: none;
+    padding: 0;
+  }
+  .utc-shell :is(.utc-page-heading, .workflow-page-heading)::after {
+    display: none;
+  }
+  .utc-shell .utc-campus-panel {
+    display: none;
+  }
+  .card,
+  .stat-card,
+  .rg-stat,
+  .rg-panel {
+    background: white;
+    box-shadow: none;
+  }
+}

@@ -69,7 +69,7 @@ export const FinalResultPolicySchema = z
     ]),
     finalRounding: rounding,
     finalStep: decimal,
-    storageDecimalPlaces: z.number().int().min(0).max(1),
+    storageDecimalPlaces: z.number().int().min(0).max(2),
     passRule: z
       .object({
         minimumFinal: decimal,

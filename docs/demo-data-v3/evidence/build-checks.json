@@ -1,0 +1,55 @@
+{
+  "checks": [
+    {
+      "name": "shared build",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\Project1\\BTL\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc",
+        "-p",
+        "D:\\Project1\\BTL\\shared\\tsconfig.json"
+      ],
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "prisma validate",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\Project1\\BTL\\node_modules\\.pnpm\\prisma@5.22.0\\node_modules\\prisma\\build\\index.js",
+        "validate",
+        "--schema",
+        "D:\\Project1\\BTL\\.cache\\demo-v3\\schema-check\\schema.prisma"
+      ],
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "prisma generate",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\Project1\\BTL\\node_modules\\.pnpm\\prisma@5.22.0\\node_modules\\prisma\\build\\index.js",
+        "generate",
+        "--schema",
+        "D:\\Project1\\BTL\\.cache\\demo-v3\\schema-check\\schema.prisma"
+      ],
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "backend production build",
+      "command": [
+        "C:\\Program Files\\nodejs\\node.exe",
+        "D:\\Project1\\BTL\\node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc",
+        "-p",
+        "tsconfig.build.json"
+      ],
+      "status": "PASS",
+      "exitCode": 0
+    },
+    {
+      "name": "frontend Vite build, API mode, no env files",
+      "status": "PASS"
+    }
+  ],
+  "productionConnected": false
+}

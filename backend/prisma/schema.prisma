@@ -235,6 +235,7 @@ model LoginSession {
 }
 
 model AuditLog {
+  @@index([resource, resourceId, createdAt(sort: Desc), id(sort: Desc)], map: "AUDIT_LOG_resource_history_idx")
   id         String   @id @default(uuid())
   userId     String?  @map("user_id")
   action     String
@@ -913,7 +914,7 @@ model PhaseEvaluation {
   id             String    @id @default(uuid())
   guidancePlanId String    @map("guidance_plan_id")
   phaseName      String    @map("phase_name")
-  score          Decimal?  @db.Decimal(4, 1)
+  score          Decimal?  @db.Decimal(5, 2)
   comment        String?
   evaluatedAt    DateTime? @map("evaluated_at") @db.Timestamptz(6)
   createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
@@ -1162,7 +1163,7 @@ model RubricCriteria {
   termId      String   @map("term_id")
   name        String
   weight      Decimal  @db.Decimal(5, 2)
-  maxScore    Decimal  @default(10) @map("max_score") @db.Decimal(4, 1)
+  maxScore    Decimal  @default(10) @map("max_score") @db.Decimal(5, 2)
   description String?
   createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
@@ -1182,7 +1183,7 @@ model ScoreEntry {
   proposalId String   @map("proposal_id")
   scorerId   String   @map("scorer_id") // Lecturer ID
   role       String // ADVISOR | REVIEWER | COMMITTEE_CHAIR | COMMITTEE_MEMBER
-  totalScore Decimal? @map("total_score") @db.Decimal(4, 1)
+  totalScore Decimal? @map("total_score") @db.Decimal(5, 2)
   isLocked   Boolean  @default(false) @map("is_locked")
   createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
   updatedAt  DateTime @updatedAt @map("updated_at") @db.Timestamptz(6)
@@ -1198,7 +1199,7 @@ model ScoreDetail {
   id               String   @id @default(uuid())
   scoreEntryId     String   @map("score_entry_id")
   rubricCriteriaId String   @map("rubric_criteria_id")
-  score            Decimal  @db.Decimal(4, 1)
+  score            Decimal  @db.Decimal(5, 2)
   comment          String?
   createdAt        DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
 
@@ -1220,9 +1221,9 @@ model FinalResult {
   publishedBy   String?   @map("published_by") @db.VarChar(36)
   id            String    @id @default(uuid())
   proposalId    String    @unique @map("proposal_id")
-  advisorScore  Decimal?  @map("advisor_score") @db.Decimal(4, 1)
-  reviewerScore Decimal?  @map("reviewer_score") @db.Decimal(4, 1)
-  finalScore    Decimal?  @map("final_score") @db.Decimal(4, 1)
+  advisorScore  Decimal?  @map("advisor_score") @db.Decimal(5, 2)
+  reviewerScore Decimal?  @map("reviewer_score") @db.Decimal(5, 2)
+  finalScore    Decimal?  @map("final_score") @db.Decimal(5, 2)
   isPassed      Boolean?  @map("is_passed")
   isPublished   Boolean   @default(false) @map("is_published")
   publishedAt   DateTime? @map("published_at") @db.Timestamptz(6)

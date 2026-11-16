@@ -1,0 +1,306 @@
+/* Loaded with WorkspaceLayout; every rule opts into the registration route. */
+.app-shell.utc-registration-shell {
+  background: var(--utc-canvas);
+}
+.app-shell.utc-registration-shell .sidebar {
+  background: var(--utc-navy-950);
+  border: 0;
+  color: white;
+}
+.app-shell.utc-registration-shell .brand {
+  min-height: 124px;
+  height: auto;
+  padding: 20px 16px;
+  gap: 12px;
+  border-bottom: 3px solid var(--utc-gold-500);
+}
+.app-shell.utc-registration-shell .utc-seal {
+  width: 58px;
+  height: 58px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.app-shell.utc-registration-shell .brand strong {
+  color: white;
+  font-size: 11px;
+  line-height: 1.6;
+  letter-spacing: 0;
+}
+.app-shell.utc-registration-shell .brand small {
+  color: #d5e4f7;
+  font-size: 10px;
+  line-height: 1.5;
+}
+.app-shell.utc-registration-shell .brand b {
+  color: var(--utc-gold-500);
+  font-size: 24px;
+  line-height: 1.2;
+}
+.app-shell.utc-registration-shell .sidebar-context {
+  background: var(--utc-navy-800);
+  border: 1px solid #376698;
+  margin: 16px 12px 12px;
+  border-radius: 10px;
+  transition: none;
+}
+.app-shell.utc-registration-shell .sidebar-context:hover {
+  background: var(--utc-navy-800);
+  border-color: #376698;
+}
+.app-shell.utc-registration-shell .sidebar-context small {
+  color: #d5e4f7;
+  font-size: 12px;
+}
+.app-shell.utc-registration-shell .sidebar-context strong {
+  color: white;
+  font-size: 14px;
+  font-weight: 600;
+}
+.app-shell.utc-registration-shell .sidebar-context > svg {
+  color: #b9daff;
+}
+.app-shell.utc-registration-shell .sidebar-nav {
+  padding-inline: 12px;
+  scrollbar-color: #376698 transparent;
+}
+.app-shell.utc-registration-shell .nav-group-toggle {
+  color: #c7daf1;
+  font-size: 12px;
+  letter-spacing: 0;
+  text-transform: none;
+  min-height: 44px;
+  padding: 12px 10px 6px;
+}
+.app-shell.utc-registration-shell .nav-group-toggle:hover {
+  color: white;
+}
+.app-shell.utc-registration-shell .nav-item {
+  color: #e7f0fd;
+  min-height: 44px;
+  padding: 10px;
+  font-weight: 400;
+  transition:
+    background-color var(--utc-motion-fast) var(--utc-ease),
+    color var(--utc-motion-fast) var(--utc-ease);
+}
+.app-shell.utc-registration-shell .nav-item svg {
+  width: 19px;
+  height: 19px;
+  opacity: 1;
+}
+.app-shell.utc-registration-shell .nav-item:hover {
+  color: white;
+  background: var(--utc-navy-800);
+}
+.app-shell.utc-registration-shell .nav-item:hover svg {
+  color: white;
+}
+.app-shell.utc-registration-shell .nav-item.active {
+  color: white;
+  background: var(--utc-sidebar-active);
+  box-shadow: inset 0 0 0 1px #3979bd;
+  font-weight: 600;
+}
+.app-shell.utc-registration-shell .nav-item.active svg {
+  color: var(--utc-gold-500);
+}
+.app-shell.utc-registration-shell .nav-item.active::before {
+  background: var(--utc-gold-500);
+  left: 0;
+  height: 28px;
+  border-radius: 3px;
+}
+.app-shell.utc-registration-shell .sidebar-footer {
+  background: var(--utc-navy-950);
+  border-color: #28476d;
+}
+.app-shell.utc-registration-shell .sidebar-footer .person strong {
+  color: white;
+  font-size: 13px;
+}
+.app-shell.utc-registration-shell .sidebar-footer .person small {
+  color: #c7daf1;
+  font-size: 12px;
+}
+.app-shell.utc-registration-shell .sidebar .icon-btn,
+.app-shell.utc-registration-shell .sidebar-collapse {
+  color: #d5e4f7;
+  min-width: 44px;
+  min-height: 44px;
+}
+.app-shell.utc-registration-shell .sidebar .icon-btn:hover,
+.app-shell.utc-registration-shell .sidebar-collapse:hover {
+  color: white;
+  background: var(--utc-navy-800);
+}
+.app-shell.utc-registration-shell .sidebar :is(a, button):focus-visible {
+  outline: 2px solid var(--utc-gold-500);
+  outline-offset: 2px;
+}
+.app-shell.utc-registration-shell .avatar {
+  color: var(--utc-blue-700);
+  background: #d5e9ff;
+  box-shadow: none;
+}
+.app-shell.utc-registration-shell .topbar {
+  background: white;
+  backdrop-filter: none;
+  border-color: var(--utc-border);
+  padding-inline: 24px;
+}
+.app-shell.utc-registration-shell .topbar .icon-btn {
+  min-width: 44px;
+  min-height: 44px;
+  color: var(--utc-text-primary);
+}
+.app-shell.utc-registration-shell .topbar-avatar {
+  min-width: 44px;
+  min-height: 44px;
+}
+.app-shell.utc-registration-shell .topbar .term-picker {
+  font-size: 13px;
+  min-height: 44px !important;
+  border-color: var(--utc-border-control);
+  background-color: var(--utc-surface-muted);
+}
+.app-shell.utc-registration-shell .topbar .notification-dot {
+  background: var(--utc-danger-text);
+  animation: none;
+}
+.app-shell.utc-registration-shell .breadcrumbs {
+  font-size: 12px;
+}
+.app-shell.utc-registration-shell .breadcrumbs [aria-current] {
+  font-weight: 600;
+}
+.app-shell.utc-registration-shell .utc-mobile-brand {
+  display: none;
+}
+.app-shell.utc-registration-shell .page-content {
+  padding: 24px 24px 40px;
+  max-width: none;
+}
+.app-shell.utc-registration-shell.sidebar-collapsed {
+  --sidebar-width: 80px;
+}
+.app-shell.utc-registration-shell.sidebar-collapsed .brand {
+  padding: 16px 8px;
+  min-height: 100px;
+}
+.app-shell.utc-registration-shell.sidebar-collapsed .brand > div {
+  display: none;
+}
+@media (max-width: 1023px) {
+  .app-shell.utc-registration-shell {
+    --sidebar-width: 0px;
+  }
+  .app-shell.utc-registration-shell .app-main {
+    margin-left: 0;
+  }
+  .app-shell.utc-registration-shell .sidebar {
+    width: 280px;
+    max-width: calc(100vw - 32px);
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform var(--utc-motion-normal) var(--utc-ease);
+  }
+  .app-shell.utc-registration-shell .sidebar.open {
+    transform: none;
+    visibility: visible;
+    box-shadow: var(--utc-shadow-overlay);
+  }
+  .app-shell.utc-registration-shell .sidebar-shade.open {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgb(0 27 68 / 40%);
+    z-index: 44;
+    border: 0;
+    backdrop-filter: none;
+  }
+  .app-shell.utc-registration-shell .topbar .mobile-menu {
+    display: inline-flex;
+  }
+  .app-shell.utc-registration-shell .sidebar-collapse {
+    display: none;
+  }
+  .app-shell.utc-registration-shell .sidebar.open .brand {
+    padding: 20px 16px;
+    justify-content: flex-start;
+  }
+  .app-shell.utc-registration-shell .sidebar.open .brand > div,
+  .app-shell.utc-registration-shell .sidebar.open .nav-item > span,
+  .app-shell.utc-registration-shell .sidebar.open .sidebar-footer .person > div,
+  .app-shell.utc-registration-shell .sidebar.open .sidebar-footer > button {
+    display: block;
+  }
+  .app-shell.utc-registration-shell .sidebar.open .sidebar-context,
+  .app-shell.utc-registration-shell .sidebar.open .nav-group-toggle {
+    display: flex;
+  }
+  .app-shell.utc-registration-shell .sidebar.open .nav-item {
+    justify-content: flex-start;
+  }
+  .app-shell.utc-registration-shell .sidebar.open .sidebar-footer {
+    padding: 14px;
+    justify-content: space-between;
+  }
+  .app-shell.utc-registration-shell .sidebar.open .nav-group {
+    border: 0;
+  }
+  .app-shell.utc-registration-shell .sidebar-close {
+    margin-left: auto;
+  }
+}
+@media (max-width: 767px) {
+  .app-shell.utc-registration-shell .topbar {
+    padding: 8px 12px;
+    gap: 8px;
+    height: auto;
+    min-height: 64px;
+    flex-wrap: wrap;
+  }
+  .app-shell.utc-registration-shell .breadcrumbs {
+    display: none;
+  }
+  .app-shell.utc-registration-shell .utc-mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--utc-text-primary);
+    min-height: 44px;
+  }
+  .app-shell.utc-registration-shell .topbar-controls {
+    display: contents;
+  }
+  .app-shell.utc-registration-shell .term-picker {
+    order: 5;
+    width: 100%;
+    max-width: none;
+    flex-basis: 100%;
+    padding: 8px 30px 8px 12px;
+  }
+  .app-shell.utc-registration-shell .topbar-controls > .icon-btn {
+    margin-left: auto;
+  }
+  .app-shell.utc-registration-shell .topbar-divider {
+    display: none;
+  }
+  .app-shell.utc-registration-shell .page-content {
+    padding: 20px 16px 32px;
+  }
+}
+@media (max-width: 374px) {
+  .app-shell.utc-registration-shell .page-content {
+    padding-inline: 12px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .app-shell.utc-registration-shell *,
+  .app-shell.utc-registration-shell *::before,
+  .app-shell.utc-registration-shell *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

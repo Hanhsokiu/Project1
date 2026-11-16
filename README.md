@@ -58,10 +58,19 @@ Dashboard → Connect và sinh JWT secrets riêng. Copy `frontend/.env.example` 
 Root `.env` chỉ dùng Docker interpolation, không phải env ứng dụng.
 
 ```powershell
+pnpm install --frozen-lockfile
 pnpm --filter @doan/backend prisma validate
-pnpm --filter @doan/backend prisma generate
 pnpm dev
 ```
+
+Sau khi kéo code mới, cài dependencies theo lockfile trước khi chạy. Dự án ghim
+pnpm 9.15.9 trong `package.json`; nếu pnpm global dùng nhầm phiên bản, chạy
+`corepack pnpm install --frozen-lockfile` và `corepack pnpm dev`.
+`pnpm dev` tự tạo lại Prisma Client từ schema hiện tại và build package `shared`
+trước khi mở các tiến trình watch. Bước chuẩn bị này không kết nối database,
+không chạy migration hoặc seed. Nó tránh lỗi TypeScript thiếu model/cột khi
+Prisma Client trên máy vẫn thuộc bản code cũ. Database thật vẫn cần khớp migration
+đã triển khai; không dùng reset/database push để sửa lỗi compile.
 
 Docker mặc định dùng database đã cấu hình trong backend/.env, không chạy Postgres local:
 

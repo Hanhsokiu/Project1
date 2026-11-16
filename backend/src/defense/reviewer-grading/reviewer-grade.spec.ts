@@ -107,7 +107,7 @@ describe("UC22 current assignment, privacy and independent score workflow", () =
     ).toBe(0);
   });
   it("reports policy/schema precision incompatibility clearly", async () => {
-    f.policy.scoreStep = "0.01";
+    f.policy.scoreStep = "0.001";
     expect((await f.detail()).blockers).toContain(
       "SCORE_PRECISION_UNSUPPORTED",
     );
@@ -468,7 +468,7 @@ describe("UC22 current assignment, privacy and independent score workflow", () =
   it("rejects unsupported precision/weight policies without defaults", async () => {
     const v = new ReviewerGradeValidator();
     expect(
-      v.policy(JSON.stringify({ ...f.policy, scoreStep: "0.01" })),
+      v.policy(JSON.stringify({ ...f.policy, scoreStep: "0.001" })),
     ).toBeNull();
     f.policy.rubric = {
       version: "UNIT_MEMORY_FIXTURE",

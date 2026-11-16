@@ -1,0 +1,75 @@
+{
+  "at": "2026-11-15T15:23:29.767Z",
+  "realApi": true,
+  "writes": 0,
+  "scope": {
+    "route": "/profile",
+    "utcClass": false,
+    "campusPanels": 0
+  },
+  "interactions": [
+    "keyboard collapses contact",
+    "invalid save reveals hidden contact",
+    "disclosure preserves entered data",
+    "real lecturer selection",
+    "reorder retains focus",
+    "submission confirmation",
+    "confirmation restores focus",
+    "drawer receives focus",
+    "drawer restores focus",
+    "reduced motion respected"
+  ],
+  "events": [],
+  "viewports": [
+    {
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "contentHeight": 1131.8499755859375,
+      "at": "2026-11-15T15:22:15.286Z",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768
+      },
+      "contentHeight": 1587,
+      "at": "2026-11-15T15:22:16.440Z",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "contentHeight": 1673.1500244140625,
+      "at": "2026-11-15T15:22:17.393Z",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "contentHeight": 2235.35009765625,
+      "at": "2026-11-15T15:22:18.295Z",
+      "overflow": false,
+      "violations": []
+    },
+    {
+      "viewport": {
+        "width": 320,
+        "height": 700
+      },
+      "contentHeight": 2537.050048828125,
+      "at": "2026-11-15T15:22:18.942Z",
+      "overflow": false,
+      "violations": []
+    }
+  ]
+}

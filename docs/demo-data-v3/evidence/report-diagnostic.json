@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "database": "btl_pr2b_acceptance_utc_demo_v3_baseline_v3",
+  "seconds": 18.449670400000002,
+  "generatedAt": "2026-11-16T07:58:45.036Z",
+  "scope": "Actual service, standalone rerun of failed UC25-P smoke; not an HTTP replacement",
+  "productionConnected": false
+}

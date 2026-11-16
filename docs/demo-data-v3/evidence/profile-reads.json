@@ -1,0 +1,215 @@
+{
+  "database": "btl_pr2b_acceptance_utc_demo_v3_baseline_v4",
+  "rows": [
+    {
+      "method": "EligibilitySession.eligibilityEvents",
+      "calls": 60,
+      "ms": 2331.6893999999975
+    },
+    {
+      "method": "EligibilitySession.eligibility",
+      "calls": 136,
+      "ms": 1682.5896999999968
+    },
+    {
+      "method": "EligibilitySession.memberProposal",
+      "calls": 136,
+      "ms": 1519.829399999995
+    },
+    {
+      "method": "GuidanceSession.ownerProposal",
+      "calls": 136,
+      "ms": 1517.2228999999988
+    },
+    {
+      "method": "EligibilitySession.eligibilityProgress",
+      "calls": 60,
+      "ms": 1379.3658000000132
+    },
+    {
+      "method": "ProposalReviewSession.advisor",
+      "calls": 256,
+      "ms": 1326.5376999999999
+    },
+    {
+      "method": "GuidanceSession.obligations",
+      "calls": 60,
+      "ms": 1184.4452999999976
+    },
+    {
+      "method": "ProposalReviewSession.roster",
+      "calls": 256,
+      "ms": 400.57199999999193
+    },
+    {
+      "method": "FinalDefenseSession.progressEvidence",
+      "calls": 76,
+      "ms": 329.2135999999891
+    },
+    {
+      "method": "EligibilitySession.member",
+      "calls": 136,
+      "ms": 296.40830000000824
+    },
+    {
+      "method": "EligibilitySession.eligibilityAdvisor",
+      "calls": 120,
+      "ms": 199.85329999999976
+    },
+    {
+      "method": "FinalDefenseSession.report",
+      "calls": 60,
+      "ms": 158.96390000000338
+    },
+    {
+      "method": "EligibilitySession.eligibilityCoverage",
+      "calls": 60,
+      "ms": 144.64929999999458
+    },
+    {
+      "method": "FinalDefenseSession.events",
+      "calls": 60,
+      "ms": 132.14390000000458
+    },
+    {
+      "method": "FinalDefenseSession.advisorScore",
+      "calls": 60,
+      "ms": 109.17009999999573
+    },
+    {
+      "method": "FinalDefenseSession.finalDecision",
+      "calls": 60,
+      "ms": 103.42450000000463
+    },
+    {
+      "method": "CommitteeSession.ccList",
+      "calls": 4,
+      "ms": 78.8144999999995
+    },
+    {
+      "method": "CommitteeSession.principal",
+      "calls": 61,
+      "ms": 41.74449999999979
+    },
+    {
+      "method": "ProposalReviewSession.principal",
+      "calls": 1,
+      "ms": 40.79779999999937
+    },
+    {
+      "method": "CommitteeSession.ccReady",
+      "calls": 6,
+      "ms": 36.45440000000326
+    },
+    {
+      "method": "CommitteeSession.checkReady",
+      "calls": 1,
+      "ms": 36.250700000000506
+    },
+    {
+      "method": "CommitteeSession.windowTerm",
+      "calls": 60,
+      "ms": 35.214499999999134
+    },
+    {
+      "method": "FinalDefenseSession.windowTerm",
+      "calls": 1,
+      "ms": 34.28399999999965
+    },
+    {
+      "method": "EligibilitySession.schemaReady",
+      "calls": 62,
+      "ms": 21.18339999998534
+    },
+    {
+      "method": "FinalDefenseSession.schemaReady",
+      "calls": 1,
+      "ms": 20.659200000000055
+    },
+    {
+      "method": "CommitteeSession.columns",
+      "calls": 2,
+      "ms": 20.252300000000105
+    },
+    {
+      "method": "CommitteeSession.term",
+      "calls": 257,
+      "ms": 13.737199999976838
+    },
+    {
+      "method": "CommitteeSession.grants",
+      "calls": 61,
+      "ms": 12.65729999999894
+    },
+    {
+      "method": "ProposalReviewSession.grants",
+      "calls": 1,
+      "ms": 11.301899999999478
+    },
+    {
+      "method": "ReviewerSession.rwReady",
+      "calls": 2,
+      "ms": 10.08140000000003
+    },
+    {
+      "method": "ProposalReviewSession.term",
+      "calls": 1,
+      "ms": 10.064000000000306
+    },
+    {
+      "method": "ReviewerSession.checkReviewerReady",
+      "calls": 1,
+      "ms": 10.035100000000057
+    },
+    {
+      "method": "CommitteeSession.ccLecturers",
+      "calls": 1,
+      "ms": 5.840799999999945
+    },
+    {
+      "method": "EligibilitySession.eligibilitySchemaReady",
+      "calls": 136,
+      "ms": 5.8041000000075655
+    },
+    {
+      "method": "ReviewerSession.columnsReviewer",
+      "calls": 1,
+      "ms": 4.715699999999742
+    },
+    {
+      "method": "EligibilitySession.checkEligibilitySchema",
+      "calls": 1,
+      "ms": 4.444799999999304
+    },
+    {
+      "method": "EligibilitySession.eligibilityColumns",
+      "calls": 1,
+      "ms": 3.046900000000278
+    },
+    {
+      "method": "CommitteeSession.eligibilityPolicy",
+      "calls": 60,
+      "ms": 2.6534999999985303
+    },
+    {
+      "method": "EligibilitySession.eligibilityPolicy",
+      "calls": 1,
+      "ms": 2.3245000000006257
+    },
+    {
+      "method": "CommitteeSession.policy",
+      "calls": 60,
+      "ms": 2.1419000000059896
+    },
+    {
+      "method": "FinalDefenseSession.policy",
+      "calls": 1,
+      "ms": 1.4597999999996318
+    },
+    {
+      "method": "CommitteeSession.ccClaimsReady",
+      "calls": 1,
+      "ms": 0.12619999999969878
+    }
+  ]
+}

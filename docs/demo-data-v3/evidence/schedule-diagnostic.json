@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "code": "P2028",
+  "message": "\nInvalid `this.finalDb.auditLog.findMany()` invocation in\nD:\\Project1\\BTL\\backend\\dist\\defense\\reviewers\\reviewer.repository.js:237:38\n\n  234             });\n  235 }\n  236 rwEvents(member) {\n→ 237     return this.finalDb.auditLog.findMany(\nTransaction API error: Transaction not found. Transaction ID is invalid, refers to an old closed transaction Prisma doesn't have information about anymore, or was obtained before disconnecting.",
+  "seconds": 30.006917800000004
+}

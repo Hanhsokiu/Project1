@@ -1180,7 +1180,9 @@ export class ScheduleService {
     expectedRevision: number,
     evidenceHash: string,
   ) {
-    const c = (await this.load(s, actor, termId)).workspace.schedules.find(
+    const load = () => this.load(s, actor, termId).then(d => d.workspace);
+    const workspace = await (s.upstreamReads?.read("UC21", actor, termId, load) ?? load());
+    const c = workspace.schedules.find(
       (c) => c.id === id,
     );
     if (!c) return missing();

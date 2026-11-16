@@ -10,10 +10,20 @@ const key = "guidance/10000000-0000-4000-8000-000000000001";
 const service = () =>
   new FileStorageService(new ConfigService({ STORAGE_LOCAL_PATH: root }));
 beforeEach(async () => {
+  // Nest ConfigService reads process.env before constructor overrides. Other
+  // HTTP tests may load the developer's .env; never let storage tests use it.
+  for (const name of [
+    "STORAGE_LOCAL_PATH",
+    "STORAGE_GUIDANCE_DRIVER",
+    "STORAGE_SUPABASE_URL",
+    "STORAGE_SUPABASE_BUCKET",
+    "STORAGE_SUPABASE_SERVICE_KEY",
+  ]) vi.stubEnv(name, undefined);
   root = await mkdtemp(path.join(tmpdir(), "uc17-storage-readonly-"));
 });
 afterEach(async () => {
   vi.unstubAllGlobals();
+  vi.unstubAllEnvs();
   const owned = path.resolve(root),
     parent = path.resolve(tmpdir());
   if (

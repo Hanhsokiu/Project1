@@ -205,6 +205,7 @@ export class GuidanceSession extends DossierSession {
   }
   ownerProposal(termStudentId: string) {
     return this.guidanceDb.topicWorkflow.findUnique({
+      relationLoadStrategy: "join",
       where: { termStudentId },
       include: {
         refTermStudentId: true,
@@ -214,6 +215,7 @@ export class GuidanceSession extends DossierSession {
   }
   obligations(termStudentId: string) {
     return this.guidanceDb.weeklyReportObligation.findMany({
+      relationLoadStrategy: "join",
       where: { termStudentId },
       include: obligationInclude,
     });

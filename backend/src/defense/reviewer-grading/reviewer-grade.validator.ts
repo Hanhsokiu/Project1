@@ -17,10 +17,10 @@ export function gradeDecimal(value: string, max = "10", step?: string) {
   const v = D(value);
   if (v.isNegative() || v.gt(max) || (step && !v.mod(D(step)).isZero()))
     invalid("SCORE_INVALID", "Điểm vượt giới hạn hoặc sai bước điểm đã duyệt.");
-  if (v.decimalPlaces() > 1)
+  if (v.decimalPlaces() > 2)
     invalid(
       "SCORE_PRECISION_UNSUPPORTED",
-      "SCORE_ENTRY/SCORE_DETAIL Decimal(4,1) không lưu chính xác điểm này; không tự làm tròn.",
+      "SCORE_ENTRY/SCORE_DETAIL Decimal(5,2) không lưu chính xác điểm này; không tự làm tròn.",
     );
   return v.toString();
 }
@@ -30,10 +30,10 @@ export class ReviewerGradeValidator {
     try {
       const p = ReviewerGradePolicySchema.parse(JSON.parse(raw ?? "null"));
       if (
-        D(p.scoreStep).decimalPlaces() > 1 ||
+        D(p.scoreStep).decimalPlaces() > 2 ||
         p.rubric?.criteria.some(
           (c) =>
-            D(c.step).decimalPlaces() > 1 || D(c.maxScore).decimalPlaces() > 1,
+            D(c.step).decimalPlaces() > 2 || D(c.maxScore).decimalPlaces() > 2,
         )
       )
         return "SCORE_PRECISION_UNSUPPORTED";
@@ -52,7 +52,7 @@ export class ReviewerGradeValidator {
         new Date(p.approvedAt) > new Date() ||
         D(p.scoreStep).lte(0) ||
         D(p.scoreStep).gt(10) ||
-        D(p.scoreStep).decimalPlaces() > 1
+        D(p.scoreStep).decimalPlaces() > 2
       )
         return null;
       if (new Set(p.requiredFeedback).size !== p.requiredFeedback.length)
@@ -68,12 +68,12 @@ export class ReviewerGradeValidator {
           if (
             D(c.maxScore).lte(0) ||
             D(c.maxScore).gt(10) ||
-            D(c.maxScore).decimalPlaces() > 1 ||
+            D(c.maxScore).decimalPlaces() > 2 ||
             D(c.weight).lte(0) ||
             D(c.weight).decimalPlaces() > 2 ||
             D(c.step).lte(0) ||
             D(c.step).gt(c.maxScore) ||
-            D(c.step).decimalPlaces() > 1
+            D(c.step).decimalPlaces() > 2
           )
             return null;
           sum = sum.plus(c.weight);

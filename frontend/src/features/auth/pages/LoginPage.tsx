@@ -10,6 +10,7 @@ import {
   Eye,
   EyeOff,
   LockKeyhole,
+  Sparkles,
   Users,
 } from "lucide-react";
 import { authService } from "../services/auth-service";
@@ -95,7 +96,7 @@ function LoginForm({ user }: { user?: Account }) {
           )}
         <div className="relative">
           <div className="brand">
-            <span className="brand-mark">UTC</span>
+            <img className="login-utc-seal" src="/brand/utc-seal.png" width={64} height={64} alt="Logo Trường Đại học Giao thông vận tải" />
             <div>
               <strong>KHOA CÔNG NGHỆ THÔNG TIN</strong>
               <small>
@@ -221,7 +222,10 @@ function LoginForm({ user }: { user?: Account }) {
           </div>
           {isDemo && (
             <div className="login-demo">
-              <p>KHÔNG GIAN TRẢI NGHIỆM HỆ THỐNG</p>
+              <div className="login-demo-header">
+                <Sparkles size={14} />
+                <span>KHÔNG GIAN TRẢI NGHIỆM HỆ THỐNG</span>
+              </div>
               <div className="grid grid-cols-1 gap-2">
                 {[["admin", "Quản trị viên"]].map(([id, label]) => (
                   <Button variant="secondary" key={id} onClick={() => demo(id)}>
@@ -229,7 +233,7 @@ function LoginForm({ user }: { user?: Account }) {
                   </Button>
                 ))}
               </div>
-              <p className="mt-4 leading-6">
+              <p className="login-demo-hint">
                 Tài khoản: <b>admin</b> · Mật khẩu: <b>Demo@2026</b>
               </p>
             </div>

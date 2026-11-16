@@ -389,7 +389,7 @@ async function main() {
     pass('archive confirmation requires reason and returns to list');
     deny = true;
     await page.goto(origin + '/topic/review-groups/g1');
-    await expect(page.getByRole('alert')).toContainText(
+    await expect(page.getByRole('alert').filter({ hasText: 'Không tìm thấy nhóm trong phạm vi' })).toContainText(
       'Không tìm thấy nhóm trong phạm vi',
     );
     pass('scope error renders without exposing group data');

@@ -572,7 +572,8 @@ export class ReviewerService {
     );
   }
   workspaceInSession(s: ReviewerSession, actor: string, termId: string) {
-    return this.load(s, actor, termId).then((d) => d.workspace);
+    const load = () => this.load(s, actor, termId).then((d) => d.workspace);
+    return s.upstreamReads?.read("UC20", actor, termId, load) ?? load();
   }
   list(actor: string, q: ReviewerQuery) {
     return this.repo.read(async (s) => {
@@ -931,7 +932,7 @@ export class ReviewerService {
     expectedRevision: number,
     evidenceHash: string,
   ) {
-    const c = (await this.load(s, actor, termId)).workspace.students.find(
+    const c = (await this.workspaceInSession(s, actor, termId)).students.find(
       (c) => c.id === member,
     );
     if (!c) return missing();

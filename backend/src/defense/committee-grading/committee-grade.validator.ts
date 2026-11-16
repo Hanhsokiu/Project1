@@ -29,10 +29,10 @@ export class CommitteeGradeValidator {
       const cs = p.rubric.criteria;
       if (
         new Set(cs.map((c) => c.id)).size !== cs.length ||
-        p.rubric.rounding.decimalPlaces > 1 ||
+        p.rubric.rounding.decimalPlaces > 2 ||
         D(p.rubric.totalStep).lte(0) ||
         D(p.rubric.totalStep).gt(10) ||
-        D(p.rubric.totalStep).decimalPlaces() > 1
+        D(p.rubric.totalStep).decimalPlaces() > 2
       )
         return null;
       if (
@@ -45,7 +45,7 @@ export class CommitteeGradeValidator {
             D(c.step).lte(0) ||
             D(c.step).gt(c.maxScore) ||
             [c.minScore, c.maxScore, c.step].some(
-              (v) => D(v).decimalPlaces() > 1,
+              (v) => D(v).decimalPlaces() > 2,
             ) ||
             D(c.weight).lte(0) ||
             D(c.weight).decimalPlaces() > 2 ||
@@ -71,11 +71,11 @@ export class CommitteeGradeValidator {
     try {
       const p = CommitteeGradePolicySchema.parse(JSON.parse(raw ?? "null"));
       if (
-        p.rubric.rounding.decimalPlaces > 1 ||
-        D(p.rubric.totalStep).decimalPlaces() > 1 ||
+        p.rubric.rounding.decimalPlaces > 2 ||
+        D(p.rubric.totalStep).decimalPlaces() > 2 ||
         p.rubric.criteria.some((c) =>
           [c.minScore, c.maxScore, c.step].some(
-            (v) => D(v).decimalPlaces() > 1,
+            (v) => D(v).decimalPlaces() > 2,
           ),
         )
       )

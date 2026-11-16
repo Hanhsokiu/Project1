@@ -1,0 +1,58 @@
+{
+  "checks": [
+    {
+      "workspace": "backend",
+      "name": "type-check",
+      "command": [
+        "node",
+        "node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "diagnostics": ""
+    },
+    {
+      "workspace": "backend",
+      "name": "lint",
+      "command": [
+        "node",
+        "node_modules\\.pnpm\\eslint@8.57.1_supports-color@8.1.1\\node_modules\\eslint\\bin\\eslint.js",
+        "src",
+        "--ext",
+        ".ts"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "diagnostics": ""
+    },
+    {
+      "workspace": "frontend",
+      "name": "type-check",
+      "command": [
+        "node",
+        "node_modules\\.pnpm\\typescript@5.9.3\\node_modules\\typescript\\bin\\tsc",
+        "--noEmit"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "diagnostics": ""
+    },
+    {
+      "workspace": "frontend",
+      "name": "lint",
+      "command": [
+        "node",
+        "node_modules\\.pnpm\\eslint@8.57.1_supports-color@8.1.1\\node_modules\\eslint\\bin\\eslint.js",
+        "src",
+        "--ext",
+        ".ts,.tsx"
+      ],
+      "exitCode": 0,
+      "status": "PASS",
+      "diagnostics": ""
+    }
+  ],
+  "productionConnected": false,
+  "generatedAt": "2026-11-16T08:10:24.736Z"
+}

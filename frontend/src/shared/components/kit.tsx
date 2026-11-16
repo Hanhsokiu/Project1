@@ -74,7 +74,7 @@ export function PageHeader({
   actions?: ReactNode;
 }) {
   return (
-    <div className="page-heading">
+    <div className="page-heading utc-page-heading">
       <div>
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
@@ -125,8 +125,8 @@ export function Button({
 }) {
   return (
     <button className={`btn btn-${variant} ${className}`} title={props.title || props["aria-label"]} disabled={disabled || loading} aria-busy={loading || undefined} {...props}>
-      {loading && <Loader2 size={16} className="animate-spin" aria-hidden="true" />}
       {children}
+      {loading && <Loader2 size={16} className="btn-spinner animate-spin" aria-hidden="true" />}
     </button>
   );
 }
@@ -161,7 +161,9 @@ export function Empty({
 }) {
   return (
     <div className="empty">
-      <FileSearch size={34} />
+      <span className="empty-icon">
+        <FileSearch size={28} />
+      </span>
       <h3>{title}</h3>
       <p>{description}</p>
       {action}
@@ -293,8 +295,18 @@ export function DataBoundary({
   const q = useDemo();
   if (q.isPending)
     return (
-      <div className="loading">
-        <Loader2 className="animate-spin" /> Đang tải dữ liệu…
+      <div className="loading-skeleton">
+        <div className="skeleton-header">
+          <div className="skeleton" style={{ width: '45%', height: 28 }} />
+          <div className="skeleton" style={{ width: '70%', height: 14, marginTop: 10 }} />
+        </div>
+        <div className="skeleton-grid">
+          <div className="skeleton skeleton-card" />
+          <div className="skeleton skeleton-card" />
+          <div className="skeleton skeleton-card" />
+          <div className="skeleton skeleton-card" />
+        </div>
+        <div className="skeleton skeleton-table" />
       </div>
     );
   if (q.isError)

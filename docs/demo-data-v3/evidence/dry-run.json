@@ -1,0 +1,103 @@
+{
+  "mode": "DRY_RUN_OFFLINE",
+  "database": "btl_pr2b_acceptance_utc_demo_v3_baseline_v3",
+  "port": 55463,
+  "productionConnected": false,
+  "manifest": {
+    "profile": "UTC_PROJECT1_DEMO_V3",
+    "version": "3.0.0",
+    "mode": "synthetic_only",
+    "source_policy": "Use uploaded Excel/PDF for structural/business reference only; do not import real student identities or scores",
+    "seed": 20261116,
+    "reference_date": "2026-11-16T09:00:00+07:00",
+    "timezone": "Asia/Ho_Chi_Minh",
+    "terms": [
+      {
+        "code": "DEMO-2026-03",
+        "participations": 76,
+        "stage": "COMPLETED",
+        "registration_open": false,
+        "historically_scheduled": 65,
+        "fully_scored": 60,
+        "deferred_before_schedule": 11,
+        "historically_scheduled_but_deferred": 5,
+        "committees": 3,
+        "committee_members_per_committee": 4
+      },
+      {
+        "code": "DEMO-2026-10",
+        "participations": 11,
+        "stage": "IN_PROGRESS",
+        "registration_open": false,
+        "historically_scheduled": 0,
+        "fully_scored": 0,
+        "committees": 0,
+        "committee_members_per_committee": 0
+      }
+    ],
+    "identities": {
+      "students_unique": 84,
+      "students_in_both_terms": 3,
+      "lecturers_unique": 18,
+      "faculty_staff": 2,
+      "admins": 1,
+      "users_unique": 105
+    },
+    "research_areas_target": 7,
+    "research_areas_policy": "Resolve against existing active catalog and approved rules; original specification mentions 5 standard areas",
+    "assignment": {
+      "one_topic_per_term_student": true,
+      "target_assigned_topics": 87,
+      "preferences_per_registration_min": 1,
+      "preferences_per_registration_max": 3,
+      "respect_lecturer_term_quota": true
+    },
+    "grading": {
+      "complete_students": 60,
+      "expected_scorers_per_complete_student": 6,
+      "component_score_entries_target": 360,
+      "process_weight": 0.4,
+      "committee_weight": 0.6,
+      "advisor_and_reviewer_process_weights": [
+        0.5,
+        0.5
+      ],
+      "precision_policy": "Verify decimal fields and rounding with source Excel/PDF; no silent precision loss"
+    },
+    "baseline": {
+      "no_new_business_changes": true,
+      "no_unauthorized_roles": true,
+      "never_send_real_emails": true,
+      "no_fake_file_paths": true
+    },
+    "scenario_profiles_in_separate_test_databases": [
+      "baseline",
+      "registration_open",
+      "preferences_over_quota",
+      "assignment_revision",
+      "proposal_revision",
+      "dossier_reopen",
+      "guidance_overdue",
+      "defense_conflict",
+      "partial_grading",
+      "publication_locked",
+      "rbac_cross_term"
+    ],
+    "safety": {
+      "target": "local_dedicated_test_database_only",
+      "seed_requires_explicit_opt_in": true,
+      "prohibit_shared_supabase": true,
+      "prohibit_production": true,
+      "idempotent": true,
+      "preserve_unrelated_data": true
+    }
+  },
+  "actualCatalogAreas": [
+    "Phần mềm",
+    "Game",
+    "Kiểm thử",
+    "Học máy",
+    "Mạng"
+  ],
+  "changesApplied": 0
+}

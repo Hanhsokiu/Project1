@@ -4,8 +4,10 @@ import { PrismaService } from "../../prisma/prisma.service";
 import { GuidanceSession } from "../tasks/guidance.repository";
 import { groupError } from "../../topic/review-groups/review-group.errors";
 import { termInclude } from "../../term/repository/term.repository";
+import { UpstreamReadCache } from "./upstream-read-cache";
 
 export class FinalDefenseSession extends GuidanceSession {
+  readonly upstreamReads = new UpstreamReadCache();
   constructor(readonly finalDb: Prisma.TransactionClient) {
     super(finalDb);
   }
@@ -32,6 +34,10 @@ export class FinalDefenseSession extends GuidanceSession {
       "SCORE_ENTRY.context",
     ].every((n) => names.has(n));
     if (!columnsReady) return false;
+    const precision = await this.finalDb.$queryRaw<{ready:boolean}[]>`
+      SELECT EXISTS(SELECT 1 FROM information_schema.columns WHERE table_schema='public'
+      AND table_name='SCORE_ENTRY' AND column_name='total_score' AND numeric_precision=5 AND numeric_scale=2) AS ready`;
+    if (!precision[0]?.ready) return false;
     // Partially added columns are not an applied migration. Reads fall back to
     // baseline projections until the version ownership/immutability guards exist.
     const guards = await this.finalDb.$queryRaw<Array<{ name: string }>>`

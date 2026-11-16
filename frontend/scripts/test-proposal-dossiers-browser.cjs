@@ -462,7 +462,7 @@ async function main() {
     );
     deny = true;
     await page.goto(origin + "/topic/dossier/foreign");
-    await expect(page.getByRole("alert")).toContainText("Không tìm thấy hồ sơ");
+    await expect(page.getByRole("alert").filter({ hasText: "Không tìm thấy hồ sơ" })).toContainText("Không tìm thấy hồ sơ");
     await expect(
       page.getByRole("region", { name: "Xem trước nội dung in" }),
     ).toHaveCount(0);

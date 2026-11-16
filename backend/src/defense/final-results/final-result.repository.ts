@@ -27,8 +27,8 @@ export class FinalResultSession extends CommitteeGradeSession {
       !columns.some(
         (c) =>
           c.column_name === "final_score" &&
-          c.numeric_precision === 4 &&
-          c.numeric_scale === 1,
+          c.numeric_precision === 5 &&
+          c.numeric_scale === 2,
       )
     )
       return false;

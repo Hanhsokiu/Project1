@@ -1,0 +1,43 @@
+{
+  "database": "btl_pr2b_acceptance_utc_demo_v3_baseline_v4",
+  "realPostgreSQL": true,
+  "checks": [
+    {
+      "name": "ownerProposal",
+      "status": "PASS",
+      "query": {
+        "ms": 98.38389999999993,
+        "digest": "113295d89358af30eee723eaed00120f114b896f76b7079827a933667e89478b"
+      },
+      "join": {
+        "ms": 15.789200000000164,
+        "digest": "113295d89358af30eee723eaed00120f114b896f76b7079827a933667e89478b"
+      }
+    },
+    {
+      "name": "obligations",
+      "status": "PASS",
+      "query": {
+        "ms": 66.11779999999999,
+        "digest": "9c482d95225920218ce0f6ef4c2f2ebc55845e81d28037b6f12eaa11afbdca63"
+      },
+      "join": {
+        "ms": 21.48630000000003,
+        "digest": "9c482d95225920218ce0f6ef4c2f2ebc55845e81d28037b6f12eaa11afbdca63"
+      }
+    },
+    {
+      "name": "eligibilityProgress",
+      "status": "PASS",
+      "query": {
+        "ms": 37.58310000000006,
+        "digest": "ed405cbed8f2ed932f1c896fe0c68f39011e7d6ec41246b25cc2d6da1ad17e49"
+      },
+      "join": {
+        "ms": 29.773300000000063,
+        "digest": "ed405cbed8f2ed932f1c896fe0c68f39011e7d6ec41246b25cc2d6da1ad17e49"
+      }
+    }
+  ],
+  "limits": "One source owner sampled in one RepeatableRead snapshot; request arguments captured from repository methods, both strategies queried actual PostgreSQL."
+}

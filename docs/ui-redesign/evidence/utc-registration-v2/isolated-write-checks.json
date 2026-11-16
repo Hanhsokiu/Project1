@@ -1,0 +1,59 @@
+{
+  "at": "2026-11-15T15:38:06.079Z",
+  "result": "PASS",
+  "isolatedHttpFixtures": true,
+  "realBackendAccess": false,
+  "checks": [
+    "mobile keyboard disclosure retains values and validation reveals the fields without writing",
+    "draft PUT preserves reordered preferences, disables fields while pending, shows success",
+    "submit confirmation POST shows pending, closes on success and refreshes saved status",
+    "HTTP failure shows error, restores controls, preserves saved submitted status",
+    "server closed window disables both save and submit"
+  ],
+  "writes": [
+    {
+      "method": "PUT",
+      "path": "/registrations/term/11111111-1111-4111-8111-111111111111/me/draft",
+      "preferences": [
+        {
+          "lecturerId": "33333333-3333-4333-8333-333333333331",
+          "preferenceOrder": 1
+        },
+        {
+          "lecturerId": "33333333-3333-4333-8333-333333333330",
+          "preferenceOrder": 2
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/registrations/term/11111111-1111-4111-8111-111111111111/me/submit",
+      "preferences": [
+        {
+          "lecturerId": "33333333-3333-4333-8333-333333333331",
+          "preferenceOrder": 1
+        },
+        {
+          "lecturerId": "33333333-3333-4333-8333-333333333330",
+          "preferenceOrder": 2
+        }
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/registrations/term/11111111-1111-4111-8111-111111111111/me/draft",
+      "preferences": [
+        {
+          "lecturerId": "33333333-3333-4333-8333-333333333331",
+          "preferenceOrder": 1
+        },
+        {
+          "lecturerId": "33333333-3333-4333-8333-333333333330",
+          "preferenceOrder": 2
+        }
+      ]
+    }
+  ],
+  "unexpected": [],
+  "errors": []
+}
