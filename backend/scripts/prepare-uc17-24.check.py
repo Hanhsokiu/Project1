@@ -62,7 +62,7 @@ class ChainTests(unittest.TestCase):
         chain.install(self.root);p=self.root/'backend/prisma/migrations'/chain.NAMES[0]/'migration.sql';p.write_bytes(b'bad')
         with self.assertRaisesRegex(ValueError,'differs'):chain.verify(self.root)
 
-    def test_release_27_verifies_without_private_zip_and_rejects_drift(self):
+    def prepare_release(self):
         schema=self.root/'backend/prisma/schema.prisma'
         schema.write_bytes(schema.read_bytes()+b'\r\n')
         chain.install(self.root)
@@ -74,11 +74,60 @@ class ChainTests(unittest.TestCase):
         (base/'.gitattributes').write_text('0_init/migration.sql text eol=crlf\n'+'\n'.join(n+'/migration.sql -text' for n in chain.NAMES+list(tails))+'\n')
         (self.root/chain.ZIP_NAME).unlink()
         schema.write_bytes(schema.read_bytes().replace(b'\r\n',b'\n'))
-        with patch.object(chain,'RELEASE_TAIL',tails):
-            self.assertEqual(len(chain.verify(self.root)['migrations']),8)
-            target=base/chain.NAMES[0]/'migration.sql'
-            target.write_bytes(target.read_bytes()+b'-- unreviewed')
-            with self.assertRaisesRegex(ValueError,'checksum drift'):chain.verify(self.root)
+        pin=patch.object(chain,'RELEASE_TAIL',tails);pin.start();self.addCleanup(pin.stop)
+        return base
+
+    def test_release_verifies_without_private_zip_and_rejects_promoted_drift(self):
+        base=self.prepare_release()
+        self.assertEqual(len(chain.migration_names(self.root)),25+len(chain.RELEASE_TAIL))
+        self.assertEqual(len(chain.verify(self.root)['migrations']),8)
+        target=base/chain.NAMES[0]/'migration.sql'
+        target.write_bytes(target.read_bytes()+b'-- unreviewed')
+        with self.assertRaisesRegex(ValueError,'checksum drift'):chain.verify(self.root)
+
+    def test_release_rejects_each_tail_checksum_change(self):
+        base=self.prepare_release()
+        for name in chain.RELEASE_TAIL:
+            with self.subTest(name=name):
+                target=base/name/'migration.sql';original=target.read_bytes()
+                target.write_bytes(original+b'-- drift')
+                with self.assertRaisesRegex(ValueError,'Applied release SQL changed'):chain.verify(self.root)
+                target.write_bytes(original)
+
+    def test_release_rejects_missing_or_unknown_migrations_without_zip(self):
+        base=self.prepare_release()
+        target=base/list(chain.RELEASE_TAIL)[-1]/'migration.sql'
+        original=target.read_bytes();target.unlink()
+        with self.assertRaisesRegex(ValueError,'Exact ordered'):chain.verify(self.root)
+        target.write_bytes(original)
+        extra=base/'202611170001_unknown';extra.mkdir();(extra/'migration.sql').write_bytes(b'SELECT 1;')
+        with self.assertRaisesRegex(ValueError,'Exact ordered'):chain.verify(self.root)
+
+    def test_release_schema_pin_preserves_promotion_and_rejects_drift(self):
+        self.prepare_release()
+        schema=self.root/'backend/prisma/schema.prisma'
+        manifest=self.root/chain.MANIFEST;evidence=json.loads(manifest.read_text())
+        promotion_pin=evidence['schemaSha256']
+        schema.write_bytes(schema.read_bytes()+b'// reviewed forward schema\r\n')
+        with self.assertRaisesRegex(ValueError,'Schema changed'):chain.verify(self.root)
+        evidence['releaseSchemaSha256']=chain.sha(schema.read_bytes().replace(b'\r\n',b'\n').replace(b'\n',b'\r\n'))
+        manifest.write_text(json.dumps(evidence))
+        for newline in [b'\n',b'\r\n']:
+            schema.write_bytes(schema.read_bytes().replace(b'\r\n',b'\n').replace(b'\n',newline))
+            self.assertEqual(chain.verify(self.root)['schemaSha256'],promotion_pin)
+        schema.write_bytes(schema.read_bytes()+b'// unreviewed\n')
+        with self.assertRaisesRegex(ValueError,'Schema changed'):chain.verify(self.root)
+
+    def test_release_stage_excludes_forward_migrations_and_checks_byte_rules(self):
+        base=self.prepare_release()
+        for uc in range(16,25):
+            staged=chain.stage(uc,self.root)
+            names=chain.migration_names_stage(staged/'migrations')
+            self.assertEqual(len(names),uc+1)
+            self.assertFalse(set(names)&set(chain.RELEASE_TAIL))
+        attributes=base/'.gitattributes'
+        attributes.write_bytes(attributes.read_bytes().replace(b'/migration.sql -text',b'/migration.sql text',1))
+        with self.assertRaisesRegex(ValueError,'checkout byte rules'):chain.verify(self.root)
 
     def test_git_byte_attributes_scoped_and_tamper_rejected(self):
         chain.install(self.root)

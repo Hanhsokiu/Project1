@@ -12,3 +12,5 @@
 202611090008_uc24_defense_final_results/migration.sql -text
 20261109150000_uc24_uc25_rbac_permissions/migration.sql -text
 202611110001_uc24_fr_guard_forward_fix/migration.sql -text
+202611160001_grade_precision_two_decimals/migration.sql -text
+202611160002_audit_resource_history_index/migration.sql -text

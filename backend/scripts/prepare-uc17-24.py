@@ -23,6 +23,8 @@ DEPLOY = 'backend/prisma/deployment/uc17-24'
 RELEASE_TAIL = {
     '20261109150000_uc24_uc25_rbac_permissions': '1D309BE4A0A43FD782594BACECC31D489FF06E6CFF68C2CBACD27F0C0070A082',
     '202611110001_uc24_fr_guard_forward_fix': 'A7E0384E8C821925E8C0B034DB38AD793440FE3A907FA7DD23B4598E121AC3E7',
+    '202611160001_grade_precision_two_decimals': '9E88030489AD4C6700166E00DB9F3F836C1E9E532114F7A278E5B75017FD9EB3',
+    '202611160002_audit_resource_history_index': '9AD2056E4E171E4F6ABA62836BF5C501D76D409D3A5FC49AB329EA83E40A79A1',
 }
 
 def sha(data): return hashlib.sha256(data).hexdigest().upper()
@@ -93,6 +95,8 @@ def verify(root=ROOT):
     names=migration_names(root)
     expected=[x['name'] for x in evidence['baseline']]+NAMES
     release = names == expected + list(RELEASE_TAIL)
+    if not release and names != expected:
+        raise ValueError('Exact ordered promotion or pinned release migration chain required')
     if release:
         # Promotion is finished. A clean release checkout must verify the pinned
         # official source without shipping the historical/private review ZIP.
@@ -131,7 +135,10 @@ def verify(root=ROOT):
         # Datamodel text can be checked out as LF on Linux. This does not relax
         # any SQL checksum: only equivalent Prisma-schema line endings qualify.
         schema_pins.add(sha(schema.replace(b'\r\n',b'\n').replace(b'\n',b'\r\n')))
-    if evidence['schemaSha256'] not in schema_pins: raise ValueError('Schema changed after staging; review first')
+    # Preserve the original promotion pin; forward releases pin their updated
+    # datamodel separately without rewriting historical migration evidence.
+    schema_pin = evidence.get('releaseSchemaSha256', evidence['schemaSha256']) if release else evidence['schemaSha256']
+    if schema_pin not in schema_pins: raise ValueError('Schema changed after staging; review first')
     return evidence
 
 def stage(through,root=ROOT):
@@ -265,7 +272,7 @@ def main():
     args=parser.parse_args()
     if args.action=='install': install(); print('PASS: pinned review SQL and recorded unapplied candidate fixes installed; 17 baseline migrations unchanged; this command accessed no database')
     elif args.action=='verify':
-        evidence=verify(); print('PASS: 25 ordered migrations, pinned review/candidate hashes and dependency; this command accessed no database')
+        evidence=verify(); print(f'PASS: {len(migration_names(ROOT))} ordered migrations, pinned review/candidate hashes and dependency; this command accessed no database')
         for x in evidence['migrations']: print(x['name'],x['sha256'])
     elif args.action=='stage':
         if args.through is None: parser.error('--through required')
