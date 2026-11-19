@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../read-transaction";
 import { ConfigService } from "@nestjs/config";
 import { ReviewerAssignSchema, ReviewerFinalizeSchema } from "@doan/shared";
 import type {
@@ -223,6 +224,35 @@ export class ReviewerService {
       groups = new Map<string, ReviewerRow[]>();
     const committeeProofs = new Map<string, EffectiveCommittee | null>();
     const histories: unknown[] = [];
+    const eventReads = new Map(
+      await mapDefenseReads(
+        s.finalDb,
+        upstream.candidates.filter(
+          (c) =>
+            scope.allows(c.departmentId) &&
+            rows.some(
+              (r) =>
+                r.proposalId === c.proposalId ||
+                r.termStudentId === c.termStudentId,
+            ),
+        ),
+        async (c) =>
+          [c.termStudentId, await s.rwEvents(c.termStudentId)] as const,
+      ),
+    );
+    const historyReads = new Map(
+      await mapDefenseReads(
+        s.finalDb,
+        upstream.candidates.filter(
+          (c) => scope.allows(c.departmentId) && c.proposalId,
+        ),
+        async (c) =>
+          [
+            c.termStudentId,
+            await s.rwAdvisorHistory(c.proposalId!, termId),
+          ] as const,
+      ),
+    );
     for (const c of upstream.candidates) {
       if (!scope.allows(c.departmentId)) continue;
       const rs = rows.filter(
@@ -260,7 +290,7 @@ export class ReviewerService {
           a.termStudentId === c.termStudentId && a.proposalId === c.proposalId,
       );
       const history = c.proposalId
-        ? await s.rwAdvisorHistory(c.proposalId, termId)
+        ? historyReads.get(c.termStudentId)!
         : {
             valid: false,
             advisorIds: [],
@@ -331,7 +361,7 @@ export class ReviewerService {
           r.termStudentId !== c.termStudentId ||
           r.proposalId !== c.proposalId,
       );
-      const events = rs.length ? await s.rwEvents(c.termStudentId) : [];
+      const events = rs.length ? eventReads.get(c.termStudentId)! : [];
       const provenance =
         !rs.length ||
         (!legacy &&

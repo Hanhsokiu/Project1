@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../../defense/read-transaction";
 import { ConfigService } from "@nestjs/config";
 import type {
   DossierPrintSnapshot,
@@ -166,12 +167,16 @@ export class ReportReader {
           ),
         ];
       const committee = f.committeeId
-        ? (await s.ccList(f.termId)).find(c => c.id === f.committeeId)
+        ? (await s.ccList(f.termId)).find((c) => c.id === f.committeeId)
         : null;
-      const committeeAllowed = !f.committeeId || !!(
-        committee && committee.termId === f.termId &&
-        (all || (committee.departmentId && deps.includes(committee.departmentId)))
-      );
+      const committeeAllowed =
+        !f.committeeId ||
+        !!(
+          committee &&
+          committee.termId === f.termId &&
+          (all ||
+            (committee.departmentId && deps.includes(committee.departmentId)))
+        );
       if (
         (all || deps.length) &&
         (!f.departmentId || all || deps.includes(f.departmentId)) &&
@@ -238,19 +243,24 @@ export class ReportReader {
       blockers: string[] = [],
       facts: ReportFact[] = [],
       rows: ReportRow[] = [];
-    for (const row of committeeRows) {
-      if (
-        (f.committeeId && row.id !== f.committeeId) ||
-        (a.departments &&
-          (!row.departmentId || !a.departments.includes(row.departmentId)))
-      )
-        continue;
-      const c =
-        a.committee?.committeeId === row.id
-          ? a.committee
-          : await this.effectiveCommittee(s, f.termId, row.id);
-      if (c) ef.set(c.committeeId, c);
-    }
+    const effective = await mapDefenseReads(
+      s.finalDb,
+      committeeRows,
+      async (row) => {
+        if (
+          (f.committeeId && row.id !== f.committeeId) ||
+          (a.departments &&
+            (!row.departmentId || !a.departments.includes(row.departmentId)))
+        )
+          return null;
+        const c =
+          a.committee?.committeeId === row.id
+            ? a.committee
+            : await this.effectiveCommittee(s, f.termId, row.id);
+        return c;
+      },
+    );
+    for (const c of effective) if (c) ef.set(c.committeeId, c);
     if (f.committeeId && !ef.has(f.committeeId))
       groupError(
         409,
@@ -274,10 +284,12 @@ export class ReportReader {
         : null,
       reviewerReady = await s.rgReady();
     let dossier: ReportSnapshot["dossier"] = null;
-    for (const candidate of candidates) {
-      if (f.termStudentId && candidate.id !== f.termStudentId) continue;
+    const collectCandidate = async (candidate: { id: string }) => {
+      const rows: ReportRow[] = [];
+      let candidateDossier: ReportSnapshot["dossier"] = null;
+      if (f.termStudentId && candidate.id !== f.termStudentId) return;
       const m = await s.member(candidate.id);
-      if (!m || m.termId !== f.termId || !m.student.isActive) continue;
+      if (!m || m.termId !== f.termId || !m.student.isActive) return;
       const owner = await s.memberProposal(m.id),
         p = owner.proposals.length === 1 ? owner.proposals[0] : null;
       if (
@@ -286,7 +298,7 @@ export class ReportReader {
           p.studentId !== m.studentId ||
           this.review.ownership(p).termStudentId !== m.id)
       )
-        continue;
+        return;
       const dep =
           p?.topic.researchArea?.pr2bResearchAreaWorkflowResearchAreaId
             ?.departmentId ?? "",
@@ -301,7 +313,7 @@ export class ReportReader {
         (f.committeeId && c?.committeeId !== f.committeeId) ||
         (a.role === "LECTURER" && c?.committeeId !== a.committee?.committeeId)
       )
-        continue;
+        return;
       if (facts.length >= max)
         groupError(
           409,
@@ -642,7 +654,7 @@ export class ReportReader {
                 "DOSSIER_TEMPLATE_MISMATCH",
                 "Mẫu đề cương không khớp bản chốt.",
               );
-            dossier = {
+            candidateDossier = {
               snapshot,
               version: valid.f.templateVersion,
               id: valid.f.id,
@@ -715,9 +727,8 @@ export class ReportReader {
           (!cells.DATE || Date.parse(cells.DATE) < Date.parse(f.from))) ||
         (f.to && (!cells.DATE || Date.parse(cells.DATE) >= Date.parse(f.to)))
       )
-        continue;
+        return { fact: null, rows, dossier: candidateDossier };
       cells.STATE = fact.row.sourceState;
-      facts.push(fact);
       if (template?.code === "PDF_REVIEWER_GRADE") {
         rows.push(...reviewerRows);
         for (const reviewer of fact.reviewers.filter(
@@ -735,6 +746,26 @@ export class ReportReader {
         !committeeReport(template?.code ?? "XLSX_STUDENTS")
       )
         rows.push(fact.row);
+      return { fact, rows, dossier: candidateDossier };
+    };
+    const append = (item: Awaited<ReturnType<typeof collectCandidate>>) => {
+      if (!item) return;
+      if (item.dossier) dossier = item.dossier;
+      if (item.fact) facts.push(item.fact);
+      rows.push(...item.rows);
+    };
+    if (!template) {
+      // Candidates are capped above. Preserve order after independent reads;
+      // template generation retains its original per-row limit/error ordering.
+      for (const item of await mapDefenseReads(
+        s.finalDb,
+        candidates,
+        collectCandidate,
+      ))
+        append(item);
+    } else {
+      for (const candidate of candidates)
+        append(await collectCandidate(candidate));
     }
     const selectedCommittees =
       f.className || f.termStudentId || f.from || f.to || f.state

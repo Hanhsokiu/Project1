@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../read-transaction";
 import { ConfigService } from "@nestjs/config";
 import { Prisma } from "@prisma/client";
 import { randomUUID } from "crypto";
@@ -522,8 +523,8 @@ export class ReviewerGradeService {
         q.termId,
         faculty ? q.reviewerId : u.lecturer!.id,
       );
-      for (const r of rows) {
-        if (!r.termStudentId) continue;
+      await mapDefenseReads(s.finalDb, rows, async (r) => {
+        if (!r.termStudentId) return;
         try {
           const v = (
             await this.load(s, actor, q.termId, r.termStudentId, r.reviewerId)
@@ -547,7 +548,7 @@ export class ReviewerGradeService {
             blockers.push(response.error?.code ?? "REVIEWER_NOT_CURRENT");
           }
         }
-      }
+      });
       items.sort(
         (a, b) =>
           a.studentCode.localeCompare(b.studentCode) ||

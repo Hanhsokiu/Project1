@@ -1,3 +1,4 @@
+import { defenseReadTransaction } from "../read-transaction";
 import { writeOwnedGrade } from "../grading/write-grade";
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
@@ -99,10 +100,13 @@ export class ReviewerGradeSession extends ScheduleSession {
 export class ReviewerGradeRepository {
   constructor(private readonly prisma: PrismaService) {}
   read<T>(fn: (s: ReviewerGradeSession) => Promise<T>) {
-    return this.prisma.$transaction((tx) => fn(new ReviewerGradeSession(tx)), {
-      isolationLevel: "RepeatableRead",
-      timeout: 30000,
-    });
+    return this.prisma.$transaction(
+      (tx) => fn(new ReviewerGradeSession(defenseReadTransaction(tx))),
+      {
+        isolationLevel: "RepeatableRead",
+        timeout: 30000,
+      },
+    );
   }
   write<T>(fn: (s: ReviewerGradeSession) => Promise<T>) {
     return this.prisma

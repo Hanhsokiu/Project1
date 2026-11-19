@@ -3,7 +3,6 @@ import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { GuidanceSession } from "../tasks/guidance.repository";
 import { groupError } from "../../topic/review-groups/review-group.errors";
-import { termInclude } from "../../term/repository/term.repository";
 import { UpstreamReadCache } from "./upstream-read-cache";
 
 export class FinalDefenseSession extends GuidanceSession {
@@ -34,7 +33,7 @@ export class FinalDefenseSession extends GuidanceSession {
       "SCORE_ENTRY.context",
     ].every((n) => names.has(n));
     if (!columnsReady) return false;
-    const precision = await this.finalDb.$queryRaw<{ready:boolean}[]>`
+    const precision = await this.finalDb.$queryRaw<{ ready: boolean }[]>`
       SELECT EXISTS(SELECT 1 FROM information_schema.columns WHERE table_schema='public'
       AND table_name='SCORE_ENTRY' AND column_name='total_score' AND numeric_precision=5 AND numeric_scale=2) AS ready`;
     if (!precision[0]?.ready) return false;
@@ -124,7 +123,9 @@ export class FinalDefenseSession extends GuidanceSession {
   windowTerm(id: string) {
     return this.finalDb.thesisTerm.findUnique({
       where: { id },
-      include: termInclude,
+      // Window checks need phase dates and locks, not the entire roster,
+      // assignment policy snapshots and account/profile relations.
+      include: { phases: true },
     });
   }
   report(proposalId: string) {

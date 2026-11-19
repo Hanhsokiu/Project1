@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../read-transaction";
 import { ConfigService } from "@nestjs/config";
 import { randomUUID } from "crypto";
 import {
@@ -312,60 +313,72 @@ export class CommitteeWorkflowService {
     if (!this.roles.role(scope.u, "FACULTY", "defense-eligibility", "read"))
       blockers.push("UC18_READ_PERMISSION_REQUIRED");
     else
-      for (const member of [
-        ...new Set([
-          ...(await s.ccCandidateMembers(termId)).map((m) => m.id),
-          ...rows.flatMap((r) => this.active(r).map((a) => a.termStudentId)),
-        ]),
-      ]) {
-        try {
-          const e = await s.ccEvidence(actor, termId, member, () =>
-            this.eligibility.forCommittee(s, actor, member, termId),
-          );
-          if (!scope.allows(e.departmentId)) continue;
-          const a = rows
-            .flatMap((r) => r.studentAssignments)
-            .find((a) => a.termStudentId === member);
-          candidates.push({
-            termStudentId: member,
-            proposalId: e.proposalId,
-            departmentId: e.departmentId,
-            studentCode: e.studentCode,
-            studentName: e.studentName,
-            title: e.title,
-            eligibility: e.effective,
-            advisorId: e.advisor?.id ?? null,
-            advisorName: e.advisor?.name ?? null,
-            advisorHash: reviewHash(
-              e.advisor
-                ? {
-                    id: e.advisor.id,
-                    assignmentId: e.advisor.assignmentId,
-                    revision: e.advisor.revision,
-                  }
-                : null,
-            ),
-            assignmentRevision: a?.revision ?? 0,
-            currentCommitteeId: a?.state === "ACTIVE" ? a.committeeId : null,
-            blockers: [
-              ...e.blockers,
-              ...(!e.advisor ? ["OFFICIAL_ADVISOR_REQUIRED"] : []),
-              ...(claims.some((a) => a.proposalId === e.proposalId)
-                ? ["LEGACY_SESSION_ASSIGNMENT_RECONCILIATION_REQUIRED"]
-                : []),
-            ],
-          });
-        } catch (e) {
-          if (e instanceof HttpException && e.getStatus() === 404) continue;
-          throw e;
-        }
-      }
+      await mapDefenseReads(
+        s.finalDb,
+        [
+          ...new Set([
+            ...(await s.ccCandidateMembers(termId)).map((m) => m.id),
+            ...rows.flatMap((r) => this.active(r).map((a) => a.termStudentId)),
+          ]),
+        ],
+        async (member) => {
+          try {
+            const e = await s.ccEvidence(actor, termId, member, () =>
+              this.eligibility.forCommittee(s, actor, member, termId),
+            );
+            if (!scope.allows(e.departmentId)) return;
+            const a = rows
+              .flatMap((r) => r.studentAssignments)
+              .find((a) => a.termStudentId === member);
+            candidates.push({
+              termStudentId: member,
+              proposalId: e.proposalId,
+              departmentId: e.departmentId,
+              studentCode: e.studentCode,
+              studentName: e.studentName,
+              title: e.title,
+              eligibility: e.effective,
+              advisorId: e.advisor?.id ?? null,
+              advisorName: e.advisor?.name ?? null,
+              advisorHash: reviewHash(
+                e.advisor
+                  ? {
+                      id: e.advisor.id,
+                      assignmentId: e.advisor.assignmentId,
+                      revision: e.advisor.revision,
+                    }
+                  : null,
+              ),
+              assignmentRevision: a?.revision ?? 0,
+              currentCommitteeId: a?.state === "ACTIVE" ? a.committeeId : null,
+              blockers: [
+                ...e.blockers,
+                ...(!e.advisor ? ["OFFICIAL_ADVISOR_REQUIRED"] : []),
+                ...(claims.some((a) => a.proposalId === e.proposalId)
+                  ? ["LEGACY_SESSION_ASSIGNMENT_RECONCILIATION_REQUIRED"]
+                  : []),
+              ],
+            });
+          } catch (e) {
+            if (e instanceof HttpException && e.getStatus() === 404) return;
+            throw e;
+          }
+        },
+      );
     candidates.sort((a, b) => a.termStudentId.localeCompare(b.termStudentId));
     const rosterHash = reviewHash({ rows, lecturers, policy, claims });
     const committees: CommitteeView[] = [];
-    for (const row of rows.filter((r) => scope.allows(r.departmentId))) {
+    const scopedRows = rows.filter((row) => scope.allows(row.departmentId));
+    const eventsByCommittee = new Map(
+      await mapDefenseReads(
+        s.finalDb,
+        scopedRows,
+        async (row) => [row.id, ready ? await s.ccEvents(row.id) : []] as const,
+      ),
+    );
+    for (const row of scopedRows) {
       const issues = this.issues(row, rows, candidates, policy, claims),
-        events = ready ? await s.ccEvents(row.id) : [];
+        events = eventsByCommittee.get(row.id)!;
       const trusted = events.some((e) => {
         const value = e.newValue as { snapshot?: unknown } | null;
         return (

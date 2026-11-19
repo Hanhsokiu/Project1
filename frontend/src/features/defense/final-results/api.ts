@@ -25,8 +25,12 @@ export const finalResultApi = {
       >(root + "/options")
     ).data.data,
   list: async (q: FinalResultQuery) =>
-    (await httpClient.get<Envelope<FinalResultList>>(root, { params: q })).data
-      .data,
+    (
+      await httpClient.get<Envelope<FinalResultList>>(root, {
+        params: q,
+        timeout: 45000,
+      })
+    ).data.data,
   detail: async (id: string, termId: string) =>
     (
       await httpClient.get<Envelope<FinalResultView>>(path(id), {

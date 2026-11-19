@@ -20,7 +20,10 @@ const states: Record<PhaseCode, TermStatus[]> = {
   DEFENSE: ["DEFENDING"],
 };
 export function operationWindow(
-  term: LoadedTerm,
+  term: Pick<
+    LoadedTerm,
+    "phases" | "status" | "isLocked" | "startDate" | "endDate"
+  >,
   phaseCode: PhaseCode,
   at = new Date(),
 ) {

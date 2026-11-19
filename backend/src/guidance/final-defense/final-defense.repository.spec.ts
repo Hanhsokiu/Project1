@@ -3,6 +3,17 @@ import { FinalDefenseSession } from "./final-defense.repository";
 import type { Prisma } from "@prisma/client";
 
 describe("UC17 capability check before migration", () => {
+  it("loads phase dates/locks without the term roster and assignment-policy relations", async () => {
+    const findUnique = vi.fn().mockResolvedValue(null);
+    const s = new FinalDefenseSession({
+      thesisTerm: { findUnique },
+    } as unknown as Prisma.TransactionClient);
+    await s.windowTerm("term");
+    expect(findUnique).toHaveBeenCalledWith({
+      where: { id: "term" },
+      include: { phases: true },
+    });
+  });
   it("checks only catalogs and stops before any new-model lookup when columns are absent", async () => {
     const query = vi.fn().mockResolvedValue([]);
     const s = new FinalDefenseSession({
@@ -75,7 +86,7 @@ describe("UC17 capability check before migration", () => {
     const query = vi
       .fn()
       .mockResolvedValueOnce(columns)
-      .mockResolvedValueOnce([{ready:true}])
+      .mockResolvedValueOnce([{ ready: true }])
       .mockResolvedValueOnce(guards);
     const s = new FinalDefenseSession({
       $queryRaw: query,
@@ -83,7 +94,7 @@ describe("UC17 capability check before migration", () => {
     expect(await s.schemaReady()).toBe(false);
     query
       .mockResolvedValueOnce(columns)
-      .mockResolvedValueOnce([{ready:true}])
+      .mockResolvedValueOnce([{ ready: true }])
       .mockResolvedValueOnce([
         ...guards,
         { name: "final_pdf_asset_immutable" },

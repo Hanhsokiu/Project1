@@ -1,3 +1,4 @@
+import { defenseReadTransaction } from "../read-transaction";
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
@@ -209,10 +210,13 @@ export class ScheduleSession extends ReviewerSession {
 export class ScheduleRepository {
   constructor(private readonly prisma: PrismaService) {}
   read<T>(fn: (s: ScheduleSession) => Promise<T>) {
-    return this.prisma.$transaction((tx) => fn(new ScheduleSession(tx)), {
-      isolationLevel: "RepeatableRead",
-      timeout: 30000,
-    });
+    return this.prisma.$transaction(
+      (tx) => fn(new ScheduleSession(defenseReadTransaction(tx))),
+      {
+        isolationLevel: "RepeatableRead",
+        timeout: 30000,
+      },
+    );
   }
   write<T>(fn: (s: ScheduleSession) => Promise<T>) {
     // All UC21 writers (including SQL guards) use the same cross-term mutex.

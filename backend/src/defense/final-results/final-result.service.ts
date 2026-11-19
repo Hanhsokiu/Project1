@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../read-transaction";
 import { ConfigService } from "@nestjs/config";
 import { randomUUID } from "crypto";
 import { FinalResultCommandSchema, calculateFinalResult } from "@doan/shared";
@@ -521,32 +522,67 @@ export class FinalResultService {
         !["FACULTY", "LECTURER", "STUDENT"].some((r) => this.has(u, r, "read"))
       )
         groupError(403, "AUTH_004", "Thiếu quyền xem kết quả.");
-      const items: FinalResultView[] = [];
-      for (const m of await s.members(q.termId)) {
-        try {
-          const { view } = await this.inspect(s, actor, q.termId, m.id);
-          if (
-            (q.committeeId && view.committeeId !== q.committeeId) ||
-            (q.state && view.state !== q.state) ||
-            (q.search &&
-              ![view.studentCode, view.studentName, view.title].some((v) =>
+      const candidates = await mapDefenseReads(
+        s.finalDb,
+        await s.members(q.termId),
+        async (m) => {
+          try {
+            const a = await this.access(s, actor, q.termId, m.id);
+            if (
+              q.search &&
+              ![
+                a.member.student.studentCode,
+                a.member.student.fullName,
+                a.p.topic.title,
+              ].some((v) =>
                 v
                   .normalize("NFC")
                   .toLocaleLowerCase("vi")
                   .includes(q.search.normalize("NFC").toLocaleLowerCase("vi")),
-              ))
-          )
-            continue;
-          items.push(view);
-        } catch (e) {
-          if (e instanceof HttpException && e.getStatus() === 404) continue;
-          throw e;
-        }
-      }
+              )
+            )
+              return null;
+            return a;
+          } catch (e) {
+            if (e instanceof HttpException && e.getStatus() === 404)
+              return null;
+            throw e;
+          }
+        },
+      );
+      const scoped = candidates.filter(
+        (a): a is NonNullable<typeof a> => a !== null,
+      );
+      scoped.sort((a, b) =>
+        a.member.student.studentCode.localeCompare(
+          b.member.student.studentCode,
+        ),
+      );
+      // State and effective committee filters require live source validation.
+      // Without them, count and page the authorized/search-matched identities
+      // before loading PDF/grade evidence for the requested page.
+      const needsEvidenceFilter = !!(q.state || q.committeeId);
+      const selected = needsEvidenceFilter
+        ? scoped
+        : scoped.slice((q.page - 1) * q.limit, q.page * q.limit);
+      const views = await mapDefenseReads(s.finalDb, selected, async (a) => {
+        const { view } = await this.inspect(s, actor, q.termId, a.member.id);
+        if (
+          (q.committeeId && view.committeeId !== q.committeeId) ||
+          (q.state && view.state !== q.state)
+        )
+          return null;
+        return view;
+      });
+      const items = views.filter(
+        (view): view is FinalResultView => view !== null,
+      );
       items.sort((a, b) => a.studentCode.localeCompare(b.studentCode));
       return {
-        items: items.slice((q.page - 1) * q.limit, q.page * q.limit),
-        total: items.length,
+        items: needsEvidenceFilter
+          ? items.slice((q.page - 1) * q.limit, q.page * q.limit)
+          : items,
+        total: needsEvidenceFilter ? items.length : scoped.length,
         page: q.page,
         limit: q.limit,
       };

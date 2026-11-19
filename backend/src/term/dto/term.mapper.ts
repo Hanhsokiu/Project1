@@ -11,7 +11,7 @@ export function parametersFromTerm(term: LoadedTerm): Record<string, number> {
   }
   return values;
 }
-export function phasesFromTerm(term: LoadedTerm) {
+export function phasesFromTerm(term: Pick<LoadedTerm, "phases">) {
   const sorted = [...term.phases].sort(
     (a, b) =>
       a.startDate.getTime() - b.startDate.getTime() || a.id.localeCompare(b.id),

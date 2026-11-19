@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../read-transaction";
 import { ConfigService } from "@nestjs/config";
 import { randomUUID } from "crypto";
 import {
@@ -178,32 +179,40 @@ export class EligibilityService {
         deny();
       const allowed = await this.optionsInSession(s, u, query.termId);
       if (!allowed) missing();
-      const items: EligibilityView[] = [];
-      for (const member of await s.members(query.termId)) {
-        let a: Access;
-        try {
-          a = await this.access(s, actor, member.id, query.termId, u);
-        } catch (e) {
-          if (e instanceof HttpException && e.getStatus() === 404) continue;
-          throw e;
-        }
-        const needle = query.search.normalize("NFC").toLocaleLowerCase("vi");
-        if (
-          needle &&
-          ![
-            a.member.student.studentCode,
-            a.member.student.fullName,
-            a.p?.topic.title ?? "",
-          ].some((v) =>
-            v.normalize("NFC").toLocaleLowerCase("vi").includes(needle),
+      const views = await mapDefenseReads(
+        s.finalDb,
+        await s.members(query.termId),
+        async (member) => {
+          let a: Access;
+          try {
+            a = await this.access(s, actor, member.id, query.termId, u);
+          } catch (e) {
+            if (e instanceof HttpException && e.getStatus() === 404)
+              return null;
+            throw e;
+          }
+          const needle = query.search.normalize("NFC").toLocaleLowerCase("vi");
+          if (
+            needle &&
+            ![
+              a.member.student.studentCode,
+              a.member.student.fullName,
+              a.p?.topic.title ?? "",
+            ].some((v) =>
+              v.normalize("NFC").toLocaleLowerCase("vi").includes(needle),
+            )
           )
-        )
-          continue;
-        const { view } = await this.inspect(s, a);
-        if (query.preview && view.preview !== query.preview) continue;
-        if (query.official && view.official.state !== query.official) continue;
-        items.push(view);
-      }
+            return null;
+          const { view } = await this.inspect(s, a);
+          if (query.preview && view.preview !== query.preview) return null;
+          if (query.official && view.official.state !== query.official)
+            return null;
+          return view;
+        },
+      );
+      const items = views.filter(
+        (view): view is EligibilityView => view !== null,
+      );
       items.sort((a, b) => a.studentCode.localeCompare(b.studentCode));
       return {
         items: items.slice(
@@ -308,11 +317,47 @@ export class EligibilityService {
       uc17Ready = await s.schemaReady();
     const policy = this.v.policy((await s.eligibilityPolicy(termId))?.value),
       policyHash = reviewHash(policy);
-    const row = p && ready ? await s.eligibility(p.id) : null;
-    const legacy =
+    // Dispatch independent producer reads together. Downstream read sessions can
+    // combine these across students without changing any evidence evaluation.
+    const progressRequired =
+      p && policy?.progressRule === "ALL_ACTIVE_TASKS_PASSED";
+    const [
+      row,
+      legacy,
+      finalPolicyRecord,
+      report,
+      decision,
+      uc17Events,
+      planEvidence,
+      obligationEvidence,
+      requiredEvidence,
+      term,
+      events,
+    ] = await Promise.all([
+      p && ready ? s.eligibility(p.id) : null,
       p && !ready && (await s.eligibilityLegacyReady())
-        ? await s.legacyEligibility(p.id)
-        : null;
+        ? s.legacyEligibility(p.id)
+        : null,
+      s.policy(termId),
+      p && uc17Ready ? s.report(p.id) : null,
+      p && uc17Ready ? s.finalDecision(p.id) : null,
+      p && uc17Ready
+        ? s.events(p.id)
+        : ([] as Awaited<ReturnType<EligibilitySession["events"]>>),
+      progressRequired ? s.eligibilityProgress(p.id) : null,
+      progressRequired
+        ? s.obligations(memberId)
+        : ([] as Awaited<ReturnType<EligibilitySession["obligations"]>>),
+      progressRequired
+        ? s.eligibilityCoverage(termId, memberId)
+        : ([] as Awaited<
+            ReturnType<EligibilitySession["eligibilityCoverage"]>
+          >),
+      s.windowTerm(termId),
+      p && ready
+        ? s.eligibilityEvents(p.id)
+        : ([] as Awaited<ReturnType<EligibilitySession["eligibilityEvents"]>>),
+    ]);
     const oldContext = row?.context as Context | null;
     const academic = this.v.academic(
       oldContext?.academic,
@@ -352,8 +397,6 @@ export class EligibilityService {
     );
     let official: Awaited<ReturnType<GuidanceValidator["official"]>> | null =
       null;
-    let dossier: Awaited<ReturnType<GuidanceValidator["finalized"]>> | null =
-      null;
     const validated = async <T>(
       key: string,
       work: () => Promise<T>,
@@ -374,12 +417,15 @@ export class EligibilityService {
     };
     if (p) {
       official = await validated("advisor", () => this.guidance.official(s, p));
-      dossier = await validated("dossier", () => this.guidance.finalized(s, p));
     }
-    const advisor = official
-      ? await s.eligibilityAdvisor(official.assignment.advisorId)
-      : null;
-    const finalPolicy = this.final.policy((await s.policy(termId))?.value);
+    const [dossier, advisor, score] = await Promise.all([
+      p ? validated("dossier", () => this.guidance.finalized(s, p)) : null,
+      official ? s.eligibilityAdvisor(official.assignment.advisorId) : null,
+      p && official && uc17Ready
+        ? s.advisorScore(p.id, official.assignment.advisorId)
+        : null,
+    ]);
+    const finalPolicy = this.final.policy(finalPolicyRecord?.value);
     const binding =
       official && p
         ? {
@@ -389,8 +435,7 @@ export class EligibilityService {
             policyHash: reviewHash(finalPolicy),
           }
         : null;
-    const report = p && uc17Ready ? await s.report(p.id) : null,
-      version = report?.versions[0];
+    const version = report?.versions[0];
     const asset = version?.fileAsset;
     let pdfValid = !!(
       version &&
@@ -424,13 +469,7 @@ export class EligibilityService {
         ? "PDF cuối có phiên bản, đúng owner và checksum."
         : "PDF cuối thiếu, không đọc được hoặc metadata/checksum chưa hợp lệ.",
     );
-    const decision = p && uc17Ready ? await s.finalDecision(p.id) : null;
-    const score =
-      p && official && uc17Ready
-        ? await s.advisorScore(p.id, official.assignment.advisorId)
-        : null;
     const sc = score?.context as { binding?: unknown } | null;
-    const uc17Events = p && uc17Ready ? await s.events(p.id) : [];
     const scoreProvenance =
       score &&
       uc17Events.some(
@@ -506,11 +545,11 @@ export class EligibilityService {
     );
     let progress: unknown = null;
     if (p && policy?.progressRule === "ALL_ACTIVE_TASKS_PASSED") {
-      const plan = await s.eligibilityProgress(p.id),
-        obligations = (await s.obligations(memberId)).sort((a, b) =>
+      const plan = planEvidence,
+        obligations = obligationEvidence.sort((a, b) =>
           a.id.localeCompare(b.id),
         );
-      const required = await s.eligibilityCoverage(termId, memberId);
+      const required = requiredEvidence;
       progress = { plan, obligations, required };
       const w = plan?.pr2bGuidancePlanWorkflowPlanId;
       const tasks =
@@ -657,7 +696,6 @@ export class EligibilityService {
         ? "Chứng cứ học vụ do Khoa xác minh theo nguồn được duyệt."
         : "Chưa có chứng cứ học vụ còn hiệu lực từ nguồn được duyệt; không dùng academicEligible/GPA.",
     );
-    const term = await s.windowTerm(termId);
     const window =
       term && policy ? operationWindow(term, policy.phaseCode) : null;
     const preview = evaluateEligibility(checks);
@@ -694,7 +732,6 @@ export class EligibilityService {
       policyHash,
     };
     const evidenceHash = reviewHash(evidence);
-    const events = p && ready ? await s.eligibilityEvents(p.id) : [];
     const facultyProvenance =
       row &&
       events.some((e) => {

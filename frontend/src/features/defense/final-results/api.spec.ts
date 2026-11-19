@@ -10,6 +10,7 @@ describe("UC24 API wiring/cache isolation", () => {
     await api.list(q);
     expect(client.get).toHaveBeenLastCalledWith("/defense-results", {
       params: q,
+      timeout: 45000,
     });
     await api.detail("student/id", "t");
     expect(client.get).toHaveBeenLastCalledWith(

@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../read-transaction";
 import { ConfigService } from "@nestjs/config";
 import { randomUUID } from "crypto";
 import {
@@ -173,6 +174,13 @@ export class ScheduleService {
   private async ledger(s: ScheduleSession, rows: ScheduleRecord[]) {
     const bookings: Booking[] = [],
       issues: string[] = [];
+    const trustedById = new Map(
+      await mapDefenseReads(
+        s.finalDb,
+        rows.filter((row) => row.revision),
+        async (row) => [row.id, await this.trusted(s, row)] as const,
+      ),
+    );
     const owners = await s.scProposalOwners(
       rows
         .filter((r) => !r.revision)
@@ -201,7 +209,7 @@ export class ScheduleService {
         });
         continue;
       }
-      if (!(await this.trusted(s, r))) {
+      if (!trustedById.get(r.id)) {
         issues.push("GLOBAL_SCHEDULE_PROVENANCE_UNVERIFIED");
         continue;
       }
@@ -1180,11 +1188,14 @@ export class ScheduleService {
     expectedRevision: number,
     evidenceHash: string,
   ) {
-    const load = () => this.load(s, actor, termId).then(d => d.workspace);
-    const workspace = await (s.upstreamReads?.read("UC21", actor, termId, load) ?? load());
-    const c = workspace.schedules.find(
-      (c) => c.id === id,
-    );
+    const load = () => this.load(s, actor, termId).then((d) => d.workspace);
+    const workspace = await (s.upstreamReads?.read(
+      "UC21",
+      actor,
+      termId,
+      load,
+    ) ?? load());
+    const c = workspace.schedules.find((c) => c.id === id);
     if (!c) return missing();
     this.review.revision(c.revision, expectedRevision);
     if (!c.downstream || c.evidenceHash !== evidenceHash)

@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
+import { defenseReadTransaction } from "../../defense/read-transaction";
 import { FinalResultSession } from "../../defense/final-results/final-result.repository";
 import { committeeJson } from "../../defense/committees/committee.repository";
 import { groupError } from "../../topic/review-groups/review-group.errors";
@@ -66,10 +67,13 @@ export class ReportSession extends FinalResultSession {
 export class ReportRepository {
   constructor(private readonly prisma: PrismaService) {}
   read<T>(fn: (s: ReportSession) => Promise<T>) {
-    return this.prisma.$transaction((tx) => fn(new ReportSession(tx)), {
-      isolationLevel: "RepeatableRead",
-      timeout: 60000,
-    });
+    return this.prisma.$transaction(
+      (tx) => fn(new ReportSession(defenseReadTransaction(tx))),
+      {
+        isolationLevel: "RepeatableRead",
+        timeout: 60000,
+      },
+    );
   }
   write<T>(fn: (s: ReportSession) => Promise<T>) {
     return this.prisma

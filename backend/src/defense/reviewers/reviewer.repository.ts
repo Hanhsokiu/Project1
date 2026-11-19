@@ -1,3 +1,4 @@
+import { defenseReadTransaction } from "../read-transaction";
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
@@ -9,7 +10,40 @@ import { groupError } from "../../topic/review-groups/review-group.errors";
 import { reviewHash } from "../../topic/proposal-reviews/proposal-review.validator";
 
 export type ReviewerRow = Prisma.ReviewerAssignmentGetPayload<object>;
+const advisorHistoryInclude = {
+  registration: { select: { studentId: true } },
+  assignmentPlan: { include: { pr2bAssignmentPlanWorkflowPlanId: true } },
+  pr2bAssignmentChangeAssignmentId: { orderBy: { assignmentRevision: "asc" } },
+} satisfies Prisma.AdvisorAssignmentInclude;
 export class ReviewerSession extends CommitteeSession {
+  private advisorHistories = new Map<
+    string,
+    Promise<
+      Prisma.AdvisorAssignmentGetPayload<{
+        include: typeof advisorHistoryInclude;
+      }>[]
+    >
+  >();
+  private advisorHistoryRows(termId: string) {
+    let rows = this.advisorHistories.get(termId);
+    if (!rows) {
+      // UC20 never changes this UC10 producer. Reuse only in this transaction;
+      // caller scope and per-student evidence checks still run on every use.
+      rows = Promise.resolve(
+        this.finalDb.advisorAssignment.findMany({
+          relationLoadStrategy: "query",
+          where: {
+            registration: { termId },
+            assignmentPlan: { status: { in: ["FINALIZED", "PUBLISHED"] } },
+          },
+          include: advisorHistoryInclude,
+          orderBy: { id: "asc" },
+        }),
+      );
+      this.advisorHistories.set(termId, rows);
+    }
+    return rows;
+  }
   private rwColumns?: Promise<{ column_name: string }[]>;
   private rwCapability?: Promise<boolean>;
   private columnsReviewer() {
@@ -116,19 +150,9 @@ export class ReviewerSession extends CommitteeSession {
         hash: reviewHash(null),
         areaId: null,
       };
-    const rows = await this.finalDb.advisorAssignment.findMany({
-      where: {
-        registration: { termId, studentId: p.studentId },
-        assignmentPlan: { status: { in: ["FINALIZED", "PUBLISHED"] } },
-      },
-      include: {
-        assignmentPlan: { include: { pr2bAssignmentPlanWorkflowPlanId: true } },
-        pr2bAssignmentChangeAssignmentId: {
-          orderBy: { assignmentRevision: "asc" },
-        },
-      },
-      orderBy: { id: "asc" },
-    });
+    const rows = (await this.advisorHistoryRows(termId)).filter(
+      (row) => row.registration.studentId === p.studentId,
+    );
     let valid = rows.length > 0;
     const advisorIds = new Set<string>();
     const proof = rows.map((a) => {
@@ -294,10 +318,13 @@ export class ReviewerSession extends CommitteeSession {
 export class ReviewerRepository {
   constructor(private readonly prisma: PrismaService) {}
   read<T>(fn: (s: ReviewerSession) => Promise<T>) {
-    return this.prisma.$transaction((tx) => fn(new ReviewerSession(tx)), {
-      isolationLevel: "RepeatableRead",
-      timeout: 30000,
-    });
+    return this.prisma.$transaction(
+      (tx) => fn(new ReviewerSession(defenseReadTransaction(tx))),
+      {
+        isolationLevel: "RepeatableRead",
+        timeout: 30000,
+      },
+    );
   }
   write<T>(fn: (s: ReviewerSession) => Promise<T>) {
     return this.prisma

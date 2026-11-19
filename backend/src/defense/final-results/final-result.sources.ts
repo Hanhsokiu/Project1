@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../read-transaction";
 import { calculateFinalResult } from "@doan/shared";
 import { readRuntimeFinalResultPolicy } from "../../common/security/application-policy-runtime";
 import type {
@@ -135,51 +136,61 @@ export class FinalResultSources {
         else {
           requiredCount = members.length;
           proof.push({ uc23PolicyHash: reviewHash(cgPolicy) });
-          for (const m of members) {
-            try {
-              const rows = await s.cgScores(proposalId, m.lecturerId),
-                score = rows.length === 1 ? rows[0] : null,
-                actor = (score?.context as { finalizedBy?: string } | null)
-                  ?.finalizedBy;
-              if (!score || !actor) {
-                blockers.push(`COMMITTEE_GRADE_MISSING:${m.lecturerId}`);
-                continue;
-              }
-              const g = await this.committeeGrades.effectiveInSession(
-                s,
-                actor,
-                termId,
-                committee.committeeId,
-                memberId,
-                m.lecturerId,
-                score.revision,
-              );
-              if (
-                g.committeeEvidenceHash !== committee.evidenceHash ||
-                g.memberRole !== m.role ||
-                g.proposalId !== proposalId
-              )
-                throw new HttpException(
-                  { error: { code: "COMMITTEE_GRADE_BINDING_CHANGED" } },
-                  409,
+          const committeeId = committee.committeeId;
+          const expectedHash = committee.evidenceHash;
+          const grades = await mapDefenseReads(
+            s.finalDb,
+            members,
+            async (m) => {
+              try {
+                const rows = await s.cgScores(proposalId, m.lecturerId),
+                  score = rows.length === 1 ? rows[0] : null,
+                  actor = (score?.context as { finalizedBy?: string } | null)
+                    ?.finalizedBy;
+                if (!score || !actor) {
+                  return { blocker: `COMMITTEE_GRADE_MISSING:${m.lecturerId}` };
+                }
+                const g = await this.committeeGrades.effectiveInSession(
+                  s,
+                  actor,
+                  termId,
+                  committeeId,
+                  memberId,
+                  m.lecturerId,
+                  score.revision,
                 );
-              sources.push({
-                source: "COMMITTEE",
-                lecturerId: m.lecturerId,
-                role: m.role,
-                scoreEntryId: g.scoreEntryId,
-                revision: g.revision,
-                totalScore: g.totalScore,
-                evidenceHash: g.evidenceHash,
-                reportVersionId: g.reportVersionId,
-                reportChecksum: g.reportChecksum,
-              });
-              proof.push(g);
-            } catch (e) {
-              blockers.push(
-                `COMMITTEE_GRADE_UNVERIFIED:${m.lecturerId}:${sourceIssue(e)}`,
-              );
-            }
+                if (
+                  g.committeeEvidenceHash !== expectedHash ||
+                  g.memberRole !== m.role ||
+                  g.proposalId !== proposalId
+                )
+                  throw new HttpException(
+                    { error: { code: "COMMITTEE_GRADE_BINDING_CHANGED" } },
+                    409,
+                  );
+                const source: ResultSource = {
+                  source: "COMMITTEE",
+                  lecturerId: m.lecturerId,
+                  role: m.role,
+                  scoreEntryId: g.scoreEntryId,
+                  revision: g.revision,
+                  totalScore: g.totalScore,
+                  evidenceHash: g.evidenceHash,
+                  reportVersionId: g.reportVersionId,
+                  reportChecksum: g.reportChecksum,
+                };
+                return { source, proof: g };
+              } catch (e) {
+                return {
+                  blocker: `COMMITTEE_GRADE_UNVERIFIED:${m.lecturerId}:${sourceIssue(e)}`,
+                };
+              }
+            },
+          );
+          for (const grade of grades) {
+            if (grade.blocker) blockers.push(grade.blocker);
+            if (grade.source) sources.push(grade.source);
+            if (grade.proof) proof.push(grade.proof);
           }
         }
         const sc = await currentGradeSchedule(s, this.schedules, {

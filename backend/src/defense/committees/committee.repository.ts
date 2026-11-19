@@ -1,3 +1,4 @@
+import { defenseReadTransaction } from "../read-transaction";
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
@@ -363,10 +364,13 @@ export const committeeJson = (v: unknown) =>
 export class CommitteeRepository {
   constructor(private readonly prisma: PrismaService) {}
   read<T>(fn: (s: CommitteeSession) => Promise<T>) {
-    return this.prisma.$transaction((tx) => fn(new CommitteeSession(tx)), {
-      isolationLevel: "RepeatableRead",
-      timeout: 30000,
-    });
+    return this.prisma.$transaction(
+      (tx) => fn(new CommitteeSession(defenseReadTransaction(tx))),
+      {
+        isolationLevel: "RepeatableRead",
+        timeout: 30000,
+      },
+    );
   }
   write<T>(fn: (s: CommitteeSession) => Promise<T>) {
     return this.prisma

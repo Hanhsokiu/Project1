@@ -1,6 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
+import { defenseReadTransaction } from "../read-transaction";
 import { FinalDefenseSession } from "../../guidance/final-defense/final-defense.repository";
 import { groupError } from "../../topic/review-groups/review-group.errors";
 
@@ -129,7 +130,13 @@ export class EligibilitySession extends FinalDefenseSession {
   eligibilityEvents(proposalId: string) {
     return this.finalDb.auditLog.findMany({
       where: { resource: "defense-eligibility", resourceId: proposalId },
-      select: {id:true,userId:true,action:true,createdAt:true,newValue:true},
+      select: {
+        id: true,
+        userId: true,
+        action: true,
+        createdAt: true,
+        newValue: true,
+      },
       orderBy: [{ createdAt: "desc" }, { id: "desc" }],
       take: 100,
     });
@@ -185,10 +192,13 @@ export const eligibilityJson = (v: unknown) =>
 export class EligibilityRepository {
   constructor(private readonly prisma: PrismaService) {}
   read<T>(fn: (s: EligibilitySession) => Promise<T>) {
-    return this.prisma.$transaction((tx) => fn(new EligibilitySession(tx)), {
-      isolationLevel: "RepeatableRead",
-      timeout: 20000,
-    });
+    return this.prisma.$transaction(
+      (tx) => fn(new EligibilitySession(defenseReadTransaction(tx))),
+      {
+        isolationLevel: "RepeatableRead",
+        timeout: 20000,
+      },
+    );
   }
   write<T>(fn: (s: EligibilitySession) => Promise<T>) {
     return this.prisma

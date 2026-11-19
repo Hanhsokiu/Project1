@@ -65,17 +65,15 @@ describe("UC20 Prisma adapter boundaries, no database", () => {
   it("CAS guards every existing pair and inserts only absent pairs without deleting history", async () => {
     const db = {
       reviewerAssignment: {
-        findMany: vi
-          .fn()
-          .mockResolvedValue([
-            {
-              id: "row",
-              reviewerId: "old",
-              revision: 2,
-              state: "DRAFT",
-              finalizedAt: null,
-            },
-          ]),
+        findMany: vi.fn().mockResolvedValue([
+          {
+            id: "row",
+            reviewerId: "old",
+            revision: 2,
+            state: "DRAFT",
+            finalizedAt: null,
+          },
+        ]),
         updateMany: vi.fn().mockResolvedValue({ count: 1 }),
         create: vi.fn(),
       },
@@ -142,6 +140,7 @@ describe("UC20 Prisma adapter boundaries, no database", () => {
     ];
     const row = {
       id: "a",
+      registration: { studentId: "s" },
       advisorId: "current",
       assignmentPlanId: "plan",
       assignmentPlan: {
@@ -155,15 +154,24 @@ describe("UC20 Prisma adapter boundaries, no database", () => {
     };
     const db = {
       proposal: {
-        findUnique: vi
-          .fn()
-          .mockResolvedValue({
-            termId: "t",
-            studentId: "s",
-            topic: { researchAreaId: "area" },
-          }),
+        findUnique: vi.fn().mockResolvedValue({
+          termId: "t",
+          studentId: "s",
+          topic: { researchAreaId: "area" },
+        }),
       },
-      advisorAssignment: { findMany: vi.fn().mockResolvedValue([row]) },
+      advisorAssignment: {
+        findMany: vi
+          .fn()
+          .mockResolvedValue([
+            row,
+            {
+              ...row,
+              registration: { studentId: "another-student" },
+              advisorId: "foreign-advisor",
+            },
+          ]),
+      },
     };
     const s = new ReviewerSession(db as never);
     expect(await s.rwAdvisorHistory("p", "t")).toMatchObject({
@@ -171,6 +179,14 @@ describe("UC20 Prisma adapter boundaries, no database", () => {
       advisorIds: ["current", "old"],
       areaId: "area",
     });
+    expect(db.advisorAssignment.findMany).toHaveBeenCalledWith(
+      expect.objectContaining({
+        where: {
+          registration: { termId: "t" },
+          assignmentPlan: { status: { in: ["FINALIZED", "PUBLISHED"] } },
+        },
+      }),
+    );
     changes[0].assignmentRevision = 2;
     expect((await s.rwAdvisorHistory("p", "t")).valid).toBe(false);
     changes[0].assignmentRevision = 1;

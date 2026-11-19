@@ -16,6 +16,64 @@ beforeEach(async () => {
 });
 afterEach(() => vi.useRealTimers());
 describe("UC24 actual producer chain, isolated transaction adapter", () => {
+  it("counts authorized search matches before paging and reads evidence only for that page", async () => {
+    const member = (await f.session.member(memberId))!;
+    const owner = await f.session.memberProposal(memberId);
+    const proposal = owner.proposals[0];
+    const evidence = await f.sources.collect(
+      f.session,
+      ids.term,
+      memberId,
+      proposal.id,
+    );
+    vi.spyOn(f.session, "members").mockResolvedValue(
+      ["third", "first", "second", "foreign"].map((id) => ({ id })),
+    );
+    vi.spyOn(f.session, "member").mockImplementation(
+      (id) =>
+        Promise.resolve({
+          ...member,
+          id,
+          studentId: member.studentId,
+          student: {
+            ...member.student,
+            studentCode:
+              id === "first" ? "001" : id === "second" ? "002" : "003",
+            fullName: "Search student",
+          },
+        }) as unknown as ReturnType<typeof f.session.member>,
+    );
+    f.session.memberProposal = async (id) => ({
+      ...owner,
+      proposals: [
+        {
+          ...proposal,
+          topic: {
+            ...proposal.topic,
+            pr2bTopicWorkflowTopicId: {
+              ...proposal.topic.pr2bTopicWorkflowTopicId!,
+              termStudentId: id,
+            },
+            researchArea: id === "foreign" ? null : proposal.topic.researchArea,
+          },
+        },
+      ],
+    });
+    const read = vi.spyOn(f.sources, "collect").mockResolvedValue(evidence);
+    const result = await f.service.list(
+      ids.faculty,
+      FinalResultQuerySchema.parse({
+        termId: ids.term,
+        search: "search",
+        page: 2,
+        limit: 1,
+      }),
+    );
+    expect(result.total).toBe(3);
+    expect(result.items.map((row) => row.studentCode)).toEqual(["002"]);
+    expect(read).toHaveBeenCalledTimes(1);
+    expect(read.mock.calls[0][2]).toBe("second");
+  });
   it("collects five actual members and does not accept four of five required sheets", async () => {
     const five = await createFinalResultFixture(5);
     expect((await five.detail()).requiredCount).toBe(7);

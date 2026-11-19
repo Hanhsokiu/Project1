@@ -1,4 +1,5 @@
 import { HttpException, Injectable } from "@nestjs/common";
+import { mapDefenseReads } from "../read-transaction";
 import { ConfigService } from "@nestjs/config";
 import { Prisma } from "@prisma/client";
 import { randomUUID } from "crypto";
@@ -601,6 +602,7 @@ export class CommitteeGradeService {
     if (!(await s.ccReady()))
       return { items, blockers: ["UC19_SCHEMA_REQUIRED"] };
     const faculty = this.facultyReader(u);
+    const reads: Array<() => Promise<CommitteeGradeView | null>> = [];
     for (const row of await s.ccList(q.termId)) {
       if (q.committeeId && row.id !== q.committeeId) continue;
       if (faculty && !(await this.granted(s, u, q.termId, [row.departmentId])))
@@ -615,9 +617,9 @@ export class CommitteeGradeService {
               : m.lecturerId !== u.lecturer!.id
           )
             continue;
-          try {
-            items.push(
-              (
+          reads.push(async () => {
+            try {
+              return (
                 await this.load(
                   s,
                   actor,
@@ -626,18 +628,24 @@ export class CommitteeGradeService {
                   a.termStudentId,
                   m.lecturerId,
                 )
-              ).view,
-            );
-          } catch (e) {
-            if (
-              !(e instanceof HttpException) ||
-              ![403, 404, 409].includes(e.getStatus())
-            )
-              throw e;
-            if (e.getStatus() === 409) blockers.push(codeOf(e));
-          }
+              ).view;
+            } catch (e) {
+              if (
+                !(e instanceof HttpException) ||
+                ![403, 404, 409].includes(e.getStatus())
+              )
+                throw e;
+              if (e.getStatus() === 409) blockers.push(codeOf(e));
+              return null;
+            }
+          });
         }
     }
+    items.push(
+      ...(await mapDefenseReads(s.finalDb, reads, (read) => read())).filter(
+        (view): view is CommitteeGradeView => view !== null,
+      ),
+    );
     return { items, blockers: [...new Set(blockers)] };
   }
   list(actor: string, q: CommitteeGradeQuery) {

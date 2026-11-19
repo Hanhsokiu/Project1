@@ -212,15 +212,19 @@ def checkpoints(root=ROOT,refresh=False):
                 for table,col in group['columns']:
                     script+=assertion(f"EXISTS(SELECT 1 FROM information_schema.columns WHERE table_schema='public' AND table_name={sql_literal(table)} AND column_name={sql_literal(col)})",'STOP_column_missing')
                 for table,name in group['constraints']:
-                    script+=assertion(f"EXISTS(SELECT 1 FROM pg_constraint WHERE conrelid=to_regclass({sql_literal('public.\"'+table+'\"')}) AND conname={sql_literal(name)} AND convalidated)",'STOP_constraint_missing_or_unvalidated')
+                    table_literal=sql_literal('public."'+table+'"')
+                    script+=assertion(f"EXISTS(SELECT 1 FROM pg_constraint WHERE conrelid=to_regclass({table_literal}) AND conname={sql_literal(name)} AND convalidated)",'STOP_constraint_missing_or_unvalidated')
                 for name,body,row_off in group['functions']:
                     expected=body.replace('\r\n','\n')
                     config=" AND p.proconfig @> ARRAY['row_security=off']" if row_off else ''
                     script+=assertion(f"EXISTS(SELECT 1 FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname='public' AND p.proname={sql_literal(name)} AND NOT p.prosecdef AND p.provolatile='v'{config} AND EXISTS(SELECT 1 FROM unnest(p.proconfig) cfg WHERE replace(cfg,' ','')='search_path=pg_catalog,public') AND replace(p.prosrc,E'\\r\\n',E'\\n')={sql_literal(expected)})",'STOP_function_body_or_config_mismatch')
                 for table,name,fn,bits,deferred in group['triggers']:
-                    script+=assertion(f"EXISTS(SELECT 1 FROM pg_trigger t JOIN pg_proc p ON p.oid=t.tgfoid JOIN pg_namespace n ON n.oid=p.pronamespace WHERE t.tgrelid=to_regclass({sql_literal('public.\"'+table+'\"')}) AND t.tgname={sql_literal(name)} AND t.tgtype::integer={bits} AND NOT t.tgisinternal AND t.tgenabled IN ('O','A') AND n.nspname='public' AND p.proname={sql_literal(fn)} AND t.tgdeferrable={str(deferred).lower()} AND t.tginitdeferred={str(deferred).lower()})",'STOP_trigger_binding_or_timing_mismatch')
+                    table_literal=sql_literal('public."'+table+'"')
+                    script+=assertion(f"EXISTS(SELECT 1 FROM pg_trigger t JOIN pg_proc p ON p.oid=t.tgfoid JOIN pg_namespace n ON n.oid=p.pronamespace WHERE t.tgrelid=to_regclass({table_literal}) AND t.tgname={sql_literal(name)} AND t.tgtype::integer={bits} AND NOT t.tgisinternal AND t.tgenabled IN ('O','A') AND n.nspname='public' AND p.proname={sql_literal(fn)} AND t.tgdeferrable={str(deferred).lower()} AND t.tginitdeferred={str(deferred).lower()})",'STOP_trigger_binding_or_timing_mismatch')
                 for table,name,unique in group['indexes']:
-                    script+=assertion(f"EXISTS(SELECT 1 FROM pg_index WHERE indrelid=to_regclass({sql_literal('public.\"'+table+'\"')}) AND indexrelid=to_regclass({sql_literal('public.\"'+name+'\"')}) AND indisvalid AND indisready AND indisunique={str(unique).lower()})",'STOP_index_invalid')
+                    table_literal=sql_literal('public."'+table+'"')
+                    index_literal=sql_literal('public."'+name+'"')
+                    script+=assertion(f"EXISTS(SELECT 1 FROM pg_index WHERE indrelid=to_regclass({table_literal}) AND indexrelid=to_regclass({index_literal}) AND indisvalid AND indisready AND indisunique={str(unique).lower()})",'STOP_index_invalid')
             if (phase=='postflight' and uc>=19) or (phase=='preflight' and uc>=20):
                 script+=assertion('''EXISTS(SELECT 1 FROM pg_class WHERE oid=to_regclass('public."DEFENSE_COMMITTEE_ASSIGNMENT"') AND relrowsecurity)
  AND (SELECT count(*) FROM pg_constraint WHERE conrelid=to_regclass('public."DEFENSE_COMMITTEE_ASSIGNMENT"') AND contype='f' AND convalidated)=6''','STOP_UC19_new_table_RLS_or_FK_mismatch')
