@@ -5,7 +5,7 @@
 .workflow-eyebrow {
   display: block;
   margin-bottom: 8px;
-  color: #4f46e5;
+  color: var(--utc-blue-700);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -16,11 +16,11 @@
   line-height: 1.3;
   font-weight: 650;
   letter-spacing: -0.025em;
-  color: #252337;
+  color: var(--utc-text-primary);
 }
 .workflow-page-heading p {
   margin-top: 10px;
-  color: #596176;
+  color: var(--utc-text-secondary);
   font-size: 14px;
   line-height: 1.7;
 }
@@ -65,7 +65,7 @@
 }
 .rg-stat-note {
   font-size: 10px;
-  color: #8992a4;
+  color: var(--utc-text-muted);
   line-height: 1.4;
 }
 .rg-panel {
@@ -90,7 +90,7 @@
 .rg-panel-heading p {
   margin-top: 4px;
   font-size: 11px;
-  color: #8791a5;
+  color: var(--utc-text-muted);
 }
 .rg-panel-badge {
   font-size: 10px;
@@ -167,7 +167,7 @@
 }
 .workflow-content table td {
   border-color: #eef2fa;
-  color: #52627a;
+  color: var(--utc-text-secondary);
   font-size: 12px;
   padding-top: 19px;
   padding-bottom: 19px;
@@ -189,7 +189,7 @@
   display: grid;
   place-items: center;
   background: #eaf1ff;
-  color: #2360d9;
+  color: var(--utc-blue-700);
   border-radius: 8px;
 }
 .rg-group-cell a {
@@ -202,7 +202,7 @@
   margin-top: 4px;
   font-size: 10px;
   font-weight: 400;
-  color: #8b95a8;
+  color: var(--utc-text-muted);
 }
 .rg-member-count {
   display: flex;
@@ -370,9 +370,9 @@
 }
 /* Workflow content uses the same shell, typography and tokens as steps 1–3. */
 .workflow-content {
-  --rg-navy: #1c2a43;
+  --rg-navy: var(--utc-text-primary);
   --rg-blue: var(--primary);
-  --rg-low: #edf2ff;
+  --rg-low: var(--utc-blue-100);
   --rg-border: var(--line);
   min-width: 0;
 }
@@ -392,19 +392,19 @@
     .rg-group-cell small,
     .rg-stat-value-text
   ) {
-  color: #52627a;
+  color: var(--utc-text-secondary);
 }
 .workflow-content :is(.rg-stat, .rg-panel) {
   border-color: var(--line);
   border-radius: 12px;
 }
 .workflow-content th {
-  color: #52627a;
+  color: var(--utc-text-secondary);
   font-size: 11px;
 }
 .workflow-content .rg-member-count > span,
 .workflow-content .rg-round-badge:not(.rg-round-badge-active) {
-  color: #52627a;
+  color: var(--utc-text-secondary);
 }
 @media (max-width: 640px) {
   .workflow-toolbar .search-input {

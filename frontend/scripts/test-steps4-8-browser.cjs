@@ -8,16 +8,18 @@ async function main() {
   let input = ""; for await (const chunk of process.stdin) input += chunk;
   const cfg = JSON.parse(input), parsed = new URL(cfg.api);
   assert.equal(parsed.hostname, "127.0.0.1"); assert.equal(parsed.protocol, "http:");
-  const root = path.resolve(__dirname, ".."), origin = "http://127.0.0.1:50180";
-  const vite = spawn(process.execPath, [path.join(path.dirname(require.resolve("vite/package.json")), "bin/vite.js"), "--host", "127.0.0.1", "--port", "50180", "--strictPort"], { cwd: root, env: { ...process.env, VITE_API_URL: cfg.api, VITE_REVIEW_GROUP_DEMO: "false" }, stdio: "ignore", windowsHide: true });
+  const port = Number(process.env.DATN_BROWSER_TEST_PORT);
+  assert(Number.isInteger(port) && port > 0 && port < 65536, 'Owned browser test port required');
+  const root = path.resolve(__dirname, ".."), origin = "http://127.0.0.1:" + port;
+  const vite = spawn(process.execPath, [path.join(path.dirname(require.resolve("vite/package.json")), "bin/vite.js"), "--host", "127.0.0.1", "--port", String(port), "--strictPort"], { cwd: root, env: { ...process.env, VITE_API_URL: cfg.api, VITE_AUTH_API: "true", VITE_ACCEPTANCE_STAGING: "false", VITE_REVIEW_GROUP_DEMO: "false" }, stdio: "ignore", windowsHide: true });
   const checks = [], errors = [], requests = [], pages = new Map();
   let browser, lastPage, result = "FAIL", failure;
   const startedAt = new Date().toISOString();
   const pass = name => { checks.push({ name, result: "PASS" }); console.log("PASS " + name); };
   try {
     let ready = false;
-    for (let i = 0; i < 150; i++) { try { if ((await fetch(origin)).ok) { ready = true; break; } } catch {} await new Promise(r => setTimeout(r, 100)); }
-    assert(ready, "Vite failed to start on isolated port 50180");
+    for (let i = 0; i < 600; i++) { try { if ((await fetch(origin)).ok) { ready = true; break; } } catch {} await new Promise(r => setTimeout(r, 100)); }
+    assert(ready, "Vite failed to start on owned loopback port");
     browser = await chromium.launch({ channel: "msedge", headless: true });
     async function open(actor, route) {
       let page = pages.get(actor);
@@ -28,6 +30,8 @@ async function main() {
           return [origin, parsed.origin].includes(u.origin) || !["http:", "https:"].includes(u.protocol) ? route.continue() : route.abort();
         }); // Traffic guard only: never fulfill/mutate responses.
         page = await context.newPage(); pages.set(actor, page);
+        page.setDefaultNavigationTimeout(90000);
+        page.on("dialog", dialog => dialog.accept());
         page.on("pageerror", e => errors.push(e.message));
         page.on("response", r => { if (r.url().startsWith(cfg.api)) requests.push({ actor, method: r.request().method(), path: new URL(r.url()).pathname, status: r.status() }); });
         await page.goto(origin + "/login");
@@ -39,8 +43,10 @@ async function main() {
       lastPage = page; await page.goto(origin + route); return page;
     }
     async function command(page, suffix, method, action) {
-      const pending = page.waitForResponse(r => r.url().split("?")[0].endsWith(suffix) && r.request().method() === method);
-      await action(); const response = await pending;
+      const [response] = await Promise.all([
+        page.waitForResponse(r => r.url().split("?")[0].endsWith(suffix) && r.request().method() === method),
+        action(),
+      ]);
       const data = await response.json();
       assert(response.ok(), method + " " + suffix + " returned " + response.status() + " " + JSON.stringify(data));
       return data.data;
@@ -127,6 +133,12 @@ async function main() {
     }
     async function submit(number) {
       s = await open("student", "/guidance/tasks/" + task.id + "/submissions");
+      await s.getByLabel(/Công việc được giao/).fill("TEST kiểm thử tích hợp phiên bản " + number);
+      await s.getByLabel(/Công việc đã thực hiện/).fill("TEST đã thực hiện và đối chiếu API");
+      await s.getByLabel(/Kết quả đạt được/).fill("TEST có báo cáo PDF và source ZIP");
+      await s.getByLabel(/Dự kiến công việc tiếp theo/).fill("TEST hoàn thiện theo nhận xét GVHD");
+      const explanation = s.getByLabel("Giải trình thay đổi", { exact: true });
+      if (await explanation.count()) await explanation.fill("TEST đã bổ sung kết quả theo nhận xét GVHD");
       await s.getByLabel("Báo cáo PDF", { exact: true }).setInputFiles({ name: "bao-cao.pdf", mimeType: "application/pdf", buffer: pdf });
       await s.getByLabel("Mã nguồn ZIP", { exact: true }).setInputFiles({ name: "source.zip", mimeType: "application/zip", buffer: zip() });
       await s.getByLabel("Nội dung báo cáo bổ sung").fill("Báo cáo lần " + number);
@@ -138,20 +150,23 @@ async function main() {
     const sub1 = await submit(1); pass("Student uploads real PDF/ZIP to private storage and commits immutable submission v1");
     a = await open("advisor", "/guidance/review/" + sub1.id);
     await a.getByLabel("Kết quả đánh giá").selectOption("REVISION_REQUIRED");
+    await a.getByLabel("Hạn sửa", { exact: true }).fill(local(cfg.dueDate));
     await a.getByLabel("Nhận xét đánh giá").fill("Cần bổ sung kết quả kiểm thử tích hợp");
     await command(a, "/task-submissions/" + sub1.id + "/reviews", "POST", () => a.getByRole("button", { name: "Ghi nhận đánh giá", exact: true }).click());
     s = await open("student", "/guidance/review/" + sub1.id);
-    await expect(s.getByText("Yêu cầu chỉnh sửa: Cần bổ sung kết quả kiểm thử tích hợp", { exact: true })).toBeVisible();
+    await expect(s.getByRole("status").filter({ hasText: "Yêu cầu chỉnh sửa: Cần bổ sung kết quả kiểm thử tích hợp" })).toBeVisible();
     pass("Advisor requests revision on submission v1; student sees exact reviewer feedback");
     const sub2 = await submit(2); assert.notEqual(sub2.id, sub1.id);
     a = await open("advisor", "/guidance/review/" + sub2.id);
     await a.getByLabel("Kết quả đánh giá").selectOption("PASS");
+    await a.getByLabel("Nhận xét đánh giá").fill("TEST đã kiểm tra bản sửa và minh chứng hợp lệ");
     await command(a, "/task-submissions/" + sub2.id + "/reviews", "POST", () => a.getByRole("button", { name: "Ghi nhận đánh giá", exact: true }).click());
     await expect(a.getByRole("heading", { name: /Đạt · Kết luận/ })).toBeVisible();
     pass("Student resubmits v2; advisor PASS completes task while v1/review history remains");
     f = await open("faculty", "/guidance/progress?termId=qa-t1");
     await expect(f.locator('[data-metric="Tổng nhiệm vụ"]')).toHaveText("1");
     await expect(f.locator('[data-metric="Đã hoàn thành (Đạt)"]')).toHaveText("1");
+    await f.locator("summary").filter({ hasText: "Bộ lọc" }).click();
     await f.getByLabel("Lọc GVHD", { exact: true }).selectOption("advisor");
     await expect(f.getByText("Nghĩa vụ báo cáo tuần (kể cả chưa có task)")).toBeVisible();
     await f.screenshot({ path: path.join(cfg.evidence, "live-faculty-dashboard.png"), fullPage: true });

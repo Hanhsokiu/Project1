@@ -1,0 +1,106 @@
+/* UTC Project1 — visual-reference tokens, based on user-supplied mockup.
+   Values are approximate samples from a raster image, NOT official UTC brand specifications.
+   Merge carefully with the existing design-system.css; do not blindly replace established tokens. */
+:root {
+  /* Brand & navigation */
+  --utc-navy-950: #001B44;
+  --utc-navy-900: #002454;
+  --utc-navy-800: #0B3F7A;
+  --utc-sidebar-active: #155BA6;
+  --utc-blue-700: #075095;
+  --utc-blue-600: #0D63B8;
+  --utc-blue-100: #E7F2FF;
+  --utc-gold-500: #FFCC0A;
+  --utc-gold-600: #EFB900;
+
+  /* Surfaces */
+  --utc-canvas: #F3F7FE;
+  --utc-surface: #FFFFFF;
+  --utc-surface-muted: #F7F9FD;
+  --utc-surface-blue: #EEF4FE;
+  --utc-border: #D9E6F7;
+  --utc-border-control: #B9CDE4;
+  --utc-divider: #E5ECF5;
+
+  /* Text */
+  --utc-text-primary: #0D1747;
+  --utc-text-secondary: #485D77;
+  --utc-text-muted: #60738A;
+  --utc-on-dark: #FFFFFF;
+
+  /* States */
+  --utc-success-text: #12652E;
+  --utc-success-bg: #DDF6E4;
+  --utc-warning-text: #995300;
+  --utc-warning-bg: #FFF1CE;
+  --utc-danger-text: #B42332;
+  --utc-danger-bg: #FFF0F2;
+  --utc-info-text: #0B4F93;
+  --utc-info-bg: #E7F2FF;
+
+  /* Typography */
+  --utc-font-family: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --utc-text-xs: 0.75rem;
+  --utc-text-sm: 0.875rem;
+  --utc-text-base: 1rem;
+  --utc-text-lg: 1.125rem;
+  --utc-title-page: clamp(1.375rem, 1.05rem + 0.95vw, 1.875rem);
+
+  /* Spacing, radii, and depth */
+  --utc-space-1: 4px;
+  --utc-space-2: 8px;
+  --utc-space-3: 12px;
+  --utc-space-4: 16px;
+  --utc-space-5: 20px;
+  --utc-space-6: 24px;
+  --utc-space-8: 32px;
+  --utc-radius-control: 10px;
+  --utc-radius-card: 14px;
+  --utc-radius-pill: 999px;
+  --utc-shadow-card: 0 2px 12px rgba(11, 48, 91, 0.055);
+  --utc-shadow-overlay: 0 12px 32px rgba(11, 48, 91, 0.16);
+  --utc-sidebar-width: 248px;
+  --utc-content-max: 1180px;
+  --utc-control-height: 44px;
+
+  /* Motion and focus */
+  --utc-ease: cubic-bezier(.2, .7, .2, 1);
+  --utc-motion-fast: 140ms;
+  --utc-motion-normal: 220ms;
+  --utc-motion-slow: 280ms;
+  --utc-focus-ring: 0 0 0 3px rgba(13, 99, 184, .22);
+}
+
+/* EXAMPLES — adapt to the existing component kit, not as a blanket replacement. */
+.utc-app-shell { background: var(--utc-canvas); color: var(--utc-text-primary); font-family: var(--utc-font-family); }
+.utc-sidebar { background: linear-gradient(180deg, var(--utc-navy-900), var(--utc-navy-950) 55%, var(--utc-navy-800)); color: var(--utc-on-dark); }
+.utc-sidebar-link--active { background: var(--utc-sidebar-active); border-inline-start: 3px solid var(--utc-gold-500); }
+.utc-card { background: var(--utc-surface); border: 1px solid var(--utc-border); border-radius: var(--utc-radius-card); box-shadow: var(--utc-shadow-card); }
+.utc-control { min-height: var(--utc-control-height); border: 1px solid var(--utc-border-control); border-radius: var(--utc-radius-control); background: white; }
+.utc-control:focus-visible, .utc-button:focus-visible { outline: none; box-shadow: var(--utc-focus-ring); }
+.utc-button { min-height: var(--utc-control-height); border-radius: var(--utc-radius-control); transition: background-color var(--utc-motion-fast) var(--utc-ease), border-color var(--utc-motion-fast) var(--utc-ease), box-shadow var(--utc-motion-fast) var(--utc-ease), opacity var(--utc-motion-fast) var(--utc-ease); }
+.utc-button--primary { color: white; background: var(--utc-blue-700); border: 1px solid var(--utc-blue-700); }
+.utc-button--primary:hover { background: #063F7B; }
+.utc-button--secondary { color: var(--utc-blue-700); background: white; border: 1px solid var(--utc-border-control); }
+.utc-status--success { color: var(--utc-success-text); background: var(--utc-success-bg); }
+.utc-status--warning { color: var(--utc-warning-text); background: var(--utc-warning-bg); }
+.utc-status--danger { color: var(--utc-danger-text); background: var(--utc-danger-bg); }
+
+@media (max-width: 1023px) {
+  .utc-desktop-sidebar { display: none; } /* Actual app should provide accessible drawer toggle. */
+}
+@media (max-width: 767px) {
+  .utc-page-content { padding-inline: 16px; }
+  .utc-registration-action { min-height: 44px; }
+}
+@media (max-width: 374px) {
+  .utc-page-content { padding-inline: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .utc-app-shell *, .utc-app-shell *::before, .utc-app-shell *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

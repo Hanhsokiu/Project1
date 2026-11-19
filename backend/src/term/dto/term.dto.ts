@@ -68,7 +68,10 @@ export const termCreateSchema = z
     registrationEnd: iso.optional(),
   })
   .strict();
-export const termPatchSchema = termCreateSchema.partial().strict();
+export const planChangeReason = z.string().trim().min(5).max(2000);
+export const termPatchSchema = termCreateSchema.partial().extend({
+  reason: planChangeReason.optional(),
+}).strict();
 export type TermCreateDto = z.infer<typeof termCreateSchema>;
 export type TermPatchDto = z.infer<typeof termPatchSchema>;
 
@@ -110,6 +113,7 @@ export const phaseSchema = z
   .strict();
 export const phasePlanSchema = z
   .object({
+    reason: planChangeReason.optional(),
     phases: z
       .array(phaseSchema)
       .min(6, "Kế hoạch phải có đầy đủ sáu giai đoạn chính.")

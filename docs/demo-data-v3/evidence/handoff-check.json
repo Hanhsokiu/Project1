@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "generatedAt": "2026-11-16T04:15:47.198Z",
+  "syntaxFiles": 24,
+  "jsonFiles": 17,
+  "localLinks": 38,
+  "protectedFiles": 728,
+  "protectedChanges": [],
+  "secretValuesFound": false,
+  "limits": "Protected fingerprint was captured after seed development began, not an initial repository snapshot. Checks do not prove unexecuted scenarios or backend business flows."
+}

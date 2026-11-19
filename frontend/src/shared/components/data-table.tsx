@@ -87,7 +87,7 @@ export function DataTable<T>({ rows, columns, searchText, filters, emptyTitle, p
       <strong>Đã chọn {chosen.length}</strong><div className="actions">{selectionActions(chosen)}</div>
       <button type="button" className="text-link" onClick={() => setSelected(new Set())}>Bỏ chọn</button>
     </div>}
-    {!filtered.length ? <div className="empty" role="status"><FileSearch size={32} aria-hidden="true" /><h3>{emptyTitle || (search || filterCount ? "Không tìm thấy kết quả" : "Chưa có dữ liệu")}</h3><p>{search || filterCount ? "Thử từ khóa khác hoặc điều chỉnh bộ lọc để mở rộng kết quả." : "Dữ liệu sẽ xuất hiện khi có hồ sơ phù hợp."}</p>{search && <button type="button" className="btn btn-secondary" onClick={() => setSearch("")}>Xóa tìm kiếm</button>}</div> : <>
+    {!filtered.length ? <div className="empty" role="status"><span className="empty-icon"><FileSearch size={24} aria-hidden="true" /></span><h3>{emptyTitle || (search || filterCount ? "Không tìm thấy kết quả" : "Chưa có dữ liệu")}</h3><p>{search || filterCount ? "Thử từ khóa khác hoặc điều chỉnh bộ lọc để mở rộng kết quả." : "Dữ liệu sẽ xuất hiện khi có hồ sơ phù hợp."}</p>{search && <button type="button" className="btn btn-secondary" onClick={() => setSearch("")}>Xóa tìm kiếm</button>}</div> : <>
       <div className="table-scroll"><table aria-label={label}>
         <thead><tr>
           {selectable && <th className="selection-cell"><input ref={selectAll} type="checkbox" aria-label="Chọn tất cả dòng trong trang" checked={allPage} onChange={togglePage} /></th>}

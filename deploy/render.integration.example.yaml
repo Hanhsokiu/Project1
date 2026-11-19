@@ -1,0 +1,58 @@
+# REVIEW TEMPLATE ONLY: do not apply automatically or create infrastructure from CI.
+# Uses the existing Supabase project; never creates a database or runs migrations.
+services:
+  - type: web
+    name: datn-integration-api
+    runtime: docker
+    repo: https://github.com/Hanhsokiu/Project1
+    branch: fix/integration-ui
+    autoDeployTrigger: "off"
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false
+      - key: DIRECT_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: FRONTEND_URL
+        sync: false
+      - key: STORAGE_GUIDANCE_DRIVER
+        value: supabase
+      - key: STORAGE_SUPABASE_URL
+        sync: false
+      - key: STORAGE_SUPABASE_BUCKET
+        sync: false
+      - key: STORAGE_SUPABASE_SERVICE_KEY
+        sync: false
+      - key: GUIDANCE_UPLOAD_ENABLED
+        value: "false"
+      - key: UC17_WRITES_ENABLED
+        value: "false"
+      - key: UC18_WRITES_ENABLED
+        value: "false"
+      - key: UC19_WRITES_ENABLED
+        value: "false"
+      - key: UC20_WRITES_ENABLED
+        value: "false"
+      - key: UC21_WRITES_ENABLED
+        value: "false"
+      - key: UC22_WRITES_ENABLED
+        value: "false"
+      - key: UC23_WRITES_ENABLED
+        value: "false"
+      - key: UC24_WRITES_ENABLED
+        value: "false"
+      - key: UC25_WRITES_ENABLED
+        value: "false"
+      - key: EMAIL_WORKER_ENABLED
+        value: "false"
+      - key: GUIDANCE_REMINDERS_ENABLED
+        value: "false"

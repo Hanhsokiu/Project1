@@ -28,6 +28,7 @@ import {
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
 import { termService } from "../services/term-service";
+import { vietnamDateTime } from "../../../shared/utils/vietnam-time";
 type TermForm = Pick<
   Term,
   | "name"
@@ -38,20 +39,10 @@ type TermForm = Pick<
   | "end"
   | "registrationStart"
   | "registrationEnd"
-> & { id?: string };
+> & { id?: string; reason?: string };
 const dateTime = (value: string, end = false) => {
   if (value.length === 10) return `${value}T${end ? "23:59" : "00:00"}`;
-  const explicit =
-    value.endsWith("Z") ||
-    value.endsWith("z") ||
-    value.slice(10).includes("+") ||
-    value.slice(10).includes("-");
-  return explicit
-    ? new Date(value)
-        .toLocaleString("sv-SE", { timeZone: "Asia/Ho_Chi_Minh" })
-        .replace(" ", "T")
-        .slice(0, 16)
-    : value.slice(0, 16);
+  return vietnamDateTime(value);
 };
 function registrationWindow(start: string) {
   if (!start) return { registrationStart: "", registrationEnd: "" };
@@ -378,6 +369,7 @@ export default function TermListPage() {
                 <input
                   required
                   type="datetime-local"
+                  step="0.001"
                   min={form.start ? `${form.start}T00:00` : undefined}
                   max={form.end ? `${form.end}T23:59` : undefined}
                   value={form.registrationStart}
@@ -390,6 +382,7 @@ export default function TermListPage() {
                 <input
                   required
                   type="datetime-local"
+                  step="0.001"
                   min={form.registrationStart}
                   max={form.end ? `${form.end}T23:59` : undefined}
                   value={form.registrationEnd}
@@ -398,6 +391,11 @@ export default function TermListPage() {
                   }
                 />
               </Field>
+              {form.id && <Field label="Lý do điều chỉnh/gia hạn thời gian đợt">
+                <textarea value={form.reason ?? ""} minLength={5} maxLength={2000}
+                  onChange={e => setForm({ ...form, reason: e.target.value })}
+                  placeholder="Bắt buộc khi đổi thời gian của đợt đã mở; lưu trong nhật ký." />
+              </Field>}
             </div>
             <div className="mt-5">
               <Notice>

@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "files": 64,
+  "tests": 403,
+  "failed": 0,
+  "realPostgreSQLIntegration": false,
+  "generatedAt": "2026-11-16T04:07:59.385Z"
+}

@@ -29,7 +29,7 @@ async function main() {
     const [identity] =
       await db.$queryRaw`SELECT current_database() AS db,current_setting('server_version_num') AS version`;
     assert.equal(identity.db, url.pathname.slice(1));
-    assert.equal(Math.floor(Number(identity.version) / 10000), 17);
+    assert.equal(Math.floor(Number(identity.version) / 10000), require('./integration/rehearsal-baseline.cjs').expectedMajor());
     const [tables] =
       await db.$queryRaw`SELECT count(*)::int AS n FROM information_schema.tables WHERE table_schema='public' AND table_type='BASE TABLE'`;
     assert.equal(tables.n, 0, "New empty isolated database required");

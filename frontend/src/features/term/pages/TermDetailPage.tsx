@@ -25,10 +25,12 @@ import {
 } from "../../../shared/components/kit";
 import { useWorkspace } from "../../../shared/hooks/use-workspace";
 import { useAction } from "../../../shared/hooks/use-demo";
+import { AUTH_API } from "../../../shared/api/api-session";
 import { termService, transitions } from "../services/term-service";
 export default function TermDetailPage() {
   const { id } = useParams();
-  const { db, setTermId } = useWorkspace();
+  const { db, setTermId, user } = useWorkspace();
+  const canTransition = !AUTH_API || !!user?.permissions?.includes("term:transition");
   const action = useAction({ invalidateTerms: true });
   const [confirm, setConfirm] = useState<"lock" | TermStatus | null>(null);
   const t = db.terms.find((t) => t.id === id);
@@ -226,15 +228,15 @@ export default function TermDetailPage() {
             </p>
             <div className="flex flex-wrap gap-2">
               {transitions[t.status]
-                .filter((s) => !["DEFENDING", "COMPLETED"].includes(s))
+                .filter((s) => s !== "COMPLETED")
                 .map((s) => (
                   <Button
                     key={s}
                     variant={s === "CANCELLED" ? "danger" : "secondary"}
-                    disabled={t.locked || action.pending}
+                    disabled={t.locked || action.pending || !canTransition}
                     onClick={() => setConfirm(s)} loading={action.pending}
                   >
-                    {labels[s]}
+                    {s === "DEFENDING" ? "Chuyển sang bảo vệ" : labels[s]}
                   </Button>
                 ))}
               {!transitions[t.status].length && (
@@ -275,7 +277,9 @@ export default function TermDetailPage() {
               ? t.locked
                 ? "Mở khóa đợt?"
                 : "Khóa đợt?"
-              : `Chuyển sang ${labels[confirm].toLocaleLowerCase("vi")}?`
+              : confirm === "DEFENDING"
+                ? "Chuyển sang bảo vệ?"
+                : `Chuyển sang ${labels[confirm].toLocaleLowerCase("vi")}?`
           }
           description={
             confirm === "lock"

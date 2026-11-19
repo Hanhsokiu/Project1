@@ -7,12 +7,14 @@ import { GlobalExceptionHandler } from "./common/exception/global-exception.hand
 import { describeStep1 } from "./common/swagger/step1-document";
 import { describeStep3 } from "./common/swagger/step3-document";
 import { configureBodyParsers } from "./common/http/body-parsers";
+import { denyAcceptanceTools } from "./common/http/deny-acceptance-tools";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bodyParser: false });
   const config = app.get(ConfigService);
 
   const apiPrefix = config.get<string>("API_PREFIX", "api");
+  denyAcceptanceTools(app, apiPrefix);
   configureBodyParsers(app, apiPrefix);
   app.setGlobalPrefix(apiPrefix);
 

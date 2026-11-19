@@ -14,6 +14,7 @@ export function createSeed(
   includeDemoData = typeof import.meta !== "undefined" &&
     import.meta.env?.MODE === "test",
 ): DemoDb {
+  if (import.meta.env.PROD) throw new Error("Demo fixtures are disabled in production");
   const directions = ["Phần mềm", "Game", "Kiểm thử", "Học máy", "Mạng"];
   if (!includeDemoData) {
     return {

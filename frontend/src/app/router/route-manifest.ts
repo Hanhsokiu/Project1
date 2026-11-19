@@ -5,6 +5,7 @@ export interface RouteInfo {
   group: string;
   roles: Role[];
   menu?: boolean;
+  menuMode?: "API" | "DEMO";
   permission?: string;
   menuRoles?: Role[];
   roleTitles?: Partial<Record<Role, string>>;
@@ -152,6 +153,7 @@ export const routeManifest: RouteInfo[] = [
     title: "Biểu mẫu & xuất dữ liệu",
     group: "Báo cáo & biểu mẫu",
     roles: A,
+    menuMode: "DEMO",
   },
   {
     path: "/profile",
@@ -288,6 +290,71 @@ export const routeManifest: RouteInfo[] = [
       !(path as string).endsWith("/new") &&
       path !== "/guidance/notifications",
   })),
+  {
+    path: "/defense/eligibility",
+    title: "Xét điều kiện bảo vệ",
+    group: "Xét điều kiện & bảo vệ",
+    roles: ["FACULTY", "LECTURER", "STUDENT"],
+    permission: "defense-eligibility:read",
+    menu: true,
+  },
+  {
+    path: "/defense/committees",
+    title: "Hội đồng bảo vệ",
+    group: "Xét điều kiện & bảo vệ",
+    roles: ["FACULTY"],
+    permission: "defense-committee:read",
+    menu: true,
+  },
+  {
+    path: "/defense/reviewers",
+    title: "Phân công phản biện",
+    group: "Xét điều kiện & bảo vệ",
+    roles: ["FACULTY"],
+    permission: "defense-reviewer:read",
+    menu: true,
+  },
+  {
+    path: "/defense/schedule",
+    title: "Lịch bảo vệ",
+    group: "Xét điều kiện & bảo vệ",
+    roles: ["FACULTY", "STUDENT", "LECTURER"],
+    permission: "defense-schedule:read",
+    menu: true,
+  },
+  {
+    path: "/defense/reviewer-grading",
+    title: "Chấm điểm phản biện",
+    group: "Xét điều kiện & bảo vệ",
+    roles: ["LECTURER", "FACULTY"],
+    permission: "defense-reviewer-grade:read",
+    menu: true,
+  },
+  {
+    path: "/defense/committee-grading",
+    title: "Chấm điểm hội đồng",
+    group: "Xét điều kiện & bảo vệ",
+    roles: ["LECTURER", "FACULTY"],
+    permission: "defense-committee-grade:read",
+    menu: true,
+  },
+  {
+    path: "/defense/results",
+    title: "Kết quả bảo vệ",
+    group: "Xét điều kiện & bảo vệ",
+    roles: ["FACULTY", "LECTURER", "STUDENT"],
+    permission: "defense-result:read",
+    menu: true,
+  },
+  {
+    path: "/defense/reports",
+    title: "Báo cáo & biểu mẫu bảo vệ",
+    group: "Báo cáo & biểu mẫu",
+    roles: ["FACULTY", "LECTURER"],
+    permission: "defense-report:read",
+    menu: true,
+    menuMode: "API",
+  },
 ];
 
 function workflowPermission(path: string): string | undefined {
@@ -301,8 +368,8 @@ function workflowPermission(path: string): string | undefined {
   if (path === "/guidance/review") return "task:review";
   if (path.startsWith("/guidance/review/")) return "submission:read";
   if (path === "/guidance/progress") return "guidance:monitor";
-  if (path === "/guidance/defense-confirm" || path === "/guidance/final-report")
-    return undefined;
+  if (path === "/guidance/defense-confirm") return "defense-confirmation:read";
+  if (path === "/guidance/final-report") return "final-report:read";
   if (path.includes("/submissions")) return "submission:read";
   if (path.startsWith("/guidance/")) return "guidance:read";
 }
@@ -355,9 +422,9 @@ function workflowPresentation(path: string): Partial<RouteInfo> {
       // Open from a plan, which supplies the required planId.
       return { menuRoles: [] };
     case "/guidance/defense-confirm":
+      return { menuRoles: ["FACULTY", "LECTURER"] };
     case "/guidance/final-report":
-      // These legacy screens use browser demo storage, not the step 4–8 APIs.
-      return { menuRoles: [] };
+      return { menuRoles: ["STUDENT"] };
     default:
       return {};
   }
@@ -369,7 +436,6 @@ export function canAccessRoute(
   user: Pick<Account, "roles" | "permissions">,
   api: boolean,
 ) {
-  if (api && ["/guidance/defense-confirm", "/guidance/final-report"].includes(route.path)) return false;
   return (
     route.roles.some((role) => user.roles.includes(role)) &&
     (!api ||
@@ -385,6 +451,7 @@ export function navigationRoutes(
   return routeManifest.filter(
     (route) =>
       route.menu !== false &&
+      (!route.menuMode || route.menuMode === (api ? "API" : "DEMO")) &&
       canAccessRoute(route, user, api) &&
       (!route.menuRoles ||
         route.menuRoles.some((role) => user.roles.includes(role))),

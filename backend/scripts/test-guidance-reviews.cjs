@@ -51,7 +51,7 @@ async function main() {
     const applied =
       await db.$queryRaw`SELECT migration_name FROM public."_prisma_migrations" WHERE finished_at IS NOT NULL ORDER BY migration_name`;
     const expected = fs
-      .readdirSync(path.join(backend, "prisma/migrations"))
+      .readdirSync(path.join(path.dirname(require('./integration/rehearsal-baseline.cjs').schema(backend)), 'migrations'))
       .filter((name) =>
         fs.existsSync(
           path.join(backend, "prisma/migrations", name, "migration.sql"),

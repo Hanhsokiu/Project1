@@ -35,24 +35,15 @@ async function main() {
     );
     assert.equal(tables.n, 0, 'Fresh isolated database required');
     const backend = path.resolve(__dirname, '..');
-    const deploy = spawnSync(
-      process.execPath,
-      [
-        require.resolve('prisma/build/index.js'),
-        'migrate',
-        'deploy',
-        '--schema',
-        path.join(backend, 'prisma/schema.prisma'),
-      ],
-      { cwd: backend, env: process.env, encoding: 'utf8', windowsHide: true },
-    );
+    const deploy = await require('./integration/deploy-test-chain.cjs').deploy(db, backend, url.toString());
     if (deploy.error || deploy.status !== 0)
       throw Error('Isolated migration replay failed');
     pass('active migration chain replays without reset/drop');
     const history = await db.$queryRawUnsafe(
       'SELECT migration_name,checksum,finished_at FROM public."_prisma_migrations" ORDER BY migration_name',
     );
-    assert.equal(history.length, fs.readdirSync(path.join(backend,'prisma/migrations')).filter(name=>fs.existsSync(path.join(backend,'prisma/migrations',name,'migration.sql'))).length);
+    const scope=path.join(path.dirname(require('./integration/rehearsal-baseline.cjs').schema(backend)),'migrations');
+    assert.equal(history.length, fs.readdirSync(scope).filter(name=>fs.existsSync(path.join(scope,name,'migration.sql'))).length);
     for (const row of history) {
       assert(row.finished_at);
       assert.equal(
@@ -75,7 +66,7 @@ async function main() {
     pass('migration history checksums match applied files');
     // Synthetic fixture. No official assignment, approval, receipt or files fabricated.
     for (const name of ['FACULTY', 'LECTURER', 'STUDENT', 'ADMIN'])
-      await db.role.create({ data: { id: name, name } });
+      await db.role.upsert({ where: { name }, create: { id: name, name }, update: {} });
     const permissions = await db.permission.findMany({
       where: { resource: 'review-group' },
     });

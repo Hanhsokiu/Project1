@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import { AUTH_API } from "../../../shared/api/api-session";
 import {
   Eye,
@@ -450,5 +451,6 @@ function Content({ db }: { db: DemoDb }) {
   );
 }
 export default function ExportCenterPage() {
-  return <DataBoundary>{(db) => <Content db={db} />}</DataBoundary>;
+  const location = useLocation();
+  return AUTH_API ? <Navigate to={"/defense/reports" + location.search} replace /> : <DataBoundary>{(db) => <Content db={db} />}</DataBoundary>;
 }

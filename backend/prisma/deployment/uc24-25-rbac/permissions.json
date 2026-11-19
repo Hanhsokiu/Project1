@@ -1,0 +1,24 @@
+{
+  "version": "uc24-25-rbac-v1",
+  "status": "PRODUCTION_DEFINITIONS_HISTORY26_AND_FOUR_FACULTY_READ_APPLIED",
+  "controller": {
+    "defense-result": ["read", "confirm", "finalize", "publish"],
+    "defense-report": ["read", "templates-read", "statistics", "preview", "export", "history-read", "download"]
+  },
+  "serviceOnly": {
+    "defense-result": ["read-own", "components-read", "history-read", "final-read"],
+    "defense-report": ["grade-statistics", "score-statistics", "draft-preview", "draft-export", "list-export", "components-export", "final-export", "comments-export", "minutes-export", "dossier-export", "pii-export"]
+  },
+  "existingCrossResourceDependencies": [
+    {"resource": "defense-confirmation", "action": "comment-read"},
+    {"resource": "defense-reviewer-grade", "action": "comment-read"},
+    {"resource": "dossier", "action": "export"}
+  ],
+  "proposedMinimumMapping": {
+    "status": "FOUR_FACULTY_READ_APPLIED_OTHER_CAPABILITIES_PENDING_POLICY",
+    "FACULTY": ["defense-result:read", "defense-report:read", "defense-report:templates-read", "defense-report:statistics"],
+    "LECTURER": [],
+    "STUDENT": [],
+    "ADMIN": []
+  }
+}

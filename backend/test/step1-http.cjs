@@ -3,12 +3,8 @@ const { PrismaClient } = require("@prisma/client");
 const bcrypt = require("bcryptjs");
 const fs = require("node:fs");
 const path = require("node:path");
-for (const line of fs
-  .readFileSync(path.resolve(__dirname, "../.env"), "utf8")
-  .split(/\r?\n/)) {
-  const m = line.match(/^([A-Z_]+)=(.*)$/);
-  if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
-}
+// Explicit local fixture target only; never read application .env.
+require('../scripts/rehearse-pr2b.cjs').testTarget(process.env.DATABASE_URL);
 const base = process.env.TEST_API_URL || "http://127.0.0.1:3010/api";
 const db = new PrismaClient();
 const suffix = Date.now().toString();
@@ -105,6 +101,7 @@ async function main() {
   const programs = (await request("GET", "/training-systems", token)).data;
   const department = (await request("GET", "/departments", token)).data[0];
   const area = (await request("GET", "/research-areas", token)).data[0];
+  await require('./catalog-fixture.cjs').provision(db,'lecturer',{lecturerCode:`S1L${suffix}`,fullName:'Step1 fixture lecturer',departmentId:department.id});
   const fixtureLecturer = (
     await request("POST", "/lecturers", token, {
       lecturerCode: `S1L${suffix}`,
@@ -124,7 +121,8 @@ async function main() {
   const students = [];
   for (const program of programs.filter((p) =>
     ["CQ", "LT", "TX"].includes(p.code),
-  ))
+  )) {
+    await require('./catalog-fixture.cjs').provision(db,'student',{studentCode:`S1${suffix}${program.code}`,fullName:'Step1 fixture student',trainingSystemId:program.id});
     students.push(
       (
         await request("POST", "/students", token, {
@@ -136,6 +134,7 @@ async function main() {
         })
       ).data,
     );
+  }
   const seededSemester = (await request("GET", "/semesters", token)).data.find(
     (s) => s.academicYear === "2026-2027" && s.semester === 1,
   );

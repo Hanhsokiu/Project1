@@ -40,7 +40,10 @@ async function main() {
     copy(names[2]);
     deploy();
     await db.$executeRawUnsafe('INSERT INTO "TOPIC_WORKFLOW" ("id","topicId","termId","termStudentId") VALUES ($1,$2,$3,$4)', 'fx-tw', 'fx-topic1', 'fx-t1', 'fx-ts1');
-    names.slice(3).forEach(copy);
+    names.slice(3,17).forEach(copy);
+    deploy();
+    await require('./integration/deploy-test-chain.cjs').bootstrapRoles(db, url.toString());
+    names.slice(17).forEach(copy);
     deploy(); deploy();
     const rows = await db.$queryRawUnsafe('SELECT migration_name,checksum,finished_at,rolled_back_at FROM public."_prisma_migrations" ORDER BY migration_name');
     assert.equal(rows.length,fs.readdirSync(path.join(backend,'prisma/migrations')).filter(name=>fs.existsSync(path.join(backend,'prisma/migrations',name,'migration.sql'))).length);

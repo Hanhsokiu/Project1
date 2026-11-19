@@ -1,0 +1,687 @@
+[
+  {
+    "path": "/",
+    "title": "Tổng quan",
+    "group": "Không gian làm việc",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ]
+  },
+  {
+    "path": "/notifications",
+    "title": "Thông báo",
+    "group": "Không gian làm việc",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ]
+  },
+  {
+    "path": "/admin/accounts",
+    "title": "Tài khoản",
+    "group": "Quản trị hệ thống",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "path": "/admin/roles",
+    "title": "Vai trò & quyền",
+    "group": "Quản trị hệ thống",
+    "roles": [
+      "ADMIN"
+    ]
+  },
+  {
+    "path": "/admin/audit-logs",
+    "permission": "audit:read",
+    "title": "Nhật ký hoạt động",
+    "group": "Quản trị hệ thống",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "path": "/catalog/students",
+    "title": "Sinh viên",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "path": "/catalog/lecturers",
+    "title": "Giảng viên",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER"
+    ]
+  },
+  {
+    "path": "/catalog/reference",
+    "title": "Danh mục đào tạo",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "path": "/catalog/import",
+    "title": "Import dữ liệu",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "path": "/terms",
+    "title": "Kỳ học & đợt đồ án",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "path": "/terms/:id",
+    "title": "Chi tiết đợt",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ],
+    "menu": false
+  },
+  {
+    "path": "/terms/:id/phases",
+    "title": "Kế hoạch giai đoạn",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ],
+    "menu": false
+  },
+  {
+    "path": "/terms/:id/parameters",
+    "title": "Tham số đợt",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ],
+    "menu": false
+  },
+  {
+    "path": "/terms/:id/roster",
+    "title": "Danh sách tham gia",
+    "group": "Danh mục & kế hoạch",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ],
+    "menu": false
+  },
+  {
+    "path": "/registration",
+    "title": "Đăng ký nguyện vọng",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "STUDENT"
+    ]
+  },
+  {
+    "path": "/registration/assignment",
+    "title": "Phân công GVHD",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "path": "/registration/list",
+    "title": "Danh sách đăng ký",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "path": "/registration/manual",
+    "title": "Điều chỉnh phân công",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY"
+    ]
+  },
+  {
+    "path": "/registration/result",
+    "title": "Kết quả phân công",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ]
+  },
+  {
+    "path": "/topic/my",
+    "title": "Thống nhất đề tài",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ]
+  },
+  {
+    "path": "/topic/draft",
+    "title": "Soạn đề cương",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "STUDENT",
+      "LECTURER"
+    ],
+    "menu": false
+  },
+  {
+    "path": "/topic/overview",
+    "title": "Hồ sơ đề tài",
+    "group": "Đăng ký & đề cương",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ],
+    "menu": false
+  },
+  {
+    "path": "/report/export",
+    "title": "Biểu mẫu & xuất dữ liệu",
+    "group": "Báo cáo & biểu mẫu",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ],
+    "menuMode": "DEMO"
+  },
+  {
+    "path": "/profile",
+    "title": "Thông tin cá nhân",
+    "group": "Cá nhân",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ],
+    "menu": false
+  },
+  {
+    "path": "/change-password",
+    "title": "Đổi mật khẩu",
+    "group": "Cá nhân",
+    "roles": [
+      "ADMIN",
+      "FACULTY",
+      "LECTURER",
+      "STUDENT",
+      "COMMITTEE"
+    ],
+    "menu": false
+  },
+  {
+    "path": "/topic/review-groups",
+    "title": "Nhóm duyệt đề cương",
+    "roles": [
+      "FACULTY",
+      "LECTURER"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "review-group:read",
+    "roleTitles": {
+      "LECTURER": "Nhóm duyệt của tôi"
+    },
+    "menu": true
+  },
+  {
+    "path": "/topic/review-groups/new",
+    "title": "Tạo nhóm duyệt",
+    "roles": [
+      "FACULTY"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "review-group:manage",
+    "menu": false
+  },
+  {
+    "path": "/topic/review-groups/:id/edit",
+    "title": "Sửa nhóm duyệt",
+    "roles": [
+      "FACULTY"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "review-group:manage",
+    "menu": false
+  },
+  {
+    "path": "/topic/review-groups/:id",
+    "title": "Chi tiết nhóm duyệt",
+    "roles": [
+      "FACULTY",
+      "LECTURER"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "review-group:read",
+    "menu": false
+  },
+  {
+    "path": "/topic/reviews",
+    "title": "Xét duyệt đề cương",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "roleTitles": {
+      "FACULTY": "Phân công & xét duyệt",
+      "LECTURER": "Đề cương cần xét duyệt",
+      "STUDENT": "Kết quả xét duyệt"
+    },
+    "menu": true
+  },
+  {
+    "path": "/topic/reviews/:id",
+    "title": "Chi tiết xét duyệt",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "menu": false
+  },
+  {
+    "path": "/topic/review-assignments/:proposalId",
+    "title": "Phân công xét duyệt",
+    "roles": [
+      "FACULTY"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:assign",
+    "menu": false
+  },
+  {
+    "path": "/topic/proposal",
+    "title": "Đề cương & phiên bản",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "roleTitles": {
+      "STUDENT": "Đề cương của tôi",
+      "LECTURER": "Đề cương sinh viên",
+      "FACULTY": "Tra cứu đề cương"
+    },
+    "menu": true
+  },
+  {
+    "path": "/topic/proposal/:proposalId",
+    "title": "Phiên bản đề cương",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "menu": false
+  },
+  {
+    "path": "/topic/proposal/:proposalId/versions/:versionId",
+    "title": "Lịch sử đề cương",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "menu": false
+  },
+  {
+    "path": "/topic/dossier",
+    "title": "Chốt đề cương & bản giấy",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "roleTitles": {
+      "STUDENT": "Hồ sơ & bản in",
+      "LECTURER": "Hồ sơ sinh viên",
+      "FACULTY": "Chốt hồ sơ & nhận bản giấy"
+    },
+    "menu": true
+  },
+  {
+    "path": "/topic/dossier/:proposalId",
+    "title": "Chi tiết hồ sơ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Đề cương & xét duyệt",
+    "permission": "proposal:read",
+    "menu": false
+  },
+  {
+    "path": "/guidance/plan",
+    "title": "Kế hoạch hướng dẫn",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "roleTitles": {
+      "STUDENT": "Kế hoạch của tôi",
+      "LECTURER": "Kế hoạch hướng dẫn"
+    },
+    "menuRoles": [
+      "LECTURER",
+      "STUDENT"
+    ],
+    "menu": true
+  },
+  {
+    "path": "/guidance/plan/:proposalId",
+    "title": "Chi tiết kế hoạch",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menu": false
+  },
+  {
+    "path": "/guidance/plan/:proposalId/tasks/new",
+    "title": "Giao nhiệm vụ",
+    "roles": [
+      "LECTURER"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "task:manage",
+    "menu": false
+  },
+  {
+    "path": "/guidance/tasks",
+    "title": "Nhiệm vụ & tiến độ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "roleTitles": {
+      "STUDENT": "Nhiệm vụ & nộp báo cáo",
+      "LECTURER": "Nhiệm vụ sinh viên"
+    },
+    "menuRoles": [
+      "LECTURER",
+      "STUDENT"
+    ],
+    "menu": true
+  },
+  {
+    "path": "/guidance/tasks/:id",
+    "title": "Chi tiết nhiệm vụ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menu": false
+  },
+  {
+    "path": "/guidance/tasks/:id/submissions",
+    "title": "Nộp báo cáo",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "submission:read",
+    "menu": false
+  },
+  {
+    "path": "/guidance/weeks",
+    "title": "Kế hoạch và báo cáo tuần",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menu": true
+  },
+  {
+    "path": "/guidance/review",
+    "title": "Nhận xét báo cáo",
+    "roles": [
+      "LECTURER"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "task:review",
+    "menu": true
+  },
+  {
+    "path": "/guidance/review/:submissionId",
+    "title": "Chi tiết nhận xét",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "submission:read",
+    "menu": false
+  },
+  {
+    "path": "/guidance/progress",
+    "title": "Theo dõi tiến độ",
+    "roles": [
+      "FACULTY"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:monitor",
+    "menu": true
+  },
+  {
+    "path": "/guidance/meetings",
+    "title": "Nhật ký hướng dẫn",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menuRoles": [],
+    "menu": true
+  },
+  {
+    "path": "/guidance/notifications",
+    "title": "Thông báo hướng dẫn",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "guidance:read",
+    "menu": false
+  },
+  {
+    "path": "/guidance/defense-confirm",
+    "title": "Xác nhận bảo vệ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "defense-confirmation:read",
+    "menuRoles": [
+      "FACULTY",
+      "LECTURER"
+    ],
+    "menu": true
+  },
+  {
+    "path": "/guidance/final-report",
+    "title": "Báo cáo cuối kỳ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "group": "Hướng dẫn đồ án",
+    "permission": "final-report:read",
+    "menuRoles": [
+      "STUDENT"
+    ],
+    "menu": true
+  },
+  {
+    "path": "/defense/eligibility",
+    "title": "Xét điều kiện bảo vệ",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "permission": "defense-eligibility:read",
+    "menu": true
+  },
+  {
+    "path": "/defense/committees",
+    "title": "Hội đồng bảo vệ",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY"
+    ],
+    "permission": "defense-committee:read",
+    "menu": true
+  },
+  {
+    "path": "/defense/reviewers",
+    "title": "Phân công phản biện",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY"
+    ],
+    "permission": "defense-reviewer:read",
+    "menu": true
+  },
+  {
+    "path": "/defense/schedule",
+    "title": "Lịch bảo vệ",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY",
+      "STUDENT",
+      "LECTURER"
+    ],
+    "permission": "defense-schedule:read",
+    "menu": true
+  },
+  {
+    "path": "/defense/reviewer-grading",
+    "title": "Chấm điểm phản biện",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "LECTURER",
+      "FACULTY"
+    ],
+    "permission": "defense-reviewer-grade:read",
+    "menu": true
+  },
+  {
+    "path": "/defense/committee-grading",
+    "title": "Chấm điểm hội đồng",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "LECTURER",
+      "FACULTY"
+    ],
+    "permission": "defense-committee-grade:read",
+    "menu": true
+  },
+  {
+    "path": "/defense/results",
+    "title": "Kết quả bảo vệ",
+    "group": "Xét điều kiện & bảo vệ",
+    "roles": [
+      "FACULTY",
+      "LECTURER",
+      "STUDENT"
+    ],
+    "permission": "defense-result:read",
+    "menu": true
+  },
+  {
+    "path": "/defense/reports",
+    "title": "Báo cáo & biểu mẫu bảo vệ",
+    "group": "Báo cáo & biểu mẫu",
+    "roles": [
+      "FACULTY",
+      "LECTURER"
+    ],
+    "permission": "defense-report:read",
+    "menu": true,
+    "menuMode": "API"
+  }
+]

@@ -1,0 +1,421 @@
+{
+  "version": 1,
+  "source": "backend/prisma/deployment/uc24-25-rbac/PERMISSION-MAPPING.md",
+  "meaning": "Mapping is descriptive; it does not authorize a permission grant.",
+  "globalRoleMutationsAllowed": false,
+  "entries": [
+    {
+      "number": 1,
+      "permission": "defense-result:read",
+      "resource": "defense-result",
+      "action": "read",
+      "sourceRoleProposal": "F; L; S cùng read-own",
+      "endpointAndGuards": "GET R/options, R, R/:id; POST R/:id/preview. F chỉ term/bộ môn; L đúng hội đồng; S hồ sơ sở hữu. Read riêng chỉ metadata/trạng thái, ẩn sources/calculation/saved calculation/history.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY",
+        "LECTURER",
+        "STUDENT"
+      ],
+      "sensitive": false,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXISTING_ROLE_GRANT_AND_WORKFLOW_SCOPE"
+    },
+    {
+      "number": 2,
+      "permission": "defense-result:confirm",
+      "resource": "defense-result",
+      "action": "confirm",
+      "sourceRoleProposal": "L cùng read",
+      "endpointAndGuards": "POST R/:id/confirm; vai trò hội đồng thuộc policy.confirmation.roles, nguồn hiện hành, cửa sổ hợp lệ; không xác nhận thay người khác. Chờ policy/phân công.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "LECTURER"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 3,
+      "permission": "defense-result:finalize",
+      "resource": "defense-result",
+      "action": "finalize",
+      "sourceRoleProposal": "F cùng read",
+      "endpointAndGuards": "POST R/:id/finalize; đủ nguồn/confirmation, đúng finalizeWindow, separation, revision/evidence; chờ duyệt người/phạm vi.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 4,
+      "permission": "defense-result:publish",
+      "resource": "defense-result",
+      "action": "publish",
+      "sourceRoleProposal": "F cùng read",
+      "endpointAndGuards": "POST R/:id/publish; đã finalized/current, đúng publication window và separation; chờ duyệt riêng.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 5,
+      "permission": "defense-result:read-own",
+      "resource": "defense-result",
+      "action": "read-own",
+      "sourceRoleProposal": "S cùng read",
+      "endpointAndGuards": "GET R/R/:id; hồ sơ sở hữu; chỉ mở trạng thái riêng, không tự mở điểm.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "STUDENT"
+      ],
+      "sensitive": false,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXISTING_ROLE_GRANT_AND_WORKFLOW_SCOPE"
+    },
+    {
+      "number": 6,
+      "permission": "defense-result:components-read",
+      "resource": "defense-result",
+      "action": "components-read",
+      "sourceRoleProposal": "F/L; S khi được công bố",
+      "endpointAndGuards": "GET/preview UC24 và reader UC25. F/L có thể đọc điểm nội bộ theo scope nên là quyền nhạy cảm. S còn cần final-read, PUBLISHED/current và policy.studentComponents. Không cấp đợt bốn quyền.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY",
+        "LECTURER",
+        "STUDENT"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 7,
+      "permission": "defense-result:history-read",
+      "resource": "defense-result",
+      "action": "history-read",
+      "sourceRoleProposal": "F/L cùng read",
+      "endpointAndGuards": "GET/preview UC24; lịch sử actor/revision trong phạm vi. Nhánh S luôn ẩn history. Không cấp đợt bốn quyền.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY",
+        "LECTURER"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 8,
+      "permission": "defense-result:final-read",
+      "resource": "defense-result",
+      "action": "final-read",
+      "sourceRoleProposal": "S cùng read + read-own",
+      "endpointAndGuards": "GET/preview UC24; PUBLISHED/current + publication.studentFinal. Chưa có policy nên BLOCKED.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "STUDENT"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 9,
+      "permission": "defense-report:read",
+      "resource": "defense-report",
+      "action": "read",
+      "sourceRoleProposal": "F; L đúng hội đồng",
+      "endpointAndGuards": "GET P/options, đồng thời là gate nền của mọi action P. Không mở riêng điểm, nhận xét hoặc export.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY",
+        "LECTURER"
+      ],
+      "sensitive": false,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXISTING_ROLE_GRANT_AND_WORKFLOW_SCOPE"
+    },
+    {
+      "number": 10,
+      "permission": "defense-report:templates-read",
+      "resource": "defense-report",
+      "action": "templates-read",
+      "sourceRoleProposal": "F/L cùng read",
+      "endpointAndGuards": "GET P/templates?termId; L cần committeeId thực. Chỉ metadata mẫu; DRAFT/ENGINEERING_DRAFT không được coi là mẫu chính thức.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY",
+        "LECTURER"
+      ],
+      "sensitive": false,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXISTING_ROLE_GRANT_AND_WORKFLOW_SCOPE"
+    },
+    {
+      "number": 11,
+      "permission": "defense-report:statistics",
+      "resource": "defense-report",
+      "action": "statistics",
+      "sourceRoleProposal": "F/L cùng read",
+      "endpointAndGuards": "GET P/statistics?termId; chỉ số lượng/tải/tiến độ trong scope. Không average/pass/distribution/sheet counts khi thiếu quyền điểm tương ứng.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY",
+        "LECTURER"
+      ],
+      "sensitive": false,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXISTING_ROLE_GRANT_AND_WORKFLOW_SCOPE"
+    },
+    {
+      "number": 12,
+      "permission": "defense-report:preview",
+      "resource": "defense-report",
+      "action": "preview",
+      "sourceRoleProposal": "F/L cùng read và quyền nội dung mẫu",
+      "endpointAndGuards": "POST P/exports/preview; repo.read nhưng vẫn kiểm tra list-export và quyền theo columns. Preview DRAFT cần draft-preview. Không thuộc runner GET.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 13,
+      "permission": "defense-report:export",
+      "resource": "defense-report",
+      "action": "export",
+      "sourceRoleProposal": "F/L được policy mẫu cho phép",
+      "endpointAndGuards": "POST P/exports; ghi metadata/audit/idempotency/file. Cần mẫu/version approved, nguồn hiện hành, quyền nội dung, flags. Chờ duyệt riêng.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 14,
+      "permission": "defense-report:history-read",
+      "resource": "defense-report",
+      "action": "history-read",
+      "sourceRoleProposal": "F/L cùng read",
+      "endpointAndGuards": "GET P/exports, P/exports/:id; kiểm tra lại ownership/scope và quyền nội dung; bản DRAFT có thể cần draft-export. Không tự cấp vì tên có chữ read.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 15,
+      "permission": "defense-report:download",
+      "resource": "defense-report",
+      "action": "download",
+      "sourceRoleProposal": "F/L cùng read",
+      "endpointAndGuards": "POST P/exports/:id/download; có ghi audit/idempotency, kiểm tra thời hạn/nguồn/quyền hiện hành. Không phải smoke READ ONLY.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 16,
+      "permission": "defense-report:grade-statistics",
+      "resource": "defense-report",
+      "action": "grade-statistics",
+      "sourceRoleProposal": "F/L được duyệt",
+      "endpointAndGuards": "GET P/statistics; mở số phiếu/kết quả đã chốt; reader kết quả cần defense-result:components-read. Policy quyết định phạm vi release.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 17,
+      "permission": "defense-report:score-statistics",
+      "resource": "defense-report",
+      "action": "score-statistics",
+      "sourceRoleProposal": "F/L được duyệt",
+      "endpointAndGuards": "GET P/statistics; mở điểm trung bình/phân bố/tỉ lệ theo policy.statisticsRelease và bins approved; cần quyền UC24 liên resource.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 18,
+      "permission": "defense-report:draft-preview",
+      "resource": "defense-report",
+      "action": "draft-preview",
+      "sourceRoleProposal": "F/L được duyệt",
+      "endpointAndGuards": "POST P/exports/preview với mode DRAFT; vẫn cần preview + các quyền nội dung; không biến DRAFT thành bản chính thức.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 19,
+      "permission": "defense-report:draft-export",
+      "resource": "defense-report",
+      "action": "draft-export",
+      "sourceRoleProposal": "F/L được duyệt",
+      "endpointAndGuards": "Export/history/detail/download bản DRAFT; vẫn cần action nền và quyền nội dung. Không cấp mặc định.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 20,
+      "permission": "defense-report:list-export",
+      "resource": "defense-report",
+      "action": "list-export",
+      "sourceRoleProposal": "F/L được mẫu cho phép",
+      "endpointAndGuards": "Gate nội dung bắt buộc của mọi mẫu kể cả preview; gồm danh sách/tên/mã SV nên phải có scope và quyết định chia sẻ.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 21,
+      "permission": "defense-report:components-export",
+      "resource": "defense-report",
+      "action": "components-export",
+      "sourceRoleProposal": "F/L được duyệt",
+      "endpointAndGuards": "Mẫu có ADVISOR_SCORE/REVIEWER_SCORE/COMMITTEE_SCORE/MEMBER_SCORES/REVIEWER_SCORES; quyền UC24 và release riêng vẫn áp dụng.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 22,
+      "permission": "defense-report:final-export",
+      "resource": "defense-report",
+      "action": "final-export",
+      "sourceRoleProposal": "F/L được duyệt",
+      "endpointAndGuards": "Mẫu kết quả/biên bản hoặc cột FINAL_SCORE; cần kết quả chính thức/current và policy release.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 23,
+      "permission": "defense-report:comments-export",
+      "resource": "defense-report",
+      "action": "comments-export",
+      "sourceRoleProposal": "F/L được duyệt",
+      "endpointAndGuards": "COMMENTS/QUESTIONS; phiếu GVHD còn cần F + defense-confirmation:comment-read; phiếu GVPB cần đúng GVPB hoặc F + defense-reviewer-grade:comment-read.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 24,
+      "permission": "defense-report:minutes-export",
+      "resource": "defense-report",
+      "action": "minutes-export",
+      "sourceRoleProposal": "F/L theo mẫu",
+      "endpointAndGuards": "PDF_MINUTES; thiếu CONCLUSION/DEFENSE_REMARKS/REVISION_REQUESTS phải block hoặc để trống theo allowMissing được duyệt. Chỉ UNSIGNED, không giả lập đồng ký.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 25,
+      "permission": "defense-report:dossier-export",
+      "resource": "defense-report",
+      "action": "dossier-export",
+      "sourceRoleProposal": "F/L theo mẫu",
+      "endpointAndGuards": "PDF_DOSSIER; cùng pii-export, dossier:export, mẫu/version và bản đề cương chốt hiện hành.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 26,
+      "permission": "defense-report:pii-export",
+      "resource": "defense-report",
+      "action": "pii-export",
+      "sourceRoleProposal": "F/L theo mẫu",
+      "endpointAndGuards": "PDF_DOSSIER; dữ liệu cá nhân chỉ đúng hồ sơ/scope đã duyệt; không gộp vào read.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    },
+    {
+      "number": 27,
+      "permission": "dossier:export",
+      "resource": "dossier",
+      "action": "export",
+      "sourceRoleProposal": "F/L theo policy mẫu và quyền nền",
+      "endpointAndGuards": "Reader PDF_DOSSIER của UC25 gọi snapshot B1–B8 đã finalized, checksum/templateVersion đúng; không mở quyền sửa đề cương.",
+      "productionGrantApproval": "NOT_ASSUMED",
+      "minimumRoleCandidates": [
+        "FACULTY"
+      ],
+      "sensitive": true,
+      "scopeRevalidatedByService": true,
+      "requiredDecision": "EXPLICIT_ACCOUNT_ACTION_TERM_DEPARTMENT_APPROVAL"
+    }
+  ]
+}

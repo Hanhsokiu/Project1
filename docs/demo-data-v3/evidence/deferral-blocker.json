@@ -1,0 +1,8 @@
+{
+  "status": "BLOCKED",
+  "code": "ELIGIBILITY_BLOCKED",
+  "database": "btl_pr2b_acceptance_utc_demo_v3_baseline_v3",
+  "termStatus": "DEFENDING",
+  "affected": 11,
+  "reason": "The preserved baseline already advanced to DEFENDING before this producer step was added. The actual service rejects reviewing this earlier phase. Never rewind term state or fabricate approval."
+}

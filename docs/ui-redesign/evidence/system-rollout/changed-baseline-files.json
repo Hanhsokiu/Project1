@@ -1,0 +1,22 @@
+[
+  "docs/ui-redesign/evidence/utc-registration-v2/isolated-draft-pending.png",
+  "docs/ui-redesign/evidence/utc-registration-v2/isolated-write-checks.json",
+  "frontend/scripts/test-utc-registration-browser.cjs",
+  "frontend/src/app/layouts/utc-registration-shell.css",
+  "frontend/src/features/registration/pages/student-registration.css",
+  "frontend/scripts/test-proposal-dossiers-browser.cjs",
+  "frontend/scripts/test-proposal-reviews-browser.cjs",
+  "frontend/scripts/test-proposal-versions-browser.cjs",
+  "frontend/scripts/test-review-groups-browser.cjs",
+  "frontend/scripts/test-ui-redesign-browser.cjs",
+  "frontend/scripts/ui-redesign-fixture.tsx",
+  "frontend/src/app/layouts/WorkspaceLayout.tsx",
+  "frontend/src/design-system.css",
+  "frontend/src/features/auth/pages/LoginPage.tsx",
+  "frontend/src/features/catalog/components/import-page.css",
+  "frontend/src/features/review-groups/workspace.css",
+  "frontend/src/index.css",
+  "frontend/src/main.tsx",
+  "frontend/src/shared/components/kit.tsx",
+  "frontend/tailwind.config.ts"
+]

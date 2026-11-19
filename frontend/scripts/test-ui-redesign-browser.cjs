@@ -8,7 +8,9 @@ const AxeBuilder = require("@axe-core/playwright").default;
 
 async function main() {
   const root = path.resolve(__dirname, "..");
-  const output = path.resolve(root, "../.cache/ui-modern-20261104/browser");
+  const output = process.env.UI_EVIDENCE_DIR
+    ? path.resolve(process.env.UI_EVIDENCE_DIR)
+    : path.resolve(root, "../docs/ui-redesign/evidence/system-rollout/isolated-browser");
   fs.mkdirSync(output, { recursive: true });
   process.chdir(root);
   Object.assign(process.env, {
@@ -16,7 +18,7 @@ async function main() {
     VITE_CATALOG_API: "false", VITE_IMPORT_API: "false", VITE_REGISTRATION_API: "false", VITE_DEMO_MODE: "false",
   });
   const { createServer } = await import("vite");
-  const server = await createServer({ root, mode: "test", server: { host: "127.0.0.1", port: 50188, strictPort: true } });
+  const server = await createServer({ root, mode: "test", server: { host: "127.0.0.1", port: process.argv.includes("--registration-only") ? 50190 : 50188, strictPort: true } });
   const checks = [], errors = [], network = [];
   const pass = name => { checks.push(name); console.log("PASS " + name); };
   let browser, activePage;
@@ -30,7 +32,7 @@ async function main() {
       id: "committee-ui-check", username: "committee-ui-check", roles: ["COMMITTEE"],
     });
     browser = await chromium.launch({ channel: "msedge", headless: true });
-    const origin = "http://127.0.0.1:50188";
+    const origin = process.argv.includes("--registration-only") ? "http://127.0.0.1:50190" : "http://127.0.0.1:50188";
     async function contextFor(role) {
       const actor = db.accounts.find(account => account.roles.includes(role));
       assert(actor, "Missing UI fixture for " + role);
@@ -45,14 +47,39 @@ async function main() {
       page.on("pageerror", error => { errors.push(error.message); console.error("PAGE ERROR " + error.message); });
       return { context, page, actor };
     }
+    if (process.argv.includes('--registration-only')) {
+      const { page: registration } = await contextFor('STUDENT');
+      await registration.goto(origin + '/registration');
+      await expect(registration.locator('.registration-pilot')).toBeVisible();
+      await registration.setViewportSize({ width: 390, height: 844 });
+      const menu = registration.locator('.mobile-menu');
+      await expect(registration.locator('.sidebar')).toHaveAttribute('inert', '');
+      await menu.click();
+      await expect(registration.locator('.sidebar.open')).not.toHaveAttribute('inert');
+      await registration.keyboard.press('Escape');
+      await expect(menu).toBeFocused();
+      await expect(registration.locator('.sidebar')).toHaveAttribute('inert', '');
+      await registration.keyboard.press('Tab');
+      assert.equal(await registration.locator('.sidebar').evaluate(n => n.contains(document.activeElement)), false, 'Closing drawer must not receive keyboard focus');
+      await registration.setViewportSize({ width: 1440, height: 900 });
+      await expect(registration.locator('.sidebar')).not.toHaveAttribute('inert');
+      for (const width of [1440, 1280, 1024, 768, 390, 375, 320]) {
+        await registration.setViewportSize({ width, height: 900 });
+        await registration.screenshot({ path: path.join(output, 'registration-' + width + '.png'), fullPage: true });
+        const overflow = await registration.evaluate(() => [...document.querySelectorAll('main *')].filter(e => e.getBoundingClientRect().right > innerWidth + 1).slice(0, 8).map(e => ({ tag: e.tagName, cls: e.className, width: e.getBoundingClientRect().width })));
+        assert.deepEqual(overflow, [], 'Registration overflow at ' + width);
+      }
+      pass('registration fits seven viewports and closed drawer stays outside keyboard navigation');
+      return;
+    }
     const { context: adminContext, page } = await contextFor("ADMIN");
     activePage = page;
     await page.goto(origin + "/admin/accounts");
     await expect(page.getByRole("heading", { name: "Tài khoản người dùng", exact: true })).toBeVisible();
     await page.getByRole("button", { name: "Thu gọn thanh điều hướng", exact: true }).click();
-    await expect(page.locator(".sidebar")).toHaveCSS("width", "72px");
+    await expect(page.locator(".sidebar")).toHaveCSS("width", "80px");
     await page.reload();
-    await expect(page.locator(".sidebar")).toHaveCSS("width", "72px");
+    await expect(page.locator(".sidebar")).toHaveCSS("width", "80px");
     await page.getByRole("button", { name: "Mở rộng thanh điều hướng", exact: true }).click();
     pass("desktop sidebar collapses, preserves preference and expands");
     await expect(page.getByRole("navigation", { name: "Đường dẫn trang" })).toContainText("Tài khoản");
@@ -98,7 +125,7 @@ async function main() {
     if (process.argv.includes("--accessibility-only")) return;
     const termId = db.terms[0].id;
     const routes = ["/", "/admin/accounts", "/admin/roles", "/admin/audit-logs", "/catalog/students", "/catalog/lecturers", "/catalog/import", "/catalog/reference", "/terms", `/terms/${termId}`, `/terms/${termId}/roster`, `/terms/${termId}/phases`, `/terms/${termId}/parameters`, "/registration/list", "/registration/assignment", "/registration/manual", "/registration/result", "/topic/my", "/topic/overview", "/report/export", "/profile", "/notifications"];
-    for (const width of [1440, 834, 390]) {
+    for (const width of [1440, 1024, 768, 390, 320]) {
       await page.setViewportSize({ width, height: 1000 });
       for (const route of routes) {
         await page.goto(origin + route);
@@ -125,11 +152,11 @@ async function main() {
     const mobileSave = mobileDialog.getByRole("button", { name: "Lưu tài khoản", exact: true });
     await mobileSave.scrollIntoViewIfNeeded();
     const mobileSaveBox = await mobileSave.boundingBox();
-    assert(mobileSaveBox.x >= 0 && mobileSaveBox.x + mobileSaveBox.width <= 390);
+    assert(mobileSaveBox.x >= 0 && mobileSaveBox.x + mobileSaveBox.width <= 320);
     await page.keyboard.press("Escape");
     await expect(page.getByRole("button", { name: "Thêm tài khoản", exact: true })).toBeFocused();
     pass("mobile drawer keeps Save visible and Escape restores the opener");
-    for (const width of [1440, 834, 390]) {
+    for (const width of [1440, 1024, 768, 390, 320]) {
       await page.setViewportSize({ width, height: 1000 });
       for (const screen of ["eligibility", "reviewers", "committees", "schedule", "minutes", "deferments", "rubric", "scores", "results", "guidance-plan", "task-board", "task-review", "meetings"]) {
         await page.goto(origin + "/scripts/ui-redesign-fixture.html?screen=" + screen);
@@ -145,20 +172,28 @@ async function main() {
     for (const role of ["FACULTY", "LECTURER", "STUDENT", "COMMITTEE"]) {
       const { context, page: rolePage } = await contextFor(role);
       const screens = role === "FACULTY" ? ["/", "/terms", "/catalog/students"] : role === "STUDENT" ? ["/", "/registration", "/topic/my", "/topic/draft", "/guidance/final-report", "/guidance/defense-confirm"] : role === "LECTURER" ? ["/", "/topic/my", "/catalog/lecturers"] : ["/", "/notifications", "/profile"];
-      for (const width of [1440, 834, 390]) {
+      for (const width of [1440, 1024, 768, 390, 320]) {
         await rolePage.setViewportSize({ width, height: 1000 });
         for (const screen of screens) {
           await rolePage.goto(origin + screen);
           await expect(rolePage.locator("main")).toBeVisible();
-          await expect(rolePage.locator("main").getByRole("heading", { level: 1 }).first()).toBeVisible();
-          assert(await rolePage.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), `${role} overflow at ${width}: ${screen}`);
+          if (["/guidance/final-report", "/guidance/defense-confirm"].includes(screen)) {
+            await expect(rolePage.locator("main").getByRole("status")).toContainText("cần kết nối API");
+          } else {
+            await expect(rolePage.locator("main").getByRole("heading", { level: 1 }).first(), `${role} ${screen} at ${width}px`).toBeVisible();
+          }
+          if (!await rolePage.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)) {
+            await rolePage.screenshot({ path: path.join(output, 'overflow-' + role + '-' + width + screen.replaceAll('/', '-') + '.png'), fullPage: true });
+            console.error(await rolePage.evaluate(() => [...document.querySelectorAll('main *')].filter(e => e.getBoundingClientRect().right > innerWidth + 1).slice(0, 8).map(e => ({ tag: e.tagName, cls: e.className, width: e.getBoundingClientRect().width }))));
+            throw Error(role + ' overflow at ' + width + ': ' + screen);
+          }
         }
       }
       await rolePage.goto(origin + "/");
       await rolePage.setViewportSize({ width: 1440, height: 1000 });
       await rolePage.screenshot({ path: path.join(output, role.toLowerCase() + "-dashboard.png"), fullPage: true });
       await expect(rolePage.locator('.sidebar a[href="/admin/accounts"]')).toHaveCount(0);
-      pass(`${role} dashboard, screens and navigation permissions verified at three widths`);
+      pass(`${role} dashboard, screens and navigation permissions verified at five widths`);
       await context.close();
     }
     assert.deepEqual(errors, []); assert.deepEqual(network, []);

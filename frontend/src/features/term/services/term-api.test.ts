@@ -1,15 +1,32 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import type { Phase } from "../../../shared/data/types";
-const { apiData } = vi.hoisted(() => ({
+const { apiData, resources } = vi.hoisted(() => ({
   apiData: vi.fn().mockResolvedValue({}),
+  resources: vi.fn(),
 }));
 vi.mock("../../../shared/data/snapshot-api", () => ({
   apiData,
-  getStep1Resources: () => undefined,
+  getStep1Resources: resources,
 }));
 import { termApi } from "./term-api";
+beforeEach(() => { apiData.mockClear(); resources.mockReturnValue(undefined); });
 
 describe("phase plan payload compatibility", () => {
+  it("keeps exact existing term instants when editing metadata rather than silently moving an exclusive end to midnight", async () => {
+    const term = { id:"term",start:"2030-11-01",end:"2030-12-01",
+      startDate:"2030-10-31T17:00:00.000Z",endDate:"2030-11-30T17:00:00.000Z" };
+    resources.mockReturnValue({terms:[term],semesters:[{id:"s",name:"Semester"}],programs:[{id:"p",name:"Program"}]});
+    await termApi.save({ ...term, name:"Updated term name",code:"TERM",semester:"Semester",program:"Program",
+      registrationStart:"2030-11-01T00:00",registrationEnd:"2030-11-04T00:00" });
+    expect(apiData.mock.calls[0][2]).toMatchObject({startDate:term.startDate,endDate:term.endDate});
+  });
+  it("sends the change reason together with unrounded phase instants", async () => {
+    await termApi.savePhases("term",[{id:"new",code:"DEFENSE",name:"Defense",
+      start:"2030-11-15T00:00:00.005",end:"2030-11-15T23:59:59.999",locked:false}],"Approved extension");
+    expect(apiData.mock.calls[0][2]).toMatchObject({reason:"Approved extension",phases:[{
+      start:"2030-11-15T00:00:00.005+07:00",end:"2030-11-15T23:59:59.999+07:00",
+    }]});
+  });
   it("keeps legacy phase codes after inserting a review window and converts Vietnam time correctly", async () => {
     const base: Phase[] = [
       "Đăng ký",

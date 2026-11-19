@@ -1,0 +1,206 @@
+{
+  "at": "2026-11-15T17:03:47.454Z",
+  "source": "Playwright MCP / real application API",
+  "observations": [
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T17:12:14.298Z",
+      "file": "registration-after-1440.png",
+      "overflow": false,
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      },
+      "axeAt": "2026-11-15T17:08:33.615Z"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "at": "2026-11-15T17:12:16.567Z",
+      "file": "registration-after-1024.png",
+      "overflow": false,
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      },
+      "axeAt": "2026-11-15T17:08:35.745Z"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T17:12:18.677Z",
+      "file": "registration-after-768.png",
+      "overflow": false,
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      },
+      "axeAt": "2026-11-15T17:08:37.868Z"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T17:12:21.807Z",
+      "file": "registration-after-390.png",
+      "overflow": false,
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      },
+      "axeAt": "2026-11-15T17:08:39.978Z"
+    },
+    {
+      "route": "/registration",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T17:12:23.965Z",
+      "file": "registration-after-320.png",
+      "overflow": false,
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      },
+      "axeAt": "2026-11-15T17:08:41.254Z"
+    },
+    {
+      "route": "/",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T17:08:56.734Z",
+      "file": "dashboard-after-1440.png",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 1024,
+        "height": 900
+      },
+      "at": "2026-11-15T17:08:59.891Z",
+      "file": "dashboard-after-1024.png",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 768,
+        "height": 1024
+      },
+      "at": "2026-11-15T17:09:03.003Z",
+      "file": "dashboard-after-768.png",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T17:09:06.115Z",
+      "file": "dashboard-after-390.png",
+      "overflow": false
+    },
+    {
+      "route": "/",
+      "role": "STUDENT",
+      "viewport": {
+        "width": 320,
+        "height": 844
+      },
+      "at": "2026-11-15T17:09:08.211Z",
+      "file": "dashboard-after-320.png",
+      "overflow": false
+    },
+    {
+      "route": "/terms",
+      "role": "FACULTY",
+      "viewport": {
+        "width": 1440,
+        "height": 900
+      },
+      "at": "2026-11-15T17:11:14.416Z",
+      "file": "terms-after-1440.png",
+      "overflow": false,
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      }
+    },
+    {
+      "route": "/terms",
+      "role": "FACULTY",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "at": "2026-11-15T17:11:17.634Z",
+      "file": "terms-after-390.png",
+      "overflow": false,
+      "axe": {
+        "violations": [],
+        "incomplete": 1
+      }
+    }
+  ],
+  "errors": [],
+  "checks": [
+    "Reorder animation cancels when reduced motion changes during animation",
+    "Reduced motion skips new reorder animation; restored initial order without saving",
+    "Optional note keyboard disclosure works",
+    "Submission confirmation opens and Escape restores focus; no confirmation submitted",
+    "Mobile disclosure retains input (Enter)",
+    "Drawer initial focus waits for animation frame; Escape restores trigger",
+    "Closing mobile drawer is inert immediately; Tab stays outside",
+    "Desktop breakpoint releases sidebar inert",
+    "Selected a real available third lecturer then removed locally; restored original preferences"
+  ],
+  "reportedAt": "2026-11-15T17:15:28.784Z",
+  "thirdLecturerAvailable": true,
+  "businessWritesPerformed": false,
+  "realApiTestsExclude": [
+    "draft save",
+    "submission confirmation write",
+    "backend validation on real write"
+  ],
+  "loginScreenshot": {
+    "file": "login-after-1440.png",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    },
+    "role": "ANONYMOUS",
+    "axeRun": false
+  },
+  "limitations": [
+    "Dashboard screenshots/overflow only; no new axe run there.",
+    "Axe has one incomplete check per tested registration/terms viewport; no full accessibility certification.",
+    "Registration initial before-* screenshots show term 03 loading; use earlier system-rollout baseline for term 01 visual comparison.",
+    "Existing global snapshot timeout F02 is outside this presentation task."
+  ]
+}

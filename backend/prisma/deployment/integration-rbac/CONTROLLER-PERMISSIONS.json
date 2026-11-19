@@ -1,0 +1,1322 @@
+{
+  "version": 1,
+  "meaning": "Static endpoint gates; service workflow/scope checks remain mandatory; no grant authorization.",
+  "entries": [
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/auth/controller/account.controller.ts",
+      "method": "GET",
+      "path": "/accounts",
+      "permission": "account:read"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/auth/controller/account.controller.ts",
+      "method": "PATCH",
+      "path": "/accounts/:id",
+      "permission": "account:update"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/auth/controller/account.controller.ts",
+      "method": "PATCH",
+      "path": "/accounts/:id/status",
+      "permission": "account:lock"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/auth/controller/account.controller.ts",
+      "method": "POST",
+      "path": "/accounts",
+      "permission": "account:create"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/auth/controller/account.controller.ts",
+      "method": "POST",
+      "path": "/accounts/:id/reset-password",
+      "permission": "account:update"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/auth/controller/audit-log.controller.ts",
+      "method": "GET",
+      "path": "/audit-logs",
+      "permission": "audit:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/import.controller.ts",
+      "method": "GET",
+      "path": "/imports/:id",
+      "permission": "student:import"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/import.controller.ts",
+      "method": "GET",
+      "path": "/imports/students/template",
+      "permission": "student:import"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/import.controller.ts",
+      "method": "POST",
+      "path": "/imports/:id/confirm",
+      "permission": "student:import"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/import.controller.ts",
+      "method": "POST",
+      "path": "/imports/students/preview",
+      "permission": "student:import"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/lecturer-import.controller.ts",
+      "method": "GET",
+      "path": "/imports/lecturers/:id",
+      "permission": "lecturer:import"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/lecturer-import.controller.ts",
+      "method": "GET",
+      "path": "/imports/lecturers/template",
+      "permission": "lecturer:import"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/lecturer-import.controller.ts",
+      "method": "POST",
+      "path": "/imports/lecturers/:id/confirm",
+      "permission": "lecturer:import"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/lecturer-import.controller.ts",
+      "method": "POST",
+      "path": "/imports/lecturers/preview",
+      "permission": "lecturer:import"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/lecturer.controller.ts",
+      "method": "GET",
+      "path": "/lecturers",
+      "permission": "lecturer:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/lecturer.controller.ts",
+      "method": "GET",
+      "path": "/lecturers/:id",
+      "permission": "lecturer:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/lecturer.controller.ts",
+      "method": "PATCH",
+      "path": "/lecturers/:id",
+      "permission": "lecturer:update"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/lecturer.controller.ts",
+      "method": "POST",
+      "path": "/lecturers",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "GET",
+      "path": "/departments",
+      "permission": "catalog:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "GET",
+      "path": "/research-areas",
+      "permission": "catalog:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "GET",
+      "path": "/training-systems",
+      "permission": "catalog:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "PATCH",
+      "path": "/departments/:id",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "PATCH",
+      "path": "/research-areas/:id",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "PATCH",
+      "path": "/training-systems/:id",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "POST",
+      "path": "/departments",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "POST",
+      "path": "/research-areas",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/reference.controller.ts",
+      "method": "POST",
+      "path": "/training-systems",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/student.controller.ts",
+      "method": "GET",
+      "path": "/students",
+      "permission": "student:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/student.controller.ts",
+      "method": "GET",
+      "path": "/students/:id",
+      "permission": "student:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/student.controller.ts",
+      "method": "PATCH",
+      "path": "/students/:id",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/student.controller.ts",
+      "method": "POST",
+      "path": "/students",
+      "permission": "catalog:manage"
+    },
+    {
+      "phase": "UC23",
+      "controller": "src/defense/committee-grading/committee-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-committee-grades",
+      "permission": "defense-committee-grade:read"
+    },
+    {
+      "phase": "UC23",
+      "controller": "src/defense/committee-grading/committee-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-committee-grades/:id",
+      "permission": "defense-committee-grade:read"
+    },
+    {
+      "phase": "UC23",
+      "controller": "src/defense/committee-grading/committee-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-committee-grades/:id/versions/:versionId/pdf",
+      "permission": "defense-committee-grade:download-own"
+    },
+    {
+      "phase": "UC23",
+      "controller": "src/defense/committee-grading/committee-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-committee-grades/options",
+      "permission": "defense-committee-grade:read"
+    },
+    {
+      "phase": "UC23",
+      "controller": "src/defense/committee-grading/committee-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-committee-grades/progress",
+      "permission": "defense-committee-grade:progress-read"
+    },
+    {
+      "phase": "UC23",
+      "controller": "src/defense/committee-grading/committee-grade.controller.ts",
+      "method": "POST",
+      "path": "/defense-committee-grades/:id/finalize",
+      "permission": "defense-committee-grade:finalize-own"
+    },
+    {
+      "phase": "UC23",
+      "controller": "src/defense/committee-grading/committee-grade.controller.ts",
+      "method": "POST",
+      "path": "/defense-committee-grades/:id/save",
+      "permission": "defense-committee-grade:save-own"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "GET",
+      "path": "/defense-committees",
+      "permission": "defense-committee:read"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "GET",
+      "path": "/defense-committees/:id",
+      "permission": "defense-committee:read"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "GET",
+      "path": "/defense-committees/allocation",
+      "permission": "defense-committee:assign"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "GET",
+      "path": "/defense-committees/options",
+      "permission": "defense-committee:read"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "GET",
+      "path": "/defense-committees/workspace",
+      "permission": "defense-committee:read"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "POST",
+      "path": "/defense-committees",
+      "permission": "defense-committee:create"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "POST",
+      "path": "/defense-committees/:id/finalize",
+      "permission": "defense-committee:finalize"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "POST",
+      "path": "/defense-committees/:id/unassign",
+      "permission": "defense-committee:assign"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "POST",
+      "path": "/defense-committees/:id/update",
+      "permission": "defense-committee:update"
+    },
+    {
+      "phase": "UC19",
+      "controller": "src/defense/committees/committee-workflow.controller.ts",
+      "method": "POST",
+      "path": "/defense-committees/assignments",
+      "permission": "defense-committee:assign"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/defense/controller/committee.controller.ts",
+      "method": "GET",
+      "path": "/committees/term/:termId",
+      "permission": "defense-committee:read"
+    },
+    {
+      "phase": "UC18",
+      "controller": "src/defense/eligibility/eligibility.controller.ts",
+      "method": "GET",
+      "path": "/defense-eligibility",
+      "permission": "defense-eligibility:read"
+    },
+    {
+      "phase": "UC18",
+      "controller": "src/defense/eligibility/eligibility.controller.ts",
+      "method": "GET",
+      "path": "/defense-eligibility/:termStudentId",
+      "permission": "defense-eligibility:read"
+    },
+    {
+      "phase": "UC18",
+      "controller": "src/defense/eligibility/eligibility.controller.ts",
+      "method": "GET",
+      "path": "/defense-eligibility/options",
+      "permission": "defense-eligibility:read"
+    },
+    {
+      "phase": "UC18",
+      "controller": "src/defense/eligibility/eligibility.controller.ts",
+      "method": "POST",
+      "path": "/defense-eligibility/:termStudentId/decide",
+      "permission": "defense-eligibility:decide"
+    },
+    {
+      "phase": "UC18",
+      "controller": "src/defense/eligibility/eligibility.controller.ts",
+      "method": "POST",
+      "path": "/defense-eligibility/:termStudentId/review",
+      "permission": "defense-eligibility:review"
+    },
+    {
+      "phase": "UC18",
+      "controller": "src/defense/eligibility/eligibility.controller.ts",
+      "method": "POST",
+      "path": "/defense-eligibility/finalize",
+      "permission": "defense-eligibility:finalize"
+    },
+    {
+      "phase": "UC24",
+      "controller": "src/defense/final-results/final-result.controller.ts",
+      "method": "GET",
+      "path": "/defense-results",
+      "permission": "defense-result:read"
+    },
+    {
+      "phase": "UC24",
+      "controller": "src/defense/final-results/final-result.controller.ts",
+      "method": "GET",
+      "path": "/defense-results/:id",
+      "permission": "defense-result:read"
+    },
+    {
+      "phase": "UC24",
+      "controller": "src/defense/final-results/final-result.controller.ts",
+      "method": "GET",
+      "path": "/defense-results/options",
+      "permission": "defense-result:read"
+    },
+    {
+      "phase": "UC24",
+      "controller": "src/defense/final-results/final-result.controller.ts",
+      "method": "POST",
+      "path": "/defense-results/:id/confirm",
+      "permission": "defense-result:confirm"
+    },
+    {
+      "phase": "UC24",
+      "controller": "src/defense/final-results/final-result.controller.ts",
+      "method": "POST",
+      "path": "/defense-results/:id/finalize",
+      "permission": "defense-result:finalize"
+    },
+    {
+      "phase": "UC24",
+      "controller": "src/defense/final-results/final-result.controller.ts",
+      "method": "POST",
+      "path": "/defense-results/:id/preview",
+      "permission": "defense-result:read"
+    },
+    {
+      "phase": "UC24",
+      "controller": "src/defense/final-results/final-result.controller.ts",
+      "method": "POST",
+      "path": "/defense-results/:id/publish",
+      "permission": "defense-result:publish"
+    },
+    {
+      "phase": "UC22",
+      "controller": "src/defense/reviewer-grading/reviewer-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewer-grades",
+      "permission": "defense-reviewer-grade:read"
+    },
+    {
+      "phase": "UC22",
+      "controller": "src/defense/reviewer-grading/reviewer-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewer-grades/:id",
+      "permission": "defense-reviewer-grade:read"
+    },
+    {
+      "phase": "UC22",
+      "controller": "src/defense/reviewer-grading/reviewer-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewer-grades/:id/versions/:versionId/pdf",
+      "permission": "defense-reviewer-grade:download"
+    },
+    {
+      "phase": "UC22",
+      "controller": "src/defense/reviewer-grading/reviewer-grade.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewer-grades/options",
+      "permission": "defense-reviewer-grade:read"
+    },
+    {
+      "phase": "UC22",
+      "controller": "src/defense/reviewer-grading/reviewer-grade.controller.ts",
+      "method": "POST",
+      "path": "/defense-reviewer-grades/:id/finalize",
+      "permission": "defense-reviewer-grade:finalize"
+    },
+    {
+      "phase": "UC22",
+      "controller": "src/defense/reviewer-grading/reviewer-grade.controller.ts",
+      "method": "POST",
+      "path": "/defense-reviewer-grades/:id/save",
+      "permission": "defense-reviewer-grade:save"
+    },
+    {
+      "phase": "UC20",
+      "controller": "src/defense/reviewers/reviewer.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewers",
+      "permission": "defense-reviewer:read"
+    },
+    {
+      "phase": "UC20",
+      "controller": "src/defense/reviewers/reviewer.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewers/:id",
+      "permission": "defense-reviewer:read"
+    },
+    {
+      "phase": "UC20",
+      "controller": "src/defense/reviewers/reviewer.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewers/allocation",
+      "permission": "defense-reviewer:assign"
+    },
+    {
+      "phase": "UC20",
+      "controller": "src/defense/reviewers/reviewer.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewers/options",
+      "permission": "defense-reviewer:read"
+    },
+    {
+      "phase": "UC20",
+      "controller": "src/defense/reviewers/reviewer.controller.ts",
+      "method": "GET",
+      "path": "/defense-reviewers/workspace",
+      "permission": "defense-reviewer:read"
+    },
+    {
+      "phase": "UC20",
+      "controller": "src/defense/reviewers/reviewer.controller.ts",
+      "method": "POST",
+      "path": "/defense-reviewers/:id/update",
+      "permission": "defense-reviewer:update"
+    },
+    {
+      "phase": "UC20",
+      "controller": "src/defense/reviewers/reviewer.controller.ts",
+      "method": "POST",
+      "path": "/defense-reviewers/assignments",
+      "permission": "defense-reviewer:assign"
+    },
+    {
+      "phase": "UC20",
+      "controller": "src/defense/reviewers/reviewer.controller.ts",
+      "method": "POST",
+      "path": "/defense-reviewers/finalize",
+      "permission": "defense-reviewer:finalize"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "GET",
+      "path": "/defense-schedules",
+      "permission": "defense-schedule:read"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "GET",
+      "path": "/defense-schedules/:id",
+      "permission": "defense-schedule:read"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "GET",
+      "path": "/defense-schedules/options",
+      "permission": "defense-schedule:read"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "GET",
+      "path": "/defense-schedules/proposal",
+      "permission": "defense-schedule:create"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "GET",
+      "path": "/defense-schedules/workspace",
+      "permission": "defense-schedule:read"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "POST",
+      "path": "/defense-schedules",
+      "permission": "defense-schedule:create"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "POST",
+      "path": "/defense-schedules/:id/update",
+      "permission": "defense-schedule:update"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "POST",
+      "path": "/defense-schedules/assignments",
+      "permission": "defense-schedule:create"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "POST",
+      "path": "/defense-schedules/cancel",
+      "permission": "defense-schedule:update"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "POST",
+      "path": "/defense-schedules/finalize",
+      "permission": "defense-schedule:finalize"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "POST",
+      "path": "/defense-schedules/preview",
+      "permission": "defense-schedule:read"
+    },
+    {
+      "phase": "UC21",
+      "controller": "src/defense/scheduling/schedule.controller.ts",
+      "method": "POST",
+      "path": "/defense-schedules/publish",
+      "permission": "defense-schedule:publish"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/controller/task.controller.ts",
+      "method": "GET",
+      "path": "/tasks/plan/:planId",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "UC17",
+      "controller": "src/guidance/final-defense/final-defense.controller.ts",
+      "method": "GET",
+      "path": "/final-defense",
+      "permission": "defense-confirmation:read"
+    },
+    {
+      "phase": "UC17",
+      "controller": "src/guidance/final-defense/final-defense.controller.ts",
+      "method": "GET",
+      "path": "/final-defense/options",
+      "permission": "defense-confirmation:read"
+    },
+    {
+      "phase": "UC17",
+      "controller": "src/guidance/final-defense/final-defense.controller.ts",
+      "method": "GET",
+      "path": "/proposals/:proposalId/final-report",
+      "permission": "defense-confirmation:read"
+    },
+    {
+      "phase": "UC17",
+      "controller": "src/guidance/final-defense/final-defense.controller.ts",
+      "method": "GET",
+      "path": "/proposals/:proposalId/final-report/versions/:versionId/pdf",
+      "permission": "final-report:download"
+    },
+    {
+      "phase": "UC17",
+      "controller": "src/guidance/final-defense/final-defense.controller.ts",
+      "method": "POST",
+      "path": "/proposals/:proposalId/final-report/decide",
+      "permission": "defense-confirmation:decide"
+    },
+    {
+      "phase": "UC17",
+      "controller": "src/guidance/final-defense/final-defense.controller.ts",
+      "method": "POST",
+      "path": "/proposals/:proposalId/final-report/pdf",
+      "permission": "final-report:create"
+    },
+    {
+      "phase": "UC17",
+      "controller": "src/guidance/final-defense/final-defense.controller.ts",
+      "method": "POST",
+      "path": "/proposals/:proposalId/final-report/review",
+      "permission": "defense-confirmation:review"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "GET",
+      "path": "/guidance-plans/:id/meetings",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "GET",
+      "path": "/guidance-review-options/terms",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "GET",
+      "path": "/task-submissions/:id/review-context",
+      "permission": "submission:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "GET",
+      "path": "/terms/:termId/guidance-dashboard",
+      "permission": "guidance:monitor"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "GET",
+      "path": "/terms/:termId/progress-review-inbox",
+      "permission": "task:review"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "PATCH",
+      "path": "/guidance-meetings/:id",
+      "permission": "guidance:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "POST",
+      "path": "/guidance-plans/:id/meetings",
+      "permission": "guidance:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "POST",
+      "path": "/task-reviews/:id/amendments",
+      "permission": "task:review"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "POST",
+      "path": "/task-submissions/:id/reopen",
+      "permission": "task:review"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/reviews/progress-review.controller.ts",
+      "method": "POST",
+      "path": "/task-submissions/:id/reviews",
+      "permission": "task:review"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/submissions/submission.controller.ts",
+      "method": "GET",
+      "path": "/task-submissions/:submissionId",
+      "permission": "submission:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/submissions/submission.controller.ts",
+      "method": "GET",
+      "path": "/task-submissions/:submissionId/files/:fileId/download",
+      "permission": "submission:download"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/submissions/submission.controller.ts",
+      "method": "GET",
+      "path": "/tasks/:taskId/submission-context",
+      "permission": "submission:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/submissions/submission.controller.ts",
+      "method": "GET",
+      "path": "/tasks/:taskId/submissions",
+      "permission": "submission:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/submissions/submission.controller.ts",
+      "method": "POST",
+      "path": "/tasks/:taskId/submission-uploads",
+      "permission": "submission:create"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/submissions/submission.controller.ts",
+      "method": "POST",
+      "path": "/tasks/:taskId/submissions",
+      "permission": "submission:create"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/submissions/submission.controller.ts",
+      "method": "PUT",
+      "path": "/tasks/:taskId/draft",
+      "permission": "submission:create"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "GET",
+      "path": "/guidance-plans/:planId/tasks",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "GET",
+      "path": "/proposals/:proposalId/guidance-context",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "GET",
+      "path": "/proposals/:proposalId/guidance-plan",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "GET",
+      "path": "/tasks/:id",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "GET",
+      "path": "/terms/:termId/guidance-periods",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "GET",
+      "path": "/terms/:termId/guidance-tasks",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "GET",
+      "path": "/terms/:termId/weekly-report-coverage",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "PATCH",
+      "path": "/guidance-plans/:planId",
+      "permission": "guidance:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "PATCH",
+      "path": "/tasks/:id",
+      "permission": "task:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "POST",
+      "path": "/guidance-plans/:planId/resume",
+      "permission": "guidance:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "POST",
+      "path": "/guidance-plans/:planId/tasks",
+      "permission": "task:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "POST",
+      "path": "/proposals/:proposalId/guidance-plan",
+      "permission": "guidance:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "POST",
+      "path": "/tasks/:id/cancel",
+      "permission": "task:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "POST",
+      "path": "/tasks/:id/progress",
+      "permission": "task:progress"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/tasks/guidance.controller.ts",
+      "method": "POST",
+      "path": "/weekly-report-obligations/:id/task",
+      "permission": "task:ensure-weekly"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/weekly/weekly.controller.ts",
+      "method": "GET",
+      "path": "/terms/:termId/weekly-plans",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/weekly/weekly.controller.ts",
+      "method": "GET",
+      "path": "/terms/:termId/weekly-plans/:id/history",
+      "permission": "guidance:monitor"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/weekly/weekly.controller.ts",
+      "method": "GET",
+      "path": "/terms/:termId/weekly-progress",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/weekly/weekly.controller.ts",
+      "method": "GET",
+      "path": "/weekly-plans/options",
+      "permission": "guidance:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/weekly/weekly.controller.ts",
+      "method": "PATCH",
+      "path": "/terms/:termId/weekly-plans/:id",
+      "permission": "guidance:monitor"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/weekly/weekly.controller.ts",
+      "method": "POST",
+      "path": "/terms/:termId/weekly-plans",
+      "permission": "guidance:monitor"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/guidance/weekly/weekly.controller.ts",
+      "method": "POST",
+      "path": "/terms/:termId/weekly-plans/:id/state",
+      "permission": "guidance:monitor"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/notification/controller/notification.controller.ts",
+      "method": "GET",
+      "path": "/notifications/me",
+      "permission": "notification:own"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/notification/controller/notification.controller.ts",
+      "method": "GET",
+      "path": "/notifications/outbox/term/:termId",
+      "permission": "assignment:manage"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/notification/controller/notification.controller.ts",
+      "method": "PATCH",
+      "path": "/notifications/:id/read",
+      "permission": "notification:own"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/notification/controller/notification.controller.ts",
+      "method": "PATCH",
+      "path": "/notifications/me/read",
+      "permission": "notification:own"
+    },
+    {
+      "phase": "AUTH_SYSTEM",
+      "controller": "src/notification/controller/notification.controller.ts",
+      "method": "POST",
+      "path": "/notifications/outbox/:id/retry",
+      "permission": "assignment:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/assignment.controller.ts",
+      "method": "GET",
+      "path": "/assignments/term/:termId/plan",
+      "permission": "assignment:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/assignment.controller.ts",
+      "method": "GET",
+      "path": "/assignments/term/:termId/results",
+      "permission": "assignment:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/assignment.controller.ts",
+      "method": "POST",
+      "path": "/assignments/term/:termId/finalize",
+      "permission": "assignment:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/assignment.controller.ts",
+      "method": "POST",
+      "path": "/assignments/term/:termId/preview",
+      "permission": "assignment:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/assignment.controller.ts",
+      "method": "POST",
+      "path": "/assignments/term/:termId/publish",
+      "permission": "assignment:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/assignment.controller.ts",
+      "method": "PUT",
+      "path": "/assignments/term/:termId/draft",
+      "permission": "assignment:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/assignment.controller.ts",
+      "method": "PUT",
+      "path": "/assignments/term/:termId/manual",
+      "permission": "assignment:manage"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/registration.controller.ts",
+      "method": "GET",
+      "path": "/registrations",
+      "permission": "registration:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/registration.controller.ts",
+      "method": "GET",
+      "path": "/registrations/term/:termId",
+      "permission": "registration:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/registration.controller.ts",
+      "method": "GET",
+      "path": "/registrations/term/:termId/me",
+      "permission": "registration:own"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/registration.controller.ts",
+      "method": "POST",
+      "path": "/registrations/term/:termId/me/submit",
+      "permission": "registration:own"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/registration/controller/registration.controller.ts",
+      "method": "PUT",
+      "path": "/registrations/term/:termId/me/draft",
+      "permission": "registration:own"
+    },
+    {
+      "phase": "UC25",
+      "controller": "src/report/defense-reporting/report.controller.ts",
+      "method": "GET",
+      "path": "/defense-reports/exports",
+      "permission": "defense-report:history-read"
+    },
+    {
+      "phase": "UC25",
+      "controller": "src/report/defense-reporting/report.controller.ts",
+      "method": "GET",
+      "path": "/defense-reports/exports/:id",
+      "permission": "defense-report:history-read"
+    },
+    {
+      "phase": "UC25",
+      "controller": "src/report/defense-reporting/report.controller.ts",
+      "method": "GET",
+      "path": "/defense-reports/options",
+      "permission": "defense-report:read"
+    },
+    {
+      "phase": "UC25",
+      "controller": "src/report/defense-reporting/report.controller.ts",
+      "method": "GET",
+      "path": "/defense-reports/statistics",
+      "permission": "defense-report:statistics"
+    },
+    {
+      "phase": "UC25",
+      "controller": "src/report/defense-reporting/report.controller.ts",
+      "method": "GET",
+      "path": "/defense-reports/templates",
+      "permission": "defense-report:templates-read"
+    },
+    {
+      "phase": "UC25",
+      "controller": "src/report/defense-reporting/report.controller.ts",
+      "method": "POST",
+      "path": "/defense-reports/exports",
+      "permission": "defense-report:export"
+    },
+    {
+      "phase": "UC25",
+      "controller": "src/report/defense-reporting/report.controller.ts",
+      "method": "POST",
+      "path": "/defense-reports/exports/:id/download",
+      "permission": "defense-report:download"
+    },
+    {
+      "phase": "UC25",
+      "controller": "src/report/defense-reporting/report.controller.ts",
+      "method": "POST",
+      "path": "/defense-reports/exports/preview",
+      "permission": "defense-report:preview"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/academic-semester.controller.ts",
+      "method": "GET",
+      "path": "/semesters",
+      "permission": "term:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/academic-semester.controller.ts",
+      "method": "POST",
+      "path": "/semesters",
+      "permission": "term:create"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "GET",
+      "path": "/terms",
+      "permission": "term:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "GET",
+      "path": "/terms/:id",
+      "permission": "term:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "GET",
+      "path": "/terms/:id/operation-window",
+      "permission": "term:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "GET",
+      "path": "/terms/latest",
+      "permission": "term:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "PATCH",
+      "path": "/terms/:id",
+      "permission": "term:update"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "PATCH",
+      "path": "/terms/:id/lock",
+      "permission": "term:lock"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "PATCH",
+      "path": "/terms/:id/status",
+      "permission": "term:transition"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "POST",
+      "path": "/terms",
+      "permission": "term:create"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "POST",
+      "path": "/terms/:id/quotas/approve",
+      "permission": "term:roster"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "POST",
+      "path": "/terms/:id/quotas/preview",
+      "permission": "term:roster"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "PUT",
+      "path": "/terms/:id/parameters",
+      "permission": "term:parameters"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "PUT",
+      "path": "/terms/:id/phases",
+      "permission": "term:plan"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/term/controller/thesis-term.controller.ts",
+      "method": "PUT",
+      "path": "/terms/:id/roster",
+      "permission": "term:roster"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/controller/topic.controller.ts",
+      "method": "GET",
+      "path": "/topics/:id/versions/:version/pdf",
+      "permission": "topic:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/controller/topic.controller.ts",
+      "method": "GET",
+      "path": "/topics/term/:termId",
+      "permission": "topic:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/controller/topic.controller.ts",
+      "method": "POST",
+      "path": "/topics/:id/agree",
+      "permission": "topic:write"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/controller/topic.controller.ts",
+      "method": "POST",
+      "path": "/topics/:id/prepare-workflow",
+      "permission": "topic:write"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/controller/topic.controller.ts",
+      "method": "POST",
+      "path": "/topics/term/:termId/student/:studentId/submit",
+      "permission": "topic:write"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/controller/topic.controller.ts",
+      "method": "PUT",
+      "path": "/topics/term/:termId/student/:studentId/draft",
+      "permission": "topic:write"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/proposal-dossiers/dossier.controller.ts",
+      "method": "GET",
+      "path": "/proposals/:proposalId/dossier",
+      "permission": "proposal:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/proposal-dossiers/dossier.controller.ts",
+      "method": "GET",
+      "path": "/proposals/:proposalId/dossier.pdf",
+      "permission": "proposal:export"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/proposal-dossiers/dossier.controller.ts",
+      "method": "GET",
+      "path": "/proposals/:proposalId/preview.pdf",
+      "permission": "proposal:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/proposal-dossiers/dossier.controller.ts",
+      "method": "POST",
+      "path": "/proposals/:proposalId/dossier/pdf",
+      "permission": "proposal:export"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/proposal-dossiers/dossier.controller.ts",
+      "method": "POST",
+      "path": "/proposals/:proposalId/dossier/receipt",
+      "permission": "dossier:receive"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/proposal-dossiers/dossier.controller.ts",
+      "method": "POST",
+      "path": "/proposals/:proposalId/finalize",
+      "permission": "proposal:finalize"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/topic/proposal-dossiers/dossier.controller.ts",
+      "method": "PUT",
+      "path": "/proposals/:proposalId/dossier/student-profile",
+      "permission": "proposal:finalize"
+    }
+  ]
+}

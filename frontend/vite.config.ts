@@ -4,7 +4,14 @@ import path from 'path';
 
 export default defineConfig(({ mode }) => {
   const env = { ...loadEnv(mode, __dirname, 'VITE_'), ...process.env };
+  if (mode === 'production' && (env.VITE_AUTH_API !== 'true' || env.VITE_DEMO_MODE === 'true')) {
+    throw new Error('Production build requires real API authentication and disabled demo mode');
+  }
   const apiUrl = env.VITE_API_URL || '/api';
+  const previewTarget = process.env.DATN_PREVIEW_API_TARGET || 'http://127.0.0.1:3000';
+  if (!/^http:\/\/127\.0\.0\.1:\d{2,5}$/.test(previewTarget)) {
+    throw new Error('Local preview proxy must use an IPv4 loopback backend');
+  }
   let validApiUrl = apiUrl.startsWith('/') && !apiUrl.startsWith('//');
   if (!validApiUrl) {
     try {
@@ -38,7 +45,7 @@ export default defineConfig(({ mode }) => {
       ignored: ['**/test-results*/**', '**/playwright-report/**'],
     },
     proxy: {
-      '/api': { target: 'http://localhost:3000', changeOrigin: true },
+      '/api': { target: previewTarget, changeOrigin: true },
     },
   },
   };

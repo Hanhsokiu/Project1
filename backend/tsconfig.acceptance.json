@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./.acceptance-build",
+    "tsBuildInfoFile": "./.acceptance-build/build.tsbuildinfo"
+  },
+  "include": ["src/acceptance/**/*.ts"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
+}

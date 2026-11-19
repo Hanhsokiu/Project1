@@ -1,0 +1,485 @@
+{
+  "database": "btl_pr2b_acceptance_utc_demo_v3_baseline_v3",
+  "realPostgreSQL": true,
+  "fixtureFrontend": false,
+  "checks": [
+    {
+      "testId": "UC01-P",
+      "uc": "UC01",
+      "method": "GET",
+      "route": "/auth/me",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC01-N",
+      "uc": "UC01",
+      "method": "GET",
+      "route": "/auth/me",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC02-P",
+      "uc": "UC02",
+      "method": "GET",
+      "route": "/accounts",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC02-N",
+      "uc": "UC02",
+      "method": "GET",
+      "route": "/accounts",
+      "status": 403,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC03-P",
+      "uc": "UC03",
+      "method": "GET",
+      "route": "/audit-logs",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC03-N",
+      "uc": "UC03",
+      "method": "GET",
+      "route": "/audit-logs",
+      "status": 403,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC04-P",
+      "uc": "UC04",
+      "method": "GET",
+      "route": "/students",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC04-N",
+      "uc": "UC04",
+      "method": "GET",
+      "route": "/students",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC05-P",
+      "uc": "UC05",
+      "method": "GET",
+      "route": "/lecturers",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC05-N",
+      "uc": "UC05",
+      "method": "GET",
+      "route": "/lecturers",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC06-P",
+      "uc": "UC06",
+      "method": "GET",
+      "route": "/research-areas",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC06-N",
+      "uc": "UC06",
+      "method": "GET",
+      "route": "/research-areas",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC07-P",
+      "uc": "UC07",
+      "method": "GET",
+      "route": "/terms/256adf1f-1c50-546a-b7a1-58fcb735d56f",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC07-N",
+      "uc": "UC07",
+      "method": "POST",
+      "route": "/terms",
+      "status": 403,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC08-P",
+      "uc": "UC08",
+      "method": "GET",
+      "route": "/terms/256adf1f-1c50-546a-b7a1-58fcb735d56f",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC08-N",
+      "uc": "UC08",
+      "method": "PUT",
+      "route": "/terms/256adf1f-1c50-546a-b7a1-58fcb735d56f/phases",
+      "status": 403,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC09-P",
+      "uc": "UC09",
+      "method": "GET",
+      "route": "/registrations/term/256adf1f-1c50-546a-b7a1-58fcb735d56f/me",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC09-N",
+      "uc": "UC09",
+      "method": "POST",
+      "route": "/registrations/term/256adf1f-1c50-546a-b7a1-58fcb735d56f/me/submit",
+      "status": 409,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC10-P",
+      "uc": "UC10",
+      "method": "GET",
+      "route": "/assignments/term/256adf1f-1c50-546a-b7a1-58fcb735d56f/results",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC10-N",
+      "uc": "UC10",
+      "method": "POST",
+      "route": "/assignments/term/256adf1f-1c50-546a-b7a1-58fcb735d56f/preview",
+      "status": 403,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC11-P",
+      "uc": "UC11",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/editing-context",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC11-N",
+      "uc": "UC11",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/editing-context",
+      "status": 404,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC12-P",
+      "uc": "UC12",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/versions",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC12-N",
+      "uc": "UC12",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/versions",
+      "status": 404,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC13-P",
+      "uc": "UC13",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/dossier",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC13-N",
+      "uc": "UC13",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/dossier",
+      "status": 404,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC14-P",
+      "uc": "UC14",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/guidance-plan",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC14-N",
+      "uc": "UC14",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/guidance-plan",
+      "status": 404,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC15-P",
+      "uc": "UC15",
+      "method": "GET",
+      "route": "/task-submissions/324ecb39-5ed9-530a-8dd5-ad5617257669",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC15-N",
+      "uc": "UC15",
+      "method": "GET",
+      "route": "/task-submissions/324ecb39-5ed9-530a-8dd5-ad5617257669",
+      "status": 404,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC16-P",
+      "uc": "UC16",
+      "method": "GET",
+      "route": "/task-submissions/324ecb39-5ed9-530a-8dd5-ad5617257669/review-context",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC16-N",
+      "uc": "UC16",
+      "method": "GET",
+      "route": "/task-submissions/324ecb39-5ed9-530a-8dd5-ad5617257669/review-context",
+      "status": 404,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "PDF-DOSSIER",
+      "uc": "UC13",
+      "method": "GET",
+      "route": "/proposals/eee81099-9885-58c8-9f56-dbf0b276f35a/dossier.pdf",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "FILE-REPORT",
+      "uc": "UC15",
+      "method": "GET",
+      "route": "/task-submissions/324ecb39-5ed9-530a-8dd5-ad5617257669/files/18ced14e-6bc8-502d-9b35-8f2f0f47ee10/download",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "FILE-IDOR",
+      "uc": "UC15",
+      "method": "GET",
+      "route": "/task-submissions/324ecb39-5ed9-530a-8dd5-ad5617257669/files/18ced14e-6bc8-502d-9b35-8f2f0f47ee10/download",
+      "status": 404,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC17-P",
+      "uc": "UC17",
+      "method": "GET",
+      "route": "/proposals/59185ddc-8f6e-5e81-9fbd-0c38a0d93020/final-report",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC17-N",
+      "uc": "UC17",
+      "method": "GET",
+      "route": "/proposals/59185ddc-8f6e-5e81-9fbd-0c38a0d93020/final-report",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC18-P",
+      "uc": "UC18",
+      "method": "GET",
+      "route": "/defense-eligibility/9fb9b6b8-ee61-51c8-a8f5-479c1854d1bf?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC18-N",
+      "uc": "UC18",
+      "method": "GET",
+      "route": "/defense-eligibility/9fb9b6b8-ee61-51c8-a8f5-479c1854d1bf?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC19-P",
+      "uc": "UC19",
+      "method": "GET",
+      "route": "/defense-committees/workspace?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC19-N",
+      "uc": "UC19",
+      "method": "GET",
+      "route": "/defense-committees/workspace?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC20-P",
+      "uc": "UC20",
+      "method": "GET",
+      "route": "/defense-reviewers/workspace?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC20-N",
+      "uc": "UC20",
+      "method": "GET",
+      "route": "/defense-reviewers/workspace?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC21-P",
+      "uc": "UC21",
+      "method": "GET",
+      "route": "/defense-schedules/workspace?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC21-N",
+      "uc": "UC21",
+      "method": "GET",
+      "route": "/defense-schedules/workspace?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC22-P",
+      "uc": "UC22",
+      "method": "GET",
+      "route": "/defense-reviewer-grades/options",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC22-N",
+      "uc": "UC22",
+      "method": "GET",
+      "route": "/defense-reviewer-grades/options",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC23-P",
+      "uc": "UC23",
+      "method": "GET",
+      "route": "/defense-committee-grades/options",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC23-N",
+      "uc": "UC23",
+      "method": "GET",
+      "route": "/defense-committee-grades/options",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC24-P",
+      "uc": "UC24",
+      "method": "GET",
+      "route": "/defense-results/9fb9b6b8-ee61-51c8-a8f5-479c1854d1bf?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 200,
+      "result": "PASS",
+      "kind": "positive"
+    },
+    {
+      "testId": "UC24-N",
+      "uc": "UC24",
+      "method": "GET",
+      "route": "/defense-results/9fb9b6b8-ee61-51c8-a8f5-479c1854d1bf?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    },
+    {
+      "testId": "UC25-P",
+      "uc": "UC25",
+      "method": "GET",
+      "route": "/defense-reports/statistics?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "result": "FAIL",
+      "error": "Expected 200, got 500"
+    },
+    {
+      "testId": "UC25-N",
+      "uc": "UC25",
+      "method": "GET",
+      "route": "/defense-reports/statistics?termId=6b7d3666-56db-5531-879d-aa0bda9b530f",
+      "status": 401,
+      "result": "PASS",
+      "kind": "negative"
+    }
+  ],
+  "status": "FAIL",
+  "limits": "Read/ownership/closed-state smoke; does not replace full mutation and scenario tests."
+}

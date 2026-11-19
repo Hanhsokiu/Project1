@@ -19,7 +19,7 @@ import {
 } from "../validator/term-configuration.validator";
 import { TermTransitionValidator } from "../validator/term-transition.validator";
 import { TermLifecycleService } from "./term-lifecycle.service";
-import { operationWindow } from "./term-window.service";
+import { operationWindow, TermWindowService } from "./term-window.service";
 import { phasesFromTerm } from "../dto/term.mapper";
 import { phasePlanSchema } from "../dto/term.dto";
 
@@ -713,6 +713,87 @@ describe("proposal review schedule compatibility", () => {
 });
 
 describe("shared server-clock operation window", () => {
+  it("creates a new scheduled term using the native server clock without any acceptance runtime", async () => {
+    vi.useRealTimers();
+    const nativeDate = Date;
+    const now = new Date();
+    const start = new Date(now.getTime() - 60000), end = new Date(now.getTime() + 120 * 86400000);
+    repository.semester.mockResolvedValue({ ...semester, startDate:new Date(start.getTime()-86400000), endDate:new Date(end.getTime()+86400000) });
+    repository.create.mockImplementation(async data => {
+      term.startDate=data.startDate;term.endDate=data.endDate;
+      term.phases=data.phases.create.map((p:LoadedTerm["phases"][number],i:number)=>({ ...p,id:`live-${i}`,termId:term.id,createdAt:now }));
+      return term;
+    });
+    await service.create({ ...input, startDate:start.toISOString(),endDate:end.toISOString() },"actor");
+    expect(Date).toBe(nativeDate);
+    expect(term.status).toBe("DRAFT");
+    expect(operationWindow(term,"REGISTRATION").canWrite).toBe(false);
+    await service.transition(term.id,"OPEN_REGISTRATION","actor");
+    expect(operationWindow(term,"REGISTRATION").canWrite).toBe(true);
+    expect(term.phases).toHaveLength(6);
+  });
+  it.each([
+    ["REGISTRATION", "OPEN_REGISTRATION"], ["ASSIGNMENT", "CLOSED_REGISTRATION"],
+    ["PROPOSAL", "IN_PROGRESS"], ["WEEKLY", "IN_PROGRESS"],
+    ["FINAL", "IN_PROGRESS"], ["DEFENSE", "DEFENDING"],
+  ] as const)("checks real server instants for %s without changing workflow state", (code, status) => {
+    term.status = status;
+    const phase = term.phases.find(p => p.code === code)!;
+    const before = structuredClone(term);
+    for (const [at, allowed] of [
+      [phase.startDate.getTime() - 1, false], [phase.startDate.getTime(), true],
+      [phase.endDate.getTime() - 1, true], [phase.endDate.getTime(), false],
+      [phase.endDate.getTime() + 1, false],
+    ] as const) {
+      vi.setSystemTime(at);
+      expect(operationWindow(term, code).canWrite).toBe(allowed);
+    }
+    expect(term).toEqual(before);
+    expect(repository.update).not.toHaveBeenCalled();
+    expect(audit.log).not.toHaveBeenCalled();
+  });
+
+  it("does not advance IN_PROGRESS into DEFENDING when the defense date arrives", () => {
+    term.status = "IN_PROGRESS";
+    vi.setSystemTime(term.phases.find(p => p.code === "DEFENSE")!.startDate);
+    expect(operationWindow(term, "DEFENSE").canWrite).toBe(false);
+    expect(term.status).toBe("IN_PROGRESS");
+    expect(repository.update).not.toHaveBeenCalled();
+  });
+
+  it("reopens an expired FINAL window only after a valid audited plan extension", async () => {
+    term.status = "IN_PROGRESS";
+    const final = term.phases.find(p => p.code === "FINAL")!;
+    vi.setSystemTime(final.endDate.getTime() + 60000);
+    const windows = new TermWindowService(repository as unknown as TermRepository);
+    await expect(windows.requireOpen(term.id, "FINAL")).rejects.toThrow();
+    const phases = phasesFromTerm(term).map(p => ({ id:p.id, code:p.code, name:p.phaseName,
+      start:p.startDate.toISOString(), end:p.endDate.toISOString(), locked:p.isLocked }));
+    const extended = new Date(final.endDate.getTime() + 3600000).toISOString();
+    phases.find(p => p.code === "FINAL")!.end = extended;
+    phases.find(p => p.code === "DEFENSE")!.start = extended;
+    await expect(service.savePhases(term.id, phases, "actor")).rejects.toThrow();
+    expect(repository.updatePhase).not.toHaveBeenCalled();
+    repository.updatePhase.mockImplementation(async (id, data) => Object.assign(term.phases.find(p => p.id === id)!, data));
+    await service.savePhases(term.id, phases, "actor", "Approved operational extension");
+    await expect(windows.requireOpen(term.id, "FINAL")).resolves.toMatchObject({ canWrite:true });
+    expect(term.status).toBe("IN_PROGRESS");
+    expect(audit.log).toHaveBeenCalledWith(expect.objectContaining({ userId:"actor", action:"SAVE_TERM_PHASES",
+      oldValue:expect.objectContaining({ status:"IN_PROGRESS" }),
+      newValue:expect.objectContaining({ changeReason:"Approved operational extension" }),
+    }), tx);
+  });
+
+  it("does not let the generic term editor bypass the reason for changing live term dates", async () => {
+    term.status = "IN_PROGRESS";
+    const endDate = "2027-01-31T00:00:00+07:00";
+    await expect(service.update(term.id, { endDate }, "actor")).rejects.toThrow();
+    expect(repository.update).not.toHaveBeenCalled();
+    await service.update(term.id, { endDate, reason:"Extend approved term deadline" }, "actor");
+    expect(audit.log).toHaveBeenCalledWith(expect.objectContaining({ action:"UPDATE_TERM",
+      newValue:expect.objectContaining({ changeReason:"Extend approved term deadline" }) }),tx);
+  });
+
   it("uses a half-open server-time interval, lifecycle state and both locks", () => {
     term.status = "OPEN_REGISTRATION";
     const phase = term.phases[0];

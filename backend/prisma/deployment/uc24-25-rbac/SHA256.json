@@ -1,0 +1,11 @@
+{
+  "manifestSha256": "87885ce1ffc720c5342d4367f4f1437f54292f1f4d1ce1c3e66a367dbc40a335",
+  "permissionDefinitions": 27,
+  "roleGrants": 0,
+  "files": {
+    "preflight.sql": "dbf273c7c8330826cd58c0ff830e456c4675e31e1c3fc7c9a0af6858c7a80356",
+    "migration.sql": "1d309be4a0a43fd782594bacecc31d489ff06e6cff68c2cbacd27f0c0070a082",
+    "postflight.sql": "d02a50c2dc14f77fda178cd9d21be54b9730e555e1e6322ddec2298690b0baa6",
+    "rollback.sql": "530d41c0ec0d86969a60253a43588e225038cf7cd41368f766a3fb083996bae7"
+  }
+}

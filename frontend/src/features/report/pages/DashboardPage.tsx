@@ -129,7 +129,7 @@ function Milestones({ data }: { data: DashboardData }) {
             return (
               <div key={phase.id} className="flex gap-3 items-start">
                 <span
-                  className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 text-xs font-semibold ${state === "IN_PROGRESS" ? "bg-[#eef2ff] text-[#4338ca]" : "bg-[#f8fafc] text-slate-500"}`}
+                  className={`milestone-number ${state === "IN_PROGRESS" ? "active" : ""}`}
                 >
                   {String(i + 1).padStart(2, "0")}
                 </span>
@@ -169,11 +169,11 @@ function NextDeadline({ data }: { data: DashboardData }) {
           {upcoming.map((phase) => (
             <div
               key={phase.id}
-              className="flex gap-3 p-3 rounded-xl bg-[#f8fafc]"
+              className="deadline-item"
             >
               <CalendarDays
                 size={19}
-                className="text-[#4f46e5] shrink-0 mt-1"
+                className="text-primary shrink-0 mt-1"
               />
               <div>
                 <strong className="text-sm">{phase.name}</strong>
@@ -185,8 +185,8 @@ function NextDeadline({ data }: { data: DashboardData }) {
           ))}
         </div>
       ) : (
-        <div className="rounded-2xl bg-[#f8fafc] text-center p-7">
-          <CalendarDays size={27} className="mx-auto text-slate-400 mb-3" />
+        <div className="deadline-empty">
+          <CalendarDays size={27} className="mx-auto mb-3" />
           <strong className="text-sm">Chưa có mốc sắp tới</strong>
           <p className="muted text-xs leading-5 mt-2">
             Lịch đăng ký, phân công và nộp đề cương được cập nhật theo kế hoạch
@@ -219,9 +219,9 @@ function QuickLink({
   return (
     <Link
       to={to}
-      className="block rounded-[20px] border border-[#e2e8f0] bg-white p-5 hover:bg-[#f8fafc] transition-colors"
+      className="quick-link"
     >
-      <span className="w-9 h-9 rounded-xl bg-[#eef2ff] text-[#4f46e5] inline-flex items-center justify-center">
+      <span className="quick-link-icon">
         {icon}
       </span>
       <h3 className="font-semibold text-sm mt-4 flex justify-between gap-2">
@@ -297,10 +297,10 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
       </DarkHero>
       <div className="grid xl:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-6 items-start">
         <div className="space-y-6">
-          <section className="rounded-[20px] bg-[#f3f0fa] border border-[#e2e8f0] p-6">
+          <section className="dashboard-action-panel">
             <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <span className="w-10 h-10 rounded-xl bg-[#4f46e5] text-white flex items-center justify-center">
+                <span className="dashboard-action-icon">
                   <Flag size={20} />
                 </span>
                 <div>
@@ -337,7 +337,7 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
                 <Link
                   key={item.title}
                   to={item.to}
-                  className="rounded-xl bg-white p-3"
+                  className="dashboard-action-card"
                 >
                   <strong className="text-sm">{item.title}</strong>
                   <p className="muted text-xs mt-1">{item.value}</p>
@@ -354,11 +354,11 @@ function FacultyDashboard({ data }: { data: DashboardData }) {
                 <Link
                   to={step.to}
                   key={step.title}
-                  className={`flex items-start justify-between gap-3 rounded-2xl p-4 transition-colors ${i === first ? "bg-[#eef2ff]" : "bg-[#f8fafc] hover:bg-[#eef2ff]"}`}
+                  className={`dashboard-step ${i === first ? "dashboard-step-current" : ""} ${step.done ? "dashboard-step-done" : ""}`}
                 >
                   <div className="flex items-start gap-3 min-w-0">
                     <span
-                      className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 text-xs ${step.done ? "bg-[#4f46e5] text-white" : "bg-white text-[#4f46e5]"}`}
+                      className={`dashboard-step-number ${step.done ? "done" : ""}`}
                     >
                       {step.done ? <Check size={15} /> : i + 1}
                     </span>
@@ -491,13 +491,13 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
           {steps.slice(1).map((step, i) => (
             <div
               key={step.title}
-              className="rounded-xl bg-white/[.05] px-3 py-3"
+              className="dashboard-overview-step"
             >
-              <p className="text-[10px] uppercase text-[#c7d2fe] font-semibold">
+              <p className="text-[10px] uppercase font-semibold eyebrow">
                 Mốc {i + 1}
               </p>
               <p className="text-xs font-medium mt-2">{step.title}</p>
-              <p className="text-[10px] text-[#c6c6cb] mt-2">
+              <p className="text-[10px] muted mt-2">
                 {step.done ? "Đã hoàn tất" : "Chờ thực hiện"}
               </p>
             </div>
@@ -506,10 +506,10 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
       </DarkHero>
       <div className="grid xl:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] gap-6 items-start">
         <div className="space-y-6">
-          <section className="rounded-[24px] border border-[#e2e8f0] bg-[#f3f0fa] p-6">
+          <section className="dashboard-action-panel">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
-                <span className="w-9 h-9 rounded-xl bg-[#4f46e5] text-white flex items-center justify-center mb-3">
+                <span className="dashboard-action-icon mb-3">
                   <GraduationCap size={20} />
                 </span>
                 <p className="eyebrow">BƯỚC TIẾP THEO</p>
@@ -529,15 +529,15 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
               </RouteButton>
             </div>
             <div className="grid sm:grid-cols-3 gap-3 mt-5">
-              <div className="bg-white rounded-xl p-3 text-xs">
+              <div className="dashboard-action-card text-xs">
                 <strong>Học vụ</strong>
                 <p className="muted mt-1">GPA {student?.gpa ?? "—"} / 4.0</p>
               </div>
-              <div className="bg-white rounded-xl p-3 text-xs">
+              <div className="dashboard-action-card text-xs">
                 <strong>Hạn đăng ký</strong>
                 <p className="muted mt-1">{date(data.term.registrationEnd)}</p>
               </div>
-              <div className="bg-white rounded-xl p-3 text-xs">
+              <div className="dashboard-action-card text-xs">
                 <strong>Thông tin liên hệ</strong>
                 <p className="muted mt-1">
                   {student?.email && student.phone
@@ -553,7 +553,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                 <div className="space-y-3">
                   <Person name={lecturer.name} sub={lecturer.code} />
                   <a
-                    className="text-xs text-[#4f46e5] break-all block"
+                    className="text-xs text-primary break-all block"
                     href={`mailto:${lecturer.email}`}
                   >
                     {lecturer.email}
@@ -582,7 +582,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                     {topic.title}
                   </p>
                   <Link
-                    className="text-xs text-[#4f46e5] block mt-3"
+                    className="text-xs text-primary block mt-3"
                     to="/topic/my"
                   >
                     Chi tiết đề tài →
@@ -602,7 +602,7 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
               <div className="my-4">
                 <Badge value={submittedProposal ? "SUBMITTED" : "DRAFT"} />
               </div>
-              <Link to="/topic/draft" className="text-xs text-[#4f46e5]">
+              <Link to="/topic/draft" className="text-xs text-primary">
                 Soạn đề cương / xuất PDF →
               </Link>
             </Card>
@@ -616,9 +616,9 @@ function StudentDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                 <Link
                   key={step.title}
                   to={step.to}
-                  className={`p-4 rounded-2xl text-center border ${step.done ? "border-[#c7d2fe] bg-[#f3f0fa]" : "border-[#e2e8f0] bg-[#f8fafc]"}`}
+                  className={`student-step-card ${step.done ? "done" : ""}`}
                 >
-                  <span className="flex w-10 h-10 rounded-xl bg-white mx-auto items-center justify-center text-[#4f46e5]">
+                  <span className="flex w-10 h-10 rounded-xl bg-white mx-auto items-center justify-center text-primary">
                     {step.done ? (
                       <CheckCircle2 size={21} />
                     ) : (
@@ -672,11 +672,11 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
           <DarkMetric label="Đề tài đã thống nhất" value={agreed} />
           <DarkMetric label="Đề cương có phiên bản" value={submitted} />
         </div>
-        <div className="rounded-xl bg-white/[.06] p-4 text-xs flex flex-wrap justify-between gap-3">
+        <div className="dashboard-overview-step text-xs flex flex-wrap justify-between gap-3">
           <span>
             Chỉ tiêu trong đợt: {data.students.length}/{data.quota} sinh viên
           </span>
-          <span className="text-[#c7d2fe]">
+          <span className="text-primary">
             {data.term.assignmentPublished
               ? "Khoa đã công bố kết quả phân công"
               : "Chờ Khoa chốt và công bố phân công"}
@@ -705,7 +705,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                   title: "Liên hệ",
                   render: (s) => (
                     <div className="text-xs space-y-1">
-                      <a className="text-[#4f46e5]" href={`mailto:${s.email}`}>
+                      <a className="text-primary" href={`mailto:${s.email}`}>
                         {s.email}
                       </a>
                       <p>{s.phone}</p>
@@ -752,7 +752,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
             />
           </Card>
           <Card title="Thông tin chuyên môn và hướng nghiên cứu">
-            <div className="rounded-2xl bg-[#f8fafc] p-4 grid sm:grid-cols-2 gap-4">
+            <div className="info-panel p-4 grid sm:grid-cols-2 gap-4">
               <div>
                 <p className="eyebrow">GIẢNG VIÊN HƯỚNG DẪN</p>
                 <strong className="block mt-2">
@@ -801,7 +801,7 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
                         to="/topic/my"
                         onClick={() => setStudentId(topic.studentId)}
                         key={topic.id}
-                        className="block rounded-xl bg-[#f8fafc] p-3"
+                        className="dashboard-list-item"
                       >
                         <strong className="text-sm">
                           {
@@ -822,13 +822,13 @@ function LecturerDashboard({ data, db }: { data: DashboardData; db: DemoDb }) {
             </Card>
             <Card title="Hồ sơ đề cương">
               <div className="space-y-3">
-                <div className="flex justify-between rounded-xl bg-[#f8fafc] p-3 text-sm">
+                <div className="dashboard-stat-row">
                   <span>Đã có phiên bản nộp</span>
-                  <strong className="text-[#4f46e5]">{submitted}</strong>
+                  <strong className="text-primary">{submitted}</strong>
                 </div>
-                <div className="flex justify-between rounded-xl bg-[#f8fafc] p-3 text-sm">
+                <div className="dashboard-stat-row">
                   <span>Chưa nộp phiên bản</span>
-                  <strong className="text-[#4f46e5]">
+                  <strong className="text-primary">
                     {Math.max(0, data.students.length - submitted)}
                   </strong>
                 </div>
@@ -1026,7 +1026,7 @@ function CommitteeDashboard({
             <div className="space-y-4">
               {notifications.slice(0, 5).map((n) => (
                 <Link
-                  className="block border-b border-slate-100 pb-4 last:border-0"
+                  className="notification-item"
                   to="/notifications"
                   key={n.id}
                 >
@@ -1046,7 +1046,7 @@ function CommitteeDashboard({
     </>
   );
 }
-function DashboardContent({ db }: { db: DemoDb }) {
+export function DashboardContent({ db }: { db: DemoDb }) {
   const { user, termId } = useWorkspace();
   const availableRoles = user.roles;
   const [selectedRole, setSelectedRole] = useState<Role>(
@@ -1056,13 +1056,13 @@ function DashboardContent({ db }: { db: DemoDb }) {
     ? selectedRole
     : availableRoles[0];
   if (!role) return <CommitteeDashboard db={db} />;
-  if (!db.terms.length)
+  if (!db.terms.some(t => t.id === termId))
     return (
       <>
         <PageHeader
           eyebrow="GPMS · KHÔNG GIAN LÀM VIỆC"
           title="Chưa có đợt đồ án"
-          description="Khoa chưa tạo đợt đồ án trên hệ thống."
+          description="Chưa có đợt đồ án trong phạm vi tài khoản đang chọn."
         />
         <Card>
           <Empty

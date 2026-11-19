@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, BadRequestException, ConflictException } from "@nestjs/common";
 import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { AuditService } from "../../common/audit/audit.service";
@@ -256,6 +256,7 @@ export class CatalogRepository {
       code?: string;
       description?: string | null;
       isActive?: boolean;
+      departmentId?: string;
     },
     actorId: string,
   ) {
@@ -285,7 +286,19 @@ export class CatalogRepository {
           : await tx.trainingSystem.create({
               data: { name: input.name, code: input.code! },
             });
-      } else
+      } else {
+        if (input.departmentId) {
+          const department = await tx.department.findUnique({ where: { id: input.departmentId } });
+          if (!department) throw new BadRequestException("Bộ môn của hướng nghiên cứu không tồn tại.");
+          if (id) {
+            // Serialize rerouting with new topic FK references; never move existing dossiers between scopes.
+            await tx.$queryRaw`SELECT id FROM public."RESEARCH_AREA" WHERE id=${id} FOR UPDATE`;
+            const current = await tx.researchAreaWorkflow.findUnique({ where: { researchAreaId: id } });
+            if (current?.departmentId && current.departmentId !== input.departmentId &&
+                await tx.topic.count({ where: { researchAreaId: id } }))
+              throw new ConflictException("Không chuyển bộ môn của hướng đã có đề tài; cần đối soát các hồ sơ liên quan.");
+          }
+        }
         saved = id
           ? await tx.researchArea.update({
               where: { id },
@@ -302,6 +315,13 @@ export class CatalogRepository {
                 isActive: input.isActive,
               },
             });
+        if (input.departmentId)
+          await tx.researchAreaWorkflow.upsert({
+            where: { researchAreaId: saved.id },
+            create: { researchAreaId: saved.id, departmentId: input.departmentId },
+            update: { departmentId: input.departmentId },
+          });
+      }
       await this.audit.log(
         {
           userId: actorId,

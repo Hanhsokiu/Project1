@@ -1,0 +1,58 @@
+{
+  "profile": "UTC_PROJECT1_DEMO_V3",
+  "database": "btl_pr2b_acceptance_utc_demo_v3_baseline_v4",
+  "productionConnected": false,
+  "checks": [
+    {
+      "name": "baseline identity counts",
+      "status": "PASS"
+    },
+    {
+      "name": "exactly three students share their real fixture identity across terms",
+      "status": "PASS"
+    },
+    {
+      "name": "quotas, preference order, direction, official assignments and one personal topic",
+      "status": "PASS"
+    },
+    {
+      "name": "proposal version chains, content hashes, reviewer identities, approvals and dossiers",
+      "status": "PASS"
+    },
+    {
+      "name": "all stored assets exist and match size/checksum",
+      "status": "PASS"
+    },
+    {
+      "name": "current week: 5 PASS, 3 REVISION_REQUIRED, 2 missing overdue, 1 pending",
+      "status": "PASS"
+    },
+    {
+      "name": "weekly ownership, late flags and actual assigned advisor reviews",
+      "status": "PASS"
+    },
+    {
+      "name": "database foreign-key constraints all validated",
+      "status": "PASS"
+    },
+    {
+      "name": "requested 60 complete defense results",
+      "status": "BLOCKED",
+      "expected": 60,
+      "actual": 0
+    },
+    {
+      "name": "no outbound email or fabricated published defense result",
+      "status": "PASS"
+    }
+  ],
+  "precision": {
+    "requested": "two fractional digits",
+    "storedExample": "8.25",
+    "sourceExample": "8.25",
+    "status": "PASS"
+  },
+  "status": "PARTIAL",
+  "workflow9_10": "INCOMPLETE",
+  "generatedAt": "2026-11-16T08:04:21.583Z"
+}

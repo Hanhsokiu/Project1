@@ -59,6 +59,12 @@ export class TermLifecycleService {
       HttpStatus.CONFLICT,
     );
   }
+  private planReason(term: LoadedTerm, changed: boolean, reason?: string) {
+    termAssert(
+      !changed || term.status === "DRAFT" || !!reason?.trim() && reason.trim().length >= 5 && reason.trim().length <= 2000,
+      "Cần lý do điều chỉnh/gia hạn kế hoạch (5–2000 ký tự) khi đợt đã mở.",
+    );
+  }
   private async response(term: LoadedTerm, tx?: TermTransaction) {
     return toTermResponse(
       term,
@@ -275,6 +281,9 @@ export class TermLifecycleService {
           (!!input.registrationEnd &&
             new Date(input.registrationEnd).getTime() !==
               new Date(registration.end).getTime()));
+      this.planReason(term,
+        start.getTime() !== term.startDate.getTime() || end.getTime() !== term.endDate.getTime() || registrationChanged,
+        input.reason);
       if (input.registrationStart || input.registrationEnd) {
         termAssert(registration, "Chưa cấu hình giai đoạn đăng ký.");
         if (input.registrationStart)
@@ -318,7 +327,7 @@ export class TermLifecycleService {
           resource: "term",
           resourceId: id,
           oldValue: before,
-          newValue: response,
+          newValue: { ...response, changeReason: input.reason?.trim() ?? null },
         },
         tx,
       );
@@ -438,7 +447,7 @@ export class TermLifecycleService {
       return response;
     });
   }
-  async savePhases(id: string, phases: PhaseInput[], userId: string) {
+  async savePhases(id: string, phases: PhaseInput[], userId: string, reason?: string) {
     return this.repository.transaction(async (tx) => {
       const term = await this.required(id, tx);
       this.editable(term);
@@ -460,6 +469,12 @@ export class TermLifecycleService {
           },
         ];
       validatePhasePlan(phases, term.startDate, term.endDate);
+      const changed = phases.length !== existing.length || phases.some(p => {
+        const old = existing.find(x => x.code === p.code);
+        return !old || old.phaseName !== p.name || old.isLocked !== p.locked ||
+          old.startDate.getTime() !== new Date(p.start).getTime() || old.endDate.getTime() !== new Date(p.end).getTime();
+      });
+      this.planReason(term, changed, reason);
       termAssert(
         phases.every(
           (p) =>
@@ -504,7 +519,7 @@ export class TermLifecycleService {
           resource: "term",
           resourceId: id,
           oldValue: before,
-          newValue: response,
+          newValue: { ...response, changeReason: reason?.trim() ?? null },
         },
         tx,
       );

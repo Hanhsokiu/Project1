@@ -1,0 +1,53 @@
+import type { ReviewerGradeView } from "@doan/shared";
+// TEST_ONLY, never imported by runtime UI.
+export function syntheticGradeView(): ReviewerGradeView {
+  return {
+    termId: "term",
+    termStudentId: "student",
+    proposalId: "proposal",
+    reviewerId: "reviewer",
+    studentCode: "SV01",
+    studentName: "Sinh viên được phân phản biện",
+    title: "Đề tài kiểm thử",
+    proposalSummary: null,
+    advisorName: "GVHD chính thức",
+    committeeId: "H1",
+    revision: 0,
+    state: "NONE",
+    policy: {
+      version: "TEST_ONLY_UC22",
+      status: "APPROVED",
+      approvedBy: "faculty",
+      approvedAt: "2020-01-01T00:00:00Z",
+      reference: "Synthetic, not faculty approval",
+      phaseCode: "FINAL",
+      scoreStep: "0.5",
+      draftAllowed: true,
+      requiredFeedback: ["comment"],
+      sourceChange: "BLOCK",
+      afterFinalize: "IMMUTABLE",
+      studentRelease: "WITHHELD",
+      schedule: { required: false, requirePublished: false, window: null },
+      rubric: null,
+    },
+    policyHash: "a".repeat(64),
+    rubricHash: "b".repeat(64),
+    assignment: {
+      assignmentId: "assignment",
+      revision: 2,
+      evidenceHash: "c".repeat(64),
+    },
+    report: {
+      id: "version",
+      sequence: 1,
+      checksum: "d".repeat(64),
+      name: "final.pdf",
+    },
+    schedule: null,
+    score: null,
+    feedback: null,
+    history: [],
+    blockers: [],
+    permissions: { save: true, finalize: true, download: true },
+  };
+}

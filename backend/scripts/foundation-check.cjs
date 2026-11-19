@@ -47,6 +47,8 @@ const uniqueChanges = {
   RegistrationPref: [['registrationId', 'preferenceOrder'], ['registrationId', 'lecturerId']],
   AdvisorAssignment: [['assignmentPlanId', 'registrationId']],
   Proposal: [['termId', 'studentId']],
+  // UC19 adds a nullable code and scoped uniqueness; baseline rows stay nullable.
+  DefenseCommittee: [['termId', 'code']],
 };
 for (const model of current.dmmf.datamodel.models) {
   const now = integrated.dmmf.datamodel.models.find(m => m.name === model.name);

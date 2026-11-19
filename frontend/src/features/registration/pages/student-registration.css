@@ -1,0 +1,628 @@
+/* Registration finishing: feature structure, shared UTC Enterprise tokens. */
+.registration-pilot {
+  max-width: 1180px;
+  margin-inline: auto;
+  color: var(--utc-text-primary);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.registration-pilot .registration-hero {
+  padding-block: var(--utc-space-6);
+}
+.registration-pilot .registration-hero .page-heading {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+}
+.registration-pilot h1 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
+}
+.registration-pilot h2 {
+  color: var(--utc-text-primary);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.registration-pilot .registration-hero .muted {
+  color: var(--utc-text-secondary);
+  font-size: 14px;
+  max-width: 70ch;
+}
+.registration-pilot .registration-period {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--utc-space-6);
+  padding-block: var(--utc-space-4);
+  margin-bottom: var(--utc-space-3);
+  border-block: 1px solid var(--utc-border);
+}
+.registration-pilot .registration-period-item,
+.registration-pilot .registration-period-item > div {
+  min-width: 0;
+}
+.registration-pilot .registration-label {
+  display: block;
+  color: var(--utc-text-muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin-bottom: var(--utc-space-1);
+}
+.registration-pilot .registration-term-name {
+  color: var(--utc-text-primary);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.registration-pilot .registration-meta {
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+  margin-top: 2px;
+}
+.registration-pilot .registration-dates p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--utc-space-1);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.registration-pilot .registration-status .badge {
+  display: inline-flex;
+}
+.registration-pilot .registration-feedback {
+  margin-bottom: var(--utc-space-6);
+}
+.registration-pilot .notice {
+  padding: var(--utc-space-3) var(--utc-space-4);
+  border-radius: var(--utc-radius-control);
+  box-shadow: none;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+.registration-pilot
+  .notice:not(.notice-warning):not(.notice-danger):not(.notice-success) {
+  border: 1px solid var(--utc-border);
+  background: var(--utc-surface);
+  color: var(--utc-text-secondary);
+}
+.registration-pilot .notice-info > svg {
+  color: var(--utc-blue-700);
+}
+.registration-pilot .registration-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 296px;
+  gap: var(--utc-space-6);
+  align-items: start;
+}
+.registration-pilot .registration-sections,
+.registration-pilot .registration-aside {
+  display: grid;
+  min-width: 0;
+  gap: var(--utc-space-4);
+}
+.registration-pilot .registration-sections {
+  counter-reset: registration-section;
+}
+.registration-pilot .card,
+.registration-pilot .card:hover {
+  min-width: 0;
+  background: var(--utc-surface);
+  border: 1px solid var(--utc-border);
+  border-radius: var(--utc-radius-card);
+  box-shadow: none;
+  transform: none;
+  transition: none;
+  animation: none;
+}
+.registration-pilot .card-heading {
+  min-height: 0;
+  padding: var(--utc-space-4) var(--utc-space-5) 0;
+  border-bottom: 0;
+  gap: var(--utc-space-3);
+  align-items: flex-start;
+}
+.registration-pilot .card-heading .muted {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--utc-text-secondary);
+}
+.registration-pilot .card-body {
+  padding: var(--utc-space-3) var(--utc-space-5) var(--utc-space-4);
+}
+.registration-pilot .registration-section {
+  counter-increment: registration-section;
+}
+.registration-pilot .registration-section .card-heading > div:first-child {
+  min-width: 0;
+  flex: 1;
+  position: relative;
+  padding-left: 36px;
+}
+.registration-pilot .registration-section .card-heading h2::before {
+  content: counter(registration-section, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: var(--utc-radius-small);
+  background: var(--utc-surface-muted);
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.registration-pilot .registration-section-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--utc-space-2);
+}
+.registration-pilot .registration-section-toggle {
+  display: none;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--utc-text-secondary);
+  border-radius: var(--utc-radius-control);
+}
+.registration-pilot .registration-section-toggle:hover {
+  background: var(--utc-surface-muted);
+}
+.registration-pilot .registration-section-toggle svg,
+.registration-pilot .registration-note summary svg {
+  transition: transform var(--utc-motion-fast) var(--utc-ease);
+}
+.registration-pilot .registration-section-toggle[aria-expanded="true"] svg,
+.registration-pilot .registration-note[open] summary svg {
+  transform: rotate(180deg);
+}
+.registration-pilot .registration-student {
+  margin-bottom: var(--utc-space-4);
+}
+.registration-pilot .person,
+.registration-pilot .person > div {
+  min-width: 0;
+}
+.registration-pilot .person strong {
+  color: var(--utc-text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.registration-pilot .person small {
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.registration-pilot .registration-student .avatar {
+  width: 36px;
+  height: 36px;
+  color: var(--utc-blue-700);
+  background: var(--utc-surface-blue);
+  box-shadow: none;
+}
+.registration-pilot fieldset {
+  min-width: 0;
+}
+.registration-pilot .form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--utc-space-4);
+}
+.registration-pilot .field {
+  min-width: 0;
+  color: var(--utc-text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  gap: var(--utc-space-2);
+}
+.registration-pilot .registration-control {
+  display: block;
+}
+.registration-pilot :is(input, select, textarea) {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 12px;
+  background: var(--utc-surface);
+  border: 1px solid var(--utc-border-control);
+  border-radius: var(--utc-radius-control);
+  color: var(--utc-text-primary);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  box-shadow: none;
+  transition:
+    border-color var(--utc-motion-fast) var(--utc-ease),
+    box-shadow var(--utc-motion-fast) var(--utc-ease);
+}
+.registration-pilot select {
+  padding-right: 32px;
+}
+.registration-pilot textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+.registration-pilot :is(input, textarea)::placeholder {
+  color: var(--utc-text-muted);
+  opacity: 1;
+}
+.registration-pilot :is(input, select, textarea):hover:not(:disabled) {
+  border-color: var(--utc-blue-700);
+}
+.registration-pilot :is(input, select, textarea):focus {
+  border-color: var(--utc-blue-700);
+}
+.registration-pilot
+  :is(
+    a,
+    button,
+    input,
+    select,
+    textarea,
+    summary,
+    .preference-row
+  ):focus-visible {
+  outline: 2px solid var(--utc-blue-600);
+  outline-offset: 3px;
+}
+.registration-pilot :is(input, select, textarea)[aria-invalid="true"] {
+  border-color: var(--utc-danger-text);
+}
+.registration-pilot :is(input, select, textarea):disabled {
+  opacity: 1;
+  color: var(--ink-disabled);
+  background: var(--utc-surface-muted);
+  cursor: not-allowed;
+}
+.registration-pilot .registration-selected-direction,
+.registration-pilot .registration-hint {
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+  line-height: 1.6;
+  margin-top: var(--utc-space-2);
+  overflow-wrap: anywhere;
+}
+.registration-pilot .registration-selected-direction:empty {
+  display: none;
+}
+.registration-pilot .registration-selected-direction strong {
+  font-weight: 500;
+}
+.registration-pilot .registration-count {
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  padding-top: var(--utc-space-1);
+}
+.registration-pilot .registration-preferences {
+  gap: var(--utc-space-3);
+}
+.registration-pilot .preference-row {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--utc-space-3);
+  min-width: 0;
+  padding: var(--utc-space-2) 0 var(--utc-space-3);
+  border: 0;
+  border-bottom: 1px solid var(--utc-border);
+  border-radius: 0;
+  background: transparent;
+}
+.registration-pilot .preference-number,
+.registration-pilot .registration-saved-rank {
+  display: inline-grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  color: var(--utc-text-secondary);
+  background: var(--utc-surface-muted);
+  border-radius: var(--utc-radius-small);
+  font-size: 12px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.registration-pilot .preference-row .avatar {
+  display: none;
+}
+.registration-pilot .registration-preference-actions {
+  display: flex;
+  gap: var(--utc-space-1);
+}
+.registration-pilot .icon-btn {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--utc-border-control);
+  border-radius: var(--utc-radius-control);
+  color: var(--utc-text-secondary);
+  background: var(--utc-surface);
+}
+.registration-pilot .icon-btn:hover:not(:disabled) {
+  background: var(--utc-surface-muted);
+  color: var(--utc-blue-700);
+  border-color: var(--utc-blue-700);
+}
+.registration-pilot .icon-btn.registration-remove {
+  color: var(--utc-danger-text);
+}
+.registration-pilot .icon-btn.registration-remove:hover:not(:disabled) {
+  color: var(--utc-danger-text);
+  background: var(--utc-danger-bg);
+  border-color: var(--utc-danger-text);
+}
+.registration-pilot .icon-btn:disabled {
+  color: var(--ink-disabled);
+  background: var(--utc-surface-muted);
+  border-color: var(--utc-border);
+  opacity: 1;
+}
+.registration-pilot .btn {
+  font-size: 14px;
+  font-weight: 500;
+}
+.registration-pilot .registration-note {
+  border-top: 1px solid var(--utc-border);
+}
+.registration-pilot .registration-note summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--utc-space-1);
+  min-height: 44px;
+  padding-block: var(--utc-space-2);
+  color: var(--utc-text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  list-style: none;
+}
+.registration-pilot .registration-note summary::-webkit-details-marker {
+  display: none;
+}
+.registration-pilot .registration-note summary span {
+  color: var(--utc-text-secondary);
+  font-weight: 400;
+}
+.registration-pilot .registration-note summary svg {
+  margin-left: auto;
+}
+.registration-pilot .registration-note > .field {
+  padding-bottom: var(--utc-space-3);
+}
+.registration-pilot .form-actions {
+  margin-top: var(--utc-space-3);
+  padding-top: var(--utc-space-4);
+  gap: var(--utc-space-3);
+  border-top: 1px solid var(--utc-border);
+}
+.registration-pilot .registration-save-hint {
+  flex: 1 1 140px;
+  color: var(--utc-text-secondary);
+  font-size: 12px;
+}
+.registration-pilot .dialog-actions { flex-wrap: wrap; }
+.registration-pilot .dialog-actions .btn {
+  min-inline-size: 144px;
+  max-inline-size: 100%;
+}
+.registration-pilot .registration-saved .card-heading {
+  padding-bottom: var(--utc-space-1);
+}
+.registration-pilot .info-grid {
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--utc-space-4);
+}
+.registration-pilot .info-grid > div {
+  grid-column: 1;
+  min-width: 0;
+}
+.registration-pilot .info-grid dt {
+  display: flex;
+  align-items: center;
+  gap: var(--utc-space-2);
+  margin-bottom: var(--utc-space-1);
+  color: var(--utc-text-muted);
+  font-size: 12px;
+}
+.registration-pilot .info-grid dt svg {
+  color: var(--utc-text-secondary);
+}
+.registration-pilot .info-grid dd {
+  margin-left: 25px;
+  color: var(--utc-text-primary);
+  font-size: 13px;
+  font-weight: 400;
+  overflow-wrap: anywhere;
+}
+.registration-pilot .info-grid dd > div {
+  display: flex;
+  align-items: baseline;
+  gap: var(--utc-space-2);
+  margin-top: var(--utc-space-2);
+}
+.registration-pilot .registration-saved-rank {
+  width: 22px;
+  height: 22px;
+}
+.registration-pilot .registration-guidelines {
+  padding: var(--utc-space-2) var(--utc-space-4);
+}
+.registration-pilot .registration-guidelines h2 {
+  font-size: 14px;
+  margin-bottom: var(--utc-space-3);
+}
+.registration-pilot .registration-rules {
+  display: grid;
+  gap: var(--utc-space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--utc-text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+.registration-pilot .registration-rules li {
+  display: flex;
+  gap: var(--utc-space-2);
+  align-items: baseline;
+}
+.registration-pilot .registration-rules li::before {
+  content: "";
+  flex: 0 0 4px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+}
+@media (min-width: 1280px) {
+  .registration-pilot .registration-selected-direction {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+@media (min-width: 1280px) and (pointer: fine) {
+  .registration-pilot .icon-btn {
+    width: 36px;
+    height: 36px;
+    min-height: 36px;
+  }
+}
+@media (max-width: 1279px) {
+  .registration-pilot .registration-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .registration-pilot .registration-aside {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .registration-pilot .registration-period {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) auto;
+    gap: var(--utc-space-4);
+  }
+}
+@media (max-width: 767px) {
+  .registration-pilot h1 {
+    font-size: 23px;
+    letter-spacing: -0.02em;
+  }
+  .registration-pilot h2 {
+    font-size: 15px;
+  }
+  .registration-pilot .registration-hero {
+    padding-block: var(--utc-space-4) var(--utc-space-5);
+  }
+  .registration-pilot .registration-period {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--utc-space-4);
+  }
+  .registration-pilot .registration-period-item:first-child {
+    grid-column: 1 / -1;
+  }
+  .registration-pilot .registration-feedback {
+    margin-bottom: var(--utc-space-4);
+  }
+  .registration-pilot .registration-layout {
+    gap: var(--utc-space-5);
+  }
+  .registration-pilot .registration-aside {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .registration-pilot .card-heading {
+    padding: var(--utc-space-3) var(--utc-space-4) 0;
+  }
+  .registration-pilot .card-body {
+    padding: var(--utc-space-3) var(--utc-space-4) var(--utc-space-4);
+  }
+  .registration-pilot .registration-section .card-heading {
+    align-items: center;
+    padding: var(--utc-space-2) var(--utc-space-3);
+  }
+  .registration-pilot .registration-section-toggle {
+    display: inline-flex;
+  }
+  .registration-pilot .registration-section.is-collapsed .card-body,
+  .registration-pilot .registration-section.is-collapsed .card-heading .muted {
+    display: none;
+  }
+  .registration-pilot .registration-count-label {
+    display: none;
+  }
+  .registration-pilot :is(input, select, textarea) {
+    font-size: 16px;
+  }
+  .registration-pilot .registration-save-hint {
+    flex-basis: 100%;
+  }
+  .registration-pilot .form-actions > .btn {
+    flex: 1 1 120px;
+  }
+}
+@media (max-width: 639px) {
+  .registration-pilot .form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .registration-pilot .preference-row {
+    grid-template-columns: 28px minmax(0, 1fr);
+  }
+  .registration-pilot .registration-preference-actions {
+    grid-column: 2;
+    justify-self: end;
+  }
+}
+@media (max-width: 374px) {
+  .registration-pilot h1 {
+    font-size: 22px;
+  }
+  .registration-pilot .registration-period {
+    gap: var(--utc-space-3);
+  }
+  .registration-pilot .registration-count {
+    padding: 0;
+  }
+  .registration-pilot .registration-section .card-heading > div:first-child {
+    padding-left: 32px;
+  }
+  .registration-pilot .registration-section-controls {
+    gap: 0;
+  }
+  .registration-pilot .form-actions > .btn {
+    flex-basis: 100%;
+  }
+}
+@media (forced-colors: active) {
+  .registration-pilot
+    :is(.btn, .icon-btn, .preference-number, .registration-saved-rank) {
+    border: 1px solid ButtonText;
+  }
+  .registration-pilot
+    :is(
+      a,
+      button,
+      input,
+      select,
+      textarea,
+      summary,
+      .preference-row
+    ):focus-visible {
+    outline-color: Highlight;
+  }
+}

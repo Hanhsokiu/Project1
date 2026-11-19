@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter @doan/shared build && nest start --watch",
-    "build": "pnpm --filter @doan/shared build && nest build",
+    "dev": "node ../scripts/run-pnpm.cjs --filter @doan/shared build && nest start --watch",
+    "build": "node ../scripts/run-pnpm.cjs --filter @doan/shared build && nest build",
     "start": "node dist/main",
-    "type-check": "pnpm --filter @doan/shared build && tsc --noEmit",
+    "type-check": "node ../scripts/run-pnpm.cjs --filter @doan/shared build && tsc --noEmit",
     "lint": "eslint src --ext .ts",
     "format": "prettier --write src/**/*.ts",
     "test": "vitest run",

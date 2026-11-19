@@ -1,6 +1,6 @@
 .import-page {
-  --import-accent: #4f46e5;
-  --import-soft: #f5f2fb;
+  --import-accent: var(--utc-blue-700);
+  --import-soft: var(--utc-blue-100);
 }
 
 .import-page .page-heading {

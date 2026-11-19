@@ -1,24 +1,55 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, Link, useLocation } from 'react-router-dom';
+import {
+  LayoutDashboard,
+  Users,
+  GraduationCap,
+  UserCog,
+  CalendarDays,
+  ClipboardList,
+  BarChart3,
+  Shield,
+} from 'lucide-react';
+
+const NAV_ITEMS = [
+  { to: '/', label: 'Tổng quan', icon: LayoutDashboard },
+  { to: '/admin/accounts', label: 'Tài khoản & Phân quyền', icon: UserCog },
+  { to: '/catalog/students', label: 'Sinh viên', icon: GraduationCap },
+  { to: '/catalog/lecturers', label: 'Giảng viên', icon: Users },
+  { to: '/terms', label: 'Đợt đồ án', icon: CalendarDays },
+  { to: '/topic/review-groups', label: 'Nhóm duyệt đề cương', icon: ClipboardList },
+  { to: '/report/export', label: 'Báo cáo & Thống kê', icon: BarChart3 },
+];
 
 export default function AdminLayout() {
+  const { pathname } = useLocation();
+
   return (
-    <div className="flex h-screen bg-gray-50">
-      <aside className="w-64 bg-slate-900 text-slate-100 flex flex-col">
-        <div className="p-4 border-b border-slate-800">
-          <h2 className="text-lg font-bold">QLDATN - ADMIN</h2>
+    <div className="admin-layout">
+      <aside className="admin-sidebar">
+        <div className="admin-sidebar-brand">
+          <span className="admin-sidebar-logo">
+            <Shield size={20} />
+          </span>
+          <h2 className="admin-sidebar-title">QLDATN Admin</h2>
         </div>
-        <nav className="flex-1 p-4 space-y-1 text-sm">
-          <Link to="/" className="block px-3 py-2 rounded hover:bg-slate-800">Tổng quan</Link>
-          <Link to="/admin/accounts" className="block px-3 py-2 rounded hover:bg-slate-800">Tài khoản & Phân quyền</Link>
-          <Link to="/catalog/students" className="block px-3 py-2 rounded hover:bg-slate-800">Sinh viên</Link>
-          <Link to="/catalog/lecturers" className="block px-3 py-2 rounded hover:bg-slate-800">Giảng viên</Link>
-          <Link to="/terms" className="block px-3 py-2 rounded hover:bg-slate-800">Đợt đồ án</Link>
-          <Link to="/topic/review-groups" className="block px-3 py-2 rounded hover:bg-slate-800">Nhóm duyệt đề cương</Link>
-          <Link to="/report/export" className="block px-3 py-2 rounded hover:bg-slate-800">Báo cáo & Thống kê</Link>
+        <nav className="admin-sidebar-nav">
+          {NAV_ITEMS.map(({ to, label, icon: Icon }) => {
+            const isActive = pathname === to || (to !== '/' && pathname.startsWith(to));
+            return (
+              <Link
+                key={to}
+                to={to}
+                className={`admin-nav-item${isActive ? ' active' : ''}`}
+              >
+                <Icon size={18} />
+                <span>{label}</span>
+              </Link>
+            );
+          })}
         </nav>
       </aside>
-      <main className="flex-1 overflow-auto">
+      <main className="admin-main">
         <Outlet />
       </main>
     </div>

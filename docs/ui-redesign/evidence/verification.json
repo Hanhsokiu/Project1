@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-11-15T13:21:54.861Z",
+  "command": "node docs/ui-redesign/evidence/verify-audit.cjs",
+  "routerLeafCount": 62,
+  "manifestCount": 59,
+  "inventorySourceMatches": true,
+  "localLinksChecked": 415,
+  "routeSections": 62,
+  "coverage": {
+    "observed": 48,
+    "blocked": 12,
+    "codeOnly": 2
+  },
+  "evidenceRecords": 99,
+  "screenshotFiles": 100,
+  "findings": {
+    "P0": 0,
+    "P1": 5,
+    "P2": 10
+  },
+  "errors": [],
+  "result": "PASS",
+  "preexistingTrackedFileIntegrity": {
+    "checked": 15,
+    "matched": 15,
+    "unexpectedModifiedTracked": []
+  },
+  "scope": "Only docs/ui-redesign artifacts created/edited in audit; AGENTS.md retained from prior rules setup; no application source changes.",
+  "manifestTest": {
+    "command": "node node_modules/vitest/vitest.mjs run src/app/router/route-manifest.test.ts",
+    "cwd": "frontend",
+    "passed": 14,
+    "failed": 0,
+    "exitCode": 0,
+    "note": "Initial sandbox attempt failed spawn EPERM; same test passed on approved execution outside sandbox."
+  },
+  "gitDiffCheck": {
+    "command": "git diff --check -- AGENTS.md docs/ui-redesign",
+    "exitCode": 0,
+    "note": "Untracked document whitespace checked separately by verify-audit.cjs."
+  },
+  "notRun": [
+    "Full frontend type-check/lint/build/test (documentation-only task)",
+    "Screen reader and full contrast review",
+    "Business mutations, PDF/download, exhaustive role/state/viewport coverage"
+  ],
+  "contentReview": [
+    "Catalog list actions checked against actual callbacks; no invented delete/create on list",
+    "Static findings distinguished from browser observations",
+    "Authentication and business credentials excluded"
+  ]
+}

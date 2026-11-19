@@ -97,7 +97,7 @@ export function GuidanceSelector({ context }: { context: GuidanceContext }) {
           description="Kiểm tra đợt đang chọn, kết quả phân công và quyền của tài khoản."
         />
       ) : (
-        <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="guidance-context">
           <div>
             <strong>{topic?.title || "Sinh viên chưa hoàn tất đề tài"}</strong>
             <p className="text-sm muted mt-1">
@@ -140,7 +140,7 @@ export function TaskStatus({ task }: { task: Task }) {
 export function TaskHistory({ task }: { task: Task }) {
   return (
     <div className="space-y-4">
-      <div className="rounded-lg bg-slate-50 p-4">
+      <div className="task-description">
         <p className="whitespace-pre-wrap">{task.description}</p>
         <div className="flex gap-4 flex-wrap mt-3 text-sm muted">
           <span className="flex gap-1 items-center">
@@ -168,7 +168,7 @@ export function TaskHistory({ task }: { task: Task }) {
         [...task.submissions].reverse().map((submission, index) => (
           <article
             key={submission.id}
-            className="rounded-xl border border-slate-200 p-4 space-y-3"
+            className="submission-article"
           >
             <div className="flex gap-3 justify-between flex-wrap">
               <strong>
@@ -186,7 +186,7 @@ export function TaskHistory({ task }: { task: Task }) {
               ))}
             </div>
             {submission.feedback && (
-              <div className="bg-indigo-50 border-l-4 border-indigo-400 p-3 text-sm">
+              <div className="feedback-callout">
                 <strong>GVHD nhận xét</strong>
                 <p className="mt-1 whitespace-pre-wrap">
                   {submission.feedback}

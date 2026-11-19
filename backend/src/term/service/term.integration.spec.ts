@@ -7,8 +7,6 @@ type PageResponse<T> = { items: T[]; total: number; page: number; pageSize: numb
 import "reflect-metadata";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { PrismaClient } from "@prisma/client";
-import { readFileSync } from "node:fs";
-import { resolve } from "node:path";
 import { randomUUID } from "node:crypto";
 import * as bcrypt from "bcryptjs";
 
@@ -58,12 +56,8 @@ describe.runIf(process.env.RUN_TERM_DB_TESTS === "1")(
       return { status: response.status, ...data };
     }
     beforeAll(async () => {
-      if (!process.env.DATABASE_URL) {
-        const text = readFileSync(resolve(process.cwd(), ".env"), "utf8");
-        const found = text.match(/^DATABASE_URL=(.*)$/m);
-        if (found)
-          process.env.DATABASE_URL = found[1].trim().replace(/^"|"$/g, "");
-      }
+      const target = new URL(process.env.DATABASE_URL!);
+      if (target.hostname !== '127.0.0.1' || !/^\/btl_pr2b_[a-z0-9_]+$/.test(target.pathname)) throw new Error('Dedicated loopback test database required');
       prisma = new PrismaClient();
       await prisma.$connect();
       while (
@@ -151,6 +145,12 @@ describe.runIf(process.env.RUN_TERM_DB_TESTS === "1")(
       if (!prisma) return;
       try {
         if (owned.terms.length) {
+          await prisma.termPhaseWorkflow.deleteMany({
+            where: { termId: { in: owned.terms } },
+          });
+          await prisma.termWorkflow.deleteMany({
+            where: { termId: { in: owned.terms } },
+          });
           await prisma.advisorAssignment.deleteMany({
             where: { assignmentPlan: { termId: { in: owned.terms } } },
           });
@@ -370,8 +370,10 @@ describe.runIf(process.env.RUN_TERM_DB_TESTS === "1")(
         studentIds: [studentId],
         lecturers: [{ lecturerId, quota: 0 }],
       });
-      expect(quota.status, JSON.stringify(quota)).toBe(409);
-      expect(quota.error?.code).toBe("REG_003");
+      // Current quota-policy terms freeze the complete published roster first.
+      expect(quota.status, JSON.stringify(quota)).toBe(422);
+      expect(quota.error?.code).toBe("COMMON_003");
+      expect(quota.error?.message).toContain("sau khi công bố phân công");
       const detail = await request(`/terms/${termId}`);
       expect(detail.data.assignmentPublished).toBe(true);
       expect(detail.data.lecturers[0]).toMatchObject({

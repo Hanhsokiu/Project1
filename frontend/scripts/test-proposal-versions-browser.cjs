@@ -370,7 +370,7 @@ async function main() {
     await page
       .locator('.sidebar a[href^="/topic/reviews"]')
       .click();
-    await expect(page.getByRole("alert").first()).toContainText(unsupported);
+    await expect(page.getByRole("alert").filter({ hasText: unsupported })).toContainText(unsupported);
     await expect(
       page.getByRole("heading", { name: "Unexpected Application Error!" }),
     ).toHaveCount(0);
@@ -387,7 +387,7 @@ async function main() {
     await page
       .locator('.sidebar a[href^="/topic/review-groups"]')
       .click();
-    await expect(page.getByRole("alert").first()).toContainText(unsupported);
+    await expect(page.getByRole("alert").filter({ hasText: unsupported })).toContainText(unsupported);
     await page
       .locator('.sidebar a[href^="/topic/proposal"]')
       .click();
@@ -585,7 +585,7 @@ async function main() {
     pass("mobile editor and history have no horizontal page overflow");
     deny = true;
     await page.goto(origin + "/topic/proposal/p1");
-    await expect(page.getByRole("alert").first()).toContainText(
+    await expect(page.getByRole("alert").filter({ hasText: "Không tìm thấy đề cương" })).toContainText(
       "Không tìm thấy đề cương",
     );
     await expect(page.getByLabel("Mục tiêu", { exact: true })).toHaveCount(0);

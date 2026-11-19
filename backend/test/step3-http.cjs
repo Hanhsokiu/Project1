@@ -4,12 +4,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 const bcrypt = require("bcryptjs");
 const { PrismaClient } = require("@prisma/client");
-for (const l of fs
-  .readFileSync(path.resolve(__dirname, "../.env"), "utf8")
-  .split(/\r?\n/)) {
-  const m = l.match(/^([A-Z_]+)=(.*)$/);
-  if (m && !process.env[m[1]]) process.env[m[1]] = m[2];
-}
+// Explicit local fixture target only; never read application .env.
+require('../scripts/rehearse-pr2b.cjs').testTarget(process.env.DATABASE_URL);
 const db = new PrismaClient(),
   base = process.env.TEST_API_URL || "http://127.0.0.1:3010/api",
   password = "StepThree@2026",
@@ -64,6 +60,7 @@ async function main() {
   ).data;
   const lecturers = [];
   for (let i = 0; i < 4; i++) {
+    await require('./catalog-fixture.cjs').provision(db,'lecturer',{lecturerCode:`S3L${stamp}${i}`,fullName:`Step3 Lecturer ${i}`,departmentId:department.id});
     const l = (
       await req("POST", "/lecturers", token, {
         lecturerCode: `S3L${stamp}${i}`,
@@ -86,6 +83,7 @@ async function main() {
   }
   const students = [];
   for (let i = 0; i < 4; i++) {
+    await require('./catalog-fixture.cjs').provision(db,'student',{studentCode:`S3S${stamp}${i}`,fullName:`Step3 Student ${i}`,trainingSystemId:system.id});
     const s = (
       await req("POST", "/students", token, {
         studentCode: `S3S${stamp}${i}`,

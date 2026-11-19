@@ -1,0 +1,17 @@
+{
+  "status": "PREPARED_NOT_EXECUTED",
+  "cases": [
+    {"id":"UC17-options","path":"/api/final-defense/options","permission":"defense-confirmation:read","scope":"assigned advisor / own student / authorized faculty"},
+    {"id":"UC18-options","path":"/api/defense-eligibility/options","permission":"defense-eligibility:read","scope":"faculty term/department grant"},
+    {"id":"UC19-options","path":"/api/defense-committees/options","permission":"defense-committee:read","scope":"faculty term/department grant"},
+    {"id":"UC20-options","path":"/api/defense-reviewers/options","permission":"defense-reviewer:read","scope":"faculty term/department grant"},
+    {"id":"UC21-options","path":"/api/defense-schedules/options","permission":"defense-schedule:read","scope":"approved faculty / lecturer / student visibility"},
+    {"id":"UC22-options","path":"/api/defense-reviewer-grades/options","permission":"defense-reviewer-grade:read","scope":"active assigned reviewer"},
+    {"id":"UC23-options","path":"/api/defense-committee-grades/options","permission":"defense-committee-grade:read","scope":"active committee member"},
+    {"id":"UC24-options","path":"/api/defense-results/options","permission":"defense-result:read","scope":"faculty grant / committee member / student read-own"},
+    {"id":"UC25-options","path":"/api/defense-reports/options","permission":"defense-report:read","scope":"faculty grant / active committee lecturer"},
+    {"id":"UC24-list","path":"/api/defense-results","termRequired":true,"permission":"defense-result:read","scope":"authorized term only"},
+    {"id":"UC25-templates","path":"/api/defense-reports/templates","termRequired":true,"permission":"defense-report:templates-read + read","scope":"faculty grant; lecturer needs real committeeId"},
+    {"id":"UC25-statistics","path":"/api/defense-reports/statistics","termRequired":true,"permission":"defense-report:statistics + read","scope":"same role; no grade/score statistics unless separately granted"}
+  ]
+}

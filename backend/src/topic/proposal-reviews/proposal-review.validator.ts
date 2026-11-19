@@ -166,7 +166,7 @@ export class ProposalReviewValidator {
     const term = await s.term(termId),
       phase = await s.phase(termId),
       now = new Date();
-    if (!term || !['CLOSED_REGISTRATION', 'IN_PROGRESS'].includes(term.status))
+    if (!term || term.isLocked || now < term.startDate || now >= term.endDate || !['CLOSED_REGISTRATION', 'IN_PROGRESS'].includes(term.status))
       groupError(409, 'TERM_003', 'Đợt không cho phép xét duyệt.');
     if (!phase || phase.refPhaseId.termId !== termId)
       groupError(
