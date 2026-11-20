@@ -208,6 +208,20 @@
     {
       "phase": "B1-B8_SHARED",
       "controller": "src/catalog/controller/student.controller.ts",
+      "method": "GET",
+      "path": "/students/directory",
+      "permission": "student:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/student.controller.ts",
+      "method": "GET",
+      "path": "/students/directory-options",
+      "permission": "student:read"
+    },
+    {
+      "phase": "B1-B8_SHARED",
+      "controller": "src/catalog/controller/student.controller.ts",
       "method": "PATCH",
       "path": "/students/:id",
       "permission": "catalog:manage"
