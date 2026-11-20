@@ -77,6 +77,8 @@ export default function WorkspaceLayout({
 }) {
   const location = useLocation();
   const apiUser = useApiSession();
+  const scope = AUTH_API && matchPath({ path: "/catalog/students", end: true }, location.pathname)
+    ? "student-directory" : "full";
   if (AUTH_API && !apiUser)
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   if (data) {
@@ -89,7 +91,7 @@ export default function WorkspaceLayout({
     );
   }
   return (
-    <DataBoundary>
+    <DataBoundary scope={scope}>
       {(db) => {
         const user = currentUser(db);
         if (!user)
@@ -107,7 +109,7 @@ export default function WorkspaceLayout({
         )
           return <Navigate to="/profile" replace />;
         return (
-          <WorkspaceProvider>
+          <WorkspaceProvider scope={scope}>
             <Shell>{children}</Shell>
           </WorkspaceProvider>
         );

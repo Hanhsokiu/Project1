@@ -62,6 +62,7 @@ function respond() {
       { id: "actual-department", code: "CNTT", name: "Công nghệ thông tin" },
     ],
     "/research-areas": [{ id: "actual-direction", name: "Phần mềm" }],
+    "/notifications/me": [],
     "/students": {
       items: [
         {
@@ -108,6 +109,47 @@ beforeEach(() => {
 afterEach(() => vi.unstubAllEnvs());
 
 describe("per-module API snapshot ownership", () => {
+  it("loads only the student directory shell without unrelated records and keeps the full snapshot intact", async () => {
+    const { hydrateStep1Snapshot, mergeStep1Snapshot, getStep1Resources } = await import("./snapshot-api");
+    const { emptyDb } = await import("./empty-db");
+    const full = await hydrateStep1Snapshot(createSeed());
+    fixture.request.mockClear();
+    const shell = await hydrateStep1Snapshot(emptyDb(), "student-directory");
+    const paths = fixture.request.mock.calls.map(([request]) => request.url.split("?")[0]);
+    expect(paths).toContain("/terms");
+    for (const path of ["/students", "/lecturers", "/accounts", "/research-areas", "/registrations", "/audit-logs"])
+      expect(paths).not.toContain(path);
+    expect(shell.students).toEqual([]);
+    expect(shell.terms[0].id).toBe(full.terms[0].id);
+    expect(mergeStep1Snapshot(createSeed()).students).toEqual(full.students);
+    expect(getStep1Resources()?.programs[0].id).toBe("actual-program");
+  });
+  it("reuses reference lists but still reads live students and term state", async () => {
+    const { hydrateStep1Snapshot } = await import("./snapshot-api");
+    const mock = createSeed();
+    await hydrateStep1Snapshot(mock);
+    fixture.request.mockClear();
+    const value = await hydrateStep1Snapshot(mock);
+    const paths = fixture.request.mock.calls.map(([request]) => request.url.split("?")[0]);
+    expect(paths).toContain("/students");
+    expect(paths).toContain("/terms");
+    for (const path of ["/semesters", "/training-systems", "/departments", "/research-areas"])
+      expect(paths).not.toContain(path);
+    expect(value.students[0].code).toBe("001");
+  });
+
+  it("reloads an edited lookup after a confirmed API write", async () => {
+    const { hydrateStep1Snapshot } = await import("./snapshot-api");
+    const { publishApiWrite } = await import("./data-changes");
+    await hydrateStep1Snapshot(createSeed());
+    fixture.request.mockClear();
+    publishApiWrite({ method: "patch", url: "/departments/actual-department" });
+    await hydrateStep1Snapshot(createSeed());
+    const paths = fixture.request.mock.calls.map(([request]) => request.url.split("?")[0]);
+    expect(paths).toContain("/departments");
+    expect(paths).not.toContain("/training-systems");
+  });
+
   it("replaces only API-owned lists while preserving mock registration, assignment and topic records", async () => {
     const { hydrateStep1Snapshot, mergeStep1Snapshot } =
       await import("./snapshot-api");

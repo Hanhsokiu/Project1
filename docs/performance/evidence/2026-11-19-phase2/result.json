@@ -1,0 +1,158 @@
+{
+  "result": "PASS",
+  "mockedApiFixtures": true,
+  "databaseAccess": false,
+  "checks": [
+    "first batch is visible while the second is blocked; full server total and no unrelated snapshot APIs",
+    "batch boundary waits for a full page and still permits navigating back",
+    "late-batch class search waits for complete data, retries real errors, and excludes null GPA from eligibility",
+    "selection and Excel export preserve records selected across pages",
+    "class/program/eligibility/term filters, reset and sorting keep full-directory semantics",
+    "API student edit preserves the existing form and updates the scoped directory after save",
+    "student page has no axe violations, fits four viewports and supports dialog Escape",
+    "account switch discards the previous directory without browser errors"
+  ],
+  "requests": [
+    {
+      "path": "/auth/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "page": "1",
+      "method": "GET"
+    },
+    {
+      "path": "/semesters",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/training-systems",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/departments",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/students",
+      "page": "1",
+      "method": "GET"
+    },
+    {
+      "path": "/students",
+      "page": "2",
+      "method": "GET"
+    },
+    {
+      "path": "/students",
+      "page": "2",
+      "method": "GET"
+    },
+    {
+      "path": "/auth/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "page": "1",
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/students/student-3",
+      "page": null,
+      "method": "PATCH"
+    },
+    {
+      "path": "/auth/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "page": "1",
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/auth/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/students",
+      "page": "1",
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "page": "1",
+      "method": "GET"
+    },
+    {
+      "path": "/students",
+      "page": "2",
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/auth/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "page": "1",
+      "method": "GET"
+    },
+    {
+      "path": "/semesters",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/training-systems",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/departments",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "page": null,
+      "method": "GET"
+    },
+    {
+      "path": "/students",
+      "page": "1",
+      "method": "GET"
+    }
+  ],
+  "pageErrors": []
+}

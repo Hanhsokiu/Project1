@@ -5,7 +5,7 @@ import {
   setApiUser,
 } from "../api/api-session";
 import { httpClient } from "../api/http-client";
-import { hydrateStep1Snapshot, mergeStep1Snapshot } from "./snapshot-api";
+import { hydrateStep1Snapshot, mergeStep1Snapshot, type SnapshotScope } from "./snapshot-api";
 import { createSeed, DEMO_VERSION } from "./seed";
 import { emptyDb } from "./empty-db";
 import type { Account, DemoDb, Role } from "./types";
@@ -127,8 +127,8 @@ export function mutate<T>(
   return value;
 }
 export const delay = () => new Promise((resolve) => setTimeout(resolve, 120));
-export async function snapshot() {
-  await delay();
+export async function snapshot(scope: SnapshotScope = "full") {
+  if (!AUTH_API) await delay();
   if (sessionStorage.getItem("utc-demo-error") === "1") {
     sessionStorage.removeItem("utc-demo-error");
     throw new ServiceError(
@@ -145,9 +145,9 @@ export async function snapshot() {
       throw error;
     }
   }
-  const db = readDb();
+  const db = AUTH_API && scope === "student-directory" ? emptyDb() : readDb();
   if (AUTH_API && getApiUser()?.mustChangePassword) return db;
-  return hydrateStep1Snapshot(db);
+  return hydrateStep1Snapshot(db, scope);
 }
 export function resetDemo() {
   const db = createSeed();

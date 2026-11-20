@@ -60,7 +60,11 @@ function start() {
     doc as unknown as Document,
     win as unknown as Window,
   );
-  return { doc, win, invalidated: vi.spyOn(client, "invalidateQueries") };
+  return {
+    doc, win,
+    invalidated: vi.spyOn(client, "invalidateQueries"),
+    refetched: vi.spyOn(client, "refetchQueries"),
+  };
 }
 describe("automatic data refresh", () => {
   it("coalesces successful writes, ignores reads/auth and does not include content in signals", async () => {
@@ -82,23 +86,26 @@ describe("automatic data refresh", () => {
     unsub();
   });
   it("polls only visible pages and refreshes on return/focus/online", async () => {
-    const { doc, win, invalidated } = start();
+    const { doc, win, invalidated, refetched } = start();
     doc.visibilityState = "hidden";
     await vi.advanceTimersByTimeAsync(DATA_REFRESH_INTERVAL + 250);
     expect(invalidated).not.toHaveBeenCalled();
+    expect(refetched).not.toHaveBeenCalled();
     doc.visibilityState = "visible";
     doc.dispatchEvent(new Event("visibilitychange"));
     win.dispatchEvent(new Event("focus"));
     win.dispatchEvent(new Event("online"));
     await vi.advanceTimersByTimeAsync(250);
-    expect(invalidated).toHaveBeenCalledTimes(1);
+    expect(refetched).toHaveBeenCalledTimes(1);
     await vi.advanceTimersByTimeAsync(DATA_REFRESH_INTERVAL);
-    expect(invalidated).toHaveBeenCalledTimes(2);
+    expect(refetched).toHaveBeenCalledTimes(2);
+    expect(invalidated).not.toHaveBeenCalled();
   });
   it("marks caches stale without replacing unsaved drafts and clears only the saved form", async () => {
     const { invalidated } = start();
     const scope = { isConnected: true } as Element;
     draftGuard.change(scope);
+    publishApiWrite({ method: "post", url: "/students" });
     await vi.advanceTimersByTimeAsync(DATA_REFRESH_INTERVAL + 250);
     expect(invalidated.mock.calls.at(-1)?.[0]?.refetchType).toBe("none");
     setActionScope(scope);
@@ -107,6 +114,32 @@ describe("automatic data refresh", () => {
     publishApiWrite(config);
     await vi.advanceTimersByTimeAsync(250);
     expect(invalidated.mock.calls.at(-1)?.[0]?.refetchType).toBe("active");
+  });
+  it("leaves fresh cached queries alone and avoids duplicating query-owned polling", async () => {
+    start();
+    const fresh = vi.fn(async () => "fresh");
+    const stale = vi.fn(async () => "stale");
+    const ownPolling = vi.fn(async () => "self-managed");
+    const observers = [
+      new QueryObserver(client, { queryKey: ["catalog"], queryFn: fresh, staleTime: Infinity }),
+      new QueryObserver(client, { queryKey: ["queue"], queryFn: stale, staleTime: 0 }),
+      new QueryObserver(client, { queryKey: ["workflow-terms"], queryFn: ownPolling, staleTime: 0, meta: { ownsPolling: true } }),
+    ];
+    const unsubscribe = observers.map((observer) => observer.subscribe(() => {}));
+    try {
+      await vi.advanceTimersByTimeAsync(0);
+      await vi.advanceTimersByTimeAsync(DATA_REFRESH_INTERVAL + 250);
+      expect(fresh).toHaveBeenCalledTimes(1);
+      expect(stale).toHaveBeenCalledTimes(2);
+      expect(ownPolling).toHaveBeenCalledTimes(1);
+      // A confirmed write must still refresh even data with a long staleTime.
+      publishApiWrite({ method: "patch", url: "/students/s" });
+      await vi.advanceTimersByTimeAsync(250);
+      expect(fresh).toHaveBeenCalledTimes(2);
+      expect(ownPolling).toHaveBeenCalledTimes(2);
+    } finally {
+      unsubscribe.forEach((stop) => stop());
+    }
   });
   it("preserves additional typing during an in-flight save, ignores closed forms and resets on navigation", async () => {
     const { win, invalidated } = start();

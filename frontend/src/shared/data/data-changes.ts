@@ -1,3 +1,5 @@
+import { snapshotLookupCache } from "./snapshot-lookup-cache";
+
 export type DraftTicket = { scope: Element; version: number };
 export class DraftGuard {
   private versions = new Map<Element, number>();
@@ -42,8 +44,9 @@ export function isDataWrite(config: WriteConfig) {
     ) && !/\/auth\/(login|refresh|logout)(?:\?|$)/.test(config.url ?? "")
   );
 }
-const listeners = new Set<() => void>();
-export function subscribeDataChanges(listener: () => void) {
+export type DataChange = { lookupPaths: string[] };
+const listeners = new Set<(change: DataChange) => void>();
+export function subscribeDataChanges(listener: (change: DataChange) => void) {
   listeners.add(listener);
   return () => {
     listeners.delete(listener);
@@ -55,6 +58,7 @@ export function captureApiWrite(config: WriteConfig) {
 }
 export function publishApiWrite(config: WriteConfig) {
   if (!isDataWrite(config)) return;
+  const lookupPaths = snapshotLookupCache.invalidateWrite(config.url);
   draftGuard.complete(config._refreshDraft);
-  listeners.forEach((listener) => listener());
+  listeners.forEach((listener) => listener({ lookupPaths }));
 }
