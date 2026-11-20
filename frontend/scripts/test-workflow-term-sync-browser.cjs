@@ -116,6 +116,8 @@ async function main() {
       if (p === '/notifications/me') return send([]);
       if (['/students', '/lecturers', '/registrations'].includes(p))
         return send({ items: [], total: 0 });
+      if (/^\/registrations\/term\/[^/]+$/.test(p))
+        return send({ items: [], stats: { total: 0, draft: 0, submitted: 0 } });
       if (['/departments', '/research-areas'].includes(p) || p.startsWith('/notifications/outbox/term/')) return send([]);
       if (/^\/assignments\/term\/[^/]+\/(plan|results)$/.test(p)) return send({ plan: null, assignments: [] });
       if (p === '/weekly-plans/options') return send(rows.map((r) => ({ ...r, canManage: true })));

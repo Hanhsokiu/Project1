@@ -10,6 +10,7 @@
     "lint": "eslint src --ext .ts",
     "format": "prettier --write src/**/*.ts",
     "test": "vitest run",
+    "test:student-directory:postgres": "node scripts/test-student-directory-postgres.cjs",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "prisma": "prisma",

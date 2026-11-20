@@ -3,6 +3,9 @@ import { vietnamDateTime as phaseTime } from "../utils/vietnam-time";
 export { apiData } from "../api/api-data";
 import { AUTH_API, getAccessToken, getApiUser } from "../api/api-session";
 import { snapshotLookupCache } from "./snapshot-lookup-cache";
+import { snapshotPlans, type SnapshotScope } from "./snapshot-scope";
+import { selectedTerm } from "./term-selection";
+export type { SnapshotScope } from "./snapshot-scope";
 import {
   assignmentApi,
   cacheAssignment,
@@ -100,9 +103,11 @@ interface Step1Resources {
 }
 let resources: Step1Resources | undefined;
 let actionResources: Step1Resources | undefined;
-export type SnapshotScope = "full" | "student-directory";
 
-export function studentItem(s: StudentDto, programs: LookupDto[] = []): Student {
+export function studentItem(
+  s: StudentDto,
+  programs: LookupDto[] = [],
+): Student {
   return {
     id: s.id,
     code: s.studentCode,
@@ -112,7 +117,10 @@ export function studentItem(s: StudentDto, programs: LookupDto[] = []): Student 
     className: s.className,
     trainingSystemId: s.trainingSystemId,
     majorName: s.majorName || "",
-    program: s.trainingSystem?.name || programs.find((p) => p.id === s.trainingSystemId)?.name || "",
+    program:
+      s.trainingSystem?.name ||
+      programs.find((p) => p.id === s.trainingSystemId)?.name ||
+      "",
     departmentId: "",
     gpa: s.gpa === null ? null : Number(s.gpa),
     eligible: s.academicEligible,
@@ -140,7 +148,17 @@ export async function apiAll<T>(url: string): Promise<T[]> {
   }
 }
 export function getStep1Resources() {
-  return actionResources?.token === getAccessToken() ? actionResources : undefined;
+  return actionResources?.token === getAccessToken()
+    ? actionResources
+    : undefined;
+}
+/** Synchronous services need the API records already read by scoped screens,
+ * e.g. a proposal's expected version and the lecturer import's existing codes.
+ * This is not a render snapshot and never makes a partial list look complete.
+ */
+export function mergeActionSnapshot(mock: DemoDb): DemoDb {
+  const current = getStep1Resources();
+  return current ? overlay(mock, current) : mergeStep1Snapshot(mock);
 }
 export function semesterItem(item: SemesterDto): CatalogItem {
   return {
@@ -221,6 +239,8 @@ function overlay(mock: DemoDb, api: Step1Resources): DemoDb {
       },
     ];
   }
+  if (step1Api.catalog && !api.lecturers && user?.lecturer)
+    result.lecturers = [user.lecturer];
   if (STEP3_API && api.assignedStudents) {
     for (const s of api.assignedStudents)
       if (!result.students.some((v) => v.id === s.id))
@@ -245,6 +265,8 @@ export function mergeStep1Snapshot(mock: DemoDb): DemoDb {
 export async function hydrateStep1Snapshot(
   mock: DemoDb,
   scope: SnapshotScope = "full",
+  termId?: string,
+  savedTermId?: string,
 ): Promise<DemoDb> {
   const token = getAccessToken();
   if (!token) return mock;
@@ -253,12 +275,31 @@ export async function hydrateStep1Snapshot(
       "Đăng ký API yêu cầu bật VITE_TERM_API và VITE_CATALOG_API để dùng đúng danh mục/đợt từ máy chủ.",
     );
   if (!step1Api.term && !step1Api.catalog) return mock;
-  const directory = scope === "student-directory";
+  const actorRoles = getApiUser()?.roles ?? [];
+  // The administrative dashboard displays account/audit totals, while the
+  // academic roles display registrations and guidance. Multi-role accounts
+  // retain the union needed by the existing dashboard role switcher.
+  const academicDashboard = actorRoles.some((role) =>
+    ["FACULTY", "LECTURER", "STUDENT"].includes(role),
+  );
+  const plan =
+    scope === "dashboard" && !academicDashboard
+      ? {
+          ...snapshotPlans[scope],
+          students: false,
+          lecturers: false,
+          directions: false,
+          registrations: false,
+          assignments: false,
+          topics: false,
+          outbox: false,
+        }
+      : snapshotPlans[scope];
   const manager = getApiUser()?.roles.some(
     (role) => role === "ADMIN" || role === "FACULTY",
   );
   const isAdmin = getApiUser()?.roles.includes("ADMIN");
-  const lookup = <T,>(path: string) =>
+  const lookup = <T>(path: string) =>
     snapshotLookupCache.read(token, path, () => apiData<T>("GET", path));
   const [
     terms,
@@ -271,24 +312,38 @@ export async function hydrateStep1Snapshot(
     accounts,
   ] = await Promise.all([
     step1Api.term ? apiAll<Term>("/terms") : Promise.resolve(undefined),
-    step1Api.term
+    step1Api.term && plan.lookups
       ? lookup<SemesterDto[]>("/semesters")
       : Promise.resolve([]),
-    lookup<LookupDto[]>("/training-systems"),
-    step1Api.catalog
+    plan.lookups || plan.students || plan.lecturers
+      ? lookup<LookupDto[]>("/training-systems")
+      : Promise.resolve([]),
+    step1Api.catalog && (plan.lookups || plan.lecturers)
       ? lookup<LookupDto[]>("/departments")
       : Promise.resolve([]),
-    step1Api.catalog && !directory
+    step1Api.catalog && plan.directions
       ? lookup<LookupDto[]>("/research-areas")
       : Promise.resolve([]),
-    step1Api.catalog && manager && !directory
+    step1Api.catalog && manager && plan.students
       ? apiAll<StudentDto>("/students")
       : Promise.resolve(undefined),
-    step1Api.catalog && !directory
+    step1Api.catalog && plan.lecturers
       ? apiAll<LecturerDto>("/lecturers")
       : Promise.resolve(undefined),
-    isAdmin && !directory ? apiAll<Account>("/accounts") : Promise.resolve(undefined),
+    isAdmin && plan.accounts
+      ? apiAll<Account>("/accounts")
+      : Promise.resolve(undefined),
   ]);
+  const actor = getApiUser();
+  const visibleTerms = actor?.studentId
+    ? (terms ?? []).filter((term) => term.studentIds.includes(actor.studentId!))
+    : (terms ?? []);
+  const activeTerm = selectedTerm(visibleTerms, termId, savedTermId);
+  const contextTerms = plan.termScoped
+    ? activeTerm
+      ? [activeTerm]
+      : []
+    : (terms ?? []);
   const value: Step1Resources = {
     token,
     terms,
@@ -313,14 +368,18 @@ export async function hydrateStep1Snapshot(
     })),
   };
   const registrationTask = async () => {
-    if (REGISTRATION_API && !directory) {
+    if (REGISTRATION_API && plan.registrations) {
       if (manager)
-        value.registrations = (await registrationApi.list()).items.map(
-          registrationFromApi,
-        );
+        value.registrations = plan.termScoped
+          ? activeTerm
+            ? (await registrationApi.list(activeTerm.id)).items.map(
+                registrationFromApi,
+              )
+            : []
+          : (await registrationApi.list()).items.map(registrationFromApi);
       else if (getApiUser()?.studentId && getApiUser()?.profileComplete) {
         const contexts = await Promise.all(
-          (terms ?? [])
+          contextTerms
             .filter((t) => t.studentIds.includes(getApiUser()!.studentId!))
             .map((t) => registrationApi.current(t.id)),
         );
@@ -339,12 +398,19 @@ export async function hydrateStep1Snapshot(
       const actor = getApiUser();
       if (manager || actor?.studentId || actor?.lecturerId) {
         const contextsTask = Promise.all(
-          (directory ? [] : terms ?? []).map(async (t) => {
+          (plan.assignments || plan.topics || plan.outbox
+            ? contextTerms
+            : []
+          ).map(async (t) => {
             if (!manager && !t.assignmentPublished) return null;
             const [c, topics, events] = await Promise.all([
-              assignmentApi.load(t.id, !!manager),
-              t.assignmentPublished ? topicApi.list(t.id) : Promise.resolve([]),
-              manager
+              plan.assignments
+                ? assignmentApi.load(t.id, !!manager)
+                : Promise.resolve(null),
+              plan.topics && t.assignmentPublished
+                ? topicApi.list(t.id)
+                : Promise.resolve([]),
+              manager && plan.outbox
                 ? apiData<
                     {
                       id: string;
@@ -357,7 +423,7 @@ export async function hydrateStep1Snapshot(
                   >("GET", `/notifications/outbox/term/${t.id}`)
                 : Promise.resolve([]),
             ]);
-            cacheAssignment(t.id, c);
+            if (c) cacheAssignment(t.id, c);
             return { c, topics, events, termId: t.id };
           }),
         );
@@ -375,8 +441,10 @@ export async function hydrateStep1Snapshot(
         const [contexts, own] = await Promise.all([contextsTask, ownTask]);
         for (const v of contexts) {
           if (!v) continue;
-          value.assignments.push(...v.c.assignments);
-          value.assignedStudents.push(...v.c.assignments.map((a) => a.student));
+          value.assignments.push(...(v.c?.assignments ?? []));
+          value.assignedStudents.push(
+            ...(v.c?.assignments.map((a) => a.student) ?? []),
+          );
           value.topics.push(...v.topics);
           value.notifications.push(
             ...v.events.map((n) => ({
@@ -411,14 +479,66 @@ export async function hydrateStep1Snapshot(
     }
   };
   const auditTask = async () => {
-    if (!directory && getApiUser()?.permissions?.includes("audit:read"))
+    if (plan.audits && getApiUser()?.permissions?.includes("audit:read"))
       value.audits = await apiAll<DemoDb["audits"][number]>("/audit-logs");
   };
   await Promise.all([registrationTask(), workflowTask(), auditTask()]);
-  if (getAccessToken() !== token) throw new Error("Phiên đăng nhập đã thay đổi. Vui lòng tải lại dữ liệu.");
-  actionResources = value;
+  if (getAccessToken() !== token)
+    throw new Error("Phiên đăng nhập đã thay đổi. Vui lòng tải lại dữ liệu.");
+  const next: Step1Resources =
+    actionResources?.token === token
+      ? { ...actionResources, terms }
+      : {
+          token,
+          terms,
+          semesters: [],
+          programs: [],
+          departments: [],
+          directions: [],
+        };
+  if (plan.lookups) next.semesters = value.semesters;
+  if (plan.lookups || plan.students || plan.lecturers)
+    next.programs = value.programs;
+  if (plan.lookups || plan.lecturers) next.departments = value.departments;
+  if (plan.directions) next.directions = value.directions;
+  if (value.students) next.students = value.students;
+  if (value.lecturers) next.lecturers = value.lecturers;
+  if (value.accounts) next.accounts = value.accounts;
+  if (value.audits) next.audits = value.audits;
+  const termIds = new Set(contextTerms.map((term) => term.id));
+  function replaceTerms<T extends { termId: string }>(
+    previous: T[] = [],
+    incoming: T[] = [],
+  ) {
+    return plan.termScoped
+      ? previous.filter((row) => !termIds.has(row.termId)).concat(incoming)
+      : incoming;
+  }
+  if (plan.registrations)
+    next.registrations = replaceTerms(next.registrations, value.registrations);
+  if (plan.assignments) {
+    next.assignments = replaceTerms(next.assignments, value.assignments);
+    next.assignedStudents = [
+      ...new Map(
+        [
+          ...(next.assignedStudents ?? []),
+          ...(value.assignedStudents ?? []),
+        ].map((student) => [student.id, student]),
+      ).values(),
+    ];
+  }
+  if (plan.topics) next.topics = replaceTerms(next.topics, value.topics);
+  if (value.notifications)
+    next.notifications = (next.notifications ?? [])
+      .filter(
+        (notice) =>
+          notice.channel === "EMAIL" &&
+          (!plan.outbox || (plan.termScoped && !termIds.has(notice.termId))),
+      )
+      .concat(value.notifications);
+  actionResources = next;
   // A partial shell must never replace the full snapshot used by synchronous
   // consumers on other screens. Each query owns its own scoped result.
-  if (!directory) resources = value;
+  if (scope === "full") resources = value;
   return overlay(mock, value);
 }

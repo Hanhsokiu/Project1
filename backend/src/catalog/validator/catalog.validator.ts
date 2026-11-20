@@ -5,7 +5,11 @@ import {
 } from "@nestjs/common";
 import { z } from "zod";
 import type { CatalogQuery } from "../dto/catalog.dto";
+import { StudentDirectoryQuerySchema } from "@doan/shared";
 export class CatalogInputValidator {
+  static studentDirectory(raw: Record<string, unknown>) {
+    return this.parse(StudentDirectoryQuerySchema, raw);
+  }
   static parse<S extends z.ZodTypeAny>(schema: S, value: unknown): z.output<S> {
     const result = schema.safeParse(value);
     if (!result.success)

@@ -1,0 +1,304 @@
+{
+  "result": "PASS",
+  "mockedApiFixtures": true,
+  "databaseAccess": false,
+  "checks": [
+    "first screen requests exactly one 8-row server page; independent aggregate includes all 120 students",
+    "pending/error pages do not display stale rows or false empty results; retry and back navigation work",
+    "search reaches students outside the initial page while global statistics remain exact",
+    "selection and Excel export preserve students chosen across separate server pages",
+    "eligibility/class/program/term filters and sorting are sent to server, reset returns to first page",
+    "existing student edit persists through API and refreshes current server page",
+    "zero axe violations, four responsive widths and dialog Escape support",
+    "account switch clears cached directory and selected rows without browser errors"
+  ],
+  "requests": [
+    {
+      "path": "/auth/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "query": {
+        "page": "1",
+        "pageSize": "100",
+        "limit": "100"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/semesters",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/training-systems",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/departments",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "search": "",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory-options",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "search": "",
+        "page": "2",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "search": "",
+        "page": "2",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory-options",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "search": "LOP CUOI",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "search": "LOP CUOI",
+        "page": "2",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/auth/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "query": {
+        "page": "1",
+        "pageSize": "100",
+        "limit": "100"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "academicCondition": "ineligible",
+        "search": "",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "className": "LOP CUOI",
+        "search": "",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "trainingSystemId": "program-2",
+        "search": "",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "termId": "term-a",
+        "search": "",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "search": "",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "name",
+        "sortDirection": "desc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/student-3",
+      "query": {},
+      "method": "PATCH"
+    },
+    {
+      "path": "/auth/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "query": {
+        "page": "1",
+        "pageSize": "100",
+        "limit": "100"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/auth/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "search": "",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory-options",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "query": {
+        "page": "1",
+        "pageSize": "100",
+        "limit": "100"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/auth/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/terms",
+      "query": {
+        "page": "1",
+        "pageSize": "100",
+        "limit": "100"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/semesters",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/training-systems",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/departments",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/notifications/me",
+      "query": {},
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory",
+      "query": {
+        "search": "",
+        "page": "1",
+        "pageSize": "8",
+        "sortBy": "code",
+        "sortDirection": "asc"
+      },
+      "method": "GET"
+    },
+    {
+      "path": "/students/directory-options",
+      "query": {},
+      "method": "GET"
+    }
+  ],
+  "pageErrors": []
+}

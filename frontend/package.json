@@ -13,6 +13,8 @@
     "test:watch": "vitest",
     "test:e2e": "playwright test",
     "test:ui:browser": "node scripts/test-ui-redesign-browser.cjs",
+    "test:performance:browser": "node scripts/test-performance-browser.cjs",
+    "test:student-directory:browser": "node scripts/test-student-directory-browser.cjs",
     "test:workflow-terms:browser": "node scripts/test-workflow-term-sync-browser.cjs",
     "test:data-consistency:browser": "node scripts/test-data-consistency-browser.cjs",
     "test:review-groups:browser": "node scripts/test-review-groups-browser.cjs",

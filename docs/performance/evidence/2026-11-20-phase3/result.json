@@ -1,0 +1,82 @@
+{
+  "status": "PASS",
+  "checks": [
+    "profile opens without bulk directories and without downloading unopened workflow/defense pages",
+    "profile save reconciles the scoped shell without returning to a full snapshot",
+    "role matrix keeps account statistics and skips unrelated academic records",
+    "audit screen exposes a real API error, retries and loads only audit records",
+    "direct term-parameter URL resolves the right term without loading its unrelated workflow",
+    "dashboard and nested boundary share one read, fetching workflows for the active term only",
+    "term switch changes query identity and loads the new term without reloading previous-term workflows",
+    "scoped dashboard fits four viewport sizes and has no axe violations"
+  ],
+  "errors": [],
+  "results": [
+    {
+      "role": "ADMIN",
+      "paths": [
+        {
+          "path": "/auth/me",
+          "method": "GET"
+        },
+        {
+          "path": "/terms",
+          "method": "GET"
+        },
+        {
+          "path": "/semesters",
+          "method": "GET"
+        },
+        {
+          "path": "/training-systems",
+          "method": "GET"
+        },
+        {
+          "path": "/departments",
+          "method": "GET"
+        },
+        {
+          "path": "/notifications/me",
+          "method": "GET"
+        }
+      ]
+    },
+    {
+      "role": "FACULTY",
+      "paths": [
+        {
+          "path": "/auth/me",
+          "method": "GET"
+        },
+        {
+          "path": "/terms",
+          "method": "GET"
+        },
+        {
+          "path": "/students",
+          "method": "GET"
+        },
+        {
+          "path": "/lecturers",
+          "method": "GET"
+        },
+        {
+          "path": "/registrations/term/term-b",
+          "method": "GET"
+        },
+        {
+          "path": "/assignments/term/term-b/plan",
+          "method": "GET"
+        },
+        {
+          "path": "/notifications/outbox/term/term-b",
+          "method": "GET"
+        },
+        {
+          "path": "/notifications/me",
+          "method": "GET"
+        }
+      ]
+    }
+  ]
+}

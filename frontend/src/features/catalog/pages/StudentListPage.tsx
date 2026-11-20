@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import {
   GraduationCap,
@@ -37,21 +37,10 @@ import { AUTH_API } from "../../../shared/api/api-session";
 import { useStudentDirectory } from "../hooks/use-student-directory";
 type StudentForm = Student;
 export default function StudentListPage() {
-  return AUTH_API ? <ApiStudentDirectory /> : <StudentDirectoryView />;
+  return <StudentDirectoryView />;
 }
-function ApiStudentDirectory() {
-  const [editing, setEditing] = useState(false);
-  const directory = useStudentDirectory(editing);
-  return <StudentDirectoryView directory={directory} onEditingChange={setEditing} />;
-}
-function StudentDirectoryView({ directory, onEditingChange }: {
-  directory?: ReturnType<typeof useStudentDirectory>;
-  onEditingChange?: (editing: boolean) => void;
-}) {
+function StudentDirectoryView() {
   const { db, user, term } = useWorkspace();
-  const students = directory?.students ?? db.students;
-  const complete = directory?.complete ?? true;
-  const pendingValue = directory?.error ? "Chưa tải được" : "Đang tải…";
   const action = useAction();
   const manager = user.roles.some((r) => r === "ADMIN" || r === "FACULTY");
   const hasTerm = db.terms.some((t) => t.id === term.id);
@@ -61,25 +50,33 @@ function StudentDirectoryView({ directory, onEditingChange }: {
   const [scope, setScope] = useState("all");
   const [form, setForm] = useState<StudentForm | null>(null);
   const [tableVersion, setTableVersion] = useState(0);
-  const editing = !!form;
-  useEffect(() => onEditingChange?.(editing), [editing, onEditingChange]);
   const programs = db.catalogs.filter((c) => c.kind === "program");
   const departments = db.catalogs.filter((c) => c.kind === "department");
-  const rows = students.filter(
-    (s) =>
+  const apiDirectory = useStudentDirectory({
+    trainingSystemId: program ? programs.find(p => p.name === program)?.id ?? "00000000-0000-0000-0000-000000000000" : undefined,
+    className: className || undefined,
+    academicCondition: eligible === "YES" ? "eligible" : eligible === "NO" ? "ineligible" : undefined,
+    termId: scope === "term" ? term.id : undefined,
+  }, AUTH_API);
+  const directory = AUTH_API ? apiDirectory : undefined;
+  const students = directory?.students ?? db.students;
+  const complete = !directory || !!directory.summary;
+  const pendingValue = directory?.optionsError ? "Chưa tải được" : "Đang tải…";
+  const matchesFilters = (s: Student) =>
       (!program || s.program === program) &&
       (!className || s.className === className) &&
       (!eligible ||
         (eligible === "YES"
           ? s.eligible && hasEligibleGpa(s.gpa, 0)
           : !s.eligible || !hasEligibleGpa(s.gpa, 0))) &&
-      (scope === "all" || term.studentIds.includes(s.id)),
-  );
+      (scope === "all" || term.studentIds.includes(s.id));
+  const rows = directory ? students : students.filter(matchesFilters);
   function resetFilters() {
     setProgram("");
     setClassName("");
     setEligible("");
     setScope("all");
+    directory?.reset();
     setTableVersion((version) => version + 1);
   }
   async function save(e: FormEvent) {
@@ -120,20 +117,20 @@ function StudentDirectoryView({ directory, onEditingChange }: {
       <div className="stat-grid">
         <Stat
           label="Tổng sinh viên"
-          value={directory ? directory.total ?? pendingValue : students.length}
+          value={directory ? directory.summary?.total ?? pendingValue : students.length}
           icon={<GraduationCap size={18} aria-hidden="true" />}
         />
         <Stat
           label="Đủ điều kiện học vụ"
           value={
-            complete ? students.filter((s) => s.eligible && hasEligibleGpa(s.gpa, 0)).length : pendingValue
+            directory ? directory.summary?.eligible ?? pendingValue : students.filter((s) => s.eligible && hasEligibleGpa(s.gpa, 0)).length
           }
           icon={<CheckCircle2 size={18} aria-hidden="true" />}
         />
         <Stat
           label="Chưa đủ điều kiện"
           value={
-            complete ? students.filter((s) => !s.eligible || !hasEligibleGpa(s.gpa, 0)).length : pendingValue
+            directory ? directory.summary?.ineligible ?? pendingValue : students.filter((s) => !s.eligible || !hasEligibleGpa(s.gpa, 0)).length
           }
           icon={<CircleAlert size={18} aria-hidden="true" />}
         />
@@ -166,9 +163,10 @@ function StudentDirectoryView({ directory, onEditingChange }: {
           Đang cập nhật thống kê và danh sách lớp…
         </p>}
         <DataTable
-          key={tableVersion}
+          key={`${tableVersion}:${directory?.sessionKey ?? "local"}`}
           rows={rows}
-          collection={directory ? { total: directory.total, complete, loading: directory.loading } : undefined}
+          remote={directory?.remote}
+          selectionFilter={matchesFilters}
           label="Danh sách sinh viên"
           filterCount={[program, className, eligible, scope === "all" ? "" : scope].filter(Boolean).length}
           selectionActions={(selected) => <Button variant="secondary" loading={action.pending} onClick={() => action.run(() => exportExcel("Sinh viên đã chọn", selected.map(s => ({ "Mã sinh viên": s.code, "Họ tên": s.name, Lớp: s.className, "Hệ đào tạo": s.program, GPA: s.gpa ?? "", Email: s.email, "Số điện thoại": s.phone })))).catch(() => {})}><Download size={16} />Xuất {selected.length} sinh viên</Button>}
@@ -207,7 +205,7 @@ function StudentDirectoryView({ directory, onEditingChange }: {
                   onChange={(e) => setClassName(e.target.value)}
                 >
                   <option value="">{complete ? "Mọi lớp" : "Đang tải danh sách lớp…"}</option>
-                  {[...new Set(students.map((s) => s.className))]
+                  {(directory ? directory.summary?.classes ?? [] : [...new Set(students.map((s) => s.className))])
                     .filter(Boolean)
                     .sort((a, b) => a.localeCompare(b, "vi"))
                     .map((c) => (

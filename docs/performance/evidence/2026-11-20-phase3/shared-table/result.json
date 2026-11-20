@@ -1,0 +1,30 @@
+{
+  "result": "PASS",
+  "mockedUiFixtures": true,
+  "backendAccess": false,
+  "checks": [
+    "desktop sidebar collapses, preserves preference and expands",
+    "compact header renders breadcrumb and account controls",
+    "row menu supports arrows, End, Escape and opens existing confirmation",
+    "complex account form uses a drawer with Cancel before Save",
+    "search, empty state, advanced filters, sorting, selection and Excel export work",
+    "account page passes automated accessibility checks",
+    "22 existing screens render without page overflow at 1440px",
+    "22 existing screens render without page overflow at 1024px",
+    "22 existing screens render without page overflow at 768px",
+    "22 existing screens render without page overflow at 390px",
+    "22 existing screens render without page overflow at 320px",
+    "mobile navigation opens and Escape restores focus",
+    "mobile drawer keeps Save visible and Escape restores the opener",
+    "13 existing defense, grading and guidance components fit 1440px",
+    "13 existing defense, grading and guidance components fit 1024px",
+    "13 existing defense, grading and guidance components fit 768px",
+    "13 existing defense, grading and guidance components fit 390px",
+    "13 existing defense, grading and guidance components fit 320px",
+    "FACULTY dashboard, screens and navigation permissions verified at five widths",
+    "LECTURER dashboard, screens and navigation permissions verified at five widths",
+    "STUDENT dashboard, screens and navigation permissions verified at five widths",
+    "COMMITTEE dashboard, screens and navigation permissions verified at five widths"
+  ],
+  "pageErrors": []
+}

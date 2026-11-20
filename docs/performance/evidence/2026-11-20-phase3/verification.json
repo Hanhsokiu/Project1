@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-20",
+  "status": "PASS",
+  "scope": [
+    "Load snapshot resources by route and active term; share nested snapshot reads",
+    "Lazy-load remaining workflow and defense routes",
+    "Defer local table search and avoid repeated row index scans",
+    "Add permission-guarded server pagination, literal search, filters, sorting and aggregate options for student directory",
+    "Preserve selection and Excel export across server pages; clear selected rows when session changes"
+  ],
+  "bundle": {
+    "kind": "production build, API mode",
+    "beforeMainKb": 772.77,
+    "afterMainKb": 514.97,
+    "beforeMainGzipKb": 224.39,
+    "afterMainGzipKb": 158.03,
+    "assetScan": { "command": "node scripts/check-production-assets.cjs --frontend frontend/dist", "checked": 91, "findings": 0, "exitCode": 0 }
+  },
+  "checks": [
+    { "command": "pnpm --filter @doan/shared build", "exitCode": 0 },
+    { "command": "pnpm --filter @doan/frontend type-check", "exitCode": 0 },
+    { "command": "pnpm --filter @doan/frontend lint", "exitCode": 0 },
+    { "command": "pnpm --filter @doan/frontend test -- --silent", "files": 69, "tests": 443, "exitCode": 0 },
+    { "command": "pnpm --filter @doan/frontend build", "environment": { "VITE_AUTH_API": "true", "VITE_DEMO_MODE": "false" }, "exitCode": 0 },
+    { "command": "pnpm --filter @doan/backend type-check", "exitCode": 0 },
+    { "command": "pnpm --filter @doan/backend lint", "exitCode": 0 },
+    { "command": "pnpm --filter @doan/backend test", "files": 79, "tests": 1036, "exitCode": 0 },
+    { "command": "pnpm --filter @doan/backend build", "exitCode": 0 },
+    { "command": "node backend/scripts/test-student-directory-postgres.cjs", "tests": 7, "exitCode": 0, "persistence": "fresh isolated loopback PostgreSQL 17; stopped after suite; no Supabase access" },
+    { "command": "node frontend/scripts/test-student-directory-browser.cjs", "checks": 8, "exitCode": 0, "evidence": "student-directory/result.json" },
+    { "command": "node frontend/scripts/test-performance-browser.cjs", "checks": 8, "exitCode": 0, "evidence": "result.json" },
+    { "command": "pnpm --filter @doan/frontend test:ui:browser", "checks": 22, "exitCode": 0, "evidence": "ui-regression/result.json" },
+    { "command": "pnpm --filter @doan/frontend test:data-consistency:browser", "checks": 38, "exitCode": 0, "timing": "Ran after snapshot/route changes, before final server-pagination extension" },
+    { "command": "git diff --check", "exitCode": 0 }
+  ],
+  "accessibility": {
+    "studentDirectoryAxeViolations": 0,
+    "dashboardAxeViolations": 0,
+    "studentDirectoryViewportWidths": [320, 375, 768, 1440],
+    "keyboard": "Dialog Escape, filter/menu keyboard navigation and focus restoration verified in browser suites",
+    "visualReview": "Inspected student-directory screenshots at 320 and 1440 pixels"
+  },
+  "rollout": {
+    "order": ["Deploy backend with shared contract first", "Deploy frontend", "Check authenticated real API timings and errors"],
+    "newReadEndpoints": ["GET /api/students/directory", "GET /api/students/directory-options"],
+    "requiredPermission": "student:read (existing permission)",
+    "databaseMigrationRequired": false,
+    "existingStudentEndpointsRetained": true,
+    "newEnvironmentVariablesRequired": false,
+    "gitPushPerformedForThisPhase": false
+  },
+  "limits": [
+    "Browser suites use isolated API fixtures; they do not establish deployed API latency or real Supabase integration",
+    "PostgreSQL suite executes actual repository SQL and Nest HTTP guards against minimal tables with matching column types, not a full migration-chain replay",
+    "Server name ordering follows PostgreSQL collation; local tables retain Vietnamese Intl numeric ordering",
+    "Existing Vite CJS deprecation and React SSR useLayoutEffect warnings remain; production main and deferred Excel chunks still exceed the default 500 kB warning threshold",
+    "No production load test, cold-start benchmark or hosting-plan change was performed",
+    "Other screens retain complete collections where current statistics, validation or business operations require them"
+  ]
+}

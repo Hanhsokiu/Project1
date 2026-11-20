@@ -56,7 +56,16 @@ import {
   Confirm,
   labels,
 } from "../../shared/components/kit";
-import { currentUser, resetDemo } from "../../shared/data/store";
+import {
+  currentUser,
+  resetDemo,
+  getWorkspaceSelection,
+} from "../../shared/data/store";
+import {
+  snapshotScopeForPath,
+  type SnapshotScope,
+} from "../../shared/data/snapshot-scope";
+import { SnapshotContext } from "../../shared/hooks/snapshot-context";
 import {
   WorkspaceProvider,
   WorkspaceSnapshotProvider,
@@ -66,19 +75,46 @@ import { authService } from "../../features/auth/services/auth-service";
 import type { DemoDb } from "../../shared/data/types";
 import { termLabel } from "../../shared/data/term-selection";
 import "./utc-registration-shell.css";
-export default function WorkspaceLayout({
-  children,
-  data,
-  selectionReady = true,
-}: {
+export default function WorkspaceLayout(props: {
   children?: ReactNode;
   data?: DemoDb;
   selectionReady?: boolean;
 }) {
   const location = useLocation();
+  const scope = AUTH_API
+    ? snapshotScopeForPath(location.pathname, location.search)
+    : "full";
+  const route = location.pathname + location.search;
+  // Saving the initially selected term must not start a second cold snapshot.
+  // Actual term changes navigate through termDestination and update this route.
+  const saved = useRef({ route, termId: getWorkspaceSelection().termId });
+  if (saved.current.route !== route)
+    saved.current = { route, termId: getWorkspaceSelection().termId };
+  const termId =
+    /^\/terms\/([^/]+)/.exec(location.pathname)?.[1] ||
+    new URLSearchParams(location.search).get("termId") ||
+    undefined;
+  return (
+    <SnapshotContext.Provider
+      value={{ scope, termId, savedTermId: saved.current.termId }}
+    >
+      <WorkspaceContent {...props} scope={scope} />
+    </SnapshotContext.Provider>
+  );
+}
+function WorkspaceContent({
+  children,
+  data,
+  selectionReady = true,
+  scope,
+}: {
+  children?: ReactNode;
+  data?: DemoDb;
+  selectionReady?: boolean;
+  scope: SnapshotScope;
+}) {
+  const location = useLocation();
   const apiUser = useApiSession();
-  const scope = AUTH_API && matchPath({ path: "/catalog/students", end: true }, location.pathname)
-    ? "student-directory" : "full";
   if (AUTH_API && !apiUser)
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   if (data) {

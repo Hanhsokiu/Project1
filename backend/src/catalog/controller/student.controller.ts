@@ -29,6 +29,16 @@ export class StudentController {
       await this.service.findAll(CatalogInputValidator.query(raw)),
     );
   }
+  @Get("directory")
+  @RequirePermission("student", "read")
+  async directory(@Query() raw: Record<string, string>) {
+    return ApiResponse.ok(await this.service.directory(CatalogInputValidator.studentDirectory(raw)));
+  }
+  @Get("directory-options")
+  @RequirePermission("student", "read")
+  async directoryOptions() {
+    return ApiResponse.ok(await this.service.directoryOptions());
+  }
   @Get(":id")
   @RequirePermission("student", "read")
   async detail(@Param("id", ParseUUIDPipe) id: string) {

@@ -1,5 +1,6 @@
 import { z } from "zod";
 export * from "./quota";
+export * from "./contracts/student-directory";
 export * from "./contracts/review-groups";
 export * from "./contracts/proposal-reviews";
 export * from "./contracts/proposal-versions";

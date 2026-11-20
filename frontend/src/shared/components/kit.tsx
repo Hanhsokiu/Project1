@@ -289,7 +289,7 @@ export function Confirm({
 }
 export function DataBoundary({
   children,
-  scope = "full",
+  scope,
 }: {
   children: (db: DemoDb) => ReactNode;
   scope?: import("../data/snapshot-api").SnapshotScope;

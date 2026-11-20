@@ -2,6 +2,7 @@ import { ConflictException, Injectable } from "@nestjs/common";
 import { CatalogRepository } from "../repository/catalog.repository";
 import { CatalogInputValidator } from "../validator/catalog.validator";
 import { studentDto, pageDto } from "../mapper/catalog.mapper";
+import type { StudentDirectoryQuery } from "@doan/shared";
 import {
   studentSchema,
   studentPatchSchema,
@@ -10,6 +11,13 @@ import {
 @Injectable()
 export class StudentService {
   constructor(private readonly repo: CatalogRepository) {}
+  async directory(q: StudentDirectoryQuery) {
+    const { items, total } = await this.repo.studentDirectory(q);
+    return pageDto(items, total, q.page, q.pageSize);
+  }
+  directoryOptions() {
+    return this.repo.studentDirectoryOptions();
+  }
   async findAll(q: CatalogQuery) {
     const [items, total] = await this.repo.students(q);
     return pageDto(items.map(studentDto), total, q.page, q.pageSize);

@@ -5,7 +5,12 @@ import {
   setApiUser,
 } from "../api/api-session";
 import { httpClient } from "../api/http-client";
-import { hydrateStep1Snapshot, mergeStep1Snapshot, type SnapshotScope } from "./snapshot-api";
+import {
+  hydrateStep1Snapshot,
+  mergeStep1Snapshot,
+  mergeActionSnapshot,
+  type SnapshotScope,
+} from "./snapshot-api";
 import { createSeed, DEMO_VERSION } from "./seed";
 import { emptyDb } from "./empty-db";
 import type { Account, DemoDb, Role } from "./types";
@@ -32,9 +37,9 @@ export function readDb(): DemoDb {
       memory = createSeed();
     }
   }
-  const db = mergeStep1Snapshot(
-    AUTH_API ? emptyDb() : structuredClone(memory!),
-  );
+  const db = AUTH_API
+    ? mergeActionSnapshot(emptyDb())
+    : mergeStep1Snapshot(structuredClone(memory!));
   const actual = AUTH_API ? getApiUser() : undefined;
   if (actual) {
     db.accounts = db.accounts.filter((a) => a.id !== actual.id).concat(actual);
@@ -74,11 +79,11 @@ export function persist(db: DemoDb) {
   }
   memory = stored;
 }
-export function currentUser(db = readDb()): Account | undefined {
+export function currentUser(db?: DemoDb): Account | undefined {
   if (AUTH_API) return getApiUser();
   try {
     const id = sessionStorage.getItem(SESSION_KEY);
-    return db.accounts.find((a) => a.id === id && !a.locked);
+    return (db ?? readDb()).accounts.find((a) => a.id === id && !a.locked);
   } catch {
     return undefined;
   }
@@ -127,7 +132,11 @@ export function mutate<T>(
   return value;
 }
 export const delay = () => new Promise((resolve) => setTimeout(resolve, 120));
-export async function snapshot(scope: SnapshotScope = "full") {
+export async function snapshot(
+  scope: SnapshotScope = "full",
+  termId?: string,
+  savedTermId?: string,
+) {
   if (!AUTH_API) await delay();
   if (sessionStorage.getItem("utc-demo-error") === "1") {
     sessionStorage.removeItem("utc-demo-error");
@@ -137,17 +146,23 @@ export async function snapshot(scope: SnapshotScope = "full") {
     );
   }
   if (AUTH_API && getAccessToken()) {
+    const token = getAccessToken();
     try {
       const response = await httpClient.get("/auth/me");
+      if (getAccessToken() !== token)
+        throw new ServiceError(
+          "SESSION_CHANGED",
+          "Phiên đăng nhập đã thay đổi. Vui lòng tải lại dữ liệu.",
+        );
       setApiUser(response.data.data);
     } catch (error) {
       if (!getAccessToken()) return readDb();
       throw error;
     }
   }
-  const db = AUTH_API && scope === "student-directory" ? emptyDb() : readDb();
+  const db = AUTH_API ? emptyDb() : readDb();
   if (AUTH_API && getApiUser()?.mustChangePassword) return db;
-  return hydrateStep1Snapshot(db, scope);
+  return hydrateStep1Snapshot(db, scope, termId, savedTermId);
 }
 export function resetDemo() {
   const db = createSeed();

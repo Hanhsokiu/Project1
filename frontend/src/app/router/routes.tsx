@@ -1,32 +1,3 @@
-import { TaskSubmissionsPage } from "../../features/task-submissions/pages";
-import { WeeklyPlansPage } from "../../features/weekly-plans/pages";
-import {
-  DossierListPage,
-  DossierDetailPage,
-} from "../../features/proposal-dossiers/pages";
-import {
-  GuidancePlanListPage,
-  GuidancePlanDetailPage,
-  GuidanceTaskListPage,
-  GuidanceTaskCreatePage,
-  GuidanceTaskDetailPage,
-} from "../../features/guidance-tasks/pages";
-import {
-  ProposalReviewQueuePage,
-  ProposalReviewDetailPage,
-  ProposalReviewAssignmentPage,
-} from "../../features/proposal-reviews/pages";
-import {
-  ProposalEditorListPage,
-  ProposalEditorPage as VersionEditorPage,
-} from "../../features/proposal-versions/pages";
-import {
-  ReviewGroupLayout,
-  ReviewGroupListPage,
-  ReviewGroupEditorPage,
-  ReviewGroupDetailPage,
-} from "../../features/review-groups/pages";
-
 import { createBrowserRouter } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import WorkspaceLayout from "../layouts/WorkspaceLayout";
@@ -43,6 +14,137 @@ import { Empty } from "../../shared/components/kit";
 import { AUTH_API } from "../../shared/api/api-session";
 import { useApiSession } from "../../shared/hooks/use-api-session";
 import type { ReactNode } from "react";
+
+const TaskSubmissionsPage = lazy(() =>
+  import("../../features/task-submissions/pages").then((m) => ({
+    default: m.TaskSubmissionsPage,
+  })),
+);
+const WeeklyPlansPage = lazy(() =>
+  import("../../features/weekly-plans/pages").then((m) => ({
+    default: m.WeeklyPlansPage,
+  })),
+);
+const DossierListPage = lazy(() =>
+  import("../../features/proposal-dossiers/pages").then((m) => ({
+    default: m.DossierListPage,
+  })),
+);
+const DossierDetailPage = lazy(() =>
+  import("../../features/proposal-dossiers/pages").then((m) => ({
+    default: m.DossierDetailPage,
+  })),
+);
+const GuidancePlanListPage = lazy(() =>
+  import("../../features/guidance-tasks/pages").then((m) => ({
+    default: m.GuidancePlanListPage,
+  })),
+);
+const GuidancePlanDetailPage = lazy(() =>
+  import("../../features/guidance-tasks/pages").then((m) => ({
+    default: m.GuidancePlanDetailPage,
+  })),
+);
+const GuidanceTaskListPage = lazy(() =>
+  import("../../features/guidance-tasks/pages").then((m) => ({
+    default: m.GuidanceTaskListPage,
+  })),
+);
+const GuidanceTaskCreatePage = lazy(() =>
+  import("../../features/guidance-tasks/pages").then((m) => ({
+    default: m.GuidanceTaskCreatePage,
+  })),
+);
+const GuidanceTaskDetailPage = lazy(() =>
+  import("../../features/guidance-tasks/pages").then((m) => ({
+    default: m.GuidanceTaskDetailPage,
+  })),
+);
+const ProposalReviewQueuePage = lazy(() =>
+  import("../../features/proposal-reviews/pages").then((m) => ({
+    default: m.ProposalReviewQueuePage,
+  })),
+);
+const ProposalReviewDetailPage = lazy(() =>
+  import("../../features/proposal-reviews/pages").then((m) => ({
+    default: m.ProposalReviewDetailPage,
+  })),
+);
+const ProposalReviewAssignmentPage = lazy(() =>
+  import("../../features/proposal-reviews/pages").then((m) => ({
+    default: m.ProposalReviewAssignmentPage,
+  })),
+);
+const ProposalEditorListPage = lazy(() =>
+  import("../../features/proposal-versions/pages").then((m) => ({
+    default: m.ProposalEditorListPage,
+  })),
+);
+const VersionEditorPage = lazy(() =>
+  import("../../features/proposal-versions/pages").then((m) => ({
+    default: m.ProposalEditorPage,
+  })),
+);
+const ReviewGroupLayout = lazy(() =>
+  import("../../features/review-groups/workspace").then((m) => ({
+    default: m.ReviewGroupLayout,
+  })),
+);
+const ReviewGroupListPage = lazy(() =>
+  import("../../features/review-groups/pages").then((m) => ({
+    default: m.ReviewGroupListPage,
+  })),
+);
+const ReviewGroupEditorPage = lazy(() =>
+  import("../../features/review-groups/pages").then((m) => ({
+    default: m.ReviewGroupEditorPage,
+  })),
+);
+const ReviewGroupDetailPage = lazy(() =>
+  import("../../features/review-groups/pages").then((m) => ({
+    default: m.ReviewGroupDetailPage,
+  })),
+);
+const EligibilityPage = lazy(() =>
+  import("../../features/defense/eligibility/page").then((m) => ({
+    default: m.EligibilityPage,
+  })),
+);
+const CommitteePage = lazy(() =>
+  import("../../features/defense/committees/page").then((m) => ({
+    default: m.CommitteePage,
+  })),
+);
+const ReviewerPage = lazy(() =>
+  import("../../features/defense/reviewers/page").then((m) => ({
+    default: m.ReviewerPage,
+  })),
+);
+const SchedulePage = lazy(() =>
+  import("../../features/defense/scheduling/page").then((m) => ({
+    default: m.SchedulePage,
+  })),
+);
+const CommitteeGradePage = lazy(() =>
+  import("../../features/defense/committee-grading/page").then((m) => ({
+    default: m.CommitteeGradePage,
+  })),
+);
+const FinalResultPage = lazy(() =>
+  import("../../features/defense/final-results/page").then((m) => ({
+    default: m.FinalResultPage,
+  })),
+);
+const DefenseReportsPage = lazy(() =>
+  import("../../features/report/defense-reporting/page").then((m) => ({
+    default: m.DefenseReportsPage,
+  })),
+);
+const ReviewerGradePage = lazy(() =>
+  import("../../features/defense/reviewer-grading/page").then((m) => ({
+    default: m.ReviewerGradePage,
+  })),
+);
 
 function WorkflowAccess({ children }: { children: ReactNode }) {
   const location = useLocation();
@@ -63,7 +165,7 @@ function WorkflowAccess({ children }: { children: ReactNode }) {
     if (!route || !canAccessRoute(route, user, true))
       return <Navigate to="/forbidden" replace />;
   }
-  return <>{children}</>;
+  return <Suspense fallback={<Loader />}>{children}</Suspense>;
 }
 
 const ProgressReviewInboxPage = lazy(() =>
@@ -474,11 +576,3 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-import { EligibilityPage } from "../../features/defense/eligibility/page";
-import { CommitteePage } from "../../features/defense/committees/page";
-import { ReviewerPage } from "../../features/defense/reviewers/page";
-import { SchedulePage } from "../../features/defense/scheduling/page";
-import { CommitteeGradePage } from "../../features/defense/committee-grading/page";
-import { FinalResultPage } from "../../features/defense/final-results/page";
-import { DefenseReportsPage } from "../../features/report/defense-reporting/page";
-import { ReviewerGradePage } from "../../features/defense/reviewer-grading/page";

@@ -3,6 +3,8 @@ import { Prisma } from "@prisma/client";
 import { PrismaService } from "../../prisma/prisma.service";
 import { AuditService } from "../../common/audit/audit.service";
 import { CatalogInputValidator } from "../validator/catalog.validator";
+import type { StudentDirectoryItem, StudentDirectoryQuery } from "@doan/shared";
+import { eligibleStudentSql, studentDirectoryOrder, studentDirectoryWhere } from "./student-directory.query";
 import type {
   CatalogQuery,
   LecturerInput,
@@ -26,6 +28,36 @@ export class CatalogRepository {
     private readonly prisma: PrismaService,
     private readonly audit: AuditService,
   ) {}
+  async studentDirectory(q: StudentDirectoryQuery) {
+    const where = studentDirectoryWhere(q);
+    // The count and page share one snapshot; concurrent writes cannot produce
+    // a total from one version of the collection and rows from another.
+    const [counts, items] = await this.prisma.$transaction([
+      this.prisma.$queryRaw<{ total: bigint }[]>(Prisma.sql`
+        SELECT count(*) AS total FROM "STUDENT" s
+        JOIN "USER_ACCOUNT" u ON u.id = s.user_id ${where}`),
+      this.prisma.$queryRaw<StudentDirectoryItem[]>(Prisma.sql`
+        SELECT s.id, s.student_code AS "studentCode", s.full_name AS "fullName",
+          s.class_name AS "className", s.major_name AS "majorName",
+          s.gpa::double precision AS gpa, s.academic_eligible AS "academicEligible",
+          s.training_system_id AS "trainingSystemId", u.email, s.phone,
+          json_build_object('id', t.id, 'code', t.code, 'name', t.name) AS "trainingSystem"
+        FROM "STUDENT" s JOIN "USER_ACCOUNT" u ON u.id = s.user_id
+        JOIN "TRAINING_SYSTEM" t ON t.id = s.training_system_id ${where}
+        ORDER BY ${studentDirectoryOrder(q)}
+        LIMIT ${q.pageSize} OFFSET ${(q.page - 1) * q.pageSize}`),
+    ], { isolationLevel: Prisma.TransactionIsolationLevel.RepeatableRead });
+    return { items, total: Number(counts[0].total) };
+  }
+  async studentDirectoryOptions() {
+    const [row] = await this.prisma.$queryRaw<{ total: bigint; eligible: bigint; classes: string[] }[]>(Prisma.sql`
+      SELECT count(*) AS total, count(*) FILTER (WHERE ${eligibleStudentSql}) AS eligible,
+        COALESCE(array_agg(DISTINCT s.class_name) FILTER (WHERE s.class_name <> ''), ARRAY[]::text[]) AS classes
+      FROM "STUDENT" s`);
+    const total = Number(row.total), eligible = Number(row.eligible);
+    return { total, eligible, ineligible: total - eligible,
+      classes: row.classes.sort((a, b) => a.localeCompare(b, "vi")) };
+  }
   async students(q: CatalogQuery) {
     const where: Prisma.StudentWhereInput = {
       ...(q.search
