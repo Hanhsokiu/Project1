@@ -9,6 +9,7 @@ import {
   getApiUser,
   subscribeApiSession,
 } from "../api/api-session";
+import { snapshotLookupCache } from "./snapshot-lookup-cache";
 
 export const DATA_REFRESH_INTERVAL = 30000;
 // Historical snapshots and comparisons are immutable; refresh the current
@@ -25,6 +26,7 @@ export function installAutoRefresh(
 ) {
   let timer: ReturnType<typeof setTimeout> | undefined;
   let pending = false;
+  let pendingWrite = false;
   let path = win.location.pathname + win.location.search;
   let accountId = getApiUser()?.id;
   let channel: BroadcastChannel | undefined;
@@ -41,12 +43,26 @@ export function installAutoRefresh(
       draftGuard.hasUnsavedChanges() ||
       !!doc.querySelector('[data-refresh-unsaved="true"]');
     pending = blocked;
-    // Mark all affected caches stale, but only refetch mounted, enabled queries.
-    // Avoid aborting/restarting a request when multiple signals arrive together.
-    void client.invalidateQueries(
-      { predicate: isLiveQuery, refetchType: blocked ? "none" : "active" },
-      { cancelRefetch: false },
-    );
+    if (pendingWrite) {
+      // Writes must invalidate even fresh data. Preserve a deferred write while
+      // a draft is open, and reconcile when the draft is saved or dismissed.
+      void client.invalidateQueries(
+        { predicate: isLiveQuery, refetchType: blocked ? "none" : "active" },
+        { cancelRefetch: false },
+      );
+      if (!blocked) pendingWrite = false;
+    } else if (!blocked) {
+      // A timer or window focus is not a data change. Respect staleTime and let
+      // queries with their own polling interval manage that interval themselves.
+      void client.refetchQueries(
+        {
+          type: "active",
+          predicate: (query) =>
+            isLiveQuery(query) && !query.meta?.ownsPolling && query.isStale(),
+        },
+        { cancelRefetch: false },
+      );
+    }
   };
   const schedule = () => {
     if (!timer) timer = setTimeout(refresh, 200);
@@ -87,11 +103,19 @@ export function installAutoRefresh(
   }
   if (channel)
     channel.onmessage = (event) => {
-      if (event.data?.kind === "changed") schedule();
+      if (event.data?.kind === "changed") {
+        // Only resource names cross tabs; no account data or request contents.
+        if (Array.isArray(event.data.lookupPaths))
+          snapshotLookupCache.invalidate(event.data.lookupPaths);
+        else snapshotLookupCache.clear();
+        pendingWrite = true;
+        schedule();
+      }
     };
-  const unsubscribeWrites = subscribeDataChanges(() => {
+  const unsubscribeWrites = subscribeDataChanges((change) => {
+    pendingWrite = true;
     schedule();
-    channel?.postMessage({ kind: "changed" });
+    channel?.postMessage({ kind: "changed", lookupPaths: change.lookupPaths });
   });
   const unsubscribeSession = subscribeApiSession(() => {
     const next = getApiUser()?.id;
@@ -100,6 +124,8 @@ export function installAutoRefresh(
       draftGuard.clear();
       setActionScope(null);
       client.clear();
+      snapshotLookupCache.clear();
+      pendingWrite = false;
     }
   });
   doc.addEventListener("input", input, true);

@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { Link } from "react-router-dom";
 import {
   GraduationCap,
@@ -33,9 +33,25 @@ import { catalogService } from "../services/catalog-service";
 import { formatGpa, hasEligibleGpa } from "../../../shared/utils/gpa";
 import "./catalog-directory.css";
 import { exportExcel } from "../../../shared/services/export-service";
+import { AUTH_API } from "../../../shared/api/api-session";
+import { useStudentDirectory } from "../hooks/use-student-directory";
 type StudentForm = Student;
 export default function StudentListPage() {
+  return AUTH_API ? <ApiStudentDirectory /> : <StudentDirectoryView />;
+}
+function ApiStudentDirectory() {
+  const [editing, setEditing] = useState(false);
+  const directory = useStudentDirectory(editing);
+  return <StudentDirectoryView directory={directory} onEditingChange={setEditing} />;
+}
+function StudentDirectoryView({ directory, onEditingChange }: {
+  directory?: ReturnType<typeof useStudentDirectory>;
+  onEditingChange?: (editing: boolean) => void;
+}) {
   const { db, user, term } = useWorkspace();
+  const students = directory?.students ?? db.students;
+  const complete = directory?.complete ?? true;
+  const pendingValue = directory?.error ? "Chưa tải được" : "Đang tải…";
   const action = useAction();
   const manager = user.roles.some((r) => r === "ADMIN" || r === "FACULTY");
   const hasTerm = db.terms.some((t) => t.id === term.id);
@@ -45,9 +61,11 @@ export default function StudentListPage() {
   const [scope, setScope] = useState("all");
   const [form, setForm] = useState<StudentForm | null>(null);
   const [tableVersion, setTableVersion] = useState(0);
+  const editing = !!form;
+  useEffect(() => onEditingChange?.(editing), [editing, onEditingChange]);
   const programs = db.catalogs.filter((c) => c.kind === "program");
   const departments = db.catalogs.filter((c) => c.kind === "department");
-  const rows = db.students.filter(
+  const rows = students.filter(
     (s) =>
       (!program || s.program === program) &&
       (!className || s.className === className) &&
@@ -102,22 +120,20 @@ export default function StudentListPage() {
       <div className="stat-grid">
         <Stat
           label="Tổng sinh viên"
-          value={db.students.length}
+          value={directory ? directory.total ?? pendingValue : students.length}
           icon={<GraduationCap size={18} aria-hidden="true" />}
         />
         <Stat
           label="Đủ điều kiện học vụ"
           value={
-            db.students.filter((s) => s.eligible && hasEligibleGpa(s.gpa, 0))
-              .length
+            complete ? students.filter((s) => s.eligible && hasEligibleGpa(s.gpa, 0)).length : pendingValue
           }
           icon={<CheckCircle2 size={18} aria-hidden="true" />}
         />
         <Stat
           label="Chưa đủ điều kiện"
           value={
-            db.students.filter((s) => !s.eligible || !hasEligibleGpa(s.gpa, 0))
-              .length
+            complete ? students.filter((s) => !s.eligible || !hasEligibleGpa(s.gpa, 0)).length : pendingValue
           }
           icon={<CircleAlert size={18} aria-hidden="true" />}
         />
@@ -142,9 +158,17 @@ export default function StudentListPage() {
           </Button>
         }
       >
+        {directory?.error && <Notice tone="danger">
+          {directory.error.message}{" "}
+          <Button variant="secondary" onClick={() => void directory.retry()}>Thử tải lại</Button>
+        </Notice>}
+        {directory && !complete && !directory.error && <p role="status" className="muted text-sm mb-4">
+          Đang cập nhật thống kê và danh sách lớp…
+        </p>}
         <DataTable
           key={tableVersion}
           rows={rows}
+          collection={directory ? { total: directory.total, complete, loading: directory.loading } : undefined}
           label="Danh sách sinh viên"
           filterCount={[program, className, eligible, scope === "all" ? "" : scope].filter(Boolean).length}
           selectionActions={(selected) => <Button variant="secondary" loading={action.pending} onClick={() => action.run(() => exportExcel("Sinh viên đã chọn", selected.map(s => ({ "Mã sinh viên": s.code, "Họ tên": s.name, Lớp: s.className, "Hệ đào tạo": s.program, GPA: s.gpa ?? "", Email: s.email, "Số điện thoại": s.phone })))).catch(() => {})}><Download size={16} />Xuất {selected.length} sinh viên</Button>}
@@ -178,11 +202,12 @@ export default function StudentListPage() {
               <Field label="Lớp">
                 <select
                   aria-label="Lọc lớp"
+                  disabled={!complete}
                   value={className}
                   onChange={(e) => setClassName(e.target.value)}
                 >
-                  <option value="">Mọi lớp</option>
-                  {[...new Set(db.students.map((s) => s.className))]
+                  <option value="">{complete ? "Mọi lớp" : "Đang tải danh sách lớp…"}</option>
+                  {[...new Set(students.map((s) => s.className))]
                     .filter(Boolean)
                     .sort((a, b) => a.localeCompare(b, "vi"))
                     .map((c) => (

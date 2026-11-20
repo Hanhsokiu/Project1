@@ -7,13 +7,19 @@ export interface TableColumn<T> {
   render: (row: T) => ReactNode;
   sortValue?: (row: T) => string | number | null | undefined;
 }
+export interface TableCollection {
+  total: number | null;
+  complete: boolean;
+  loading: boolean;
+}
 export function DataTable<T>({ rows, columns, searchText, filters, emptyTitle, pageSize = 8,
-  rowKey, selectionActions, filterCount = 0, label = "Danh sách dữ liệu",
+  rowKey, selectionActions, filterCount = 0, label = "Danh sách dữ liệu", collection,
 }: {
   rows: T[]; columns: TableColumn<T>[]; searchText?: (row: T) => string;
   filters?: ReactNode; emptyTitle?: string; pageSize?: number;
   rowKey?: (row: T) => string; selectionActions?: (selected: T[]) => ReactNode;
   filterCount?: number; label?: string;
+  collection?: TableCollection;
 }) {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -36,12 +42,21 @@ export function DataTable<T>({ rows, columns, searchText, filters, emptyTitle, p
     }
     return result;
   }, [rows, search, searchText, columns, sort]);
-  const pages = Math.max(1, Math.ceil(filtered.length / pageSize));
+  // Local filtering/sorting remains exact: do not present a partial collection
+  // as the full search result, or rank the first batch as if it were all rows.
+  const needsComplete = !!search.trim() || filterCount > 0 || !!sort;
+  const total = collection && !collection.complete
+    ? needsComplete ? null : collection.total
+    : filtered.length;
+  const pages = Math.max(1, Math.ceil((total ?? 0) / pageSize));
   const actual = Math.min(page, pages);
   const visible = filtered.slice((actual - 1) * pageSize, actual * pageSize);
+  const waiting = !!collection && !collection.complete &&
+    (needsComplete || total === null || visible.length < Math.min(pageSize, total - (actual - 1) * pageSize));
   const chosen = rows.filter(row => selected.has(key(row)));
-  const allPage = visible.length > 0 && visible.every(row => selected.has(key(row)));
+  const allPage = !waiting && visible.length > 0 && visible.every(row => selected.has(key(row)));
   const togglePage = () => setSelected(previous => {
+    if (waiting) return previous;
     const next = new Set(previous);
     visible.forEach(row => { if (allPage) next.delete(key(row)); else next.add(key(row)); });
     return next;
@@ -80,30 +95,36 @@ export function DataTable<T>({ rows, columns, searchText, filters, emptyTitle, p
         <option value="">Thứ tự mặc định</option>
         {columns.filter(column => column.sortValue).flatMap(column => [<option key={`${column.key}:asc`} value={`${column.key}:asc`}>{column.title}: tăng dần</option>, <option key={`${column.key}:desc`} value={`${column.key}:desc`}>{column.title}: giảm dần</option>])}
       </select>}
-      <span className="table-count" aria-live="polite">{filtered.length} bản ghi</span>
-      {selectable && <label className="mobile-select-page"><input type="checkbox" aria-label="Chọn tất cả dòng trong trang" checked={allPage} onChange={togglePage} />Chọn trang</label>}
+      <span className="table-count" aria-live="polite">{total === null ? collection?.loading ? "Đang tải kết quả…" : "Chưa tải đủ kết quả" : `${total} bản ghi`}</span>
+      {selectable && <label className="mobile-select-page"><input type="checkbox" aria-label="Chọn tất cả dòng trong trang" checked={allPage} disabled={waiting} onChange={togglePage} />Chọn trang</label>}
     </div>}
     {selectable && chosen.length > 0 && <div className="table-selection-bar" role="region" aria-label="Thao tác với dòng đã chọn">
       <strong>Đã chọn {chosen.length}</strong><div className="actions">{selectionActions(chosen)}</div>
       <button type="button" className="text-link" onClick={() => setSelected(new Set())}>Bỏ chọn</button>
     </div>}
-    {!filtered.length ? <div className="empty" role="status"><span className="empty-icon"><FileSearch size={24} aria-hidden="true" /></span><h3>{emptyTitle || (search || filterCount ? "Không tìm thấy kết quả" : "Chưa có dữ liệu")}</h3><p>{search || filterCount ? "Thử từ khóa khác hoặc điều chỉnh bộ lọc để mở rộng kết quả." : "Dữ liệu sẽ xuất hiện khi có hồ sơ phù hợp."}</p>{search && <button type="button" className="btn btn-secondary" onClick={() => setSearch("")}>Xóa tìm kiếm</button>}</div> : <>
+    {!waiting && !filtered.length ? <div className="empty" role="status"><span className="empty-icon"><FileSearch size={24} aria-hidden="true" /></span><h3>{emptyTitle || (search || filterCount ? "Không tìm thấy kết quả" : "Chưa có dữ liệu")}</h3><p>{search || filterCount ? "Thử từ khóa khác hoặc điều chỉnh bộ lọc để mở rộng kết quả." : "Dữ liệu sẽ xuất hiện khi có hồ sơ phù hợp."}</p>{search && <button type="button" className="btn btn-secondary" onClick={() => setSearch("")}>Xóa tìm kiếm</button>}</div> : <>
+      <div hidden={!waiting} role="status" aria-busy={collection?.loading}>
+        <p>{collection?.loading ? "Đang tải đầy đủ kết quả…" : "Chưa tải đủ dữ liệu. Vui lòng thử tải lại."}</p>
+      </div>
       <div className="table-scroll"><table aria-label={label}>
         <thead><tr>
-          {selectable && <th className="selection-cell"><input ref={selectAll} type="checkbox" aria-label="Chọn tất cả dòng trong trang" checked={allPage} onChange={togglePage} /></th>}
+          {selectable && <th className="selection-cell"><input ref={selectAll} type="checkbox" aria-label="Chọn tất cả dòng trong trang" checked={allPage} disabled={waiting} onChange={togglePage} /></th>}
           {columns.map(column => <th key={column.key} scope="col" className={/^(actions?|edit|tools)$/.test(column.key) ? "table-actions-cell" : undefined} aria-sort={sort?.key === column.key ? sort.desc ? "descending" : "ascending" : undefined}>
             {column.sortValue ? <button type="button" className="column-sort" onClick={() => { setSort(previous => ({ key: column.key, desc: previous?.key === column.key ? !previous.desc : false })); setPage(1); }}>{column.title}{sort?.key === column.key ? sort.desc ? <ArrowDown size={13} /> : <ArrowUp size={13} /> : <ArrowUpDown size={13} />}</button> : column.title}
           </th>)}
         </tr></thead>
-        <tbody>{visible.map(row => <tr key={key(row)} className={selected.has(key(row)) ? "is-selected" : undefined}>
+        <tbody>{!waiting && visible.map(row => <tr key={key(row)} className={selected.has(key(row)) ? "is-selected" : undefined}>
           {selectable && <td className="selection-cell" data-label="Chọn dòng"><input type="checkbox" aria-label={`Chọn dòng ${searchText ? searchText(row).slice(0, 90) : key(row)}`} checked={selected.has(key(row))} onChange={() => toggle(row)} /></td>}
           {columns.map(column => <td key={column.key} data-label={column.title} className={/^(actions?|edit|tools)$/.test(column.key) ? "table-actions-cell" : undefined}>{column.render(row)}</td>)}
         </tr>)}</tbody>
       </table></div>
-      <div className="pagination"><span id={`${id}-page`} aria-live="polite">Hiển thị {(actual - 1) * pageSize + 1}–{Math.min(actual * pageSize, filtered.length)} / {filtered.length}</span><div className="pagination-controls">
-        <button type="button" className="icon-btn" aria-label="Trang trước" title="Trang trước" disabled={actual === 1} onClick={() => setPage(actual - 1)}><ChevronLeft size={17} /></button><span>Trang {actual} / {pages}</span>
-        <button type="button" className="icon-btn" aria-label="Trang sau" title="Trang sau" disabled={actual === pages} onClick={() => setPage(actual + 1)}><ChevronRight size={17} /></button>
-      </div></div>
     </>}
+    {total !== null && total > 0 && <div className="pagination"><span id={`${id}-page`} aria-live="polite">{waiting
+      ? `${collection?.loading ? "Đang tải" : "Chưa tải được"} trang ${actual}`
+      : `Hiển thị ${(actual - 1) * pageSize + 1}–${Math.min(actual * pageSize, filtered.length)} / ${total}`}</span><div className="pagination-controls">
+        <button type="button" className="icon-btn" aria-label="Trang trước" title="Trang trước" disabled={actual === 1} onClick={() => setPage(actual - 1)}><ChevronLeft size={17} /></button><span>Trang {actual} / {pages}</span>
+        <button type="button" className="icon-btn" aria-label="Trang sau" title="Trang sau" disabled={actual === pages || waiting} onClick={() => setPage(actual + 1)}><ChevronRight size={17} /></button>
+      </div></div>
+    }
   </div>;
 }

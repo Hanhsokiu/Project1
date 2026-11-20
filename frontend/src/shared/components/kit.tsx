@@ -289,10 +289,12 @@ export function Confirm({
 }
 export function DataBoundary({
   children,
+  scope = "full",
 }: {
   children: (db: DemoDb) => ReactNode;
+  scope?: import("../data/snapshot-api").SnapshotScope;
 }) {
-  const q = useDemo();
+  const q = useDemo(scope);
   if (q.isPending)
     return (
       <div className="loading-skeleton">

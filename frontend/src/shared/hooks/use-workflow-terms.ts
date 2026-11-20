@@ -39,6 +39,7 @@ export function useWorkflowTerms(
     staleTime: 0,
     refetchOnMount: "always",
     refetchInterval: 30000,
+    meta: { ownsPolling: true },
   });
 }
 

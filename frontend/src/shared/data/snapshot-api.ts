@@ -2,6 +2,7 @@ import { apiData } from "../api/api-data";
 import { vietnamDateTime as phaseTime } from "../utils/vietnam-time";
 export { apiData } from "../api/api-data";
 import { AUTH_API, getAccessToken, getApiUser } from "../api/api-session";
+import { snapshotLookupCache } from "./snapshot-lookup-cache";
 import {
   assignmentApi,
   cacheAssignment,
@@ -44,7 +45,7 @@ export interface LookupDto {
   active?: boolean;
   description?: string;
 }
-interface StudentDto {
+export interface StudentDto {
   majorName?: string;
   id: string;
   studentCode: string;
@@ -98,6 +99,25 @@ interface Step1Resources {
   directions: LookupDto[];
 }
 let resources: Step1Resources | undefined;
+let actionResources: Step1Resources | undefined;
+export type SnapshotScope = "full" | "student-directory";
+
+export function studentItem(s: StudentDto, programs: LookupDto[] = []): Student {
+  return {
+    id: s.id,
+    code: s.studentCode,
+    name: s.fullName,
+    email: s.email || "",
+    phone: s.phone || "",
+    className: s.className,
+    trainingSystemId: s.trainingSystemId,
+    majorName: s.majorName || "",
+    program: s.trainingSystem?.name || programs.find((p) => p.id === s.trainingSystemId)?.name || "",
+    departmentId: "",
+    gpa: s.gpa === null ? null : Number(s.gpa),
+    eligible: s.academicEligible,
+  };
+}
 
 export async function apiAll<T>(url: string): Promise<T[]> {
   const rows: T[] = [];
@@ -120,7 +140,7 @@ export async function apiAll<T>(url: string): Promise<T[]> {
   }
 }
 export function getStep1Resources() {
-  return resources?.token === getAccessToken() ? resources : undefined;
+  return actionResources?.token === getAccessToken() ? actionResources : undefined;
 }
 export function semesterItem(item: SemesterDto): CatalogItem {
   return {
@@ -222,7 +242,10 @@ export function mergeStep1Snapshot(mock: DemoDb): DemoDb {
     : mock;
 }
 /** Server data is authoritative. The API snapshot contains no browser demo artifacts. */
-export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
+export async function hydrateStep1Snapshot(
+  mock: DemoDb,
+  scope: SnapshotScope = "full",
+): Promise<DemoDb> {
   const token = getAccessToken();
   if (!token) return mock;
   if (REGISTRATION_API && (!step1Api.term || !step1Api.catalog))
@@ -230,10 +253,13 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
       "Đăng ký API yêu cầu bật VITE_TERM_API và VITE_CATALOG_API để dùng đúng danh mục/đợt từ máy chủ.",
     );
   if (!step1Api.term && !step1Api.catalog) return mock;
+  const directory = scope === "student-directory";
   const manager = getApiUser()?.roles.some(
     (role) => role === "ADMIN" || role === "FACULTY",
   );
   const isAdmin = getApiUser()?.roles.includes("ADMIN");
+  const lookup = <T,>(path: string) =>
+    snapshotLookupCache.read(token, path, () => apiData<T>("GET", path));
   const [
     terms,
     semesters,
@@ -246,22 +272,22 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
   ] = await Promise.all([
     step1Api.term ? apiAll<Term>("/terms") : Promise.resolve(undefined),
     step1Api.term
-      ? apiData<SemesterDto[]>("GET", "/semesters")
+      ? lookup<SemesterDto[]>("/semesters")
       : Promise.resolve([]),
-    apiData<LookupDto[]>("GET", "/training-systems"),
+    lookup<LookupDto[]>("/training-systems"),
     step1Api.catalog
-      ? apiData<LookupDto[]>("GET", "/departments")
+      ? lookup<LookupDto[]>("/departments")
       : Promise.resolve([]),
-    step1Api.catalog
-      ? apiData<LookupDto[]>("GET", "/research-areas")
+    step1Api.catalog && !directory
+      ? lookup<LookupDto[]>("/research-areas")
       : Promise.resolve([]),
-    step1Api.catalog && manager
+    step1Api.catalog && manager && !directory
       ? apiAll<StudentDto>("/students")
       : Promise.resolve(undefined),
-    step1Api.catalog
+    step1Api.catalog && !directory
       ? apiAll<LecturerDto>("/lecturers")
       : Promise.resolve(undefined),
-    isAdmin ? apiAll<Account>("/accounts") : Promise.resolve(undefined),
+    isAdmin && !directory ? apiAll<Account>("/accounts") : Promise.resolve(undefined),
   ]);
   const value: Step1Resources = {
     token,
@@ -271,23 +297,7 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
     departments,
     directions,
     accounts,
-    students: students?.map((s) => ({
-      id: s.id,
-      code: s.studentCode,
-      name: s.fullName,
-      email: s.email || "",
-      phone: s.phone || "",
-      className: s.className,
-      trainingSystemId: s.trainingSystemId,
-      majorName: s.majorName || "",
-      program:
-        s.trainingSystem?.name ||
-        programs.find((p) => p.id === s.trainingSystemId)?.name ||
-        "",
-      departmentId: "",
-      gpa: s.gpa === null ? null : Number(s.gpa),
-      eligible: s.academicEligible,
-    })),
+    students: students?.map((s) => studentItem(s, programs)),
     lecturers: lecturers?.map((l) => ({
       isActive: l.isActive,
       id: l.id,
@@ -303,7 +313,7 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
     })),
   };
   const registrationTask = async () => {
-    if (REGISTRATION_API) {
+    if (REGISTRATION_API && !directory) {
       if (manager)
         value.registrations = (await registrationApi.list()).items.map(
           registrationFromApi,
@@ -329,7 +339,7 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
       const actor = getApiUser();
       if (manager || actor?.studentId || actor?.lecturerId) {
         const contextsTask = Promise.all(
-          (terms ?? []).map(async (t) => {
+          (directory ? [] : terms ?? []).map(async (t) => {
             if (!manager && !t.assignmentPublished) return null;
             const [c, topics, events] = await Promise.all([
               assignmentApi.load(t.id, !!manager),
@@ -401,11 +411,14 @@ export async function hydrateStep1Snapshot(mock: DemoDb): Promise<DemoDb> {
     }
   };
   const auditTask = async () => {
-    if (getApiUser()?.permissions?.includes("audit:read"))
+    if (!directory && getApiUser()?.permissions?.includes("audit:read"))
       value.audits = await apiAll<DemoDb["audits"][number]>("/audit-logs");
   };
   await Promise.all([registrationTask(), workflowTask(), auditTask()]);
   if (getAccessToken() !== token) throw new Error("Phiên đăng nhập đã thay đổi. Vui lòng tải lại dữ liệu.");
-  resources = value;
+  actionResources = value;
+  // A partial shell must never replace the full snapshot used by synchronous
+  // consumers on other screens. Each query owns its own scoped result.
+  if (!directory) resources = value;
   return overlay(mock, value);
 }

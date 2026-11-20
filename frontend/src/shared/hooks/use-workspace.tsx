@@ -16,6 +16,7 @@ import {
 import { selectedTerm, termDestination } from "../data/term-selection";
 import { useDemo } from "./use-demo";
 import type { Account, DemoDb, Term } from "../data/types";
+import type { SnapshotScope } from "../data/snapshot-api";
 interface Workspace {
   db: DemoDb;
   user: Account;
@@ -45,8 +46,11 @@ const emptyTerm: Term = {
   resultsPublished: false,
 };
 const Context = createContext<Workspace | null>(null);
-export function WorkspaceProvider({ children }: { children: ReactNode }) {
-  const { data: db, isFetching } = useDemo();
+export function WorkspaceProvider({ children, scope = "full" }: {
+  children: ReactNode;
+  scope?: SnapshotScope;
+}) {
+  const { data: db, isFetching } = useDemo(scope);
   return db ? (
     <WorkspaceSnapshotProvider db={db} selectionReady={!isFetching}>
       {children}

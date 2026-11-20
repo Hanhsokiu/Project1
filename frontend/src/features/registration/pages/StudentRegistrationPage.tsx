@@ -118,6 +118,7 @@ function RegistrationForm() {
     enabled: REGISTRATION_API && !!termId,
     retry: false,
     refetchInterval: 15000,
+    meta: { ownsPolling: true },
   });
   const [serverElapsed, setServerElapsed] = useState(0);
   useEffect(() => {
